@@ -160,114 +160,38 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-Ajax系列三-探讨XHR及POST数据" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-git学习之二-git基础" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2016/02/28/Ajax系列三-探讨XHR及POST数据/">Ajax系列三-探讨XHR及POST数据</a>
+      <a class="article-title" href="/2016/09/05/git学习之二-git基础/">git学习之二-git基础</a>
     </h1>
   
 
         
-        <a href="/2016/02/28/Ajax系列三-探讨XHR及POST数据/" class="archive-article-date">
-  	<time datetime="2016-02-28T14:21:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-02-28</time>
+        <a href="/2016/09/05/git学习之二-git基础/" class="archive-article-date">
+  	<time datetime="2016-09-05T14:53:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-09-05</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>#Ajax系列三-深度探讨XHR及POST数据</p>
-<h2 id="Ajax异步原理"><a href="#Ajax异步原理" class="headerlink" title="Ajax异步原理"></a>Ajax异步原理</h2><blockquote>
-<p>相当于在用户和服务器之间加了—个中间层(AJAX引擎),使用户操作与服务器响应异步化。并不是所有的用户请求都提交给服务器,像—些数据验证和数据处理等都交给Ajax引擎自己来做, 只有确定需要从服务器读取新数据时再由Ajax引擎代为向服务器提交请求。</p>
-</blockquote>
-<p><code>ajax</code>状态码</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">排序</th>
-<th style="text-align:center">时间</th>
-<th style="text-align:center">状态码</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">0</td>
-<td style="text-align:center">XHR对象刚创建</td>
-<td style="text-align:center">0</td>
-</tr>
-<tr>
-<td style="text-align:center">1</td>
-<td style="text-align:center">open建立连接成功</td>
-<td style="text-align:center">1</td>
-</tr>
-<tr>
-<td style="text-align:center">2</td>
-<td style="text-align:center">接收头信息完毕</td>
-<td style="text-align:center">2</td>
-</tr>
-<tr>
-<td style="text-align:center">3</td>
-<td style="text-align:center">接收body信息完毕</td>
-<td style="text-align:center">3</td>
-</tr>
-<tr>
-<td style="text-align:center">4</td>
-<td style="text-align:center">成功,结束后</td>
-<td style="text-align:center">4</td>
-</tr>
-</tbody>
-</table>
-<p><code>ajax</code>的好处就是不阻塞后面代码的执行。</p>
-<p><code>status</code>状态码为<code>200</code>,<code>statusText</code>状态文字是<code>OK</code>时，正确返回。<br><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span>(<span class="keyword">this</span>.readyState == <span class="number">4</span> &amp;&amp; <span class="keyword">this</span>.status == <span class="number">200</span>)&#123;</div><div class="line">	<span class="keyword">var</span> str = <span class="string">''</span>;</div><div class="line">	str = <span class="string">'状态码是 '</span> + <span class="keyword">this</span>.status;</div><div class="line">	str += <span class="string">'状态文字是 '</span> + <span class="keyword">this</span>.statusText;</div><div class="line">	document.getElementById(<span class="string">'progress'</span>).innerHTML = str;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p><code>abort</code>属性 –&gt; 中断<code>xhr</code><br><figure class="highlight scilab"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">stopxhr</span><span class="params">()</span>&#123;</span></div><div class="line">	xhr.<span class="keyword">abort</span>();</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p><code>send</code>参数写法：<code>k1=v1&amp;k2=v2&amp;k3=v3...</code></p>
-<p><code>POST</code>请求必须加上<code>Content-Type: application/x-www-form-urlencoded</code><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">xhr.setRequestHeader(<span class="string">'Content-Type'</span>,<span class="string">'application/x-www-form-urlencoded'</span>);</div><div class="line">xhr.send(<span class="string">'username='</span>+un+<span class="string">'&amp;email='</span>+eml);</div></pre></td></tr></table></figure></p>
-<h2 id="Ajax返回值之XML类型"><a href="#Ajax返回值之XML类型" class="headerlink" title="Ajax返回值之XML类型"></a>Ajax返回值之XML类型</h2><p>返回值类型：</p>
-<blockquote>
-<p>不考虑HTML5最新标准，返回值有普通文本/xml文档两种类型</p>
-</blockquote>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="php"><span class="meta">&lt;?php</span> </span></div><div class="line">header(<span class="string">'Content-Type: text/xml'</span>);</div><div class="line"><span class="meta">?&gt;</span></div><div class="line">//此处空了一行</div><div class="line"><span class="php"><span class="meta">&lt;?</span>xml version=<span class="string">"1.0"</span> encoding=<span class="string">"utf-8"</span><span class="meta">?&gt;</span></span></div><div class="line"><span class="tag">&lt;<span class="name">bookstore</span>&gt;</span><span class="tag">&lt;<span class="name">book</span> <span class="attr">bid</span>=<span class="string">'b0001'</span>&gt;</span><span class="tag">&lt;<span class="name">title</span>&gt;</span>天龙八部<span class="tag">&lt;/<span class="name">title</span>&gt;</span><span class="tag">&lt;<span class="name">intro</span>&gt;</span>人生太苦了<span class="tag">&lt;/<span class="name">intro</span>&gt;</span><span class="tag">&lt;/<span class="name">book</span>&gt;</span><span class="tag">&lt;/<span class="name">bookstore</span>&gt;</span></div></pre></td></tr></table></figure>
-<p>打开以上<code>xxx.php</code>，<code>xml</code>格式错误提示:<br><figure class="highlight applescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">This page <span class="keyword">contains</span> <span class="keyword">the</span> following errors:</div><div class="line"><span class="keyword">error</span> <span class="keyword">on</span> line <span class="number">2</span> <span class="keyword">at</span> column <span class="number">6</span>: XML declaration allowed only <span class="keyword">at</span> <span class="keyword">the</span> start <span class="keyword">of</span> <span class="keyword">the</span> document.</div><div class="line">Below <span class="keyword">is</span> a rendering <span class="keyword">of</span> <span class="keyword">the</span> page up <span class="keyword">to</span> <span class="keyword">the</span> <span class="keyword">first</span> <span class="keyword">error</span>.</div></pre></td></tr></table></figure></p>
-<p>错误显示：<code>xml</code>必须在文档的首行,如下<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="php"><span class="meta">&lt;?php</span> </span></div><div class="line">header(<span class="string">'Content-Type: text/xml'</span>);</div><div class="line"><span class="meta">?&gt;</span> </div><div class="line"><span class="php"><span class="meta">&lt;?</span>xml version=<span class="string">"1.0"</span> encoding=<span class="string">"utf-8"</span><span class="meta">?&gt;</span></span></div><div class="line"><span class="tag">&lt;<span class="name">bookstore</span>&gt;</span><span class="tag">&lt;<span class="name">book</span> <span class="attr">bid</span>=<span class="string">'b0001'</span>&gt;</span><span class="tag">&lt;<span class="name">title</span>&gt;</span>天龙八部<span class="tag">&lt;/<span class="name">title</span>&gt;</span><span class="tag">&lt;<span class="name">intro</span>&gt;</span>人生太苦了<span class="tag">&lt;/<span class="name">intro</span>&gt;</span><span class="tag">&lt;/<span class="name">book</span>&gt;</span><span class="tag">&lt;/<span class="name">bookstore</span>&gt;</span></div></pre></td></tr></table></figure></p>
-<p><strong>API最简单了，基本上照着开发文档写就行了。</strong></p>
-<p><strong><code>Ajax</code>默认无法跨域。最新标准可以，但需要对方允许。</strong></p>
-<p>取后台数据：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">xhr.onreadystatechange = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">	<span class="keyword">if</span>(<span class="keyword">this</span>.readyState == <span class="number">4</span>)&#123;         <span class="comment">//this即xhr对象</span></div><div class="line">		<span class="comment">// alert(this.responseXML);</span></div><div class="line">		<span class="keyword">var</span> xmldom = <span class="keyword">this</span>.responseXML; </div><div class="line">		<span class="keyword">var</span> book = xmldom.getElementsByTagName(<span class="string">'book'</span>)[<span class="string">'0'</span>]; </div><div class="line">		<span class="keyword">var</span> title = book.firstChild.firstChild.wholeText;</div><div class="line">		<span class="keyword">var</span> intro = book.lastChild.firstChild.wholeText;</div><div class="line">		<span class="built_in">document</span>.getElementById(<span class="string">'btitle'</span>).value = title;</div><div class="line">		<span class="built_in">document</span>.getElementById(<span class="string">'bintro'</span>).value = intro;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>在后端生成格式化文件，拼接成<code>HTML</code>或者<code>json</code>文档，操作DOM，生成新的<code>HTML</code>页面。</p>
-<p><em>返回值类型：大的方向可以分为普通文本和xml文档。</em><br>普通文本返回类型又分为：</p>
-<ul>
-<li>返回简短的标志字符串，如0,1,OK</li>
-<li>后台返回大段的<code>HTML</code>代码，直接<code>innerHTML</code>到前端页面</li>
-<li><code>json</code>格式，再由js解析</li>
-</ul>
-<p>很多类型，除了<code>HTML5</code>新标准返回的是<code>json</code>,本是文本，只不过符合某些规律，例如<code>json</code>格式。</p>
-<p><code>eval</code>将普通文本转化成js对象<code>[object: Object]</code>。<br>自己手写的后台数据：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span>  <span class="comment">//code  <span class="meta">?&gt;</span></span></div><div class="line">&#123;name: <span class="string">'linking'</span>, sex: <span class="string">'male'</span>&#125;</div><div class="line"><span class="meta">?&gt;</span></div></pre></td></tr></table></figure></p>
-<p>前端解析：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> linking = <span class="built_in">eval</span>(<span class="string">'('</span> + <span class="keyword">this</span>.responseText + <span class="string">')'</span>);</div><div class="line">alert(linking.name);</div></pre></td></tr></table></figure></p>
-<p>如果是<code>PHP</code>后台获取数据:<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$book = <span class="keyword">array</span>(<span class="string">'title'</span> =&gt; <span class="string">'天龙八部'</span>, <span class="string">'intro'</span> =&gt; <span class="string">'人生九苦'</span> );</div><div class="line"><span class="keyword">echo</span> json_encode($book) ;</div></pre></td></tr></table></figure></p>
-<h2 id="JSONP解决跨域问题"><a href="#JSONP解决跨域问题" class="headerlink" title="JSONP解决跨域问题"></a>JSONP解决跨域问题</h2><p><code>JSONP</code>不是<code>JSON</code>，只是一种协议，还未被标准组织规范，大家约定使用返回字符串；不用造对象。</p>
-<p><a href="https://zh.wikipedia.org/wiki/JSONP" target="_blank" rel="external">Wikipedia</a>解释: </p>
-<blockquote>
-<p>JSONP(JSON with Padding)是资料格式 JSON 的一种“使用模式”，可以让网页从别的网域要资料。另一个解决这个问题的新方法是<a href="https://zh.wikipedia.org/wiki/%E8%B7%A8%E4%BE%86%E6%BA%90%E8%B3%87%E6%BA%90%E5%85%B1%E4%BA%AB" target="_blank" rel="external">跨来源资源共享</a>(CORS)。<br>由于<strong>同源策略</strong>，一般来说位于 server1.example.com 的网页无法与不是 server1.example.com 的服务器沟通，而 HTML 的 script 元素是一个例外。利用 script 元素的这个开放策略，网页可以得到从其他来源动态产生的 JSON 资料，而这种使用模式就是所谓的 JSONP。用 JSONP 抓到的资料并不是 JSON，而是任意的 JavaScript，用 JavaScript 直译器执行而不是用 JSON 解析器解析。<br><strong>padding填充</strong>：典型的 JSONP 就是把既有的 JSON API 用函数呼叫<strong>包起来</strong>以达到跨域存取的解法。<br><strong>script元素注入</strong>：为了要启动一个 JSONP 呼叫（或者说，使用这个模式），你需要一个 script 元素。因此，浏览器必须为每一个 JSONP 要求加（或是重用）一个新的、有所需 src 值的 script 元素到 HTML DOM 里—或者说是“注入”这个元素。浏览器执行该元素，抓取 src 里的 URL，并执行回传的 JavaScript。<br>也因为这样，JSONP 被称作是一种“让使用者利用 script 元素注入的方式绕开同源策略”的方法。</p>
-</blockquote>
-<pre><code>function sear(){
-    //获取将要搜索的内容
-    var searchtext = document.getElementsByName(&apos;searchtext&apos;)[0].value;
-    //Google ajax API 搜索参数，返回json格式，利用回调函数aa解析
-    var url = &apos;http://ajax.googleais.com/ajax/services/search/web?v=1.0&amp;q=&apos;+ searchtext + &apos;&amp;callback=aa&apos;;
-    //动态创建script标签，加入head，使其以script形式加载进来
-    var scr = document.createElement(&apos;script&apos;);
-    scr.setAttribute(&apos;type&apos;, &apos;text/javascript&apos;);
-    scr.setAttribute(&apos;src&apos;, url);
-    document.getElementByTagName(&apos;head&apos;)[0].appendChild(scr);
-}
-//回调函数，对返回的数据进行处理
-function aa(res){
-    alert(res);
-}
-</code></pre>
+        <p>取得项目git仓库<br>在现存的目录下，通过导入所有文件来创建新的 Git 仓库。<br>初始化<br><figure class="highlight crmsh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ git init</div><div class="line"><span class="comment">#末尾自定义项目目录名称mygrit</span></div><div class="line">$ git <span class="keyword">clone</span> <span class="title">git</span>://github.com/schacon/grit.git mygrit</div></pre></td></tr></table></figure></p>
+<p>文件状态变化周期：<br><img src="http://static.open-open.com/lib/uploadImg/20120201/20120201121432_845.png" alt="文件状态变化周期"></p>
+<p>检查当前文件状态:<br><figure class="highlight elixir"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$ </span>git status</div></pre></td></tr></table></figure></p>
+<p>跟踪新文件<br><figure class="highlight vala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">$ git add filename</div><div class="line">$ git status</div><div class="line"><span class="meta"># On branch master</span></div><div class="line"><span class="meta"># Changes to be committed:</span></div><div class="line"><span class="meta">#   (use "git reset ..." to unstage)</span></div><div class="line"><span class="meta">#   new file:   README</span></div></pre></td></tr></table></figure></p>
+<p>忽略某些文件：<br><figure class="highlight crystal"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#养成一开始就设置好.gitignore文件的习惯，免得将无用文件或者机密文件上传。</span></div><div class="line">**.gitignore文件**</div><div class="line"><span class="comment"># 此为注释 – 将被 Git 忽略</span></div><div class="line">*.a       <span class="comment"># 忽略所有 .a 结尾的文件</span></div><div class="line">!<span class="class"><span class="keyword">lib</span>.<span class="title">a</span>    <span class="comment"># 但 lib.a 除外</span></span></div><div class="line">/TODO     <span class="comment"># 仅仅忽略项目根目录下的 TODO 文件，不包括 subdir/TODO</span></div><div class="line">build/    <span class="comment"># 忽略 build/ 目录下的所有文件</span></div><div class="line">doc/*.txt <span class="comment"># 会忽略 doc/notes.txt 但不包括 doc/server/arch.txt</span></div></pre></td></tr></table></figure></p>
+<p>提交更新：<br><figure class="highlight clean"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">##打开文本编辑器输入提交说明</div><div class="line">$ git commit </div><div class="line">##配置编辑器</div><div class="line">$ git config --global core.editor</div></pre></td></tr></table></figure></p>
+<p>跳过使用暂存区域：<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">#加上 -<span class="selector-tag">a</span> 则自动将所有已跟踪过的文件暂存起来一并提交</div><div class="line">$ git commit -<span class="selector-tag">a</span> -m <span class="string">'added new file'</span></div></pre></td></tr></table></figure></p>
+<p>移除文件：<br><figure class="highlight gams"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="symbol">$</span> rm <span class="keyword">file</span></div><div class="line"><span class="symbol">$</span> git rm <span class="keyword">file</span></div></pre></td></tr></table></figure></p>
+<p>移动文件：<br><figure class="highlight elixir"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 相当于改名操作</span></div><div class="line"><span class="variable">$ </span>git mv file_from file_to</div><div class="line"><span class="comment">#上面一条命令相当于下面三条命令</span></div><div class="line"><span class="variable">$ </span>mv file_from file_to</div><div class="line"><span class="variable">$ </span>git rm file_from</div><div class="line"><span class="variable">$ </span>git add file_to</div></pre></td></tr></table></figure></p>
+<p>查看提交历史：<br><figure class="highlight gams"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="symbol">$</span> git <span class="built-in">log</span></div></pre></td></tr></table></figure></p>
+<p>从已有的 Git 仓库克隆出一个新的镜像仓库来。<br><figure class="highlight crmsh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$　git <span class="keyword">clone</span> <span class="title">xxx</span>.git</div></pre></td></tr></table></figure></p>
+
       
 
       
@@ -280,7 +204,7 @@ function aa(res){
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">ajax</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">git</a>
         		</li>
       		
 		</ul>
@@ -301,7 +225,7 @@ function aa(res){
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2016/02/28/Ajax系列三-探讨XHR及POST数据/">展开全文 >></a>
+          <a class="article-more-a" href="/2016/09/05/git学习之二-git基础/">展开全文 >></a>
         </p>
       
 
@@ -316,139 +240,66 @@ function aa(res){
 
 
   
-    <article id="post-Ajax系列二-现代化的Ajax" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-一台机器部署多个Tomcat及如何忽略webapps里的项目" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2016/02/27/Ajax系列二-现代化的Ajax/">Ajax系列二-现代化的Ajax</a>
+      <a class="article-title" href="/2016/09/05/一台机器部署多个Tomcat及如何忽略webapps里的项目/">一台机器部署多个Tomcat及如何忽略webapps里的项目</a>
     </h1>
   
 
         
-        <a href="/2016/02/27/Ajax系列二-现代化的Ajax/" class="archive-article-date">
-  	<time datetime="2016-02-27T05:29:41.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-02-27</time>
+        <a href="/2016/09/05/一台机器部署多个Tomcat及如何忽略webapps里的项目/" class="archive-article-date">
+  	<time datetime="2016-09-05T14:40:36.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-09-05</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><strong>核心</strong>–<code>XMLHttpRequest</code>对象，一个专门的<code>HTTP</code>请求工具</p>
-<p>使用<code>XMLHttpRequest</code>做<code>Ajax</code>请求：</p>
-<h2 id="如何创建该对象"><a href="#如何创建该对象" class="headerlink" title="如何创建该对象"></a>如何创建该对象</h2><pre><code>标准` new XMLHttpRequest()`
-低版本`IE(678)`，`new ActiveXObject(&apos;Microsoft.XMLHTTP&apos;)`;新的`jQuery`已经抛弃IE6，**程序员不应该去迁就用户的坏习惯，有时候需要逼用户改变习惯。**
-</code></pre><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">createXHR</span>(<span class="params"></span>)</span>&#123;</div><div class="line">	<span class="keyword">var</span> xhr = <span class="literal">null</span>;</div><div class="line">	<span class="keyword">if</span>(<span class="built_in">window</span>.XMLHttpRequest)&#123;</div><div class="line">		xhr = <span class="keyword">new</span> XMLHttpRequest();</div><div class="line">	&#125; <span class="keyword">else</span> <span class="keyword">if</span>(<span class="built_in">window</span>.ActiveXObject)&#123;</div><div class="line">		xhr = <span class="keyword">new</span> ActiveXObject(<span class="string">'Microsoft.XMLHTTP'</span>);</div><div class="line">	&#125; <span class="keyword">else</span>&#123;</div><div class="line">		<span class="built_in">console</span>.log(<span class="string">'你的浏览器很奇怪。'</span>);</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> xhr;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="利用XHR发送请求来请求后台服务器资源"><a href="#利用XHR发送请求来请求后台服务器资源" class="headerlink" title="利用XHR发送请求来请求后台服务器资源"></a>利用XHR发送请求来请求后台服务器资源</h2><p>分析HTTP协议，请求需明确几个因素:<br>　　　1)请求方法：GET/POST/PUT/DELETE/HEAD<br>　　　2)请求哪个资源(URL)<br>　　　3)同步方式–同步/异步</p>
-<h2 id="如何得到请求返回结果"><a href="#如何得到请求返回结果" class="headerlink" title="如何得到请求返回结果"></a>如何得到请求返回结果</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">vote</span>(<span class="params"></span>)</span>&#123;</div><div class="line">	<span class="comment">//1. 制造xhr</span></div><div class="line">	<span class="keyword">var</span> xhr = createXHR();</div><div class="line">	<span class="comment">//2. 打开连接</span></div><div class="line">	xhr.open(<span class="string">'GET'</span>, <span class="string">'./05-ajaxvote.php'</span>, <span class="literal">true</span>/<span class="literal">false</span>);</div><div class="line">	<span class="comment">//3. 发送请求</span></div><div class="line">	xhr.send(<span class="literal">null</span>);</div><div class="line">	<span class="comment">//4. 测试同步异步的差异,改true/false</span></div><div class="line">	<span class="comment">//alert(xhr.responseText);</span></div><div class="line">	<span class="comment">//为避免误会用</span></div><div class="line">	alert(<span class="string">'123'</span>);</div></pre></td></tr></table></figure>
-<p>05-ajaxvote.php<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">sleep(<span class="number">3</span>);<span class="comment">//等待三秒</span></div><div class="line"><span class="keyword">if</span>(rand(<span class="number">1</span>,<span class="number">10</span>) &lt; <span class="number">4</span>)&#123;</div><div class="line">	<span class="keyword">echo</span> <span class="string">"0"</span>;</div><div class="line">&#125;<span class="keyword">else</span>&#123;</div><div class="line">	$votenum = file_get_contents(<span class="string">"./vote.txt"</span>);</div><div class="line">	<span class="keyword">if</span> ($votenum == <span class="keyword">null</span>) &#123;</div><div class="line">		$votenum = <span class="number">0</span>;</div><div class="line">	&#125;</div><div class="line">	$votenum += <span class="number">1</span>;</div><div class="line">	file_put_contents(<span class="string">'./vote.txt'</span>, $votenum);	</div><div class="line">	<span class="keyword">echo</span> <span class="string">"1"</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>上面的测试结果显示，<code>true</code>即异步时，立即<code>alert</code>，”你等你的，我先走了”;<code>false</code>即同步时，等三秒才<code>alert</code>，”send返回后，才是下一步”。<br>综上，同步代码按顺序执行，异步代码可跳过等待的代码，先执行下面的代码，再返回执行。</p>
-<p>XHR对象在请求与响应过程中，状态会不断变化，0-4逐步变化；可以绑定一个监听函数来监听状态的变化，只要状态变化就触发某函数。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">xhr.onreadystatechange = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">	<span class="keyword">var</span> pg = <span class="built_in">document</span>.getElementById(<span class="string">'progress'</span>);</div><div class="line">	pg.innerHTML += pg.innerHTML + <span class="string">'现在的状态是 '</span>+ <span class="keyword">this</span>.readyState + <span class="string">'&lt;br /&gt;'</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>只管<code>readyState == 4</code>的状态，其他不管。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">xhr.onreadystatechange = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">	<span class="keyword">if</span>(<span class="keyword">this</span>.readyState == <span class="number">4</span>)&#123;</div><div class="line">		<span class="keyword">if</span>(<span class="keyword">this</span>.responseText == <span class="string">'1'</span>)&#123;</div><div class="line">			<span class="built_in">document</span>.getElementById(<span class="string">'progress'</span>).innerHTML = <span class="string">'投票成功'</span>;</div><div class="line">		&#125;<span class="keyword">else</span> <span class="keyword">if</span>(<span class="keyword">this</span>.responseText == <span class="string">'0'</span>)&#123;</div><div class="line">			<span class="built_in">document</span>.getElementById(<span class="string">'progress'</span>).innerHTML = <span class="string">'投票失败'</span>;</div><div class="line">		&#125;<span class="keyword">else</span>&#123;</div><div class="line">			<span class="built_in">document</span>.getElementById(<span class="string">'progress'</span>).innerHTML = <span class="keyword">this</span>.responseText;</div><div class="line">		&#125;</div><div class="line">    &#125;   </div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">ajax</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/cs/" class="article-tag-list-link color3">cs</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2016/02/27/Ajax系列二-现代化的Ajax/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
-    <article id="post-Ajax系列一-远古时代的Ajax" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/02/26/Ajax系列一-远古时代的Ajax/">Ajax系列一-远古时代</a>
-    </h1>
-  
-
-        
-        <a href="/2016/02/26/Ajax系列一-远古时代的Ajax/" class="archive-article-date">
-  	<time datetime="2016-02-26T03:45:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-02-26</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>题按–在真正的<code>Ajax</code>出现之前，是怎么实现类似效果的。</p>
-<blockquote>
-<p>这几天断断续续的看完了<code>ajax</code>和<code>http</code>相关的教程，查询了<strong>Wikipedia</strong>相关资料，接下来几天，整理一下。</p>
+        <h1 id="一台机器部署多个Tomcat"><a href="#一台机器部署多个Tomcat" class="headerlink" title="一台机器部署多个Tomcat"></a>一台机器部署多个Tomcat</h1><blockquote>
+<p>考虑到线上部署系统<strong>安全</strong>性，需要在同一台机器上部署多个Tomcat。一个系统一个Tomcat,这样更好的容灾机制，避免多米多骨牌效应。<br>重点：<strong>避免端口冲突</strong>    </p>
 </blockquote>
-<p>投票需求：要求无刷新投票，并且不允许使用XMLHttpRequest对象<br>分析：在XHR对象没有流行之前，已经有<strong>无刷新</strong>这种效果的要求</p>
-<h2 id="方法一：-HTTP协议204-No-Content"><a href="#方法一：-HTTP协议204-No-Content" class="headerlink" title="方法一： HTTP协议204 No Content"></a>方法一： HTTP协议204 No Content</h2><p>原理：利用http 204 No Content 状态码,浏览器不会跳转</p>
-<p>前端：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">p</span>&gt;</span><span class="tag">&lt;<span class="name">img</span> <span class="attr">width</span>=<span class="string">300</span> <span class="attr">height</span>=<span class="string">400</span> <span class="attr">src</span>=<span class="string">"lin.jpg"</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">p</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"vote.php"</span>&gt;</span>vote<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div></pre></td></tr></table></figure></p>
-<p>后端：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span> </div><div class="line">$votenum = file_get_contents(<span class="string">"./vote.txt"</span>);</div><div class="line"><span class="keyword">if</span> ($votenum == <span class="keyword">null</span>) &#123;</div><div class="line">    $votenum = <span class="number">0</span>;</div><div class="line">&#125;</div><div class="line">$votenum += <span class="number">1</span>;</div><div class="line">file_put_contents(<span class="string">'./vote.txt'</span>, $votenum);</div><div class="line"><span class="comment">//利用HTTP协议的204特性</span></div><div class="line">header(<span class="string">'HTTP/1.1 204 No Content'</span>);</div><div class="line"> <span class="meta">?&gt;</span></div></pre></td></tr></table></figure></p>
-<h2 id="方法二：利用图片加载的特性，完成请求"><a href="#方法二：利用图片加载的特性，完成请求" class="headerlink" title="方法二：利用图片加载的特性，完成请求"></a>方法二：利用图片加载的特性，完成请求</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&lt;script&gt;</div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">vote</span>(<span class="params"></span>)</span>&#123;</div><div class="line">        <span class="keyword">var</span> lin = <span class="built_in">document</span>.createElement(<span class="string">'img'</span>);</div><div class="line">        <span class="comment">//设置src属性，浏览器将会请求对应的资源</span></div><div class="line">        lin.setAttribute(<span class="string">'src'</span>, <span class="string">'./lin.jpg'</span>);</div><div class="line">        <span class="built_in">document</span>.getElementById(<span class="string">"progress"</span>).appendChild(lin);</div><div class="line">    &#125;</div><div class="line">&lt;<span class="regexp">/script&gt;</span></div></pre></td></tr></table></figure>
-<h2 id="方法三：-利用css-js加载特性-原理同上。"><a href="#方法三：-利用css-js加载特性-原理同上。" class="headerlink" title="方法三： 利用css,js加载特性,原理同上。"></a>方法三： 利用css,js加载特性,原理同上。</h2><h2 id="方法四：-利用iframe特性"><a href="#方法四：-利用iframe特性" class="headerlink" title="方法四： 利用iframe特性"></a>方法四： 利用iframe特性</h2><p>Ajax注册，提交表单，页面无刷新<br>建议用<code>POST</code>，因为<code>get</code>会暴露用户信息<br>前端：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"regres"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">/*form target--&gt;iframe name*/</div><div class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">"02-reg.php"</span> <span class="attr">method</span>=<span class="string">"post"</span> <span class="attr">target</span>=<span class="string">"regzone"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>用户名：<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">name</span>=<span class="string">"username"</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>邮件：<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"email"</span> <span class="attr">name</span>=<span class="string">"email"</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"submit"</span> <span class="attr">name</span>=<span class="string">"submit"</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">iframe</span> <span class="attr">width</span>=<span class="string">0</span> <span class="attr">height</span>=<span class="string">0</span> <span class="attr">frameBorder</span>=<span class="string">"0"</span> <span class="attr">name</span>=<span class="string">"regzone"</span>&gt;</span><span class="tag">&lt;/<span class="name">iframe</span>&gt;</span></div></pre></td></tr></table></figure></p>
-<p>后端：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"utf-8"</span>&gt;</span></div><div class="line"><span class="php"><span class="meta">&lt;?php</span> </span></div><div class="line"><span class="comment">//经过运算，逻辑判断，注册是否成功</span></div><div class="line">$msg = <span class="number">1</span>/<span class="number">0</span>;</div><div class="line"><span class="number">1</span>-<span class="string">"注册成功"</span>  <span class="number">0</span>-<span class="string">"注册失败"</span></div><div class="line"><span class="meta">?&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span><span class="actionscript"></span></div><div class="line">    <span class="comment">//被请求的资源req.php想得到HTML里的元素，用parent</span></div><div class="line">    parent.document.getElementById(<span class="string">'regres'</span>).innerHTML = <span class="string">'注册成功!'</span>;</div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div></pre></td></tr></table></figure></p>
-<h2 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h2><blockquote>
-<p>在不适用<code>XMLHttpRequest</code>对象的情况下，依然可以用js来实现对后台服务器请求，同时不刷新页面或跳转。</p>
+<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><blockquote>
+<p>修改CATALINA_HOME\conf\server.xml中的启动端口和连接端口。</p>
 </blockquote>
-<p>所谓Ajax：即指<strong>页面不刷新</strong>情况下，利用<code>XMLHttpRequest</code>发送<code>HTTP</code>请求；JS的网络化.</p>
-<p><strong>悄悄的发送请求，不刷新或跳转;后台能传递数据;前台假装没反应</strong></p>
-<p>问题：<code>Ajax</code>能实现文件上传吗？</p>
-<blockquote>
-<p>分析：从<code>HTTP</code>协议角度看，上传文件，则要把文件的内容发送到服务器；<br>如果可以<code>XMLHttpRequest</code>对象在<code>POST</code>数据时，把文件的内容也发送过去。</p>
-<ul>
-<li><code>XHR</code>对象获取了你要上传 的内容</li>
-<li><code>JavaScript</code>读取本地的文件内容</li>
-<li>出于安全原因，js不能读取文件内容</li>
-<li><code>Ajax</code>上传文件是无法实现的。</li>
-</ul>
-</blockquote>
-<p>问题：一些<code>Ajax</code>上传插件是怎样实现的？</p>
+<p>操作步骤：</p>
 <blockquote>
 <ol>
-<li><code>iframe</code></li>
-<li>用<code>flash</code>实现，如<code>swfuploaded</code></li>
-<li>用<code>HTML5</code>实现，已增加文件读取<code>API</code></li>
+<li><a href="http://tomcat.apache.org/download-70.cgi" target="_blank" rel="external">下载</a>-解压apache-tomcat-x.x.xx.zip-改名tomcatx-8080</li>
+<li>复制，改名tomcatx-8090</li>
+<li>添加环境变量：CATALINA_HOME:d:\tocatx-8080;CATALINA_HOME2:d:\tomcatx-8090</li>
+<li>修改启动端口和关闭端口<br>进入d:\tomcat5-8090\conf\目录，打开server.xml文件，修改下面两个地方：<br>（1）<code>&lt;Server port=&quot;8006&quot; shutdown=&quot;SHUTDOWN&quot;&gt;</code><br>修改这个port=”8006”，原来默认的为：8005，使得它的关闭端口和另一个关闭端口不发生冲突。<br>（2）<code>&lt;Connector port=&quot;8090&quot; maxHttpHeaderSize=&quot;8192&quot;   maxThreads=&quot;150&quot; minSpareThreads=&quot;25&quot; maxSpareThreads=&quot;75&quot; enableLookups=&quot;false&quot; redirectPort=&quot;8443&quot; acceptCount=&quot;100&quot; connectionTimeout=&quot;20000&quot; disableUploadTimeout=&quot;true&quot; /&gt;</code><br>修改port=”8090”，原来默认的为“8080”，使得它的连接端口和另一个不冲突。</li>
+<li>修改startup.bat和catalina.bat文件内容：<br>(1) 打开d:\tomcat5-8090\bin\startup.bat文件，把其中所有CATALINA_HOME替换为CATALINA_HOME2。<br>（2）打开d:\tomcat5-8090\bin\catalina.bat文件，把其中所有CATALINA_HOME替换为CATALINA_HOME2。</li>
+<li>启动Tomcat，在命令行下分别进入两个不同的Tomcat安装目录下，执行startup.bat，分别启动两个Tomcat。然后在浏览器中输入：<a href="http://localhost:8080" target="_blank" rel="external">http://localhost:8080</a>  和<a href="http://localhost:8090" target="_blank" rel="external">http://localhost:8090</a></li>
+<li>至此，我们已经在一台服务器上配置了两个Tomcat。</li>
+</ol>
+</blockquote>
+<p>考虑到在本地运行，不需要那么复杂。只需要用Disable-WEB-INF。</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a><strong>参考</strong></h2><blockquote>
+<ol>
+<li><a href="http://blog.163.com/hegonghe@126/blog/static/50004810200871483335100/" target="_blank" rel="external">在同一台服务器上配置多个Tomcat（原创）</a></li>
+</ol>
+</blockquote>
+<h1 id="忽略webapps里的项目"><a href="#忽略webapps里的项目" class="headerlink" title="忽略webapps里的项目"></a>忽略webapps里的项目</h1><blockquote>
+<p>有时在同一个webapps中有多个项目，而又不想同时部署或启动，那么就要想办法忽略掉某些项目。</p>
+</blockquote>
+<h2 id="方法-1"><a href="#方法-1" class="headerlink" title="方法"></a>方法</h2><blockquote>
+<ol>
+<li>使用web application manager.密码？未实践<br>The Tomcat Web Application Manager lets you stop selected applications. I think that prevents them from loading when Tomcat is restarted.</li>
+<li>将需要忽略的项目的<code>WEB-INF</code>重命名为<code>Disabled-WEB-INF</code>.实践通过</li>
+<li>添加<code>deployIgnore=&quot;projectName&quot;</code>.不部署，</li>
+</ol>
+</blockquote>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">Host</span> <span class="attr">name</span>=<span class="string">"localhost"</span> <span class="attr">appBase</span>=<span class="string">"webapps"</span> <span class="attr">unpackWARs</span>=<span class="string">"true"</span> <span class="attr">autoDeploy</span>=<span class="string">"false"</span> <span class="attr">xmlValidation</span>=<span class="string">"false"</span> <span class="attr">xmlNamespaceAware</span>=<span class="string">"false"</span>&gt;</span> </div><div class="line"><span class="tag">&lt;<span class="name">Context</span> <span class="attr">path</span>=<span class="string">"/acbd"</span> <span class="attr">docBase</span>=<span class="string">"abcd"</span> <span class="attr">debug</span>=<span class="string">"0"</span> <span class="attr">reloadable</span>=<span class="string">"true"</span>/&gt;</span> </div><div class="line"><span class="tag">&lt;<span class="name">Valve</span> <span class="attr">className</span>=<span class="string">"org.apache.catalina.valves.AccessLogValve"</span> <span class="attr">directory</span>=<span class="string">"logs"</span> <span class="attr">prefix</span>=<span class="string">"localhost_access_log."</span> <span class="attr">suffix</span>=<span class="string">".txt"</span> <span class="attr">pattern</span>=<span class="string">"common"</span> <span class="attr">resolveHosts</span>=<span class="string">"false"</span>/&gt;</span> </div><div class="line"><span class="tag">&lt;/<span class="name">Host</span>&gt;</span></div></pre></td></tr></table></figure>
+<h2 id="参考-1"><a href="#参考-1" class="headerlink" title="参考"></a><strong>参考</strong></h2><blockquote>
+<ol>
+<li><a href="http://stackoverflow.com/questions/5067062/how-to-disable-specific-apps-from-starting-during-tomcat-startup" target="_blank" rel="external">How to disable specific apps from starting during Tomcat startup?</a></li>
+<li><a href="https://coderanch.com/t/85667/Tomcat/avoid-loading-applications-webapps" target="_blank" rel="external">avoid loading all applications under webapps</a></li>
+<li><a href="http://tomcat.apache.org/tomcat-5.5-doc/config/host.html#Automatic_Application_Deployment" target="_blank" rel="external">Apache.org</a></li>
 </ol>
 </blockquote>
 
@@ -464,7 +315,7 @@ function aa(res){
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Ajax</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">tomcat</a>
         		</li>
       		
 		</ul>
@@ -485,7 +336,7 @@ function aa(res){
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2016/02/26/Ajax系列一-远古时代的Ajax/">展开全文 >></a>
+          <a class="article-more-a" href="/2016/09/05/一台机器部署多个Tomcat及如何忽略webapps里的项目/">展开全文 >></a>
         </p>
       
 
@@ -500,42 +351,57 @@ function aa(res){
 
 
   
-    <article id="post-最近的想法及计划" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-git学习一" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2016/02/20/最近的想法及计划/">最近的想法及计划</a>
+      <a class="article-title" href="/2016/08/23/git学习一/">git学习一</a>
     </h1>
   
 
         
-        <a href="/2016/02/20/最近的想法及计划/" class="archive-article-date">
-  	<time datetime="2016-02-20T08:05:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-02-20</time>
+        <a href="/2016/08/23/git学习一/" class="archive-article-date">
+  	<time datetime="2016-08-23T15:02:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-08-23</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>年也过完了，该干活了。<br>2016上半年的任务</p>
+        <p>git 在克隆repository时选择分支为develop:<br><figure class="highlight crmsh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git <span class="keyword">clone</span> <span class="title">http</span>://xxxx.git --branch develop</div></pre></td></tr></table></figure></p>
+<p>查看所有分支:<br><figure class="highlight armasm"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="symbol">git</span> <span class="keyword">branch </span>-a</div></pre></td></tr></table></figure></p>
+<p>分布式版本控制系统：</p>
 <blockquote>
-<p>1.完成毕业论文，顺利毕业<br>2.3月份找到一个合适的工作<br>3.学习新知识，巩固计算机基础知识</p>
+<ol>
+<li>多地备份，代码更安全</li>
+<li>小组多人协同开发</li>
+</ol>
 </blockquote>
-<p>2月份还有十天，列的任务表还没有完成。亡羊补牢，希望不晚。希望坚持完成的事情</p>
+<p>git简史：</p>
 <blockquote>
-<p>1.每天花两个小时看论文，整理思路，做记录<br>2.每天坚持锻炼，形式不固定，室内室外随意<br>3.看完燕十八视频，加深对<code>HTTP、AJAX</code>的理解，并写成博客<br>4.每天看一致两篇的<em>池建强</em>的<strong>《MacTalk跨越边界》</strong>的小文章，划线or感想，随后整理出来，发博客上</p>
+<p>Linus Torvalds<br>速度和数据量<br>非线性分支管理</p>
 </blockquote>
-<p>大概这些就够我折腾了，不折腾不成长。继续努力。</p>
+<p>Git基础：</p>
 <blockquote>
-<p>1.知识不去学是不会自己跑到你的脑中的啊。<br>2.学东西不能贪多求快，必须一行一行的文字去咀嚼，才会有深刻的体会。<br>3.遇到难题不要回避，也许下次还会遇到同样的问题，还是不会，因此错过许多机会。<br>4.发现有些东西，只要不是太笨，花时间都是能够解决的，而这个痛苦的过程，是必须经历的，熬过去就好了，哪些知识会倍加深刻的印在脑海中。<br>5.学完一个知识点，可以给自己某种奖励，打一场球，看一个短文章，学一会其他的知识，换换思维。<br>6.任何事都需要保障，身体健康是最强大的后盾，所以每天必须锻炼身体，哪怕只有10分钟，也比不锻炼好。</p>
+<ol>
+<li>git直接记录<strong>快照</strong>，而非差异比较(只关心文件数据的整体是否发生变化);其他版本管理系统在每个版本中记录着各个文件内容的具体差异</li>
+<li>近乎所有操作都是<strong>本地执行</strong></li>
+<li>时刻保持<strong>数据完整性</strong></li>
+<li>多数操作仅添加数据</li>
+<li>文件三种状态<br> 已提交-committed<br> 已修改-modified<br> 已暂存-staged</li>
+</ol>
 </blockquote>
-<p>关于学习渠道</p>
+<p>安装：</p>
 <blockquote>
-<p>1.利用好公开课：主要是网易云课堂，极客学院，coursera看国外国内名校课程<br>2.看前辈的博客，书籍<br>3.先从前端入手，从视频入手，听别人怎么说，不会在一开始入门时不得要领。之后再去练习，看书。加深理解。</p>
+<ol>
+<li>源码安装</li>
+<li>预编译安装包</li>
+</ol>
 </blockquote>
+<p>初次配置：<br><figure class="highlight elixir"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">git-config</div><div class="line"></div><div class="line"><span class="comment">#特定项目配置不加--global即可</span></div><div class="line"><span class="variable">$ </span>git config --global user.name <span class="string">"Linking"</span></div><div class="line"><span class="variable">$ </span>git config --global user.email linking<span class="variable">@example</span>.com</div><div class="line"></div><div class="line"><span class="comment">#查看配置信息</span></div><div class="line"><span class="variable">$ </span>git config --list</div><div class="line"></div><div class="line"><span class="comment">#帮助文档</span></div><div class="line"><span class="variable">$ </span>git help config</div></pre></td></tr></table></figure></p>
 
       
 
@@ -549,11 +415,145 @@ function aa(res){
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">thought</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">git</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/cs/" class="article-tag-list-link color3">cs</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2016/08/23/git学习一/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
+    <article id="post-常见手机品牌正则匹配" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/07/28/常见手机品牌正则匹配/">常见手机品牌正则匹配</a>
+    </h1>
+  
+
+        
+        <a href="/2016/07/28/常见手机品牌正则匹配/" class="archive-article-date">
+  	<time datetime="2016-07-28T06:20:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-07-28</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>思路：先分析各种手机品牌的请求头中user_agent的特点，总结出规律。然后用正则匹配来进行分类，并进行统计。最后在页面中实现可视化显示。</p>
+</blockquote>
+<h1 id="一-各种终端UA格式（以安卓系统为例）"><a href="#一-各种终端UA格式（以安卓系统为例）" class="headerlink" title="一.各种终端UA格式（以安卓系统为例）"></a>一.各种终端UA格式（以安卓系统为例）</h1><p>Tablet</p>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Mozilla/<span class="number">5.0</span> (Linux; Android android-<span class="built_in">version</span>; product-model Build/product-build) AppleWebKit/webkit-<span class="built_in">version</span> (KHTML, like Gecko) Silk/browser-<span class="built_in">version</span> like Chrome/chrome-<span class="built_in">version</span> Safari/webkit-<span class="built_in">version</span></div></pre></td></tr></table></figure>
+<p>Desktop</p>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Mozilla/<span class="number">5.0</span> (X11; Linux x86_64) AppleWebKit/webkit-<span class="built_in">version</span> (KHTML, like Gecko) Silk/browser-<span class="built_in">version</span> like Chrome/chrome-<span class="built_in">version</span> Safari/webkit-<span class="built_in">version</span></div></pre></td></tr></table></figure>
+<p>Mobile</p>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Mozilla/<span class="number">5.0</span> (Linux; Android android-<span class="built_in">version</span>; product-model Build/product-build) AppleWebKit/webkit-<span class="built_in">version</span> (KHTML, like Gecko) Silk/browser-<span class="built_in">version</span> like Chrome/chrome-<span class="built_in">version</span> Mobile Safari/webkit-<span class="built_in">version</span></div></pre></td></tr></table></figure>
+<p>Note</p>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">Red <span class="keyword">and</span> italics indicates <span class="built_in">variable</span> fields, which are described below.</div><div class="line">Template fields</div><div class="line">android-<span class="built_in">version</span> – The Android <span class="built_in">platform</span> <span class="built_in">version</span> (<span class="keyword">for</span> example, <span class="number">4.4</span><span class="number">.3</span>).</div><div class="line">product-model – The <span class="built_in">value</span> <span class="keyword">of</span> Build.MODEL (<span class="keyword">for</span> example, KFTT).</div><div class="line">For <span class="keyword">a</span> complete list <span class="keyword">of</span> <span class="keyword">the</span> product models, see Screen Resolution.</div><div class="line">product-build – The <span class="built_in">value</span> <span class="keyword">of</span> Build.ID (<span class="keyword">for</span> example, IML74K).</div><div class="line">webkit-<span class="built_in">version</span> – Indicates <span class="keyword">the</span> <span class="built_in">version</span> <span class="keyword">of</span> WebKit used (<span class="keyword">for</span> example, <span class="number">535.19</span>). The <span class="built_in">version</span> can change whenever <span class="keyword">the</span> Fire device receives <span class="keyword">a</span> software update.</div><div class="line">browser-<span class="built_in">version</span> – Indicates <span class="keyword">the</span> <span class="built_in">version</span> <span class="keyword">of</span> <span class="keyword">the</span> Amazon Silk browser (<span class="keyword">for</span> example, <span class="number">44.1</span><span class="number">.54</span>). The <span class="built_in">version</span> can change whenever <span class="keyword">the</span> Fire device receives <span class="keyword">a</span> software update.</div><div class="line">chrome-<span class="built_in">version</span> – The <span class="built_in">version</span> <span class="keyword">of</span> Google Chrome <span class="keyword">with</span> which <span class="keyword">the</span> Amazon Silk browser is compatible.</div><div class="line">User Agent String Examples</div></pre></td></tr></table></figure>
+<h1 id="二-品牌-brand"><a href="#二-品牌-brand" class="headerlink" title="二. 品牌-brand"></a>二. 品牌-brand</h1><pre><code>search key_word: user-agent detect type of platform device;
+                 List of user agents for mobile phones
+</code></pre><p><strong>按照使用量降序</strong></p>
+<ol>
+<li>手机phone<br>1.1 国外品牌<br> iphone<br> blackberry<br> nokia lumia<br> samsung<br> Sony<br> Nokia<br> Kindle Fire HD（KFTT）</li>
+</ol>
+<p>1.2 国内品牌<br>    华为，huawei和honor两个品牌，PLK-AL10是荣耀7<br>    小米，MI </p>
+<ol>
+<li>平板tablet</li>
+<li>笔记本desktop</li>
+</ol>
+<h1 id="三-思考问题"><a href="#三-思考问题" class="headerlink" title="三. 思考问题"></a>三. 思考问题</h1><ol>
+<li>db中user_agent为空的，怎么得出来machine_brand?</li>
+<li>手机类型应该是从数据库中取出，而非实时分析统计的。</li>
+<li>只要手机品牌信息，不要型号等后缀。</li>
+<li>user_agent 是否完整？</li>
+<li>优化还是改型</li>
+<li>数据怎么打到前台。</li>
+</ol>
+<p>数据库操作：resources-com.xxx-portal.dao-*.xml</p>
+<figure class="highlight vbscript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">String</span> userAgent = <span class="built_in">request</span>.getHeader(<span class="string">"User-Agent"</span>);</div><div class="line"><span class="keyword">if</span>(userAgent.indexOf(<span class="string">"Mozilla"</span>)!=<span class="number">-1</span> &amp;&amp; userAgent.indexOf(<span class="string">"iPhone"</span>)!=<span class="number">-1</span> || userAgent.indexOf(<span class="string">"Android"</span>)!=<span class="number">-1</span> )&#123;</div><div class="line">    <span class="built_in">response</span>.sendRedirect(<span class="string">"页面1"</span>);</div><div class="line">&#125;<span class="keyword">else</span> <span class="keyword">if</span>(userAgent.indexOf(<span class="string">"Opera"</span>)!=<span class="number">-1</span> &amp;&amp; userAgent.indexOf(<span class="string">"Opera Mini"</span>)!=<span class="number">-1</span> || userAgent.indexOf(<span class="string">"BlackBerry"</span>)!=<span class="number">-1</span>)&#123;</div><div class="line">    <span class="built_in">response</span>.sendRedirect(<span class="string">"页面2"</span>);</div><div class="line">    &#125;<span class="keyword">else</span> <span class="keyword">if</span>(userAgent.indexOf(<span class="string">"Mozilla"</span>)!=<span class="number">-1</span> &amp;&amp; userAgent.indexOf(<span class="string">"Windows"</span>)!=<span class="number">-1</span>)&#123;</div><div class="line">    <span class="built_in">response</span>.sendRedirect(<span class="string">"页面3"</span>);</div><div class="line">&#125;<span class="keyword">else</span>&#123;</div><div class="line">    <span class="built_in">response</span>.sendRedirect(<span class="string">"页面1"</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight gauss"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//以build匹配方式，虽然可以得到build前面的型号，但不知道手机品牌，需要分类。</span></div><div class="line">/;\s?([^;]+?)\s?(Build)?/i     <span class="comment">//..末尾的/i表示不区分大小写 </span></div><div class="line"></div><div class="line">Pattern pattern = Pattern.<span class="keyword">compile</span>(<span class="string">";\\s?(\\S*?\\s?\\S*?)\\s?(Build)?/"</span>);    </div><div class="line">Matcher matcher = pattern.matcher(userAgent);    </div><div class="line"><span class="keyword">String</span> model = <span class="built_in">null</span>;    </div><div class="line"><span class="keyword">if</span> (matcher.find()) &#123;    </div><div class="line">    model = matcher.group(<span class="number">1</span>).trim();<span class="comment">//group从1    </span></div><div class="line">    <span class="built_in">log</span>.<span class="keyword">debug</span>(<span class="string">"通过userAgent解析出机型："</span> + model); </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>Build下一级再分一下，还是直接匹配。</p>
+<blockquote>
+<p>不是所有的UA都有build。</p>
+</blockquote>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Pattern p = Pattern.compile(<span class="string">"a*b"</span>)<span class="comment">;   //将给定的正则表达式编译到模式中。</span></div><div class="line">Matcher m = p.matcher(<span class="string">"aaaaab"</span>)<span class="comment">;//创建匹配给定输入与此模式的匹配器。</span></div><div class="line"><span class="keyword">boolean </span><span class="keyword">b </span>= m.matches()<span class="comment">;</span></div><div class="line">String c = m.group(<span class="number">1</span>).trim()<span class="comment">;</span></div></pre></td></tr></table></figure>
+<p>pattern取出(…xxx)的字符串？</p>
+<p>用字符串匹配方法String.comtains(),<br>正则怎么表示出来。数组？<br>序列化所有的正则，对应到机型。？<br>循环正则（用数组对象来表达），匹配到即跳出</p>
+<blockquote>
+<p>java正则特殊之处：</p>
+<ol>
+<li><strong>转义字符</strong>时需要两个<code>//</code></li>
+<li><strong>不区分大小写</strong>在前面加上<code>(?i)</code>，而<code>js</code>是后面加<code>/i</code></li>
+</ol>
+</blockquote>
+<h1 id="四-验证"><a href="#四-验证" class="headerlink" title="四. 验证"></a>四. 验证</h1><blockquote>
+<p>写一个单页面？访问数据库</p>
+<ol>
+<li>先用单个数据做实验，先看能不能匹配到，再去想怎么做模型</li>
+<li>建立分类模型<br> 初级的正则已经完成编辑，需要 在分类，用更合理的方法，运算太复杂，循环次数影响性能。 </li>
+<li>拷贝到本地数据库，jdbc?查到数据<br>jdbc取数据（20160725），取出之后经过分析，再在数据库建一个字段，储存分析结果</li>
+<li>分析结果展示，统计类型数</li>
+</ol>
+</blockquote>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> portal_logrecord <span class="keyword">WHERE</span> MACHINE_BRAND <span class="keyword">LIKE</span> <span class="string">"%asus%"</span>;//模糊查询</div></pre></td></tr></table></figure>
+<p>不要忽略手机的更新速度，注意最新机型。<br>尽量用小写，减少运算。</p>
+<h1 id="五-最终匹配代码"><a href="#五-最终匹配代码" class="headerlink" title="五. 最终匹配代码"></a>五. 最终匹配代码</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div><div class="line">168</div><div class="line">169</div><div class="line">170</div><div class="line">171</div><div class="line">172</div><div class="line">173</div><div class="line">174</div><div class="line">175</div><div class="line">176</div><div class="line">177</div><div class="line">178</div><div class="line">179</div><div class="line">180</div><div class="line">181</div><div class="line">182</div><div class="line">183</div><div class="line">184</div><div class="line">185</div><div class="line">186</div><div class="line">187</div><div class="line">188</div><div class="line">189</div><div class="line">190</div><div class="line">191</div><div class="line">192</div><div class="line">193</div><div class="line">194</div><div class="line">195</div><div class="line">196</div><div class="line">197</div><div class="line">198</div><div class="line">199</div><div class="line">200</div><div class="line">201</div><div class="line">202</div><div class="line">203</div><div class="line">204</div><div class="line">205</div><div class="line">206</div><div class="line">207</div><div class="line">208</div><div class="line">209</div><div class="line">210</div><div class="line">211</div><div class="line">212</div><div class="line">213</div><div class="line">214</div><div class="line">215</div><div class="line">216</div><div class="line">217</div><div class="line">218</div><div class="line">219</div><div class="line">220</div><div class="line">221</div><div class="line">222</div><div class="line">223</div><div class="line">224</div><div class="line">225</div><div class="line">226</div><div class="line">227</div><div class="line">228</div><div class="line">229</div><div class="line">230</div><div class="line">231</div><div class="line">232</div><div class="line">233</div><div class="line">234</div><div class="line">235</div><div class="line">236</div><div class="line">237</div><div class="line">238</div><div class="line">239</div><div class="line">240</div><div class="line">241</div><div class="line">242</div><div class="line">243</div><div class="line">244</div><div class="line">245</div><div class="line">246</div><div class="line">247</div><div class="line">248</div><div class="line">249</div><div class="line">250</div><div class="line">251</div><div class="line">252</div><div class="line">253</div><div class="line">254</div><div class="line">255</div><div class="line">256</div><div class="line">257</div><div class="line">258</div><div class="line">259</div><div class="line">260</div><div class="line">261</div><div class="line">262</div><div class="line">263</div><div class="line">264</div><div class="line">265</div><div class="line">266</div><div class="line">267</div><div class="line">268</div><div class="line">269</div><div class="line">270</div><div class="line">271</div><div class="line">272</div><div class="line">273</div><div class="line">274</div><div class="line">275</div><div class="line">276</div><div class="line">277</div><div class="line">278</div><div class="line">279</div><div class="line">280</div><div class="line">281</div><div class="line">282</div><div class="line">283</div><div class="line">284</div><div class="line">285</div><div class="line">286</div><div class="line">287</div><div class="line">288</div><div class="line">289</div><div class="line">290</div><div class="line">291</div><div class="line">292</div><div class="line">293</div><div class="line">294</div><div class="line">295</div><div class="line">296</div><div class="line">297</div><div class="line">298</div><div class="line">299</div><div class="line">300</div><div class="line">301</div><div class="line">302</div><div class="line">303</div><div class="line">304</div><div class="line">305</div><div class="line">306</div><div class="line">307</div><div class="line">308</div><div class="line">309</div><div class="line">310</div><div class="line">311</div><div class="line">312</div><div class="line">313</div><div class="line">314</div><div class="line">315</div><div class="line">316</div><div class="line">317</div><div class="line">318</div><div class="line">319</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//java版本，js版本见-七[资源参考]</span></div><div class="line">Pattern patAcer = Pattern.compile(<span class="string">"(?i)((acer|a(?:101|110|200|210|211|500|501|510|511|700|701)[);/\\s]|Android.*V3[67]0[);/\\s]|Android.*Z1[23456]0\\sBuild|Android.*Z500\\sBuild|A1-830|A1-81[01]|A3-A[12][01]|B1-7[1235][01]|B1-810|B1-A71|E39\\sBuild|S5[12]0\\sBuild|DA[0-9]+HQ?L[);/\\s]))"</span>); <span class="comment">//Acer</span></div><div class="line">Pattern patAlcatel = Pattern.compile(<span class="string">"(?i)(Alcatel|Alc[a-z0-9]+|One[ _]?Touch)"</span>); <span class="comment">//Alcatel</span></div><div class="line">Pattern patAloes = Pattern.compile(<span class="string">"(?i)(\\saloes\\sbuild)"</span>); <span class="comment">//Aloes奥洛斯</span></div><div class="line">Pattern patAmazon = Pattern.compile(<span class="string">"(?i)(kindle|kf[A-z]+|KF(?:OT|TT|JWI|JWA|SOWI|A[PRS]WI|THWI|SAW[IA])[);/ ]|Silk/\\d+\\.\\d+|Amazon (?:Tate|Jem)|AFT[BM]|SD4930UR)"</span>); <span class="comment">//kindle |(sd|kf[0349hijorstuw]+)影响了droid-Verizon</span></div><div class="line">Pattern patAmoi = Pattern.compile(<span class="string">"(?i)(\\samoi\\s|A862W)"</span>); <span class="comment">//Amoi夏新手机</span></div><div class="line">Pattern patAole = Pattern.compile(<span class="string">"(?i)(\\saole(dior)?\\sbuild)"</span>); <span class="comment">//Aole奥乐手机</span></div><div class="line">Pattern patApple = Pattern.compile(<span class="string">"(?i)((?:iTunes-)?AppleTV|(?:Apple-)?(?:iPad|iPhone)|iPh[0-9],[0-9]|CFNetwork|(?:Apple-)?iPod|ipod\\s&#123;0,1&#125;tv)"</span>); <span class="comment">//Apple</span></div><div class="line">Pattern patAsus = Pattern.compile(<span class="string">"(?i)(asus|Transformer|TF300T|Slider SL101|PadFone|ME302(?:C|KL)|ME301T|ME371MG|ME17(?:1|2V|3X)|(?:K0[01][0-9a-z]|Z00D)[);/ ])"</span>); <span class="comment">//Asus</span></div><div class="line">Pattern patArchos = Pattern.compile(<span class="string">"(?i)(Archos)"</span>); <span class="comment">//法国爱可视手机</span></div><div class="line">Pattern patBenq = Pattern.compile(<span class="string">"(?i)((benq)[\\s_-]?([\\w-]+)*)"</span>); <span class="comment">//Benq</span></div><div class="line">Pattern patBestsonny = Pattern.compile(<span class="string">"(?i)(Bestsonny)"</span>); <span class="comment">//Bestsonny</span></div><div class="line">Pattern patBeierfeng = Pattern.compile(<span class="string">"(?i)(\\sbf_t\\d&#123;2&#125;\\sbuild)"</span>); <span class="comment">//BF贝尔丰</span></div><div class="line">Pattern patBird = Pattern.compile(<span class="string">"(?i)(\\sbird\\s|bird[\\-. _]([^;/]+))"</span>); <span class="comment">//Bird波导</span></div><div class="line">Pattern patBlackBerry = Pattern.compile(<span class="string">"(?i)(playbook|blackberry|bb10;\\s(\\w+)|\\sq5\\sbuild)"</span>); <span class="comment">//BlackBerry</span></div><div class="line">Pattern patChanghong = Pattern.compile(<span class="string">"(?i)(changhong)"</span>); <span class="comment">//Changhong 长虹</span></div><div class="line">Pattern patCarNavi = Pattern.compile(<span class="string">"(?i)(carnavi)"</span>); <span class="comment">//Car Navigation汽车导航</span></div><div class="line">Pattern patCoolpad = Pattern.compile(<span class="string">"(?i)((?:YL-)?coolpad|8190q[ ;/\\)]|8295 build)"</span>); <span class="comment">//Coolpad 酷派</span></div><div class="line">Pattern patDell = Pattern.compile(<span class="string">"(?i)(dell|dell\\s(strea[kpr\\s\\d]*[\\dko])|(001dl)|venue|xcd35)"</span>); <span class="comment">//Dell</span></div><div class="line">Pattern patGionee = Pattern.compile(<span class="string">"(?i)(gionee|(?:GIO-)?GIONEE[ _-]?[a-z0-9]+|(?:Dream_D1|V188S?|GN[0-9]&#123;3,4&#125;[a-z]?)[);/ ])"</span>);<span class="comment">//GiONEE金立</span></div><div class="line">Pattern patGoogle = Pattern.compile(<span class="string">"(?i)(Google|nexus|GoogleTV|Glass|CrKey[^a-z0-9]|Talk)"</span>); <span class="comment">//Google</span></div><div class="line">Pattern patHaier = Pattern.compile(<span class="string">"(?i)(haier|;\\sqk-6385t\\sbuild|(?:HW-)?W(?:716|757|860|970)[);/ ])"</span>); <span class="comment">//Haier</span></div><div class="line">Pattern patHisense = Pattern.compile(<span class="string">"(?i)((?:HS-)?Hisense ([^;/]+) Build|Hisense [^);/]+|HS-(?:U|EG?|I|T|X)[0-9]+[a-z0-9\\-]*|E270BSA|M470BS[AE]|E2281)"</span>); <span class="comment">//Hisense</span></div><div class="line">Pattern patHP = Pattern.compile(<span class="string">"(?i)(hp|touchpad|android\\s.+slate|hp-tablet|HP ?iPAQ|webOS.*P160U|HP Slate|HP [78]|Compaq [7|8])"</span>); <span class="comment">//HP</span></div><div class="line">Pattern patHTC = Pattern.compile(<span class="string">"(?i)((htc)|Sprint T7380|EVO|(sprint\\s(\\w+))|ADR(?!910L)[a-z0-9]+|Amaze[ _]4G[);/ ]|(Desire|Sensation|Evo ?3D|IncredibleS|Wildfire|Butterfly)[ _]?([^;/]+) Build|(Amaze[ _]4G|One ?[XELSV\\+]+)[);/ ]|SPV E6[05]0|One M8|X525a|PG86100|PC36100|XV6975|PJ83100[);/ ])"</span>); <span class="comment">//HTC</span></div><div class="line">Pattern patHuawei = Pattern.compile(<span class="string">"(?i)(huawei|honor|Linux;\\sU;\\sandroid[\\s\\.\\d\\w;-]&#123;15&#125;media\\spad\\sbuild\\/jdq39|\\sch[em][12]?-[ctu]l\\d&#123;2&#125;[hm]?\\sbuild)|(HW-)?(?:Huawei|Ideos|Honor[ _]|(?:H60-L(?:01|02|03|04|11|12)|H30-(?:C00|L01M?|L02|U10|T00|T10)|G621-TL00M?|PLK-(?:AL10|CL00|TL00|TL01H?|UL00|L01)|SCL-(?:AL00|CL00|TL00H?)|CH(?:E2?|M)-[CUT]L00[HM]?|CHE1-CL[12]0|CHE2-L11|U(?:8230|8500|8661|8665|8667|8800|8818|8860|9200|9508))[);/ ])"</span>); <span class="comment">//Huawei </span></div><div class="line">Pattern patInnos = Pattern.compile(<span class="string">"(?i)(\\sd10cf\\sbuild)"</span>); <span class="comment">//Innos奕骆</span></div><div class="line">Pattern patJolla = Pattern.compile(<span class="string">"(?i)(linux;.+((jolla));)"</span>); <span class="comment">//Jolla,芬兰手机品牌</span></div><div class="line">Pattern patLenovo = Pattern.compile(<span class="string">"(?i)((?:LNV-)?lenovo|IdeaTab|IdeaPad|Thinkpad|Yoga Tablet)"</span>); <span class="comment">//Lenovo</span></div><div class="line">Pattern patLephone = Pattern.compile(<span class="string">"(?i)(\\slephone\\st\\d)"</span>); <span class="comment">//Lephone 乐丰</span></div><div class="line">Pattern patLeshi = Pattern.compile(<span class="string">"(?i)(;\\sle(tv)?\\sx\\d&#123;3&#125;\\sbuild)"</span>); <span class="comment">//leshi</span></div><div class="line">Pattern patLG = Pattern.compile(<span class="string">"(?i)(lg|lg[e;\\s\\/-]+(\\w+)*|portalmmm/2\\.0 (?:KE|KG|KP|L3)|(?:VX[0-9]+|L-0[12]D|L-07C|P713)[);/ ]|NetCast)"</span>); <span class="comment">//LG</span></div><div class="line">Pattern patLingwin = Pattern.compile(<span class="string">"(?i)(Lingwin)"</span>); <span class="comment">//Lingwin灵韵手机</span></div><div class="line">Pattern patMeizu = Pattern.compile(<span class="string">"(?i)(meizu|;\\sm\\d\\smetal\\sbuild|;\\smx\\d.+build|;\\sm\\d\\snote\\sbuild|;\\smz-m\\dmetal\\sbuild|;\\spro\\s[56]\\sbuild)|(M04[05]|M35[1356]|MX[ -]?[234](?: Pro)?|(?:MZ-)?m[12] note|(?:MZ-)?M57[18]C)[);/ ]"</span>); <span class="comment">//Meizu</span></div><div class="line">Pattern patMicrosoft = Pattern.compile(<span class="string">"(?i)(xbox|KIN\\.(One|Two))"</span>); <span class="comment">//Microsoft ，是否加windows|？</span></div><div class="line">Pattern patMotorola = Pattern.compile(<span class="string">"(?i)(MB860|DCT-700|Xoom|\\s(milestone|droid(?:[2-4x]|\\s(?:bionic|x2|pro|razr))?(:?\\s4g)?)[\\w\\s]+build\\/|mot[\\s-]?(\\w+)*|(XT\\d&#123;3,4&#125;) build\\/|android.+\\s(mz60\\d|xoom[\\s2]&#123;0,2&#125;)\\sbuild\\/|MOT|(?&lt;!AN)DROID ?(?:Build|[a-z0-9]+)|portalmmm/2.0 (?:E378i|L6|L7|v3)|XOOM [^;/]*Build|(?:XT|MZ|MB|ME)[0-9]&#123;3,4&#125;[a-z]?(?:\\(Defy\\))?(?: Build|\\)))"</span>); <span class="comment">//Motorola</span></div><div class="line">Pattern patNintendo = Pattern.compile(<span class="string">"(?i)((nintendo)\\s([wids3u]+))"</span>); <span class="comment">//任天堂</span></div><div class="line">Pattern patNokia = Pattern.compile(<span class="string">"(?i)(Nokia|Lumia|Maemo RX|portalmmm/2\\.0 N7|portalmmm/2\\.0 NK|nok[0-9]+|Symbian.*\\s([a-z0-9]+)$|RX-51 N900|(maemo|nokia).*(n900|lumia\\s\\d+)|(nokia)[\\s_-]?([\\w-]+)*)"</span>); <span class="comment">//Nokia</span></div><div class="line">Pattern patNook = Pattern.compile(<span class="string">"(?i)(\\s(nook)[\\w\\s]+build\\/(\\w+))"</span>); <span class="comment">//nook</span></div><div class="line">Pattern patNvidia = Pattern.compile(<span class="string">"(?i)(shield|TegraNote-P1640)"</span>); <span class="comment">//Nvidia</span></div><div class="line">Pattern patOppo = Pattern.compile(<span class="string">"(?i)(oppo|android.+find\\s\\d\\sbuild|Android.+zh-cn;\\sr.+build|r1001|x9006|r2001|u707|x909|a31\\sr\\d&#123;3&#125;t?\\sbuild|(?:OB-)?OPPO[ _]?([a-z0-9]+)|N1T|(?:X90[07][067]|U707T?|X909T?|R(?:10[01]1|2001|201[07]|6007|7005|7007|80[13579]|81[13579]|82[01379]|83[013]|800[067]|8015|810[679]|811[13]|820[057])[KLSTW]?)|N520[79]|N5117[);/ ])"</span>); <span class="comment">//Oppo</span></div><div class="line">Pattern patOwwo = Pattern.compile(<span class="string">"(?i)(;\\sq03\\sbuild)"</span>); <span class="comment">//Owwo欧沃</span></div><div class="line">Pattern patPalm = Pattern.compile(<span class="string">"(?i)((palm(?=\\-))[\\s_-]?([\\w-]+)*)"</span>); <span class="comment">//Palm</span></div><div class="line">Pattern patPhilips = Pattern.compile(<span class="string">"(?i)(Philips|AND1E[);/ ]|NETTV/)"</span>); <span class="comment">//Philips</span></div><div class="line">Pattern patPlaystation = Pattern.compile(<span class="string">"(?i)(playstation)"</span>); <span class="comment">//Playstation</span></div><div class="line">Pattern patSamsung = Pattern.compile(<span class="string">"(?i)(samsung|(s[cgp]h-\\w+|gt-\\w+|sm-n900)|(sam[sung]*)[\\s-]*(\\w+-?[\\w-]*)*|(SM-[AGPT]\\w+)|sec-((sgh\\w+))|(samsung);smarttv|EK-G[CN][0-9]&#123;3&#125;|YP-(G[SIPB]?1|G[57]0|GB70D|Maple |SC-(?:02C|04E|01F)|N[57]100|N5110|N9100|S(?:CH|GH|PH|EC|AM|HV|HW|M)-|SMART-TV|GT-|Galaxy|(?:portalmmm|o2imode)/2\\.0 [SZ]|sam[rua]|vollo Vi86[);/ ]|(?:OTV-)?SMT-E5015|ISW11SC))"</span>); <span class="comment">//Samsung</span></div><div class="line">Pattern patSharp = Pattern.compile(<span class="string">"(?i)(\\(dtv[\\);].+(aquos)|SH-0|SBM\\d+SH)"</span>); <span class="comment">//Sharp</span></div><div class="line">Pattern patSony = Pattern.compile(<span class="string">"(?i)(Sony(?: ?Ericsson)?|SGP|Xperia|C1[569]0[45]|C2[01]0[45]|C2305|C530[236]|C550[23]|C6[56]0[236]|C6616|C68(?:0[26]|[34]3)|C69(?:0[236]|16|43)|D200[45]|D21(?:0[45]|14)|D22(?:0[236]|12|43)|D230[2356]|D240[36]|D25(?:02|33)|D510[236]|D530[36]|D5322|D5503|D58[03]3|D65(?:0[23]|43)|D66[05]3|E2303|E58[02]3|E6553|(?:WT|LT|SO|ST|SK|MK)[0-9]+[a-z]*[0-9]*(?: Build|\\))|X?L39H|XM50[ht]|W960|portalmmm/2\\.0 K|S3[69]h|X10[ia]v?|E1[05][ai]v?|MT[0-9]&#123;2&#125;[a-z]? Build|SO-0(?:[345]D|[234]E|[12]C|[1235]F|[12]G)|R800[aix]|LiveWithWalkman)"</span>); <span class="comment">//Sony</span></div><div class="line">Pattern patTcl = Pattern.compile(<span class="string">"(?i)(tcl|TCL[ -][a-z0-9]+|TCL[_ -][^;/]+ Build)"</span>); <span class="comment">//tcl</span></div><div class="line">Pattern patTianyu = Pattern.compile(<span class="string">"(?i)(tianyu)"</span>); <span class="comment">//tianyu</span></div><div class="line">Pattern patToshiba = Pattern.compile(<span class="string">"(?i)(Toshiba|TSBNetTV/|portalmmm/[12].0\\sTS|T-01C|T-0[12]D|IS04|IS11T|AT1S0|AT300SE|AT(100|200|270|300|330|374|400|470|500|503|570|703|830))"</span>); <span class="comment">//Toshiba 东芝</span></div><div class="line">Pattern patVivo = Pattern.compile(<span class="string">"(?i)((?:viv-|bbg-)?vivo)"</span>); <span class="comment">//vivo</span></div><div class="line">Pattern patXiaomi = Pattern.compile(<span class="string">"(?i)(xiaomi|android[\\s\\d\\.;]&#123;7,10&#125;hm\\s|(hm[\\s\\-]note?[\\s]*(?:\\d\\w)?)|android.+(mi[\\s\\-_]*(?:one|one[\\s_]plus)?[\\s_]*(?:\\d\\w)?)\\s+build|android.+mi\\s\\w+\\s|(MI [a-z0-9]+|MI-One[ _]?[a-z0-9]+)[);/ ]|HM ([^/;]+) Build|(2014501|2014011|201481[13]|201302[23]|2013061) Build|Redmi)"</span>); <span class="comment">//xiaomi</span></div><div class="line">Pattern patZTE = Pattern.compile(<span class="string">"(?i)(zte|AxonPhone|([a-z0-9]+)_USA_Cricket|(?:Blade S6|N9[15]8St|NX(?:403A|40[X2]|507J|503A|505J|506J|508J|510J|511J|513J|601J)|Z331|N9510|N9180|N9101|N9515|N952[01]|N9810|N799D|[UV]9180|[UV]9815|Z768G)[);/ ])"</span>); <span class="comment">//ZTE</span></div><div class="line"><span class="comment">//Acer </span></div><div class="line">Matcher matAcer = patAcer.matcher(userAgentString);</div><div class="line"><span class="keyword">if</span> (matAcer.find()) &#123;   </div><div class="line">      productBrand = <span class="string">"Acer"</span>;</div><div class="line">&#125;</div><div class="line"><span class="comment">//Alcatel</span></div><div class="line">Matcher matAlcatel = patAlcatel.matcher(userAgentString);</div><div class="line"><span class="keyword">if</span> (matAlcatel.find()) &#123;      </div><div class="line">      productBrand = <span class="string">"Alcatel"</span>;</div><div class="line">&#125;</div><div class="line"><span class="comment">//Aloes</span></div><div class="line">Matcher matAloes = patAloes.matcher(userAgentString);</div><div class="line"><span class="keyword">if</span> (matAloes.find()) &#123;      </div><div class="line">      productBrand = <span class="string">"Aloes"</span>;</div><div class="line">&#125;</div><div class="line"><span class="comment">//Amazon</span></div><div class="line">Matcher matAmazon = patAmazon.matcher(userAgentString);</div><div class="line"><span class="keyword">if</span> (matAmazon.find()) &#123;  </div><div class="line">      productBrand = <span class="string">"Amazon"</span>;</div><div class="line">&#125;</div><div class="line"><span class="comment">//Amoi夏新</span></div><div class="line">Matcher matAmoi = patAmoi.matcher(userAgentString);</div><div class="line"><span class="keyword">if</span> (matAmoi.find()) &#123;  </div><div class="line">      productBrand = <span class="string">"Amoi"</span>;</div><div class="line">&#125;</div><div class="line"><span class="comment">//Aole奥乐</span></div><div class="line">Matcher matAole = patAole.matcher(userAgentString);</div><div class="line"><span class="keyword">if</span> (matAole.find()) &#123;  </div><div class="line">      productBrand = <span class="string">"Aole"</span>;</div><div class="line">&#125;</div><div class="line"><span class="comment">//苹果</span></div><div class="line">Matcher matApple = patApple.matcher(userAgentString);</div><div class="line"><span class="keyword">if</span> (matApple.find()) &#123;  </div><div class="line">      productBrand = <span class="string">"Apple"</span>;</div><div class="line">&#125;</div><div class="line"><span class="comment">//华硕</span></div><div class="line">Matcher matAsus = patAsus.matcher(userAgentString);</div><div class="line"><span class="keyword">if</span> (matAsus.find()) &#123;  </div><div class="line">      productBrand = <span class="string">"Asus"</span>;</div><div class="line">&#125;</div><div class="line"><span class="comment">//法国爱可视手机</span></div><div class="line">Matcher matArchos = patArchos.matcher(userAgentString);</div><div class="line"><span class="keyword">if</span> (matArchos.find()) &#123;  </div><div class="line">      productBrand = <span class="string">"Archos"</span>;</div><div class="line">&#125;</div><div class="line"><span class="comment">//Benq</span></div><div class="line">Matcher matBenq= patBenq.matcher(userAgentString);</div><div class="line"><span class="keyword">if</span> (matBenq.find()) &#123;   </div><div class="line">      productBrand = <span class="string">"Benq"</span>;</div><div class="line">&#125;</div><div class="line"><span class="comment">//Bestsonny至尊宝手机-联发科MediaTek</span></div><div class="line">Matcher matBestsonny = patBestsonny.matcher(userAgentString);</div><div class="line"><span class="keyword">if</span> (matBestsonny.find()) &#123;  </div><div class="line">      productBrand = <span class="string">"Bestsonny"</span>;</div><div class="line">&#125;</div><div class="line"><span class="comment">//Beierfeng贝尔丰手机</span></div><div class="line">Matcher matBeierfeng = patBeierfeng.matcher(userAgentString);</div><div class="line"><span class="keyword">if</span> (matBeierfeng.find()) &#123;  </div><div class="line">      productBrand = <span class="string">"Beierfeng"</span>;</div><div class="line">&#125;</div><div class="line"><span class="comment">//bird波导手机</span></div><div class="line">Matcher matBird = patBird.matcher(userAgentString);</div><div class="line"><span class="keyword">if</span> (matBird.find()) &#123;  </div><div class="line">      productBrand = <span class="string">"Bird"</span>;</div><div class="line">&#125;</div><div class="line"><span class="comment">//黑莓</span></div><div class="line">Matcher matBlackBerry = patBlackBerry.matcher(userAgentString);</div><div class="line"><span class="keyword">if</span> (matBlackBerry.find()) &#123;  </div><div class="line">      productBrand = <span class="string">"BlackBerry"</span>;</div><div class="line">&#125;</div><div class="line"><span class="comment">//长虹</span></div><div class="line">Matcher matChanghong = patChanghong.matcher(userAgentString);</div><div class="line"><span class="keyword">if</span> (matChanghong.find()) &#123;  </div><div class="line">      productBrand = <span class="string">"Changhong"</span>;</div><div class="line">&#125;</div><div class="line"><span class="comment">//CarNavigation汽车导航</span></div><div class="line">Matcher matCarNavi= patCarNavi.matcher(userAgentString);</div><div class="line"><span class="keyword">if</span> (matCarNavi.find()) &#123;  </div><div class="line">      productBrand = <span class="string">"CarNavi"</span>;</div><div class="line">&#125;</div><div class="line"><span class="comment">//Coolpad 酷派</span></div><div class="line">Matcher matCoolpad= patCoolpad.matcher(userAgentString);</div><div class="line"><span class="keyword">if</span> (matCoolpad.find()) &#123;  </div><div class="line">      productBrand = <span class="string">"Coolpad"</span>;</div><div class="line">&#125;</div><div class="line"><span class="comment">//Dell</span></div><div class="line">Matcher matDell= patDell.matcher(userAgentString);</div><div class="line"><span class="keyword">if</span> (matDell.find()) &#123;  </div><div class="line">      productBrand = <span class="string">"Dell"</span>;</div><div class="line">&#125;</div><div class="line"><span class="comment">//Gionee</span></div><div class="line">Matcher matGionee= patGionee.matcher(userAgentString);</div><div class="line"><span class="keyword">if</span> (matGionee.find()) &#123;  </div><div class="line">      productBrand = <span class="string">"Gionee"</span>;</div><div class="line">&#125;</div><div class="line"><span class="comment">//Google </span></div><div class="line">Matcher matGoogle = patGoogle.matcher(userAgentString);</div><div class="line"><span class="keyword">if</span> (matGoogle.find()) &#123; </div><div class="line">      productBrand = <span class="string">"Google"</span>;</div><div class="line">&#125;</div><div class="line"><span class="comment">//Haier </span></div><div class="line">Matcher matHaier = patHaier.matcher(userAgentString);</div><div class="line"><span class="keyword">if</span> (matHaier.find()) &#123; </div><div class="line">      productBrand = <span class="string">"Haier"</span>;</div><div class="line">&#125;</div><div class="line"><span class="comment">//Hisense </span></div><div class="line">Matcher matHisense = patHisense.matcher(userAgentString);</div><div class="line"><span class="keyword">if</span> (matHisense.find()) &#123; </div><div class="line">      productBrand = <span class="string">"Hisense"</span>;</div><div class="line">&#125;</div><div class="line"><span class="comment">//惠普</span></div><div class="line">Matcher matHP = patHP.matcher(userAgentString);</div><div class="line"><span class="keyword">if</span> (matHP.find()) &#123;  </div><div class="line">      productBrand = <span class="string">"HP"</span>;</div><div class="line">&#125;</div><div class="line"><span class="comment">//HTC </span></div><div class="line">Matcher matHTC = patHTC.matcher(userAgentString);</div><div class="line"><span class="keyword">if</span> (matHTC.find()) &#123;    </div><div class="line">      productBrand = <span class="string">"HTC"</span>;</div><div class="line">&#125;</div><div class="line"><span class="comment">//Huawei</span></div><div class="line">Matcher matHuawei = patHuawei.matcher(userAgentString);</div><div class="line"><span class="keyword">if</span> (matHuawei.find()) &#123; </div><div class="line">      productBrand = <span class="string">"Huawei"</span>;</div><div class="line">&#125;</div><div class="line"><span class="comment">//Innos奕骆</span></div><div class="line">Matcher matInnos = patInnos.matcher(userAgentString);</div><div class="line"><span class="keyword">if</span> (matInnos.find()) &#123; </div><div class="line">      productBrand = <span class="string">"Innos"</span>;</div><div class="line">&#125;</div><div class="line"><span class="comment">//Jolla </span></div><div class="line">Matcher matJolla = patJolla.matcher(userAgentString);</div><div class="line"><span class="keyword">if</span> (matJolla.find()) &#123;  </div><div class="line">      productBrand = <span class="string">"Jolla"</span>;</div><div class="line">&#125;</div><div class="line"><span class="comment">//Lenovo </span></div><div class="line">Matcher matLenovo = patLenovo.matcher(userAgentString);</div><div class="line"><span class="keyword">if</span> (matLenovo.find()) &#123; </div><div class="line">      productBrand = <span class="string">"Lenovo"</span>;</div><div class="line">&#125;</div><div class="line"><span class="comment">//LG </span></div><div class="line">Matcher matLG = patLG.matcher(userAgentString);</div><div class="line"><span class="keyword">if</span> (matLG.find()) &#123;     </div><div class="line">      productBrand = <span class="string">"LG"</span>;</div><div class="line">&#125;</div><div class="line"><span class="comment">//Lephone</span></div><div class="line">Matcher matLephone = patLephone.matcher(userAgentString);</div><div class="line"><span class="keyword">if</span> (matLephone.find()) &#123;  </div><div class="line">      productBrand = <span class="string">"Lephone"</span>;</div><div class="line">&#125;</div><div class="line"><span class="comment">//Leshi </span></div><div class="line">Matcher matLeshi = patLeshi.matcher(userAgentString);</div><div class="line"><span class="keyword">if</span> (matLeshi.find()) &#123;  </div><div class="line">      productBrand = <span class="string">"Leshi"</span>;</div><div class="line">&#125;</div><div class="line"><span class="comment">//Lingwin灵韵</span></div><div class="line">Matcher matLingwin = patLingwin.matcher(userAgentString);</div><div class="line"><span class="keyword">if</span> (matLingwin.find()) &#123;     </div><div class="line">      productBrand = <span class="string">"Lingwin"</span>;</div><div class="line">&#125;</div><div class="line"><span class="comment">//Meizu</span></div><div class="line">Matcher matMeizu = patMeizu.matcher(userAgentString);</div><div class="line"><span class="keyword">if</span> (matMeizu.find()) &#123;  </div><div class="line">      productBrand = <span class="string">"Meizu"</span>;</div><div class="line">&#125;</div><div class="line"><span class="comment">//Microsoft </span></div><div class="line">Matcher matMicrosoft = patMicrosoft.matcher(userAgentString);</div><div class="line"><span class="keyword">if</span> (matMicrosoft.find()) &#123;    </div><div class="line">      productBrand = <span class="string">"Microsoft"</span>;</div><div class="line">&#125;</div><div class="line"><span class="comment">//Motorola </span></div><div class="line">Matcher matMotorola = patMotorola.matcher(userAgentString);</div><div class="line"><span class="keyword">if</span> (matMotorola.find()) &#123;     </div><div class="line">      productBrand = <span class="string">"Motorola"</span>;</div><div class="line">&#125;</div><div class="line"><span class="comment">//Nintendo(任天堂)</span></div><div class="line">Matcher matNintendo= patNintendo.matcher(userAgentString);</div><div class="line"><span class="keyword">if</span> (matNintendo.find()) &#123;     </div><div class="line">      productBrand = <span class="string">"Nintendo"</span>;</div><div class="line">&#125;</div><div class="line"><span class="comment">//Nokia </span></div><div class="line">Matcher matNokia = patNokia.matcher(userAgentString);</div><div class="line"><span class="keyword">if</span> (matNokia.find()) &#123;  </div><div class="line">      productBrand = <span class="string">"Nokia"</span>;</div><div class="line">&#125;         </div><div class="line"><span class="comment">//Nook</span></div><div class="line">Matcher matNook= patNook.matcher(userAgentString);</div><div class="line"><span class="keyword">if</span> (matNook.find()) &#123;  </div><div class="line">      productBrand = <span class="string">"Nook"</span>;</div><div class="line">&#125;    </div><div class="line"><span class="comment">//Nvidia </span></div><div class="line">Matcher matNvidia = patNvidia.matcher(userAgentString);</div><div class="line"><span class="keyword">if</span> (matNvidia.find()) &#123; </div><div class="line">      productBrand = <span class="string">"Nvidia"</span>;</div><div class="line">&#125;</div><div class="line"><span class="comment">//Oppo </span></div><div class="line">Matcher matOppo = patOppo.matcher(userAgentString);</div><div class="line"><span class="keyword">if</span> (matOppo.find()) &#123;   </div><div class="line">      productBrand = <span class="string">"Oppo"</span>;</div><div class="line">&#125;</div><div class="line"><span class="comment">//Owwo</span></div><div class="line">Matcher matOwwo = patOwwo.matcher(userAgentString);</div><div class="line"><span class="keyword">if</span> (matOwwo.find()) &#123;   </div><div class="line">      productBrand = <span class="string">"Owwo"</span>;</div><div class="line">&#125;</div><div class="line"><span class="comment">//Palm</span></div><div class="line">Matcher matPalm= patPalm.matcher(userAgentString);</div><div class="line"><span class="keyword">if</span> (matPalm.find()) &#123;   </div><div class="line">      productBrand = <span class="string">"Palm"</span>;</div><div class="line">&#125;</div><div class="line"><span class="comment">//Philips</span></div><div class="line">Matcher matPhilips= patPhilips.matcher(userAgentString);</div><div class="line"><span class="keyword">if</span> (matPhilips.find()) &#123;   </div><div class="line">      productBrand = <span class="string">"Philips"</span>;</div><div class="line">&#125;</div><div class="line"><span class="comment">//playstation </span></div><div class="line">Matcher matPlaystation = patPlaystation.matcher(userAgentString);</div><div class="line"><span class="keyword">if</span> (matPlaystation.find()) &#123;  </div><div class="line">      productBrand = <span class="string">"Playstation"</span>;</div><div class="line">&#125;</div><div class="line"><span class="comment">//Samsung </span></div><div class="line">Matcher matSamsung = patSamsung.matcher(userAgentString);</div><div class="line"><span class="keyword">if</span> (matSamsung.find()) &#123;      </div><div class="line">      productBrand = <span class="string">"Samsung"</span>;</div><div class="line">&#125;</div><div class="line"><span class="comment">//Sharp </span></div><div class="line">Matcher matSharp = patSharp.matcher(userAgentString);</div><div class="line"><span class="keyword">if</span> (matSharp.find()) &#123;  </div><div class="line">      productBrand = <span class="string">"Sharp"</span>;</div><div class="line">&#125;</div><div class="line"><span class="comment">//Sony</span></div><div class="line">Matcher matSony= patSony.matcher(userAgentString);</div><div class="line"><span class="keyword">if</span> (matSony.find()) &#123;   </div><div class="line">      productBrand = <span class="string">"Sony"</span>;</div><div class="line">&#125;</div><div class="line"><span class="comment">//TCL</span></div><div class="line">Matcher matTcl= patTcl.matcher(userAgentString);</div><div class="line"><span class="keyword">if</span> (matTcl.find()) &#123;   </div><div class="line">      productBrand = <span class="string">"Tcl"</span>;</div><div class="line">&#125;</div><div class="line"><span class="comment">//Tianyu</span></div><div class="line">Matcher matTianyu= patTianyu.matcher(userAgentString);</div><div class="line"><span class="keyword">if</span> (matTianyu.find()) &#123;   </div><div class="line">      productBrand = <span class="string">"Tianyu"</span>;</div><div class="line">&#125;</div><div class="line"><span class="comment">//Vivo </span></div><div class="line">Matcher matVivo = patVivo.matcher(userAgentString);</div><div class="line"><span class="keyword">if</span>(matVivo.find())&#123;</div><div class="line">  productBrand = <span class="string">"Vivo"</span>;</div><div class="line">&#125;</div><div class="line"><span class="comment">//Toshiba 东芝</span></div><div class="line">Matcher matToshiba = patToshiba.matcher(userAgentString);</div><div class="line"><span class="keyword">if</span>(matToshiba.find())&#123;</div><div class="line">  productBrand = <span class="string">"Toshiba"</span>;</div><div class="line">&#125;</div><div class="line"><span class="comment">//Xiaomi </span></div><div class="line">Matcher matXiaomi = patXiaomi.matcher(userAgentString);</div><div class="line"><span class="keyword">if</span> (matXiaomi.find()) &#123; </div><div class="line">      productBrand = <span class="string">"Xiaomi"</span>;</div><div class="line">&#125;            </div><div class="line"><span class="comment">//ZTE</span></div><div class="line">Matcher matZTE = patZTE.matcher(userAgentString);</div><div class="line"><span class="keyword">if</span> (matZTE.find()) &#123;    </div><div class="line">      productBrand = <span class="string">"ZTE"</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="六-总结"><a href="#六-总结" class="headerlink" title="六. 总结"></a>六. 总结</h1><ol>
+<li>以上正则能够匹配常见机型，得出品牌类型；不足之处是有几个重复识别了。</li>
+<li>对正则有了更深入的了解，强大的工具</li>
+<li>java程序组成结构需要更深入的学习</li>
+</ol>
+<h1 id="七-Reference资源参考"><a href="#七-Reference资源参考" class="headerlink" title="七. Reference资源参考"></a>七. <strong>Reference资源参考</strong></h1><p>常见<a href="http://www.webapps-online.com/online-tools/user-agent-strings" target="_blank" rel="external">User-Agent站点</a><br><a href="http://uadetector.sourceforge.net/" target="_blank" rel="external">UADetector</a>：<a href="http://uadetector.sourceforge.net/" target="_blank" rel="external">http://uadetector.sourceforge.net/</a><br><strong><a href="https://github.com/faisalman/ua-parser-js" target="_blank" rel="external">相关js库</a></strong></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">正则</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">plan</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">手机品牌匹配</a>
         		</li>
       		
 		</ul>
@@ -565,7 +565,7 @@ function aa(res){
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/plan/" class="article-tag-list-link color5">plan</a>
+        			<a href="/categories/cs/" class="article-tag-list-link color3">cs</a>
         		</li>
       		
 		</ul>
@@ -574,7 +574,7 @@ function aa(res){
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2016/02/20/最近的想法及计划/">展开全文 >></a>
+          <a class="article-more-a" href="/2016/07/28/常见手机品牌正则匹配/">展开全文 >></a>
         </p>
       
 
@@ -589,108 +589,181 @@ function aa(res){
 
 
   
-    <article id="post-polygon-polyline-point-addField-caculate" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-to-D-Wade" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2016/01/22/polygon-polyline-point-addField-caculate/">polygon_polyline_point_addField_caculate</a>
+      <a class="article-title" href="/2016/07/07/to-D-Wade/">Dwayne Wade&#39;s Emotional Letter to Miami Heat Fans</a>
     </h1>
   
 
         
-        <a href="/2016/01/22/polygon-polyline-point-addField-caculate/" class="archive-article-date">
-  	<time datetime="2016-01-22T05:20:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-01-22</time>
+        <a href="/2016/07/07/to-D-Wade/" class="archive-article-date">
+  	<time datetime="2016-07-07T15:33:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-07-07</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h2><p>导师需要安徽省所有县级单位的行政边界的点位置数据，数据最终格式是屏幕坐标(<strong>同一区域形成闭环</strong>)</p>
+        <blockquote>
+<p>Dear <strong>Miami</strong>,</p>
+<p>This has been an extremely emotional and tough decision to come to. After <strong>13 years</strong>, I have decided to embark on a new journey with the <strong>Chicago Bulls</strong>. This was not an easy decision, but I feel I have made the right choice for myself and my family.</p>
+<p>I started my NBA career with the <strong>Miami Heat</strong> in <strong>2003</strong> and it has been an honor to have played with them and help build a winning franchise with <strong>three NBA championships</strong>. I look back with pride and amazement at all we have accomplished together. I want to express my gratitude to the <strong>Arison family, Pat Riley, Coach Erik Spoelstra, the coaching staff, and the entire Miami Heat organization</strong>.</p>
+<p>From the bottom of my heart, I want to thank the <strong>Miami</strong> community and especially #HEATNATION for all of their love and support over the years. It has been truly incredible. I am deeply moved and appreciative of the positive messages from my <strong>fans</strong> expressing that they want what’s best for me and I know they will support my decision. The memories including championship parades and five conference titles are incredible moments we have shared that will always remain close to my heart as I begin the <strong>next chapter</strong> of my life.</p>
+<p>Growing up in Robbins, Ill., I never dreamed that an NBA career could have even been possible and that one day I would wear a <strong>Chicago Bulls</strong> jersey. Watching the Bulls growing up inspired me at an early age to pursue my dream of becoming a basketball player. My most treasured memories were watching my dad play basketball on the courts of Fermi Elementary School and developing my game at the Blue Island Recreation Center. I have never forgotten where I came from and I am thankful to have an opportunity to play for the team that first fueled my love of the game. Many of my family members still live in Chicago and I am excited to return <strong>home</strong> to a city very close to my heart.</p>
+<p>I look forward to returning to my roots and to what lies ahead.</p>
+<p>Much <strong>Love and Respect</strong>,</p>
+<p><strong>D. Wade</strong></p>
+</blockquote>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">D.Wade</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/NBA/" class="article-tag-list-link color4">NBA</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2016/07/07/to-D-Wade/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
+    <article id="post-java初识" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/07/07/java初识/">java初识</a>
+    </h1>
+  
+
+        
+        <a href="/2016/07/07/java初识/" class="archive-article-date">
+  	<time datetime="2016-07-07T03:26:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-07-07</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="1-开发环境配置"><a href="#1-开发环境配置" class="headerlink" title="1.开发环境配置"></a>1.开发环境配置</h1><p>JDK  TOMCAT<br><strong>配置环境变量</strong><br><figure class="highlight crystal"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">- JAVA_HOME  配置JDK安装路径，jdk根目录</div><div class="line">- PATH       配合JDK命令文件的位置，jdk/bin目录</div><div class="line">- CLASSPATH  配置类库文件的位置，jdk/<span class="class"><span class="keyword">lib</span>目录</span></div></pre></td></tr></table></figure></p>
+<p>Eclipse需要映射tomcat地址（可以不管tomcat系统环境变量）。</p>
+<p>JRE：Java Runtime Environment,JRE内部有一个Java虚拟机以及一些标准的类别函数库。</p>
+<p>JAR：Java ARchive,Java归档文件，是一种软件包文件格式，用于聚合大量的Java类文件、相关的元素局和资源（文本、图片等）文件到一个文件，以便分发Java平台应用软件或库。以ZIP格式构建，<code>.jar</code>文件扩展名。可用JDK自带的jar命令创建或提取jar文件，也可用<code>zip</code>压缩工具，不过这里zip文件头里的条目顺序很重要，常见运行错误：因为Manifest资源配置文件常需放在首位。jar文件内的文件名是Unicode文本。</p>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">registered <span class="keyword">the</span> JDBC driver [com.mysql.jdbc.Driver] but failed <span class="built_in">to</span> unregister <span class="keyword">it</span> when <span class="keyword">the</span> web application was stopped. To prevent <span class="keyword">a</span> memory leak, <span class="keyword">the</span> JDBC Driver has been forcibly unregistered.</div><div class="line"></div><div class="line">appears <span class="built_in">to</span> have started <span class="keyword">a</span> thread named [Druid-ConnectionPool-Destroy<span class="number">-1886011917</span>] but has failed <span class="built_in">to</span> <span class="built_in">stop</span> <span class="keyword">it</span>. This is very likely <span class="built_in">to</span> <span class="built_in">create</span> <span class="keyword">a</span> memory leak.</div></pre></td></tr></table></figure>
+<p>字面意思是JDBC驱动无法注册，或者是内存泄露。<br>原因是：数据库在局域网。在内网连接网络即可。</p>
+<h1 id="2-相关基础"><a href="#2-相关基础" class="headerlink" title="2.相关基础"></a>2.相关基础</h1><p>ssh框架，mvc模式目录结构：</p>
 <table>
 <thead>
 <tr>
-<th>区域名</th>
-<th>x</th>
-<th>y</th>
+<th style="text-align:left">代码</th>
+<th style="text-align:left">含义</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>合肥市</td>
-<td>12</td>
-<td>53</td>
+<td style="text-align:left">dao</td>
+<td style="text-align:left">持久层接口</td>
 </tr>
 <tr>
-<td>合肥市</td>
-<td>17</td>
-<td>55</td>
+<td style="text-align:left">daoimpl</td>
+<td style="text-align:left">持久层实现</td>
 </tr>
 <tr>
-<td>合肥市</td>
-<td>12</td>
-<td>34</td>
+<td style="text-align:left">filter</td>
+<td style="text-align:left">过滤器</td>
 </tr>
 <tr>
-<td>合肥市</td>
-<td>16</td>
-<td>67</td>
+<td style="text-align:left">action</td>
+<td style="text-align:left">action</td>
 </tr>
 <tr>
-<td>合肥市</td>
-<td>14</td>
-<td>23</td>
+<td style="text-align:left">util</td>
+<td style="text-align:left">工具包</td>
 </tr>
 <tr>
-<td>合肥市</td>
-<td>12</td>
-<td>53</td>
+<td style="text-align:left">bean</td>
+<td style="text-align:left">实体类包</td>
 </tr>
 <tr>
-<td>长丰县</td>
-<td>67</td>
-<td>32</td>
+<td style="text-align:left">service</td>
+<td style="text-align:left">业务层接口</td>
 </tr>
 <tr>
-<td>长丰县</td>
-<td>44</td>
-<td>32</td>
+<td style="text-align:left">serviceimpl</td>
+<td style="text-align:left">业务层实现</td>
 </tr>
 <tr>
-<td>长丰县</td>
-<td>12</td>
-<td>89</td>
-</tr>
-<tr>
-<td>长丰县</td>
-<td>98</td>
-<td>54</td>
-</tr>
-<tr>
-<td>长丰县</td>
-<td>67</td>
-<td>32</td>
-</tr>
-<tr>
-<td>…</td>
-<td>…</td>
-<td>…</td>
+<td style="text-align:left">interceptor</td>
+<td style="text-align:left">拦截器</td>
 </tr>
 </tbody>
 </table>
-<h2 id="建模必要性"><a href="#建模必要性" class="headerlink" title="建模必要性"></a>建模必要性</h2><blockquote>
-<p>每两个元素之间都有直接的工具，然而多任务情况下无法满足需求，如果单独批量处理每一次的转化，工作量十分巨大；考虑到这些，有必要构建合适的模型，模型的好处是合并多步骤省去了中间步骤，最关键的是可以设置中间参数默认值，这样能大大减少中间的输入，而且避免了每次输入的不必要错误。</p>
+<p>maven也是一种框架。<br>一般页面放在web-inf下面。</p>
+<p>Java web一般项目目录结构：<br><figure class="highlight haml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">-<span class="ruby">WebRoot</span></div><div class="line">    -<span class="ruby">common  (系统框架公用jsp，如footer.jsp,header.jsp)</span></div><div class="line">    -<span class="ruby">images  </span></div><div class="line">    -<span class="ruby">script  (js库）</span></div><div class="line">    -<span class="ruby">style   (css模板)</span></div><div class="line">    -<span class="ruby">WEB-INF</span></div><div class="line">        -<span class="ruby">pages  (项目jsp页面，为提高安全性，放在WEB-INF下)</span></div><div class="line">        -<span class="ruby">classes</span></div><div class="line">        -<span class="ruby">conf  (配置文件)</span></div><div class="line">        -<span class="ruby">lib  (库文件)</span></div><div class="line">-<span class="ruby">test  (测试文件夹)</span></div></pre></td></tr></table></figure></p>
+<p><strong>EL</strong>:expression language表达式语言</p>
+<p>SpringMVC简介:</p>
+<blockquote>
+<ol>
+<li>基于MVC设计理念，采用松耦合可插拔组件结构，更具扩展性和灵活性。</li>
+<li>在数据绑定、视图解析、本地化处理及静态资源处理上表现不俗。</li>
+<li>围绕<strong>DispatcherServlet</strong>这个核心展开，<strong>DispatcherServlet</strong>是SpringMVC的总导演、总策划，负责截获请求并将其 分派给相应的处理器处理。</li>
+</ol>
 </blockquote>
-<h2 id="模型描述"><a href="#模型描述" class="headerlink" title="模型描述"></a>模型描述</h2><blockquote>
-<p>面-&gt;线-&gt;点-&gt;点抽稀(GA-子集,40%)-&gt;加字段(设好默认属性)-&gt;计算几何(x,y)、字段计算</p>
+<p>SpringMVC基于Model2。</p>
+<p>DispatcherServlet：收发，调度。</p>
+<p>截获特定的URL，交给SpringMVC。继承自HttpServlet。<br>servlet-mapping截获其中的地址。。</p>
+<p>DispatcherServlet体系结构：</p>
+<blockquote>
+<ol>
+<li>核心本质是一个Servlet</li>
+<li>init方法在整个系统启动时运行，且只运行一次</li>
+<li>service方法在系统运行时处于侦听模式，侦听并处理所有web请求</li>
+</ol>
 </blockquote>
-<p>这里的<strong>关键问题</strong>有两个：<br>1.多个工具的顺序<br>为了是模型更具效率，需要考虑每一步之间的先后，使计算处理量最小。例如此处的子集和加字段步骤，先子集然后加字段，就避免了给多余的点加字段，减少了运算量。<br>2.参数的默认值<br>这一步是简化工作量最关键的步骤。省去很多繁杂的输入操作。<br>模型需要输入输出参数，否则模型无效。<br><img src="http://7xqd63.com1.z0.glb.clouddn.com/polygonToPoint.PNG?imageView/4/w/344/q/88" alt=""><br>设置了默认值的参数，显示是蓝色的。<br><img src="http://7xqd63.com1.z0.glb.clouddn.com/polygon_point_childSet_addFiled.PNG?imageView/4/w/544/q/88" alt=""><br>待解决问题：<br>1.计算几何没有找到合适的代码，需要手动计算<br>2.字段计算同样人工操作。这两个问题都是对<code>arcgis</code>的<code>Python</code>操作不熟悉，有机会应该了解一点<code>arcpy</code>。</p>
-<h2 id="存在问题"><a href="#存在问题" class="headerlink" title="存在问题"></a>存在问题</h2><blockquote>
-<p>1.异常点。转点的过程中，软件处理算法的原因，造成点不是按顺序排列的，无法自动完成，只能通过人工检视来查找异常点，理清顺序。<br>2.市辖区合并。根据导师的意思，比方说合肥的四个市辖区，合并成一个，命名合肥市。<br>3.每个县市的边界点密度大概多少合适。经过反复试验，大概在100-200左右，统一将原数据降密到原来基础上的40%，能够满足需求。<br>4.邻界点是否必须重合。如果有此要求，就无法做下去。咨询老板，不需要。窃喜。<br>5.淮北市区有一块飞地。保留两个，分开表示即可。</p>
-</blockquote>
+<p>DispatcherServlet继承体系：<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">- HttpServlet -javax<span class="selector-class">.servlet</span><span class="selector-class">.http</span></div><div class="line">- HttpServletBean  -org<span class="selector-class">.springframework</span><span class="selector-class">.web</span><span class="selector-class">.servlet</span></div><div class="line">- FrameworkServlet  -org<span class="selector-class">.springframework</span><span class="selector-class">.web</span><span class="selector-class">.servlet</span></div><div class="line">- DispatcherServlet  -org<span class="selector-class">.springframework</span><span class="selector-class">.web</span><span class="selector-class">.servlet</span></div></pre></td></tr></table></figure></p>
 
       
 
@@ -704,11 +777,90 @@ function aa(res){
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">arcgis</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">java</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/cs/" class="article-tag-list-link color3">cs</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2016/07/07/java初识/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
+    <article id="post-HTML5服务器推送事件SSE" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/05/06/HTML5服务器推送事件SSE/">HTML5服务器推送事件SSE</a>
+    </h1>
+  
+
+        
+        <a href="/2016/05/06/HTML5服务器推送事件SSE/" class="archive-article-date">
+  	<time datetime="2016-05-06T07:27:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-05-06</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>今天论文总算初步告一段落，心情大好啊。想到这个快遗忘的博客，技术之路又要开启了。<br>一个月余的高压状态，虽然身体很累很累，但总算有所收获吧。</p>
+<p>今天看了一下HTML5，记录此篇，也算是回归之作。<br>路漫漫，加把劲。</p>
+<p>使用 SSE 可以不停的将 DOM事件推送到用户的浏览器中。这个事件流方法会打开一个到服务器的持久连接，新消息可用时发送数据到客户端，从而不再需要持续的轮询。</p>
+<p>HTML中需要包括一个<code>&lt;eventsource&gt;</code>元素，其src指向一个url后台程序链接，提供一个HTTP持久连接用于发送包含事件的数据流。可能是PHP、PERL或Python。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;div id=<span class="string">"sse"</span>&gt;</div><div class="line">  <span class="xml"><span class="tag">&lt;<span class="name">eventsource</span> <span class="attr">src</span>=<span class="string">"/cgi-bin/ticker.cgi"</span> /&gt;</span></span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>如下一段Perl：<br><figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/perl</span></div><div class="line"><span class="keyword">print</span> <span class="string">"Content-Type: text/event-stream\n\n"</span>;</div><div class="line"><span class="keyword">while</span>(true)&#123;</div><div class="line">  <span class="keyword">print</span> <span class="string">"Event: server-time\n"</span>;</div><div class="line">  $time = <span class="keyword">localtime</span>();</div><div class="line">  <span class="keyword">print</span> <span class="string">"Data: $time\n"</span>;</div><div class="line">  <span class="keyword">sleep</span>(<span class="number">5</span>);</div></pre></td></tr></table></figure></p>
+<p>w3c的一段php代码：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">header(<span class="string">"Content-Type: text/event-stream"</span>);</div><div class="line">header(<span class="string">"Cache-Control: no-cache"</span>);</div><div class="line">$time = date(<span class="string">'r'</span>);  <span class="comment">//参数r规定了时间格式，还有c等可用，具体看php官网date。</span></div><div class="line"><span class="keyword">echo</span> <span class="string">"data: the server time is: &#123;$time&#125;\n\n"</span>;</div><div class="line">flush();</div><div class="line"> sleep(<span class="number">5</span>);<span class="comment">//隔5s发送一次，但是默认好像是3s，5s时结果是8s一次，这是个疑惑。</span></div></pre></td></tr></table></figure></p>
+<p>处理服务器推送事件<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> source = <span class="keyword">new</span> EventSource(./sse.php);</div><div class="line">source.onmessage = <span class="function"><span class="keyword">function</span>(<span class="params">event</span>)</span>&#123;   <span class="comment">//另外还有onerror、onopen、readyState和url这几个事件。</span></div><div class="line">  <span class="built_in">document</span>.getElementById(<span class="string">"sseId"</span>).innerHTML += event.data+<span class="string">"&lt;br/&gt;"</span>;</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
+<p>运行结果<br><img src="http://o6qsa8zhh.bkt.clouddn.com/sse_result.PNG" alt=""></p>
+<p>后台是php的情况下遇到错误：<br><code>EventSource&#39;s response has a MIME type (&quot;text/html&quot;) that is not &quot;text/event-stream&quot;. Aborting the connection</code><br>网上资料显示是<code>echo &quot;data: the server time is: {$time}\n\n&quot;;</code>这里必须加上<code>\n\n</code>才行，之后也是这样调试通过的。</p>
+<p>参考：<a href="https://developer.mozilla.org/zh-CN/docs/Server-sent_events/EventSource" target="_blank" rel="external">MDN</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">hmtl5</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">arcgis 建模</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">sse</a>
         		</li>
       		
 		</ul>
@@ -720,7 +872,7 @@ function aa(res){
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/arcgis/" class="article-tag-list-link color2">arcgis</a>
+        			<a href="/categories/cs/" class="article-tag-list-link color3">cs</a>
         		</li>
       		
 		</ul>
@@ -729,7 +881,7 @@ function aa(res){
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2016/01/22/polygon-polyline-point-addField-caculate/">展开全文 >></a>
+          <a class="article-more-a" href="/2016/05/06/HTML5服务器推送事件SSE/">展开全文 >></a>
         </p>
       
 
@@ -744,236 +896,106 @@ function aa(res){
 
 
   
-    <article id="post-判断非手机登陆，做一次提醒" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-模块化-MVC" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2016/01/11/判断非手机登陆，做一次提醒/">判断非手机登陆，做一次提醒</a>
+      <a class="article-title" href="/2016/03/13/模块化-MVC/">模块化/MVC</a>
     </h1>
   
 
         
-        <a href="/2016/01/11/判断非手机登陆，做一次提醒/" class="archive-article-date">
-  	<time datetime="2016-01-11T12:17:29.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-01-11</time>
+        <a href="/2016/03/13/模块化-MVC/" class="archive-article-date">
+  	<time datetime="2016-03-13T14:28:37.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-03-13</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>需求</p>
-<blockquote>
-<p>项目的网站时做的手机网页，但是没有考虑到自适应pc端，只是在chrome中固定了手机屏幕大小，所以在pc端查看会很丑，布局是乱的；但是重写又很麻烦，所以有必要做一下提醒，让用户手动将网页缩小到手机屏幕大小。</p>
+        <blockquote>
+<p>下午看了一些关于模块化和MVC的文章，从各个文章中摘取了一些知识点，记录下来。想到好久没更新博客，权当充数。<br>接下来三天面试GIS开发和游戏开发，希望这三个公司有一个是我的归宿。</p>
 </blockquote>
-<p>用到</p>
-<blockquote>
-<p>非手机检验和cookie记录</p>
-</blockquote>
-<p>方法</p>
-<blockquote>
-<p>这段代码是使用了cookie来控制的</p>
-<ol>
-<li>使用cookie让浏览器记住页面已经打开过一次，当前页面刷新不会弹出提醒。</li>
-<li>浏览器一旦关闭，保存这个记录的cookie文件将被删除。重新打开浏览器弹出窗口会再次出现，从而确保了在原有的窗口基础上只打开一次。 </li>
+<h1 id="模块化"><a href="#模块化" class="headerlink" title="模块化"></a>模块化</h1><p>关键词：<br><strong>函数集合</strong>：污染全局变量<br><strong>对象</strong>：可修改内部变量，不安全<br><strong>立即执行函数</strong>：匿名函数，闭包，私有成员<br><strong>内存泄露</strong>：引用未释放，内存被占用<br><strong>高内聚低耦合</strong>：代码拆分 </p>
+<p>别人的模块拿来即用。标准化的接口。相互独立，功能完整。</p>
+<h2 id="模块化的价值"><a href="#模块化的价值" class="headerlink" title="模块化的价值"></a>模块化的价值</h2><ol>
+<li>代码服用</li>
+<li>提升可维护性</li>
 </ol>
+<ul>
+<li>公共模块通常用于促进<strong>代码复用</strong></li>
+<li>业务模块通常用于提升<strong>可维护性</strong></li>
+</ul>
+<h2 id="前端模块化的难点"><a href="#前端模块化的难点" class="headerlink" title="前端模块化的难点"></a>前端模块化的难点</h2><ol>
+<li>资源复杂</li>
+<li>标准缺位</li>
+<li>天生异步</li>
+</ol>
+<p>CommonJS<br><figure class="highlight lua"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">var <span class="built_in">math</span> = <span class="built_in">require</span>(<span class="string">'math'</span>);</div><div class="line"><span class="built_in">math</span>.add(<span class="number">2</span>,<span class="number">3</span>);</div></pre></td></tr></table></figure></p>
+<p>AMD<br><figure class="highlight lua"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">require</span>([<span class="string">'math'</span>], <span class="function"><span class="keyword">function</span><span class="params">()</span></span>&#123;</div><div class="line">    <span class="built_in">math</span>.add(<span class="number">2</span>,<span class="number">3</span>)</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<p>前者属于”同步”，后者属于”异步”。浏览器不需要等待js从服务器下载完，浏览器可能假死。</p>
+<p>遗憾的是JavaScript在设计时定位原因，没有提供类似的功能，开发者需要模拟出类似的功能，来隔离、组织复杂的JavaScript代码，我们称为模块化。</p>
+<p>一个模块就是实现特定功能的文件，有了模块，我们就可以更方便地使用别人的代码，想要什么功能，就加载什么模块。模块开发需要遵循一定的规范，各行其是就都乱套了。</p>
+<h2 id="AMD与CMD区别"><a href="#AMD与CMD区别" class="headerlink" title="AMD与CMD区别"></a>AMD与CMD区别</h2><blockquote>
+<p>最明显的区别就是在模块定义时对依赖的处理不同</p>
+<p>AMD推崇依赖前置，在定义模块的时候就要声明其依赖的模块<br>CMD推崇就近依赖，只有在用到某个模块的时候再去require<br>这种区别各有优劣，只是语法上的差距，而且requireJS和SeaJS都支持对方的写法</p>
+<p>AMD和CMD最大的区别是对依赖模块的执行时机处理不同，注意不是加载的时机或者方式不同</p>
+<p>很多人说requireJS是异步加载模块，SeaJS是同步加载模块，这么理解实际上是不准确的，其实加载模块都是异步的，只不过AMD依赖前置，js可以方便知道依赖模块是谁，立即加载，而CMD就近依赖，需要使用把模块变为字符串解析一遍才知道依赖了那些模块，这也是很多人诟病CMD的一点，牺牲性能来带来开发的便利性，实际上解析模块用的时间短到可以忽略</p>
+<p>为什么我们说两个的区别是依赖模块执行时机不同，为什么很多人认为ADM是异步的，CMD是同步的（除了名字的原因。。。）</p>
+<p>同样都是异步加载模块，AMD在加载模块完成后就会执行改模块，所有模块都加载执行完后会进入require的回调函数，执行主逻辑，这样的效果就是依赖模块的执行顺序和书写顺序不一定一致，看网络速度，哪个先下载下来，哪个先执行，但是主逻辑一定在所有依赖加载完成后才执行</p>
+<p>CMD加载完某个依赖模块后并不执行，只是下载而已，在所有依赖模块加载完成后进入主逻辑，遇到require语句的时候才执行对应的模块，这样模块的执行顺序和书写顺序是完全一致的</p>
+<p>这也是很多人说AMD用户体验好，因为没有延迟，依赖模块提前执行了，CMD性能好，因为只有用户需要的时候才执行的原因</p>
 </blockquote>
-<p>判断非手机登陆方式<br><figure class="highlight lisp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">if (!/Android|webOS|iPhone|iPod|BlackBerry/i.test(<span class="name">navigator</span>.userAgent))</div><div class="line">	alert(<span class="string">"为了提高体验效果，请把页面缩小成手机屏幕大小。\n谢谢合作！"</span>)<span class="comment">;</span></div></pre></td></tr></table></figure></p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span><span class="javascript"></span></div><div class="line">	<span class="keyword">try</span>&#123;</div><div class="line">		<span class="keyword">var</span> alertmessage=<span class="string">"为了提高体验效果，请把页面缩小成手机屏幕大小。\n谢谢合作！"</span>;</div><div class="line">		<span class="keyword">var</span> once_per_session=<span class="number">1</span></div><div class="line">		<span class="function"><span class="keyword">function</span> <span class="title">get_cookie</span>(<span class="params">Name</span>) </span>&#123;</div><div class="line">		  <span class="keyword">var</span> search = Name + <span class="string">"="</span></div><div class="line">		  <span class="keyword">var</span> returnvalue = <span class="string">""</span>;</div><div class="line">		  <span class="keyword">if</span> (<span class="built_in">document</span>.cookie.length &gt; <span class="number">0</span>) &#123;</div><div class="line">			offset = <span class="built_in">document</span>.cookie.indexOf(search)</div><div class="line">			<span class="keyword">if</span> (offset != <span class="number">-1</span>) &#123;</div><div class="line">			  offset += search.length;</div><div class="line">			  end = <span class="built_in">document</span>.cookie.indexOf(<span class="string">";"</span>, offset);</div><div class="line">			  <span class="keyword">if</span> (end == <span class="number">-1</span>)</div><div class="line">				 end = <span class="built_in">document</span>.cookie.length;</div><div class="line">			 	 returnvalue=<span class="built_in">unescape</span>(<span class="built_in">document</span>.cookie.substring(offset, end))</div><div class="line">			  &#125;</div><div class="line">		   	&#125;</div><div class="line">		 	<span class="keyword">return</span> returnvalue;</div><div class="line">		&#125;</div><div class="line">		<span class="function"><span class="keyword">function</span> <span class="title">alertornot</span>(<span class="params"></span>)</span>&#123;</div><div class="line">			<span class="keyword">if</span> (get_cookie(<span class="string">'alerted'</span>)==<span class="string">''</span>)&#123;</div><div class="line">		        loadalert();</div><div class="line">				<span class="built_in">document</span>.cookie=<span class="string">"alerted=yes"</span>;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">		<span class="function"><span class="keyword">function</span> <span class="title">loadalert</span>(<span class="params"></span>)</span>&#123;</div><div class="line">			<span class="keyword">if</span> (!<span class="regexp">/Android|webOS|iPhone|iPod|BlackBerry/i</span>.test(navigator.userAgent))</div><div class="line">				alert(alertmessage);</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">if</span> (once_per_session==<span class="number">0</span>)</div><div class="line">			loadalert();</div><div class="line">		<span class="keyword">else</span></div><div class="line">			alertornot();</div><div class="line">	&#125; <span class="keyword">catch</span>(e)</div><div class="line">	&#123;</div><div class="line">		alert(e);</div><div class="line">	&#125;</div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div></pre></td></tr></table></figure>
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">cs</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2016/01/11/判断非手机登陆，做一次提醒/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
-    <article id="post-nodejs学习记录" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/01/05/nodejs学习记录/">nodejs学习记录</a>
-    </h1>
-  
-
-        
-        <a href="/2016/01/05/nodejs学习记录/" class="archive-article-date">
-  	<time datetime="2016-01-05T02:18:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-01-05</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="《Node-js开发指南》"><a href="#《Node-js开发指南》" class="headerlink" title="《Node.js开发指南》"></a>《Node.js开发指南》</h1><p>学习nodejs有一段时间了，基本的概念已经有了大概的了解。《Node.js开发指南》进行到第五章-使用Nodejs进行web开发，实现一个微博系统。<br>前面看书一直断断续续，前段时间只能晚上在宿舍看一会，没有系统性，虽然勉强看完了前面四章节的基础知识，但还不能说会了。希望通过这个小系统的练习，对nodejs有更深入的理解。</p>
-<p>微博系统主要功能</p>
-<blockquote>
-<p>1.路由控制<br>2.页面模板<br>3.数据库访问<br>4.用户注册<br>5.登陆<br>6.用户会话</p>
-</blockquote>
-<p>主要技术点：</p>
-<blockquote>
-<p>1.Express框架<br>2.MVC设计模式<br>3.ejs模板引擎<br>4.MongoDB数据库</p>
-</blockquote>
-<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><table>
+<h1 id="MVC"><a href="#MVC" class="headerlink" title="MVC"></a>MVC</h1><p><span style="color:red">MVC 不是一种技术，仅是一种理念。</span></p>
+<h2 id="前端MVC"><a href="#前端MVC" class="headerlink" title="前端MVC"></a>前端MVC</h2><table>
 <thead>
 <tr>
-<th style="text-align:left">简记</th>
-<th style="text-align:center">全拼</th>
-<th style="text-align:center">中文</th>
-<th style="text-align:center">含义</th>
+<th>简写</th>
+<th>全称</th>
+<th>含义</th>
+<th>前端表现</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align:left">M</td>
-<td style="text-align:center">Model</td>
-<td style="text-align:center">模型</td>
-<td style="text-align:center">对象及数据结构的实现,通常包括数据库操作</td>
+<td>M</td>
+<td>module</td>
+<td>数据请求和数据操作。</td>
+<td>ajax从服务器拉取数据</td>
 </tr>
 <tr>
-<td style="text-align:left">V</td>
-<td style="text-align:center">View</td>
-<td style="text-align:center">视图</td>
-<td style="text-align:center">表示用户界面,HTML组织结构</td>
+<td>V</td>
+<td>view</td>
+<td>视图操作和改变</td>
+<td>HTML/CSS</td>
 </tr>
 <tr>
-<td style="text-align:left">C</td>
-<td style="text-align:center">Controller</td>
-<td style="text-align:center">控制器</td>
-<td style="text-align:center">用于处理用户请求和数据流、复杂模型,将输出传递给视图</td>
+<td>C</td>
+<td>controller</td>
+<td>事件绑定，转发view用户请求到module，业务逻辑</td>
+<td>js</td>
 </tr>
 </tbody>
 </table>
-<p>nodejs两大特性，其一：</p>
+<h2 id="JS实现基础MVC模型"><a href="#JS实现基础MVC模型" class="headerlink" title="JS实现基础MVC模型"></a>JS实现基础MVC模型</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/** 模擬 Model, View, Controller */</span></div><div class="line"><span class="keyword">var</span> M = &#123;&#125;, V = &#123;&#125;, C = &#123;&#125;;</div><div class="line"></div><div class="line"><span class="comment">/** Model 負責存放資料 */</span></div><div class="line">M.data = <span class="string">"hello world"</span>;</div><div class="line"></div><div class="line"><span class="comment">/** View 負責將資料輸出到螢幕上 */</span></div><div class="line">V.render = <span class="function"><span class="keyword">function</span> (<span class="params">M</span>) </span>&#123; alert(M.data); &#125;</div><div class="line"></div><div class="line"><span class="comment">/** Controller 作為一個 M 和 V 的橋樑 */</span></div><div class="line">C.handleOnload = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123; V.render(M); &#125;</div><div class="line"></div><div class="line"><span class="comment">/** 在網頁讀取的時候呼叫 Controller */</span></div><div class="line"><span class="built_in">window</span>.onload = C.handleOnLoad;</div></pre></td></tr></table></figure>
+<h2 id="图示MVC"><a href="#图示MVC" class="headerlink" title="图示MVC"></a>图示MVC</h2><p><img src="http://image.beekka.com/blog/2015/bg2015020105.png" alt=""></p>
 <blockquote>
-<p>可以跳过<code>http</code>服务器,因为它本身就是。提供http模块，由c++实现，性能可靠，可直接应用到生产环境。</p>
-</blockquote>
-<p>其二：</p>
-<blockquote>
-<p>与其他语言的显著区别，原始封装成都较低。nodejs中很多工作需要自己完成(但不是都是自己动手，可借助于<strong>第三方框架</strong>)。</p>
-</blockquote>
-<p>使用http模块</p>
-<blockquote>
-<p>减少一层抽象，性能的提升同时提高了开发难度。就一个简单的post请求来说，PHP只要两行代码，而nodejs需要自己手动写post请求过程。底层接口尽管用起来复杂，但让我们对http协议的理解更加清晰。<br>http模块是http服务器内核的封装，可以做网站，可以做代理服务器。手动实现所有东西，小到POST请求，达到Cookie、会话管理。当你用这种方式建立网站时，几乎已经做好了一个完整的框架了。</p>
-</blockquote>
-<p>Express框架</p>
-<blockquote>
-<p>更高层的http接口，以及许多网站常用功能实现了。<br>但不是一个无所不包的全能框架，没有像Rails或Django实现模板引擎甚至ORM(Object Relation Model,对象关系模型)。只是一个轻量级的web框架，多数功能只是对http协议中的常用操作的封装，更多的功能需要插件或者整合其他模块来完成。</p>
-</blockquote>
-<h2 id="快速开始"><a href="#快速开始" class="headerlink" title="快速开始 "></a>快速开始 </h2><p>安装Express<br>目前express已经更新到4.x版本，安装时可用@加版本<br><figure class="highlight autoit"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">npm install -g express-generator<span class="symbol">@3</span></div><div class="line"><span class="literal">or</span></div><div class="line">npm install -g express-generator<span class="symbol">@4</span></div></pre></td></tr></table></figure></p>
-<p>书上用的是2.5.8版本，所以<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">npm</span> <span class="selector-tag">install</span> <span class="selector-tag">-g</span> <span class="selector-tag">express</span>@<span class="keyword">2</span>.<span class="keyword">5</span>.<span class="keyword">8</span> --save</div></pre></td></tr></table></figure></p>
-<p>不加版本号，默认最新版本.安装完成后，用<code>express -V</code>检查安装结果。<br>这样就可以使用express命令了。<br>最快的安装启动express框架简要步骤：<br><figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">express <span class="keyword">blog </span>&amp;&amp; cd <span class="keyword">blog </span>&amp;&amp; npm <span class="keyword">install </span>&amp;&amp; npm start</div></pre></td></tr></table></figure></p>
-<p><code>express 4.x</code>无法用<code>node app.js</code>启动，指令为<code>npm start</code>。<br>然后打开<a href="localhost:3000" target="_blank" rel="external">localhost:3000</a>即可见到熟悉的<code>Welcome to Express</code>。</p>
-<blockquote>
-<p>对应的版本都需要对应的依赖，有时候安装的时候会自动选择最先版本，也需要最新的依赖；制定的方法是在<code>package.json</code>中制定依赖的版本，再运行<code>npm install</code>来安装依赖。</p>
-</blockquote>
-<p>最重要的事应该是理解框架的设计思想，文件之间的映射关系，各个文件夹的分工。<br>理解MVC。</p>
-<p>老版本用<code>supervisor app.js</code>来启动应用，依然可行。   </p>
-<h2 id="建立微博网站"><a href="#建立微博网站" class="headerlink" title="建立微博网站"></a>建立微博网站</h2><p>1功能分析</p>
-<blockquote>
-<p>开发中的大忌是没想清楚要做什么就开始动手。先应该有一个全局的规划。</p>
-</blockquote>
 <ol>
-<li>以用户为中心，需有注册登录功能</li>
-<li>最核心的是信息的发表，涉及数据库访问，前端显示</li>
-<li>评论，转发，点赞等功能，但由于学习目的，不一一实现</li>
+<li>View 传送指令到 Controller</li>
+<li>Controller 完成业务逻辑后，要求 Model 改变状态</li>
+<li>Model 将新的数据发送到 View，用户得到反馈</li>
 </ol>
-<p>2路由规划<br>或者控制器规划是网站的骨架部分，优先考虑<br>根据功能设计，路由规划方案如下：</p>
-<ul>
-<li>/: 首页</li>
-<li>/u[user] 用户主页</li>
-<li>/post: 发表信息</li>
-<li>/reg: 用户注册</li>
-<li>/login: 用户登录</li>
-<li>/logout: 登出</li>
-</ul>
-<h2 id="常见错误处理"><a href="#常见错误处理" class="headerlink" title="常见错误处理"></a>常见错误处理</h2><p>在完成用户注册页面书写之后，运行出错。<br>error:connection strategy not found</p>
-<figure class="highlight taggerscript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">$ node app.js</div><div class="line">E:<span class="symbol">\s</span>ync_mypc<span class="symbol">\s</span>ync_mypc<span class="symbol">\l</span>anguages<span class="symbol">\j</span>s<span class="symbol">\n</span>odejs<span class="symbol">\b</span>log<span class="symbol">\m</span>blog<span class="symbol">\n</span>ode_modules<span class="symbol">\c</span>onnect-mongo</div><div class="line"><span class="symbol">\s</span>rc<span class="symbol">\i</span>ndex.js:100</div><div class="line">                throw new Error('Connection strategy not found');</div><div class="line">                ^</div><div class="line"></div><div class="line">Error: Connection strategy not found</div><div class="line">    at MongoStore (E:<span class="symbol">\s</span>ync_mypc<span class="symbol">\s</span>ync_mypc<span class="symbol">\l</span>anguages<span class="symbol">\j</span>s<span class="symbol">\n</span>odejs<span class="symbol">\b</span>log<span class="symbol">\m</span>blog<span class="symbol">\n</span>ode_mo</div><div class="line">dules<span class="symbol">\c</span>onnect-mongo<span class="symbol">\s</span>rc<span class="symbol">\i</span>ndex.js:100:23)</div><div class="line">    at HTTPServer.&lt;anonymous&gt; (E:<span class="symbol">\s</span>ync_mypc<span class="symbol">\s</span>ync_mypc<span class="symbol">\l</span>anguages<span class="symbol">\j</span>s<span class="symbol">\n</span>odejs<span class="symbol">\b</span>log<span class="symbol">\m</span></div><div class="line">blog<span class="symbol">\a</span>pp.js:23:12)</div><div class="line">    at HTTPServer.app.configure (E:<span class="symbol">\s</span>ync_mypc<span class="symbol">\s</span>ync_mypc<span class="symbol">\l</span>anguages<span class="symbol">\j</span>s<span class="symbol">\n</span>odejs<span class="symbol">\b</span>log</div><div class="line"><span class="symbol">\m</span>blog<span class="symbol">\n</span>ode_modules<span class="symbol">\e</span>xpress<span class="symbol">\l</span>ib<span class="symbol">\h</span>ttp.js:542:61)</div><div class="line">    at Object.&lt;anonymous&gt; (E:<span class="symbol">\s</span>ync_mypc<span class="symbol">\s</span>ync_mypc<span class="symbol">\l</span>anguages<span class="symbol">\j</span>s<span class="symbol">\n</span>odejs<span class="symbol">\b</span>log<span class="symbol">\m</span>blog</div><div class="line"><span class="symbol">\a</span>pp.js:15:5)</div><div class="line">    at Module._compile (module.js:425:26)</div><div class="line">    at Object.Module._extensions..js (module.js:432:10)</div><div class="line">    at Module.load (module.js:356:32)</div><div class="line">    at Function.Module._load (module.js:311:12)</div><div class="line">    at Function.Module.runMain (module.js:457:10)</div><div class="line">    at startup (node.js:136:18)</div><div class="line">    at node.js:972:3</div></pre></td></tr></table></figure>
-<p>问题解决<br>在<a href="https://cnodejs.org/" target="_blank" rel="external">cnode</a>(已用github邮箱注册)上看到了一篇同样的<a href="https://cnodejs.org/topic/567a1120222744630726b244#567bab8c10b0249d07105d9c" target="_blank" rel="external">问题</a>，答案中解决了。<br>解决方式<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">npm</span> <span class="selector-tag">install</span> <span class="selector-tag">connect-mongo</span>@<span class="keyword">0</span>.<span class="keyword">8</span>.<span class="keyword">2</span> --save</div></pre></td></tr></table></figure></p>
-<p>独立的模块更新可能影响整体功能。在同一个时期要用当时的版本。</p>
-<p>定义的<code>db.js</code>中<code>DEFAULT_PORT</code>没有定义</p>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">TypeError: Cannot read property <span class="string">'DEFAULT_PORT'</span> of undefined</div><div class="line">    at Object.&lt;anonymous&gt; (E:\sync_mypc\sync_mypc\languages\js\nodejs\blog\mblog\models\db<span class="selector-class">.js</span>:<span class="number">7</span>:<span class="number">74</span>)</div><div class="line">    at Module._compile (module<span class="selector-class">.js</span>:<span class="number">425</span>:<span class="number">26</span>)</div><div class="line">    at Object<span class="selector-class">.Module</span>._extensions.<span class="selector-class">.js</span> (module<span class="selector-class">.js</span>:<span class="number">432</span>:<span class="number">10</span>)</div><div class="line">    at Module<span class="selector-class">.load</span> (module<span class="selector-class">.js</span>:<span class="number">356</span>:<span class="number">32</span>)</div><div class="line">    at Function<span class="selector-class">.Module</span>._load (module<span class="selector-class">.js</span>:<span class="number">311</span>:<span class="number">12</span>)</div><div class="line">    at Module<span class="selector-class">.require</span> (module<span class="selector-class">.js</span>:<span class="number">366</span>:<span class="number">17</span>)</div><div class="line">    at require (module<span class="selector-class">.js</span>:<span class="number">385</span>:<span class="number">17</span>)</div><div class="line">    at Object.&lt;anonymous&gt; (E:\sync_mypc\sync_mypc\languages\js\nodejs\blog\mblog\models\user<span class="selector-class">.js</span>:<span class="number">1</span>:<span class="number">77</span>)</div><div class="line">    at Module._compile (module<span class="selector-class">.js</span>:<span class="number">425</span>:<span class="number">26</span>)</div><div class="line">    at Object<span class="selector-class">.Module</span>._extensions.<span class="selector-class">.js</span> (module<span class="selector-class">.js</span>:<span class="number">432</span>:<span class="number">10</span>)</div><div class="line">Program node app<span class="selector-class">.js</span> exited with <span class="selector-tag">code</span> <span class="number">1</span></div></pre></td></tr></table></figure>
-<p>问题解决<br><figure class="highlight ada"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">DEFAULT_PORT   <span class="comment">-----    27017</span></div></pre></td></tr></table></figure></p>
-<p>到今天下午，基本完成第五章的学习。程序能够正常运行，但是还有许多细节不是很清楚，例如<code>mongodb</code>的使用，之间的映射关系自己也还要梳理一遍。</p>
-<p>代码稍后会在<a href="https://github.com/linking123/nodejs_guard" target="_blank" rel="external"><code>GitHub</code></a>和<a href=""><code>oscGit</code></a>上双备份。</p>
-<h1 id="《Node-js实战》"><a href="#《Node-js实战》" class="headerlink" title="《Node.js实战》  "></a>《Node.js实战》  </h1><p>图书编号：TP312JA425</p>
-<h2 id="第一部分-基础篇"><a href="#第一部分-基础篇" class="headerlink" title="第一部分 基础篇"></a>第一部分 基础篇</h2><p>nodejs及JavaScript基础了解。</p>
-<h2 id="第二部分-提高篇"><a href="#第二部分-提高篇" class="headerlink" title="第二部分 提高篇"></a>第二部分 提高篇</h2><p>相册服务器<br>模块<br>模板<br>2015/12/30 noon 17:09  library<br>稍后补上笔记并上传代码备份</p>
-<h2 id="第三部分-实战篇"><a href="#第三部分-实战篇" class="headerlink" title="第三部分 实战篇"></a>第三部分 实战篇</h2><p>###第七章使用express构建web应用<br>路由<br><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">app.get(<span class="string">'/'</span>, <span class="function"><span class="keyword">function</span><span class="params">(req, res)</span></span>&#123; &#125;);</div></pre></td></tr></table></figure></p>
-<p>URL路由函数一般格式<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">app</span><span class="selector-class">.method</span>(<span class="selector-tag">url_pattern</span>, <span class="selector-tag">optional_functions</span>, <span class="selector-tag">request_handler_function</span>);</div></pre></td></tr></table></figure></p>
-<p>method: get, post, delete, put; all<br>简单的URL</p>
-<blockquote>
-<p>/path/to/resources</p>
 </blockquote>
-<p>也支持正则</p>
-<blockquote>
-<p>/user(s)?/list<br>/user/*</p>
-</blockquote>
-<p>占位符(用<code>:</code>标记)从请求路由中提取指定值(除了<code>/</code>)，解析路由时将匹配到的占位符值保存到<code>req.params</code>对象中<br><figure class="highlight lua"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">app.get(<span class="string">"/albums/:album_name.json"</span>, <span class="function"><span class="keyword">function</span><span class="params">(req, res)</span></span>&#123;</div><div class="line">　　res.<span class="keyword">end</span>(<span class="string">"request "</span>+req.params.album_name);</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
-<p>如上面请求/albums/linking.json,输出结果为:</p>
-<blockquote>
-<p>request linking</p>
-</blockquote>
-<p>模块化，<code>REST</code>风格的接口。</p>
-<blockquote>
-<p>将能够独立出来，以后会复用的模块分离成单独文件。<br>模块化增加了源代码可读性，结构更加清晰明了。</p>
-</blockquote>
-<p>中间件</p>
-<blockquote>
-<p>如<code>express</code>就建立在<code>connect</code>这个中间件。</p>
-</blockquote>
-<p>通过一下格式引用中间件<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> middle_something = <span class="keyword">require</span>(<span class="string">'middle_something'</span>);</div><div class="line">app.<span class="keyword">use</span>(middle_something());</div></pre></td></tr></table></figure></p>
-<p>配置</p>
-<blockquote>
-<p>使用<code>configure</code>方法指定配置名称，在特定的配置环境下该方法提供的函数会被调用。未指定名称，则函数会被所有的配置环境调用，多个配置名称可以用逗号隔开。<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">app.configure(<span class="function"><span class="keyword">function</span><span class="params">()</span></span>&#123;   <span class="comment">//全部适用</span></div><div class="line">　app.<span class="keyword">use</span>(express.bodyParser());</div><div class="line">&#125;);</div><div class="line"></div><div class="line">app.configure(<span class="string">'dev'</span>, <span class="function"><span class="keyword">function</span><span class="params">()</span></span>&#123;  <span class="comment">//指定了开发环境适用</span></div><div class="line">　app.<span class="keyword">use</span>(expresss.logger(<span class="string">'dev'</span>));</div><div class="line">&#125;);</div><div class="line">app.configure(<span class="string">'production'</span>, <span class="string">'staging'</span>, <span class="function"><span class="keyword">function</span><span class="params">()</span></span>&#123;  <span class="comment">//多名称</span></div><div class="line">　app.<span class="keyword">use</span>(express.logger());</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
-</blockquote>
-<p>Mac和UNIX电脑中shell命令<br><figure class="highlight crmsh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="attr">NODE_ENV=</span>production <span class="keyword">node</span> <span class="title">program</span>.js</div></pre></td></tr></table></figure></p>
-<p>Windows命令<br><figure class="highlight crmsh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">set <span class="attr">NODE_ENV=</span>production</div><div class="line"><span class="keyword">node</span> <span class="title">program</span>.js</div></pre></td></tr></table></figure></p>
-<p>中间件执行过程中有一个顺序问题，注意<code>re</code>s.end`的位置，它会关闭响应。</p>
-<p>静态文件处理</p>
-<blockquote>
-<p><code>express</code>通过<code>connect</code>提供了<code>static</code>中间件，将存放静态文件的根目录路径名赋给中间件创建函数即可<br><figure class="highlight fsharp"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">app.<span class="keyword">use</span>(express.<span class="keyword">static</span>(<span class="string">"/secure/static_site_files"</span>));</div></pre></td></tr></table></figure></p>
-</blockquote>
-<p><code>bodyParser</code>,<code>cookieParser</code>,<code>session</code><br><figure class="highlight ada"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">var app = express()</div><div class="line">    .<span class="keyword">use</span>(express.logger(<span class="symbol">'dev</span>'))</div><div class="line">     // move this to AFTER the next <span class="keyword">use</span>() <span class="keyword">and</span> see what happens!</div><div class="line">    .<span class="keyword">use</span>(express.bodyParser())</div><div class="line">    .<span class="keyword">use</span>(<span class="keyword">function</span>(req, res)&#123;</div><div class="line">        console.log(req.<span class="keyword">body</span>);</div><div class="line">        res.<span class="keyword">end</span>(<span class="symbol">'want</span> to update album name to '</div><div class="line">                + req.<span class="keyword">body</span>.album.new_name + <span class="string">"\n"</span>);</div><div class="line">&#125;)</div></pre></td></tr></table></figure></p>
-<p><strong>编写应用过程中，检测和捕捉错误的代码量往往要大于正常操作的代码量，这才是良好的代码风格。</strong></p>
-<blockquote>
-<p>也许我单纯的以为代码只要能实现直接的功能就行了，是太浅薄的理解。程序中大部分时间都在跟<code>bug</code>作斗争，良好的代码风格能够节省大量的时间，快速定位错误所在。</p>
-</blockquote>
-<h2 id="第四部分-进阶篇"><a href="#第四部分-进阶篇" class="headerlink" title="第四部分 进阶篇"></a>第四部分 进阶篇</h2>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
+<li><a href="https://zh.wikipedia.org/wiki/MVC" target="_blank" rel="external">Wikipedia</a></li>
+<li>阮一峰的博客：<br>　　<a href="http://www.ruanyifeng.com/blog/2012/10/javascript_module.html" target="_blank" rel="external">Javascript模块化编程</a><br>　　<a href="http://www.ruanyifeng.com/blog/2015/02/mvcmvp_mvvm.html" target="_blank" rel="external">MVC、MVP和MVVM</a><br>　　<a href="http://www.ruanyifeng.com/blog/2007/11/mvc.html" target="_blank" rel="external">谈谈MVC模式</a></li>
+<li><a href="http://www.cnblogs.com/dolphinX/p/4381855.html" target="_blank" rel="external">博客园阿里前端</a></li>
+<li><a href="https://github.com/xufei/blog/issues/19" target="_blank" rel="external">2015前端组件化框架之路</a></li>
+</ol>
+
       
 
       
@@ -986,7 +1008,11 @@ function aa(res){
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">nodejs</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">模块化</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">MVC</a>
         		</li>
       		
 		</ul>
@@ -1007,79 +1033,7 @@ function aa(res){
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2016/01/05/nodejs学习记录/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
-    <article id="post-多pc同步测试" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/12/17/多pc同步测试/">多PC同步测试</a>
-    </h1>
-  
-
-        
-        <a href="/2015/12/17/多pc同步测试/" class="archive-article-date">
-  	<time datetime="2015-12-17T13:04:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2015-12-17</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>不会吧，这么容易。<br><img src="http://7xosdw.com1.z0.glb.clouddn.com/jingyamao.jpg" alt="jingya"></p>
-        
-          <a class="article-more-a" href="/2015/12/17/多pc同步测试/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">cs</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/cs/" class="article-tag-list-link color3">cs</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2015/12/17/多pc同步测试/">展开全文 >></a>
+          <a class="article-more-a" href="/2016/03/13/模块化-MVC/">展开全文 >></a>
         </p>
       
 
@@ -1096,7 +1050,7 @@ function aa(res){
   
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/3/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/5/">Next &raquo;</a>
+      <a class="extend prev" rel="prev" href="/page/3/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/5/">Next &raquo;</a>
     </nav>
   
 
@@ -1194,6 +1148,10 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">HTML5</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">html5</a>
               </li>
              
@@ -1206,7 +1164,7 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">HTML5</a>
+                <a href="javascript:void(0)" class="js-tag color5">JavaScriptCore</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1226,7 +1184,43 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">cookie</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">git</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">cocoa</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">iOS</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">https</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">bundle</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">多线程</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">兼容性</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">绘图</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">HTTP</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1243,6 +1237,10 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">arcgis 建模</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">标识</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1270,15 +1268,15 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">张靓颖</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">正则</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">手机品牌匹配</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">张靓颖</a>
               </li>
              
               <li class="article-tag-list-item">
