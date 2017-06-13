@@ -160,6 +160,100 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-git学习之三-conflict冲突，reset版本控制，以及实践感悟" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/09/10/git学习之三-conflict冲突，reset版本控制，以及实践感悟/">git学习之三-最近遇到的坑</a>
+    </h1>
+  
+
+        
+        <a href="/2016/09/10/git学习之三-conflict冲突，reset版本控制，以及实践感悟/" class="archive-article-date">
+  	<time datetime="2016-09-10T08:55:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-09-10</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>最近在开发过程中，用到git提交代码，之前也用过github传过代码，但是实际工作中还用的不多，过程中遇到了一些坑，记录下来。</p>
+<h2 id="conflict冲突"><a href="#conflict冲突" class="headerlink" title="conflict冲突"></a>conflict冲突</h2><p>冲突原因:</p>
+<blockquote>
+<p>由于在自己提交之前，自己下载最新代码之后有人上传了，之前下载的不是最新的代码，所以有冲突，必须把代码冲突解决之后才能够上传。时间线问题。</p>
+</blockquote>
+<p>展现形式：<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;</div><div class="line">your <span class="selector-tag">code</span> </div><div class="line">HEAD </div><div class="line">others <span class="selector-tag">code</span></div><div class="line">&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;</div></pre></td></tr></table></figure></p>
+<p>完成了一个功能模块，想要提交到代码库中；为了方便，现在用git gui工具了，先把更改的文件statechanged状态改变一下，然后提交commit，之后千万不要忘记看看远程库中有没有最近的更新，pull一下；<br>pull一次之后就要注意解决冲突，一般文件会红色显示，有错误则会显示红色波浪线，形式如上所示；</p>
+<p>注意：每天可以多次commit，就像打标签，但是最好一天只push一次。多次提交造成不必要的浪费；</p>
+<p>据老司机门的经验，开发时，应该多构建分支，在一个分支上做一个功能，功能做完之后再合并分支，这样可以减少冲突的概率。</p>
+<h2 id="撤销未提交的修改"><a href="#撤销未提交的修改" class="headerlink" title="撤销未提交的修改"></a>撤销未提交的修改</h2><p>还没有commit，但想撤回修改的情况下：<br><img src="http://7xjqvu.com1.z0.glb.clouddn.com/15-6-19/48267713.jpg" alt=""><br>git diff：<br><img src="http://7xjqvu.com1.z0.glb.clouddn.com/15-6-19/81847901.jpg" alt=""></p>
+<p>保存了，如果是一两句还好，如果几百几千行呢？手动累死你。<br>神器：<br><figure class="highlight awk"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git checkout src<span class="regexp">/com/</span>jay<span class="regexp">/example/</span>testforgit<span class="regexp">/MainActivity.java</span></div></pre></td></tr></table></figure></p>
+<p>duang一下就没了：<br><img src="http://7xjqvu.com1.z0.glb.clouddn.com/15-6-19/10997419.jpg" alt=""></p>
+<p>当然上述<strong>前提是没有add</strong>，才可以checkout。我们要<strong>先取消添加</strong>才可以撤回提交，使用下述指令：<br><figure class="highlight dts"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">git reset HEAD src<span class="meta-keyword">/com/</span>jay<span class="meta-keyword">/example/</span>testforgit/MainActivity.java</div><div class="line">git checkout src<span class="meta-keyword">/com/</span>jay<span class="meta-keyword">/example/</span>testforgit/MainActivity.java</div></pre></td></tr></table></figure></p>
+<p><img src="http://7xjqvu.com1.z0.glb.clouddn.com/15-6-19/97479292.jpg" alt=""></p>
+<h2 id="版本回退"><a href="#版本回退" class="headerlink" title="版本回退"></a>版本回退</h2><blockquote>
+<p>上面提到的是撤销未提交的修改，但如果提交了，我们想回退到之前的某一个版本怎么办?<br>我们可以通过git log查看我们的提交记录，我们需要从这里获取一个版本号，<br>一般我们只需要<strong>前七位字符</strong>就够了；另外在Git中，用HEAD代表当前版本，上一个版本就是HEAD^，<br>再上一个版本就是HEAD^^依次类推！我们先Git Log看下版本历史先！</p>
+</blockquote>
+<p><img src="http://7xjqvu.com1.z0.glb.clouddn.com/15-6-19/40426312.jpg" alt=""></p>
+<p>我们回到前一个提交的版本吧，依次键入下述指令：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">git <span class="keyword">reset</span> <span class="comment">--hard HEAD</span></div><div class="line">git <span class="keyword">reset</span> <span class="comment">--hard HEAD^</span></div><div class="line">git <span class="keyword">log</span></div></pre></td></tr></table></figure></p>
+<p>控制台：<br><img src="http://7xjqvu.com1.z0.glb.clouddn.com/15-6-19/51915562.jpg" alt=""></p>
+<p>可以看到我们已经回退到了前一个版本了，当然你可以直接这样写：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git <span class="keyword">reset</span> <span class="comment">--hard ad2080c</span></div></pre></td></tr></table></figure></p>
+<p>就是这么简单！回退后，你突然后悔了（第一次回退到前一旧版本了，现在又想回到新版本了，善变啊），想回退回新的那个版本，<br>可是遗憾的是，你键入git log却发现没有了最新的那个版本号，这怎么办呢…<br>没事，Git中给你提供了这颗“后悔药”，Git记录着你输入的每一条指令呢！键入：<br><figure class="highlight ebnf"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">git reflog</span></div></pre></td></tr></table></figure></p>
+<p>你会发现，版本号就在这里：<br><img src="http://7xjqvu.com1.z0.glb.clouddn.com/15-6-19/93429639.jpg" alt=""></p>
+<p>然后键入：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git <span class="keyword">reset</span> <span class="comment">--hard ad2080c</span></div></pre></td></tr></table></figure></p>
+<p>可以看到我们又回到了最新的那个版本了，就是这么溜！<br><img src="http://7xjqvu.com1.z0.glb.clouddn.com/15-6-19/46109301.jpg" alt=""></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">git</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/cs/" class="article-tag-list-link color3">cs</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2016/09/10/git学习之三-conflict冲突，reset版本控制，以及实践感悟/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
     <article id="post-git学习之二-git基础" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -896,158 +990,6 @@
 
 
   
-    <article id="post-模块化-MVC" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/03/13/模块化-MVC/">模块化/MVC</a>
-    </h1>
-  
-
-        
-        <a href="/2016/03/13/模块化-MVC/" class="archive-article-date">
-  	<time datetime="2016-03-13T14:28:37.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-03-13</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<p>下午看了一些关于模块化和MVC的文章，从各个文章中摘取了一些知识点，记录下来。想到好久没更新博客，权当充数。<br>接下来三天面试GIS开发和游戏开发，希望这三个公司有一个是我的归宿。</p>
-</blockquote>
-<h1 id="模块化"><a href="#模块化" class="headerlink" title="模块化"></a>模块化</h1><p>关键词：<br><strong>函数集合</strong>：污染全局变量<br><strong>对象</strong>：可修改内部变量，不安全<br><strong>立即执行函数</strong>：匿名函数，闭包，私有成员<br><strong>内存泄露</strong>：引用未释放，内存被占用<br><strong>高内聚低耦合</strong>：代码拆分 </p>
-<p>别人的模块拿来即用。标准化的接口。相互独立，功能完整。</p>
-<h2 id="模块化的价值"><a href="#模块化的价值" class="headerlink" title="模块化的价值"></a>模块化的价值</h2><ol>
-<li>代码服用</li>
-<li>提升可维护性</li>
-</ol>
-<ul>
-<li>公共模块通常用于促进<strong>代码复用</strong></li>
-<li>业务模块通常用于提升<strong>可维护性</strong></li>
-</ul>
-<h2 id="前端模块化的难点"><a href="#前端模块化的难点" class="headerlink" title="前端模块化的难点"></a>前端模块化的难点</h2><ol>
-<li>资源复杂</li>
-<li>标准缺位</li>
-<li>天生异步</li>
-</ol>
-<p>CommonJS<br><figure class="highlight lua"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">var <span class="built_in">math</span> = <span class="built_in">require</span>(<span class="string">'math'</span>);</div><div class="line"><span class="built_in">math</span>.add(<span class="number">2</span>,<span class="number">3</span>);</div></pre></td></tr></table></figure></p>
-<p>AMD<br><figure class="highlight lua"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">require</span>([<span class="string">'math'</span>], <span class="function"><span class="keyword">function</span><span class="params">()</span></span>&#123;</div><div class="line">    <span class="built_in">math</span>.add(<span class="number">2</span>,<span class="number">3</span>)</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
-<p>前者属于”同步”，后者属于”异步”。浏览器不需要等待js从服务器下载完，浏览器可能假死。</p>
-<p>遗憾的是JavaScript在设计时定位原因，没有提供类似的功能，开发者需要模拟出类似的功能，来隔离、组织复杂的JavaScript代码，我们称为模块化。</p>
-<p>一个模块就是实现特定功能的文件，有了模块，我们就可以更方便地使用别人的代码，想要什么功能，就加载什么模块。模块开发需要遵循一定的规范，各行其是就都乱套了。</p>
-<h2 id="AMD与CMD区别"><a href="#AMD与CMD区别" class="headerlink" title="AMD与CMD区别"></a>AMD与CMD区别</h2><blockquote>
-<p>最明显的区别就是在模块定义时对依赖的处理不同</p>
-<p>AMD推崇依赖前置，在定义模块的时候就要声明其依赖的模块<br>CMD推崇就近依赖，只有在用到某个模块的时候再去require<br>这种区别各有优劣，只是语法上的差距，而且requireJS和SeaJS都支持对方的写法</p>
-<p>AMD和CMD最大的区别是对依赖模块的执行时机处理不同，注意不是加载的时机或者方式不同</p>
-<p>很多人说requireJS是异步加载模块，SeaJS是同步加载模块，这么理解实际上是不准确的，其实加载模块都是异步的，只不过AMD依赖前置，js可以方便知道依赖模块是谁，立即加载，而CMD就近依赖，需要使用把模块变为字符串解析一遍才知道依赖了那些模块，这也是很多人诟病CMD的一点，牺牲性能来带来开发的便利性，实际上解析模块用的时间短到可以忽略</p>
-<p>为什么我们说两个的区别是依赖模块执行时机不同，为什么很多人认为ADM是异步的，CMD是同步的（除了名字的原因。。。）</p>
-<p>同样都是异步加载模块，AMD在加载模块完成后就会执行改模块，所有模块都加载执行完后会进入require的回调函数，执行主逻辑，这样的效果就是依赖模块的执行顺序和书写顺序不一定一致，看网络速度，哪个先下载下来，哪个先执行，但是主逻辑一定在所有依赖加载完成后才执行</p>
-<p>CMD加载完某个依赖模块后并不执行，只是下载而已，在所有依赖模块加载完成后进入主逻辑，遇到require语句的时候才执行对应的模块，这样模块的执行顺序和书写顺序是完全一致的</p>
-<p>这也是很多人说AMD用户体验好，因为没有延迟，依赖模块提前执行了，CMD性能好，因为只有用户需要的时候才执行的原因</p>
-</blockquote>
-<h1 id="MVC"><a href="#MVC" class="headerlink" title="MVC"></a>MVC</h1><p><span style="color:red">MVC 不是一种技术，仅是一种理念。</span></p>
-<h2 id="前端MVC"><a href="#前端MVC" class="headerlink" title="前端MVC"></a>前端MVC</h2><table>
-<thead>
-<tr>
-<th>简写</th>
-<th>全称</th>
-<th>含义</th>
-<th>前端表现</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>M</td>
-<td>module</td>
-<td>数据请求和数据操作。</td>
-<td>ajax从服务器拉取数据</td>
-</tr>
-<tr>
-<td>V</td>
-<td>view</td>
-<td>视图操作和改变</td>
-<td>HTML/CSS</td>
-</tr>
-<tr>
-<td>C</td>
-<td>controller</td>
-<td>事件绑定，转发view用户请求到module，业务逻辑</td>
-<td>js</td>
-</tr>
-</tbody>
-</table>
-<h2 id="JS实现基础MVC模型"><a href="#JS实现基础MVC模型" class="headerlink" title="JS实现基础MVC模型"></a>JS实现基础MVC模型</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/** 模擬 Model, View, Controller */</span></div><div class="line"><span class="keyword">var</span> M = &#123;&#125;, V = &#123;&#125;, C = &#123;&#125;;</div><div class="line"></div><div class="line"><span class="comment">/** Model 負責存放資料 */</span></div><div class="line">M.data = <span class="string">"hello world"</span>;</div><div class="line"></div><div class="line"><span class="comment">/** View 負責將資料輸出到螢幕上 */</span></div><div class="line">V.render = <span class="function"><span class="keyword">function</span> (<span class="params">M</span>) </span>&#123; alert(M.data); &#125;</div><div class="line"></div><div class="line"><span class="comment">/** Controller 作為一個 M 和 V 的橋樑 */</span></div><div class="line">C.handleOnload = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123; V.render(M); &#125;</div><div class="line"></div><div class="line"><span class="comment">/** 在網頁讀取的時候呼叫 Controller */</span></div><div class="line"><span class="built_in">window</span>.onload = C.handleOnLoad;</div></pre></td></tr></table></figure>
-<h2 id="图示MVC"><a href="#图示MVC" class="headerlink" title="图示MVC"></a>图示MVC</h2><p><img src="http://image.beekka.com/blog/2015/bg2015020105.png" alt=""></p>
-<blockquote>
-<ol>
-<li>View 传送指令到 Controller</li>
-<li>Controller 完成业务逻辑后，要求 Model 改变状态</li>
-<li>Model 将新的数据发送到 View，用户得到反馈</li>
-</ol>
-</blockquote>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
-<li><a href="https://zh.wikipedia.org/wiki/MVC" target="_blank" rel="external">Wikipedia</a></li>
-<li>阮一峰的博客：<br>　　<a href="http://www.ruanyifeng.com/blog/2012/10/javascript_module.html" target="_blank" rel="external">Javascript模块化编程</a><br>　　<a href="http://www.ruanyifeng.com/blog/2015/02/mvcmvp_mvvm.html" target="_blank" rel="external">MVC、MVP和MVVM</a><br>　　<a href="http://www.ruanyifeng.com/blog/2007/11/mvc.html" target="_blank" rel="external">谈谈MVC模式</a></li>
-<li><a href="http://www.cnblogs.com/dolphinX/p/4381855.html" target="_blank" rel="external">博客园阿里前端</a></li>
-<li><a href="https://github.com/xufei/blog/issues/19" target="_blank" rel="external">2015前端组件化框架之路</a></li>
-</ol>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">模块化</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">MVC</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/cs/" class="article-tag-list-link color3">cs</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2016/03/13/模块化-MVC/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/3/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/5/">Next &raquo;</a>
@@ -1136,10 +1078,6 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">nodejs</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Ajax</a>
               </li>
              
@@ -1149,10 +1087,6 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">HTML5</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">html5</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1168,15 +1102,19 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">html5</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">cs</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">ListView</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">GridView</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">cs</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1188,11 +1126,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">git</a>
+                <a href="javascript:void(0)" class="js-tag color1">cocoa</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">cocoa</a>
+                <a href="javascript:void(0)" class="js-tag color4">git</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1240,6 +1178,10 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">nodejs</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">标识</a>
               </li>
              
@@ -1268,15 +1210,15 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">张靓颖</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">正则</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">手机品牌匹配</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">张靓颖</a>
               </li>
              
               <li class="article-tag-list-item">
