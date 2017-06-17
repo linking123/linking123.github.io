@@ -160,6 +160,85 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-https请求处理方式1：信任一切证书的副本" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/05/16/https请求处理方式1：信任一切证书的副本/">https请求处理方式1：信任一切证书</a>
+    </h1>
+  
+
+        
+        <a href="/2017/05/16/https请求处理方式1：信任一切证书的副本/" class="archive-article-date">
+  	<time datetime="2017-05-16T06:24:49.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-16</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="处理方法"><a href="#处理方法" class="headerlink" title="处理方法"></a>处理方法</h2><h3 id="1：使用异步请求方式"><a href="#1：使用异步请求方式" class="headerlink" title="1：使用异步请求方式"></a>1：使用异步请求方式</h3><h3 id="2：证书信任的委托这样处理"><a href="#2：证书信任的委托这样处理" class="headerlink" title="2：证书信任的委托这样处理"></a>2：证书信任的委托这样处理</h3><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">-(<span class="built_in">BOOL</span>)connectionShouldUseCredentialStorage:(<span class="built_in">NSURLConnection</span> *)connection&#123;</div><div class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</div><div class="line">&#125;</div><div class="line">- (<span class="keyword">void</span>)connection:(<span class="built_in">NSURLConnection</span> *)connection willSendRequestForAuthenticationChallenge:(<span class="built_in">NSURLAuthenticationChallenge</span> *)challenge&#123;</div><div class="line">    <span class="built_in">NSLog</span>(<span class="string">@"didReceiveAuthenticationChallenge %@ %zd"</span>, [[challenge protectionSpace] authenticationMethod], (ssize_t) [challenge previousFailureCount]);</div><div class="line">    <span class="keyword">if</span> ([challenge.protectionSpace.authenticationMethod isEqualToString:<span class="built_in">NSURLAuthenticationMethodServerTrust</span>])&#123;</div><div class="line">        [[challenge sender]  useCredential:[<span class="built_in">NSURLCredential</span> credentialForTrust:challenge.protectionSpace.serverTrust] forAuthenticationChallenge:challenge];</div><div class="line">        [[challenge sender]  continueWithoutCredentialForAuthenticationChallenge: challenge];</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (<span class="built_in">BOOL</span>)connection:(<span class="built_in">NSURLConnection</span> *)connection canAuthenticateAgainstProtectionSpace:(<span class="built_in">NSURLProtectionSpace</span> *)protectionSpace&#123;</div><div class="line">       <span class="keyword">return</span> [protectionSpace.authenticationMethod isEqualToString:<span class="built_in">NSURLAuthenticationMethodServerTrust</span>];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="完整示例代码"><a href="#完整示例代码" class="headerlink" title="完整示例代码"></a>完整示例代码</h2><p>UIViewController.h</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="meta">#import <span class="meta-string">&lt;UIKit/UIKit.h&gt;</span></span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">ViewController</span> : <span class="title">UIViewController</span>&lt;<span class="title">NSURLConnectionDataDelegate</span>&gt;</span></div><div class="line"></div><div class="line"><span class="keyword">@end</span></div></pre></td></tr></table></figure>
+<p>UIViewController.m </p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="meta">#import <span class="meta-string">"ViewController.h"</span></span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">ViewController</span> ()</span></div><div class="line"></div><div class="line"><span class="keyword">@end</span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">ViewController</span></span></div><div class="line"></div><div class="line">- (<span class="keyword">void</span>)viewDidLoad &#123;</div><div class="line">    [<span class="keyword">super</span> viewDidLoad];</div><div class="line">    </div><div class="line">    <span class="comment">//string 转 url编码</span></div><div class="line">    <span class="built_in">NSString</span> *urlString = <span class="string">@"https://api.github.com/users/coolnameismy"</span>;</div><div class="line">    <span class="built_in">NSURL</span> *url = [<span class="built_in">NSURL</span> URLWithString:[urlString stringByAddingPercentEncodingWithAllowedCharacters:[<span class="built_in">NSCharacterSet</span> URLQueryAllowedCharacterSet]]];</div><div class="line"></div><div class="line">    </div><div class="line">    <span class="built_in">NSURLRequest</span> *request = [[<span class="built_in">NSURLRequest</span> alloc]initWithURL:url cachePolicy:<span class="built_in">NSURLRequestUseProtocolCachePolicy</span> timeoutInterval:<span class="number">10</span>];</div><div class="line">    <span class="built_in">NSURLConnectionDataDelegate</span> *connection = [[<span class="built_in">NSURLConnection</span> alloc]initWithRequest:request delegate:<span class="keyword">self</span>];</div><div class="line">    </div><div class="line">    [connection start];</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//请求失败</span></div><div class="line">- (<span class="keyword">void</span>)connection:(<span class="built_in">NSURLConnection</span> *)connection didFailWithError:(<span class="built_in">NSError</span> *)error&#123;</div><div class="line">    <span class="built_in">NSLog</span>(<span class="string">@"=================didFailWithError================="</span>);</div><div class="line">    <span class="built_in">NSLog</span>(<span class="string">@"error:%@"</span>,error);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//重定向</span></div><div class="line">- (<span class="keyword">nullable</span> <span class="built_in">NSURLRequest</span> *)connection:(<span class="built_in">NSURLConnection</span> *)connection willSendRequest:(<span class="built_in">NSURLRequest</span> *)request redirectResponse:(<span class="keyword">nullable</span> <span class="built_in">NSURLResponse</span> *)response&#123;</div><div class="line">    <span class="built_in">NSLog</span>(<span class="string">@"=================request redirectResponse================="</span>);</div><div class="line">    <span class="built_in">NSLog</span>(<span class="string">@"request:%@"</span>,request);</div><div class="line">    <span class="keyword">return</span> request;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//接收响应</span></div><div class="line">- (<span class="keyword">void</span>)connection:(<span class="built_in">NSURLConnection</span> *)connection didReceiveResponse:(<span class="built_in">NSURLResponse</span> *)response&#123;</div><div class="line">    <span class="built_in">NSLog</span>(<span class="string">@"=================didReceiveResponse================="</span>);</div><div class="line">    <span class="built_in">NSHTTPURLResponse</span> *resp = (<span class="built_in">NSHTTPURLResponse</span> *)response;</div><div class="line">    <span class="built_in">NSLog</span>(<span class="string">@"response:%@"</span>,resp);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//接收响应</span></div><div class="line">- (<span class="keyword">void</span>)connection:(<span class="built_in">NSURLConnection</span> *)connection didReceiveData:(<span class="built_in">NSData</span> *)data&#123;</div><div class="line">    <span class="built_in">NSLog</span>(<span class="string">@"=================didReceiveData================="</span>);</div><div class="line">    <span class="built_in">NSDictionary</span> *dic = [<span class="built_in">NSJSONSerialization</span> JSONObjectWithData:data options:<span class="built_in">NSJSONReadingAllowFragments</span> error:<span class="literal">nil</span>];</div><div class="line">    <span class="built_in">NSLog</span>(<span class="string">@"data:%@"</span>,dic);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//- (nullable NSInputStream *)connection:(NSURLConnection *)connection needNewBodyStream:(NSURLRequest *)request&#123;</span></div><div class="line"><span class="comment">//    </span></div><div class="line"><span class="comment">//&#125;</span></div><div class="line"></div><div class="line"><span class="comment">//上传数据委托，用于显示上传进度</span></div><div class="line">- (<span class="keyword">void</span>)connection:(<span class="built_in">NSURLConnection</span> *)connection   didSendBodyData:(<span class="built_in">NSInteger</span>)bytesWritten</div><div class="line"> totalBytesWritten:(<span class="built_in">NSInteger</span>)totalBytesWritten</div><div class="line">totalBytesExpectedToWrite:(<span class="built_in">NSInteger</span>)totalBytesExpectedToWrite&#123;</div><div class="line">    <span class="built_in">NSLog</span>(<span class="string">@"=================totalBytesWritten================="</span>);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//- (nullable NSCachedURLResponse *)connection:(NSURLConnection *)connection willCacheResponse:(NSCachedURLResponse *)cachedResponse&#123;</span></div><div class="line"><span class="comment">//    </span></div><div class="line"><span class="comment">//&#125;</span></div><div class="line"></div><div class="line"><span class="comment">//完成请求</span></div><div class="line">- (<span class="keyword">void</span>)connectionDidFinishLoading:(<span class="built_in">NSURLConnection</span> *)connection&#123;</div><div class="line">    <span class="built_in">NSLog</span>(<span class="string">@"=================connectionDidFinishLoading================="</span>);</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"><span class="meta">#pragma mark -https认证</span></div><div class="line">-(<span class="built_in">BOOL</span>)connectionShouldUseCredentialStorage:(<span class="built_in">NSURLConnection</span> *)connection&#123;</div><div class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</div><div class="line">&#125;</div><div class="line">- (<span class="keyword">void</span>)connection:(<span class="built_in">NSURLConnection</span> *)connection willSendRequestForAuthenticationChallenge:(<span class="built_in">NSURLAuthenticationChallenge</span> *)challenge&#123;</div><div class="line">    <span class="built_in">NSLog</span>(<span class="string">@"didReceiveAuthenticationChallenge %@ %zd"</span>, [[challenge protectionSpace] authenticationMethod], (ssize_t) [challenge previousFailureCount]);</div><div class="line">    <span class="keyword">if</span> ([challenge.protectionSpace.authenticationMethod isEqualToString:<span class="built_in">NSURLAuthenticationMethodServerTrust</span>])&#123;</div><div class="line">        [[challenge sender]  useCredential:[<span class="built_in">NSURLCredential</span> credentialForTrust:challenge.protectionSpace.serverTrust] forAuthenticationChallenge:challenge];</div><div class="line">        [[challenge sender]  continueWithoutCredentialForAuthenticationChallenge: challenge];</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (<span class="built_in">BOOL</span>)connection:(<span class="built_in">NSURLConnection</span> *)connection canAuthenticateAgainstProtectionSpace:(<span class="built_in">NSURLProtectionSpace</span> *)protectionSpace&#123;</div><div class="line">       <span class="keyword">return</span> [protectionSpace.authenticationMethod isEqualToString:<span class="built_in">NSURLAuthenticationMethodServerTrust</span>];</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (<span class="keyword">void</span>)didReceiveMemoryWarning &#123;</div><div class="line">    [<span class="keyword">super</span> didReceiveMemoryWarning];</div><div class="line">    <span class="comment">// Dispose of any resources that can be recreated.</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">@end</span></div></pre></td></tr></table></figure>
+<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><p>-<a href="http://blog.csdn.net/kmyhy/article/details/7733619" target="_blank" rel="external">iOS: HTTPS 与自签名证书</a><br>-<a href="http://www.jianshu.com/p/4b5d2d47833d" target="_blank" rel="external">iOS - HTTPS</a><br>-<a href="http://oncenote.com/2014/10/21/Security-1-HTTPS/" target="_blank" rel="external">iOS安全系列之一：HTTPS</a><br>-<a href="http://oncenote.com/2015/09/16/Security-2-HTTPS2/" target="_blank" rel="external">iOS安全系列之二：HTTPS进阶</a><br>-<a href="https://developer.apple.com/library/ios/documentation/NetworkingInternetWeb/Conceptual/NetworkingOverview/WorkingWithHTTPAndHTTPSRequests/WorkingWithHTTPAndHTTPSRequests.html" target="_blank" rel="external">Making HTTP and HTTPS Requests</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">iOS</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">https</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/cs/" class="article-tag-list-link color3">cs</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/05/16/https请求处理方式1：信任一切证书的副本/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
     <article id="post-我换主题了" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -741,102 +820,6 @@
 
 
   
-    <article id="post-ListView嵌套GridView显示多张图片出现图片重复、错乱、闪烁等问题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/03/29/ListView嵌套GridView显示多张图片出现图片重复、错乱、闪烁等问题/">ListView嵌套GridView显示多张图片出现图片重复、错乱、闪烁等问题</a>
-    </h1>
-  
-
-        
-        <a href="/2017/03/29/ListView嵌套GridView显示多张图片出现图片重复、错乱、闪烁等问题/" class="archive-article-date">
-  	<time datetime="2017-03-28T16:13:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-03-29</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h1><p>为了实现一个订单下多个商品同时评价功能，列表分五种状态（非常满意，满意，一般，较差，不满意）展示，用一个listview，item中有一个GridView，GridView中放置最多五张图片；在listview上下滑动时会出现item中的图片重复、错乱、闪烁等问题。</p>
-<h1 id="我的错误"><a href="#我的错误" class="headerlink" title="我的错误"></a>我的错误</h1><p>先讲我的错误。遇到问题后Google，参考了一些资料，都是提示要在外层listview的adapter上设置setTag(), 然后在内层GridView的adapter上整体和需要标记复用的imageView上setTag()。照此执行了，还是出错；后来在同事指点下，原来外层adapter中设置gridAdapter时只是在没有塞值时<code>gridView.setVisibility(View.GONE)</code>，忘了要在有值的时候<code>gridView.setVisibility(View.VISIBLE)</code>， 所以导致在复用的时候，没有了GridView可复用。</p>
-<figure class="highlight gauss"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//评价照片 </span></div><div class="line"><span class="keyword">String</span> evaluateImgs = item.getEvaluateDescriptionImgs(); </div><div class="line">MyGridView gridView = vh.getView(R.id.evaluate_image);</div><div class="line">EvaluationViewGridAdapter gridAdapter; </div><div class="line"><span class="keyword">if</span> (!StringUtils.isEmpty(evaluateImgs)) &#123; </div><div class="line">    <span class="comment">//这里是否不需要判断包含`,`，`split`方法是否能自动判断，需要验证</span></div><div class="line">    <span class="keyword">if</span> (evaluateImgs.contains(<span class="string">","</span>)) &#123; </div><div class="line">        <span class="keyword">String</span>[] imgs = evaluateImgs.split(<span class="string">","</span>);</div><div class="line">        gridAdapter = <span class="keyword">new</span> EvaluationViewGridAdapter(imgs, mCallback.getContext());</div><div class="line">        gridView.setAdapter(gridAdapter);</div><div class="line">        <span class="comment">//下面这句是我忘了加的</span></div><div class="line">        gridView.setVisibility(<span class="built_in">View</span>.VISIBLE); </div><div class="line">    &#125; <span class="keyword">else</span> &#123; </div><div class="line">        <span class="keyword">String</span>[] imgs = <span class="keyword">new</span> <span class="keyword">String</span>[]&#123;evaluateImgs&#125;;</div><div class="line">        gridAdapter = <span class="keyword">new</span> EvaluationViewGridAdapter(imgs, mCallback.getContext());</div><div class="line">        gridView.setAdapter(gridAdapter);</div><div class="line">        <span class="comment">//下面这句是我忘了加的</span></div><div class="line">        gridView.setVisibility(<span class="built_in">View</span>.VISIBLE); </div><div class="line">    &#125; </div><div class="line">&#125; <span class="keyword">else</span> &#123;  </div><div class="line">    gridView.setAdapter(gridAdapter);</div><div class="line">    gridView.setVisibility(<span class="built_in">View</span>.GONE); </div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<blockquote>
-<p>教训：这个问题此前已经遇到过，真是不长记性，看来遇到一些常见问题还是要记录下来啊。例如写这个博客。</p>
-</blockquote>
-<h1 id="原因总结"><a href="#原因总结" class="headerlink" title="原因总结"></a>原因总结</h1><p>为了提升listview性能，缓存复用了item(某行对应的View)，ListView通过getView()获取每行的item。</p>
-<p>滑动过程中，a. 如果某行item已经滑出屏幕，若该item不在缓存内，则put进缓存，否则更新缓存；<br>b. 获取滑入屏幕的行item之前会先判断缓存中是否有可用的item，如果有，做为convertView参数传递给adapter的getView。</p>
-<ul>
-<li>行item图片显示重复：指当前行item显示了之前某行item的图片。</li>
-<li>行item图片显示错乱：指某行item显示了不属于该行item的图片。</li>
-<li>行item图片显示闪烁：上面b的情况，加载缓慢，还没加载完又滑到下一页，下一页某个item又加载出来了，所以导致图片快速覆盖，显示闪烁效果。</li>
-</ul>
-<h1 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h1><h2 id="第一步：ListView-Adapter-getView写法"><a href="#第一步：ListView-Adapter-getView写法" class="headerlink" title="第一步：ListView Adapter getView写法"></a>第一步：ListView Adapter getView写法</h2><figure class="highlight zephir"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">@Override</div><div class="line"><span class="keyword">public</span> View getView(<span class="keyword">int</span> position, View convertView, ViewGroup <span class="keyword">parent</span>) &#123;</div><div class="line">	ViewHolder holder;</div><div class="line">	<span class="keyword">if</span> (convertView == <span class="keyword">null</span>) &#123;</div><div class="line">		convertView = inflater.inflate(R.layout.list_item, <span class="keyword">null</span>);</div><div class="line">		holder = <span class="keyword">new</span> ViewHolder();</div><div class="line">		……</div><div class="line">		convertView.setTag(holder);</div><div class="line">	&#125; <span class="keyword">else</span> &#123;</div><div class="line">		holder = (ViewHolder)convertView.getTag();</div><div class="line">	&#125;</div><div class="line">	...</div><div class="line">	<span class="keyword">return</span> convertView;</div><div class="line">&#125;</div><div class="line"> </div><div class="line"><span class="comment">/**</span></div><div class="line"> * ViewHolder</div><div class="line"> * </div><div class="line"> * <span class="doctag">@author</span> trinea<span class="doctag">@trinea</span>.cn 2013-08-01</div><div class="line"> */</div><div class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">ViewHolder</span> </span>&#123;</div><div class="line">	ImageView appIcon;</div><div class="line">	TextView  appName;</div><div class="line">	TextView  appInfo;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>这里如果写的是convert()方法，则不需要写以上复用，因为父类中会做复用的事。</p>
-<h2 id="第二步：-GridView-gridAdapter-getVIew写法"><a href="#第二步：-GridView-gridAdapter-getVIew写法" class="headerlink" title="第二步： GridView gridAdapter getVIew写法"></a>第二步： GridView gridAdapter getVIew写法</h2><p>与上面写法类似；不过需要在用到图片的地方进行判断。</p>
-<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line">@<span class="function">Override</span></div><div class="line"><span class="keyword">public</span> View <span class="title">getView</span>(<span class="params"><span class="keyword">int</span> position, View convertView, ViewGroup parent</span>) &#123;</div><div class="line">    ViewHolder holder;</div><div class="line">    <span class="keyword">if</span> (convertView == <span class="literal">null</span>) &#123;</div><div class="line">    	convertView = inflater.inflate(R.layout.list_item, <span class="literal">null</span>);</div><div class="line">    	holder = <span class="keyword">new</span> ViewHolder();</div><div class="line">    	……</div><div class="line">    	convertView.setTag(holder);</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">    	holder = (ViewHolder)convertView.getTag();</div><div class="line">    &#125;</div><div class="line">    ...</div><div class="line">    <span class="comment">/**</span></div><div class="line">    * 解决图片重复错乱闪烁的问题，例如</div><div class="line">    */</div><div class="line">    <span class="comment">//建立一个唯一标示，一般为item的相应String对象</span></div><div class="line">    String file = mListResult.<span class="keyword">get</span>(position).getFile();</div><div class="line">    ImageAware imageAware =<span class="keyword">new</span> ImageViewAware(holder.iv,<span class="literal">false</span>);</div><div class="line">    <span class="comment">//首先得到要设置的GridView</span></div><div class="line">    holder.iv.setTag(file);</div><div class="line">    <span class="comment">//判断tag存在否</span></div><div class="line">    <span class="keyword">if</span>(holder.iv.getTag()!=<span class="literal">null</span>&amp;&amp;holder.iv.getTag().<span class="keyword">equals</span>(file))&#123;</div><div class="line">        imageLoader.displayImage(file,imageAware);</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="keyword">return</span> convertView;</div><div class="line">&#125;</div><div class="line"> </div><div class="line"><span class="comment">/**</span></div><div class="line"> * ViewHolder</div><div class="line"> * </div><div class="line"> * @author linking123.github.io 2017-03-29</div><div class="line"> */</div><div class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">class</span> <span class="title">ViewHolder</span> &#123;</div><div class="line">	ImageView appIcon;</div><div class="line">	TextView  appName;</div><div class="line">	TextView  appInfo;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>一般情况下，走完以上两部可解决问题；解决不了的就要仔细检查一下，有没有像我一样的遗漏问题，小心啊，程序员们。</p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ul>
-<li><a href="http://www.trinea.cn/android/android-listview-display-error-image-when-scroll/" target="_blank" rel="external">Android ListView滑动过程中图片显示重复错位闪烁问题解决</a></li>
-</ul>
-<p>感谢作者们的无私奉献，如有侵权，立马删除。</p>
-<p>多做总结，少走老路。多写博客，方便他人。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">ListView</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">GridView</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Android/" class="article-tag-list-link color3">Android</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/03/29/ListView嵌套GridView显示多张图片出现图片重复、错乱、闪烁等问题/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
@@ -925,11 +908,15 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">ajax</a>
+                <a href="javascript:void(0)" class="js-tag color2">nodejs</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Ajax</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">ajax</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -965,19 +952,19 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">cookie</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">cocoa</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">thought</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">git</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">cookie</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">cocoa</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1001,15 +988,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">绘图</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">HTTP</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">java</a>
+                <a href="javascript:void(0)" class="js-tag color3">绘图</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1017,7 +1000,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">nodejs</a>
+                <a href="javascript:void(0)" class="js-tag color5">java</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">标识</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1029,7 +1016,7 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">标识</a>
+                <a href="javascript:void(0)" class="js-tag color2">D.Wade</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1041,6 +1028,10 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">essay</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">tomcat</a>
               </li>
              
@@ -1049,19 +1040,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Android onclick事件监听</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">essay</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">张靓颖</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">D.Wade</a>
+                <a href="javascript:void(0)" class="js-tag color5">Android onclick事件监听</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1085,11 +1068,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">进度条</a>
+                <a href="javascript:void(0)" class="js-tag color4">NBA</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">NBA</a>
+                <a href="javascript:void(0)" class="js-tag color4">进度条</a>
               </li>
             
             <div class="clearfix"></div>

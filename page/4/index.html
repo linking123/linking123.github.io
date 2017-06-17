@@ -160,6 +160,91 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-安卓onClick事件监听的实现方式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/09/24/安卓onClick事件监听的实现方式/">安卓onClick事件监听的实现方式</a>
+    </h1>
+  
+
+        
+        <a href="/2016/09/24/安卓onClick事件监听的实现方式/" class="archive-article-date">
+  	<time datetime="2016-09-24T09:32:35.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-09-24</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>昨天做了转正汇报，三个月的试用期快结束了，不得不感慨时光流逝啊。毕业三个月了，下一届的师弟师妹都开始找工作了。</p>
+<p>总体来说，这三个月是非常充实的，虽然没干多少事吧，但学到了很多东西，技术上的，与人交往上，都有所进步。年轻的时候还是忙点好，闲着也没事干，荒废大好时光。不如多干点活，多积累点经验。</p>
+<p>扯了一会蛋，说下正事。</p>
+<p>最近由于项目需要，搞起了Android；麻蛋，一头雾水哦，我接触Java也不过才两个月，安卓，我的天；项目需要啊，硬着头皮也要上啊。</p>
+<blockquote>
+<p>最好的教程还是官方API，不知道的就查一下，很明了，这一块对英语要求较高，还要加强，这是成为一个优秀的程序员必备的，毕竟编程是英语世界的人发明的，当然，无论哪个行业，融入英语世界才能了解到世界上最先进的知识。</p>
+</blockquote>
+<p>业余时间在CSDN上看<a href="http://blog.csdn.net/coder_pig/article/details/50000773" target="_blank" rel="external">pig-coder的博客</a>，是比较系统的介绍，所以选择了他的博客。感谢作者的无私奉献。</p>
+<p>看完了基础、布局、UI，进度有点慢，要加把劲了。<br>这篇把onClick事件监听的几种实现方式抠出来，作一篇博客。</p>
+<p>主要有以下三种方式：</p>
+<h2 id="匿名内部类监听按钮点击事件"><a href="#匿名内部类监听按钮点击事件" class="headerlink" title="匿名内部类监听按钮点击事件"></a>匿名内部类监听按钮点击事件</h2><figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="selector-id">#activity_login</span><span class="selector-class">.xml</span>   layout </div><div class="line">&lt;Button</div><div class="line">    android:layout_width=<span class="string">"match_parent"</span></div><div class="line">    android:layout_height=<span class="string">"wrap_content"</span></div><div class="line">    android:text=<span class="string">"@string/button_name"</span></div><div class="line">    android:id=<span class="string">"@+id/button"</span></div><div class="line">    android:layout_gravity=<span class="string">"bottom"</span> /&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="meta"># LoginActivity.java</span></div><div class="line"><span class="keyword">private</span> Button loginButton;</div><div class="line">    @<span class="function">Override</span></div><div class="line">    <span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span>(<span class="params">Bundle savedInstanceState</span>)&#123;</div><div class="line">        super.onCreate(savedInstanceState);</div><div class="line">        setContentView(R.layout.activity_login);</div><div class="line"></div><div class="line">        <span class="comment">/*</span></div><div class="line">        * 1.初始化当前所需的控件</div><div class="line">        * findViewById--返回一个view对象</div><div class="line">        * 通过R.java.id找到</div><div class="line">        * */</div><div class="line">        loginButton = (Button)findViewById(R.id.button_denglu);</div><div class="line"></div><div class="line">        <span class="comment">/*</span></div><div class="line">        * 2.设置Button监听器，实现点击操作</div><div class="line">        * 通过匿名内部类方式实现</div><div class="line">        * */</div><div class="line">        loginButton.setOnClickListener(<span class="keyword">new</span> View.OnClickListener() &#123;</div><div class="line">            @<span class="function">Override</span></div><div class="line">            <span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span>(<span class="params">View v</span>) &#123;</div><div class="line">                <span class="comment">//当前点击动作</span></div><div class="line">                System.<span class="keyword">out</span>.println(<span class="string">"我的button被点击了"</span>);</div><div class="line">            &#125;</div><div class="line">        &#125;);</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<h2 id="独立类-外部类-实现"><a href="#独立类-外部类-实现" class="headerlink" title="独立类(外部类)实现"></a>独立类(外部类)实现</h2><p>在此类的外部实现一个onClick类。<br>当遇到很多按钮需要添加事件时，通过这种方式可以设置同类的逻辑。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LoginActivity</span> <span class="keyword">extends</span> <span class="title">AppCompatActivity</span>   </span>&#123;</div><div class="line">    <span class="keyword">private</span> Button bt1;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span></span>&#123;</div><div class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState);</div><div class="line">        setContentView(R.layout.activity_login);</div><div class="line">        bt1 = (Button) findViewById(R.id.button_denglu);</div><div class="line">        bt1.setOnClickListener(<span class="keyword">new</span> myClickListener()&#123;</div><div class="line">            <span class="meta">@Override</span></div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">(View v)</span> </span>&#123;</div><div class="line">                <span class="comment">//调用父类的点击事件</span></div><div class="line">                <span class="keyword">super</span>.onClick(v);</div><div class="line">                Toast.makeText(LoginActivity.<span class="keyword">this</span>,<span class="string">"bt1要输出的逻辑"</span>,<span class="number">1</span>).show();</div><div class="line">            &#125;</div><div class="line">        &#125;);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="comment">//OnClickListener是一个接口</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">myClickListener</span> <span class="keyword">implements</span> <span class="title">View</span>.<span class="title">OnClickListener</span> </span>&#123;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">(View v)</span></span>&#123;</div><div class="line">        <span class="comment">//这里可以写需要调用此外部类的公共点击事件</span></div><div class="line">        Log.i(TAG, <span class="string">"onClick: 父类的事件"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="实现接口的方式实现"><a href="#实现接口的方式实现" class="headerlink" title="实现接口的方式实现"></a>实现接口的方式实现</h2><figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">public <span class="class"><span class="keyword">class</span> <span class="title">LoginActivity</span> <span class="keyword">extends</span> <span class="title">AppCompatActivity</span> <span class="title">implements</span> <span class="title">View</span>.<span class="title">OnClickListener</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> <span class="type">Button</span> bt1;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="keyword">protected</span> void onCreate(<span class="type">Bundle</span> savedInstanceState)&#123;</div><div class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState);</div><div class="line">        setContentView(<span class="type">R</span>.layout.activity_login);</div><div class="line">        bt1 = (<span class="type">Button</span>)findViewById(<span class="type">R</span>.id.button_denglu);</div><div class="line"></div><div class="line">        bt1.setOnClickListener(<span class="keyword">this</span>);</div><div class="line">    &#125;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    public void onClick(<span class="type">View</span> v)&#123;</div><div class="line">        <span class="type">Log</span>.i(<span class="type">TAG</span>, <span class="string">"onClick: 第三种实现方式"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="实现页面跳转"><a href="#实现页面跳转" class="headerlink" title="实现页面跳转"></a>实现页面跳转</h2><p>必须在AndroidManifest.xml中注册跳转到的页面，activity。这就是之前为什么不能实现跳转的原因。<br><figure class="highlight applescript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;activity android:<span class="built_in">name</span>=<span class="string">"Second"</span> /&gt;</div></pre></td></tr></table></figure></p>
+<p>MainActivity中绑定onClick事件<br><figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">Button </span><span class="keyword">btn1 </span>= (<span class="keyword">Button)findViewById(R.id.btn1);</span></div><div class="line"><span class="keyword">btn1.setOnClickListener(new </span>View.OnClickListener() &#123;</div><div class="line">    @Override</div><div class="line">    public void onClick(View v) &#123;</div><div class="line">        Intent intent = new Intent()<span class="comment">;</span></div><div class="line">        intent.setClass(MainActivity.this,Second.class)<span class="comment">;</span></div><div class="line">        startActivity(intent)<span class="comment">;</span></div><div class="line">    &#125;</div><div class="line">&#125;)<span class="comment">;</span></div></pre></td></tr></table></figure></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Android onclick事件监听</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Android/" class="article-tag-list-link color3">Android</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2016/09/24/安卓onClick事件监听的实现方式/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
     <article id="post-git学习之三-conflict冲突，reset版本控制，以及实践感悟" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -907,89 +992,6 @@
 
 
   
-    <article id="post-HTML5服务器推送事件SSE" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/05/06/HTML5服务器推送事件SSE/">HTML5服务器推送事件SSE</a>
-    </h1>
-  
-
-        
-        <a href="/2016/05/06/HTML5服务器推送事件SSE/" class="archive-article-date">
-  	<time datetime="2016-05-06T07:27:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-05-06</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>今天论文总算初步告一段落，心情大好啊。想到这个快遗忘的博客，技术之路又要开启了。<br>一个月余的高压状态，虽然身体很累很累，但总算有所收获吧。</p>
-<p>今天看了一下HTML5，记录此篇，也算是回归之作。<br>路漫漫，加把劲。</p>
-<p>使用 SSE 可以不停的将 DOM事件推送到用户的浏览器中。这个事件流方法会打开一个到服务器的持久连接，新消息可用时发送数据到客户端，从而不再需要持续的轮询。</p>
-<p>HTML中需要包括一个<code>&lt;eventsource&gt;</code>元素，其src指向一个url后台程序链接，提供一个HTTP持久连接用于发送包含事件的数据流。可能是PHP、PERL或Python。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;div id=<span class="string">"sse"</span>&gt;</div><div class="line">  <span class="xml"><span class="tag">&lt;<span class="name">eventsource</span> <span class="attr">src</span>=<span class="string">"/cgi-bin/ticker.cgi"</span> /&gt;</span></span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure></p>
-<p>如下一段Perl：<br><figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/perl</span></div><div class="line"><span class="keyword">print</span> <span class="string">"Content-Type: text/event-stream\n\n"</span>;</div><div class="line"><span class="keyword">while</span>(true)&#123;</div><div class="line">  <span class="keyword">print</span> <span class="string">"Event: server-time\n"</span>;</div><div class="line">  $time = <span class="keyword">localtime</span>();</div><div class="line">  <span class="keyword">print</span> <span class="string">"Data: $time\n"</span>;</div><div class="line">  <span class="keyword">sleep</span>(<span class="number">5</span>);</div></pre></td></tr></table></figure></p>
-<p>w3c的一段php代码：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">header(<span class="string">"Content-Type: text/event-stream"</span>);</div><div class="line">header(<span class="string">"Cache-Control: no-cache"</span>);</div><div class="line">$time = date(<span class="string">'r'</span>);  <span class="comment">//参数r规定了时间格式，还有c等可用，具体看php官网date。</span></div><div class="line"><span class="keyword">echo</span> <span class="string">"data: the server time is: &#123;$time&#125;\n\n"</span>;</div><div class="line">flush();</div><div class="line"> sleep(<span class="number">5</span>);<span class="comment">//隔5s发送一次，但是默认好像是3s，5s时结果是8s一次，这是个疑惑。</span></div></pre></td></tr></table></figure></p>
-<p>处理服务器推送事件<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> source = <span class="keyword">new</span> EventSource(./sse.php);</div><div class="line">source.onmessage = <span class="function"><span class="keyword">function</span>(<span class="params">event</span>)</span>&#123;   <span class="comment">//另外还有onerror、onopen、readyState和url这几个事件。</span></div><div class="line">  <span class="built_in">document</span>.getElementById(<span class="string">"sseId"</span>).innerHTML += event.data+<span class="string">"&lt;br/&gt;"</span>;</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
-<p>运行结果<br><img src="http://o6qsa8zhh.bkt.clouddn.com/sse_result.PNG" alt=""></p>
-<p>后台是php的情况下遇到错误：<br><code>EventSource&#39;s response has a MIME type (&quot;text/html&quot;) that is not &quot;text/event-stream&quot;. Aborting the connection</code><br>网上资料显示是<code>echo &quot;data: the server time is: {$time}\n\n&quot;;</code>这里必须加上<code>\n\n</code>才行，之后也是这样调试通过的。</p>
-<p>参考：<a href="https://developer.mozilla.org/zh-CN/docs/Server-sent_events/EventSource" target="_blank" rel="external">MDN</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">hmtl5</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">sse</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/cs/" class="article-tag-list-link color3">cs</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2016/05/06/HTML5服务器推送事件SSE/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/3/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/5/">Next &raquo;</a>
@@ -1078,11 +1080,15 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">ajax</a>
+                <a href="javascript:void(0)" class="js-tag color2">nodejs</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Ajax</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">ajax</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1118,19 +1124,19 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">cookie</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">cocoa</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">thought</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">git</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">cookie</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">cocoa</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1154,15 +1160,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">绘图</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">HTTP</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">java</a>
+                <a href="javascript:void(0)" class="js-tag color3">绘图</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1170,7 +1172,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">nodejs</a>
+                <a href="javascript:void(0)" class="js-tag color5">java</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">标识</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1182,7 +1188,7 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">标识</a>
+                <a href="javascript:void(0)" class="js-tag color2">D.Wade</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1194,6 +1200,10 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">essay</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">tomcat</a>
               </li>
              
@@ -1202,19 +1212,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Android onclick事件监听</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">essay</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">张靓颖</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">D.Wade</a>
+                <a href="javascript:void(0)" class="js-tag color5">Android onclick事件监听</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1238,11 +1240,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">进度条</a>
+                <a href="javascript:void(0)" class="js-tag color4">NBA</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">NBA</a>
+                <a href="javascript:void(0)" class="js-tag color4">进度条</a>
               </li>
             
             <div class="clearfix"></div>

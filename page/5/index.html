@@ -160,6 +160,89 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-HTML5服务器推送事件SSE" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/05/06/HTML5服务器推送事件SSE/">HTML5服务器推送事件SSE</a>
+    </h1>
+  
+
+        
+        <a href="/2016/05/06/HTML5服务器推送事件SSE/" class="archive-article-date">
+  	<time datetime="2016-05-06T07:27:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-05-06</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>今天论文总算初步告一段落，心情大好啊。想到这个快遗忘的博客，技术之路又要开启了。<br>一个月余的高压状态，虽然身体很累很累，但总算有所收获吧。</p>
+<p>今天看了一下HTML5，记录此篇，也算是回归之作。<br>路漫漫，加把劲。</p>
+<p>使用 SSE 可以不停的将 DOM事件推送到用户的浏览器中。这个事件流方法会打开一个到服务器的持久连接，新消息可用时发送数据到客户端，从而不再需要持续的轮询。</p>
+<p>HTML中需要包括一个<code>&lt;eventsource&gt;</code>元素，其src指向一个url后台程序链接，提供一个HTTP持久连接用于发送包含事件的数据流。可能是PHP、PERL或Python。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;div id=<span class="string">"sse"</span>&gt;</div><div class="line">  <span class="xml"><span class="tag">&lt;<span class="name">eventsource</span> <span class="attr">src</span>=<span class="string">"/cgi-bin/ticker.cgi"</span> /&gt;</span></span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>如下一段Perl：<br><figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/perl</span></div><div class="line"><span class="keyword">print</span> <span class="string">"Content-Type: text/event-stream\n\n"</span>;</div><div class="line"><span class="keyword">while</span>(true)&#123;</div><div class="line">  <span class="keyword">print</span> <span class="string">"Event: server-time\n"</span>;</div><div class="line">  $time = <span class="keyword">localtime</span>();</div><div class="line">  <span class="keyword">print</span> <span class="string">"Data: $time\n"</span>;</div><div class="line">  <span class="keyword">sleep</span>(<span class="number">5</span>);</div></pre></td></tr></table></figure></p>
+<p>w3c的一段php代码：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">header(<span class="string">"Content-Type: text/event-stream"</span>);</div><div class="line">header(<span class="string">"Cache-Control: no-cache"</span>);</div><div class="line">$time = date(<span class="string">'r'</span>);  <span class="comment">//参数r规定了时间格式，还有c等可用，具体看php官网date。</span></div><div class="line"><span class="keyword">echo</span> <span class="string">"data: the server time is: &#123;$time&#125;\n\n"</span>;</div><div class="line">flush();</div><div class="line"> sleep(<span class="number">5</span>);<span class="comment">//隔5s发送一次，但是默认好像是3s，5s时结果是8s一次，这是个疑惑。</span></div></pre></td></tr></table></figure></p>
+<p>处理服务器推送事件<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> source = <span class="keyword">new</span> EventSource(./sse.php);</div><div class="line">source.onmessage = <span class="function"><span class="keyword">function</span>(<span class="params">event</span>)</span>&#123;   <span class="comment">//另外还有onerror、onopen、readyState和url这几个事件。</span></div><div class="line">  <span class="built_in">document</span>.getElementById(<span class="string">"sseId"</span>).innerHTML += event.data+<span class="string">"&lt;br/&gt;"</span>;</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
+<p>运行结果<br><img src="http://o6qsa8zhh.bkt.clouddn.com/sse_result.PNG" alt=""></p>
+<p>后台是php的情况下遇到错误：<br><code>EventSource&#39;s response has a MIME type (&quot;text/html&quot;) that is not &quot;text/event-stream&quot;. Aborting the connection</code><br>网上资料显示是<code>echo &quot;data: the server time is: {$time}\n\n&quot;;</code>这里必须加上<code>\n\n</code>才行，之后也是这样调试通过的。</p>
+<p>参考：<a href="https://developer.mozilla.org/zh-CN/docs/Server-sent_events/EventSource" target="_blank" rel="external">MDN</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">hmtl5</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">sse</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/cs/" class="article-tag-list-link color3">cs</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2016/05/06/HTML5服务器推送事件SSE/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
     <article id="post-模块化-MVC" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -890,95 +973,6 @@ function aa(res){
 
 
   
-    <article id="post-最近的想法及计划" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/02/20/最近的想法及计划/">最近的想法及计划</a>
-    </h1>
-  
-
-        
-        <a href="/2016/02/20/最近的想法及计划/" class="archive-article-date">
-  	<time datetime="2016-02-20T08:05:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-02-20</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>年也过完了，该干活了。<br>2016上半年的任务</p>
-<blockquote>
-<p>1.完成毕业论文，顺利毕业<br>2.3月份找到一个合适的工作<br>3.学习新知识，巩固计算机基础知识</p>
-</blockquote>
-<p>2月份还有十天，列的任务表还没有完成。亡羊补牢，希望不晚。希望坚持完成的事情</p>
-<blockquote>
-<p>1.每天花两个小时看论文，整理思路，做记录<br>2.每天坚持锻炼，形式不固定，室内室外随意<br>3.看完燕十八视频，加深对<code>HTTP、AJAX</code>的理解，并写成博客<br>4.每天看一致两篇的<em>池建强</em>的<strong>《MacTalk跨越边界》</strong>的小文章，划线or感想，随后整理出来，发博客上</p>
-</blockquote>
-<p>大概这些就够我折腾了，不折腾不成长。继续努力。</p>
-<blockquote>
-<p>1.知识不去学是不会自己跑到你的脑中的啊。<br>2.学东西不能贪多求快，必须一行一行的文字去咀嚼，才会有深刻的体会。<br>3.遇到难题不要回避，也许下次还会遇到同样的问题，还是不会，因此错过许多机会。<br>4.发现有些东西，只要不是太笨，花时间都是能够解决的，而这个痛苦的过程，是必须经历的，熬过去就好了，哪些知识会倍加深刻的印在脑海中。<br>5.学完一个知识点，可以给自己某种奖励，打一场球，看一个短文章，学一会其他的知识，换换思维。<br>6.任何事都需要保障，身体健康是最强大的后盾，所以每天必须锻炼身体，哪怕只有10分钟，也比不锻炼好。</p>
-</blockquote>
-<p>关于学习渠道</p>
-<blockquote>
-<p>1.利用好公开课：主要是网易云课堂，极客学院，coursera看国外国内名校课程<br>2.看前辈的博客，书籍<br>3.先从前端入手，从视频入手，听别人怎么说，不会在一开始入门时不得要领。之后再去练习，看书。加深理解。</p>
-</blockquote>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">thought</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">plan</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/plan/" class="article-tag-list-link color5">plan</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2016/02/20/最近的想法及计划/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/4/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/6/">Next &raquo;</a>
@@ -1067,11 +1061,15 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">ajax</a>
+                <a href="javascript:void(0)" class="js-tag color2">nodejs</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Ajax</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">ajax</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1107,19 +1105,19 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">cookie</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">cocoa</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">thought</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">git</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">cookie</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">cocoa</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1143,15 +1141,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">绘图</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">HTTP</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">java</a>
+                <a href="javascript:void(0)" class="js-tag color3">绘图</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1159,7 +1153,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">nodejs</a>
+                <a href="javascript:void(0)" class="js-tag color5">java</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">标识</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1171,7 +1169,7 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">标识</a>
+                <a href="javascript:void(0)" class="js-tag color2">D.Wade</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1183,6 +1181,10 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">essay</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">tomcat</a>
               </li>
              
@@ -1191,19 +1193,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Android onclick事件监听</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">essay</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">张靓颖</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">D.Wade</a>
+                <a href="javascript:void(0)" class="js-tag color5">Android onclick事件监听</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1227,11 +1221,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">进度条</a>
+                <a href="javascript:void(0)" class="js-tag color4">NBA</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">NBA</a>
+                <a href="javascript:void(0)" class="js-tag color4">进度条</a>
               </li>
             
             <div class="clearfix"></div>
