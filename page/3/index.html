@@ -160,6 +160,179 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-program常用标识的副本" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/05/10/program常用标识的副本/">program常用标识</a>
+    </h1>
+  
+
+        
+        <a href="/2017/05/10/program常用标识的副本/" class="archive-article-date">
+  	<time datetime="2017-05-10T09:37:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-10</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="1：注释代码段"><a href="#1：注释代码段" class="headerlink" title="1：注释代码段"></a>1：注释代码段</h2><hr>
+<figure class="highlight fortran"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">#<span class="function"><span class="keyword">program</span></span> mark -[注释内容]</div><div class="line">说明：用于注释内容</div><div class="line">#<span class="function"><span class="keyword">program</span></span> mark 是每个ios程序员都必须会用的技巧，通过#<span class="function"><span class="keyword">program</span></span> mark 把代码分为个个部分，良好的注释是好代码的开始</div><div class="line"># linking哥注：在xcode的代码页最上的目录最后，鼠标停住一会，就可以清晰的看到层次关系。亲测</div></pre></td></tr></table></figure>
+<h2 id="2：取消xcode编译器内对于弃用方法的警告"><a href="#2：取消xcode编译器内对于弃用方法的警告" class="headerlink" title="2：取消xcode编译器内对于弃用方法的警告"></a>2：取消xcode编译器内对于弃用方法的警告</h2><hr>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">pragma</span> clang diagnostic push</span></div><div class="line"><span class="meta">#<span class="meta-keyword">pragma</span> clang diagnostic ignored <span class="meta-string">"-Wdeprecated-declarations"</span></span></div><div class="line">  <span class="comment">// 这段中出现使用所有的弃用方法都不会产生告警   </span></div><div class="line">  <span class="comment">// 这里放置弃用代码    </span></div><div class="line"><span class="meta">#<span class="meta-keyword">pragma</span> clang diagnostic pop</span></div><div class="line"><span class="meta">#linking哥注：项目中用到了</span></div></pre></td></tr></table></figure>
+<h2 id="3：取消对未使用变量的警告，使用方式和2相同，必须成对出现-pragma-clang"><a href="#3：取消对未使用变量的警告，使用方式和2相同，必须成对出现-pragma-clang" class="headerlink" title="3：取消对未使用变量的警告，使用方式和2相同，必须成对出现#pragma clang"></a>3：取消对未使用变量的警告，使用方式和2相同，必须成对出现#pragma clang</h2><hr>
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">pragma</span> clang diagnostic push</span></div><div class="line"><span class="meta">#<span class="meta-keyword">pragma</span> clang diagnostic ignored <span class="meta-string">"-Wunused-variable"</span>   </span></div><div class="line">    <span class="comment">// unused 代码段</span></div><div class="line"><span class="meta">#<span class="meta-keyword">pragma</span> clang diagnostic pop</span></div><div class="line"><span class="meta"># linking哥注：亲测</span></div><div class="line">====================</div><div class="line"><span class="meta">#<span class="meta-keyword">warning</span> :手动产生一条告警</span></div><div class="line"><span class="meta">#<span class="meta-keyword">error</span> : 手动产生一条错误</span></div></pre></td></tr></table></figure>
+<p>还有种方式也能达到同样效果</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">pragma</span> unused (foo)</span></div></pre></td></tr></table></figure>
+<h2 id="4-忽略内存泄露告警"><a href="#4-忽略内存泄露告警" class="headerlink" title="4: 忽略内存泄露告警"></a>4: 忽略内存泄露告警</h2><hr>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">pragma</span> clang diagnostic push</span></div><div class="line"><span class="meta">#<span class="meta-keyword">pragma</span> clang diagnostic ignored <span class="meta-string">"-Warc-performSelector-leaks"</span></span></div><div class="line">   [someController performSelector: NSSelectorFromString(@<span class="string">"someMethod"</span>)]</div><div class="line"><span class="meta">#<span class="meta-keyword">pragma</span> clang diagnostic pop</span></div></pre></td></tr></table></figure>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">标识</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/05/10/program常用标识的副本/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
+    <article id="post-《利用Python进行数据分析》读书笔记-8-第八章-绘图和可视化" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/04/20/《利用Python进行数据分析》读书笔记-8-第八章-绘图和可视化/">《利用Python进行数据分析》读书笔记-8-第八章-绘图和可视化</a>
+    </h1>
+  
+
+        
+        <a href="/2017/04/20/《利用Python进行数据分析》读书笔记-8-第八章-绘图和可视化/" class="archive-article-date">
+  	<time datetime="2017-04-20T15:01:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-04-20</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="matplotlib-API入门"><a href="#matplotlib-API入门" class="headerlink" title="matplotlib API入门"></a>matplotlib API入门</h1><h2 id="Figure-和-Subplot"><a href="#Figure-和-Subplot" class="headerlink" title="Figure 和 Subplot"></a>Figure 和 Subplot</h2><figure class="highlight lsl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">import matplotlib.pyplot as plt</div><div class="line"></div><div class="line">## Figure 和 Subplot</div><div class="line"># matplotlib的图像都位于Figure对象中，构建新对象</div><div class="line">fig = plt.figure()</div><div class="line"># 不能通过Figure绘图，必须用add_subplot创建一个或多个subplot才行</div><div class="line">ax1 = fig.add_subplot(<span class="number">2</span>,<span class="number">2</span>,<span class="number">1</span>)</div><div class="line">ax2 = fig.add_subplot(<span class="number">2</span>,<span class="number">2</span>,<span class="number">2</span>)</div><div class="line">ax3 = fig.add_subplot(<span class="number">2</span>,<span class="number">2</span>,<span class="number">3</span>)</div><div class="line">plt.show()</div><div class="line"># 这三个是表示图像是<span class="number">2</span>*<span class="number">2</span>的，当前占编号<span class="number">1</span>，<span class="number">2</span>，<span class="number">3</span>位</div><div class="line"></div><div class="line">plt.plot([<span class="number">1.5</span>,<span class="number">3.5</span>,<span class="number">-2</span>,<span class="number">1.6</span>])</div><div class="line"></div><div class="line">from numpy.random import randn</div><div class="line">plt.plot(randn(<span class="number">50</span>).cumsum(), 'k--')</div><div class="line">plt.show()</div><div class="line"># <span class="string">"k--"</span>线型选项，黑色虚线图</div><div class="line"></div><div class="line"># 随机柱状图，<span class="number">20</span>柱，每柱间隔<span class="number">0.3</span></div><div class="line">_ = ax1.hist(randn(<span class="number">100</span>), bins=<span class="number">20</span>, color='k', alpha=<span class="number">0.3</span>)</div><div class="line"># 随机散点图，<span class="number">30</span>个点</div><div class="line">ax2.scatter(np.arange(<span class="number">30</span>), np.arange(<span class="number">30</span>) + <span class="number">3</span> * randn(<span class="number">30</span>))</div><div class="line"># plt.show()</div></pre></td></tr></table></figure>
+<p>颜色、标记和线型<br><figure class="highlight less"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">plt</span><span class="selector-class">.plot</span>(randn(<span class="number">30</span>).cumsum(), <span class="string">'ko--'</span>)</div><div class="line"># 等价于以下明确形式：<span class="selector-tag">R</span></div><div class="line"># <span class="selector-tag">plot</span>(randn(<span class="number">30</span>).cumsum(), color=<span class="string">'k'</span>, linestyle=<span class="string">'dashed'</span>, marker=<span class="string">'0'</span>)</div><div class="line"><span class="selector-tag">plt</span><span class="selector-class">.show</span>()</div></pre></td></tr></table></figure></p>
+<p><img src="http://test.jpg" alt="图8-6带有标记的线型图"></p>
+<p>刻度、标签和图例</p>
+<table>
+<thead>
+<tr>
+<th>xlim</th>
+<th>xticks</th>
+<th>xticklabels</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>范围</td>
+<td>刻度位置</td>
+<td>刻度标签</td>
+</tr>
+</tbody>
+</table>
+<p>标题、轴标签、刻度以及刻度标签<br><figure class="highlight gcode"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">fig = plt.figure<span class="comment">()</span>; ax = fig.add_subplot<span class="comment">(1,1,1)</span></div><div class="line">ax.plot<span class="comment">(randn(1000)</span>.cumsum<span class="comment">()</span>)</div><div class="line">ax.set_title<span class="comment">('My first matplotlib plot')</span></div><div class="line">ax.set_xlabel<span class="comment">('Stages')</span></div><div class="line">plt.show<span class="comment">()</span></div></pre></td></tr></table></figure></p>
+<p><img src="" alt="图8-8 用于演示xticks的简单线形图"></p>
+<p>添加图例<br><figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 方式一：传入参数label</span></div><div class="line">fig = plt.figure(); ax = fig.add_subplot(<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>)</div><div class="line">ax.plot(randn(<span class="number">1000</span>).cumsum(), <span class="string">'k'</span>, <span class="keyword">label</span><span class="bash">=<span class="string">'one'</span>)</span></div><div class="line">ax.plot(randn(<span class="number">1000</span>).cumsum(), <span class="string">'k--'</span>, <span class="keyword">label</span><span class="bash">=<span class="string">'two'</span>)</span></div><div class="line">ax.plot(randn(<span class="number">1000</span>).cumsum(), <span class="string">'k.'</span>, <span class="keyword">label</span><span class="bash">=<span class="string">'three'</span>)</span></div><div class="line">ax.legend(loc=<span class="string">'best'</span>) <span class="comment"># 添加图例</span></div><div class="line">plt.show()</div></pre></td></tr></table></figure></p>
+<p><img src="" alt="图8-8 用于演示xticks的简单线形图"></p>
+<p>图注解以及在Subplot上绘图<br><figure class="highlight lsl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">fig = plt.figure()</div><div class="line">ax = fig.add_subplot(<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>)</div><div class="line"># 创建块对象</div><div class="line">rect = plt.Rectangle((<span class="number">0.2</span>,<span class="number">0.75</span>),<span class="number">0.4</span>,<span class="number">0.15</span>,color='k',alpha=<span class="number">0.3</span>)</div><div class="line">circ = plt.Circle((<span class="number">0.7</span>,<span class="number">0.2</span>),<span class="number">0.15</span>,color='b',alpha=<span class="number">0.3</span>)</div><div class="line">pgon = plt.Polygon([[<span class="number">0.15</span>,<span class="number">0.15</span>],[<span class="number">0.35</span>,<span class="number">0.4</span>],[<span class="number">0.2</span>,<span class="number">0.6</span>]],color='g',alpha=<span class="number">0.5</span>)</div><div class="line"># ax.add_patch(shp) 添加到subplot中</div><div class="line">ax.add_patch(rect)</div><div class="line">ax.add_patch(circ)</div><div class="line">ax.add_patch(pgon)</div><div class="line">plt.show()</div></pre></td></tr></table></figure></p>
+<p><img src="f&#39;f" alt="图8-12 由三个块图形组成的图"></p>
+<p>将图标保存到文件<br><figure class="highlight clean"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">plt.savefig(<span class="string">'figpath.svg'</span>)</div><div class="line">plt.savefig(<span class="string">'figpath.pdf'</span>)</div><div class="line"># # dpi-分辨率，bbox_inches-剪除图标周围空白部分</div><div class="line">plt.savefig(<span class="string">'figpath.png'</span>, dpi=<span class="number">400</span>, bbox_inches= <span class="string">'tight'</span>)</div><div class="line"># 以上都是存到磁盘，也可以存入文件型对象</div><div class="line"><span class="keyword">from</span> io <span class="keyword">import</span> StringIO</div><div class="line">buffer = StringIO()</div><div class="line">plt.savefig(buffer)</div><div class="line">plot_data = buffer.getvalue()</div><div class="line"># 对在Web上提供生成的图片很实用</div></pre></td></tr></table></figure></p>
+<p>matplotlib配置<br><figure class="highlight vala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="meta"># 如设置图像大小</span></div><div class="line">plt.rc(<span class="string">'figure'</span>, figsize=<span class="number">10</span>*<span class="number">10</span>)</div><div class="line"><span class="meta"># 关键字参数，写成字典</span></div><div class="line">font_options = &#123;<span class="string">'family'</span>: <span class="string">'monospace'</span>,</div><div class="line">                <span class="string">'weight'</span>: <span class="string">'bold'</span>,</div><div class="line">                <span class="string">'size'</span>: <span class="string">'small'</span>&#125;</div><div class="line">plt.rc(<span class="string">'font'</span>, **font_options)</div></pre></td></tr></table></figure></p>
+<h1 id="pandas中的绘图函数"><a href="#pandas中的绘图函数" class="headerlink" title="pandas中的绘图函数"></a>pandas中的绘图函数</h1><h2 id="线形图"><a href="#线形图" class="headerlink" title="线形图"></a>线形图</h2><p>简单Series图表<br><figure class="highlight capnproto"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> pandas <span class="keyword">import</span> Series</div><div class="line"><span class="keyword">from</span> pandas <span class="keyword">import</span> DataFrame</div><div class="line">s = Series(np.random.randn(<span class="number">10</span>).cumsum(), index=np.arange(<span class="number">0</span>,<span class="number">100</span>,<span class="number">10</span>))</div><div class="line">s.plot()</div><div class="line">plt.show()</div></pre></td></tr></table></figure></p>
+<p><img src="" alt="图8-13 简单Series图表"></p>
+<p>简单的DataFrame图表<br><figure class="highlight lsl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">df = DataFrame(np.random.randn(<span class="number">10</span>,<span class="number">4</span>).cumsum(<span class="number">0</span>), columns=['A','B','C','D'],index=np.arange(<span class="number">0</span>,<span class="number">100</span>,<span class="number">10</span>))</div><div class="line">df.plot()</div><div class="line">plt.show()</div></pre></td></tr></table></figure></p>
+<p><img src="" alt="图8-14 简单的DataFrame图表"></p>
+<h2 id="柱状图"><a href="#柱状图" class="headerlink" title="柱状图"></a>柱状图</h2><figure class="highlight processing"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"># kind=<span class="string">"bar"</span>(垂直柱状图)，kind=<span class="string">"barh"</span>(水平柱状图)</div><div class="line">fig, axes = plt.subplots(<span class="number">2</span>, <span class="number">1</span>)</div><div class="line">data = Series(np.<span class="built_in">random</span>.rand(<span class="number">16</span>), index=list(<span class="string">'abcdefghijklmnop'</span>))</div><div class="line">data.plot(kind=<span class="string">'bar'</span>, ax=axes[<span class="number">0</span>],<span class="built_in">color</span>=<span class="string">'k'</span>, <span class="built_in">alpha</span>=<span class="number">0.7</span>)</div><div class="line">data.plot(kind=<span class="string">'barh'</span>, ax=axes[<span class="number">1</span>],<span class="built_in">color</span>=<span class="string">'k'</span>, <span class="built_in">alpha</span>=<span class="number">0.7</span>)</div><div class="line">plt.show()</div></pre></td></tr></table></figure>
+<p><img src="" alt="图8-15 水平和垂直柱状图"></p>
+<figure class="highlight vala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">df = DataFrame(np.random.rand(<span class="number">6</span>,<span class="number">4</span>), index=[<span class="string">'one'</span>, <span class="string">'two'</span>, <span class="string">'three'</span>, <span class="string">'four'</span>, <span class="string">'five'</span>, <span class="string">'six'</span>],</div><div class="line">               columns=pd.Index([<span class="string">'A'</span>,<span class="string">'B'</span>,<span class="string">'C'</span>,<span class="string">'D'</span>],name=<span class="string">'Genus'</span>))</div><div class="line"></div><div class="line"><span class="meta"># print df</span></div><div class="line"><span class="meta"># Genus         A         B         C         D</span></div><div class="line"><span class="meta"># one    0.465771  0.579470  0.053485  0.863450</span></div><div class="line"><span class="meta"># two    0.550022  0.855826  0.967881  0.792683</span></div><div class="line"><span class="meta"># three  0.666868  0.536417  0.245592  0.839482</span></div><div class="line"><span class="meta"># four   0.439348  0.676450  0.637932  0.106940</span></div><div class="line"><span class="meta"># five   0.606376  0.609878  0.498459  0.010276</span></div><div class="line"><span class="meta"># six    0.923550  0.243204  0.422216  0.979446</span></div><div class="line"></div><div class="line">df.plot(kind=<span class="string">'bar'</span>)</div><div class="line">plt.savefig(<span class="string">'图8-16 DataFrame柱状图'</span>)</div><div class="line"><span class="meta"># plt.show()</span></div><div class="line"><span class="meta"># 设置stacked=True生成DataFrame的堆积柱状图，每行都堆积在一起</span></div><div class="line">df.plot(kind=<span class="string">'barh'</span>, stacked=True, alpha=<span class="number">0.5</span>)</div><div class="line">plt.savefig(<span class="string">'图8-17 DataFrame堆积柱状图'</span>)</div><div class="line"><span class="meta"># plt.show()</span></div></pre></td></tr></table></figure>
+<figure class="highlight vala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">tips = pd.read_csv(<span class="string">'../pydata-book-master/ch08/tips.csv'</span>)</div><div class="line">party_counts = pd.crosstab(tips.day, tips.size)</div><div class="line"><span class="meta"># print party_counts</span></div><div class="line"><span class="meta"># col_0  1708</span></div><div class="line"><span class="meta"># day</span></div><div class="line"><span class="meta"># Fri      19</span></div><div class="line"><span class="meta"># Sat      87</span></div><div class="line"><span class="meta"># Sun      76</span></div><div class="line"><span class="meta"># Thur     62</span></div><div class="line"></div><div class="line">party_counts = party_counts.ix[:, <span class="number">2</span>:<span class="number">5</span>]</div><div class="line">print party_counts</div></pre></td></tr></table></figure>
+<h1 id="实战：绘制地图-图形化显示海地地震危机数据"><a href="#实战：绘制地图-图形化显示海地地震危机数据" class="headerlink" title="实战：绘制地图-图形化显示海地地震危机数据"></a>实战：绘制地图-图形化显示海地地震危机数据</h1><figure class="highlight vala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div></pre></td><td class="code"><pre><div class="line">data = pd.read_csv(<span class="string">'../pydata-book-master/ch08/Haiti.csv'</span>)</div><div class="line"><span class="meta"># print data</span></div><div class="line"><span class="meta"># 拿出时间戳和位置信息</span></div><div class="line"><span class="meta"># print data[['INCIDENT DATE', 'LATITUDE', 'LONGITUDE']][:10]</span></div><div class="line"><span class="meta">#       INCIDENT DATE   LATITUDE   LONGITUDE</span></div><div class="line"><span class="meta"># 0  05/07/2010 17:26  18.233333  -72.533333</span></div><div class="line"><span class="meta"># 1  28/06/2010 23:06  50.226029    5.729886</span></div><div class="line"><span class="meta"># 2  24/06/2010 16:21  22.278381  114.174287</span></div><div class="line"><span class="meta"># 3  20/06/2010 21:59  44.407062    8.933989</span></div><div class="line"><span class="meta"># 4  18/05/2010 16:26  18.571084  -72.334671</span></div><div class="line"><span class="meta"># 5  26/04/2010 13:14  18.593707  -72.310079</span></div><div class="line"><span class="meta"># 6  26/04/2010 14:19  18.482800  -73.638800</span></div><div class="line"><span class="meta"># 7  26/04/2010 14:27  18.415000  -73.195000</span></div><div class="line"><span class="meta"># 8  15/03/2010 10:58  18.517443  -72.236841</span></div><div class="line"><span class="meta"># 9  15/03/2010 11:00  18.547790  -72.410010</span></div><div class="line"></div><div class="line"><span class="meta"># 消息类型</span></div><div class="line"><span class="meta"># print data['CATEGORY'][:6]</span></div><div class="line"><span class="meta"># 0          1. Urgences | Emergency, 3. Public Health,</span></div><div class="line"><span class="meta"># 1    1. Urgences | Emergency, 2. Urgences logistiqu...</span></div><div class="line"><span class="meta"># 2    2. Urgences logistiques | Vital Lines, 8. Autr...</span></div><div class="line"><span class="meta"># 3                            1. Urgences | Emergency,</span></div><div class="line"><span class="meta"># 4                            1. Urgences | Emergency,</span></div><div class="line"><span class="meta"># 5                       5e. Communication lines down,</span></div><div class="line"><span class="meta"># Name: CATEGORY, dtype: object</span></div><div class="line"></div><div class="line"><span class="meta"># 异常的地理位置</span></div><div class="line"><span class="meta"># print data.describe()</span></div><div class="line"><span class="meta">#             Serial     LATITUDE    LONGITUDE</span></div><div class="line"><span class="meta"># count  3593.000000  3593.000000  3593.000000</span></div><div class="line"><span class="meta"># mean   2080.277484    18.611495   -72.322680</span></div><div class="line"><span class="meta"># std    1171.100360     0.738572     3.650776</span></div><div class="line"><span class="meta"># min       4.000000    18.041313   -74.452757</span></div><div class="line"><span class="meta"># 25%    1074.000000    18.524070   -72.417500</span></div><div class="line"><span class="meta"># 50%    2163.000000    18.539269   -72.335000</span></div><div class="line"><span class="meta"># 75%    3088.000000    18.561820   -72.293570</span></div><div class="line"><span class="meta"># max    4052.000000    50.226029   114.174287</span></div><div class="line"></div><div class="line"><span class="meta"># 清除错误位置信息并移除缺失分类信息：</span></div><div class="line">data = data[(data.LATITUDE &gt; <span class="number">18</span>) &amp; (data.LATITUDE &lt; <span class="number">20</span>) &amp;</div><div class="line">            (data.LONGITUDE &gt; <span class="number">-75</span>) &amp; (data.LONGITUDE &lt; <span class="number">-70</span>)</div><div class="line">            &amp; data.CATEGORY.notnull()]</div><div class="line"></div><div class="line"><span class="meta"># 编写函数获取所有分类的列表，将各个分类信息拆分为编码和英语名称</span></div><div class="line">def to_cat_list(catstr):</div><div class="line">    stripped = (x.strip() <span class="keyword">for</span> x in catstr.split(<span class="string">','</span>))</div><div class="line">    <span class="keyword">return</span> [x <span class="keyword">for</span> x in stripped <span class="keyword">if</span> x]</div><div class="line"></div><div class="line">def get_all_categories(cat_series):</div><div class="line">    cat_sets = (<span class="keyword">set</span>(to_cat_list(x)) <span class="keyword">for</span> x in cat_series)</div><div class="line">    <span class="keyword">return</span> sorted(<span class="keyword">set</span>.union(*cat_sets))</div><div class="line"></div><div class="line">def get_english(cat):</div><div class="line">    code, names = cat.split(<span class="string">'.'</span>)</div><div class="line">    <span class="keyword">if</span> <span class="string">'|'</span> in names:</div><div class="line">        names = names.split(<span class="string">' | '</span>)[<span class="number">1</span>]</div><div class="line">    <span class="keyword">return</span> code, names.strip()</div><div class="line"></div><div class="line"><span class="meta"># 测试get_english是否正常</span></div><div class="line"><span class="meta"># print get_english('2. Urgences logistiques | Vital Lines')</span></div><div class="line"><span class="meta"># ('2', 'Vital Lines')</span></div><div class="line"></div><div class="line">all_cats = get_all_categories(data.CATEGORY)</div><div class="line"><span class="meta"># 生成器表达式</span></div><div class="line">english_mapping = dict(get_english(x) <span class="keyword">for</span> x in all_cats)</div><div class="line"></div><div class="line"><span class="meta"># print english_mapping['2a']</span></div><div class="line"><span class="meta"># Food Shortage</span></div><div class="line"></div><div class="line"><span class="meta"># print english_mapping['6c']</span></div><div class="line"><span class="meta"># Earthquake and aftershocks</span></div></pre></td></tr></table></figure>
+<figure class="highlight nix"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 抽取分类编码，构造全0DataFrame</span></div><div class="line">def get_code(seq):</div><div class="line">    return [x.split('.')[<span class="number">0</span>] for x <span class="keyword">in</span> seq <span class="keyword">if</span> x]</div><div class="line"></div><div class="line"><span class="attr">all_codes</span> = get_code(all_cats)</div><div class="line"><span class="attr">code_index</span> = pd.Index(pd.unique(all_codes))</div><div class="line"><span class="attr">dummy_frame</span> = DataFrame(np.zeros((len(data), len(code_index))), <span class="attr">index=data.index,</span> <span class="attr">columns=code_index)</span></div><div class="line"><span class="comment"># print dummy_frame.ix[:, :6]</span></div><div class="line"><span class="comment">#         1   1a   1b   1c   1d    2</span></div><div class="line"><span class="comment"># 0     0.0  0.0  0.0  0.0  0.0  0.0</span></div><div class="line"><span class="comment"># 4     0.0  0.0  0.0  0.0  0.0  0.0</span></div><div class="line"><span class="comment"># 5     0.0  0.0  0.0  0.0  0.0  0.0</span></div><div class="line"><span class="comment"># 6     0.0  0.0  0.0  0.0  0.0  0.0</span></div><div class="line"><span class="comment"># 7     0.0  0.0  0.0  0.0  0.0  0.0</span></div><div class="line"><span class="comment"># 8     0.0  0.0  0.0  0.0  0.0  0.0</span></div><div class="line"><span class="comment"># 9     0.0  0.0  0.0  0.0  0.0  0.0</span></div><div class="line"><span class="comment"># 10    0.0  0.0  0.0  0.0  0.0  0.0</span></div><div class="line"></div><div class="line">for row, cat <span class="keyword">in</span> zip(data.index, data.CATEGORY):</div><div class="line">    <span class="attr">codes</span> = get_code(to_cat_list(cat))</div><div class="line">    dummy_frame.ix[row, codes] = <span class="number">1</span></div><div class="line"></div><div class="line"><span class="attr">data</span> = data.join(dummy_frame.add_prefix('category_'))</div><div class="line"><span class="comment"># print data.ix[:,10:15]</span></div><div class="line"><span class="comment">#       category_1  category_1a  category_1b  category_1c  category_1d</span></div><div class="line"><span class="comment"># 0            1.0          0.0          0.0          0.0          0.0</span></div><div class="line"><span class="comment"># 4            1.0          0.0          0.0          0.0          0.0</span></div><div class="line"><span class="comment"># 5            0.0          0.0          0.0          0.0          0.0</span></div><div class="line"><span class="comment"># 6            0.0          0.0          0.0          0.0          0.0</span></div><div class="line"><span class="comment"># 7            0.0          0.0          0.0          0.0          0.0</span></div><div class="line"><span class="comment"># 8            0.0          0.0          0.0          0.0          0.0</span></div><div class="line"><span class="comment"># 9            0.0          0.0          0.0          0.0          0.0</span></div><div class="line"><span class="comment"># 10           0.0          1.0          0.0          0.0          0.0</span></div><div class="line"></div><div class="line"><span class="comment"># Python绘制地图依赖于basemap工具集(http://matplotlib.github.com/basemap）插件</span></div><div class="line"><span class="comment"># 绘制黑白海地地图</span></div><div class="line">from mpl_toolkits.basemap <span class="built_in">import</span> Basemap</div><div class="line"><span class="built_in">import</span> matplotlib.pyplot as plt</div><div class="line"></div><div class="line">def basic_haiti_map(<span class="attr">ax=None,</span> <span class="attr">lllat=17.25,</span> <span class="attr">urlat=20.25,</span> <span class="attr">lllon=-75,</span> <span class="attr">urlon=-71):</span></div><div class="line">    <span class="comment"># 创建极球面投影的Basemap实例</span></div><div class="line">    <span class="attr">m</span> = Basemap(<span class="attr">ax=ax,</span> <span class="attr">projection='stere',</span></div><div class="line">                <span class="attr">lon_0=(urlon</span> + lllon) / <span class="number">2</span>,</div><div class="line">                <span class="attr">lat_0=(urlat</span> + lllat) / <span class="number">2</span>,</div><div class="line">                <span class="attr">llcrnrlat=lllat,</span> <span class="attr">urcrnrlat=urlat,</span></div><div class="line">                <span class="attr">llcrnrlon=lllon,</span> <span class="attr">urcrnrlon=urlon,</span></div><div class="line">                <span class="attr">resolution='f')</span></div><div class="line"></div><div class="line">    <span class="comment"># 绘制海岸线、州届、国界以及地图边界</span></div><div class="line">    m.drawcoastlines()</div><div class="line">    m.drawstates()</div><div class="line">    m.drawcountries()</div><div class="line">    return m</div><div class="line"></div><div class="line">fig, <span class="attr">axes</span> = plt.subplots(<span class="attr">nrows=2,</span> <span class="attr">ncols=2,</span> <span class="attr">figsize=(12,</span> <span class="number">10</span>))</div><div class="line">fig.subplots_adjust(<span class="attr">hspace=0.05,</span> <span class="attr">wspace=0.05)</span></div><div class="line"></div><div class="line"><span class="attr">to_plot</span> = ['<span class="number">2</span>a', '<span class="number">1</span>', '<span class="number">3</span>c', '<span class="number">7</span>a']</div><div class="line"><span class="attr">lllat</span> = <span class="number">17.25</span>;<span class="attr">urlat</span> = <span class="number">20.25</span>;<span class="attr">lllon</span> = -<span class="number">75</span>;<span class="attr">urlon</span> = -<span class="number">71</span></div><div class="line"></div><div class="line">for code, ax <span class="keyword">in</span> zip(to_plot, axes.flat):</div><div class="line">    <span class="attr">m</span> = basic_haiti_map(ax, <span class="attr">lllat=lllat,</span> <span class="attr">urlat=urlat,</span> <span class="attr">lllon=lllon,</span> <span class="attr">urlon=urlon)</span></div><div class="line">    <span class="attr">cat_data</span> = data[data['category_%s' % code] == <span class="number">1</span>]</div><div class="line">    <span class="comment"># 计算地图的投影坐标</span></div><div class="line">    x, <span class="attr">y</span> = m(cat_data.LONGITUDE, cat_data.LATITUDE)</div><div class="line"></div><div class="line">    m.plot(x, y, 'k.', <span class="attr">alpha=0.5)</span></div><div class="line">    ax.set_title('%s: %s' % (code, english_mapping[code]))</div></pre></td></tr></table></figure>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/cs/" class="article-tag-list-link color3">cs</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/04/20/《利用Python进行数据分析》读书笔记-8-第八章-绘图和可视化/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
     <article id="post-《利用Python进行数据分析》读书笔记-7-第七章-数据规整化：清理、转换、合并与重塑" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -869,240 +1042,6 @@
 
 
   
-    <article id="post-《利用Python进行数据分析》读书笔记-2-第一二章_准备工作及引言" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/02/27/《利用Python进行数据分析》读书笔记-2-第一二章_准备工作及引言/">《利用Python进行数据分析》读书笔记_2_第一二章_准备工作及引言</a>
-    </h1>
-  
-
-        
-        <a href="/2017/02/27/《利用Python进行数据分析》读书笔记-2-第一二章_准备工作及引言/" class="archive-article-date">
-  	<time datetime="2017-02-27T15:44:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-02-27</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="第一章-准备工作"><a href="#第一章-准备工作" class="headerlink" title="第一章 准备工作"></a>第一章 准备工作</h1><p>这一章节主要是环境构建工作。</p>
-<p>遇到问题，无法安装pandas包，pip也无法安装；<br>命令<code>sudo easy_install xxx</code>，怀疑是网速原因，超时了。<br>所以直接下载了zip包。。补充：之后在公司网速可以的情况下由下载下来了，安装了pip工具。</p>
-<p><a href="https://github.com/wesm/pydata-book.git" target="_blank" rel="external">本书用到的数据地址</a></p>
-<h1 id="第二章-引言"><a href="#第二章-引言" class="headerlink" title="第二章 引言"></a>第二章 引言</h1><h2 id="来自bit-ly的1-usa-gov数据"><a href="#来自bit-ly的1-usa-gov数据" class="headerlink" title="来自bit.ly的1.usa.gov数据"></a>来自bit.ly的1.usa.gov数据</h2><figure class="highlight vim"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">#!/usr/bin/<span class="keyword">python</span></div><div class="line">#-*- codin<span class="variable">g:utf</span>-<span class="number">8</span> -*-</div><div class="line"></div><div class="line"># 读取文件中一行</div><div class="line">path = <span class="string">'../pydata-book-master/ch02/usagov_bitly_data2012-03-16-1331923249.txt'</span></div><div class="line"><span class="keyword">print</span> <span class="keyword">open</span>(path).readline()</div><div class="line"># <span class="keyword">ou</span><span class="variable">t:</span> &#123; <span class="string">"a"</span>: <span class="string">"Mozilla\/5.0 (Windows NT 6.1; WOW64) AppleWebKit\/535.11 (KHTML, like Gecko) Chrome\/17.0.963.78 Safari\/535.11"</span>, <span class="string">"c"</span>: <span class="string">"US"</span>, <span class="string">"nk"</span>: <span class="number">1</span>, <span class="string">"tz"</span>: <span class="string">"America\/New_York"</span>, <span class="string">"gr"</span>: <span class="string">"MA"</span>, <span class="string">"g"</span>: <span class="string">"A6qOVH"</span>, <span class="string">"h"</span>: <span class="string">"wfLQtf"</span>, <span class="string">"l"</span>: <span class="string">"orofrog"</span>, <span class="string">"al"</span>: <span class="string">"en-US,en;q=0.8"</span>, <span class="string">"hh"</span>: <span class="string">"1.usa.gov"</span>, <span class="string">"r"</span>: <span class="string">"http:\/\/www.facebook.com\/l\/7AQEFzjSi\/1.usa.gov\/wfLQtf"</span>, <span class="string">"u"</span>: <span class="string">"http:\/\/www.ncbi.nlm.nih.gov\/pubmed\/22415991"</span>, <span class="string">"t"</span>: <span class="number">1331923247</span>, <span class="string">"hc"</span>: <span class="number">1331822918</span>, <span class="string">"cy"</span>: <span class="string">"Danvers"</span>, <span class="string">"ll"</span>: [ <span class="number">42.576698</span>, -<span class="number">70.954903</span> ] &#125;</div><div class="line"></div><div class="line">import json</div><div class="line"># 列表推导式，生成的是一组Python字典</div><div class="line">record = [json.loads(<span class="built_in">line</span>) <span class="keyword">for</span> <span class="built_in">line</span> in <span class="keyword">open</span>(path)]</div><div class="line"><span class="keyword">print</span> record[<span class="number">0</span>]</div><div class="line"># out：&#123;<span class="keyword">u</span><span class="string">'a'</span>: <span class="keyword">u</span><span class="string">'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/535.11 (KHTML, like Gecko) Chrome/17.0.963.78 Safari/535.11'</span>, <span class="keyword">u</span><span class="string">'c'</span>: <span class="keyword">u</span><span class="string">'US'</span>, <span class="keyword">u</span><span class="string">'nk'</span>: <span class="number">1</span>, <span class="keyword">u</span><span class="string">'tz'</span>: <span class="keyword">u</span><span class="string">'America/New_York'</span>, <span class="keyword">u</span><span class="string">'gr'</span>: <span class="keyword">u</span><span class="string">'MA'</span>, <span class="keyword">u</span><span class="string">'g'</span>: <span class="keyword">u</span><span class="string">'A6qOVH'</span>, <span class="keyword">u</span><span class="string">'h'</span>: <span class="keyword">u</span><span class="string">'wfLQtf'</span>, <span class="keyword">u</span><span class="string">'cy'</span>: <span class="keyword">u</span><span class="string">'Danvers'</span>, <span class="keyword">u</span><span class="string">'l'</span>: <span class="keyword">u</span><span class="string">'orofrog'</span>, <span class="keyword">u</span><span class="string">'al'</span>: <span class="keyword">u</span><span class="string">'en-US,en;q=0.8'</span>, <span class="keyword">u</span><span class="string">'hh'</span>: <span class="keyword">u</span><span class="string">'1.usa.gov'</span>, <span class="keyword">u</span><span class="string">'r'</span>: <span class="keyword">u</span><span class="string">'http://www.facebook.com/l/7AQEFzjSi/1.usa.gov/wfLQtf'</span>, <span class="keyword">u</span><span class="string">'u'</span>: <span class="keyword">u</span><span class="string">'http://www.ncbi.nlm.nih.gov/pubmed/22415991'</span>, <span class="keyword">u</span><span class="string">'t'</span>: <span class="number">1331923247</span>, <span class="keyword">u</span><span class="string">'hc'</span>: <span class="number">1331822918</span>, <span class="keyword">u</span><span class="string">'ll'</span>: [<span class="number">42.576698</span>, -<span class="number">70.954903</span>]&#125;</div><div class="line"># 既然已经生成了字典项，就可以通过键访问值</div><div class="line"><span class="keyword">print</span> record[<span class="number">0</span>][<span class="string">'ll'</span>]</div><div class="line"># <span class="keyword">ou</span><span class="variable">t:</span> [<span class="number">42.576698</span>, -<span class="number">70.954903</span>]</div><div class="line"># 单引号前面的<span class="keyword">u</span>标识unicode；</div><div class="line"><span class="keyword">print</span> record[<span class="number">0</span>][<span class="string">'tz'</span>]</div><div class="line"># <span class="keyword">ou</span><span class="variable">t:</span> America/New_York  # 时区是字符串对象形式，而非打印形式</div></pre></td></tr></table></figure>
-<h2 id="纯Python时区计数"><a href="#纯Python时区计数" class="headerlink" title="纯Python时区计数"></a>纯Python时区计数</h2><figure class="highlight vim"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line">time_zones = [<span class="keyword">rec</span>[<span class="string">'tz'</span>] <span class="keyword">for</span> <span class="keyword">rec</span> in record <span class="keyword">if</span> <span class="string">'tz'</span> in <span class="keyword">rec</span>]</div><div class="line"><span class="keyword">print</span> time_zones[:<span class="number">10</span>]</div><div class="line"></div><div class="line"># 对时区进行计数</div><div class="line">def get_counts(sequence):</div><div class="line">    counts = &#123;&#125;</div><div class="line">    <span class="keyword">for</span> <span class="keyword">x</span> in sequence:</div><div class="line">        <span class="keyword">if</span> <span class="keyword">x</span> in <span class="built_in">count</span><span class="variable">s:</span></div><div class="line">            counts[<span class="keyword">x</span>] += <span class="number">1</span></div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            counts[<span class="keyword">x</span>] = <span class="number">1</span></div><div class="line">    <span class="keyword">return</span> counts</div><div class="line"># 使用标准库简化方法</div><div class="line">from collections import defaultdict</div><div class="line">def get_counts2(sequence):</div><div class="line">    counts = defaultdict(<span class="keyword">int</span>)</div><div class="line">    <span class="keyword">for</span> <span class="keyword">x</span> in sequence:</div><div class="line">        counts[<span class="keyword">x</span>]+=<span class="number">1</span></div><div class="line">    <span class="keyword">return</span> counts</div><div class="line">counts = get_counts(time_zones)</div><div class="line"><span class="keyword">print</span> counts[<span class="string">'America/New_York'</span>]</div><div class="line"># <span class="keyword">ou</span><span class="variable">t:</span> <span class="number">1251</span></div><div class="line"><span class="keyword">print</span> <span class="built_in">len</span>(time_zones)</div><div class="line"># <span class="number">3340</span></div><div class="line"># 前<span class="number">10</span>位的时区及计数</div><div class="line">def top_counts(count_dict, n = <span class="number">10</span>):</div><div class="line">    value_key_pairs = [(<span class="built_in">count</span>, tz) <span class="keyword">for</span> tz, <span class="built_in">count</span> in count_dict.<span class="built_in">items</span>()]</div><div class="line">    value_key_pairs.<span class="keyword">sort</span>()</div><div class="line">    <span class="keyword">return</span> value_key_pairs[-n:]</div><div class="line"><span class="keyword">print</span> top_counts(counts)</div><div class="line"># <span class="keyword">ou</span><span class="variable">t:</span> [(<span class="number">33</span>, <span class="keyword">u</span><span class="string">'America/Sao_Paulo'</span>), (<span class="number">35</span>, <span class="keyword">u</span><span class="string">'Europe/Madrid'</span>), (<span class="number">36</span>, <span class="keyword">u</span><span class="string">'Pacific/Honolulu'</span>), (<span class="number">37</span>, <span class="keyword">u</span><span class="string">'Asia/Tokyo'</span>), (<span class="number">74</span>, <span class="keyword">u</span><span class="string">'Europe/London'</span>), (<span class="number">191</span>, <span class="keyword">u</span><span class="string">'America/Denver'</span>), (<span class="number">382</span>, <span class="keyword">u</span><span class="string">'America/Los_Angeles'</span>), (<span class="number">400</span>, <span class="keyword">u</span><span class="string">'America/Chicago'</span>), (<span class="number">521</span>, <span class="keyword">u</span><span class="string">''</span>), (<span class="number">1251</span>, <span class="keyword">u</span><span class="string">'America/New_York'</span>)]</div><div class="line"># 更简单的方式是collections.Counter类</div><div class="line">from collections import Counter</div><div class="line">counts1 = Counter(time_zones)</div><div class="line"><span class="keyword">print</span> counts1.most_common(<span class="number">10</span>)</div><div class="line"># <span class="keyword">ou</span><span class="variable">t:</span> [(<span class="keyword">u</span><span class="string">'America/New_York'</span>, <span class="number">1251</span>), (<span class="keyword">u</span><span class="string">''</span>, <span class="number">521</span>), (<span class="keyword">u</span><span class="string">'America/Chicago'</span>, <span class="number">400</span>), (<span class="keyword">u</span><span class="string">'America/Los_Angeles'</span>, <span class="number">382</span>), (<span class="keyword">u</span><span class="string">'America/Denver'</span>, <span class="number">191</span>), (<span class="keyword">u</span><span class="string">'Europe/London'</span>, <span class="number">74</span>), (<span class="keyword">u</span><span class="string">'Asia/Tokyo'</span>, <span class="number">37</span>), (<span class="keyword">u</span><span class="string">'Pacific/Honolulu'</span>, <span class="number">36</span>), (<span class="keyword">u</span><span class="string">'Europe/Madrid'</span>, <span class="number">35</span>), (<span class="keyword">u</span><span class="string">'America/Sao_Paulo'</span>, <span class="number">33</span>)]</div></pre></td></tr></table></figure>
-<h2 id="pandas对时区计数"><a href="#pandas对时区计数" class="headerlink" title="pandas对时区计数"></a>pandas对时区计数</h2><figure class="highlight vala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"><span class="meta"># pandas时区计数</span></div><div class="line"><span class="meta"># DataFrame是pandas中最重要的数据结构，将数据处理成表格</span></div><div class="line">from pandas import DataFrame, Series</div><div class="line">import pandas as pd ;import numpy as np;import matplotlib.pyplot as plt</div><div class="line">frame = DataFrame(record)</div><div class="line"><span class="meta"># print frame</span></div><div class="line"><span class="meta"># print frame['tz'][:10]</span></div><div class="line">tz_counts = frame[<span class="string">'tz'</span>].value_counts()</div><div class="line"><span class="meta"># print tz_counts[:10]</span></div><div class="line"><span class="meta"># tz_counts[:10].plot(kind='barh', rot=0)</span></div><div class="line"><span class="meta"># 这里如不添加下句，图形闪退</span></div><div class="line"><span class="meta"># plt.show()</span></div><div class="line"><span class="meta"># print frame['a'][1]</span></div><div class="line">result = Series([x.split()[<span class="number">0</span>] <span class="keyword">for</span> x in frame.a.dropna()])</div><div class="line"><span class="meta"># print result[:5]</span></div><div class="line"><span class="meta"># print result.value_counts()[:8]</span></div><div class="line">cframe = frame[frame.a.notnull()]</div><div class="line">operating_sys = np.where(cframe[<span class="string">'a'</span>].str.contains(<span class="string">'Windows'</span>),(<span class="string">"Windows"</span>),<span class="string">'Not Windows'</span>)</div><div class="line"><span class="meta"># print operating_sys[:5]</span></div><div class="line">by_tz_os = cframe.groupby([<span class="string">'tz'</span>,operating_sys])</div><div class="line">agg_counts = by_tz_os.size().unstack().fillna(<span class="number">0</span>)</div><div class="line"><span class="meta"># print agg_counts[:5]</span></div><div class="line">indexer = agg_counts.sum(<span class="number">1</span>).argsort()</div><div class="line"><span class="meta"># print indexer[:5]</span></div><div class="line">count_subset = agg_counts.take(indexer)[<span class="number">-10</span>:]</div><div class="line"><span class="meta"># print count_subset</span></div><div class="line"><span class="meta"># count_subset.plot(kind='barh', stacked=True)</span></div><div class="line"><span class="meta"># plt.show()</span></div><div class="line">normed_subset = count_subset.div(count_subset.sum(<span class="number">1</span>),axis=<span class="number">0</span>)</div><div class="line"><span class="meta"># normed_subset.plot(kind='barh', stached=True)</span></div><div class="line"><span class="meta"># plt.hold()</span></div><div class="line"><span class="meta"># plt.interactive(False)</span></div><div class="line"><span class="meta"># plt.show()</span></div></pre></td></tr></table></figure>
-<h2 id="MovieLens-1M数据集"><a href="#MovieLens-1M数据集" class="headerlink" title="MovieLens 1M数据集"></a>MovieLens 1M数据集</h2><figure class="highlight vala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div></pre></td><td class="code"><pre><div class="line">unames = [<span class="string">'user_id'</span>, <span class="string">'gender'</span>, <span class="string">'age'</span>, <span class="string">'occupation'</span>, <span class="string">'zip'</span>]</div><div class="line">users = pd.read_table(<span class="string">'../pydata-book-master/ch02/movielens/users.dat'</span>, sep=<span class="string">'::'</span>, header=None, names=unames, engine=<span class="string">'python'</span>)</div><div class="line"></div><div class="line">rnames = [<span class="string">'user_id'</span>, <span class="string">'movie_id'</span>, <span class="string">'rating'</span>, <span class="string">'timestamp'</span>]</div><div class="line">ratings = pd.read_table(<span class="string">'../pydata-book-master/ch02/movielens/ratings.dat'</span>, sep=<span class="string">'::'</span>, header=None, names=rnames, engine=<span class="string">'python'</span>)</div><div class="line"></div><div class="line">mnames = [<span class="string">'movie_id'</span>, <span class="string">'title'</span>, <span class="string">'genres'</span>]</div><div class="line">movies = pd.read_table(<span class="string">'../pydata-book-master/ch02/movielens/movies.dat'</span>, sep=<span class="string">'::'</span>, header=None, names=mnames, engine=<span class="string">'python'</span>)</div><div class="line"></div><div class="line"><span class="meta"># print users[:5]</span></div><div class="line"><span class="meta"># print ratings[:5]</span></div><div class="line"><span class="meta"># print movies[:4]</span></div><div class="line"></div><div class="line"><span class="meta"># pandas的merge函数根据列名的重叠情况推断出哪些列是合并（或连接）键</span></div><div class="line">data = pd.merge(pd.merge(ratings, users), movies)</div><div class="line"><span class="meta"># print data</span></div><div class="line"><span class="meta"># data.ix[0]</span></div><div class="line"></div><div class="line"><span class="meta"># 按性别计算每部电影平均分，使用pivot_table方法</span></div><div class="line">mean_ratings = data.pivot_table(<span class="string">'rating'</span>, index=<span class="string">'title'</span>, columns=<span class="string">'gender'</span>, aggfunc=<span class="string">'mean'</span>)</div><div class="line"><span class="meta"># print mean_ratings[:5]</span></div><div class="line">rating_by_title = data.groupby(<span class="string">'title'</span>).size()</div><div class="line"><span class="meta"># print rating_by_title[:10]</span></div><div class="line"><span class="meta"># 过滤掉评分小于250</span></div><div class="line">active_title = rating_by_title.index[rating_by_title&gt;=<span class="number">250</span>]</div><div class="line"><span class="meta"># print active_title</span></div><div class="line">mean_ratings =mean_ratings.ix[active_title]</div><div class="line"><span class="meta"># print mean_ratings</span></div><div class="line"><span class="meta"># 按女性分数排序</span></div><div class="line">top_female_rating = mean_ratings.sort_values(by=<span class="string">'F'</span>, ascending=False)</div><div class="line"><span class="meta"># print top_female_rating[:4]</span></div><div class="line"></div><div class="line"><span class="meta"># 计算评分分歧；男女观众的分歧；方法是加上一列diff，做差;按diff排序，得出的结果是分歧 最大且女性更喜欢的电影。</span></div><div class="line">mean_ratings[<span class="string">'diff'</span>] = mean_ratings[<span class="string">'M'</span>] - mean_ratings[<span class="string">'F'</span>]</div><div class="line">sorted_by_diff = mean_ratings.sort_values(by=<span class="string">'diff'</span>)</div><div class="line"><span class="meta"># print sorted_by_diff[:10]</span></div><div class="line"><span class="meta"># 对行反序，并去除前十，则是男性更喜欢的电影</span></div><div class="line"><span class="meta"># print sorted_by_diff[::-1][:10]</span></div><div class="line"></div><div class="line"><span class="meta"># 根据电影名称分组的得分数据的标准差</span></div><div class="line">rating_std_by_title = data.groupby(<span class="string">'title'</span>)[<span class="string">'rating'</span>].std()</div><div class="line"><span class="meta"># 根据active_titles进行过滤</span></div><div class="line">rating_std_by_title = rating_std_by_title.ix[active_title]</div><div class="line"><span class="meta"># 根据值对Series进行降序排列</span></div><div class="line">rating_std_by_title.sort_value(ascending=False)[:<span class="number">5</span>]</div><div class="line"><span class="meta"># AttributeError: 'Series' object has no attribute 'sort_value';按树上对order也不行，deprecated</span></div></pre></td></tr></table></figure>
-<h2 id="1880–2010年间全美婴儿姓名"><a href="#1880–2010年间全美婴儿姓名" class="headerlink" title="1880–2010年间全美婴儿姓名"></a>1880–2010年间全美婴儿姓名</h2><figure class="highlight vala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div></pre></td><td class="code"><pre><div class="line"><span class="meta"># 1880-2010年间全美婴儿姓名</span></div><div class="line"><span class="meta"># 用linux命令查看某个文件对前十行</span></div><div class="line"><span class="meta"># head -n 10 names/yob1880.txt</span></div><div class="line"><span class="meta"># 第一行：Mary,F,7065</span></div><div class="line"><span class="meta"># 数据由标准逗号隔开，可以用pandas.read_csv加载到DataFrame中</span></div><div class="line">import pandas as pd;import matplotlib.pyplot as plt;import numpy as  np</div><div class="line"><span class="meta"># names1880 = pd.read_csv('../pydata-book-master/ch02/names/yob1880.txt', names=['name', 'sex', 'birthsNum'])</span></div><div class="line"><span class="meta"># print names1880</span></div><div class="line"><span class="meta"># print names1880.groupby('sex').birthsNum.sum()</span></div><div class="line"><span class="meta"># out: sex</span></div><div class="line"><span class="meta">#      F     90993</span></div><div class="line"><span class="meta">#      M    110493</span></div><div class="line"><span class="meta">#      Name: birthsNum, dtype: int64</span></div><div class="line"></div><div class="line"><span class="meta"># 将所有文件中到数据组装到一个DataFrame中，并加上一个year字段。使用pandas.concat</span></div><div class="line"><span class="meta"># 2010年是目前最后一个有效统计年度</span></div><div class="line">years = range(<span class="number">1880</span>, <span class="number">2011</span>)</div><div class="line">pieces = []</div><div class="line">columns = [<span class="string">'name'</span>, <span class="string">'sex'</span>, <span class="string">'birthsNum'</span>]</div><div class="line"><span class="keyword">for</span> year in years:</div><div class="line">    path = <span class="string">'../pydata-book-master/ch02/names/yob%d.txt'</span> % year</div><div class="line">    frame = pd.read_csv(path, names=columns)</div><div class="line"></div><div class="line">    frame[<span class="string">'year'</span>] = year</div><div class="line">    pieces.append(frame)</div><div class="line"><span class="meta"># 将所有数据整合到单个DataFrame中;ignore_index必须置为False，不保留原始行号；concat默认按行整合</span></div><div class="line">names = pd.concat(pieces, ignore_index=False)</div><div class="line"><span class="meta"># print names</span></div><div class="line"><span class="meta"># 聚合;DataFrame.pivot_table(y轴，x轴，多种类型-线条，每一年每种性别对出生总数)</span></div><div class="line">total_birthsNum = names.pivot_table(<span class="string">'birthsNum'</span>, index=<span class="string">'year'</span>, columns=<span class="string">'sex'</span>, aggfunc=sum)</div><div class="line"><span class="meta"># print total_birthsNum.tail()</span></div><div class="line"><span class="meta"># total_birthsNum.plot(title='Total birthsNum by sex and year')</span></div><div class="line"><span class="meta"># plt.show()</span></div><div class="line"></div><div class="line"><span class="meta"># 插入prop列，表示相对比例；由于birthsNum是整数，需要将分子分母转换成浮点数（Python3.x除外）</span></div><div class="line">def add_prop(group):</div><div class="line">    # 整数除法会向下圆整</div><div class="line">    birthsNum = group.birthsNum.astype(<span class="keyword">float</span>)</div><div class="line">    group[<span class="string">'prop'</span>] = birthsNum/birthsNum.sum()</div><div class="line">    <span class="keyword">return</span> group</div><div class="line">names = names.groupby([<span class="string">'year'</span>, <span class="string">'sex'</span>]).apply(add_prop)</div><div class="line"><span class="meta"># print names</span></div><div class="line"><span class="meta"># 分组前应该进行有效性检查，用numpy.allclose=1判定所有prop之和是否为1</span></div><div class="line"><span class="meta"># print np.allclose(names.groupby(['year', 'sex']).prop.sum(), 1)</span></div><div class="line"><span class="meta"># out: True</span></div><div class="line"><span class="meta"># 为便于分析，取出前1000条按sex/year组合对数据</span></div><div class="line">def get_top1000(group):</div><div class="line">    <span class="keyword">return</span> group.sort_index(by=<span class="string">'birthsNum'</span>, ascending=False)[:<span class="number">1000</span>]</div><div class="line">grouped = names.groupby([<span class="string">'year'</span>, <span class="string">'sex'</span>])</div><div class="line">top_1000 = grouped.apply(get_top1000)</div><div class="line"><span class="meta"># print top_1000</span></div><div class="line"><span class="meta"># 接下来针对这1000条数据进行分析</span></div></pre></td></tr></table></figure>
-<blockquote>
-<p>感到这一章就是先展示一下能干什么，用到的东西不熟悉，也只能照着敲敲；因此决定暂不跟着敲了；P41-P47跳过。</p>
-</blockquote>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/cs/" class="article-tag-list-link color3">cs</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/02/27/《利用Python进行数据分析》读书笔记-2-第一二章_准备工作及引言/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
-    <article id="post-《利用Python进行数据分析》读书笔记-1-附录" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/02/26/《利用Python进行数据分析》读书笔记-1-附录/">《利用Python进行数据分析》读书笔记_1_附录</a>
-    </h1>
-  
-
-        
-        <a href="/2017/02/26/《利用Python进行数据分析》读书笔记-1-附录/" class="archive-article-date">
-  	<time datetime="2017-02-26T15:10:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-02-26</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<p>题记：这本书是2016年6月10日购于Aamazon，至今还是新的，有愧初衷。决定于2017年2月25日开始看，本书共12章，400页（不含附录）。计划两个月看完。那么，到3月25日要看200页，大概到第七章结束；四周200页，一周就是50页。</p>
-</blockquote>
-<p>那么就从附录的基础开始看吧。</p>
-<p>时间计划表：</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">周序号</th>
-<th style="text-align:center">时间</th>
-<th style="text-align:center">章节</th>
-<th style="text-align:center">页码</th>
-<th style="text-align:center">执行情况</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">1</td>
-<td style="text-align:center">20170227-20170305</td>
-<td style="text-align:center">第一、二章</td>
-<td style="text-align:center">p1-p47</td>
-<td style="text-align:center">完成</td>
-</tr>
-<tr>
-<td style="text-align:center">2</td>
-<td style="text-align:center">20170306-20170312</td>
-<td style="text-align:center">第三、四章</td>
-<td style="text-align:center">p48-p112</td>
-<td style="text-align:center">完成</td>
-</tr>
-<tr>
-<td style="text-align:center">3</td>
-<td style="text-align:center">20170313-20170319</td>
-<td style="text-align:center">第五章</td>
-<td style="text-align:center">p115-p161</td>
-<td style="text-align:center">完成</td>
-</tr>
-<tr>
-<td style="text-align:center">4</td>
-<td style="text-align:center">20170320-20170325</td>
-<td style="text-align:center">第六章</td>
-<td style="text-align:center">p162-p185</td>
-<td style="text-align:center">完成</td>
-</tr>
-<tr>
-<td style="text-align:center">5</td>
-<td style="text-align:center">20170326-201704</td>
-<td style="text-align:center">第七章</td>
-<td style="text-align:center">p186-p230</td>
-<td style="text-align:center">-</td>
-</tr>
-<tr>
-<td style="text-align:center">6</td>
-<td style="text-align:center">20170305-20170305</td>
-<td style="text-align:center">-</td>
-<td style="text-align:center">-</td>
-<td style="text-align:center">-</td>
-</tr>
-<tr>
-<td style="text-align:center">7</td>
-<td style="text-align:center">20170305-20170305</td>
-<td style="text-align:center">-</td>
-<td style="text-align:center">-</td>
-<td style="text-align:center">-</td>
-</tr>
-<tr>
-<td style="text-align:center">8</td>
-<td style="text-align:center">20170305-20170305</td>
-<td style="text-align:center">-</td>
-<td style="text-align:center">-</td>
-<td style="text-align:center">-</td>
-</tr>
-<tr>
-<td style="text-align:center">9</td>
-<td style="text-align:center">20170305-20170305</td>
-<td style="text-align:center">-</td>
-<td style="text-align:center">-</td>
-<td style="text-align:center">-</td>
-</tr>
-</tbody>
-</table>
-<h1 id="附录A：Python语言精要"><a href="#附录A：Python语言精要" class="headerlink" title="附录A：Python语言精要"></a>附录A：Python语言精要</h1><p>-重拾Python基础</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div></pre></td><td class="code"><pre><div class="line">#!/usr/bin/python</div><div class="line"># -*- coding: utf-8 -*-</div><div class="line"># 在python中输入中文，包括中文注释，都需要加入上面对声明：https://www.python.org/dev/peps/pep-0263/#defining-the-encoding</div><div class="line"></div><div class="line"># python对变量进行赋值是在创建等号右侧对象对一个引用；即左侧是引用，右侧是对象；</div><div class="line">a = [1, 2, 3, 4, 5, 6]</div><div class="line">b = a</div><div class="line">a.append(7)</div><div class="line">print a</div><div class="line">print b</div><div class="line"># a，b两个引用指向一个对象，输出都是[1,2,3,4,5,6,7]</div><div class="line"># 赋值也叫绑定，将一个名称（引用）和一个对象绑定自在一起；</div><div class="line"></div><div class="line"># python按引用传递，以参数形式传入函数时，只是传入一个引用，不会复制；</div><div class="line"># 其他语言既支持按引用传递，又支持按值传递；</div><div class="line"># python可以修改参数的内容；而其他语言貌似不可以</div><div class="line">def append_ele(data_list, ele):</div><div class="line">    data_list.append(ele)</div><div class="line">data_list = [1,2,3]</div><div class="line">append_ele(data_list, 5)</div><div class="line">print data_list</div><div class="line"></div><div class="line"># 强类型语言？</div><div class="line"># 由于没有显式的将类型写出，常被误认为是弱类型语言，和js差不多；</div><div class="line"># 如计算以下：</div><div class="line">'5' + 5</div><div class="line"># 报错信息如下：</div><div class="line">Traceback (most recent call last):</div><div class="line">   File "/Users/linking/PycharmProjects/testProject/test1", line 25, in &lt;module&gt;</div><div class="line">    '5' + 5</div><div class="line">TypeError: cannot concatenate 'str' and 'int' objects</div><div class="line"># 再例：</div><div class="line">a = 5.3</div><div class="line">b = 2</div><div class="line">print 'a is %s, b is %s' % (type(a), type(b))</div><div class="line">out: a is &lt;type 'float'&gt;, b is &lt;type 'int'&gt;</div><div class="line"># 占位符 %s</div><div class="line">print a/b</div><div class="line">2.65</div><div class="line"># isinstance()函数检查类型</div><div class="line">print isinstance(a, int)</div><div class="line">out: False</div><div class="line">print isinstance(b, int)</div><div class="line">out: True</div><div class="line">print isinstance(a, (int, float))</div><div class="line">out: True</div><div class="line"></div><div class="line"># 属性和方法</div><div class="line">a = 'foo'</div><div class="line"># 通过.调用a.</div><div class="line"></div><div class="line"># python是一种非常严格的语言（急性子）；几乎在任何时候，计算过程和表达式都是立即求值。</div><div class="line"></div><div class="line"># 可变对象：列表，字典，NumPy数组及大部分用户自定义类</div><div class="line"># 不可变类：字符串和元组等；</div><div class="line"># 不可变指不能修改原内存块的数据。即使修改成功了也只是创建了一个新对象，并将其赋值给原变量而已。</div><div class="line"></div><div class="line"># 数据类型</div><div class="line">from __future__ import division</div><div class="line">print 3 / 2</div><div class="line"># 加__future__则结果是1.5,不加就是1</div><div class="line"># 也可以显式转换  3／float(2)</div><div class="line"># 整数除法如下：</div><div class="line">print 3//2</div><div class="line"># 结果 1</div><div class="line"></div><div class="line"># 字符串</div><div class="line"># 很多人因灵活的字符串处理能力而选择了python</div><div class="line"># ''  ""  效果相同</div><div class="line"># 多行字符串用三重引号（'''或"""）如下</div><div class="line">c = """</div><div class="line">    this is a longer string that</div><div class="line">    spans multiple lines</div><div class="line">    """</div><div class="line"># 字符串不可变；要修改也只能创建一个新的。</div><div class="line"># str(5.6)这种形式即可完成类型转换</div><div class="line"># 反斜杠（\）是转义字符；</div><div class="line">pring s = '12\\34'</div><div class="line">out : 12\34</div><div class="line"># 若要按照原样输出，则在左侧加r前缀</div><div class="line">s = r'this\has\no\special\characters\'</div><div class="line">out: 'this\has\no\special\characters\'</div><div class="line"># 字符串格式化</div><div class="line"># 机制：以一个%开头后面跟着一个或多个格式字符的字符串是需要插入的目标（类似c中的printf函数）</div><div class="line">temple = '%2.f %s are worth $%d'</div><div class="line">print temple % (3.413444, 'we', 222)</div><div class="line"># 这里的%是二元运算符，后面是元组(,,,)</div><div class="line">print bool([]),bool([1,2,3])</div><div class="line">out: False True</div><div class="line">print bool('hollo'),bool('')</div><div class="line">out: True False</div><div class="line">print bool(0), bool(1)</div><div class="line">out: False,True</div><div class="line"></div><div class="line"># None是Python的空值类型。一个函数没有显式地返回值，则隐式返回None</div><div class="line"># None不是保留关键字，只是NoneType的一个实例。</div><div class="line"></div><div class="line"># 异常处理</div><div class="line">def attempt_float(x):</div><div class="line">    try:</div><div class="line">        return float(x)</div><div class="line">    except (TypeError,ValueError):</div><div class="line">        return x</div><div class="line">print attempt_float('123.44xx')</div><div class="line"># 如上用元组包括多个，同时捕捉多个异常。</div><div class="line"></div><div class="line"># 三元表达式</div><div class="line">x = 5</div><div class="line">print 'Non-negative' if x &gt; 0 else 'Negative'</div><div class="line"># 优点是缩减代码，缺点是复杂情况下可读性差</div><div class="line"></div><div class="line"># 元组</div><div class="line"># 任何序列或迭代器都可以通过tuple转换为元组</div><div class="line">print tuple([3,2,1])</div><div class="line">out: (3,2,1)</div><div class="line">tup = tuple('string')</div><div class="line">print tup</div><div class="line">out: ('s', 't', 'r', 'i', 'n', 'g')</div><div class="line">print tup[0]</div><div class="line">out: s</div><div class="line"></div><div class="line"># 列表切片</div><div class="line"># 正 从0开始，负 从-1开始；都是在索引的插缝数数。</div><div class="line"></div><div class="line"># 有序 sorted ，唯一 set</div><div class="line"></div><div class="line"># 字典，是Python中最重要的内置数据结构。是一种大小可变的键值对集。</div><div class="line">empty_dict=&#123;&#125;</div><div class="line">dict_a = &#123;"a key": "a value", 'b key': 'b value'&#125;</div><div class="line"></div><div class="line"># 匿名函数</div><div class="line">def apply_to_list(some_list, f):</div><div class="line">    return [f(x) for x in some_list]</div><div class="line">ints = [4, 0, 1, 5, 6]</div><div class="line">print apply_to_list(ints, lambda x: x * 2)</div><div class="line">out: [8, 0, 2, 10, 12]</div><div class="line"># 得以轻松的传入一个自定义运算给apply_to_list函数；</div><div class="line"></div><div class="line"># 生成器</div><div class="line">def squares(n=10):</div><div class="line">    print 'Generating squares from 1 to %d' % (n**2)</div><div class="line">    for i in xrange(1, n+1):</div><div class="line">        yield i**2</div><div class="line">gen = squares()</div><div class="line">print gen</div><div class="line">out: &lt;generator object squares at 0x106936d20&gt;</div><div class="line">for x in gen:</div><div class="line">    print x,</div><div class="line">out:  Generating squares from 1 to 100</div><div class="line">      1 4 9 16 25 36 49 64 81 100</div></pre></td></tr></table></figure>
-<p>20170226 23:06 周日 于皖水公寓1#1317</p>
-<hr>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/cs/" class="article-tag-list-link color3">cs</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/02/26/《利用Python进行数据分析》读书笔记-1-附录/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/2/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/4/">Next &raquo;</a>
@@ -1191,11 +1130,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Ajax</a>
+                <a href="javascript:void(0)" class="js-tag color5">ajax</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">ajax</a>
+                <a href="javascript:void(0)" class="js-tag color5">Ajax</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1216,10 +1155,6 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">JavaScriptCore</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">cocoa</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1247,15 +1182,15 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">bundle</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">iOS</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">https</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">bundle</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1267,15 +1202,15 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">cocoa</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">绘图</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">HTTP</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">java</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1287,11 +1222,7 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">arcgis</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">arcgis 建模</a>
+                <a href="javascript:void(0)" class="js-tag color5">java</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1304,6 +1235,14 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Python</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">arcgis</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">arcgis 建模</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1327,15 +1266,23 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">张靓颖</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">正则</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">手机品牌匹配</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">张靓颖</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">plan</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">NBA</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1347,19 +1294,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">plan</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">进度条</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">crawler</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">NBA</a>
               </li>
             
             <div class="clearfix"></div>
