@@ -15,7 +15,7 @@
 <meta property="og:site_name" content="Linking's blog">
 <meta property="og:description" content="目前为止，博客大部分功能已经实现。可以正常运行。前后大概用了三天时间。头痛熟悉git命令，github，hexo+NexT theme等。">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/791ffc07jw1ea2kymrm83g20bo0bo0sz.gif">
-<meta property="og:updated_time" content="2017-03-29T15:52:07.000Z">
+<meta property="og:updated_time" content="2017-06-25T14:00:15.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="博客建立过程记录">
 <meta name="twitter:description" content="目前为止，博客大部分功能已经实现。可以正常运行。前后大概用了三天时间。头痛熟悉git命令，github，hexo+NexT theme等。">
@@ -256,6 +256,7 @@
 <h2 id="加上访问数统计"><a href="#加上访问数统计" class="headerlink" title="加上访问数统计"></a>加上访问数统计</h2><p>20170329</p>
 <h2 id="node-modules缺少"><a href="#node-modules缺少" class="headerlink" title="node_modules缺少"></a>node_modules缺少</h2><figure class="highlight crystal"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">&#123; <span class="symbol">Error:</span> Cannot find <span class="class"><span class="keyword">module</span> './<span class="title">build</span>/<span class="title">Debug</span>/<span class="title">DTraceProviderBindings</span>'</span></div><div class="line">    at Function.Module._resolveFilename (<span class="class"><span class="keyword">module</span>.<span class="title">js</span>:470:15)</span></div><div class="line">    at Function.Module._load (<span class="class"><span class="keyword">module</span>.<span class="title">js</span>:418:25)</span></div><div class="line">    at Module.<span class="keyword">require</span> (<span class="class"><span class="keyword">module</span>.<span class="title">js</span>:498:17)</span></div><div class="line">    at <span class="keyword">require</span> (internal/<span class="class"><span class="keyword">module</span>.<span class="title">js</span>:20:19)</span></div><div class="line">    at Object.&lt;anonymous&gt; (<span class="regexp">/Users/linking</span><span class="regexp">/.nvm/versions</span><span class="regexp">/node/v</span>7.<span class="number">2.0</span>/<span class="class"><span class="keyword">lib</span>/<span class="title">node_modules</span>/<span class="title">hexo</span>-<span class="title">cli</span>/<span class="title">node_modules</span>/<span class="title">dtrace</span>-<span class="title">provider</span>/<span class="title">dtrace</span>-<span class="title">provider</span>.<span class="title">js</span>:17:23)</span></div><div class="line">    at Module._compile (<span class="class"><span class="keyword">module</span>.<span class="title">js</span>:571:32)</span></div><div class="line">    at Object.Module._extensions..js (<span class="class"><span class="keyword">module</span>.<span class="title">js</span>:580:10)</span></div><div class="line">    at Module.load (<span class="class"><span class="keyword">module</span>.<span class="title">js</span>:488:32)</span></div><div class="line">    at tryModuleLoad (<span class="class"><span class="keyword">module</span>.<span class="title">js</span>:447:12)</span></div><div class="line">    at Function.Module._load (<span class="class"><span class="keyword">module</span>.<span class="title">js</span>:439:3)</span></div><div class="line">    at Module.<span class="keyword">require</span> (<span class="class"><span class="keyword">module</span>.<span class="title">js</span>:498:17)</span></div><div class="line">    at <span class="keyword">require</span> (internal/<span class="class"><span class="keyword">module</span>.<span class="title">js</span>:20:19)</span></div><div class="line">    at Object.&lt;anonymous&gt; (<span class="regexp">/Users/linking</span><span class="regexp">/.nvm/versions</span><span class="regexp">/node/v</span>7.<span class="number">2.0</span>/<span class="class"><span class="keyword">lib</span>/<span class="title">node_modules</span>/<span class="title">hexo</span>-<span class="title">cli</span>/<span class="title">node_modules</span>/<span class="title">bunyan</span>/<span class="title">lib</span>/<span class="title">bunyan</span>.<span class="title">js</span>:79:18)</span></div><div class="line">    at Module._compile (<span class="class"><span class="keyword">module</span>.<span class="title">js</span>:571:32)</span></div><div class="line">    at Object.Module._extensions..js (<span class="class"><span class="keyword">module</span>.<span class="title">js</span>:580:10)</span></div><div class="line">    at Module.load (<span class="class"><span class="keyword">module</span>.<span class="title">js</span>:488:32) <span class="title">code</span>: '<span class="title">MODULE_NOT_FOUND</span>' &#125;</span></div></pre></td></tr></table></figure>
 <p>暂未解决，目前不影响使用；但不够优雅，等我什么时候有心情再解决吧。</p>
+<h2 id="litia主题的文章截取不显示"><a href="#litia主题的文章截取不显示" class="headerlink" title="litia主题的文章截取不显示"></a>litia主题的文章截取不显示</h2><p>more&gt;&gt;效果需要在文章中的合适位置手动写 「 <!-- more --> 」</p>
 
       
 
@@ -506,10 +507,6 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">nodejs</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Ajax</a>
               </li>
              
@@ -522,6 +519,18 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">JavaScriptCore</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">markdown</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">html5</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">hmtl5</a>
               </li>
              
@@ -530,11 +539,7 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">html5</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">JavaScriptCore</a>
+                <a href="javascript:void(0)" class="js-tag color3">thought</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -543,14 +548,6 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">GridView</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">cs</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">thought</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -574,15 +571,15 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">bundle</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">多线程</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">兼容性</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">bundle</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -598,7 +595,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">test</a>
+                <a href="javascript:void(0)" class="js-tag color2">nodejs</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">cs</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -610,11 +611,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">标识</a>
+                <a href="javascript:void(0)" class="js-tag color2">D.Wade</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">D.Wade</a>
+                <a href="javascript:void(0)" class="js-tag color3">标识</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -626,11 +627,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">tomcat</a>
+                <a href="javascript:void(0)" class="js-tag color1">essay</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">essay</a>
+                <a href="javascript:void(0)" class="js-tag color2">tomcat</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -642,6 +643,10 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">张靓颖</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">正则</a>
               </li>
              
@@ -650,7 +655,7 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">张靓颖</a>
+                <a href="javascript:void(0)" class="js-tag color3">crawler</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -667,10 +672,6 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">NBA</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">crawler</a>
               </li>
              
               <li class="article-tag-list-item">
