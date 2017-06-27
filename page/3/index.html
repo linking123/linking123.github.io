@@ -160,6 +160,80 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-cookie操作的副本" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/05/12/cookie操作的副本/">cookie操作</a>
+    </h1>
+  
+
+        
+        <a href="/2017/05/12/cookie操作的副本/" class="archive-article-date">
+  	<time datetime="2017-05-12T05:40:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-12</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="获取服务端cookie"><a href="#获取服务端cookie" class="headerlink" title="获取服务端cookie"></a>获取服务端cookie</h2><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//获取cookie</span></div><div class="line"><span class="built_in">NSDictionary</span> *headers = [((<span class="built_in">NSHTTPURLResponse</span> *)resp) allHeaderFields];</div><div class="line"><span class="built_in">NSLog</span>(<span class="string">@"headers:%@"</span>,headers);</div><div class="line"><span class="built_in">NSDictionary</span> *cookies = [<span class="built_in">NSHTTPCookie</span> cookiesWithResponseHeaderFields:headers forURL:[<span class="built_in">NSURL</span> URLWithString:<span class="string">@"http://localhost/"</span>]];</div><div class="line"></div><div class="line"><span class="keyword">for</span> (<span class="built_in">NSHTTPCookie</span> *cookie <span class="keyword">in</span> cookies) &#123;</div><div class="line">    <span class="built_in">NSLog</span>(<span class="string">@"cookie:%@"</span>,cookie);</div><div class="line">    <span class="keyword">if</span> ([[cookie name] isEqualToString:<span class="string">@"JSESSIONID"</span>]) &#123;</div><div class="line">        <span class="built_in">NSLog</span>(<span class="string">@"session id is %@"</span>,[cookie value]);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="获取客户端cookie"><a href="#获取客户端cookie" class="headerlink" title="获取客户端cookie"></a>获取客户端cookie</h2><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//获取本地cookie</span></div><div class="line"><span class="built_in">NSHTTPCookieStorage</span> *httpCookiesStorage =  [<span class="built_in">NSHTTPCookieStorage</span> sharedHTTPCookieStorage];</div><div class="line"><span class="built_in">NSDictionary</span> *cookies = [httpCookiesStorage cookiesForURL:[<span class="built_in">NSURL</span> URLWithString:<span class="string">@"http://localhost/"</span>]];</div><div class="line"><span class="keyword">for</span> (<span class="built_in">NSHTTPCookie</span> *cookie <span class="keyword">in</span> cookies) &#123;</div><div class="line">    <span class="built_in">NSLog</span>(<span class="string">@"cookie:%@"</span>,cookie);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="客户端设置cookie"><a href="#客户端设置cookie" class="headerlink" title="客户端设置cookie"></a>客户端设置cookie</h2><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//客户端设置cookie</span></div><div class="line">-(<span class="keyword">void</span>)clientSetCookie&#123;</div><div class="line">    </div><div class="line">    <span class="built_in">NSDictionary</span> *prop1 = [<span class="built_in">NSDictionary</span> dictionaryWithObjectsAndKeys:</div><div class="line">                           <span class="string">@"a"</span>,<span class="built_in">NSHTTPCookieName</span>,</div><div class="line">                           <span class="string">@"aaa"</span>,<span class="built_in">NSHTTPCookieValue</span>,</div><div class="line">                           <span class="string">@"/"</span>,<span class="built_in">NSHTTPCookiePath</span>,</div><div class="line">                           [<span class="built_in">NSURL</span> URLWithString:<span class="string">@"http://localhost/"</span>],<span class="built_in">NSHTTPCookieOriginURL</span>,</div><div class="line">                           [<span class="built_in">NSDate</span> dateWithTimeIntervalSinceNow:<span class="number">60</span>],<span class="built_in">NSHTTPCookieExpires</span>,</div><div class="line">                           <span class="literal">nil</span>];</div><div class="line">    <span class="built_in">NSDictionary</span> *prop2 = [<span class="built_in">NSDictionary</span> dictionaryWithObjectsAndKeys:</div><div class="line">                           <span class="string">@"b"</span>,<span class="built_in">NSHTTPCookieName</span>,</div><div class="line">                           <span class="string">@"bbb"</span>,<span class="built_in">NSHTTPCookieValue</span>,</div><div class="line">                           <span class="string">@"/"</span>,<span class="built_in">NSHTTPCookiePath</span>,</div><div class="line">                           [<span class="built_in">NSURL</span> URLWithString:<span class="string">@"http://localhost/"</span>],<span class="built_in">NSHTTPCookieOriginURL</span>,</div><div class="line">                           [<span class="built_in">NSDate</span> dateWithTimeIntervalSinceNow:<span class="number">60</span>],<span class="built_in">NSHTTPCookieExpires</span>,</div><div class="line">                           <span class="literal">nil</span>];</div><div class="line">    </div><div class="line">    <span class="built_in">NSHTTPCookie</span> *cookie1 = [<span class="built_in">NSHTTPCookie</span> cookieWithProperties:prop1];</div><div class="line">    <span class="built_in">NSHTTPCookie</span> *cookie2 = [<span class="built_in">NSHTTPCookie</span> cookieWithProperties:prop2];</div><div class="line"></div><div class="line">    <span class="comment">//单个设置</span></div><div class="line">    [[<span class="built_in">NSHTTPCookieStorage</span> sharedHTTPCookieStorage] setCookie:cookie1];</div><div class="line">    [[<span class="built_in">NSHTTPCookieStorage</span> sharedHTTPCookieStorage] setCookie:cookie2];</div><div class="line">    </div><div class="line">    <span class="comment">//批量设置</span></div><div class="line"><span class="comment">//    NSArray *cookies = @[cookie1,cookie2,cookie3];</span></div><div class="line"><span class="comment">//    [[NSHTTPCookieStorage sharedHTTPCookieStorage]setCookies:cookies forURL:[NSURL URLWithString:@"http://localhost/"] mainDocumentURL:nil];</span></div><div class="line">    </div><div class="line">    <span class="comment">//设置cookie本地缓存策略</span></div><div class="line">    <span class="comment">//NSHTTPCookieAcceptPolicyAlways:保存所有cookie，这个是默认值</span></div><div class="line">    <span class="comment">//NSHTTPCookieAcceptPolicyNever:不保存任何响应头中的cookie</span></div><div class="line">    <span class="comment">//NSHTTPCookieAcceptPolicyOnlyFromMainDocumentDomain:只保存域请求匹配的cookie</span></div><div class="line"></div><div class="line">    [[<span class="built_in">NSHTTPCookieStorage</span> sharedHTTPCookieStorage]setCookieAcceptPolicy:<span class="built_in">NSHTTPCookieAcceptPolicyAlways</span>];</div><div class="line"></div><div class="line">    <span class="built_in">NSLog</span>(<span class="string">@"设置完成"</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="删除cookie"><a href="#删除cookie" class="headerlink" title="删除cookie"></a>删除cookie</h2><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="meta">#pragma mark -客户端删除cookie</span></div><div class="line"><span class="comment">//根据url和name删除cookie</span></div><div class="line">-(<span class="keyword">void</span>)deleteCookie:(<span class="built_in">NSString</span> *)cookieName url:(<span class="built_in">NSURL</span> *)url&#123;</div><div class="line">    <span class="comment">//根据url找到所属的cookie集合</span></div><div class="line">    <span class="built_in">NSArray</span> *cookies = [[<span class="built_in">NSHTTPCookieStorage</span> sharedHTTPCookieStorage]cookiesForURL:url];</div><div class="line">    <span class="keyword">for</span> (<span class="built_in">NSHTTPCookie</span> *cookie <span class="keyword">in</span> cookies) &#123;</div><div class="line">        <span class="keyword">if</span>([cookie.name isEqualToString:cookieName])&#123;</div><div class="line">            [[<span class="built_in">NSHTTPCookieStorage</span> sharedHTTPCookieStorage] deleteCookie:cookie];</div><div class="line">            <span class="built_in">NSLog</span>(<span class="string">@"删除cookie:%@"</span>,cookieName);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="comment">//删除全部cookies</span></div><div class="line">-(<span class="keyword">void</span>)deleteCookies&#123;</div><div class="line">    <span class="keyword">for</span> (<span class="built_in">NSHTTPCookie</span> *cookie <span class="keyword">in</span> [[<span class="built_in">NSHTTPCookieStorage</span> sharedHTTPCookieStorage]cookies]) &#123;</div><div class="line">        [[<span class="built_in">NSHTTPCookieStorage</span> sharedHTTPCookieStorage] deleteCookie:cookie];</div><div class="line">    &#125;</div><div class="line">    <span class="built_in">NSLog</span>(<span class="string">@"删除完成"</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="cookie策略"><a href="#cookie策略" class="headerlink" title="cookie策略"></a>cookie策略</h2><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//设置cookie本地缓存策略</span></div><div class="line"><span class="comment">//NSHTTPCookieAcceptPolicyAlways:保存所有cookie，这个是默认值</span></div><div class="line"><span class="comment">//NSHTTPCookieAcceptPolicyNever:不保存任何响应头中的cookie</span></div><div class="line"><span class="comment">//NSHTTPCookieAcceptPolicyOnlyFromMainDocumentDomain:只保存域请求匹配的cookie</span></div></pre></td></tr></table></figure>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">cookie</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/iOS/" class="article-tag-list-link color4">iOS</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/05/12/cookie操作的副本/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
     <article id="post-cocoa基础的副本" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -610,28 +684,9 @@
       
         <h1 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h1><p>为了实现一个订单下多个商品同时评价功能，列表分五种状态（非常满意，满意，一般，较差，不满意）展示，用一个listview，item中有一个GridView，GridView中放置最多五张图片；在listview上下滑动时会出现item中的图片重复、错乱、闪烁等问题。</p>
 <h1 id="我的错误"><a href="#我的错误" class="headerlink" title="我的错误"></a>我的错误</h1><p>先讲我的错误。遇到问题后Google，参考了一些资料，都是提示要在外层listview的adapter上设置setTag(), 然后在内层GridView的adapter上整体和需要标记复用的imageView上setTag()。照此执行了，还是出错；后来在同事指点下，原来外层adapter中设置gridAdapter时只是在没有塞值时<code>gridView.setVisibility(View.GONE)</code>，忘了要在有值的时候<code>gridView.setVisibility(View.VISIBLE)</code>， 所以导致在复用的时候，没有了GridView可复用。</p>
-<figure class="highlight gauss"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//评价照片 </span></div><div class="line"><span class="keyword">String</span> evaluateImgs = item.getEvaluateDescriptionImgs(); </div><div class="line">MyGridView gridView = vh.getView(R.id.evaluate_image);</div><div class="line">EvaluationViewGridAdapter gridAdapter; </div><div class="line"><span class="keyword">if</span> (!StringUtils.isEmpty(evaluateImgs)) &#123; </div><div class="line">    <span class="comment">//这里是否不需要判断包含`,`，`split`方法是否能自动判断，需要验证</span></div><div class="line">    <span class="keyword">if</span> (evaluateImgs.contains(<span class="string">","</span>)) &#123; </div><div class="line">        <span class="keyword">String</span>[] imgs = evaluateImgs.split(<span class="string">","</span>);</div><div class="line">        gridAdapter = <span class="keyword">new</span> EvaluationViewGridAdapter(imgs, mCallback.getContext());</div><div class="line">        gridView.setAdapter(gridAdapter);</div><div class="line">        <span class="comment">//下面这句是我忘了加的</span></div><div class="line">        gridView.setVisibility(<span class="built_in">View</span>.VISIBLE); </div><div class="line">    &#125; <span class="keyword">else</span> &#123; </div><div class="line">        <span class="keyword">String</span>[] imgs = <span class="keyword">new</span> <span class="keyword">String</span>[]&#123;evaluateImgs&#125;;</div><div class="line">        gridAdapter = <span class="keyword">new</span> EvaluationViewGridAdapter(imgs, mCallback.getContext());</div><div class="line">        gridView.setAdapter(gridAdapter);</div><div class="line">        <span class="comment">//下面这句是我忘了加的</span></div><div class="line">        gridView.setVisibility(<span class="built_in">View</span>.VISIBLE); </div><div class="line">    &#125; </div><div class="line">&#125; <span class="keyword">else</span> &#123;  </div><div class="line">    gridView.setAdapter(gridAdapter);</div><div class="line">    gridView.setVisibility(<span class="built_in">View</span>.GONE); </div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<blockquote>
-<p>教训：这个问题此前已经遇到过，真是不长记性，看来遇到一些常见问题还是要记录下来啊。例如写这个博客。</p>
-</blockquote>
-<h1 id="原因总结"><a href="#原因总结" class="headerlink" title="原因总结"></a>原因总结</h1><p>为了提升listview性能，缓存复用了item(某行对应的View)，ListView通过getView()获取每行的item。</p>
-<p>滑动过程中，a. 如果某行item已经滑出屏幕，若该item不在缓存内，则put进缓存，否则更新缓存；<br>b. 获取滑入屏幕的行item之前会先判断缓存中是否有可用的item，如果有，做为convertView参数传递给adapter的getView。</p>
-<ul>
-<li>行item图片显示重复：指当前行item显示了之前某行item的图片。</li>
-<li>行item图片显示错乱：指某行item显示了不属于该行item的图片。</li>
-<li>行item图片显示闪烁：上面b的情况，加载缓慢，还没加载完又滑到下一页，下一页某个item又加载出来了，所以导致图片快速覆盖，显示闪烁效果。</li>
-</ul>
-<h1 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h1><h2 id="第一步：ListView-Adapter-getView写法"><a href="#第一步：ListView-Adapter-getView写法" class="headerlink" title="第一步：ListView Adapter getView写法"></a>第一步：ListView Adapter getView写法</h2><figure class="highlight zephir"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">@Override</div><div class="line"><span class="keyword">public</span> View getView(<span class="keyword">int</span> position, View convertView, ViewGroup <span class="keyword">parent</span>) &#123;</div><div class="line">	ViewHolder holder;</div><div class="line">	<span class="keyword">if</span> (convertView == <span class="keyword">null</span>) &#123;</div><div class="line">		convertView = inflater.inflate(R.layout.list_item, <span class="keyword">null</span>);</div><div class="line">		holder = <span class="keyword">new</span> ViewHolder();</div><div class="line">		……</div><div class="line">		convertView.setTag(holder);</div><div class="line">	&#125; <span class="keyword">else</span> &#123;</div><div class="line">		holder = (ViewHolder)convertView.getTag();</div><div class="line">	&#125;</div><div class="line">	...</div><div class="line">	<span class="keyword">return</span> convertView;</div><div class="line">&#125;</div><div class="line"> </div><div class="line"><span class="comment">/**</span></div><div class="line"> * ViewHolder</div><div class="line"> * </div><div class="line"> * <span class="doctag">@author</span> trinea<span class="doctag">@trinea</span>.cn 2013-08-01</div><div class="line"> */</div><div class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">ViewHolder</span> </span>&#123;</div><div class="line">	ImageView appIcon;</div><div class="line">	TextView  appName;</div><div class="line">	TextView  appInfo;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>这里如果写的是convert()方法，则不需要写以上复用，因为父类中会做复用的事。</p>
-<h2 id="第二步：-GridView-gridAdapter-getVIew写法"><a href="#第二步：-GridView-gridAdapter-getVIew写法" class="headerlink" title="第二步： GridView gridAdapter getVIew写法"></a>第二步： GridView gridAdapter getVIew写法</h2><p>与上面写法类似；不过需要在用到图片的地方进行判断。</p>
-<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line">@<span class="function">Override</span></div><div class="line"><span class="keyword">public</span> View <span class="title">getView</span>(<span class="params"><span class="keyword">int</span> position, View convertView, ViewGroup parent</span>) &#123;</div><div class="line">    ViewHolder holder;</div><div class="line">    <span class="keyword">if</span> (convertView == <span class="literal">null</span>) &#123;</div><div class="line">    	convertView = inflater.inflate(R.layout.list_item, <span class="literal">null</span>);</div><div class="line">    	holder = <span class="keyword">new</span> ViewHolder();</div><div class="line">    	……</div><div class="line">    	convertView.setTag(holder);</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">    	holder = (ViewHolder)convertView.getTag();</div><div class="line">    &#125;</div><div class="line">    ...</div><div class="line">    <span class="comment">/**</span></div><div class="line">    * 解决图片重复错乱闪烁的问题，例如</div><div class="line">    */</div><div class="line">    <span class="comment">//建立一个唯一标示，一般为item的相应String对象</span></div><div class="line">    String file = mListResult.<span class="keyword">get</span>(position).getFile();</div><div class="line">    ImageAware imageAware =<span class="keyword">new</span> ImageViewAware(holder.iv,<span class="literal">false</span>);</div><div class="line">    <span class="comment">//首先得到要设置的GridView</span></div><div class="line">    holder.iv.setTag(file);</div><div class="line">    <span class="comment">//判断tag存在否</span></div><div class="line">    <span class="keyword">if</span>(holder.iv.getTag()!=<span class="literal">null</span>&amp;&amp;holder.iv.getTag().<span class="keyword">equals</span>(file))&#123;</div><div class="line">        imageLoader.displayImage(file,imageAware);</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="keyword">return</span> convertView;</div><div class="line">&#125;</div><div class="line"> </div><div class="line"><span class="comment">/**</span></div><div class="line"> * ViewHolder</div><div class="line"> * </div><div class="line"> * @author linking123.github.io 2017-03-29</div><div class="line"> */</div><div class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">class</span> <span class="title">ViewHolder</span> &#123;</div><div class="line">	ImageView appIcon;</div><div class="line">	TextView  appName;</div><div class="line">	TextView  appInfo;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>一般情况下，走完以上两部可解决问题；解决不了的就要仔细检查一下，有没有像我一样的遗漏问题，小心啊，程序员们。</p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ul>
-<li><a href="http://www.trinea.cn/android/android-listview-display-error-image-when-scroll/" target="_blank" rel="external">Android ListView滑动过程中图片显示重复错位闪烁问题解决</a></li>
-</ul>
-<p>感谢作者们的无私奉献，如有侵权，立马删除。</p>
-<p>多做总结，少走老路。多写博客，方便他人。</p>
-
+        
+          <a class="article-more-a" href="/2017/03/29/ListView嵌套GridView显示多张图片出现图片重复、错乱、闪烁等问题/#more">more >></a>
+        
       
 
       
@@ -817,139 +872,9 @@
 
 
   
-    <article id="post-《利用Python进行数据分析》读书笔记-5-第五章-pandas入门" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/03/19/《利用Python进行数据分析》读书笔记-5-第五章-pandas入门/">《利用Python进行数据分析》读书笔记-第五章-pandas入门</a>
-    </h1>
-  
-
-        
-        <a href="/2017/03/19/《利用Python进行数据分析》读书笔记-5-第五章-pandas入门/" class="archive-article-date">
-  	<time datetime="2017-03-19T14:40:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-03-19</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="pandas数据结构介绍"><a href="#pandas数据结构介绍" class="headerlink" title="pandas数据结构介绍"></a>pandas数据结构介绍</h2><h3 id="Series"><a href="#Series" class="headerlink" title="Series"></a>Series</h3><blockquote>
-<ul>
-<li>Series最重要的一个功能：在算术运算中会自动对齐不同索引的数据（键相同）。</li>
-<li>Series对象本身及其索引都有一个name属性。</li>
-</ul>
-</blockquote>
-<figure class="highlight vala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="meta"># 一组 key: value</span></div><div class="line"><span class="meta"># obj = Series([4,5,7,-3])</span></div><div class="line"><span class="meta"># print obj</span></div><div class="line"><span class="meta"># out:</span></div><div class="line"><span class="meta"># 0    4</span></div><div class="line"><span class="meta"># 1    5</span></div><div class="line"><span class="meta"># 2    7</span></div><div class="line"><span class="meta"># 3   -3</span></div><div class="line"><span class="meta"># dtype: int64</span></div><div class="line"><span class="meta"># print obj.values</span></div><div class="line"><span class="meta"># out：[ 4  5  7 -3]</span></div><div class="line"><span class="meta"># print obj.index</span></div><div class="line"><span class="meta"># out:RangeIndex(start=0, stop=4, step=1)</span></div><div class="line"></div><div class="line">obj2 = Series([<span class="number">3</span>, <span class="number">5</span>, <span class="number">-7</span>, <span class="number">9</span>], index=[<span class="string">'a'</span>, <span class="string">'d'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>])</div><div class="line"><span class="meta"># print obj2</span></div><div class="line"><span class="meta"># out:</span></div><div class="line"><span class="meta"># a    3</span></div><div class="line"><span class="meta"># d    5</span></div><div class="line"><span class="meta"># b    7</span></div><div class="line"><span class="meta"># c    9</span></div><div class="line"><span class="meta"># dtype: int64</span></div><div class="line"><span class="meta"># print obj2['d']</span></div><div class="line"><span class="meta"># out: 5</span></div><div class="line"><span class="meta"># print obj2[['d','c','b']]</span></div><div class="line"><span class="meta"># out:</span></div><div class="line"><span class="meta"># d    5</span></div><div class="line"><span class="meta"># c    9</span></div><div class="line"><span class="meta"># b    7</span></div><div class="line"><span class="meta"># dtype: int64</span></div><div class="line"><span class="meta"># print obj2[obj2&gt;0]</span></div><div class="line"><span class="meta"># out:</span></div><div class="line"><span class="meta"># a    3</span></div><div class="line"><span class="meta"># d    5</span></div><div class="line"><span class="meta"># c    9</span></div><div class="line"><span class="meta"># dtype: int64</span></div><div class="line"><span class="meta"># print 'b' in obj2</span></div><div class="line"><span class="meta"># out: True</span></div><div class="line"></div><div class="line"><span class="meta"># 通过字典创建Series</span></div><div class="line">sdata = &#123;<span class="string">'aaa'</span>: <span class="number">41</span>, <span class="string">'bbb'</span>: <span class="number">51</span>, <span class="string">'ccc'</span>: <span class="number">61</span>, <span class="string">'ddd'</span>: <span class="number">71</span>&#125;</div><div class="line">obj3 = Series(sdata)</div><div class="line"><span class="meta"># print obj3</span></div><div class="line"><span class="meta"># out：</span></div><div class="line"><span class="meta"># aaa    41</span></div><div class="line"><span class="meta"># bbb    51</span></div><div class="line"><span class="meta"># ccc    61</span></div><div class="line"><span class="meta"># ddd    71</span></div><div class="line"><span class="meta"># dtype: int64</span></div><div class="line"><span class="meta"># 传入一个值，作为键</span></div><div class="line">states = [<span class="string">'aaa'</span>, <span class="string">'bbb'</span>, <span class="string">'ddd'</span>, <span class="string">'eee'</span>]</div><div class="line">obj4 = Series(sdata, index=states)</div><div class="line"><span class="meta"># print obj4</span></div><div class="line"><span class="meta"># out:</span></div><div class="line"><span class="meta"># aaa    41</span></div><div class="line"><span class="meta"># bbb    51</span></div><div class="line"><span class="meta"># ddd    71</span></div><div class="line"><span class="meta"># eee    NaN</span></div><div class="line"><span class="meta"># dtype: int64</span></div><div class="line"><span class="meta"># 第四个值eee找不到键</span></div><div class="line"></div><div class="line"><span class="meta"># isnull,notnull检测缺失数据</span></div><div class="line"><span class="meta"># print pd.isnull(obj4)</span></div><div class="line"><span class="meta"># out:</span></div><div class="line"><span class="meta"># aaa    False</span></div><div class="line"><span class="meta"># bbb    False</span></div><div class="line"><span class="meta"># ddd    False</span></div><div class="line"><span class="meta"># eee     True</span></div><div class="line"><span class="meta"># dtype: bool</span></div><div class="line"></div><div class="line"><span class="meta"># 算术运算，自动对齐键</span></div><div class="line"><span class="meta"># print obj3+obj4</span></div><div class="line"><span class="meta"># our:</span></div><div class="line"><span class="meta"># aaa     82.0</span></div><div class="line"><span class="meta"># bbb    102.0</span></div><div class="line"><span class="meta"># ccc      NaN</span></div><div class="line"><span class="meta"># ddd    142.0</span></div><div class="line"><span class="meta"># eee      NaN</span></div><div class="line"><span class="meta"># dtype: float64</span></div><div class="line"></div><div class="line">obj4.name = <span class="string">'population'</span></div><div class="line">obj4.index.name = <span class="string">'state'</span></div><div class="line"><span class="meta"># print obj4</span></div><div class="line"><span class="meta"># out:</span></div><div class="line"><span class="meta"># state</span></div><div class="line"><span class="meta"># aaa    41.0</span></div><div class="line"><span class="meta"># bbb    51.0</span></div><div class="line"><span class="meta"># ddd    71.0</span></div><div class="line"><span class="meta"># eee     NaN</span></div><div class="line"><span class="meta"># Name: population, dtype: float64</span></div><div class="line"></div><div class="line"><span class="meta"># 索引改变：</span></div><div class="line">obj4.index = [<span class="string">'bob'</span>, <span class="string">'fds'</span>, <span class="string">'a33'</span>, <span class="string">'8uk'</span>]</div><div class="line"><span class="meta"># print obj4</span></div></pre></td></tr></table></figure>
-<h3 id="DataFrame"><a href="#DataFrame" class="headerlink" title="DataFrame"></a>DataFrame</h3><blockquote>
-<p>DataFrame是一个<strong>表格型</strong>的数据结构，含有一组<strong>有序的列</strong>，每列可以是不同的值类型。既有行索引也有列索引。可看做由Series组成的字典。<br>以<strong>二维</strong>结构保存数据，可视为多维数据（<strong>层次化索引</strong>的表格型结构是pandas中许多高级数据处理功能的关键要素）。</p>
-</blockquote>
-<ol>
-<li>构建DataFrame方式一<blockquote>
-<p>方式一：直接传入一个由等长列表或NumPy数组组成的字典：</p>
-</blockquote>
-</li>
-</ol>
-<figure class="highlight vala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="meta">## 构建</span></div><div class="line">data = &#123;<span class="string">'state'</span>: [<span class="string">'Ohio'</span>, <span class="string">'Ohio'</span>, <span class="string">'Ohio'</span>, <span class="string">'Nevada'</span>, <span class="string">'Nevada'</span>],</div><div class="line">        <span class="string">'year'</span>: [<span class="number">2000</span>, <span class="number">2001</span>, <span class="number">2002</span>, <span class="number">2003</span>, <span class="number">2004</span>],</div><div class="line">        <span class="string">'pop'</span>: [<span class="number">1.5</span>, <span class="number">1.7</span>, <span class="number">3.6</span>, <span class="number">2.4</span>, <span class="number">2.9</span>]&#125;</div><div class="line">frame1 = DataFrame(data)</div><div class="line"><span class="meta"># print frame1</span></div><div class="line"><span class="meta"># out:</span></div><div class="line"><span class="meta">#    pop   state  year</span></div><div class="line"><span class="meta"># 0  1.5    Ohio  2000</span></div><div class="line"><span class="meta"># 1  1.7    Ohio  2001</span></div><div class="line"><span class="meta"># 2  3.6    Ohio  2002</span></div><div class="line"><span class="meta"># 3  2.4  Nevada  2003</span></div><div class="line"><span class="meta"># 4  2.9  Nevada  2004</span></div></pre></td></tr></table></figure>
-<p>1.1. 指定列序列</p>
-<figure class="highlight vala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">frame2 = DataFrame(data, columns=[<span class="string">'year'</span>, <span class="string">'state'</span>, <span class="string">'pop'</span>])</div><div class="line"><span class="meta"># print frame2</span></div><div class="line"><span class="meta"># out:</span></div><div class="line"><span class="meta">#    year   state  pop</span></div><div class="line"><span class="meta"># 0  2000    Ohio  1.5</span></div><div class="line"><span class="meta"># 1  2001    Ohio  1.7</span></div><div class="line"><span class="meta"># 2  2002    Ohio  3.6</span></div><div class="line"><span class="meta"># 3  2003  Nevada  2.4</span></div><div class="line"><span class="meta"># 4  2004  Nevada  2.9</span></div><div class="line"><span class="meta"># 若找不到列，就会显示NaN</span></div></pre></td></tr></table></figure>
-<p>1.2. 通过字典标记方式或属性方式，获取一个Series<br><figure class="highlight vala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="meta"># print frame2['state']</span></div><div class="line"><span class="meta"># out:</span></div><div class="line"><span class="meta"># 0      Ohio</span></div><div class="line"><span class="meta"># 1      Ohio</span></div><div class="line"><span class="meta"># 2      Ohio</span></div><div class="line"><span class="meta"># 3    Nevada</span></div><div class="line"><span class="meta"># 4    Nevada</span></div><div class="line"><span class="meta"># Name: state, dtype: object</span></div><div class="line"><span class="meta"># print frame2.year</span></div><div class="line"><span class="meta"># out:</span></div><div class="line"><span class="meta"># 0    2000</span></div><div class="line"><span class="meta"># 1    2001</span></div><div class="line"><span class="meta"># 2    2002</span></div><div class="line"><span class="meta"># 3    2003</span></div><div class="line"><span class="meta"># 4    2004</span></div><div class="line"><span class="meta"># Name: year, dtype: int64</span></div></pre></td></tr></table></figure></p>
-<p>1.3. 行，通过名称或位置获取，如用索引字段ix<br><figure class="highlight vala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="meta"># print frame2.ix[1]</span></div><div class="line"><span class="meta"># out：</span></div><div class="line"><span class="meta"># year     2001</span></div><div class="line"><span class="meta"># state    Ohio</span></div><div class="line"><span class="meta"># pop       1.7</span></div><div class="line"><span class="meta"># Name: 1, dtype: object</span></div></pre></td></tr></table></figure></p>
-<p>1.4. 直接给列赋值，新建test列，赋值2.3<br><figure class="highlight vala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">frame2[<span class="string">'test'</span>] = <span class="number">2.3</span></div><div class="line"><span class="meta"># print frame2</span></div><div class="line"><span class="meta"># out:</span></div><div class="line"><span class="meta">#    year   state  pop  test</span></div><div class="line"><span class="meta"># 0  2000    Ohio  1.5   2.3</span></div><div class="line"><span class="meta"># 1  2001    Ohio  1.7   2.3</span></div><div class="line"><span class="meta"># 2  2002    Ohio  3.6   2.3</span></div><div class="line"><span class="meta"># 3  2003  Nevada  2.4   2.3</span></div><div class="line"><span class="meta"># 4  2004  Nevada  2.9   2.3</span></div></pre></td></tr></table></figure></p>
-<blockquote>
-<p>将列表或数组赋值给某个列时，长度必须和DataFrame相匹配；空位都将填上缺失值NaN。</p>
-</blockquote>
-<ol>
-<li>构建DataFrame方式二<blockquote>
-<p>方式二：嵌套字典，即字典的字典。</p>
-</blockquote>
-</li>
-</ol>
-<figure class="highlight vala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">pop = &#123;<span class="string">'Nevada'</span>: &#123;<span class="number">2001</span>:<span class="number">2.3</span>, <span class="number">2004</span>:<span class="number">3.4</span>&#125;,</div><div class="line">       <span class="string">'Ohio'</span>: &#123;<span class="number">2003</span>:<span class="number">3.34</span>, <span class="number">2005</span>:<span class="number">5.2</span>&#125;&#125;</div><div class="line"><span class="meta"># 转化为DataFrame，解释原则：外层字典的键作为列，内层键作为行索引。</span></div><div class="line">frame3 = DataFrame(pop)</div><div class="line"><span class="meta"># print frame3</span></div><div class="line"><span class="meta"># out:</span></div><div class="line"><span class="meta">#       Nevada  Ohio</span></div><div class="line"><span class="meta"># 2001     2.3   NaN</span></div><div class="line"><span class="meta"># 2003     NaN  3.34</span></div><div class="line"><span class="meta"># 2004     3.4   NaN</span></div><div class="line"><span class="meta"># 2005     NaN  5.20</span></div></pre></td></tr></table></figure>
-<p>2.1 设置index和columns的name属性<br><figure class="highlight vala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">frame3.index.name = <span class="string">'year'</span>;frame3.columns.name = <span class="string">'state'</span></div><div class="line"><span class="meta"># print frame3</span></div><div class="line"><span class="meta"># out:</span></div><div class="line"><span class="meta"># state  Nevada  Ohio</span></div><div class="line"><span class="meta"># year</span></div><div class="line"><span class="meta"># 2001      2.3   NaN</span></div><div class="line"><span class="meta"># 2003      NaN  3.34</span></div><div class="line"><span class="meta"># 2004      3.4   NaN</span></div><div class="line"><span class="meta"># 2005      NaN  5.20</span></div></pre></td></tr></table></figure></p>
-<p>2.2 value属性会以二维ndarray形式返回DataFrame中的数据<br><figure class="highlight vala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="meta"># print frame3.values</span></div><div class="line"><span class="meta"># out:</span></div><div class="line"><span class="meta"># [[ 2.3    nan]</span></div><div class="line"><span class="meta">#  [  nan  3.34]</span></div><div class="line"><span class="meta">#  [ 3.4    nan]</span></div><div class="line"><span class="meta">#  [  nan  5.2 ]]</span></div></pre></td></tr></table></figure></p>
-<h3 id="索引对象"><a href="#索引对象" class="headerlink" title="索引对象"></a>索引对象</h3><blockquote>
-<p>pandas索引对象负责管理轴标签和其他元数据（比如轴名称等）。</p>
-</blockquote>
-<p>Index对象不可修改。此特性非常重要，使得Index对象在多个数据结构之间安全共享。</p>
-<h2 id="基本功能"><a href="#基本功能" class="headerlink" title="基本功能"></a>基本功能</h2><h3 id="重新索引reindex"><a href="#重新索引reindex" class="headerlink" title="重新索引reindex"></a>重新索引reindex</h3><figure class="highlight vala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">obj = Series([<span class="number">4.5</span>, <span class="number">2.3</span>, <span class="number">-2.4</span>, <span class="number">3.5</span>], index=[<span class="string">'d'</span>, <span class="string">'c'</span>, <span class="string">'a'</span>, <span class="string">'b'</span>])</div><div class="line"><span class="meta"># obj.reindex(['a','b', 'c', 'd', 'e', 'f'])</span></div><div class="line"><span class="meta"># print obj</span></div><div class="line"><span class="meta"># out:</span></div><div class="line"><span class="meta"># d    4.5</span></div><div class="line"><span class="meta"># c    2.3</span></div><div class="line"><span class="meta"># a   -2.4</span></div><div class="line"><span class="meta"># b    3.5</span></div><div class="line"><span class="meta"># dtype: float64</span></div><div class="line"><span class="meta"># 这里没有像书上说的一样，没有索引值用缺失值NaN；待查</span></div><div class="line"><span class="meta"># obj.reindex(['a','b', 'c', 'd', 'e', 'f'], fill_value=0)</span></div><div class="line"><span class="meta"># 这一句会用0来填充缺失值</span></div><div class="line"><span class="meta"># print obj</span></div><div class="line"><span class="meta"># out:</span></div><div class="line"><span class="meta"># d    4.5</span></div><div class="line"><span class="meta"># c    2.3</span></div><div class="line"><span class="meta"># a   -2.4</span></div><div class="line"><span class="meta"># b    3.5</span></div><div class="line"><span class="meta"># dtype: float64</span></div><div class="line"><span class="meta"># 同样无效</span></div></pre></td></tr></table></figure>
-<h3 id="丢弃指定轴上的项"><a href="#丢弃指定轴上的项" class="headerlink" title="丢弃指定轴上的项"></a>丢弃指定轴上的项</h3><figure class="highlight vala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">obj = Series(np.arange(<span class="number">5.</span>), index=[<span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>, <span class="string">'d'</span>, <span class="string">'e'</span>])</div><div class="line">new_obj = obj.drop(<span class="string">'c'</span>)</div><div class="line"><span class="meta"># print new_obj</span></div><div class="line"><span class="meta"># out:</span></div><div class="line"><span class="meta"># a    0.0</span></div><div class="line"><span class="meta"># b    1.0</span></div><div class="line"><span class="meta"># d    3.0</span></div><div class="line"><span class="meta"># e    4.0</span></div><div class="line"><span class="meta"># dtype: float64</span></div><div class="line"><span class="meta"># drop放回一个在指定轴上删除了指定值的新对象</span></div></pre></td></tr></table></figure>
-<h3 id="索引、选取和过滤"><a href="#索引、选取和过滤" class="headerlink" title="索引、选取和过滤"></a>索引、选取和过滤</h3><p>利用标签的切片与普通Python切片运算不同，末端是包含的，即封闭区间。如<br><figure class="highlight vala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">obj = Series(np.arange(<span class="number">4.</span>), index=[<span class="string">'a'</span>,<span class="string">'b'</span>,<span class="string">'c'</span>,<span class="string">'d'</span>])</div><div class="line"><span class="meta"># print obj</span></div><div class="line"><span class="meta"># out:</span></div><div class="line"><span class="meta"># a    0.0</span></div><div class="line"><span class="meta"># b    1.0</span></div><div class="line"><span class="meta"># c    2.0</span></div><div class="line"><span class="meta"># d    3.0</span></div><div class="line"><span class="meta"># dtype: float64</span></div><div class="line"><span class="meta"># print obj['b':'c']</span></div><div class="line"><span class="meta"># out:</span></div><div class="line"><span class="meta"># b    1.0</span></div><div class="line"><span class="meta"># c    2.0</span></div><div class="line"><span class="meta"># dtype: float64</span></div><div class="line"><span class="meta"># 如果是普通切片方式，b-c就只有1.0</span></div><div class="line"><span class="meta"># 赋值方式如下：</span></div><div class="line">obj[<span class="string">'b'</span>,<span class="string">'c'</span>] = <span class="number">5</span></div><div class="line"><span class="meta"># print obj</span></div><div class="line"><span class="meta"># out: </span></div><div class="line"><span class="meta"># a    0.0</span></div><div class="line"><span class="meta"># b    5.0</span></div><div class="line"><span class="meta"># c    5.0</span></div><div class="line"><span class="meta"># d    3.0</span></div><div class="line"><span class="meta"># dtype: float64</span></div></pre></td></tr></table></figure></p>
-<h3 id="算术运算和数据对齐"><a href="#算术运算和数据对齐" class="headerlink" title="算术运算和数据对齐"></a>算术运算和数据对齐</h3><blockquote>
-<p>对象相加时，如果存在不同的索引对，则结果的索引就是该索引对的并集。</p>
-</blockquote>
-<figure class="highlight vala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">s1 = Series([<span class="number">7.3</span>, <span class="number">4.5</span>, <span class="number">67.1</span>, <span class="number">2.3</span>], index=[<span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'d'</span>, <span class="string">'f'</span>])</div><div class="line">s2 = Series([<span class="number">3</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">3</span>], [<span class="string">'a'</span>, <span class="string">'d'</span>, <span class="string">'f'</span>, <span class="string">'g'</span>, <span class="string">'h'</span>])</div><div class="line"><span class="meta"># print s1 + s2</span></div><div class="line"><span class="meta"># out:</span></div><div class="line"><span class="meta"># a    10.3</span></div><div class="line"><span class="meta"># b     NaN</span></div><div class="line"><span class="meta"># d    72.1</span></div><div class="line"><span class="meta"># f     8.3</span></div><div class="line"><span class="meta"># g     NaN</span></div><div class="line"><span class="meta"># h     NaN</span></div><div class="line"><span class="meta"># dtype: float64</span></div><div class="line"><span class="meta"># 相加就是并集，若索引不重叠，则NaN；自动数据对齐操作。</span></div><div class="line"><span class="meta"># 而DataFrame对齐操作会同时发生在行和列上</span></div></pre></td></tr></table></figure>
-<h3 id="排序和排名"><a href="#排序和排名" class="headerlink" title="排序和排名"></a>排序和排名</h3><figure class="highlight vala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="meta"># obj = Series(range(4), index=['d','c','b','a'])</span></div><div class="line"><span class="meta"># print obj</span></div><div class="line"><span class="meta"># d    0</span></div><div class="line"><span class="meta"># c    1</span></div><div class="line"><span class="meta"># b    2</span></div><div class="line"><span class="meta"># a    3</span></div><div class="line"><span class="meta"># dtype: int64</span></div><div class="line"><span class="meta"># print obj.sort_index()</span></div><div class="line"><span class="meta"># a    3</span></div><div class="line"><span class="meta"># b    2</span></div><div class="line"><span class="meta"># c    1</span></div><div class="line"><span class="meta"># d    0</span></div><div class="line"><span class="meta"># dtype: int64</span></div><div class="line"></div><div class="line">frame = DataFrame(np.arange(<span class="number">8</span>).reshape((<span class="number">2</span>,<span class="number">4</span>)), index=[<span class="string">'three'</span>, <span class="string">'one'</span>], columns=[<span class="string">'d'</span>,<span class="string">'a'</span>,<span class="string">'b'</span>,<span class="string">'c'</span>])</div><div class="line"><span class="meta"># print frame.sort_index()</span></div><div class="line"><span class="meta">#        d  a  b  c</span></div><div class="line"><span class="meta"># one    4  5  6  7</span></div><div class="line"><span class="meta"># three  0  1  2  3</span></div><div class="line"><span class="meta"># print frame.sort_index(axis=1)</span></div><div class="line"><span class="meta">#        a  b  c  d</span></div><div class="line"><span class="meta"># three  1  2  3  0</span></div><div class="line"><span class="meta"># one    5  6  7  4</span></div></pre></td></tr></table></figure>
-<blockquote>
-<p>按值对Series排序，用其order方法；<br>排序时缺失值会被放到Series末尾。</p>
-</blockquote>
-<p><code>sort_index()方法已过时，用sort_value()方法代替。</code></p>
-<figure class="highlight vala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="meta"># DataFrame根据列值排序，传列名给by选项</span></div><div class="line">frame = DataFrame(&#123;<span class="string">'b'</span>: [<span class="number">4</span>, <span class="number">8</span>, <span class="number">5</span>, <span class="number">3</span>], <span class="string">'a'</span>: [<span class="number">-2</span>, <span class="number">1</span>, <span class="number">9</span>, <span class="number">6</span>]&#125;)</div><div class="line"><span class="meta"># print frame</span></div><div class="line"><span class="meta">#    a  b</span></div><div class="line"><span class="meta"># 0 -2  4</span></div><div class="line"><span class="meta"># 1  1  8</span></div><div class="line"><span class="meta"># 2  9  5</span></div><div class="line"><span class="meta"># 3  6  3</span></div><div class="line"><span class="meta"># print frame.sort_values(by='b')</span></div><div class="line"><span class="meta">#    a  b</span></div><div class="line"><span class="meta"># 3  6  3</span></div><div class="line"><span class="meta"># 0 -2  4</span></div><div class="line"><span class="meta"># 2  9  5</span></div><div class="line"><span class="meta"># 1  1  8</span></div></pre></td></tr></table></figure>
-<p>排序<br><figure class="highlight vala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">obj = Series([<span class="number">7</span>, <span class="number">3</span>, <span class="number">5</span>, <span class="number">7</span>, <span class="number">9</span>, <span class="number">3</span>, <span class="number">1</span>])</div><div class="line"><span class="meta"># print obj.rank()</span></div><div class="line"><span class="meta"># 0    5.5</span></div><div class="line"><span class="meta"># 1    2.5</span></div><div class="line"><span class="meta"># 2    4.0</span></div><div class="line"><span class="meta"># 3    5.5</span></div><div class="line"><span class="meta"># 4    7.0</span></div><div class="line"><span class="meta"># 5    2.5</span></div><div class="line"><span class="meta"># 6    1.0</span></div><div class="line"><span class="meta"># dtype: float64</span></div><div class="line"><span class="meta"># 暂时没看懂什么意思啊</span></div></pre></td></tr></table></figure></p>
-<h3 id="汇总和计算描述统计"><a href="#汇总和计算描述统计" class="headerlink" title="汇总和计算描述统计"></a>汇总和计算描述统计</h3><ul>
-<li>axis（约简的 轴）选项标明是按行还是按列；如axis=0按列，axis=1按行。</li>
-<li>skipna 排除缺失值，默认值True</li>
-<li>level 轴是层次化索引的，则根据level分组约简</li>
-</ul>
-<blockquote>
-<p>第五章于20170319结束，时间节点设计有问题，现在需要手动敲的越来越多，所以速度跟不上，尤其是精力跟不上了。看书要分主次，重要的知识点要细看，必须手动敲出来；一些同类化的知识可以跳着看，以节省时间。</p>
-<p>但是有一个原则不能改，一些重要的知识点不能跳过，需要真真的✋敲出来。不然那就是真正的浪费时间。</p>
-</blockquote>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/cs/" class="article-tag-list-link color3">cs</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/03/19/《利用Python进行数据分析》读书笔记-5-第五章-pandas入门/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/2/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/4/">Next &raquo;</a>
+      <a class="extend prev" rel="prev" href="/page/2/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/4/">Next &raquo;</a>
     </nav>
   
 
@@ -1035,6 +960,10 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">nodejs</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Ajax</a>
               </li>
              
@@ -1044,14 +973,6 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">HTML5</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">JavaScriptCore</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">markdown</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1067,7 +988,7 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">thought</a>
+                <a href="javascript:void(0)" class="js-tag color5">JavaScriptCore</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1079,11 +1000,19 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">cookie</a>
+                <a href="javascript:void(0)" class="js-tag color4">markdown</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">thought</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">cocoa</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">cookie</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1099,15 +1028,15 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">bundle</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">多线程</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">兼容性</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">bundle</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1119,15 +1048,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">java</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">nodejs</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">cs</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">java</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1139,11 +1064,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">D.Wade</a>
+                <a href="javascript:void(0)" class="js-tag color3">标识</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">标识</a>
+                <a href="javascript:void(0)" class="js-tag color2">D.Wade</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1155,11 +1080,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">essay</a>
+                <a href="javascript:void(0)" class="js-tag color2">tomcat</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">tomcat</a>
+                <a href="javascript:void(0)" class="js-tag color1">essay</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1183,10 +1108,6 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">crawler</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">plan</a>
               </li>
              
@@ -1200,6 +1121,10 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">NBA</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">crawler</a>
               </li>
              
               <li class="article-tag-list-item">

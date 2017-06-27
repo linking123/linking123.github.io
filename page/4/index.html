@@ -160,6 +160,136 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-《利用Python进行数据分析》读书笔记-5-第五章-pandas入门" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/19/《利用Python进行数据分析》读书笔记-5-第五章-pandas入门/">《利用Python进行数据分析》读书笔记-第五章-pandas入门</a>
+    </h1>
+  
+
+        
+        <a href="/2017/03/19/《利用Python进行数据分析》读书笔记-5-第五章-pandas入门/" class="archive-article-date">
+  	<time datetime="2017-03-19T14:40:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-03-19</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="pandas数据结构介绍"><a href="#pandas数据结构介绍" class="headerlink" title="pandas数据结构介绍"></a>pandas数据结构介绍</h2><h3 id="Series"><a href="#Series" class="headerlink" title="Series"></a>Series</h3><blockquote>
+<ul>
+<li>Series最重要的一个功能：在算术运算中会自动对齐不同索引的数据（键相同）。</li>
+<li>Series对象本身及其索引都有一个name属性。</li>
+</ul>
+</blockquote>
+<figure class="highlight vala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="meta"># 一组 key: value</span></div><div class="line"><span class="meta"># obj = Series([4,5,7,-3])</span></div><div class="line"><span class="meta"># print obj</span></div><div class="line"><span class="meta"># out:</span></div><div class="line"><span class="meta"># 0    4</span></div><div class="line"><span class="meta"># 1    5</span></div><div class="line"><span class="meta"># 2    7</span></div><div class="line"><span class="meta"># 3   -3</span></div><div class="line"><span class="meta"># dtype: int64</span></div><div class="line"><span class="meta"># print obj.values</span></div><div class="line"><span class="meta"># out：[ 4  5  7 -3]</span></div><div class="line"><span class="meta"># print obj.index</span></div><div class="line"><span class="meta"># out:RangeIndex(start=0, stop=4, step=1)</span></div><div class="line"></div><div class="line">obj2 = Series([<span class="number">3</span>, <span class="number">5</span>, <span class="number">-7</span>, <span class="number">9</span>], index=[<span class="string">'a'</span>, <span class="string">'d'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>])</div><div class="line"><span class="meta"># print obj2</span></div><div class="line"><span class="meta"># out:</span></div><div class="line"><span class="meta"># a    3</span></div><div class="line"><span class="meta"># d    5</span></div><div class="line"><span class="meta"># b    7</span></div><div class="line"><span class="meta"># c    9</span></div><div class="line"><span class="meta"># dtype: int64</span></div><div class="line"><span class="meta"># print obj2['d']</span></div><div class="line"><span class="meta"># out: 5</span></div><div class="line"><span class="meta"># print obj2[['d','c','b']]</span></div><div class="line"><span class="meta"># out:</span></div><div class="line"><span class="meta"># d    5</span></div><div class="line"><span class="meta"># c    9</span></div><div class="line"><span class="meta"># b    7</span></div><div class="line"><span class="meta"># dtype: int64</span></div><div class="line"><span class="meta"># print obj2[obj2&gt;0]</span></div><div class="line"><span class="meta"># out:</span></div><div class="line"><span class="meta"># a    3</span></div><div class="line"><span class="meta"># d    5</span></div><div class="line"><span class="meta"># c    9</span></div><div class="line"><span class="meta"># dtype: int64</span></div><div class="line"><span class="meta"># print 'b' in obj2</span></div><div class="line"><span class="meta"># out: True</span></div><div class="line"></div><div class="line"><span class="meta"># 通过字典创建Series</span></div><div class="line">sdata = &#123;<span class="string">'aaa'</span>: <span class="number">41</span>, <span class="string">'bbb'</span>: <span class="number">51</span>, <span class="string">'ccc'</span>: <span class="number">61</span>, <span class="string">'ddd'</span>: <span class="number">71</span>&#125;</div><div class="line">obj3 = Series(sdata)</div><div class="line"><span class="meta"># print obj3</span></div><div class="line"><span class="meta"># out：</span></div><div class="line"><span class="meta"># aaa    41</span></div><div class="line"><span class="meta"># bbb    51</span></div><div class="line"><span class="meta"># ccc    61</span></div><div class="line"><span class="meta"># ddd    71</span></div><div class="line"><span class="meta"># dtype: int64</span></div><div class="line"><span class="meta"># 传入一个值，作为键</span></div><div class="line">states = [<span class="string">'aaa'</span>, <span class="string">'bbb'</span>, <span class="string">'ddd'</span>, <span class="string">'eee'</span>]</div><div class="line">obj4 = Series(sdata, index=states)</div><div class="line"><span class="meta"># print obj4</span></div><div class="line"><span class="meta"># out:</span></div><div class="line"><span class="meta"># aaa    41</span></div><div class="line"><span class="meta"># bbb    51</span></div><div class="line"><span class="meta"># ddd    71</span></div><div class="line"><span class="meta"># eee    NaN</span></div><div class="line"><span class="meta"># dtype: int64</span></div><div class="line"><span class="meta"># 第四个值eee找不到键</span></div><div class="line"></div><div class="line"><span class="meta"># isnull,notnull检测缺失数据</span></div><div class="line"><span class="meta"># print pd.isnull(obj4)</span></div><div class="line"><span class="meta"># out:</span></div><div class="line"><span class="meta"># aaa    False</span></div><div class="line"><span class="meta"># bbb    False</span></div><div class="line"><span class="meta"># ddd    False</span></div><div class="line"><span class="meta"># eee     True</span></div><div class="line"><span class="meta"># dtype: bool</span></div><div class="line"></div><div class="line"><span class="meta"># 算术运算，自动对齐键</span></div><div class="line"><span class="meta"># print obj3+obj4</span></div><div class="line"><span class="meta"># our:</span></div><div class="line"><span class="meta"># aaa     82.0</span></div><div class="line"><span class="meta"># bbb    102.0</span></div><div class="line"><span class="meta"># ccc      NaN</span></div><div class="line"><span class="meta"># ddd    142.0</span></div><div class="line"><span class="meta"># eee      NaN</span></div><div class="line"><span class="meta"># dtype: float64</span></div><div class="line"></div><div class="line">obj4.name = <span class="string">'population'</span></div><div class="line">obj4.index.name = <span class="string">'state'</span></div><div class="line"><span class="meta"># print obj4</span></div><div class="line"><span class="meta"># out:</span></div><div class="line"><span class="meta"># state</span></div><div class="line"><span class="meta"># aaa    41.0</span></div><div class="line"><span class="meta"># bbb    51.0</span></div><div class="line"><span class="meta"># ddd    71.0</span></div><div class="line"><span class="meta"># eee     NaN</span></div><div class="line"><span class="meta"># Name: population, dtype: float64</span></div><div class="line"></div><div class="line"><span class="meta"># 索引改变：</span></div><div class="line">obj4.index = [<span class="string">'bob'</span>, <span class="string">'fds'</span>, <span class="string">'a33'</span>, <span class="string">'8uk'</span>]</div><div class="line"><span class="meta"># print obj4</span></div></pre></td></tr></table></figure>
+<h3 id="DataFrame"><a href="#DataFrame" class="headerlink" title="DataFrame"></a>DataFrame</h3><blockquote>
+<p>DataFrame是一个<strong>表格型</strong>的数据结构，含有一组<strong>有序的列</strong>，每列可以是不同的值类型。既有行索引也有列索引。可看做由Series组成的字典。<br>以<strong>二维</strong>结构保存数据，可视为多维数据（<strong>层次化索引</strong>的表格型结构是pandas中许多高级数据处理功能的关键要素）。</p>
+</blockquote>
+<ol>
+<li>构建DataFrame方式一<blockquote>
+<p>方式一：直接传入一个由等长列表或NumPy数组组成的字典：</p>
+</blockquote>
+</li>
+</ol>
+<figure class="highlight vala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="meta">## 构建</span></div><div class="line">data = &#123;<span class="string">'state'</span>: [<span class="string">'Ohio'</span>, <span class="string">'Ohio'</span>, <span class="string">'Ohio'</span>, <span class="string">'Nevada'</span>, <span class="string">'Nevada'</span>],</div><div class="line">        <span class="string">'year'</span>: [<span class="number">2000</span>, <span class="number">2001</span>, <span class="number">2002</span>, <span class="number">2003</span>, <span class="number">2004</span>],</div><div class="line">        <span class="string">'pop'</span>: [<span class="number">1.5</span>, <span class="number">1.7</span>, <span class="number">3.6</span>, <span class="number">2.4</span>, <span class="number">2.9</span>]&#125;</div><div class="line">frame1 = DataFrame(data)</div><div class="line"><span class="meta"># print frame1</span></div><div class="line"><span class="meta"># out:</span></div><div class="line"><span class="meta">#    pop   state  year</span></div><div class="line"><span class="meta"># 0  1.5    Ohio  2000</span></div><div class="line"><span class="meta"># 1  1.7    Ohio  2001</span></div><div class="line"><span class="meta"># 2  3.6    Ohio  2002</span></div><div class="line"><span class="meta"># 3  2.4  Nevada  2003</span></div><div class="line"><span class="meta"># 4  2.9  Nevada  2004</span></div></pre></td></tr></table></figure>
+<p>1.1. 指定列序列</p>
+<figure class="highlight vala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">frame2 = DataFrame(data, columns=[<span class="string">'year'</span>, <span class="string">'state'</span>, <span class="string">'pop'</span>])</div><div class="line"><span class="meta"># print frame2</span></div><div class="line"><span class="meta"># out:</span></div><div class="line"><span class="meta">#    year   state  pop</span></div><div class="line"><span class="meta"># 0  2000    Ohio  1.5</span></div><div class="line"><span class="meta"># 1  2001    Ohio  1.7</span></div><div class="line"><span class="meta"># 2  2002    Ohio  3.6</span></div><div class="line"><span class="meta"># 3  2003  Nevada  2.4</span></div><div class="line"><span class="meta"># 4  2004  Nevada  2.9</span></div><div class="line"><span class="meta"># 若找不到列，就会显示NaN</span></div></pre></td></tr></table></figure>
+<p>1.2. 通过字典标记方式或属性方式，获取一个Series<br><figure class="highlight vala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="meta"># print frame2['state']</span></div><div class="line"><span class="meta"># out:</span></div><div class="line"><span class="meta"># 0      Ohio</span></div><div class="line"><span class="meta"># 1      Ohio</span></div><div class="line"><span class="meta"># 2      Ohio</span></div><div class="line"><span class="meta"># 3    Nevada</span></div><div class="line"><span class="meta"># 4    Nevada</span></div><div class="line"><span class="meta"># Name: state, dtype: object</span></div><div class="line"><span class="meta"># print frame2.year</span></div><div class="line"><span class="meta"># out:</span></div><div class="line"><span class="meta"># 0    2000</span></div><div class="line"><span class="meta"># 1    2001</span></div><div class="line"><span class="meta"># 2    2002</span></div><div class="line"><span class="meta"># 3    2003</span></div><div class="line"><span class="meta"># 4    2004</span></div><div class="line"><span class="meta"># Name: year, dtype: int64</span></div></pre></td></tr></table></figure></p>
+<p>1.3. 行，通过名称或位置获取，如用索引字段ix<br><figure class="highlight vala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="meta"># print frame2.ix[1]</span></div><div class="line"><span class="meta"># out：</span></div><div class="line"><span class="meta"># year     2001</span></div><div class="line"><span class="meta"># state    Ohio</span></div><div class="line"><span class="meta"># pop       1.7</span></div><div class="line"><span class="meta"># Name: 1, dtype: object</span></div></pre></td></tr></table></figure></p>
+<p>1.4. 直接给列赋值，新建test列，赋值2.3<br><figure class="highlight vala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">frame2[<span class="string">'test'</span>] = <span class="number">2.3</span></div><div class="line"><span class="meta"># print frame2</span></div><div class="line"><span class="meta"># out:</span></div><div class="line"><span class="meta">#    year   state  pop  test</span></div><div class="line"><span class="meta"># 0  2000    Ohio  1.5   2.3</span></div><div class="line"><span class="meta"># 1  2001    Ohio  1.7   2.3</span></div><div class="line"><span class="meta"># 2  2002    Ohio  3.6   2.3</span></div><div class="line"><span class="meta"># 3  2003  Nevada  2.4   2.3</span></div><div class="line"><span class="meta"># 4  2004  Nevada  2.9   2.3</span></div></pre></td></tr></table></figure></p>
+<blockquote>
+<p>将列表或数组赋值给某个列时，长度必须和DataFrame相匹配；空位都将填上缺失值NaN。</p>
+</blockquote>
+<ol>
+<li>构建DataFrame方式二<blockquote>
+<p>方式二：嵌套字典，即字典的字典。</p>
+</blockquote>
+</li>
+</ol>
+<figure class="highlight vala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">pop = &#123;<span class="string">'Nevada'</span>: &#123;<span class="number">2001</span>:<span class="number">2.3</span>, <span class="number">2004</span>:<span class="number">3.4</span>&#125;,</div><div class="line">       <span class="string">'Ohio'</span>: &#123;<span class="number">2003</span>:<span class="number">3.34</span>, <span class="number">2005</span>:<span class="number">5.2</span>&#125;&#125;</div><div class="line"><span class="meta"># 转化为DataFrame，解释原则：外层字典的键作为列，内层键作为行索引。</span></div><div class="line">frame3 = DataFrame(pop)</div><div class="line"><span class="meta"># print frame3</span></div><div class="line"><span class="meta"># out:</span></div><div class="line"><span class="meta">#       Nevada  Ohio</span></div><div class="line"><span class="meta"># 2001     2.3   NaN</span></div><div class="line"><span class="meta"># 2003     NaN  3.34</span></div><div class="line"><span class="meta"># 2004     3.4   NaN</span></div><div class="line"><span class="meta"># 2005     NaN  5.20</span></div></pre></td></tr></table></figure>
+<p>2.1 设置index和columns的name属性<br><figure class="highlight vala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">frame3.index.name = <span class="string">'year'</span>;frame3.columns.name = <span class="string">'state'</span></div><div class="line"><span class="meta"># print frame3</span></div><div class="line"><span class="meta"># out:</span></div><div class="line"><span class="meta"># state  Nevada  Ohio</span></div><div class="line"><span class="meta"># year</span></div><div class="line"><span class="meta"># 2001      2.3   NaN</span></div><div class="line"><span class="meta"># 2003      NaN  3.34</span></div><div class="line"><span class="meta"># 2004      3.4   NaN</span></div><div class="line"><span class="meta"># 2005      NaN  5.20</span></div></pre></td></tr></table></figure></p>
+<p>2.2 value属性会以二维ndarray形式返回DataFrame中的数据<br><figure class="highlight vala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="meta"># print frame3.values</span></div><div class="line"><span class="meta"># out:</span></div><div class="line"><span class="meta"># [[ 2.3    nan]</span></div><div class="line"><span class="meta">#  [  nan  3.34]</span></div><div class="line"><span class="meta">#  [ 3.4    nan]</span></div><div class="line"><span class="meta">#  [  nan  5.2 ]]</span></div></pre></td></tr></table></figure></p>
+<h3 id="索引对象"><a href="#索引对象" class="headerlink" title="索引对象"></a>索引对象</h3><blockquote>
+<p>pandas索引对象负责管理轴标签和其他元数据（比如轴名称等）。</p>
+</blockquote>
+<p>Index对象不可修改。此特性非常重要，使得Index对象在多个数据结构之间安全共享。</p>
+<h2 id="基本功能"><a href="#基本功能" class="headerlink" title="基本功能"></a>基本功能</h2><h3 id="重新索引reindex"><a href="#重新索引reindex" class="headerlink" title="重新索引reindex"></a>重新索引reindex</h3><figure class="highlight vala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">obj = Series([<span class="number">4.5</span>, <span class="number">2.3</span>, <span class="number">-2.4</span>, <span class="number">3.5</span>], index=[<span class="string">'d'</span>, <span class="string">'c'</span>, <span class="string">'a'</span>, <span class="string">'b'</span>])</div><div class="line"><span class="meta"># obj.reindex(['a','b', 'c', 'd', 'e', 'f'])</span></div><div class="line"><span class="meta"># print obj</span></div><div class="line"><span class="meta"># out:</span></div><div class="line"><span class="meta"># d    4.5</span></div><div class="line"><span class="meta"># c    2.3</span></div><div class="line"><span class="meta"># a   -2.4</span></div><div class="line"><span class="meta"># b    3.5</span></div><div class="line"><span class="meta"># dtype: float64</span></div><div class="line"><span class="meta"># 这里没有像书上说的一样，没有索引值用缺失值NaN；待查</span></div><div class="line"><span class="meta"># obj.reindex(['a','b', 'c', 'd', 'e', 'f'], fill_value=0)</span></div><div class="line"><span class="meta"># 这一句会用0来填充缺失值</span></div><div class="line"><span class="meta"># print obj</span></div><div class="line"><span class="meta"># out:</span></div><div class="line"><span class="meta"># d    4.5</span></div><div class="line"><span class="meta"># c    2.3</span></div><div class="line"><span class="meta"># a   -2.4</span></div><div class="line"><span class="meta"># b    3.5</span></div><div class="line"><span class="meta"># dtype: float64</span></div><div class="line"><span class="meta"># 同样无效</span></div></pre></td></tr></table></figure>
+<h3 id="丢弃指定轴上的项"><a href="#丢弃指定轴上的项" class="headerlink" title="丢弃指定轴上的项"></a>丢弃指定轴上的项</h3><figure class="highlight vala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">obj = Series(np.arange(<span class="number">5.</span>), index=[<span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>, <span class="string">'d'</span>, <span class="string">'e'</span>])</div><div class="line">new_obj = obj.drop(<span class="string">'c'</span>)</div><div class="line"><span class="meta"># print new_obj</span></div><div class="line"><span class="meta"># out:</span></div><div class="line"><span class="meta"># a    0.0</span></div><div class="line"><span class="meta"># b    1.0</span></div><div class="line"><span class="meta"># d    3.0</span></div><div class="line"><span class="meta"># e    4.0</span></div><div class="line"><span class="meta"># dtype: float64</span></div><div class="line"><span class="meta"># drop放回一个在指定轴上删除了指定值的新对象</span></div></pre></td></tr></table></figure>
+<h3 id="索引、选取和过滤"><a href="#索引、选取和过滤" class="headerlink" title="索引、选取和过滤"></a>索引、选取和过滤</h3><p>利用标签的切片与普通Python切片运算不同，末端是包含的，即封闭区间。如<br><figure class="highlight vala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">obj = Series(np.arange(<span class="number">4.</span>), index=[<span class="string">'a'</span>,<span class="string">'b'</span>,<span class="string">'c'</span>,<span class="string">'d'</span>])</div><div class="line"><span class="meta"># print obj</span></div><div class="line"><span class="meta"># out:</span></div><div class="line"><span class="meta"># a    0.0</span></div><div class="line"><span class="meta"># b    1.0</span></div><div class="line"><span class="meta"># c    2.0</span></div><div class="line"><span class="meta"># d    3.0</span></div><div class="line"><span class="meta"># dtype: float64</span></div><div class="line"><span class="meta"># print obj['b':'c']</span></div><div class="line"><span class="meta"># out:</span></div><div class="line"><span class="meta"># b    1.0</span></div><div class="line"><span class="meta"># c    2.0</span></div><div class="line"><span class="meta"># dtype: float64</span></div><div class="line"><span class="meta"># 如果是普通切片方式，b-c就只有1.0</span></div><div class="line"><span class="meta"># 赋值方式如下：</span></div><div class="line">obj[<span class="string">'b'</span>,<span class="string">'c'</span>] = <span class="number">5</span></div><div class="line"><span class="meta"># print obj</span></div><div class="line"><span class="meta"># out: </span></div><div class="line"><span class="meta"># a    0.0</span></div><div class="line"><span class="meta"># b    5.0</span></div><div class="line"><span class="meta"># c    5.0</span></div><div class="line"><span class="meta"># d    3.0</span></div><div class="line"><span class="meta"># dtype: float64</span></div></pre></td></tr></table></figure></p>
+<h3 id="算术运算和数据对齐"><a href="#算术运算和数据对齐" class="headerlink" title="算术运算和数据对齐"></a>算术运算和数据对齐</h3><blockquote>
+<p>对象相加时，如果存在不同的索引对，则结果的索引就是该索引对的并集。</p>
+</blockquote>
+<figure class="highlight vala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">s1 = Series([<span class="number">7.3</span>, <span class="number">4.5</span>, <span class="number">67.1</span>, <span class="number">2.3</span>], index=[<span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'d'</span>, <span class="string">'f'</span>])</div><div class="line">s2 = Series([<span class="number">3</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">3</span>], [<span class="string">'a'</span>, <span class="string">'d'</span>, <span class="string">'f'</span>, <span class="string">'g'</span>, <span class="string">'h'</span>])</div><div class="line"><span class="meta"># print s1 + s2</span></div><div class="line"><span class="meta"># out:</span></div><div class="line"><span class="meta"># a    10.3</span></div><div class="line"><span class="meta"># b     NaN</span></div><div class="line"><span class="meta"># d    72.1</span></div><div class="line"><span class="meta"># f     8.3</span></div><div class="line"><span class="meta"># g     NaN</span></div><div class="line"><span class="meta"># h     NaN</span></div><div class="line"><span class="meta"># dtype: float64</span></div><div class="line"><span class="meta"># 相加就是并集，若索引不重叠，则NaN；自动数据对齐操作。</span></div><div class="line"><span class="meta"># 而DataFrame对齐操作会同时发生在行和列上</span></div></pre></td></tr></table></figure>
+<h3 id="排序和排名"><a href="#排序和排名" class="headerlink" title="排序和排名"></a>排序和排名</h3><figure class="highlight vala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="meta"># obj = Series(range(4), index=['d','c','b','a'])</span></div><div class="line"><span class="meta"># print obj</span></div><div class="line"><span class="meta"># d    0</span></div><div class="line"><span class="meta"># c    1</span></div><div class="line"><span class="meta"># b    2</span></div><div class="line"><span class="meta"># a    3</span></div><div class="line"><span class="meta"># dtype: int64</span></div><div class="line"><span class="meta"># print obj.sort_index()</span></div><div class="line"><span class="meta"># a    3</span></div><div class="line"><span class="meta"># b    2</span></div><div class="line"><span class="meta"># c    1</span></div><div class="line"><span class="meta"># d    0</span></div><div class="line"><span class="meta"># dtype: int64</span></div><div class="line"></div><div class="line">frame = DataFrame(np.arange(<span class="number">8</span>).reshape((<span class="number">2</span>,<span class="number">4</span>)), index=[<span class="string">'three'</span>, <span class="string">'one'</span>], columns=[<span class="string">'d'</span>,<span class="string">'a'</span>,<span class="string">'b'</span>,<span class="string">'c'</span>])</div><div class="line"><span class="meta"># print frame.sort_index()</span></div><div class="line"><span class="meta">#        d  a  b  c</span></div><div class="line"><span class="meta"># one    4  5  6  7</span></div><div class="line"><span class="meta"># three  0  1  2  3</span></div><div class="line"><span class="meta"># print frame.sort_index(axis=1)</span></div><div class="line"><span class="meta">#        a  b  c  d</span></div><div class="line"><span class="meta"># three  1  2  3  0</span></div><div class="line"><span class="meta"># one    5  6  7  4</span></div></pre></td></tr></table></figure>
+<blockquote>
+<p>按值对Series排序，用其order方法；<br>排序时缺失值会被放到Series末尾。</p>
+</blockquote>
+<p><code>sort_index()方法已过时，用sort_value()方法代替。</code></p>
+<figure class="highlight vala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="meta"># DataFrame根据列值排序，传列名给by选项</span></div><div class="line">frame = DataFrame(&#123;<span class="string">'b'</span>: [<span class="number">4</span>, <span class="number">8</span>, <span class="number">5</span>, <span class="number">3</span>], <span class="string">'a'</span>: [<span class="number">-2</span>, <span class="number">1</span>, <span class="number">9</span>, <span class="number">6</span>]&#125;)</div><div class="line"><span class="meta"># print frame</span></div><div class="line"><span class="meta">#    a  b</span></div><div class="line"><span class="meta"># 0 -2  4</span></div><div class="line"><span class="meta"># 1  1  8</span></div><div class="line"><span class="meta"># 2  9  5</span></div><div class="line"><span class="meta"># 3  6  3</span></div><div class="line"><span class="meta"># print frame.sort_values(by='b')</span></div><div class="line"><span class="meta">#    a  b</span></div><div class="line"><span class="meta"># 3  6  3</span></div><div class="line"><span class="meta"># 0 -2  4</span></div><div class="line"><span class="meta"># 2  9  5</span></div><div class="line"><span class="meta"># 1  1  8</span></div></pre></td></tr></table></figure>
+<p>排序<br><figure class="highlight vala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">obj = Series([<span class="number">7</span>, <span class="number">3</span>, <span class="number">5</span>, <span class="number">7</span>, <span class="number">9</span>, <span class="number">3</span>, <span class="number">1</span>])</div><div class="line"><span class="meta"># print obj.rank()</span></div><div class="line"><span class="meta"># 0    5.5</span></div><div class="line"><span class="meta"># 1    2.5</span></div><div class="line"><span class="meta"># 2    4.0</span></div><div class="line"><span class="meta"># 3    5.5</span></div><div class="line"><span class="meta"># 4    7.0</span></div><div class="line"><span class="meta"># 5    2.5</span></div><div class="line"><span class="meta"># 6    1.0</span></div><div class="line"><span class="meta"># dtype: float64</span></div><div class="line"><span class="meta"># 暂时没看懂什么意思啊</span></div></pre></td></tr></table></figure></p>
+<h3 id="汇总和计算描述统计"><a href="#汇总和计算描述统计" class="headerlink" title="汇总和计算描述统计"></a>汇总和计算描述统计</h3><ul>
+<li>axis（约简的 轴）选项标明是按行还是按列；如axis=0按列，axis=1按行。</li>
+<li>skipna 排除缺失值，默认值True</li>
+<li>level 轴是层次化索引的，则根据level分组约简</li>
+</ul>
+<blockquote>
+<p>第五章于20170319结束，时间节点设计有问题，现在需要手动敲的越来越多，所以速度跟不上，尤其是精力跟不上了。看书要分主次，重要的知识点要细看，必须手动敲出来；一些同类化的知识可以跳着看，以节省时间。</p>
+<p>但是有一个原则不能改，一些重要的知识点不能跳过，需要真真的✋敲出来。不然那就是真正的浪费时间。</p>
+</blockquote>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/cs/" class="article-tag-list-link color3">cs</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/03/19/《利用Python进行数据分析》读书笔记-5-第五章-pandas入门/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
     <article id="post-《利用Python进行数据分析》读书笔记-4-第四章-Numpy基础：数组和矢量计算" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -878,89 +1008,9 @@
 
 
   
-    <article id="post-git学习之二-git基础" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/09/05/git学习之二-git基础/">git学习之二-git基础</a>
-    </h1>
-  
-
-        
-        <a href="/2016/09/05/git学习之二-git基础/" class="archive-article-date">
-  	<time datetime="2016-09-05T14:53:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-09-05</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>取得项目git仓库<br>在现存的目录下，通过导入所有文件来创建新的 Git 仓库。<br>初始化<br><figure class="highlight crmsh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ git init</div><div class="line"><span class="comment">#末尾自定义项目目录名称mygrit</span></div><div class="line">$ git <span class="keyword">clone</span> <span class="title">git</span>://github.com/schacon/grit.git mygrit</div></pre></td></tr></table></figure></p>
-<p>文件状态变化周期：<br><img src="http://static.open-open.com/lib/uploadImg/20120201/20120201121432_845.png" alt="文件状态变化周期"></p>
-<p>检查当前文件状态:<br><figure class="highlight elixir"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$ </span>git status</div></pre></td></tr></table></figure></p>
-<p>跟踪新文件<br><figure class="highlight vala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">$ git add filename</div><div class="line">$ git status</div><div class="line"><span class="meta"># On branch master</span></div><div class="line"><span class="meta"># Changes to be committed:</span></div><div class="line"><span class="meta">#   (use "git reset ..." to unstage)</span></div><div class="line"><span class="meta">#   new file:   README</span></div></pre></td></tr></table></figure></p>
-<p>忽略某些文件：<br><figure class="highlight crystal"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#养成一开始就设置好.gitignore文件的习惯，免得将无用文件或者机密文件上传。</span></div><div class="line">**.gitignore文件**</div><div class="line"><span class="comment"># 此为注释 – 将被 Git 忽略</span></div><div class="line">*.a       <span class="comment"># 忽略所有 .a 结尾的文件</span></div><div class="line">!<span class="class"><span class="keyword">lib</span>.<span class="title">a</span>    <span class="comment"># 但 lib.a 除外</span></span></div><div class="line">/TODO     <span class="comment"># 仅仅忽略项目根目录下的 TODO 文件，不包括 subdir/TODO</span></div><div class="line">build/    <span class="comment"># 忽略 build/ 目录下的所有文件</span></div><div class="line">doc/*.txt <span class="comment"># 会忽略 doc/notes.txt 但不包括 doc/server/arch.txt</span></div></pre></td></tr></table></figure></p>
-<p>提交更新：<br><figure class="highlight clean"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">##打开文本编辑器输入提交说明</div><div class="line">$ git commit </div><div class="line">##配置编辑器</div><div class="line">$ git config --global core.editor</div></pre></td></tr></table></figure></p>
-<p>跳过使用暂存区域：<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">#加上 -<span class="selector-tag">a</span> 则自动将所有已跟踪过的文件暂存起来一并提交</div><div class="line">$ git commit -<span class="selector-tag">a</span> -m <span class="string">'added new file'</span></div></pre></td></tr></table></figure></p>
-<p>移除文件：<br><figure class="highlight gams"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="symbol">$</span> rm <span class="keyword">file</span></div><div class="line"><span class="symbol">$</span> git rm <span class="keyword">file</span></div></pre></td></tr></table></figure></p>
-<p>移动文件：<br><figure class="highlight elixir"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 相当于改名操作</span></div><div class="line"><span class="variable">$ </span>git mv file_from file_to</div><div class="line"><span class="comment">#上面一条命令相当于下面三条命令</span></div><div class="line"><span class="variable">$ </span>mv file_from file_to</div><div class="line"><span class="variable">$ </span>git rm file_from</div><div class="line"><span class="variable">$ </span>git add file_to</div></pre></td></tr></table></figure></p>
-<p>查看提交历史：<br><figure class="highlight gams"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="symbol">$</span> git <span class="built-in">log</span></div></pre></td></tr></table></figure></p>
-<p>从已有的 Git 仓库克隆出一个新的镜像仓库来。<br><figure class="highlight crmsh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$　git <span class="keyword">clone</span> <span class="title">xxx</span>.git</div></pre></td></tr></table></figure></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">git</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/cs/" class="article-tag-list-link color3">cs</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2016/09/05/git学习之二-git基础/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/3/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/5/">Next &raquo;</a>
+      <a class="extend prev" rel="prev" href="/page/3/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/5/">Next &raquo;</a>
     </nav>
   
 
@@ -1046,6 +1096,10 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">nodejs</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Ajax</a>
               </li>
              
@@ -1055,14 +1109,6 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">HTML5</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">JavaScriptCore</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">markdown</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1078,7 +1124,7 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">thought</a>
+                <a href="javascript:void(0)" class="js-tag color5">JavaScriptCore</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1090,11 +1136,19 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">cookie</a>
+                <a href="javascript:void(0)" class="js-tag color4">markdown</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">thought</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">cocoa</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">cookie</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1110,15 +1164,15 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">bundle</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">多线程</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">兼容性</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">bundle</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1130,15 +1184,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">java</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">nodejs</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">cs</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">java</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1150,11 +1200,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">D.Wade</a>
+                <a href="javascript:void(0)" class="js-tag color3">标识</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">标识</a>
+                <a href="javascript:void(0)" class="js-tag color2">D.Wade</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1166,11 +1216,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">essay</a>
+                <a href="javascript:void(0)" class="js-tag color2">tomcat</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">tomcat</a>
+                <a href="javascript:void(0)" class="js-tag color1">essay</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1194,10 +1244,6 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">crawler</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">plan</a>
               </li>
              
@@ -1211,6 +1257,10 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">NBA</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">crawler</a>
               </li>
              
               <li class="article-tag-list-item">
