@@ -160,6 +160,161 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-polygon-polyline-point-addField-caculate" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/01/22/polygon-polyline-point-addField-caculate/">polygon_polyline_point_addField_caculate</a>
+    </h1>
+  
+
+        
+        <a href="/2016/01/22/polygon-polyline-point-addField-caculate/" class="archive-article-date">
+  	<time datetime="2016-01-22T05:20:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-01-22</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h2><p>导师需要安徽省所有县级单位的行政边界的点位置数据，数据最终格式是屏幕坐标(<strong>同一区域形成闭环</strong>)</p>
+<table>
+<thead>
+<tr>
+<th>区域名</th>
+<th>x</th>
+<th>y</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>合肥市</td>
+<td>12</td>
+<td>53</td>
+</tr>
+<tr>
+<td>合肥市</td>
+<td>17</td>
+<td>55</td>
+</tr>
+<tr>
+<td>合肥市</td>
+<td>12</td>
+<td>34</td>
+</tr>
+<tr>
+<td>合肥市</td>
+<td>16</td>
+<td>67</td>
+</tr>
+<tr>
+<td>合肥市</td>
+<td>14</td>
+<td>23</td>
+</tr>
+<tr>
+<td>合肥市</td>
+<td>12</td>
+<td>53</td>
+</tr>
+<tr>
+<td>长丰县</td>
+<td>67</td>
+<td>32</td>
+</tr>
+<tr>
+<td>长丰县</td>
+<td>44</td>
+<td>32</td>
+</tr>
+<tr>
+<td>长丰县</td>
+<td>12</td>
+<td>89</td>
+</tr>
+<tr>
+<td>长丰县</td>
+<td>98</td>
+<td>54</td>
+</tr>
+<tr>
+<td>长丰县</td>
+<td>67</td>
+<td>32</td>
+</tr>
+<tr>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+</tr>
+</tbody>
+</table>
+<h2 id="建模必要性"><a href="#建模必要性" class="headerlink" title="建模必要性"></a>建模必要性</h2><blockquote>
+<p>每两个元素之间都有直接的工具，然而多任务情况下无法满足需求，如果单独批量处理每一次的转化，工作量十分巨大；考虑到这些，有必要构建合适的模型，模型的好处是合并多步骤省去了中间步骤，最关键的是可以设置中间参数默认值，这样能大大减少中间的输入，而且避免了每次输入的不必要错误。</p>
+</blockquote>
+<h2 id="模型描述"><a href="#模型描述" class="headerlink" title="模型描述"></a>模型描述</h2><blockquote>
+<p>面-&gt;线-&gt;点-&gt;点抽稀(GA-子集,40%)-&gt;加字段(设好默认属性)-&gt;计算几何(x,y)、字段计算</p>
+</blockquote>
+<p>这里的<strong>关键问题</strong>有两个：<br>1.多个工具的顺序<br>为了是模型更具效率，需要考虑每一步之间的先后，使计算处理量最小。例如此处的子集和加字段步骤，先子集然后加字段，就避免了给多余的点加字段，减少了运算量。<br>2.参数的默认值<br>这一步是简化工作量最关键的步骤。省去很多繁杂的输入操作。<br>模型需要输入输出参数，否则模型无效。<br><img src="http://7xqd63.com1.z0.glb.clouddn.com/polygonToPoint.PNG?imageView/4/w/344/q/88" alt=""><br>设置了默认值的参数，显示是蓝色的。<br><img src="http://7xqd63.com1.z0.glb.clouddn.com/polygon_point_childSet_addFiled.PNG?imageView/4/w/544/q/88" alt=""><br>待解决问题：<br>1.计算几何没有找到合适的代码，需要手动计算<br>2.字段计算同样人工操作。这两个问题都是对<code>arcgis</code>的<code>Python</code>操作不熟悉，有机会应该了解一点<code>arcpy</code>。</p>
+<h2 id="存在问题"><a href="#存在问题" class="headerlink" title="存在问题"></a>存在问题</h2><blockquote>
+<p>1.异常点。转点的过程中，软件处理算法的原因，造成点不是按顺序排列的，无法自动完成，只能通过人工检视来查找异常点，理清顺序。<br>2.市辖区合并。根据导师的意思，比方说合肥的四个市辖区，合并成一个，命名合肥市。<br>3.每个县市的边界点密度大概多少合适。经过反复试验，大概在100-200左右，统一将原数据降密到原来基础上的40%，能够满足需求。<br>4.邻界点是否必须重合。如果有此要求，就无法做下去。咨询老板，不需要。窃喜。<br>5.淮北市区有一块飞地。保留两个，分开表示即可。</p>
+</blockquote>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">arcgis</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">arcgis 建模</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/arcgis/" class="article-tag-list-link color2">arcgis</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2016/01/22/polygon-polyline-point-addField-caculate/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
     <article id="post-判断非手机登陆，做一次提醒" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1518,82 +1673,6 @@
 
 
   
-    <article id="post-博客建立过程记录" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/11/30/博客建立过程记录/">博客建立过程记录</a>
-    </h1>
-  
-
-        
-        <a href="/2015/11/30/博客建立过程记录/" class="archive-article-date">
-  	<time datetime="2015-11-30T10:18:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2015-11-30</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>目前为止，博客大部分功能已经实现。可以正常运行。<br>前后大概用了三天时间。<br>头痛<br><img src="http://ww1.sinaimg.cn/large/791ffc07jw1ea2kymrm83g20bo0bo0sz.gif" alt=""><br>熟悉git命令，github，hexo+NexT theme等。<br>
-        
-          <a class="article-more-a" href="/2015/11/30/博客建立过程记录/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">cs</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">blog</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/cs/" class="article-tag-list-link color3">cs</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2015/11/30/博客建立过程记录/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/6/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/8/">Next &raquo;</a>
@@ -1730,15 +1809,15 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">cocoa</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">cookie</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">git</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">cocoa</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1770,11 +1849,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">cs</a>
+                <a href="javascript:void(0)" class="js-tag color5">java</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">java</a>
+                <a href="javascript:void(0)" class="js-tag color3">cs</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1818,10 +1897,6 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">张靓颖</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">正则</a>
               </li>
              
@@ -1830,7 +1905,7 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">plan</a>
+                <a href="javascript:void(0)" class="js-tag color4">张靓颖</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1839,6 +1914,10 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">MVC</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">plan</a>
               </li>
              
               <li class="article-tag-list-item">
