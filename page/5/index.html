@@ -160,6 +160,72 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Adapter初识" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/12/04/Adapter初识/">Adapter初识</a>
+    </h1>
+  
+
+        
+        <a href="/2016/12/04/Adapter初识/" class="archive-article-date">
+  	<time datetime="2016-12-04T14:31:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-12-04</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Adapter-类控件"><a href="#Adapter-类控件" class="headerlink" title="Adapter 类控件"></a>Adapter 类控件</h2><h3 id="Adapter基础讲解"><a href="#Adapter基础讲解" class="headerlink" title="Adapter基础讲解"></a>Adapter基础讲解</h3><p>概念：帮助填充数据的中间桥梁，将数据以合适的形式显示到view上，供用户查看。</p>
+<p><img src="http://7xjqvu.com1.z0.glb.clouddn.com/15-9-1/77919389.jpg" alt=""></p>
+<p>1.ArrayAdapter:<br><figure class="highlight processing"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//data to show</span></div><div class="line"><span class="comment">//String[] datas = &#123;"神奇", "没事吗", "不会吧"&#125;;</span></div><div class="line"><span class="comment">//also can setdata like this</span></div><div class="line">List&lt;<span class="keyword">String</span>&gt; datas = <span class="keyword">new</span> ArrayList&lt;<span class="keyword">String</span>&gt;();</div><div class="line">datas.<span class="built_in">add</span>(<span class="string">"hehe1"</span>);</div><div class="line">datas.<span class="built_in">add</span>(<span class="string">"hehe2"</span>);</div><div class="line">datas.<span class="built_in">add</span>(<span class="string">"hehe3"</span>);</div><div class="line"><span class="comment">//create ArrayAdapter</span></div><div class="line">ArrayAdapter&lt;<span class="keyword">String</span>&gt; adapter = <span class="keyword">new</span> ArrayAdapter&lt;<span class="keyword">String</span>&gt;(<span class="keyword">this</span>, android.R.layout.simple_expandable_list_item_1, datas);</div><div class="line"><span class="comment">//listview set adapter</span></div><div class="line">ListView lv = (ListView)findViewById(R.id.listview_adapter1);</div><div class="line">lv.setAdapter(adapter);</div></pre></td></tr></table></figure></p>
+<p>ArrayAdapter第二参数：<br><img src="http://ohigs9xaw.bkt.clouddn.com/ArrayAdapterSecondParam.png" alt="qiniu截借的别人的blog"></p>
+<p>2.SimpleAdapter<br>常用，listview，item，<code>List&lt;Map&lt;String,Object&gt;&gt; list = new ArrayList&lt;Map&lt;String,Object&gt;&gt;()</code>;<br>from是塞的数据list中的标识string[]{},to是item中的id的int[]{R.id.xx}数组,resource是item布局,context几个adapter参数；<br>add at 20161201</p>
+<h3 id="ListView简单使用"><a href="#ListView简单使用" class="headerlink" title="ListView简单使用"></a>ListView简单使用</h3><p>1.自定义BaseAdapter,绑定数据<br>展示样式在item中设计，适应adapter中做数据的set工作，只做一个适配器，而具体的数据在mainactivity中插入，一般会用到list，以及范型，<code>list&lt;entrity&gt;</code>,实体类中写属性的存取方法，最后给listview设置适配器，listview.setAdapter(mAdapter)。下面是代码：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line">//itme_layout</div><div class="line"><span class="php"><span class="meta">&lt;?</span>xml version=<span class="string">"1.0"</span> encoding=<span class="string">"utf-8"</span><span class="meta">?&gt;</span></span></div><div class="line"><span class="tag">&lt;<span class="name">LinearLayout</span> <span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span></span></div><div class="line">    <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></div><div class="line">    <span class="attr">android:layout_height</span>=<span class="string">"match_parent"</span></div><div class="line">    <span class="attr">android:orientation</span>=<span class="string">"horizontal"</span></div><div class="line">    <span class="attr">android:padding</span>=<span class="string">"10dp"</span>&gt;</div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">ImageView</span></span></div><div class="line">        <span class="attr">android:id</span>=<span class="string">"@+id/img"</span></div><div class="line">        <span class="attr">android:layout_width</span>=<span class="string">"wrap_content"</span></div><div class="line">        <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span></div><div class="line">        <span class="attr">android:src</span>=<span class="string">"@mipmap/ic_launcher"</span> /&gt;</div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">LinearLayout</span></span></div><div class="line">        <span class="attr">android:layout_width</span>=<span class="string">"wrap_content"</span></div><div class="line">        <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span></div><div class="line">        <span class="attr">android:layout_marginLeft</span>=<span class="string">"10dp"</span></div><div class="line">        <span class="attr">android:orientation</span>=<span class="string">"vertical"</span></div><div class="line">        <span class="attr">android:padding</span>=<span class="string">"5dp"</span>&gt;</div><div class="line"></div><div class="line">        <span class="tag">&lt;<span class="name">TextView</span></span></div><div class="line">            <span class="attr">android:id</span>=<span class="string">"@+id/tv1"</span></div><div class="line">            <span class="attr">android:layout_width</span>=<span class="string">"wrap_content"</span></div><div class="line">            <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span></div><div class="line">            <span class="attr">android:text</span>=<span class="string">"wenzi1"</span> /&gt;</div><div class="line"></div><div class="line">        <span class="tag">&lt;<span class="name">TextView</span></span></div><div class="line">            <span class="attr">android:id</span>=<span class="string">"@+id/tv2"</span></div><div class="line">            <span class="attr">android:layout_width</span>=<span class="string">"wrap_content"</span></div><div class="line">            <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span></div><div class="line">            <span class="attr">android:layout_marginTop</span>=<span class="string">"3dp"</span></div><div class="line">            <span class="attr">android:text</span>=<span class="string">"wenzi1"</span> /&gt;</div><div class="line">    <span class="tag">&lt;/<span class="name">LinearLayout</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">LinearLayout</span>&gt;</span></div></pre></td></tr></table></figure>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#entity</span></div><div class="line">package com.example.linking.adapters.Model;</div><div class="line"><span class="comment">/**</span></div><div class="line"> * Created by linking on 16/12/4.</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Animals</span> &#123;</div><div class="line">    <span class="keyword">private</span> String aName;</div><div class="line">    <span class="keyword">private</span> String aSpeak;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> aIcon;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Animals</span>(<span class="params">String aName, String aSpeak, <span class="keyword">int</span> aIcon</span>) </span>&#123;</div><div class="line">        <span class="keyword">this</span>.aName = aName;</div><div class="line">        <span class="keyword">this</span>.aSpeak = aSpeak;</div><div class="line">        <span class="keyword">this</span>.aIcon = aIcon;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Animals</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getaName</span>(<span class="params"></span>) </span>&#123;</div><div class="line">        <span class="keyword">return</span> aName;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setaName</span>(<span class="params">String aName</span>) </span>&#123;</div><div class="line">        <span class="keyword">this</span>.aName = aName;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getaSpeak</span>(<span class="params"></span>) </span>&#123;</div><div class="line">        <span class="keyword">return</span> aSpeak;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setaSpeak</span>(<span class="params">String aSpeak</span>) </span>&#123;</div><div class="line">        <span class="keyword">this</span>.aSpeak = aSpeak;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getaIcon</span>(<span class="params"></span>) </span>&#123;</div><div class="line">        <span class="keyword">return</span> aIcon;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setaIcon</span>(<span class="params"><span class="keyword">int</span> aIcon</span>) </span>&#123;</div><div class="line">        <span class="keyword">this</span>.aIcon = aIcon;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div></pre></td><td class="code"><pre><div class="line">##AnimalAdapter</div><div class="line">package com.example.linking.adapters.Adapter;</div><div class="line"></div><div class="line"><span class="keyword">import</span> android.content.Context;</div><div class="line"><span class="keyword">import</span> android.view.LayoutInflater;</div><div class="line"><span class="keyword">import</span> android.view.View;</div><div class="line"><span class="keyword">import</span> android.view.ViewGroup;</div><div class="line"><span class="keyword">import</span> android.widget.BaseAdapter;</div><div class="line"><span class="keyword">import</span> android.widget.ImageView;</div><div class="line"><span class="keyword">import</span> android.widget.TextView;</div><div class="line"></div><div class="line"><span class="keyword">import</span> com.example.linking.adapters.Model.Animals;</div><div class="line"><span class="keyword">import</span> com.example.linking.adapters.R;</div><div class="line"></div><div class="line"><span class="keyword">import</span> java.util.LinkedList;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * Created by linking on 16/12/4.</div><div class="line"> */</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> AnimalAdapter extends BaseAdapter &#123;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> LinkedList&lt;Animals&gt; mData;</div><div class="line">    <span class="keyword">private</span> Context mContext;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> AnimalAdapter(LinkedList&lt;Animals&gt; mData, Context mContext) &#123;</div><div class="line">        <span class="keyword">this</span>.mData = mData;</div><div class="line">        <span class="keyword">this</span>.mContext = mContext;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    <span class="keyword">public</span> <span class="keyword">int</span> getCount() &#123;</div><div class="line">        <span class="built_in">return</span> mData.<span class="built_in">size</span>();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    <span class="keyword">public</span> Object getItem(<span class="keyword">int</span> <span class="built_in">position</span>) &#123;</div><div class="line">        <span class="built_in">return</span> null;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    <span class="keyword">public</span> <span class="keyword">long</span> getItemId(<span class="keyword">int</span> <span class="built_in">position</span>) &#123;</div><div class="line">        <span class="built_in">return</span> <span class="built_in">position</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    <span class="keyword">public</span> View getView(<span class="keyword">int</span> <span class="built_in">position</span>, View view, ViewGroup viewGroup) &#123;</div><div class="line">        view = LayoutInflater.from(mContext).inflate(R.layout.item_listview_baseadapter,viewGroup,false);</div><div class="line">        ImageView img_icon = (ImageView) view.findViewById(R.id.img);</div><div class="line">        TextView tv1 = (TextView) view.findViewById(R.id.tv1);</div><div class="line">        TextView tv2 = (TextView) view.findViewById(R.id.tv2);</div><div class="line">        img_icon.setBackgroundResource(mData.<span class="built_in">get</span>(<span class="built_in">position</span>).getaIcon());</div><div class="line">        tv1.setText(mData.<span class="built_in">get</span>(<span class="built_in">position</span>).getaName());</div><div class="line">        tv2.setText(mData.<span class="built_in">get</span>(<span class="built_in">position</span>).getaSpeak());</div><div class="line">        <span class="built_in">return</span> view;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line">#<span class="type">Activity</span></div><div class="line"><span class="keyword">package</span> com.example.linking.adapters.<span class="type">Activity</span>;</div><div class="line"></div><div class="line"><span class="keyword">import</span> android.content.<span class="type">Context</span>;</div><div class="line"><span class="keyword">import</span> android.support.v7.app.<span class="type">AppCompatActivity</span>;</div><div class="line"><span class="keyword">import</span> android.os.<span class="type">Bundle</span>;</div><div class="line"><span class="keyword">import</span> android.widget.<span class="type">ListView</span>;</div><div class="line"></div><div class="line"><span class="keyword">import</span> com.example.linking.adapters.<span class="type">Adapter</span>.<span class="type">AnimalAdapter</span>;</div><div class="line"><span class="keyword">import</span> com.example.linking.adapters.<span class="type">Model</span>.<span class="type">Animals</span>;</div><div class="line"><span class="keyword">import</span> com.example.linking.adapters.<span class="type">R</span>;</div><div class="line"></div><div class="line"><span class="keyword">import</span> java.util.<span class="type">LinkedList</span>;</div><div class="line"><span class="keyword">import</span> java.util.<span class="type">List</span>;</div><div class="line"></div><div class="line">public <span class="class"><span class="keyword">class</span> <span class="title">ListViewBaseAdapterActivity</span> <span class="keyword">extends</span> <span class="title">AppCompatActivity</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> <span class="type">List</span>&lt;<span class="type">Animals</span>&gt; mData = <span class="literal">null</span>;</div><div class="line">    <span class="keyword">private</span> <span class="type">Context</span> mContext;</div><div class="line">    <span class="keyword">private</span> <span class="type">AnimalAdapter</span> mAdapter = <span class="literal">null</span>;</div><div class="line">    <span class="keyword">private</span> <span class="type">ListView</span> list_animal;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="keyword">protected</span> void onCreate(<span class="type">Bundle</span> savedInstanceState) &#123;</div><div class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState);</div><div class="line">        setContentView(<span class="type">R</span>.layout.activity_list_view_base_adapter);</div><div class="line"></div><div class="line">        mContext = <span class="type">ListViewBaseAdapterActivity</span>.<span class="keyword">this</span>;</div><div class="line">        list_animal = (<span class="type">ListView</span>) findViewById(<span class="type">R</span>.id.listview1);</div><div class="line">        mData = <span class="keyword">new</span> <span class="type">LinkedList</span>&lt;<span class="type">Animals</span>&gt;();</div><div class="line">        mData.add(<span class="keyword">new</span> <span class="type">Animals</span>(<span class="string">"狗说"</span>,<span class="string">"你是够吗"</span>,<span class="type">R</span>.mipmap.ic_launcher));</div><div class="line">        mData.add(<span class="keyword">new</span> <span class="type">Animals</span>(<span class="string">"mao说"</span>,<span class="string">"你是mao吗"</span>,<span class="type">R</span>.mipmap.ic_launcher));</div><div class="line">        mData.add(<span class="keyword">new</span> <span class="type">Animals</span>(<span class="string">"hooo说"</span>,<span class="string">"你是hooo吗"</span>,<span class="type">R</span>.mipmap.ic_launcher));</div><div class="line">        mAdapter = <span class="keyword">new</span> <span class="type">AnimalAdapter</span>((<span class="type">LinkedList</span> &lt; <span class="type">Animals</span> &gt; )mData,mContext);</div><div class="line">        list_animal.setAdapter(mAdapter);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>2.其他设置<br>2.1表头表尾设置分割线<br>只能在Java中写代码进行设置了，可供我们调用的方法如下：</p>
+<ul>
+<li>addHeaderView(View v)：添加headView(表头),括号中的参数是一个View对象</li>
+<li>addFooterView(View v)：添加footerView(表尾)，括号中的参数是一个View对象</li>
+<li>addHeaderView(headView, null, false)：和前面的区别：设置Header是否可以被选中</li>
+<li>addFooterView(View,view,false)：同上</li>
+</ul>
+<p>对了，使用这个addHeaderView方法必须放在<strong>listview.setAdapter</strong><span style="color:red">前面</span>，否则会报错。<br><strong>注意问题</strong>：<br>    添加表头表尾后，我们发现positon是从表头开始算的，就是你添加的第一个数据本来的postion是<br>0，但是此时却变成了1，因为表头也算！！</p>
+<p>2.2列表从底部开始显示：stackFromBottom=”true”<br>2.3设置点击颜色cacheColorHint<br>2.4隐藏滑动条<br><figure class="highlight lasso"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">android:scrollbars=”<span class="literal">none</span>” </div><div class="line"><span class="literal">or</span></div><div class="line">setVerticalScrollBarEnabled(<span class="literal">true</span>);</div></pre></td></tr></table></figure></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2016/12/04/Adapter初识/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
     <article id="post-安卓onClick事件监听的实现方式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -847,151 +913,6 @@
 
 
   
-    <article id="post-java初识" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/07/07/java初识/">java初识</a>
-    </h1>
-  
-
-        
-        <a href="/2016/07/07/java初识/" class="archive-article-date">
-  	<time datetime="2016-07-07T03:26:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-07-07</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="1-开发环境配置"><a href="#1-开发环境配置" class="headerlink" title="1.开发环境配置"></a>1.开发环境配置</h1><p>JDK  TOMCAT<br><strong>配置环境变量</strong><br><figure class="highlight crystal"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">- JAVA_HOME  配置JDK安装路径，jdk根目录</div><div class="line">- PATH       配合JDK命令文件的位置，jdk/bin目录</div><div class="line">- CLASSPATH  配置类库文件的位置，jdk/<span class="class"><span class="keyword">lib</span>目录</span></div></pre></td></tr></table></figure></p>
-<p>Eclipse需要映射tomcat地址（可以不管tomcat系统环境变量）。</p>
-<p>JRE：Java Runtime Environment,JRE内部有一个Java虚拟机以及一些标准的类别函数库。</p>
-<p>JAR：Java ARchive,Java归档文件，是一种软件包文件格式，用于聚合大量的Java类文件、相关的元素局和资源（文本、图片等）文件到一个文件，以便分发Java平台应用软件或库。以ZIP格式构建，<code>.jar</code>文件扩展名。可用JDK自带的jar命令创建或提取jar文件，也可用<code>zip</code>压缩工具，不过这里zip文件头里的条目顺序很重要，常见运行错误：因为Manifest资源配置文件常需放在首位。jar文件内的文件名是Unicode文本。</p>
-<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">registered <span class="keyword">the</span> JDBC driver [com.mysql.jdbc.Driver] but failed <span class="built_in">to</span> unregister <span class="keyword">it</span> when <span class="keyword">the</span> web application was stopped. To prevent <span class="keyword">a</span> memory leak, <span class="keyword">the</span> JDBC Driver has been forcibly unregistered.</div><div class="line"></div><div class="line">appears <span class="built_in">to</span> have started <span class="keyword">a</span> thread named [Druid-ConnectionPool-Destroy<span class="number">-1886011917</span>] but has failed <span class="built_in">to</span> <span class="built_in">stop</span> <span class="keyword">it</span>. This is very likely <span class="built_in">to</span> <span class="built_in">create</span> <span class="keyword">a</span> memory leak.</div></pre></td></tr></table></figure>
-<p>字面意思是JDBC驱动无法注册，或者是内存泄露。<br>原因是：数据库在局域网。在内网连接网络即可。</p>
-<h1 id="2-相关基础"><a href="#2-相关基础" class="headerlink" title="2.相关基础"></a>2.相关基础</h1><p>ssh框架，mvc模式目录结构：</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">代码</th>
-<th style="text-align:left">含义</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">dao</td>
-<td style="text-align:left">持久层接口</td>
-</tr>
-<tr>
-<td style="text-align:left">daoimpl</td>
-<td style="text-align:left">持久层实现</td>
-</tr>
-<tr>
-<td style="text-align:left">filter</td>
-<td style="text-align:left">过滤器</td>
-</tr>
-<tr>
-<td style="text-align:left">action</td>
-<td style="text-align:left">action</td>
-</tr>
-<tr>
-<td style="text-align:left">util</td>
-<td style="text-align:left">工具包</td>
-</tr>
-<tr>
-<td style="text-align:left">bean</td>
-<td style="text-align:left">实体类包</td>
-</tr>
-<tr>
-<td style="text-align:left">service</td>
-<td style="text-align:left">业务层接口</td>
-</tr>
-<tr>
-<td style="text-align:left">serviceimpl</td>
-<td style="text-align:left">业务层实现</td>
-</tr>
-<tr>
-<td style="text-align:left">interceptor</td>
-<td style="text-align:left">拦截器</td>
-</tr>
-</tbody>
-</table>
-<p>maven也是一种框架。<br>一般页面放在web-inf下面。</p>
-<p>Java web一般项目目录结构：<br><figure class="highlight haml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">-<span class="ruby">WebRoot</span></div><div class="line">    -<span class="ruby">common  (系统框架公用jsp，如footer.jsp,header.jsp)</span></div><div class="line">    -<span class="ruby">images  </span></div><div class="line">    -<span class="ruby">script  (js库）</span></div><div class="line">    -<span class="ruby">style   (css模板)</span></div><div class="line">    -<span class="ruby">WEB-INF</span></div><div class="line">        -<span class="ruby">pages  (项目jsp页面，为提高安全性，放在WEB-INF下)</span></div><div class="line">        -<span class="ruby">classes</span></div><div class="line">        -<span class="ruby">conf  (配置文件)</span></div><div class="line">        -<span class="ruby">lib  (库文件)</span></div><div class="line">-<span class="ruby">test  (测试文件夹)</span></div></pre></td></tr></table></figure></p>
-<p><strong>EL</strong>:expression language表达式语言</p>
-<p>SpringMVC简介:</p>
-<blockquote>
-<ol>
-<li>基于MVC设计理念，采用松耦合可插拔组件结构，更具扩展性和灵活性。</li>
-<li>在数据绑定、视图解析、本地化处理及静态资源处理上表现不俗。</li>
-<li>围绕<strong>DispatcherServlet</strong>这个核心展开，<strong>DispatcherServlet</strong>是SpringMVC的总导演、总策划，负责截获请求并将其 分派给相应的处理器处理。</li>
-</ol>
-</blockquote>
-<p>SpringMVC基于Model2。</p>
-<p>DispatcherServlet：收发，调度。</p>
-<p>截获特定的URL，交给SpringMVC。继承自HttpServlet。<br>servlet-mapping截获其中的地址。。</p>
-<p>DispatcherServlet体系结构：</p>
-<blockquote>
-<ol>
-<li>核心本质是一个Servlet</li>
-<li>init方法在整个系统启动时运行，且只运行一次</li>
-<li>service方法在系统运行时处于侦听模式，侦听并处理所有web请求</li>
-</ol>
-</blockquote>
-<p>DispatcherServlet继承体系：<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">- HttpServlet -javax<span class="selector-class">.servlet</span><span class="selector-class">.http</span></div><div class="line">- HttpServletBean  -org<span class="selector-class">.springframework</span><span class="selector-class">.web</span><span class="selector-class">.servlet</span></div><div class="line">- FrameworkServlet  -org<span class="selector-class">.springframework</span><span class="selector-class">.web</span><span class="selector-class">.servlet</span></div><div class="line">- DispatcherServlet  -org<span class="selector-class">.springframework</span><span class="selector-class">.web</span><span class="selector-class">.servlet</span></div></pre></td></tr></table></figure></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">java</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/cs/" class="article-tag-list-link color3">cs</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2016/07/07/java初识/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/4/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/6/">Next &raquo;</a>
@@ -1120,15 +1041,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">thought</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">cookie</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">markdown</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">thought</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1136,11 +1053,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">git</a>
+                <a href="javascript:void(0)" class="js-tag color2">cookie</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">bundle</a>
+                <a href="javascript:void(0)" class="js-tag color4">git</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1152,6 +1069,10 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">bundle</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">多线程</a>
               </li>
              
@@ -1160,15 +1081,15 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">绘图</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">HTTP</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">cs</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">绘图</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1200,19 +1121,15 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">essay</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">tomcat</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">blog</a>
+                <a href="javascript:void(0)" class="js-tag color1">essay</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">张靓颖</a>
+                <a href="javascript:void(0)" class="js-tag color5">blog</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1225,6 +1142,10 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">手机品牌匹配</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">张靓颖</a>
               </li>
              
               <li class="article-tag-list-item">

@@ -160,6 +160,151 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-java初识" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/07/07/java初识/">java初识</a>
+    </h1>
+  
+
+        
+        <a href="/2016/07/07/java初识/" class="archive-article-date">
+  	<time datetime="2016-07-07T03:26:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-07-07</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="1-开发环境配置"><a href="#1-开发环境配置" class="headerlink" title="1.开发环境配置"></a>1.开发环境配置</h1><p>JDK  TOMCAT<br><strong>配置环境变量</strong><br><figure class="highlight crystal"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">- JAVA_HOME  配置JDK安装路径，jdk根目录</div><div class="line">- PATH       配合JDK命令文件的位置，jdk/bin目录</div><div class="line">- CLASSPATH  配置类库文件的位置，jdk/<span class="class"><span class="keyword">lib</span>目录</span></div></pre></td></tr></table></figure></p>
+<p>Eclipse需要映射tomcat地址（可以不管tomcat系统环境变量）。</p>
+<p>JRE：Java Runtime Environment,JRE内部有一个Java虚拟机以及一些标准的类别函数库。</p>
+<p>JAR：Java ARchive,Java归档文件，是一种软件包文件格式，用于聚合大量的Java类文件、相关的元素局和资源（文本、图片等）文件到一个文件，以便分发Java平台应用软件或库。以ZIP格式构建，<code>.jar</code>文件扩展名。可用JDK自带的jar命令创建或提取jar文件，也可用<code>zip</code>压缩工具，不过这里zip文件头里的条目顺序很重要，常见运行错误：因为Manifest资源配置文件常需放在首位。jar文件内的文件名是Unicode文本。</p>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">registered <span class="keyword">the</span> JDBC driver [com.mysql.jdbc.Driver] but failed <span class="built_in">to</span> unregister <span class="keyword">it</span> when <span class="keyword">the</span> web application was stopped. To prevent <span class="keyword">a</span> memory leak, <span class="keyword">the</span> JDBC Driver has been forcibly unregistered.</div><div class="line"></div><div class="line">appears <span class="built_in">to</span> have started <span class="keyword">a</span> thread named [Druid-ConnectionPool-Destroy<span class="number">-1886011917</span>] but has failed <span class="built_in">to</span> <span class="built_in">stop</span> <span class="keyword">it</span>. This is very likely <span class="built_in">to</span> <span class="built_in">create</span> <span class="keyword">a</span> memory leak.</div></pre></td></tr></table></figure>
+<p>字面意思是JDBC驱动无法注册，或者是内存泄露。<br>原因是：数据库在局域网。在内网连接网络即可。</p>
+<h1 id="2-相关基础"><a href="#2-相关基础" class="headerlink" title="2.相关基础"></a>2.相关基础</h1><p>ssh框架，mvc模式目录结构：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">代码</th>
+<th style="text-align:left">含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">dao</td>
+<td style="text-align:left">持久层接口</td>
+</tr>
+<tr>
+<td style="text-align:left">daoimpl</td>
+<td style="text-align:left">持久层实现</td>
+</tr>
+<tr>
+<td style="text-align:left">filter</td>
+<td style="text-align:left">过滤器</td>
+</tr>
+<tr>
+<td style="text-align:left">action</td>
+<td style="text-align:left">action</td>
+</tr>
+<tr>
+<td style="text-align:left">util</td>
+<td style="text-align:left">工具包</td>
+</tr>
+<tr>
+<td style="text-align:left">bean</td>
+<td style="text-align:left">实体类包</td>
+</tr>
+<tr>
+<td style="text-align:left">service</td>
+<td style="text-align:left">业务层接口</td>
+</tr>
+<tr>
+<td style="text-align:left">serviceimpl</td>
+<td style="text-align:left">业务层实现</td>
+</tr>
+<tr>
+<td style="text-align:left">interceptor</td>
+<td style="text-align:left">拦截器</td>
+</tr>
+</tbody>
+</table>
+<p>maven也是一种框架。<br>一般页面放在web-inf下面。</p>
+<p>Java web一般项目目录结构：<br><figure class="highlight haml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">-<span class="ruby">WebRoot</span></div><div class="line">    -<span class="ruby">common  (系统框架公用jsp，如footer.jsp,header.jsp)</span></div><div class="line">    -<span class="ruby">images  </span></div><div class="line">    -<span class="ruby">script  (js库）</span></div><div class="line">    -<span class="ruby">style   (css模板)</span></div><div class="line">    -<span class="ruby">WEB-INF</span></div><div class="line">        -<span class="ruby">pages  (项目jsp页面，为提高安全性，放在WEB-INF下)</span></div><div class="line">        -<span class="ruby">classes</span></div><div class="line">        -<span class="ruby">conf  (配置文件)</span></div><div class="line">        -<span class="ruby">lib  (库文件)</span></div><div class="line">-<span class="ruby">test  (测试文件夹)</span></div></pre></td></tr></table></figure></p>
+<p><strong>EL</strong>:expression language表达式语言</p>
+<p>SpringMVC简介:</p>
+<blockquote>
+<ol>
+<li>基于MVC设计理念，采用松耦合可插拔组件结构，更具扩展性和灵活性。</li>
+<li>在数据绑定、视图解析、本地化处理及静态资源处理上表现不俗。</li>
+<li>围绕<strong>DispatcherServlet</strong>这个核心展开，<strong>DispatcherServlet</strong>是SpringMVC的总导演、总策划，负责截获请求并将其 分派给相应的处理器处理。</li>
+</ol>
+</blockquote>
+<p>SpringMVC基于Model2。</p>
+<p>DispatcherServlet：收发，调度。</p>
+<p>截获特定的URL，交给SpringMVC。继承自HttpServlet。<br>servlet-mapping截获其中的地址。。</p>
+<p>DispatcherServlet体系结构：</p>
+<blockquote>
+<ol>
+<li>核心本质是一个Servlet</li>
+<li>init方法在整个系统启动时运行，且只运行一次</li>
+<li>service方法在系统运行时处于侦听模式，侦听并处理所有web请求</li>
+</ol>
+</blockquote>
+<p>DispatcherServlet继承体系：<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">- HttpServlet -javax<span class="selector-class">.servlet</span><span class="selector-class">.http</span></div><div class="line">- HttpServletBean  -org<span class="selector-class">.springframework</span><span class="selector-class">.web</span><span class="selector-class">.servlet</span></div><div class="line">- FrameworkServlet  -org<span class="selector-class">.springframework</span><span class="selector-class">.web</span><span class="selector-class">.servlet</span></div><div class="line">- DispatcherServlet  -org<span class="selector-class">.springframework</span><span class="selector-class">.web</span><span class="selector-class">.servlet</span></div></pre></td></tr></table></figure></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">java</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/cs/" class="article-tag-list-link color3">cs</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2016/07/07/java初识/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
     <article id="post-HTML5服务器推送事件SSE" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -870,109 +1015,6 @@ function aa(res){
 
 
   
-    <article id="post-Ajax系列一-远古时代的Ajax" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/02/26/Ajax系列一-远古时代的Ajax/">Ajax系列一-远古时代</a>
-    </h1>
-  
-
-        
-        <a href="/2016/02/26/Ajax系列一-远古时代的Ajax/" class="archive-article-date">
-  	<time datetime="2016-02-26T03:45:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-02-26</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>题按–在真正的<code>Ajax</code>出现之前，是怎么实现类似效果的。</p>
-<blockquote>
-<p>这几天断断续续的看完了<code>ajax</code>和<code>http</code>相关的教程，查询了<strong>Wikipedia</strong>相关资料，接下来几天，整理一下。</p>
-</blockquote>
-<p>投票需求：要求无刷新投票，并且不允许使用XMLHttpRequest对象<br>分析：在XHR对象没有流行之前，已经有<strong>无刷新</strong>这种效果的要求</p>
-<h2 id="方法一：-HTTP协议204-No-Content"><a href="#方法一：-HTTP协议204-No-Content" class="headerlink" title="方法一： HTTP协议204 No Content"></a>方法一： HTTP协议204 No Content</h2><p>原理：利用http 204 No Content 状态码,浏览器不会跳转</p>
-<p>前端：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">p</span>&gt;</span><span class="tag">&lt;<span class="name">img</span> <span class="attr">width</span>=<span class="string">300</span> <span class="attr">height</span>=<span class="string">400</span> <span class="attr">src</span>=<span class="string">"lin.jpg"</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">p</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"vote.php"</span>&gt;</span>vote<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div></pre></td></tr></table></figure></p>
-<p>后端：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span> </div><div class="line">$votenum = file_get_contents(<span class="string">"./vote.txt"</span>);</div><div class="line"><span class="keyword">if</span> ($votenum == <span class="keyword">null</span>) &#123;</div><div class="line">    $votenum = <span class="number">0</span>;</div><div class="line">&#125;</div><div class="line">$votenum += <span class="number">1</span>;</div><div class="line">file_put_contents(<span class="string">'./vote.txt'</span>, $votenum);</div><div class="line"><span class="comment">//利用HTTP协议的204特性</span></div><div class="line">header(<span class="string">'HTTP/1.1 204 No Content'</span>);</div><div class="line"> <span class="meta">?&gt;</span></div></pre></td></tr></table></figure></p>
-<h2 id="方法二：利用图片加载的特性，完成请求"><a href="#方法二：利用图片加载的特性，完成请求" class="headerlink" title="方法二：利用图片加载的特性，完成请求"></a>方法二：利用图片加载的特性，完成请求</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&lt;script&gt;</div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">vote</span>(<span class="params"></span>)</span>&#123;</div><div class="line">        <span class="keyword">var</span> lin = <span class="built_in">document</span>.createElement(<span class="string">'img'</span>);</div><div class="line">        <span class="comment">//设置src属性，浏览器将会请求对应的资源</span></div><div class="line">        lin.setAttribute(<span class="string">'src'</span>, <span class="string">'./lin.jpg'</span>);</div><div class="line">        <span class="built_in">document</span>.getElementById(<span class="string">"progress"</span>).appendChild(lin);</div><div class="line">    &#125;</div><div class="line">&lt;<span class="regexp">/script&gt;</span></div></pre></td></tr></table></figure>
-<h2 id="方法三：-利用css-js加载特性-原理同上。"><a href="#方法三：-利用css-js加载特性-原理同上。" class="headerlink" title="方法三： 利用css,js加载特性,原理同上。"></a>方法三： 利用css,js加载特性,原理同上。</h2><h2 id="方法四：-利用iframe特性"><a href="#方法四：-利用iframe特性" class="headerlink" title="方法四： 利用iframe特性"></a>方法四： 利用iframe特性</h2><p>Ajax注册，提交表单，页面无刷新<br>建议用<code>POST</code>，因为<code>get</code>会暴露用户信息<br>前端：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"regres"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">/*form target--&gt;iframe name*/</div><div class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">"02-reg.php"</span> <span class="attr">method</span>=<span class="string">"post"</span> <span class="attr">target</span>=<span class="string">"regzone"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>用户名：<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">name</span>=<span class="string">"username"</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>邮件：<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"email"</span> <span class="attr">name</span>=<span class="string">"email"</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"submit"</span> <span class="attr">name</span>=<span class="string">"submit"</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">iframe</span> <span class="attr">width</span>=<span class="string">0</span> <span class="attr">height</span>=<span class="string">0</span> <span class="attr">frameBorder</span>=<span class="string">"0"</span> <span class="attr">name</span>=<span class="string">"regzone"</span>&gt;</span><span class="tag">&lt;/<span class="name">iframe</span>&gt;</span></div></pre></td></tr></table></figure></p>
-<p>后端：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"utf-8"</span>&gt;</span></div><div class="line"><span class="php"><span class="meta">&lt;?php</span> </span></div><div class="line"><span class="comment">//经过运算，逻辑判断，注册是否成功</span></div><div class="line">$msg = <span class="number">1</span>/<span class="number">0</span>;</div><div class="line"><span class="number">1</span>-<span class="string">"注册成功"</span>  <span class="number">0</span>-<span class="string">"注册失败"</span></div><div class="line"><span class="meta">?&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span><span class="actionscript"></span></div><div class="line">    <span class="comment">//被请求的资源req.php想得到HTML里的元素，用parent</span></div><div class="line">    parent.document.getElementById(<span class="string">'regres'</span>).innerHTML = <span class="string">'注册成功!'</span>;</div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div></pre></td></tr></table></figure></p>
-<h2 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h2><blockquote>
-<p>在不适用<code>XMLHttpRequest</code>对象的情况下，依然可以用js来实现对后台服务器请求，同时不刷新页面或跳转。</p>
-</blockquote>
-<p>所谓Ajax：即指<strong>页面不刷新</strong>情况下，利用<code>XMLHttpRequest</code>发送<code>HTTP</code>请求；JS的网络化.</p>
-<p><strong>悄悄的发送请求，不刷新或跳转;后台能传递数据;前台假装没反应</strong></p>
-<p>问题：<code>Ajax</code>能实现文件上传吗？</p>
-<blockquote>
-<p>分析：从<code>HTTP</code>协议角度看，上传文件，则要把文件的内容发送到服务器；<br>如果可以<code>XMLHttpRequest</code>对象在<code>POST</code>数据时，把文件的内容也发送过去。</p>
-<ul>
-<li><code>XHR</code>对象获取了你要上传 的内容</li>
-<li><code>JavaScript</code>读取本地的文件内容</li>
-<li>出于安全原因，js不能读取文件内容</li>
-<li><code>Ajax</code>上传文件是无法实现的。</li>
-</ul>
-</blockquote>
-<p>问题：一些<code>Ajax</code>上传插件是怎样实现的？</p>
-<blockquote>
-<ol>
-<li><code>iframe</code></li>
-<li>用<code>flash</code>实现，如<code>swfuploaded</code></li>
-<li>用<code>HTML5</code>实现，已增加文件读取<code>API</code></li>
-</ol>
-</blockquote>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Ajax</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/cs/" class="article-tag-list-link color3">cs</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2016/02/26/Ajax系列一-远古时代的Ajax/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/5/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/7/">Next &raquo;</a>
@@ -1101,15 +1143,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">thought</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">cookie</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">markdown</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">thought</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1117,11 +1155,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">git</a>
+                <a href="javascript:void(0)" class="js-tag color2">cookie</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">bundle</a>
+                <a href="javascript:void(0)" class="js-tag color4">git</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1133,6 +1171,10 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">bundle</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">多线程</a>
               </li>
              
@@ -1141,15 +1183,15 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">绘图</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">HTTP</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">cs</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">绘图</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1181,19 +1223,15 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">essay</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">tomcat</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">blog</a>
+                <a href="javascript:void(0)" class="js-tag color1">essay</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">张靓颖</a>
+                <a href="javascript:void(0)" class="js-tag color5">blog</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1206,6 +1244,10 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">手机品牌匹配</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">张靓颖</a>
               </li>
              
               <li class="article-tag-list-item">
