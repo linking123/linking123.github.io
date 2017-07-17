@@ -160,6 +160,89 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-HTML5与Ajax上传文件" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/03/01/HTML5与Ajax上传文件/">HTML5与Ajax上传文件</a>
+    </h1>
+  
+
+        
+        <a href="/2016/03/01/HTML5与Ajax上传文件/" class="archive-article-date">
+  	<time datetime="2016-03-01T14:33:06.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-03-01</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="iframe伪装，jQuery-uploaded-file插件"><a href="#iframe伪装，jQuery-uploaded-file插件" class="headerlink" title="iframe伪装，jQuery-uploaded-file插件"></a>iframe伪装，jQuery-uploaded-file插件</h2><p>前台代码<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">h1</span>&gt;</span>iframe模拟ajax上传文件效果<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">h2</span>&gt;</span><span class="tag">&lt;/<span class="name">h2</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">'11-up.php'</span> <span class="attr">method</span>=<span class="string">'post'</span> <span class="attr">enctype</span>=<span class="string">'multipart/form-data'</span> <span class="attr">onsubmit</span>=<span class="string">'return ajaxUpload();'</span>&gt;</span></div><div class="line">    	<span class="tag">&lt;<span class="name">p</span>&gt;</span><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">'file'</span> <span class="attr">name</span>=<span class="string">'pic'</span> /&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">    	<span class="tag">&lt;<span class="name">p</span>&gt;</span><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">'submit'</span> <span class="attr">value</span>=<span class="string">'提交'</span> /&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">form</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>js代码<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*</span></div><div class="line">分析：</div><div class="line">  1. 捕捉表单提交动作(onsubmit="return ajaxUpload()")</div><div class="line">  2. 创建iframe(jQuery直接创建$('&lt;iframe&gt;&lt;/iframe&gt;'))</div><div class="line">  3. 把表单的target修改指向该iframe(target='framename')</div><div class="line">  4. 去掉这个iframe()</div><div class="line">*/</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">ajaxUpload</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="keyword">var</span> ifname = <span class="string">'up'</span> + <span class="built_in">Math</span>.random();</div><div class="line">    $(<span class="string">'&lt;iframe name="'</span>+ ifname +<span class="string">'" width="0" height="0" frameBorder="0"&gt;&lt;/iframe&gt;'</span>).appendTo($(<span class="string">'body'</span>));</div><div class="line">    $(<span class="string">'form:first'</span>).attr(<span class="string">'target'</span>, ifname);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>PHP代码<br><figure class="highlight awk"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span>(empty(<span class="variable">$_FILES</span>))&#123;</div><div class="line">	<span class="keyword">exit</span>(<span class="string">'no file'</span>);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="variable">$error</span> = <span class="variable">$_FILES</span>[<span class="string">'pic'</span>][<span class="string">'error'</span>] == <span class="number">0</span> ? <span class="string">'succ'</span> : <span class="string">'fail'</span>;</div><div class="line">    </div><div class="line">echo <span class="string">"&lt;script&gt;parent.document.getElementsByTagName('h2')[0].innerHTML = '$error'&lt;/script&gt;"</span>;</div></pre></td></tr></table></figure></p>
+<h2 id="HTML5-Files-API"><a href="#HTML5-Files-API" class="headerlink" title="HTML5 Files API"></a>HTML5 Files API</h2><p><code>files API</code> <code>Formdata</code><br>前台代码：<br><figure class="highlight delphi"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;input <span class="keyword">type</span>=<span class="string">'file'</span> <span class="keyword">name</span>=<span class="string">'pic'</span> onchange=<span class="string">'selfile();'</span> /&gt;</div></pre></td></tr></table></figure></p>
+<p>js代码：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">selfile</span>(<span class="params"></span>)</span>&#123;</div><div class="line">	<span class="comment">//表单数据容器</span></div><div class="line">	<span class="keyword">var</span> fd = <span class="keyword">new</span> FormData();</div><div class="line">    <span class="comment">//获取文件，文件列表`files`属性</span></div><div class="line">	<span class="keyword">var</span> pic = <span class="built_in">document</span>.getElementsByTagName(<span class="string">'input'</span>)[<span class="number">0</span>].files[<span class="number">0</span>];</div><div class="line">    <span class="comment">//附加数据到表单容器中</span></div><div class="line">	fd.append(<span class="string">'pic'</span>, pic);</div><div class="line"></div><div class="line">	<span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHttpRequest();</div><div class="line">	xhr.open(<span class="string">'POST'</span>, <span class="string">'./13-upfile.php'</span>, <span class="literal">true</span>);</div><div class="line"></div><div class="line">	xhr.onreadystatechange = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">		<span class="keyword">if</span>(<span class="keyword">this</span>.readyState == <span class="number">4</span>)&#123;</div><div class="line">			<span class="built_in">document</span>.getElementById(<span class="string">'debug'</span>).innerHTML = <span class="keyword">this</span>.responseText;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	xhr.send();</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>PHP代码：<br><figure class="highlight awk"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">&lt;?php </div><div class="line"></div><div class="line"><span class="regexp">//</span> print_r(<span class="variable">$_FILES</span>);</div><div class="line"></div><div class="line"><span class="regexp">//</span> sleep(<span class="number">3</span>);</div><div class="line"></div><div class="line"><span class="keyword">if</span>(empty(<span class="variable">$_FILES</span>))&#123;</div><div class="line">	<span class="keyword">exit</span>(<span class="string">'no file'</span>);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">if</span> (<span class="variable">$_FILES</span>[<span class="string">'pic'</span>][<span class="string">'error'</span>]!=<span class="number">0</span>) &#123;</div><div class="line">	<span class="keyword">exit</span>(<span class="string">'fail'</span>);</div><div class="line">&#125;</div><div class="line"></div><div class="line">move_uploaded_file(<span class="variable">$_FILES</span>[<span class="string">'pic'</span>][<span class="string">'tmp_name'</span>], <span class="string">'upload/'</span>.<span class="variable">$_FILES</span>[<span class="string">'pic'</span>][<span class="string">'name'</span>]);</div><div class="line"></div><div class="line">echo <span class="string">"ok"</span>;</div><div class="line">?&gt;</div></pre></td></tr></table></figure></p>
+<blockquote>
+<p>这里还只是用到了HTML5的文件上传API基础，有很多新特性值得花时间研究。<br>而我现在最缺的就是时间，论文需要加快速度。<br>后面还有找工作的事情，毕业季来了啊！！</p>
+</blockquote>
+<p><strong>蛋</strong>定！！！</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Ajax</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">HTML5</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/cs/" class="article-tag-list-link color3">cs</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2016/03/01/HTML5与Ajax上传文件/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
     <article id="post-Ajax系列三-探讨XHR及POST数据" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1022,78 +1105,6 @@ function aa(res){
 
 
   
-    <article id="post-多pc同步测试" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/12/17/多pc同步测试/">多PC同步测试</a>
-    </h1>
-  
-
-        
-        <a href="/2015/12/17/多pc同步测试/" class="archive-article-date">
-  	<time datetime="2015-12-17T13:04:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2015-12-17</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>不会吧，这么容易。<br><img src="http://7xosdw.com1.z0.glb.clouddn.com/jingyamao.jpg" alt="jingya"></p>
-        
-          <a class="article-more-a" href="/2015/12/17/多pc同步测试/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">cs</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/cs/" class="article-tag-list-link color3">cs</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2015/12/17/多pc同步测试/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/6/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/8/">Next &raquo;</a>
@@ -1182,6 +1193,10 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">nodejs</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Ajax</a>
               </li>
              
@@ -1190,11 +1205,7 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">HTML5</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">html5</a>
+                <a href="javascript:void(0)" class="js-tag color5">JavaScriptCore</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1206,7 +1217,15 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">JavaScriptCore</a>
+                <a href="javascript:void(0)" class="js-tag color1">html5</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">HTML5</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">thought</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1218,19 +1237,15 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">cookie</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">markdown</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">thought</a>
+                <a href="javascript:void(0)" class="js-tag color1">cocoa</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">cocoa</a>
+                <a href="javascript:void(0)" class="js-tag color2">cookie</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1246,19 +1261,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">bundle</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">兼容性</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">多线程</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">绘图</a>
+                <a href="javascript:void(0)" class="js-tag color2">bundle</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1266,7 +1273,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">java</a>
+                <a href="javascript:void(0)" class="js-tag color3">绘图</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">兼容性</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1274,7 +1285,7 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">nodejs</a>
+                <a href="javascript:void(0)" class="js-tag color3">标识</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1286,15 +1297,15 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">标识</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">D.Wade</a>
+                <a href="javascript:void(0)" class="js-tag color5">java</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Python</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">D.Wade</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1318,11 +1329,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">张靓颖</a>
+                <a href="javascript:void(0)" class="js-tag color5">Android onclick事件监听</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Android onclick事件监听</a>
+                <a href="javascript:void(0)" class="js-tag color4">张靓颖</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1334,7 +1345,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">NBA</a>
+                <a href="javascript:void(0)" class="js-tag color4">模块化</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">MVC</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1342,11 +1357,7 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">模块化</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">MVC</a>
+                <a href="javascript:void(0)" class="js-tag color4">NBA</a>
               </li>
              
               <li class="article-tag-list-item">
