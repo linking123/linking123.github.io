@@ -160,6 +160,421 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-《利用Python进行数据分析》读书笔记-6-第六章-数据加载、存储和数据格式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/25/《利用Python进行数据分析》读书笔记-6-第六章-数据加载、存储和数据格式/">《利用Python进行数据分析》读书笔记-6-第六章-数据加载、存储和数据格式</a>
+    </h1>
+  
+
+        
+        <a href="/2017/03/25/《利用Python进行数据分析》读书笔记-6-第六章-数据加载、存储和数据格式/" class="archive-article-date">
+  	<time datetime="2017-03-25T14:49:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-03-25</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>输入输出分类：</p>
+<ul>
+<li>读取文本文件</li>
+<li>其他更高效的磁盘存储格式</li>
+<li>加载数据库中数据</li>
+<li>利用Web API操作网络资源</li>
+</ul>
+<h2 id="读取文本格式的数据"><a href="#读取文本格式的数据" class="headerlink" title="读取文本格式的数据"></a>读取文本格式的数据</h2><p>pandas提供了将表格数据读取为DataFrame对象的函数；其中read_csv和read_table是应用最多的两个：</p>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>read_csv</td>
+<td>从文件、URL、文件型对象中加载带分隔符的数据；默认逗号</td>
+</tr>
+<tr>
+<td>read_table</td>
+<td>从文件、URL、文件型对象中加载带分隔符的数据；默认制表符”\t”</td>
+</tr>
+</tbody>
+</table>
+<p>类型推断是这些函数中最重要的功能之一。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">$ cat ex1.csv</div><div class="line"><span class="comment">&lt;!--out: --&gt;</span></div><div class="line"><span class="comment">&lt;!--a,b,c,d,message--&gt;</span></div><div class="line"><span class="comment">&lt;!--0,1,2,3,4,hello--&gt;</span></div><div class="line"><span class="comment">&lt;!--1,5,6,7,8,world--&gt;</span></div><div class="line"><span class="comment">&lt;!--2,9,10,11,12,foo--&gt;</span></div><div class="line">#以上数据用逗号隔开</div><div class="line"></div><div class="line">import pandas as pd</div><div class="line">import numpy as np</div><div class="line">from pandas import Series, DataFrame</div><div class="line"></div><div class="line">df = pd.read_csv('../pydata-book-master/ch06/ex1.csv')</div><div class="line"># print df</div><div class="line">#  a   b   c   d message</div><div class="line"># 0  1   2   3   4   hello</div><div class="line"># 1  5   6   7   8   world</div><div class="line"># 2  9  10  11  12     foo</div><div class="line">pt = pd.read_table('../pydata-book-master/ch06/ex1.csv', sep=',')</div><div class="line"># print pt</div><div class="line"># out: 同上</div></pre></td></tr></table></figure>
+<p>对于没有标题行的文件<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">$ cat ex2.csv</div><div class="line"><span class="comment">&lt;!--out: --&gt;</span> </div><div class="line"><span class="comment">&lt;!--0,1,2,3,4,hello--&gt;</span></div><div class="line"><span class="comment">&lt;!--1,5,6,7,8,world--&gt;</span></div><div class="line"><span class="comment">&lt;!--2,9,10,11,12,foo--&gt;</span></div><div class="line"></div><div class="line"># 自动分配默认列名</div><div class="line"></div><div class="line"># pc = pd.read_csv('../pydata-book-master/ch06/ex2.csv', header=None)</div><div class="line"># print pc</div><div class="line">#    0   1   2   3      4</div><div class="line"># 0  1   2   3   4  hello</div><div class="line"># 1  5   6   7   8  world</div><div class="line"># 2  9  10  11  12    foo</div><div class="line"># 手动定义列名</div><div class="line"># pc2 = pd.read_csv('../pydata-book-master/ch06/ex2.csv', names=['a','b','c','d','msg'])</div><div class="line"># print pc2</div><div class="line">#    a   b   c   d    msg</div><div class="line"># 0  1   2   3   4  hello</div><div class="line"># 1  5   6   7   8  world</div><div class="line"># 2  9  10  11  12    foo</div></pre></td></tr></table></figure></p>
+<p>指定索引<br><figure class="highlight vala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="meta"># 指定索引</span></div><div class="line">names = [<span class="string">'a'</span>,<span class="string">'b'</span>,<span class="string">'c'</span>,<span class="string">'d'</span>,<span class="string">'msg'</span>]</div><div class="line">pc3 = pd.read_csv(<span class="string">'../pydata-book-master/ch06/ex2.csv'</span>, names=names, index_col=<span class="string">'msg'</span>)</div><div class="line"><span class="meta"># print pc3</span></div><div class="line"><span class="meta">#        a   b   c   d</span></div><div class="line"><span class="meta"># msg</span></div><div class="line"><span class="meta"># hello  1   2   3   4</span></div><div class="line"><span class="meta"># world  5   6   7   8</span></div><div class="line"><span class="meta"># foo    9  10  11  12</span></div><div class="line"><span class="meta"># 层次化索引</span></div><div class="line">parsed = pd.read_csv(<span class="string">'../pydata-book-master/ch06/csv_mindex.csv'</span>, index_col=[<span class="string">'key1'</span>, <span class="string">'key2'</span>])</div><div class="line"><span class="meta"># print parsed</span></div><div class="line"><span class="meta">#            value1  value2</span></div><div class="line"><span class="meta"># key1 key2</span></div><div class="line"><span class="meta"># one  a          1       2</span></div><div class="line"><span class="meta">#      b          3       4</span></div><div class="line"><span class="meta">#      c          5       6</span></div><div class="line"><span class="meta">#      d          7       8</span></div><div class="line"><span class="meta"># two  a          9      10</span></div><div class="line"><span class="meta">#      b         11      12</span></div><div class="line"><span class="meta">#      c         13      14</span></div><div class="line"><span class="meta">#      d         15      16</span></div></pre></td></tr></table></figure></p>
+<figure class="highlight vala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="meta"># 非固定分隔符，需要正则表达式</span></div><div class="line"><span class="meta"># print list(open('../pydata-book-master/ch06/ex3.csv'))</span></div><div class="line"><span class="meta"># ['            A         B         C\n',</span></div><div class="line"><span class="meta">#  'aaa -0.264438 -1.026059 -0.619500\n',</span></div><div class="line"><span class="meta">#  'bbb  0.927272  0.302904 -0.032399\n',</span></div><div class="line"><span class="meta">#  'ccc -0.264273 -0.386314 -0.217601\n',</span></div><div class="line"><span class="meta">#  'ddd -0.871858 -0.348382  1.100491']</span></div><div class="line"><span class="meta"># 观察到该文件各个字段由不定数量的空白符分割，用`\s+`这个正则来表示：</span></div><div class="line">result = pd.read_table(<span class="string">'../pydata-book-master/ch06/ex3.csv'</span>, sep=<span class="string">'\s+'</span>)</div><div class="line"><span class="meta"># print result</span></div><div class="line"><span class="meta">#             A         B         C</span></div><div class="line"><span class="meta"># aaa -0.264438 -1.026059 -0.619500</span></div><div class="line"><span class="meta"># bbb  0.927272  0.302904 -0.032399</span></div><div class="line"><span class="meta"># ccc -0.264273 -0.386314 -0.217601</span></div><div class="line"><span class="meta"># ddd -0.871858 -0.348382  1.100491</span></div></pre></td></tr></table></figure>
+<p>跳过异常行(使用参数skiprows)<br><figure class="highlight lsl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">$ cat ch06/ex4.csv </div><div class="line"># hey!</div><div class="line">a,b,c,d,message</div><div class="line"># just wanted to make things more difficult for you</div><div class="line"># who reads CSV files with computers, anyway?</div><div class="line"><span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,hello</div><div class="line"><span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>,world</div><div class="line"><span class="number">9</span>,<span class="number">10</span>,<span class="number">11</span>,<span class="number">12</span>,foo%</div></pre></td></tr></table></figure></p>
+<p>可以认为1，3，4行为异常数据<br><figure class="highlight lsl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">print pd.read_csv('../pydata-book-master/ch06/ex4.csv', skiprows=[<span class="number">0</span>,<span class="number">2</span>,<span class="number">3</span>])</div><div class="line">#    a   b   c   d message</div><div class="line"># <span class="number">0</span>  <span class="number">1</span>   <span class="number">2</span>   <span class="number">3</span>   <span class="number">4</span>   hello</div><div class="line"># <span class="number">1</span>  <span class="number">5</span>   <span class="number">6</span>   <span class="number">7</span>   <span class="number">8</span>   world</div><div class="line"># <span class="number">2</span>  <span class="number">9</span>  <span class="number">10</span>  <span class="number">11</span>  <span class="number">12</span>     foo</div></pre></td></tr></table></figure></p>
+<h2 id="逐块读取文本文件"><a href="#逐块读取文本文件" class="headerlink" title="逐块读取文本文件"></a>逐块读取文本文件</h2><p>大文件只想读取一小部分或者逐块对文件进行迭代<br><figure class="highlight lsl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">result = pd.read_csv('../pydata-book-master/ch06/ex6.csv', nrows=<span class="number">5</span>)</div><div class="line"># print result</div><div class="line">#         one       two     three      four <span class="type">key</span></div><div class="line"># <span class="number">0</span>  <span class="number">0.467976</span> <span class="number">-0.038649</span> <span class="number">-0.295344</span> <span class="number">-1.824726</span>   L</div><div class="line"># <span class="number">1</span> <span class="number">-0.358893</span>  <span class="number">1.404453</span>  <span class="number">0.704965</span> <span class="number">-0.200638</span>   B</div><div class="line"># <span class="number">2</span> <span class="number">-0.501840</span>  <span class="number">0.659254</span> <span class="number">-0.421691</span> <span class="number">-0.057688</span>   G</div><div class="line"># <span class="number">3</span>  <span class="number">0.204886</span>  <span class="number">1.074134</span>  <span class="number">1.388361</span> <span class="number">-0.982404</span>   R</div><div class="line"># <span class="number">4</span>  <span class="number">0.354628</span> <span class="number">-0.133116</span>  <span class="number">0.283763</span> <span class="number">-0.837063</span>   Q</div></pre></td></tr></table></figure></p>
+<p>逐块读取;用到chunksize(行数)<br><figure class="highlight vala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="meta"># chunker = pd.read_csv('../pydata-book-master/ch06/ex6.csv', chunksize=100)</span></div><div class="line"><span class="meta"># print chunker</span></div><div class="line"><span class="meta"># &lt;pandas.io.parsers.TextFileReader object at 0x10f6175d0&gt;</span></div><div class="line"><span class="meta"># TextFileReader对象可实现盾剑逐块迭代</span></div><div class="line">chunker = pd.read_csv(<span class="string">'../pydata-book-master/ch06/ex6.csv'</span>, chunksize=<span class="number">1000</span>)</div><div class="line">tot = Series([])</div><div class="line"><span class="keyword">for</span> piece in chunker:</div><div class="line">    tot = tot.add(piece[<span class="string">'key'</span>].value_counts(), fill_value=<span class="number">0</span>)</div><div class="line">tot = tot.sort_values(ascending=False)</div><div class="line">print tot[:<span class="number">10</span>]</div><div class="line"><span class="meta"># E    368.0</span></div><div class="line"><span class="meta"># X    364.0</span></div><div class="line"><span class="meta"># L    346.0</span></div><div class="line"><span class="meta"># O    343.0</span></div><div class="line"><span class="meta"># Q    340.0</span></div><div class="line"><span class="meta"># M    338.0</span></div><div class="line"><span class="meta"># J    337.0</span></div><div class="line"><span class="meta"># F    335.0</span></div><div class="line"><span class="meta"># K    334.0</span></div><div class="line"><span class="meta"># H    330.0</span></div><div class="line"><span class="meta"># dtype: float64</span></div></pre></td></tr></table></figure></p>
+<h2 id="将数据写到文本格式"><a href="#将数据写到文本格式" class="headerlink" title="将数据写到文本格式"></a>将数据写到文本格式</h2><figure class="highlight lsl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">data = pd.read_csv('../pydata-book-master/ch06/ex5.csv')</div><div class="line"># print data</div><div class="line">#   something  a   b     c   d message</div><div class="line"># <span class="number">0</span>       one  <span class="number">1</span>   <span class="number">2</span>   <span class="number">3.0</span>   <span class="number">4</span>     NaN</div><div class="line"># <span class="number">1</span>       two  <span class="number">5</span>   <span class="number">6</span>   NaN   <span class="number">8</span>   world</div><div class="line"># <span class="number">2</span>     three  <span class="number">9</span>  <span class="number">10</span>  <span class="number">11.0</span>  <span class="number">12</span>     foo</div></pre></td></tr></table></figure>
+<p>pandas.read_csv生成的是DataFrame对象；</p>
+<p>DataFrame的to_csv方法，可以将数据写到一个用逗号分隔的文件中<br><figure class="highlight lsl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">data.to_csv('./ch06_out.csv')</div><div class="line"># $ cat ./ch06_out.csv</div><div class="line"># ,something,a,b,c,d,message</div><div class="line"># <span class="number">0</span>,one,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3.0</span>,<span class="number">4</span>,</div><div class="line"># <span class="number">1</span>,two,<span class="number">5</span>,<span class="number">6</span>,,<span class="number">8</span>,world</div><div class="line"># <span class="number">2</span>,three,<span class="number">9</span>,<span class="number">10</span>,<span class="number">11.0</span>,<span class="number">12</span>,foo</div><div class="line"></div><div class="line"># 可以指定分隔符,如|；这里只为了展示，所以用sys.stdout直接打印出来了。</div><div class="line">data.to_csv(sys.stdout, sep='|')</div><div class="line"># |something|a|b|c|d|message</div><div class="line"># <span class="number">0</span>|one|<span class="number">1</span>|<span class="number">2</span>|<span class="number">3.0</span>|<span class="number">4</span>|</div><div class="line"># <span class="number">1</span>|two|<span class="number">5</span>|<span class="number">6</span>||<span class="number">8</span>|world</div><div class="line"># <span class="number">2</span>|three|<span class="number">9</span>|<span class="number">10</span>|<span class="number">11.0</span>|<span class="number">12</span>|foo</div></pre></td></tr></table></figure></p>
+<p>将缺失值替换为其他标记值<br><figure class="highlight lsl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">data.to_csv(sys.stdout, na_rep='NULL')</div><div class="line"># ,something,a,b,c,d,message</div><div class="line"># <span class="number">0</span>,one,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3.0</span>,<span class="number">4</span>,NULL</div><div class="line"># <span class="number">1</span>,two,<span class="number">5</span>,<span class="number">6</span>,NULL,<span class="number">8</span>,world</div><div class="line"># <span class="number">2</span>,three,<span class="number">9</span>,<span class="number">10</span>,<span class="number">11.0</span>,<span class="number">12</span>,foo</div></pre></td></tr></table></figure></p>
+<p>只输出特定列，指定顺序<br><figure class="highlight vala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">data.to_csv(sys.<span class="keyword">stdout</span>, index=False, columns=[<span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>])</div><div class="line"><span class="meta"># a,b,c</span></div><div class="line"><span class="meta"># 1,2,3.0</span></div><div class="line"><span class="meta"># 5,6,</span></div><div class="line"><span class="meta"># 9,10,11.0</span></div></pre></td></tr></table></figure></p>
+<p>Series也有to_csv()方法<br><figure class="highlight lsl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">datas = pd.date_range('<span class="number">1</span>/<span class="number">1</span>/<span class="number">2000</span>', periods=<span class="number">7</span>)</div><div class="line">ts = Series(np.arange(<span class="number">7</span>), index=datas)</div><div class="line">ts.to_csv('./ch06tsseries.csv')</div><div class="line"># <span class="number">2000</span><span class="number">-01</span><span class="number">-01</span>,<span class="number">0</span></div><div class="line"># <span class="number">2000</span><span class="number">-01</span><span class="number">-02</span>,<span class="number">1</span></div><div class="line"># <span class="number">2000</span><span class="number">-01</span><span class="number">-03</span>,<span class="number">2</span></div><div class="line"># <span class="number">2000</span><span class="number">-01</span><span class="number">-04</span>,<span class="number">3</span></div><div class="line"># <span class="number">2000</span><span class="number">-01</span><span class="number">-05</span>,<span class="number">4</span></div><div class="line"># <span class="number">2000</span><span class="number">-01</span><span class="number">-06</span>,<span class="number">5</span></div><div class="line"># <span class="number">2000</span><span class="number">-01</span><span class="number">-07</span>,<span class="number">6</span></div></pre></td></tr></table></figure></p>
+<p>更简单的读取方法from_csv<br><figure class="highlight vala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="meta"># print Series.from_csv('./ch06tsseries.csv', parse_dates=True)</span></div><div class="line"><span class="meta"># 2000-01-01    0</span></div><div class="line"><span class="meta"># 2000-01-02    1</span></div><div class="line"><span class="meta"># 2000-01-03    2</span></div><div class="line"><span class="meta"># 2000-01-04    3</span></div><div class="line"><span class="meta"># 2000-01-05    4</span></div><div class="line"><span class="meta"># 2000-01-06    5</span></div><div class="line"><span class="meta"># 2000-01-07    6</span></div><div class="line"><span class="meta"># dtype: int64</span></div></pre></td></tr></table></figure></p>
+<h2 id="手工处理分隔符格式"><a href="#手工处理分隔符格式" class="headerlink" title="手工处理分隔符格式"></a>手工处理分隔符格式</h2><p>场景：pandas.read_table加载表格数据时，由于畸形行导致错误<br><figure class="highlight clean"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"># $ cat ch06/ex7.csv</div><div class="line"># <span class="string">"a"</span>,<span class="string">"b"</span>,<span class="string">"c"</span></div><div class="line"># <span class="string">"1"</span>,<span class="string">"2"</span>,<span class="string">"3"</span></div><div class="line"># <span class="string">"1"</span>,<span class="string">"2"</span>,<span class="string">"3"</span>,<span class="string">"4"</span></div><div class="line"></div><div class="line"><span class="keyword">import</span> csv</div><div class="line"></div><div class="line">lines = list(csv.reader(open(<span class="string">'../pydata-book-master/ch06/ex7.csv'</span>)))</div><div class="line">headers, values = lines[<span class="number">0</span>], lines[<span class="number">1</span>:]</div><div class="line">data_dict = &#123;h: v for h, v <span class="keyword">in</span> zip(headers, zip(*values))&#125;</div><div class="line"># print data_dict</div><div class="line"># &#123;<span class="string">'a'</span>: (<span class="string">'1'</span>, <span class="string">'1'</span>), <span class="string">'c'</span>: (<span class="string">'3'</span>, <span class="string">'3'</span>), <span class="string">'b'</span>: (<span class="string">'2'</span>, <span class="string">'2'</span>)&#125;</div><div class="line"></div><div class="line"><span class="keyword">class</span> my_dialect(csv.Dialect):</div><div class="line">    lineterminator = <span class="string">'\n'</span></div><div class="line">    delimiter = <span class="string">';'</span></div><div class="line">    quotechar = <span class="string">'"'</span></div><div class="line">    quoting = csv.QUOTE_ALL</div><div class="line"></div><div class="line"># delimiter分隔符指定</div><div class="line"></div><div class="line">f = open(<span class="string">'../pydata-book-master/ch06/ex7.csv'</span>)</div><div class="line">reader = csv.reader(f, dialect=my_dialect)</div><div class="line"># print reader</div><div class="line"># &lt;_csv.reader object at <span class="number">0x10a5bb440</span>&gt;</div><div class="line"># 以上类的参数也可以单个的传入csv.reader方法</div></pre></td></tr></table></figure></p>
+<p>手动写入分隔符文件csv.writer<br><figure class="highlight clean"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">with</span> open(<span class="string">'mydata.csv'</span>, <span class="string">'w'</span>) <span class="keyword">as</span> fw:</div><div class="line">    writer = csv.writer(fw, my_dialect)</div><div class="line">    writer.writerow((<span class="string">"one"</span>, <span class="string">"two"</span>, <span class="string">"three"</span>))</div><div class="line">    writer.writerow((<span class="string">'1'</span>, <span class="string">'2'</span>, <span class="string">'3'</span>))</div><div class="line">    writer.writerow((<span class="string">'4'</span>, <span class="string">'5'</span>, <span class="string">'6'</span>))</div><div class="line">    writer.writerow((<span class="string">'7'</span>, <span class="string">'8'</span>, <span class="string">'9'</span>))</div><div class="line"># out: mydata.csv</div><div class="line"># <span class="string">"one"</span>;<span class="string">"two"</span>;<span class="string">"three"</span></div><div class="line"># <span class="string">"1"</span>;<span class="string">"2"</span>;<span class="string">"3"</span></div><div class="line"># <span class="string">"4"</span>;<span class="string">"5"</span>;<span class="string">"6"</span></div><div class="line"># <span class="string">"7"</span>;<span class="string">"8"</span>;<span class="string">"9"</span></div></pre></td></tr></table></figure></p>
+<blockquote>
+<p>tip:一些东西还是要看源码才最直接</p>
+</blockquote>
+<h2 id="JSON数据"><a href="#JSON数据" class="headerlink" title="JSON数据"></a>JSON数据</h2><blockquote>
+<p>JSON已成为HTTP请求在Web浏览器和其他程序之间发送数据的标准格式之一、</p>
+</blockquote>
+<figure class="highlight autoit"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">obj1 = <span class="string">"""</span></div><div class="line">&#123;"name<span class="string">": "</span>Wes<span class="string">",</span></div><div class="line">"places_lived<span class="string">": ["</span>United States<span class="string">", "</span>Spain<span class="string">", "</span>Germany<span class="string">"],</span></div><div class="line">"pet<span class="string">":null,</span></div><div class="line">"siblings<span class="string">":[&#123;"</span>name<span class="string">":"</span>Scott<span class="string">", "</span>age<span class="string">":25, "</span>pet<span class="string">":"</span>Zuko<span class="string">"&#125;, &#123;"</span>name<span class="string">":"</span>Katie<span class="string">", "</span>age<span class="string">":22, "</span>pet<span class="string">":"</span>Cisco<span class="string">"&#125;]</span></div><div class="line">&#125;</div><div class="line">"""</div><div class="line">import json</div><div class="line"><span class="meta"># json.loads将JSON字符串转换成Python形式</span></div><div class="line">result = json.loads(obj1)</div><div class="line"><span class="meta"># print result</span></div><div class="line"><span class="meta"># &#123;u<span class="string">'pet'</span>: None,</span></div><div class="line"><span class="meta"># u<span class="string">'siblings'</span>: [&#123;u<span class="string">'pet'</span>: u<span class="string">'Zuko'</span>, u<span class="string">'age'</span>: 25, u<span class="string">'name'</span>: u<span class="string">'Scott'</span>&#125;,</span></div><div class="line"><span class="meta">#               &#123;u<span class="string">'pet'</span>: u<span class="string">'Cisco'</span>, u<span class="string">'age'</span>: 22, u<span class="string">'name'</span>: u<span class="string">'Katie'</span>&#125;],</span></div><div class="line"><span class="meta"># u<span class="string">'name'</span>: u<span class="string">'Wes'</span>,</span></div><div class="line"><span class="meta"># u<span class="string">'places_lived'</span>: [u<span class="string">'United States'</span>, u<span class="string">'Spain'</span>, u<span class="string">'Germany'</span>]&#125;</span></div><div class="line"><span class="meta"># 对应的，json.dumps将Python转换成JSON形式</span></div><div class="line">asjson = json.dumps(result)</div><div class="line"><span class="meta"># print asjson</span></div><div class="line"><span class="meta"># &#123;<span class="string">"pet"</span>: null, <span class="string">"siblings"</span>: [&#123;<span class="string">"pet"</span>: <span class="string">"Zuko"</span>, <span class="string">"age"</span>: 25, <span class="string">"name"</span>: <span class="string">"Scott"</span>&#125;,</span></div><div class="line"><span class="meta">#                            &#123;<span class="string">"pet"</span>: <span class="string">"Cisco"</span>, <span class="string">"age"</span>: 22, <span class="string">"name"</span>: <span class="string">"Katie"</span>&#125;],</span></div><div class="line"><span class="meta">#  <span class="string">"name"</span>: <span class="string">"Wes"</span>, <span class="string">"places_lived"</span>: [<span class="string">"United States"</span>, <span class="string">"Spain"</span>, <span class="string">"Germany"</span>]&#125;</span></div></pre></td></tr></table></figure>
+<h2 id="XML和HTML：Web信息收集"><a href="#XML和HTML：Web信息收集" class="headerlink" title="XML和HTML：Web信息收集"></a>XML和HTML：Web信息收集</h2><figure class="highlight vala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div></pre></td><td class="code"><pre><div class="line"><span class="meta"># http://finance.yahoo.com/quote/AAPL/options?ltr=1</span></div><div class="line">from lxml.html import parse</div><div class="line">from urllib2 import urlopen</div><div class="line"><span class="meta"># 原网址404，在雅虎随便找了一个阿里巴巴的</span></div><div class="line"><span class="meta"># parsed = parse(urlopen('http://finance.yahoo.com/quote/BABA/options?p=BABA'))</span></div><div class="line"><span class="meta"># doc = parsed.getroot()</span></div><div class="line"><span class="meta"># 通过上面的对象，可获取特定的tag</span></div><div class="line"><span class="meta"># 如获取所有的链接；&lt;a href="#"&gt;word&lt;/a&gt;</span></div><div class="line"><span class="meta"># links = doc.findall('.//a')</span></div><div class="line"><span class="meta"># print links[:5]</span></div><div class="line"><span class="meta"># [&lt;Element a at 0x1109ace10&gt;,</span></div><div class="line"><span class="meta"># &lt;Element a at 0x1109ace68&gt;,</span></div><div class="line"><span class="meta"># &lt;Element a at 0x1109acec0&gt;,</span></div><div class="line"><span class="meta"># &lt;Element a at 0x1109acf18&gt;,</span></div><div class="line"><span class="meta"># &lt;Element a at 0x1109acf70&gt;]</span></div><div class="line"><span class="meta"># lnk = links[7]</span></div><div class="line"><span class="meta"># print lnk</span></div><div class="line"><span class="meta"># &lt;Element a at 0x1040d3628&gt;</span></div><div class="line"><span class="meta"># 从以上对象中提取出href</span></div><div class="line"><span class="meta"># print len(links)</span></div><div class="line"><span class="meta"># 50个</span></div><div class="line"><span class="meta"># print lnk.get('href')</span></div><div class="line"><span class="meta"># https://www.yahoo.com/celebrity/</span></div><div class="line"><span class="meta"># print lnk.text_content()</span></div><div class="line"><span class="meta"># Celebrity</span></div><div class="line"></div><div class="line"><span class="meta"># 构建列表推导式，获取全部URL</span></div><div class="line"><span class="meta"># urls = [lnk1.get('href') for lnk1 in doc.findall('.//a')]</span></div><div class="line"><span class="meta"># print urls[-10:]</span></div><div class="line"><span class="meta"># ['//finance.yahoo.com/broker-comparison?bypass=true',</span></div><div class="line"><span class="meta"># 'https://help.yahoo.com/kb/index?page=content&amp;y=PROD_MAIL_ML&amp;locale=en_US&amp;id=SLN2310&amp;actp=productlink',</span></div><div class="line"><span class="meta"># 'http://help.yahoo.com/l/us/yahoo/finance/',</span></div><div class="line"><span class="meta"># 'https://yahoo.uservoice.com/forums/382977',</span></div><div class="line"><span class="meta"># 'http://info.yahoo.com/privacy/us/yahoo/',</span></div><div class="line"><span class="meta"># 'http://info.yahoo.com/relevantads/',</span></div><div class="line"><span class="meta"># 'http://info.yahoo.com/legal/us/yahoo/utos/utos-173.html',</span></div><div class="line"><span class="meta"># 'http://twitter.com/YahooFinance',</span></div><div class="line"><span class="meta"># 'http://facebook.com/yahoofinance',</span></div><div class="line"><span class="meta"># 'http://yahoofinance.tumblr.com']</span></div><div class="line"></div><div class="line"><span class="meta"># 从文档中找出正确的表格就是反复试验</span></div><div class="line"><span class="meta"># parsed1 = parse(urlopen('http://finance.yahoo.com/quote/BABA/options?p=BABA'))</span></div><div class="line"><span class="meta"># doc1 = parsed1.getroot()</span></div><div class="line"><span class="meta"># tables = doc1.findall('.//table')</span></div><div class="line"><span class="meta"># calls = tables[0]</span></div><div class="line"><span class="meta"># puts = tables[0]</span></div><div class="line"><span class="meta"># rows = calls.findall('.//tr')</span></div><div class="line"><span class="meta"># print rows[0].text_content()</span></div><div class="line"><span class="meta"># Search</span></div><div class="line"><span class="meta"># def unpack(row, kind='td'):</span></div><div class="line"><span class="meta">#     elts = row.findall('.//%s' % kind)</span></div><div class="line"><span class="meta">#     return [val.text_content() for val in elts]</span></div><div class="line"></div><div class="line"><span class="meta"># print unpack(rows[0], kind='th')</span></div><div class="line"><span class="meta"># 由于对Safari怎么获取XPath不熟悉，后期还要专门了解</span></div><div class="line"><span class="meta"># 原网址变动，书本代码无法运行，需要深入理解改写一下</span></div><div class="line"><span class="meta"># 完全照着书本敲收效甚微</span></div><div class="line"></div><div class="line"><span class="meta"># 利用lxml.objectify解析XML</span></div><div class="line">from lxml import objectify</div><div class="line">path = <span class="string">'../pydata-book-master/ch06/mta_perf/Performance_MNR.xml'</span></div><div class="line">parsed2 = objectify.parse(open(path))</div><div class="line">root = parsed2.getroot()</div><div class="line">print root</div></pre></td></tr></table></figure>
+<h2 id="利用lxml-objectify解析XML"><a href="#利用lxml-objectify解析XML" class="headerlink" title="利用lxml.objectify解析XML"></a>利用lxml.objectify解析XML</h2><figure class="highlight vala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">from lxml import objectify</div><div class="line"><span class="meta"># path = '../pydata-book-master/ch06/mta_perf/Performance_MNR.xml'</span></div><div class="line"><span class="meta"># parsed2 = objectify.parse(open(path))</span></div><div class="line"><span class="meta"># root = parsed2.getroot()</span></div><div class="line"><span class="meta"># print root</span></div><div class="line"></div><div class="line"><span class="meta"># 解析HTML标签</span></div><div class="line">from StringIO import StringIO</div><div class="line">tag = <span class="string">'&lt;a href="http://www.google.com"&gt;Google&lt;/a&gt;'</span></div><div class="line">root = objectify.parse(StringIO(tag)).getroot()</div><div class="line"><span class="meta"># print root.get('href')</span></div><div class="line"><span class="meta"># http://www.google.com</span></div><div class="line"><span class="meta"># print root.text</span></div><div class="line"><span class="meta"># Google</span></div></pre></td></tr></table></figure>
+<h2 id="二进制数据格式"><a href="#二进制数据格式" class="headerlink" title="二进制数据格式"></a>二进制数据格式</h2><figure class="highlight vala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="meta"># 保存到磁盘上</span></div><div class="line">frame = pd.read_csv(<span class="string">'../pydata-book-master/ch06/ex1.csv'</span>)</div><div class="line"><span class="meta"># print  frame</span></div><div class="line"><span class="meta">#    a   b   c   d message</span></div><div class="line"><span class="meta"># 0  1   2   3   4   hello</span></div><div class="line"><span class="meta"># 1  5   6   7   8   world</span></div><div class="line"><span class="meta"># 2  9  10  11  12     foo</span></div><div class="line"><span class="meta"># 从磁盘读取到Python对象中</span></div><div class="line">print pd.load(<span class="string">'../pydata-book-master/ch06/frame_pickle'</span>)</div></pre></td></tr></table></figure>
+<h2 id="读取Microsoft-Excel文件-pandas的ExcelFile类）"><a href="#读取Microsoft-Excel文件-pandas的ExcelFile类）" class="headerlink" title="读取Microsoft Excel文件(pandas的ExcelFile类）"></a>读取Microsoft Excel文件(pandas的ExcelFile类）</h2><figure class="highlight lsl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">xls_file = pd.ExcelFile('../pydata-book-master/ch06/ex1.xlsx')</div><div class="line"># 将某个工作表中的数据通过parse读取到DataFrame中</div><div class="line">table = xls_file.parse('Sheet1')</div><div class="line"># print table</div><div class="line">#    a   b   c   d message</div><div class="line"># <span class="number">0</span>  <span class="number">1</span>   <span class="number">2</span>   <span class="number">3</span>   <span class="number">4</span>   hello</div><div class="line"># <span class="number">1</span>  <span class="number">5</span>   <span class="number">6</span>   <span class="number">7</span>   <span class="number">8</span>   world</div><div class="line"># <span class="number">2</span>  <span class="number">9</span>  <span class="number">10</span>  <span class="number">11</span>  <span class="number">12</span>     foo</div></pre></td></tr></table></figure>
+<h2 id="使用HTML和Web-API"><a href="#使用HTML和Web-API" class="headerlink" title="使用HTML和Web API"></a>使用HTML和Web API</h2><figure class="highlight vala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">import requests</div><div class="line">url = <span class="string">'https://www.google.com.hk/search?safe=strict&amp;site=&amp;source=hp&amp;q=test&amp;btnK=Google+搜索'</span></div><div class="line">resp = requests.<span class="keyword">get</span>(url)</div><div class="line"><span class="meta"># print resp</span></div><div class="line"><span class="meta"># &lt;Response [200]&gt;</span></div><div class="line"><span class="meta"># Web API一般返回JSON字符串</span></div><div class="line">import json</div><div class="line">data = json.loads(resp.text)</div><div class="line"><span class="meta"># print data.keys()</span></div><div class="line"><span class="meta"># ValueError: No JSON object could be decoded</span></div><div class="line"><span class="meta"># 书上的Twitter链接打不开</span></div><div class="line"></div><div class="line"><span class="meta"># 取出感兴趣的tweet字段，然后将results列表传给DataFrame</span></div><div class="line">tweet_field = [<span class="string">'created_at'</span>, <span class="string">'from_user'</span>, <span class="string">'id'</span>, <span class="string">'text'</span>]</div><div class="line">tweets = DataFrame(data[<span class="string">'result'</span>], columns=tweet_field)</div><div class="line"><span class="meta"># print tweets</span></div><div class="line"><span class="meta"># DataFrame中每一行有了来自一条tweet的数据</span></div><div class="line">tweets._ix[<span class="number">7</span>]</div></pre></td></tr></table></figure>
+<h2 id="使用数据库"><a href="#使用数据库" class="headerlink" title="使用数据库"></a>使用数据库</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 数据库选择标准：性能、数据完整性、应用程序的伸缩性需求</span></div><div class="line"><span class="comment"># 引入Python内置的sqlite3驱动器</span></div><div class="line"><span class="keyword">import</span> sqlite3</div><div class="line">query = <span class="string">"""</span></div><div class="line">CREATE TABLE test (a VARCHAR(20), b VARCHAR(20),</div><div class="line">c REAL, d INTEGER</div><div class="line">);"""</div><div class="line">con = sqlite3.connect(<span class="string">':memory:'</span>)</div><div class="line">con.execute(query)</div><div class="line">con.commit()</div><div class="line"><span class="comment"># 插入几条数据</span></div><div class="line">data = [(<span class="string">'Atlanta'</span>, <span class="string">'Georgia'</span>, <span class="number">1.25</span>, <span class="number">6</span>),</div><div class="line">        (<span class="string">'Wangjiang'</span>, <span class="string">'Maoan'</span>, <span class="number">2.5</span>, <span class="number">5</span>),</div><div class="line">        (<span class="string">'Hefei'</span>, <span class="string">'Gaoxing'</span>, <span class="number">5.5</span>, <span class="number">9</span>)]</div><div class="line">stmt = <span class="string">"INSERT INTO test VALUES(?,?,?,?)"</span></div><div class="line">con.executemany(stmt, data)</div><div class="line">con.commit()</div><div class="line"><span class="comment"># 从表中选取数据</span></div><div class="line">cursor = con.execute(<span class="string">'select * from test'</span>)</div><div class="line">rows = cursor.fetchall()</div><div class="line"><span class="comment"># print rows</span></div><div class="line"><span class="comment"># [(u'Atlanta', u'Georgia', 1.25, 6),</span></div><div class="line">(<span class="string">u'Wangjiang'</span>, <span class="string">u'Maoan'</span>, <span class="number">2.5</span>, <span class="number">5</span>), </div><div class="line">(<span class="string">u'Hefei'</span>, <span class="string">u'Gaoxing'</span>, <span class="number">5.5</span>, <span class="number">9</span>)]</div><div class="line"><span class="comment"># 列名位于游标的description属性中</span></div><div class="line"><span class="comment"># print cursor.description</span></div><div class="line"><span class="comment"># (('a', None, None, None, None, None, None),</span></div><div class="line"><span class="comment"># ('b', None, None, None, None, None, None),</span></div><div class="line"><span class="comment"># ('c', None, None, None, None, None, None),</span></div><div class="line"><span class="comment"># ('d', None, None, None, None, None, None))</span></div><div class="line"><span class="comment"># 传入DataFrame</span></div><div class="line"><span class="comment"># print DataFrame(rows, columns=zip(*cursor.description)[0])</span></div><div class="line"><span class="comment">#            a        b     c  d</span></div><div class="line"><span class="comment"># 0    Atlanta  Georgia  1.25  6</span></div><div class="line"><span class="comment"># 1  Wangjiang    Maoan  2.50  5</span></div><div class="line"><span class="comment"># 2      Hefei  Gaoxing  5.50  9</span></div><div class="line"></div><div class="line"><span class="comment"># pandas有一个简化过程的read_frame函数</span></div><div class="line"><span class="keyword">import</span> pandas.io.sql <span class="keyword">as</span> sql</div><div class="line"><span class="comment"># 书本上read_frame已失效</span></div><div class="line"><span class="comment"># print sql.read_sql('select * from test', con)</span></div><div class="line"><span class="comment">#            a        b     c  d</span></div><div class="line"><span class="comment"># 0    Atlanta  Georgia  1.25  6</span></div><div class="line"><span class="comment"># 1  Wangjiang    Maoan  2.50  5</span></div><div class="line"><span class="comment"># 2      Hefei  Gaoxing  5.50  9</span></div></pre></td></tr></table></figure>
+<h2 id="存取MongoDB数据"><a href="#存取MongoDB数据" class="headerlink" title="存取MongoDB数据"></a>存取MongoDB数据</h2><figure class="highlight vala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="meta"># 电脑上需要装MongoDB数据库；</span></div><div class="line"><span class="meta"># 使用pymongo驱动通过默认端口连接</span></div><div class="line"><span class="meta"># 存储在MongoDB中的文档被组织在数据库的集合（想象成表）</span></div><div class="line"><span class="meta"># 没有装，姑且记录一下该怎么写,留作参考</span></div><div class="line">import pymongo</div><div class="line">con = pymongo.Connection(<span class="string">'localhost'</span>, port=<span class="number">27017</span>)</div><div class="line"><span class="meta"># MongoDB服务运行的每个实例可以有多个数据库，每个数据库又可以有多个集合。</span></div><div class="line"><span class="meta"># 访问之前获取的tweets集合</span></div><div class="line">tweets = con.db.tweets</div><div class="line"><span class="meta"># 加载数据并存入集合</span></div><div class="line">import requests, json</div><div class="line"></div><div class="line">url = <span class="string">'https://www.google.com.hk/search?safe=strict&amp;site=&amp;source=hp&amp;q=test&amp;btnK=Google+搜索'</span></div><div class="line">data = json.loads(requests.<span class="keyword">get</span>(url).text)</div><div class="line"><span class="keyword">for</span> tweet in data[<span class="string">'results'</span>]:</div><div class="line">    tweets.save(tweet)</div><div class="line"></div><div class="line"><span class="meta"># 从集合中取出</span></div><div class="line">cursor = tweets.find(&#123;<span class="string">'from_user'</span>: <span class="string">'linking'</span>&#125;)</div><div class="line"><span class="meta"># 转换成DataFrame</span></div><div class="line">tweet_fileds = [<span class="string">'create_at'</span>, <span class="string">'from_user'</span>, <span class="string">'id'</span>, <span class="string">'text'</span>]</div><div class="line">result = DataFrame(list(cursor), columns=tweet_fileds)</div></pre></td></tr></table></figure>
+<blockquote>
+<p>走过了一遍第六章，给我的感觉是，工具很强大，可以做很多数据分析工作，<strong>数据结构</strong>知识还是匮乏，一些比较复杂的东西还是不能很好的理解，需要加强，多看几遍也是一个方法。</p>
+<p>时间上，下班时间有点<strong>晚</strong>，可以看书的时间都在9点左右，有点晚，太累了，以后下班是不是可以早一点，做饭时间吃饭时间太晚；另外严重缺乏锻炼了，涨了一些肉的，膝盖还是没有恢复，需要针对性锻炼。</p>
+<p>记一下，博客的评论插件，<strong>多说</strong>社会化评论系统已经关闭；选择移除多说或者换成其他的。</p>
+<p>………………………………………………2017-03-25 22:57 Sat&amp;合肥-皖水公寓</p>
+</blockquote>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/cs/" class="article-tag-list-link color3">cs</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/03/25/《利用Python进行数据分析》读书笔记-6-第六章-数据加载、存储和数据格式/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
+    <article id="post-《利用Python进行数据分析》读书笔记-5-第五章-pandas入门" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/19/《利用Python进行数据分析》读书笔记-5-第五章-pandas入门/">《利用Python进行数据分析》读书笔记-第五章-pandas入门</a>
+    </h1>
+  
+
+        
+        <a href="/2017/03/19/《利用Python进行数据分析》读书笔记-5-第五章-pandas入门/" class="archive-article-date">
+  	<time datetime="2017-03-19T14:40:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-03-19</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="pandas数据结构介绍"><a href="#pandas数据结构介绍" class="headerlink" title="pandas数据结构介绍"></a>pandas数据结构介绍</h2><h3 id="Series"><a href="#Series" class="headerlink" title="Series"></a>Series</h3><blockquote>
+<ul>
+<li>Series最重要的一个功能：在算术运算中会自动对齐不同索引的数据（键相同）。</li>
+<li>Series对象本身及其索引都有一个name属性。</li>
+</ul>
+</blockquote>
+<figure class="highlight vala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="meta"># 一组 key: value</span></div><div class="line"><span class="meta"># obj = Series([4,5,7,-3])</span></div><div class="line"><span class="meta"># print obj</span></div><div class="line"><span class="meta"># out:</span></div><div class="line"><span class="meta"># 0    4</span></div><div class="line"><span class="meta"># 1    5</span></div><div class="line"><span class="meta"># 2    7</span></div><div class="line"><span class="meta"># 3   -3</span></div><div class="line"><span class="meta"># dtype: int64</span></div><div class="line"><span class="meta"># print obj.values</span></div><div class="line"><span class="meta"># out：[ 4  5  7 -3]</span></div><div class="line"><span class="meta"># print obj.index</span></div><div class="line"><span class="meta"># out:RangeIndex(start=0, stop=4, step=1)</span></div><div class="line"></div><div class="line">obj2 = Series([<span class="number">3</span>, <span class="number">5</span>, <span class="number">-7</span>, <span class="number">9</span>], index=[<span class="string">'a'</span>, <span class="string">'d'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>])</div><div class="line"><span class="meta"># print obj2</span></div><div class="line"><span class="meta"># out:</span></div><div class="line"><span class="meta"># a    3</span></div><div class="line"><span class="meta"># d    5</span></div><div class="line"><span class="meta"># b    7</span></div><div class="line"><span class="meta"># c    9</span></div><div class="line"><span class="meta"># dtype: int64</span></div><div class="line"><span class="meta"># print obj2['d']</span></div><div class="line"><span class="meta"># out: 5</span></div><div class="line"><span class="meta"># print obj2[['d','c','b']]</span></div><div class="line"><span class="meta"># out:</span></div><div class="line"><span class="meta"># d    5</span></div><div class="line"><span class="meta"># c    9</span></div><div class="line"><span class="meta"># b    7</span></div><div class="line"><span class="meta"># dtype: int64</span></div><div class="line"><span class="meta"># print obj2[obj2&gt;0]</span></div><div class="line"><span class="meta"># out:</span></div><div class="line"><span class="meta"># a    3</span></div><div class="line"><span class="meta"># d    5</span></div><div class="line"><span class="meta"># c    9</span></div><div class="line"><span class="meta"># dtype: int64</span></div><div class="line"><span class="meta"># print 'b' in obj2</span></div><div class="line"><span class="meta"># out: True</span></div><div class="line"></div><div class="line"><span class="meta"># 通过字典创建Series</span></div><div class="line">sdata = &#123;<span class="string">'aaa'</span>: <span class="number">41</span>, <span class="string">'bbb'</span>: <span class="number">51</span>, <span class="string">'ccc'</span>: <span class="number">61</span>, <span class="string">'ddd'</span>: <span class="number">71</span>&#125;</div><div class="line">obj3 = Series(sdata)</div><div class="line"><span class="meta"># print obj3</span></div><div class="line"><span class="meta"># out：</span></div><div class="line"><span class="meta"># aaa    41</span></div><div class="line"><span class="meta"># bbb    51</span></div><div class="line"><span class="meta"># ccc    61</span></div><div class="line"><span class="meta"># ddd    71</span></div><div class="line"><span class="meta"># dtype: int64</span></div><div class="line"><span class="meta"># 传入一个值，作为键</span></div><div class="line">states = [<span class="string">'aaa'</span>, <span class="string">'bbb'</span>, <span class="string">'ddd'</span>, <span class="string">'eee'</span>]</div><div class="line">obj4 = Series(sdata, index=states)</div><div class="line"><span class="meta"># print obj4</span></div><div class="line"><span class="meta"># out:</span></div><div class="line"><span class="meta"># aaa    41</span></div><div class="line"><span class="meta"># bbb    51</span></div><div class="line"><span class="meta"># ddd    71</span></div><div class="line"><span class="meta"># eee    NaN</span></div><div class="line"><span class="meta"># dtype: int64</span></div><div class="line"><span class="meta"># 第四个值eee找不到键</span></div><div class="line"></div><div class="line"><span class="meta"># isnull,notnull检测缺失数据</span></div><div class="line"><span class="meta"># print pd.isnull(obj4)</span></div><div class="line"><span class="meta"># out:</span></div><div class="line"><span class="meta"># aaa    False</span></div><div class="line"><span class="meta"># bbb    False</span></div><div class="line"><span class="meta"># ddd    False</span></div><div class="line"><span class="meta"># eee     True</span></div><div class="line"><span class="meta"># dtype: bool</span></div><div class="line"></div><div class="line"><span class="meta"># 算术运算，自动对齐键</span></div><div class="line"><span class="meta"># print obj3+obj4</span></div><div class="line"><span class="meta"># our:</span></div><div class="line"><span class="meta"># aaa     82.0</span></div><div class="line"><span class="meta"># bbb    102.0</span></div><div class="line"><span class="meta"># ccc      NaN</span></div><div class="line"><span class="meta"># ddd    142.0</span></div><div class="line"><span class="meta"># eee      NaN</span></div><div class="line"><span class="meta"># dtype: float64</span></div><div class="line"></div><div class="line">obj4.name = <span class="string">'population'</span></div><div class="line">obj4.index.name = <span class="string">'state'</span></div><div class="line"><span class="meta"># print obj4</span></div><div class="line"><span class="meta"># out:</span></div><div class="line"><span class="meta"># state</span></div><div class="line"><span class="meta"># aaa    41.0</span></div><div class="line"><span class="meta"># bbb    51.0</span></div><div class="line"><span class="meta"># ddd    71.0</span></div><div class="line"><span class="meta"># eee     NaN</span></div><div class="line"><span class="meta"># Name: population, dtype: float64</span></div><div class="line"></div><div class="line"><span class="meta"># 索引改变：</span></div><div class="line">obj4.index = [<span class="string">'bob'</span>, <span class="string">'fds'</span>, <span class="string">'a33'</span>, <span class="string">'8uk'</span>]</div><div class="line"><span class="meta"># print obj4</span></div></pre></td></tr></table></figure>
+<h3 id="DataFrame"><a href="#DataFrame" class="headerlink" title="DataFrame"></a>DataFrame</h3><blockquote>
+<p>DataFrame是一个<strong>表格型</strong>的数据结构，含有一组<strong>有序的列</strong>，每列可以是不同的值类型。既有行索引也有列索引。可看做由Series组成的字典。<br>以<strong>二维</strong>结构保存数据，可视为多维数据（<strong>层次化索引</strong>的表格型结构是pandas中许多高级数据处理功能的关键要素）。</p>
+</blockquote>
+<ol>
+<li>构建DataFrame方式一<blockquote>
+<p>方式一：直接传入一个由等长列表或NumPy数组组成的字典：</p>
+</blockquote>
+</li>
+</ol>
+<figure class="highlight vala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="meta">## 构建</span></div><div class="line">data = &#123;<span class="string">'state'</span>: [<span class="string">'Ohio'</span>, <span class="string">'Ohio'</span>, <span class="string">'Ohio'</span>, <span class="string">'Nevada'</span>, <span class="string">'Nevada'</span>],</div><div class="line">        <span class="string">'year'</span>: [<span class="number">2000</span>, <span class="number">2001</span>, <span class="number">2002</span>, <span class="number">2003</span>, <span class="number">2004</span>],</div><div class="line">        <span class="string">'pop'</span>: [<span class="number">1.5</span>, <span class="number">1.7</span>, <span class="number">3.6</span>, <span class="number">2.4</span>, <span class="number">2.9</span>]&#125;</div><div class="line">frame1 = DataFrame(data)</div><div class="line"><span class="meta"># print frame1</span></div><div class="line"><span class="meta"># out:</span></div><div class="line"><span class="meta">#    pop   state  year</span></div><div class="line"><span class="meta"># 0  1.5    Ohio  2000</span></div><div class="line"><span class="meta"># 1  1.7    Ohio  2001</span></div><div class="line"><span class="meta"># 2  3.6    Ohio  2002</span></div><div class="line"><span class="meta"># 3  2.4  Nevada  2003</span></div><div class="line"><span class="meta"># 4  2.9  Nevada  2004</span></div></pre></td></tr></table></figure>
+<p>1.1. 指定列序列</p>
+<figure class="highlight vala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">frame2 = DataFrame(data, columns=[<span class="string">'year'</span>, <span class="string">'state'</span>, <span class="string">'pop'</span>])</div><div class="line"><span class="meta"># print frame2</span></div><div class="line"><span class="meta"># out:</span></div><div class="line"><span class="meta">#    year   state  pop</span></div><div class="line"><span class="meta"># 0  2000    Ohio  1.5</span></div><div class="line"><span class="meta"># 1  2001    Ohio  1.7</span></div><div class="line"><span class="meta"># 2  2002    Ohio  3.6</span></div><div class="line"><span class="meta"># 3  2003  Nevada  2.4</span></div><div class="line"><span class="meta"># 4  2004  Nevada  2.9</span></div><div class="line"><span class="meta"># 若找不到列，就会显示NaN</span></div></pre></td></tr></table></figure>
+<p>1.2. 通过字典标记方式或属性方式，获取一个Series<br><figure class="highlight vala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="meta"># print frame2['state']</span></div><div class="line"><span class="meta"># out:</span></div><div class="line"><span class="meta"># 0      Ohio</span></div><div class="line"><span class="meta"># 1      Ohio</span></div><div class="line"><span class="meta"># 2      Ohio</span></div><div class="line"><span class="meta"># 3    Nevada</span></div><div class="line"><span class="meta"># 4    Nevada</span></div><div class="line"><span class="meta"># Name: state, dtype: object</span></div><div class="line"><span class="meta"># print frame2.year</span></div><div class="line"><span class="meta"># out:</span></div><div class="line"><span class="meta"># 0    2000</span></div><div class="line"><span class="meta"># 1    2001</span></div><div class="line"><span class="meta"># 2    2002</span></div><div class="line"><span class="meta"># 3    2003</span></div><div class="line"><span class="meta"># 4    2004</span></div><div class="line"><span class="meta"># Name: year, dtype: int64</span></div></pre></td></tr></table></figure></p>
+<p>1.3. 行，通过名称或位置获取，如用索引字段ix<br><figure class="highlight vala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="meta"># print frame2.ix[1]</span></div><div class="line"><span class="meta"># out：</span></div><div class="line"><span class="meta"># year     2001</span></div><div class="line"><span class="meta"># state    Ohio</span></div><div class="line"><span class="meta"># pop       1.7</span></div><div class="line"><span class="meta"># Name: 1, dtype: object</span></div></pre></td></tr></table></figure></p>
+<p>1.4. 直接给列赋值，新建test列，赋值2.3<br><figure class="highlight vala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">frame2[<span class="string">'test'</span>] = <span class="number">2.3</span></div><div class="line"><span class="meta"># print frame2</span></div><div class="line"><span class="meta"># out:</span></div><div class="line"><span class="meta">#    year   state  pop  test</span></div><div class="line"><span class="meta"># 0  2000    Ohio  1.5   2.3</span></div><div class="line"><span class="meta"># 1  2001    Ohio  1.7   2.3</span></div><div class="line"><span class="meta"># 2  2002    Ohio  3.6   2.3</span></div><div class="line"><span class="meta"># 3  2003  Nevada  2.4   2.3</span></div><div class="line"><span class="meta"># 4  2004  Nevada  2.9   2.3</span></div></pre></td></tr></table></figure></p>
+<blockquote>
+<p>将列表或数组赋值给某个列时，长度必须和DataFrame相匹配；空位都将填上缺失值NaN。</p>
+</blockquote>
+<ol>
+<li>构建DataFrame方式二<blockquote>
+<p>方式二：嵌套字典，即字典的字典。</p>
+</blockquote>
+</li>
+</ol>
+<figure class="highlight vala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">pop = &#123;<span class="string">'Nevada'</span>: &#123;<span class="number">2001</span>:<span class="number">2.3</span>, <span class="number">2004</span>:<span class="number">3.4</span>&#125;,</div><div class="line">       <span class="string">'Ohio'</span>: &#123;<span class="number">2003</span>:<span class="number">3.34</span>, <span class="number">2005</span>:<span class="number">5.2</span>&#125;&#125;</div><div class="line"><span class="meta"># 转化为DataFrame，解释原则：外层字典的键作为列，内层键作为行索引。</span></div><div class="line">frame3 = DataFrame(pop)</div><div class="line"><span class="meta"># print frame3</span></div><div class="line"><span class="meta"># out:</span></div><div class="line"><span class="meta">#       Nevada  Ohio</span></div><div class="line"><span class="meta"># 2001     2.3   NaN</span></div><div class="line"><span class="meta"># 2003     NaN  3.34</span></div><div class="line"><span class="meta"># 2004     3.4   NaN</span></div><div class="line"><span class="meta"># 2005     NaN  5.20</span></div></pre></td></tr></table></figure>
+<p>2.1 设置index和columns的name属性<br><figure class="highlight vala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">frame3.index.name = <span class="string">'year'</span>;frame3.columns.name = <span class="string">'state'</span></div><div class="line"><span class="meta"># print frame3</span></div><div class="line"><span class="meta"># out:</span></div><div class="line"><span class="meta"># state  Nevada  Ohio</span></div><div class="line"><span class="meta"># year</span></div><div class="line"><span class="meta"># 2001      2.3   NaN</span></div><div class="line"><span class="meta"># 2003      NaN  3.34</span></div><div class="line"><span class="meta"># 2004      3.4   NaN</span></div><div class="line"><span class="meta"># 2005      NaN  5.20</span></div></pre></td></tr></table></figure></p>
+<p>2.2 value属性会以二维ndarray形式返回DataFrame中的数据<br><figure class="highlight vala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="meta"># print frame3.values</span></div><div class="line"><span class="meta"># out:</span></div><div class="line"><span class="meta"># [[ 2.3    nan]</span></div><div class="line"><span class="meta">#  [  nan  3.34]</span></div><div class="line"><span class="meta">#  [ 3.4    nan]</span></div><div class="line"><span class="meta">#  [  nan  5.2 ]]</span></div></pre></td></tr></table></figure></p>
+<h3 id="索引对象"><a href="#索引对象" class="headerlink" title="索引对象"></a>索引对象</h3><blockquote>
+<p>pandas索引对象负责管理轴标签和其他元数据（比如轴名称等）。</p>
+</blockquote>
+<p>Index对象不可修改。此特性非常重要，使得Index对象在多个数据结构之间安全共享。</p>
+<h2 id="基本功能"><a href="#基本功能" class="headerlink" title="基本功能"></a>基本功能</h2><h3 id="重新索引reindex"><a href="#重新索引reindex" class="headerlink" title="重新索引reindex"></a>重新索引reindex</h3><figure class="highlight vala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">obj = Series([<span class="number">4.5</span>, <span class="number">2.3</span>, <span class="number">-2.4</span>, <span class="number">3.5</span>], index=[<span class="string">'d'</span>, <span class="string">'c'</span>, <span class="string">'a'</span>, <span class="string">'b'</span>])</div><div class="line"><span class="meta"># obj.reindex(['a','b', 'c', 'd', 'e', 'f'])</span></div><div class="line"><span class="meta"># print obj</span></div><div class="line"><span class="meta"># out:</span></div><div class="line"><span class="meta"># d    4.5</span></div><div class="line"><span class="meta"># c    2.3</span></div><div class="line"><span class="meta"># a   -2.4</span></div><div class="line"><span class="meta"># b    3.5</span></div><div class="line"><span class="meta"># dtype: float64</span></div><div class="line"><span class="meta"># 这里没有像书上说的一样，没有索引值用缺失值NaN；待查</span></div><div class="line"><span class="meta"># obj.reindex(['a','b', 'c', 'd', 'e', 'f'], fill_value=0)</span></div><div class="line"><span class="meta"># 这一句会用0来填充缺失值</span></div><div class="line"><span class="meta"># print obj</span></div><div class="line"><span class="meta"># out:</span></div><div class="line"><span class="meta"># d    4.5</span></div><div class="line"><span class="meta"># c    2.3</span></div><div class="line"><span class="meta"># a   -2.4</span></div><div class="line"><span class="meta"># b    3.5</span></div><div class="line"><span class="meta"># dtype: float64</span></div><div class="line"><span class="meta"># 同样无效</span></div></pre></td></tr></table></figure>
+<h3 id="丢弃指定轴上的项"><a href="#丢弃指定轴上的项" class="headerlink" title="丢弃指定轴上的项"></a>丢弃指定轴上的项</h3><figure class="highlight vala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">obj = Series(np.arange(<span class="number">5.</span>), index=[<span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>, <span class="string">'d'</span>, <span class="string">'e'</span>])</div><div class="line">new_obj = obj.drop(<span class="string">'c'</span>)</div><div class="line"><span class="meta"># print new_obj</span></div><div class="line"><span class="meta"># out:</span></div><div class="line"><span class="meta"># a    0.0</span></div><div class="line"><span class="meta"># b    1.0</span></div><div class="line"><span class="meta"># d    3.0</span></div><div class="line"><span class="meta"># e    4.0</span></div><div class="line"><span class="meta"># dtype: float64</span></div><div class="line"><span class="meta"># drop放回一个在指定轴上删除了指定值的新对象</span></div></pre></td></tr></table></figure>
+<h3 id="索引、选取和过滤"><a href="#索引、选取和过滤" class="headerlink" title="索引、选取和过滤"></a>索引、选取和过滤</h3><p>利用标签的切片与普通Python切片运算不同，末端是包含的，即封闭区间。如<br><figure class="highlight vala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">obj = Series(np.arange(<span class="number">4.</span>), index=[<span class="string">'a'</span>,<span class="string">'b'</span>,<span class="string">'c'</span>,<span class="string">'d'</span>])</div><div class="line"><span class="meta"># print obj</span></div><div class="line"><span class="meta"># out:</span></div><div class="line"><span class="meta"># a    0.0</span></div><div class="line"><span class="meta"># b    1.0</span></div><div class="line"><span class="meta"># c    2.0</span></div><div class="line"><span class="meta"># d    3.0</span></div><div class="line"><span class="meta"># dtype: float64</span></div><div class="line"><span class="meta"># print obj['b':'c']</span></div><div class="line"><span class="meta"># out:</span></div><div class="line"><span class="meta"># b    1.0</span></div><div class="line"><span class="meta"># c    2.0</span></div><div class="line"><span class="meta"># dtype: float64</span></div><div class="line"><span class="meta"># 如果是普通切片方式，b-c就只有1.0</span></div><div class="line"><span class="meta"># 赋值方式如下：</span></div><div class="line">obj[<span class="string">'b'</span>,<span class="string">'c'</span>] = <span class="number">5</span></div><div class="line"><span class="meta"># print obj</span></div><div class="line"><span class="meta"># out: </span></div><div class="line"><span class="meta"># a    0.0</span></div><div class="line"><span class="meta"># b    5.0</span></div><div class="line"><span class="meta"># c    5.0</span></div><div class="line"><span class="meta"># d    3.0</span></div><div class="line"><span class="meta"># dtype: float64</span></div></pre></td></tr></table></figure></p>
+<h3 id="算术运算和数据对齐"><a href="#算术运算和数据对齐" class="headerlink" title="算术运算和数据对齐"></a>算术运算和数据对齐</h3><blockquote>
+<p>对象相加时，如果存在不同的索引对，则结果的索引就是该索引对的并集。</p>
+</blockquote>
+<figure class="highlight vala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">s1 = Series([<span class="number">7.3</span>, <span class="number">4.5</span>, <span class="number">67.1</span>, <span class="number">2.3</span>], index=[<span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'d'</span>, <span class="string">'f'</span>])</div><div class="line">s2 = Series([<span class="number">3</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">3</span>], [<span class="string">'a'</span>, <span class="string">'d'</span>, <span class="string">'f'</span>, <span class="string">'g'</span>, <span class="string">'h'</span>])</div><div class="line"><span class="meta"># print s1 + s2</span></div><div class="line"><span class="meta"># out:</span></div><div class="line"><span class="meta"># a    10.3</span></div><div class="line"><span class="meta"># b     NaN</span></div><div class="line"><span class="meta"># d    72.1</span></div><div class="line"><span class="meta"># f     8.3</span></div><div class="line"><span class="meta"># g     NaN</span></div><div class="line"><span class="meta"># h     NaN</span></div><div class="line"><span class="meta"># dtype: float64</span></div><div class="line"><span class="meta"># 相加就是并集，若索引不重叠，则NaN；自动数据对齐操作。</span></div><div class="line"><span class="meta"># 而DataFrame对齐操作会同时发生在行和列上</span></div></pre></td></tr></table></figure>
+<h3 id="排序和排名"><a href="#排序和排名" class="headerlink" title="排序和排名"></a>排序和排名</h3><figure class="highlight vala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="meta"># obj = Series(range(4), index=['d','c','b','a'])</span></div><div class="line"><span class="meta"># print obj</span></div><div class="line"><span class="meta"># d    0</span></div><div class="line"><span class="meta"># c    1</span></div><div class="line"><span class="meta"># b    2</span></div><div class="line"><span class="meta"># a    3</span></div><div class="line"><span class="meta"># dtype: int64</span></div><div class="line"><span class="meta"># print obj.sort_index()</span></div><div class="line"><span class="meta"># a    3</span></div><div class="line"><span class="meta"># b    2</span></div><div class="line"><span class="meta"># c    1</span></div><div class="line"><span class="meta"># d    0</span></div><div class="line"><span class="meta"># dtype: int64</span></div><div class="line"></div><div class="line">frame = DataFrame(np.arange(<span class="number">8</span>).reshape((<span class="number">2</span>,<span class="number">4</span>)), index=[<span class="string">'three'</span>, <span class="string">'one'</span>], columns=[<span class="string">'d'</span>,<span class="string">'a'</span>,<span class="string">'b'</span>,<span class="string">'c'</span>])</div><div class="line"><span class="meta"># print frame.sort_index()</span></div><div class="line"><span class="meta">#        d  a  b  c</span></div><div class="line"><span class="meta"># one    4  5  6  7</span></div><div class="line"><span class="meta"># three  0  1  2  3</span></div><div class="line"><span class="meta"># print frame.sort_index(axis=1)</span></div><div class="line"><span class="meta">#        a  b  c  d</span></div><div class="line"><span class="meta"># three  1  2  3  0</span></div><div class="line"><span class="meta"># one    5  6  7  4</span></div></pre></td></tr></table></figure>
+<blockquote>
+<p>按值对Series排序，用其order方法；<br>排序时缺失值会被放到Series末尾。</p>
+</blockquote>
+<p><code>sort_index()方法已过时，用sort_value()方法代替。</code></p>
+<figure class="highlight vala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="meta"># DataFrame根据列值排序，传列名给by选项</span></div><div class="line">frame = DataFrame(&#123;<span class="string">'b'</span>: [<span class="number">4</span>, <span class="number">8</span>, <span class="number">5</span>, <span class="number">3</span>], <span class="string">'a'</span>: [<span class="number">-2</span>, <span class="number">1</span>, <span class="number">9</span>, <span class="number">6</span>]&#125;)</div><div class="line"><span class="meta"># print frame</span></div><div class="line"><span class="meta">#    a  b</span></div><div class="line"><span class="meta"># 0 -2  4</span></div><div class="line"><span class="meta"># 1  1  8</span></div><div class="line"><span class="meta"># 2  9  5</span></div><div class="line"><span class="meta"># 3  6  3</span></div><div class="line"><span class="meta"># print frame.sort_values(by='b')</span></div><div class="line"><span class="meta">#    a  b</span></div><div class="line"><span class="meta"># 3  6  3</span></div><div class="line"><span class="meta"># 0 -2  4</span></div><div class="line"><span class="meta"># 2  9  5</span></div><div class="line"><span class="meta"># 1  1  8</span></div></pre></td></tr></table></figure>
+<p>排序<br><figure class="highlight vala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">obj = Series([<span class="number">7</span>, <span class="number">3</span>, <span class="number">5</span>, <span class="number">7</span>, <span class="number">9</span>, <span class="number">3</span>, <span class="number">1</span>])</div><div class="line"><span class="meta"># print obj.rank()</span></div><div class="line"><span class="meta"># 0    5.5</span></div><div class="line"><span class="meta"># 1    2.5</span></div><div class="line"><span class="meta"># 2    4.0</span></div><div class="line"><span class="meta"># 3    5.5</span></div><div class="line"><span class="meta"># 4    7.0</span></div><div class="line"><span class="meta"># 5    2.5</span></div><div class="line"><span class="meta"># 6    1.0</span></div><div class="line"><span class="meta"># dtype: float64</span></div><div class="line"><span class="meta"># 暂时没看懂什么意思啊</span></div></pre></td></tr></table></figure></p>
+<h3 id="汇总和计算描述统计"><a href="#汇总和计算描述统计" class="headerlink" title="汇总和计算描述统计"></a>汇总和计算描述统计</h3><ul>
+<li>axis（约简的 轴）选项标明是按行还是按列；如axis=0按列，axis=1按行。</li>
+<li>skipna 排除缺失值，默认值True</li>
+<li>level 轴是层次化索引的，则根据level分组约简</li>
+</ul>
+<blockquote>
+<p>第五章于20170319结束，时间节点设计有问题，现在需要手动敲的越来越多，所以速度跟不上，尤其是精力跟不上了。看书要分主次，重要的知识点要细看，必须手动敲出来；一些同类化的知识可以跳着看，以节省时间。</p>
+<p>但是有一个原则不能改，一些重要的知识点不能跳过，需要真真的✋敲出来。不然那就是真正的浪费时间。</p>
+</blockquote>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/cs/" class="article-tag-list-link color3">cs</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/03/19/《利用Python进行数据分析》读书笔记-5-第五章-pandas入门/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
+    <article id="post-《利用Python进行数据分析》读书笔记-4-第四章-Numpy基础：数组和矢量计算" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/14/《利用Python进行数据分析》读书笔记-4-第四章-Numpy基础：数组和矢量计算/">《利用Python进行数据分析》读书笔记-4-第四章-Numpy基础：数组和矢量计算</a>
+    </h1>
+  
+
+        
+        <a href="/2017/03/14/《利用Python进行数据分析》读书笔记-4-第四章-Numpy基础：数组和矢量计算/" class="archive-article-date">
+  	<time datetime="2017-03-14T13:25:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-03-14</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>Tip：全称Numerical Pythn，是高性能科学计算和数据分析的基础包。本书所有高级工具的构建基础。</p>
+</blockquote>
+<h2 id="NumPy功能"><a href="#NumPy功能" class="headerlink" title="NumPy功能"></a>NumPy功能</h2><ul>
+<li>ndarry，矢量算术运算和复杂广播能力的快速切节省空间的多维数组</li>
+<li>对数组数据进行快速运算的标准数据函数（无需编写循环）</li>
+<li>读写磁盘的工具，，操作内存映射文件的工具</li>
+<li>线性代数、随机数生成以及傅立叶变换</li>
+<li><strong>集成C、C++、Fortran等语言编写的代码</strong>（从生态系统角度，最重要的功能）</li>
+</ul>
+<p>对于大部分数据分析应用，作者关注功能：</p>
+<ul>
+<li>数据整理和清理、子集构造和过滤、转换等快速矢量化数组运算</li>
+<li>数组算法，如排序、唯一化、集合运算</li>
+<li>高效描述统计和数据聚合／摘要运算</li>
+<li>异构数据集的合并／连接运算</li>
+<li>条件逻辑表述为数组表达式（除去if-else-if循环）</li>
+<li>数据分组运算</li>
+</ul>
+<blockquote>
+<p>Tip:标准NumPy约定，总是使用<code>import NumPy as np</code>,而不是<code>from NumPy import *</code>.</p>
+</blockquote>
+<h2 id="ndarray-一种多维数组对象"><a href="#ndarray-一种多维数组对象" class="headerlink" title="ndarray: 一种多维数组对象"></a>ndarray: 一种多维数组对象</h2><blockquote>
+<p>Tip：NumPy最重要特点是其N维数组对象（即ndarray，该对象是一个快速而灵活的大数据集容器）。</p>
+<p>大多数数据分析工作不需要深入理解NumPy，但精通面向数组的编程和思维方式是成为Python科学计算牛人的一大关键步骤。</p>
+<p>Focus:<strong>本书提到的<code>数组</code>、<code>NUmPy数组</code>、<code>ndarray</code>都是指ndarray对象</strong></p>
+</blockquote>
+<ul>
+<li>ndarray是同构数据多维容器，其中所有元素相同的类型。</li>
+<li>每个数组都有shape和dtype属性</li>
+</ul>
+<h3 id="创建ndarray"><a href="#创建ndarray" class="headerlink" title="创建ndarray"></a>创建ndarray</h3><figure class="highlight vala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#!/usr/bin/python</span></div><div class="line"><span class="meta"># -*- coding:utf-8 -*-</span></div><div class="line"></div><div class="line">import numpy as np</div><div class="line"><span class="meta"># data = np.ndarraz([[0.580052,0.186730,1.040717],[-0.636917,-0.938659,0.124094]])</span></div><div class="line"><span class="meta"># print data.shape</span></div><div class="line"></div><div class="line">data1 = [<span class="number">5</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">3</span>,<span class="number">9</span>]</div><div class="line">arr1 = np.array(data1)</div><div class="line"><span class="meta"># print arr1</span></div><div class="line"><span class="meta"># print arr1.ndim  # 1 维</span></div><div class="line"><span class="meta"># print arr1.shape  # (5,)</span></div><div class="line"><span class="meta"># print arr1.dtype   # int64</span></div><div class="line"></div><div class="line"><span class="meta"># print np.zeros(10)</span></div><div class="line"><span class="meta"># [ 0.  0.  0.  0.  0.  0.  0.  0.  0.  0.]</span></div><div class="line"><span class="meta"># print np.zeros((3,6))</span></div><div class="line"><span class="meta"># [[ 0.  0.  0.  0.  0.  0.]</span></div><div class="line"><span class="meta">#  [ 0.  0.  0.  0.  0.  0.]</span></div><div class="line"><span class="meta">#  [ 0.  0.  0.  0.  0.  0.]]</span></div><div class="line"><span class="meta"># print np.empty((2,3,2))</span></div><div class="line"><span class="meta"># [[[ -2.00000000e+000  -2.00000000e+000]</span></div><div class="line"><span class="meta">#   [  6.95320070e-310   6.95320070e-310]</span></div><div class="line"><span class="meta">#   [  6.95320070e-310   6.95320070e-310]]</span></div><div class="line"><span class="meta">#</span></div><div class="line"><span class="meta">#  [[  6.95320070e-310   6.95320070e-310]</span></div><div class="line"><span class="meta">#   [  6.95320070e-310   6.95320070e-310]</span></div><div class="line"><span class="meta">#   [  6.95320070e-310   6.95320070e-310]]]</span></div><div class="line"><span class="meta"># np.empty经常返回一些为初始化的垃圾值</span></div><div class="line"><span class="meta"># print np.arange(10)</span></div><div class="line"><span class="meta"># [0 1 2 3 4 5 6 7 8 9]</span></div></pre></td></tr></table></figure>
+<blockquote>
+<p>Focus:如无特别指定，数据类型基本都是float64</p>
+</blockquote>
+<h3 id="ndarray的数据类型"><a href="#ndarray的数据类型" class="headerlink" title="ndarray的数据类型"></a>ndarray的数据类型</h3><p>ndarray的astype方法可转换其dtype：<br><figure class="highlight elm"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="title">arr</span> = np.array([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>])</div><div class="line"><span class="title">print</span> arr.d<span class="keyword">type</span></div><div class="line"># int64</div><div class="line"><span class="title">float_arr</span> = arr.<span class="keyword">as</span><span class="keyword">type</span>(np.float64)</div><div class="line"><span class="title">print</span> float_arr.d<span class="keyword">type</span></div><div class="line"># float64</div></pre></td></tr></table></figure></p>
+<h2 id="数组与标量之间运算"><a href="#数组与标量之间运算" class="headerlink" title="数组与标量之间运算"></a>数组与标量之间运算</h2><blockquote>
+<p>无需循环就可执行批量运算；这就叫做矢量化（vectorization）。不同大小数组之间的运算叫做广播。</p>
+</blockquote>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">arr = np.array(<span class="string">[[1.,2.,3.], [4.,5.,6.]]</span>)</div><div class="line"># <span class="built_in">print</span> arr</div><div class="line"># <span class="built_in">print</span> arr * arr 加减乘除都是相对位置相乘</div></pre></td></tr></table></figure>
+<h2 id="基本索引和切片"><a href="#基本索引和切片" class="headerlink" title="基本索引和切片"></a>基本索引和切片</h2><blockquote>
+<p>与列表最重要区别在于，数组切片是原始数组的视图。说明数据不会被复制，视图伤的任何修改都会直接反映到数组上。若非要复制，就要显式复制：arr[5:8].copy()</p>
+</blockquote>
+<figure class="highlight accesslog"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">arr = np.arange(<span class="number">10</span>)</div><div class="line"># print arr<span class="string">[5:8]</span>  # <span class="string">[5,6,7]</span></div><div class="line">arr<span class="string">[5:8]</span> = <span class="number">12</span></div><div class="line"># print arr   # <span class="string">[0 1 2 3 4 12 12 12 8 9]</span></div><div class="line">arr_slice = arr<span class="string">[5:8]</span></div><div class="line">arr_slice<span class="string">[1]</span> =<span class="number">12345</span></div><div class="line">print arr  # <span class="string">[0 1 2 3 4 12 12345 12 8 9]</span></div><div class="line">arr_slice<span class="string">[:]</span> = <span class="number">64</span></div><div class="line"># print arr  # <span class="string">[0 1 2 3 4 64 64 64 8 9]</span></div></pre></td></tr></table></figure>
+<h2 id="切片索引"><a href="#切片索引" class="headerlink" title="切片索引"></a>切片索引</h2><blockquote>
+<p>ndarray切片语法与一维对象相似。多维切片只是一维的基础山进行扩展。</p>
+</blockquote>
+<p>沿着第0轴切片；切片是沿着一个轴向选取元素的。一次传入多个切片：</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">arr2d = np.array(<span class="string">[[1,2,3],[4,5,6],[7,8,9]]</span>)</div><div class="line"># <span class="built_in">print</span> arr2d[:<span class="number">2</span>]</div><div class="line"># out: <span class="string">[[1 2 3], [4 5 6]]</span></div><div class="line"># <span class="built_in">print</span> arr2d[:<span class="number">2</span>,:<span class="number">1</span>]</div><div class="line"># out: <span class="string">[[1], [4]]</span></div><div class="line"># <span class="built_in">print</span> arr2d[:<span class="number">2</span>,<span class="number">1</span>:]</div><div class="line"># out: <span class="string">[[2,3],[5,6]]</span></div></pre></td></tr></table></figure>
+<p>上面只能得到相同维数的数组视图。</p>
+<p>通过将整数索引和切片混合，可以得到低维度的切片：</p>
+<figure class="highlight inform7"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">print arr2d<span class="comment">[1,:2]</span></div><div class="line"># out: <span class="comment">[4, 5]</span></div><div class="line">print arr2d<span class="comment">[2:,1]</span></div><div class="line"># out: <span class="comment">[8]</span></div><div class="line">print arr2d<span class="comment">[:, :1]</span></div><div class="line"># out: <span class="comment">[<span class="comment">[1]</span>,  <span class="comment">[4]</span>,  <span class="comment">[7]</span>]</span></div></pre></td></tr></table></figure>
+<blockquote>
+<p>Focus：<code>:</code>,冒号表示选取整个轴。</p>
+</blockquote>
+<p>对切片表达式进行赋值，该操作会扩散到整个选区。<br><figure class="highlight lua"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">arr2d[:<span class="number">2</span>, <span class="number">1</span>:] = <span class="number">0</span></div><div class="line"><span class="built_in">print</span> arr2d</div><div class="line"># out: <span class="string">[[1 0 0],  [4 0 0],  [7 8 9]]</span></div></pre></td></tr></table></figure></p>
+<h2 id="布尔型索引"><a href="#布尔型索引" class="headerlink" title="布尔型索引"></a>布尔型索引</h2><blockquote>
+<p>二维数组切片，第一个数字开始在行这个维度上切片，第二个数字在列上切片。</p>
+</blockquote>
+<p>布尔型索引选取数组中多数据，总是创建数的副本，即使是返回一摸一样多数组。</p>
+<blockquote>
+<p>⚠️：Python关键字and和or在布尔型数组中无效。</p>
+</blockquote>
+<p>通过布尔型数组设置值，如下，将data中的所有负值都设为0:<br><figure class="highlight haskell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">data</span>[<span class="keyword">data</span> &lt; 0] = 0</span></div></pre></td></tr></table></figure></p>
+<p>一维数组设置正行或列的值：<br><figure class="highlight xl"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">data</span>[<span class="keyword">name</span> != <span class="string">'Joe'</span>] = <span class="number">7</span></div></pre></td></tr></table></figure></p>
+<h3 id="花式索引"><a href="#花式索引" class="headerlink" title="花式索引"></a>花式索引</h3><blockquote>
+<p>指利用整数数组进行索引；花式索引跟切片不一样，总是将数据复制到新数组中。</p>
+</blockquote>
+<figure class="highlight vala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">arr = np.empty((<span class="number">8</span>,<span class="number">3</span>))</div><div class="line"><span class="keyword">for</span> i in range(<span class="number">8</span>):</div><div class="line">    arr[i] = i</div><div class="line"><span class="meta"># print arr</span></div><div class="line"><span class="meta"># out：[[ 0.  0.  0.]</span></div><div class="line"><span class="meta">#  [ 1.  1.  1.]</span></div><div class="line"><span class="meta">#  [ 2.  2.  2.]</span></div><div class="line"><span class="meta">#  [ 3.  3.  3.]</span></div><div class="line"><span class="meta">#  [ 4.  4.  4.]</span></div><div class="line"><span class="meta">#  [ 5.  5.  5.]</span></div><div class="line"><span class="meta">#  [ 6.  6.  6.]</span></div><div class="line"><span class="meta">#  [ 7.  7.  7.]]</span></div><div class="line"></div><div class="line"><span class="meta"># print arr[[4,3,0,6]]</span></div><div class="line"><span class="meta"># out:[[ 4.  4.  4.]</span></div><div class="line"><span class="meta">#  [ 3.  3.  3.]</span></div><div class="line"><span class="meta">#  [ 0.  0.  0.]</span></div><div class="line"><span class="meta">#  [ 6.  6.  6.]]</span></div></pre></td></tr></table></figure>
+<h3 id="数组转置与轴对换"><a href="#数组转置与轴对换" class="headerlink" title="数组转置与轴对换"></a>数组转置与轴对换</h3><figure class="highlight vala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">arrzzdh = np.arange(<span class="number">15</span>).reshape(<span class="number">3</span>,<span class="number">5</span>)</div><div class="line"><span class="meta"># print arrzzdh</span></div><div class="line"><span class="meta"># out: 0-15个数字 转换成3行5列的数组</span></div><div class="line"><span class="meta"># [[ 0  1  2  3  4]</span></div><div class="line"><span class="meta">#  [ 5  6  7  8  9]</span></div><div class="line"><span class="meta">#  [10 11 12 13 14]]</span></div><div class="line">print arrzzdh.T</div><div class="line"><span class="meta"># out: 转置，行列倒置</span></div><div class="line"><span class="meta"># [[ 0  5 10]</span></div><div class="line"><span class="meta">#  [ 1  6 11]</span></div><div class="line"><span class="meta">#  [ 2  7 12]</span></div><div class="line"><span class="meta">#  [ 3  8 13]</span></div><div class="line"><span class="meta">#  [ 4  9 14]]</span></div></pre></td></tr></table></figure>
+<h2 id="利用数组进行数据处理"><a href="#利用数组进行数据处理" class="headerlink" title="利用数组进行数据处理"></a>利用数组进行数据处理</h2><blockquote>
+<p>用数组表达式代替循环的做法，称为矢量化。</p>
+</blockquote>
+<figure class="highlight maxima"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">points</span> = <span class="built_in">np</span>.arange(-<span class="number">5</span>,<span class="number">5</span>,<span class="number">0.1</span>) # <span class="number">1000</span>个间隔相等的点</div><div class="line">xs, ys = <span class="built_in">np</span>.meshgrid(<span class="built_in">points</span>, <span class="built_in">points</span>)</div><div class="line"># <span class="built_in">print</span> ys</div><div class="line">import matplotlib.pyplot as plt</div><div class="line">z = <span class="built_in">np</span>.<span class="built_in">sqrt</span>(xs**<span class="number">2</span> + ys**<span class="number">2</span>)</div><div class="line"># <span class="built_in">print</span> z</div><div class="line">plt.imshow(z, cmap=plt.cm.gray);plt.colorbar()</div><div class="line">plt.<span class="built_in">title</span>(<span class="string">"Image plot of $\sqrt&#123;x^2 + y^2&#125;$ for a grid of values"</span>)</div><div class="line">plt.<span class="built_in">show</span>()</div></pre></td></tr></table></figure>
+<h3 id="将条件逻辑表述为数组运算"><a href="#将条件逻辑表述为数组运算" class="headerlink" title="将条件逻辑表述为数组运算"></a>将条件逻辑表述为数组运算</h3><p>如<code>numpy.where函数</code>是三元表达式<code>x if condition erse y</code>的矢量化版本。<br><figure class="highlight applescript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="literal">result</span> = np.<span class="keyword">where</span>(condition=<span class="string">""</span>,x=<span class="string">""</span>,y=<span class="string">""</span>)</div></pre></td></tr></table></figure></p>
+<p>满足条件则x，否则y</p>
+<h3 id="数学和统计方法"><a href="#数学和统计方法" class="headerlink" title="数学和统计方法"></a>数学和统计方法</h3><figure class="highlight maxima"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">arr = <span class="built_in">np</span>.<span class="built_in">random</span>.randn(<span class="number">5</span>, <span class="number">4</span>)</div><div class="line"><span class="built_in">print</span> arr.<span class="built_in">mean</span>()</div><div class="line"># out: -<span class="number">0.360180571527</span></div><div class="line"></div><div class="line">arr = <span class="built_in">np</span>.<span class="built_in">random</span>.randn(<span class="number">100</span>)</div><div class="line"><span class="built_in">print</span> (arr &gt; <span class="number">0</span>).<span class="built_in">sum</span>()</div><div class="line"># out: 随机的一百个数字，每次大于<span class="number">0</span>的数的个数。</div></pre></td></tr></table></figure>
+<figure class="highlight maxima"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">## 排序</div><div class="line">arr1 =<span class="built_in">np</span>.<span class="built_in">random</span>.randn(<span class="number">8</span>)</div><div class="line"><span class="built_in">print</span> arr1</div><div class="line">arr1.<span class="built_in">sort</span>()</div><div class="line"># 先<span class="built_in">sort</span>排序，才能输出，如果直接同时输出排序，会None</div><div class="line"><span class="built_in">print</span> arr1</div><div class="line"></div><div class="line"># 多维数组排序，在任何一个轴上，传入该轴编号即可</div><div class="line">arr2 = <span class="built_in">np</span>.<span class="built_in">random</span>.randn(<span class="number">5</span>,<span class="number">3</span>)</div><div class="line"><span class="built_in">print</span> arr2</div><div class="line">arr2.<span class="built_in">sort</span>(<span class="number">1</span>)</div><div class="line"><span class="built_in">print</span> arr2</div></pre></td></tr></table></figure>
+<figure class="highlight vala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="meta">## 唯一化</span></div><div class="line">names = np.array([<span class="string">'jin'</span>, <span class="string">'king'</span>, <span class="string">'lin'</span>, <span class="string">'wen'</span>, <span class="string">'jin'</span>, <span class="string">'wen'</span>, <span class="string">'lin'</span>])</div><div class="line"><span class="meta"># print np.unique(names) # 这里又必须直接输出</span></div><div class="line"><span class="meta"># print names  # 无效</span></div><div class="line">ints = np.array([<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">5</span>,<span class="number">4</span>,<span class="number">2</span>,<span class="number">4</span>,<span class="number">6</span>,<span class="number">1</span>])</div><div class="line"><span class="meta"># print np.unique(ints) # 直接输出有效</span></div><div class="line"><span class="meta"># print ints # 无效</span></div><div class="line"><span class="meta"># # 没效果？那么纯Python方法有效果吗</span></div><div class="line"><span class="meta"># print sorted(set(names))</span></div><div class="line"><span class="meta"># print names</span></div><div class="line"><span class="meta"># print sorted(set(ints))</span></div><div class="line"><span class="meta"># print ints</span></div><div class="line"><span class="meta"># 还是没有效果啊</span></div><div class="line"><span class="meta"># 这里说明排序唯一都要直接输出，**原值没有改变**。</span></div></pre></td></tr></table></figure>
+<figure class="highlight vala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="meta">## 用于数组的文件输入输出</span></div><div class="line"><span class="meta">### 将数组以二进制格式保存到硬盘</span></div><div class="line"><span class="meta"># np.save()和np.load()方法是用于读写的主要方法。</span></div><div class="line">arr3 = np.arange(<span class="number">10</span>)</div><div class="line">np.save(<span class="string">'test_arr_save'</span>, arr3)</div><div class="line"><span class="meta"># 保存为了.npy文件；然后用load方法读取数组</span></div><div class="line"><span class="meta"># print np.load('test_arr_save.npy')</span></div><div class="line"><span class="meta"># out: [0 1 2 3 4 5 6 7 8 9]</span></div><div class="line"><span class="meta"># np.savez保存多个数组到压缩文件</span></div><div class="line">np.savez(<span class="string">'arr_archive.npz'</span>, a= arr3, b=arr3)</div><div class="line">arch = np.load(<span class="string">'arr_archive.npz'</span>)</div><div class="line"><span class="meta"># print arch['b']</span></div><div class="line"><span class="meta"># out: [0 1 2 3 4 5 6 7 8 9]</span></div></pre></td></tr></table></figure>
+<figure class="highlight vala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta"># 存取文本文件</span></div><div class="line"><span class="meta"># 指定分隔符为逗号，读取csv文件</span></div><div class="line"><span class="meta"># np.loadtxt('filename', delimiter=',')</span></div></pre></td></tr></table></figure>
+<p>最后涉及到了<strong>线性代数</strong>,<strong>随机漫步</strong>等数学概念，深切体会到学好数学是任何一门科学想要往高了走的必然阶梯，计算机科学当然也不例外。</p>
+<p>今天组内培训，讲了一些代码规范、版本更新和项目管理的知识，无规矩不成方圆，团队大了，尤其需要一套行之有效的规矩来约束每个人的行为，代码能体现一个人的行为方式，是否有代码洁癖。<code>Talk is cheap, show me the code.</code>希望组内能坚持下去，互相code Review。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/cs/" class="article-tag-list-link color3">cs</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/03/14/《利用Python进行数据分析》读书笔记-4-第四章-Numpy基础：数组和矢量计算/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
     <article id="post-《利用Python进行数据分析》读书笔记-3-第三章-IPython-一种交互式计算和开发环境" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -632,294 +1047,9 @@
 
 
   
-    <article id="post-git学习之三-conflict冲突，reset版本控制，以及实践感悟" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/09/10/git学习之三-conflict冲突，reset版本控制，以及实践感悟/">git学习之三-最近遇到的坑</a>
-    </h1>
-  
-
-        
-        <a href="/2016/09/10/git学习之三-conflict冲突，reset版本控制，以及实践感悟/" class="archive-article-date">
-  	<time datetime="2016-09-10T08:55:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-09-10</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>最近在开发过程中，用到git提交代码，之前也用过github传过代码，但是实际工作中还用的不多，过程中遇到了一些坑，记录下来。</p>
-<h2 id="conflict冲突"><a href="#conflict冲突" class="headerlink" title="conflict冲突"></a>conflict冲突</h2><p>冲突原因:</p>
-<blockquote>
-<p>由于在自己提交之前，自己下载最新代码之后有人上传了，之前下载的不是最新的代码，所以有冲突，必须把代码冲突解决之后才能够上传。时间线问题。</p>
-</blockquote>
-<p>展现形式：<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;</div><div class="line">your <span class="selector-tag">code</span> </div><div class="line">HEAD </div><div class="line">others <span class="selector-tag">code</span></div><div class="line">&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;</div></pre></td></tr></table></figure></p>
-<p>完成了一个功能模块，想要提交到代码库中；为了方便，现在用git gui工具了，先把更改的文件statechanged状态改变一下，然后提交commit，之后千万不要忘记看看远程库中有没有最近的更新，pull一下；<br>pull一次之后就要注意解决冲突，一般文件会红色显示，有错误则会显示红色波浪线，形式如上所示；</p>
-<p>注意：每天可以多次commit，就像打标签，但是最好一天只push一次。多次提交造成不必要的浪费；</p>
-<p>据老司机门的经验，开发时，应该多构建分支，在一个分支上做一个功能，功能做完之后再合并分支，这样可以减少冲突的概率。</p>
-<h2 id="撤销未提交的修改"><a href="#撤销未提交的修改" class="headerlink" title="撤销未提交的修改"></a>撤销未提交的修改</h2><p>还没有commit，但想撤回修改的情况下：<br><img src="http://7xjqvu.com1.z0.glb.clouddn.com/15-6-19/48267713.jpg" alt=""><br>git diff：<br><img src="http://7xjqvu.com1.z0.glb.clouddn.com/15-6-19/81847901.jpg" alt=""></p>
-<p>保存了，如果是一两句还好，如果几百几千行呢？手动累死你。<br>神器：<br><figure class="highlight awk"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git checkout src<span class="regexp">/com/</span>jay<span class="regexp">/example/</span>testforgit<span class="regexp">/MainActivity.java</span></div></pre></td></tr></table></figure></p>
-<p>duang一下就没了：<br><img src="http://7xjqvu.com1.z0.glb.clouddn.com/15-6-19/10997419.jpg" alt=""></p>
-<p>当然上述<strong>前提是没有add</strong>，才可以checkout。我们要<strong>先取消添加</strong>才可以撤回提交，使用下述指令：<br><figure class="highlight dts"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">git reset HEAD src<span class="meta-keyword">/com/</span>jay<span class="meta-keyword">/example/</span>testforgit/MainActivity.java</div><div class="line">git checkout src<span class="meta-keyword">/com/</span>jay<span class="meta-keyword">/example/</span>testforgit/MainActivity.java</div></pre></td></tr></table></figure></p>
-<p><img src="http://7xjqvu.com1.z0.glb.clouddn.com/15-6-19/97479292.jpg" alt=""></p>
-<h2 id="版本回退"><a href="#版本回退" class="headerlink" title="版本回退"></a>版本回退</h2><blockquote>
-<p>上面提到的是撤销未提交的修改，但如果提交了，我们想回退到之前的某一个版本怎么办?<br>我们可以通过git log查看我们的提交记录，我们需要从这里获取一个版本号，<br>一般我们只需要<strong>前七位字符</strong>就够了；另外在Git中，用HEAD代表当前版本，上一个版本就是HEAD^，<br>再上一个版本就是HEAD^^依次类推！我们先Git Log看下版本历史先！</p>
-</blockquote>
-<p><img src="http://7xjqvu.com1.z0.glb.clouddn.com/15-6-19/40426312.jpg" alt=""></p>
-<p>我们回到前一个提交的版本吧，依次键入下述指令：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">git <span class="keyword">reset</span> <span class="comment">--hard HEAD</span></div><div class="line">git <span class="keyword">reset</span> <span class="comment">--hard HEAD^</span></div><div class="line">git <span class="keyword">log</span></div></pre></td></tr></table></figure></p>
-<p>控制台：<br><img src="http://7xjqvu.com1.z0.glb.clouddn.com/15-6-19/51915562.jpg" alt=""></p>
-<p>可以看到我们已经回退到了前一个版本了，当然你可以直接这样写：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git <span class="keyword">reset</span> <span class="comment">--hard ad2080c</span></div></pre></td></tr></table></figure></p>
-<p>就是这么简单！回退后，你突然后悔了（第一次回退到前一旧版本了，现在又想回到新版本了，善变啊），想回退回新的那个版本，<br>可是遗憾的是，你键入git log却发现没有了最新的那个版本号，这怎么办呢…<br>没事，Git中给你提供了这颗“后悔药”，Git记录着你输入的每一条指令呢！键入：<br><figure class="highlight ebnf"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">git reflog</span></div></pre></td></tr></table></figure></p>
-<p>你会发现，版本号就在这里：<br><img src="http://7xjqvu.com1.z0.glb.clouddn.com/15-6-19/93429639.jpg" alt=""></p>
-<p>然后键入：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git <span class="keyword">reset</span> <span class="comment">--hard ad2080c</span></div></pre></td></tr></table></figure></p>
-<p>可以看到我们又回到了最新的那个版本了，就是这么溜！<br><img src="http://7xjqvu.com1.z0.glb.clouddn.com/15-6-19/46109301.jpg" alt=""></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">git</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/cs/" class="article-tag-list-link color3">cs</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2016/09/10/git学习之三-conflict冲突，reset版本控制，以及实践感悟/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
-    <article id="post-git学习之二-git基础" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/09/05/git学习之二-git基础/">git学习之二-git基础</a>
-    </h1>
-  
-
-        
-        <a href="/2016/09/05/git学习之二-git基础/" class="archive-article-date">
-  	<time datetime="2016-09-05T14:53:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-09-05</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>取得项目git仓库<br>在现存的目录下，通过导入所有文件来创建新的 Git 仓库。<br>初始化<br><figure class="highlight crmsh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ git init</div><div class="line"><span class="comment">#末尾自定义项目目录名称mygrit</span></div><div class="line">$ git <span class="keyword">clone</span> <span class="title">git</span>://github.com/schacon/grit.git mygrit</div></pre></td></tr></table></figure></p>
-<p>文件状态变化周期：<br><img src="http://static.open-open.com/lib/uploadImg/20120201/20120201121432_845.png" alt="文件状态变化周期"></p>
-<p>检查当前文件状态:<br><figure class="highlight elixir"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$ </span>git status</div></pre></td></tr></table></figure></p>
-<p>跟踪新文件<br><figure class="highlight vala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">$ git add filename</div><div class="line">$ git status</div><div class="line"><span class="meta"># On branch master</span></div><div class="line"><span class="meta"># Changes to be committed:</span></div><div class="line"><span class="meta">#   (use "git reset ..." to unstage)</span></div><div class="line"><span class="meta">#   new file:   README</span></div></pre></td></tr></table></figure></p>
-<p>忽略某些文件：<br><figure class="highlight crystal"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#养成一开始就设置好.gitignore文件的习惯，免得将无用文件或者机密文件上传。</span></div><div class="line">**.gitignore文件**</div><div class="line"><span class="comment"># 此为注释 – 将被 Git 忽略</span></div><div class="line">*.a       <span class="comment"># 忽略所有 .a 结尾的文件</span></div><div class="line">!<span class="class"><span class="keyword">lib</span>.<span class="title">a</span>    <span class="comment"># 但 lib.a 除外</span></span></div><div class="line">/TODO     <span class="comment"># 仅仅忽略项目根目录下的 TODO 文件，不包括 subdir/TODO</span></div><div class="line">build/    <span class="comment"># 忽略 build/ 目录下的所有文件</span></div><div class="line">doc/*.txt <span class="comment"># 会忽略 doc/notes.txt 但不包括 doc/server/arch.txt</span></div></pre></td></tr></table></figure></p>
-<p>提交更新：<br><figure class="highlight clean"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">##打开文本编辑器输入提交说明</div><div class="line">$ git commit </div><div class="line">##配置编辑器</div><div class="line">$ git config --global core.editor</div></pre></td></tr></table></figure></p>
-<p>跳过使用暂存区域：<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">#加上 -<span class="selector-tag">a</span> 则自动将所有已跟踪过的文件暂存起来一并提交</div><div class="line">$ git commit -<span class="selector-tag">a</span> -m <span class="string">'added new file'</span></div></pre></td></tr></table></figure></p>
-<p>移除文件：<br><figure class="highlight gams"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="symbol">$</span> rm <span class="keyword">file</span></div><div class="line"><span class="symbol">$</span> git rm <span class="keyword">file</span></div></pre></td></tr></table></figure></p>
-<p>移动文件：<br><figure class="highlight elixir"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 相当于改名操作</span></div><div class="line"><span class="variable">$ </span>git mv file_from file_to</div><div class="line"><span class="comment">#上面一条命令相当于下面三条命令</span></div><div class="line"><span class="variable">$ </span>mv file_from file_to</div><div class="line"><span class="variable">$ </span>git rm file_from</div><div class="line"><span class="variable">$ </span>git add file_to</div></pre></td></tr></table></figure></p>
-<p>查看提交历史：<br><figure class="highlight gams"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="symbol">$</span> git <span class="built-in">log</span></div></pre></td></tr></table></figure></p>
-<p>从已有的 Git 仓库克隆出一个新的镜像仓库来。<br><figure class="highlight crmsh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$　git <span class="keyword">clone</span> <span class="title">xxx</span>.git</div></pre></td></tr></table></figure></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">git</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/cs/" class="article-tag-list-link color3">cs</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2016/09/05/git学习之二-git基础/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
-    <article id="post-一台机器部署多个Tomcat及如何忽略webapps里的项目" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/09/05/一台机器部署多个Tomcat及如何忽略webapps里的项目/">一台机器部署多个Tomcat及如何忽略webapps里的项目</a>
-    </h1>
-  
-
-        
-        <a href="/2016/09/05/一台机器部署多个Tomcat及如何忽略webapps里的项目/" class="archive-article-date">
-  	<time datetime="2016-09-05T14:40:36.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-09-05</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="一台机器部署多个Tomcat"><a href="#一台机器部署多个Tomcat" class="headerlink" title="一台机器部署多个Tomcat"></a>一台机器部署多个Tomcat</h1><blockquote>
-<p>考虑到线上部署系统<strong>安全</strong>性，需要在同一台机器上部署多个Tomcat。一个系统一个Tomcat,这样更好的容灾机制，避免多米多骨牌效应。<br>重点：<strong>避免端口冲突</strong>    </p>
-</blockquote>
-<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><blockquote>
-<p>修改CATALINA_HOME\conf\server.xml中的启动端口和连接端口。</p>
-</blockquote>
-<p>操作步骤：</p>
-<blockquote>
-<ol>
-<li><a href="http://tomcat.apache.org/download-70.cgi" target="_blank" rel="external">下载</a>-解压apache-tomcat-x.x.xx.zip-改名tomcatx-8080</li>
-<li>复制，改名tomcatx-8090</li>
-<li>添加环境变量：CATALINA_HOME:d:\tocatx-8080;CATALINA_HOME2:d:\tomcatx-8090</li>
-<li>修改启动端口和关闭端口<br>进入d:\tomcat5-8090\conf\目录，打开server.xml文件，修改下面两个地方：<br>（1）<code>&lt;Server port=&quot;8006&quot; shutdown=&quot;SHUTDOWN&quot;&gt;</code><br>修改这个port=”8006”，原来默认的为：8005，使得它的关闭端口和另一个关闭端口不发生冲突。<br>（2）<code>&lt;Connector port=&quot;8090&quot; maxHttpHeaderSize=&quot;8192&quot;   maxThreads=&quot;150&quot; minSpareThreads=&quot;25&quot; maxSpareThreads=&quot;75&quot; enableLookups=&quot;false&quot; redirectPort=&quot;8443&quot; acceptCount=&quot;100&quot; connectionTimeout=&quot;20000&quot; disableUploadTimeout=&quot;true&quot; /&gt;</code><br>修改port=”8090”，原来默认的为“8080”，使得它的连接端口和另一个不冲突。</li>
-<li>修改startup.bat和catalina.bat文件内容：<br>(1) 打开d:\tomcat5-8090\bin\startup.bat文件，把其中所有CATALINA_HOME替换为CATALINA_HOME2。<br>（2）打开d:\tomcat5-8090\bin\catalina.bat文件，把其中所有CATALINA_HOME替换为CATALINA_HOME2。</li>
-<li>启动Tomcat，在命令行下分别进入两个不同的Tomcat安装目录下，执行startup.bat，分别启动两个Tomcat。然后在浏览器中输入：<a href="http://localhost:8080" target="_blank" rel="external">http://localhost:8080</a>  和<a href="http://localhost:8090" target="_blank" rel="external">http://localhost:8090</a></li>
-<li>至此，我们已经在一台服务器上配置了两个Tomcat。</li>
-</ol>
-</blockquote>
-<p>考虑到在本地运行，不需要那么复杂。只需要用Disable-WEB-INF。</p>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a><strong>参考</strong></h2><blockquote>
-<ol>
-<li><a href="http://blog.163.com/hegonghe@126/blog/static/50004810200871483335100/" target="_blank" rel="external">在同一台服务器上配置多个Tomcat（原创）</a></li>
-</ol>
-</blockquote>
-<h1 id="忽略webapps里的项目"><a href="#忽略webapps里的项目" class="headerlink" title="忽略webapps里的项目"></a>忽略webapps里的项目</h1><blockquote>
-<p>有时在同一个webapps中有多个项目，而又不想同时部署或启动，那么就要想办法忽略掉某些项目。</p>
-</blockquote>
-<h2 id="方法-1"><a href="#方法-1" class="headerlink" title="方法"></a>方法</h2><blockquote>
-<ol>
-<li>使用web application manager.密码？未实践<br>The Tomcat Web Application Manager lets you stop selected applications. I think that prevents them from loading when Tomcat is restarted.</li>
-<li>将需要忽略的项目的<code>WEB-INF</code>重命名为<code>Disabled-WEB-INF</code>.实践通过</li>
-<li>添加<code>deployIgnore=&quot;projectName&quot;</code>.不部署，</li>
-</ol>
-</blockquote>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">Host</span> <span class="attr">name</span>=<span class="string">"localhost"</span> <span class="attr">appBase</span>=<span class="string">"webapps"</span> <span class="attr">unpackWARs</span>=<span class="string">"true"</span> <span class="attr">autoDeploy</span>=<span class="string">"false"</span> <span class="attr">xmlValidation</span>=<span class="string">"false"</span> <span class="attr">xmlNamespaceAware</span>=<span class="string">"false"</span>&gt;</span> </div><div class="line"><span class="tag">&lt;<span class="name">Context</span> <span class="attr">path</span>=<span class="string">"/acbd"</span> <span class="attr">docBase</span>=<span class="string">"abcd"</span> <span class="attr">debug</span>=<span class="string">"0"</span> <span class="attr">reloadable</span>=<span class="string">"true"</span>/&gt;</span> </div><div class="line"><span class="tag">&lt;<span class="name">Valve</span> <span class="attr">className</span>=<span class="string">"org.apache.catalina.valves.AccessLogValve"</span> <span class="attr">directory</span>=<span class="string">"logs"</span> <span class="attr">prefix</span>=<span class="string">"localhost_access_log."</span> <span class="attr">suffix</span>=<span class="string">".txt"</span> <span class="attr">pattern</span>=<span class="string">"common"</span> <span class="attr">resolveHosts</span>=<span class="string">"false"</span>/&gt;</span> </div><div class="line"><span class="tag">&lt;/<span class="name">Host</span>&gt;</span></div></pre></td></tr></table></figure>
-<h2 id="参考-1"><a href="#参考-1" class="headerlink" title="参考"></a><strong>参考</strong></h2><blockquote>
-<ol>
-<li><a href="http://stackoverflow.com/questions/5067062/how-to-disable-specific-apps-from-starting-during-tomcat-startup" target="_blank" rel="external">How to disable specific apps from starting during Tomcat startup?</a></li>
-<li><a href="https://coderanch.com/t/85667/Tomcat/avoid-loading-applications-webapps" target="_blank" rel="external">avoid loading all applications under webapps</a></li>
-<li><a href="http://tomcat.apache.org/tomcat-5.5-doc/config/host.html#Automatic_Application_Deployment" target="_blank" rel="external">Apache.org</a></li>
-</ol>
-</blockquote>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">tomcat</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/cs/" class="article-tag-list-link color3">cs</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2016/09/05/一台机器部署多个Tomcat及如何忽略webapps里的项目/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/4/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/6/">Next &raquo;</a>
+      <a class="extend prev" rel="prev" href="/page/4/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/6/">Next &raquo;</a>
     </nav>
   
 
@@ -1005,7 +1135,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">nodejs</a>
+                <a href="javascript:void(0)" class="js-tag color5">ajax</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">HTML5</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1013,11 +1147,7 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">ajax</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">JavaScriptCore</a>
+                <a href="javascript:void(0)" class="js-tag color1">html5</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1029,15 +1159,7 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">html5</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">HTML5</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">thought</a>
+                <a href="javascript:void(0)" class="js-tag color5">JavaScriptCore</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1053,15 +1175,23 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">avatar</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">cocoa</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">cookie</a>
+                <a href="javascript:void(0)" class="js-tag color3">thought</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">git</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">cookie</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1073,19 +1203,7 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">多线程</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">bundle</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">HTTP</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">绘图</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1093,11 +1211,27 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">绘图</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">多线程</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">HTTP</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">cs</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">标识</a>
+                <a href="javascript:void(0)" class="js-tag color5">java</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">nodejs</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1109,11 +1243,7 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">java</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Python</a>
+                <a href="javascript:void(0)" class="js-tag color3">标识</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1121,15 +1251,19 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Python</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">python</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">tomcat</a>
+                <a href="javascript:void(0)" class="js-tag color1">essay</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">essay</a>
+                <a href="javascript:void(0)" class="js-tag color2">tomcat</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1141,11 +1275,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Android onclick事件监听</a>
+                <a href="javascript:void(0)" class="js-tag color4">张靓颖</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">张靓颖</a>
+                <a href="javascript:void(0)" class="js-tag color5">Android onclick事件监听</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1157,6 +1291,18 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">PPT</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">MarkDown</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">plan</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">模块化</a>
               </li>
              
@@ -1165,15 +1311,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">plan</a>
+                <a href="javascript:void(0)" class="js-tag color3">crawler</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">NBA</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">crawler</a>
               </li>
              
               <li class="article-tag-list-item">

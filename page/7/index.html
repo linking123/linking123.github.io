@@ -160,6 +160,313 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-模块化-MVC" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/03/13/模块化-MVC/">模块化/MVC</a>
+    </h1>
+  
+
+        
+        <a href="/2016/03/13/模块化-MVC/" class="archive-article-date">
+  	<time datetime="2016-03-13T14:28:37.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-03-13</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>下午看了一些关于模块化和MVC的文章，从各个文章中摘取了一些知识点，记录下来。想到好久没更新博客，权当充数。<br>接下来三天面试GIS开发和游戏开发，希望这三个公司有一个是我的归宿。</p>
+</blockquote>
+<h1 id="模块化"><a href="#模块化" class="headerlink" title="模块化"></a>模块化</h1><p>关键词：<br><strong>函数集合</strong>：污染全局变量<br><strong>对象</strong>：可修改内部变量，不安全<br><strong>立即执行函数</strong>：匿名函数，闭包，私有成员<br><strong>内存泄露</strong>：引用未释放，内存被占用<br><strong>高内聚低耦合</strong>：代码拆分 </p>
+<p>别人的模块拿来即用。标准化的接口。相互独立，功能完整。</p>
+<h2 id="模块化的价值"><a href="#模块化的价值" class="headerlink" title="模块化的价值"></a>模块化的价值</h2><ol>
+<li>代码服用</li>
+<li>提升可维护性</li>
+</ol>
+<ul>
+<li>公共模块通常用于促进<strong>代码复用</strong></li>
+<li>业务模块通常用于提升<strong>可维护性</strong></li>
+</ul>
+<h2 id="前端模块化的难点"><a href="#前端模块化的难点" class="headerlink" title="前端模块化的难点"></a>前端模块化的难点</h2><ol>
+<li>资源复杂</li>
+<li>标准缺位</li>
+<li>天生异步</li>
+</ol>
+<p>CommonJS<br><figure class="highlight lua"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">var <span class="built_in">math</span> = <span class="built_in">require</span>(<span class="string">'math'</span>);</div><div class="line"><span class="built_in">math</span>.add(<span class="number">2</span>,<span class="number">3</span>);</div></pre></td></tr></table></figure></p>
+<p>AMD<br><figure class="highlight lua"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">require</span>([<span class="string">'math'</span>], <span class="function"><span class="keyword">function</span><span class="params">()</span></span>&#123;</div><div class="line">    <span class="built_in">math</span>.add(<span class="number">2</span>,<span class="number">3</span>)</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<p>前者属于”同步”，后者属于”异步”。浏览器不需要等待js从服务器下载完，浏览器可能假死。</p>
+<p>遗憾的是JavaScript在设计时定位原因，没有提供类似的功能，开发者需要模拟出类似的功能，来隔离、组织复杂的JavaScript代码，我们称为模块化。</p>
+<p>一个模块就是实现特定功能的文件，有了模块，我们就可以更方便地使用别人的代码，想要什么功能，就加载什么模块。模块开发需要遵循一定的规范，各行其是就都乱套了。</p>
+<h2 id="AMD与CMD区别"><a href="#AMD与CMD区别" class="headerlink" title="AMD与CMD区别"></a>AMD与CMD区别</h2><blockquote>
+<p>最明显的区别就是在模块定义时对依赖的处理不同</p>
+<p>AMD推崇依赖前置，在定义模块的时候就要声明其依赖的模块<br>CMD推崇就近依赖，只有在用到某个模块的时候再去require<br>这种区别各有优劣，只是语法上的差距，而且requireJS和SeaJS都支持对方的写法</p>
+<p>AMD和CMD最大的区别是对依赖模块的执行时机处理不同，注意不是加载的时机或者方式不同</p>
+<p>很多人说requireJS是异步加载模块，SeaJS是同步加载模块，这么理解实际上是不准确的，其实加载模块都是异步的，只不过AMD依赖前置，js可以方便知道依赖模块是谁，立即加载，而CMD就近依赖，需要使用把模块变为字符串解析一遍才知道依赖了那些模块，这也是很多人诟病CMD的一点，牺牲性能来带来开发的便利性，实际上解析模块用的时间短到可以忽略</p>
+<p>为什么我们说两个的区别是依赖模块执行时机不同，为什么很多人认为ADM是异步的，CMD是同步的（除了名字的原因。。。）</p>
+<p>同样都是异步加载模块，AMD在加载模块完成后就会执行改模块，所有模块都加载执行完后会进入require的回调函数，执行主逻辑，这样的效果就是依赖模块的执行顺序和书写顺序不一定一致，看网络速度，哪个先下载下来，哪个先执行，但是主逻辑一定在所有依赖加载完成后才执行</p>
+<p>CMD加载完某个依赖模块后并不执行，只是下载而已，在所有依赖模块加载完成后进入主逻辑，遇到require语句的时候才执行对应的模块，这样模块的执行顺序和书写顺序是完全一致的</p>
+<p>这也是很多人说AMD用户体验好，因为没有延迟，依赖模块提前执行了，CMD性能好，因为只有用户需要的时候才执行的原因</p>
+</blockquote>
+<h1 id="MVC"><a href="#MVC" class="headerlink" title="MVC"></a>MVC</h1><p><span style="color:red">MVC 不是一种技术，仅是一种理念。</span></p>
+<h2 id="前端MVC"><a href="#前端MVC" class="headerlink" title="前端MVC"></a>前端MVC</h2><table>
+<thead>
+<tr>
+<th>简写</th>
+<th>全称</th>
+<th>含义</th>
+<th>前端表现</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>M</td>
+<td>module</td>
+<td>数据请求和数据操作。</td>
+<td>ajax从服务器拉取数据</td>
+</tr>
+<tr>
+<td>V</td>
+<td>view</td>
+<td>视图操作和改变</td>
+<td>HTML/CSS</td>
+</tr>
+<tr>
+<td>C</td>
+<td>controller</td>
+<td>事件绑定，转发view用户请求到module，业务逻辑</td>
+<td>js</td>
+</tr>
+</tbody>
+</table>
+<h2 id="JS实现基础MVC模型"><a href="#JS实现基础MVC模型" class="headerlink" title="JS实现基础MVC模型"></a>JS实现基础MVC模型</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/** 模擬 Model, View, Controller */</span></div><div class="line"><span class="keyword">var</span> M = &#123;&#125;, V = &#123;&#125;, C = &#123;&#125;;</div><div class="line"></div><div class="line"><span class="comment">/** Model 負責存放資料 */</span></div><div class="line">M.data = <span class="string">"hello world"</span>;</div><div class="line"></div><div class="line"><span class="comment">/** View 負責將資料輸出到螢幕上 */</span></div><div class="line">V.render = <span class="function"><span class="keyword">function</span> (<span class="params">M</span>) </span>&#123; alert(M.data); &#125;</div><div class="line"></div><div class="line"><span class="comment">/** Controller 作為一個 M 和 V 的橋樑 */</span></div><div class="line">C.handleOnload = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123; V.render(M); &#125;</div><div class="line"></div><div class="line"><span class="comment">/** 在網頁讀取的時候呼叫 Controller */</span></div><div class="line"><span class="built_in">window</span>.onload = C.handleOnLoad;</div></pre></td></tr></table></figure>
+<h2 id="图示MVC"><a href="#图示MVC" class="headerlink" title="图示MVC"></a>图示MVC</h2><p><img src="http://image.beekka.com/blog/2015/bg2015020105.png" alt=""></p>
+<blockquote>
+<ol>
+<li>View 传送指令到 Controller</li>
+<li>Controller 完成业务逻辑后，要求 Model 改变状态</li>
+<li>Model 将新的数据发送到 View，用户得到反馈</li>
+</ol>
+</blockquote>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
+<li><a href="https://zh.wikipedia.org/wiki/MVC" target="_blank" rel="external">Wikipedia</a></li>
+<li>阮一峰的博客：<br>　　<a href="http://www.ruanyifeng.com/blog/2012/10/javascript_module.html" target="_blank" rel="external">Javascript模块化编程</a><br>　　<a href="http://www.ruanyifeng.com/blog/2015/02/mvcmvp_mvvm.html" target="_blank" rel="external">MVC、MVP和MVVM</a><br>　　<a href="http://www.ruanyifeng.com/blog/2007/11/mvc.html" target="_blank" rel="external">谈谈MVC模式</a></li>
+<li><a href="http://www.cnblogs.com/dolphinX/p/4381855.html" target="_blank" rel="external">博客园阿里前端</a></li>
+<li><a href="https://github.com/xufei/blog/issues/19" target="_blank" rel="external">2015前端组件化框架之路</a></li>
+</ol>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">模块化</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">MVC</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/cs/" class="article-tag-list-link color3">cs</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2016/03/13/模块化-MVC/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
+    <article id="post-Today" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/03/03/Today/">Today</a>
+    </h1>
+  
+
+        
+        <a href="/2016/03/03/Today/" class="archive-article-date">
+  	<time datetime="2016-03-03T14:19:07.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-03-03</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>今天没有心情发笔记。<br>有时候常在想，我们做项目的意义何在？仅仅是为了完成任务，交付拿钱走人？<br>性格使然，不喜欢很功利性的事情，往往想到很功利的去做事就没有了动力。<br>我也不喜欢临时抱佛脚，考试周冲刺这些事。所以总是不能快速的解决问题，做出成果。没少吃亏，死性不改。<br>也许等我能做出成绩之后再回过头来想这些可能更实际一点吧。现在看问题还是太局限了。<br>小孩子脾气。依着自己的性子。终究是成不了大事的。</p>
+<p>忍耐吧。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">thought</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/diary/" class="article-tag-list-link color1">diary</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2016/03/03/Today/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
+    <article id="post-进度条" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/03/02/进度条/">进度条</a>
+    </h1>
+  
+
+        
+        <a href="/2016/03/02/进度条/" class="archive-article-date">
+  	<time datetime="2016-03-02T14:17:57.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-03-02</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>思路：</p>
+<blockquote>
+<p>进度是已上传除以总大小的百分比；通过动态改变元素的宽度来显示百分比，数字的变化标明大小。</p>
+</blockquote>
+<p>编程重要的是思想，逻辑清楚了，再来码代码会清晰许多。</p>
+<p>前端代码：<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&lt;<span class="selector-tag">input</span> type=<span class="string">'file'</span> name=<span class="string">'pic'</span> onchange=<span class="string">'selfile();'</span> /&gt;</div><div class="line">&lt;<span class="selector-tag">div</span> id=<span class="string">'progress'</span>&gt;</div><div class="line">    &lt;<span class="selector-tag">div</span> id=<span class="string">'bar'</span>&gt;&lt;/div&gt;</div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure></p>
+<p>默认样式：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">type</span>=<span class="string">"text/css"</span>&gt;</span><span class="css">	</span></div><div class="line"><span class="selector-id">#progress</span>&#123;</div><div class="line">	<span class="attribute">width</span>: <span class="number">500px</span>;<span class="attribute">height</span>: <span class="number">30px</span>;<span class="attribute">border</span>: <span class="number">1px</span> solid green;</div><div class="line">&#125;</div><div class="line"><span class="selector-id">#bar</span>&#123;</div><div class="line">	<span class="attribute">width</span>: <span class="number">0%</span>;<span class="attribute">height</span>: <span class="number">100%</span>;<span class="attribute">background</span>: green;</div><div class="line">&#125;</div><div class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>利用上传过程中,<code>xhr.upload.onprogress</code>状态的变化，函数运行过程中自带的事件参数来计算上传百分比<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">xhr.upload.onprogress = <span class="function"><span class="keyword">function</span>(<span class="params">ev</span>)</span>&#123;</div><div class="line">	<span class="comment">// console.log(ev);    //查看ev事件参数的属性和方法</span></div><div class="line">	<span class="keyword">if</span>(ev.lengthComputable)&#123;</div><div class="line">		<span class="keyword">var</span> percent = <span class="number">100</span> * ev.loaded/ev.total;</div><div class="line">		<span class="comment">// console.log(percent);</span></div><div class="line">		<span class="built_in">document</span>.getElementById(<span class="string">'bar'</span>).style.width = percent + <span class="string">'%'</span>;</div><div class="line">		<span class="built_in">document</span>.getElementById(<span class="string">'bar'</span>).innerHTML = <span class="built_in">parseInt</span>(percent) + <span class="string">'%'</span>;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>后记：</p>
+<blockquote>
+<p>很久之前我就想用这种简单的进度条给自己做一个读书管理软件，但由于自己的惰性，一直没有成型。<br><blockquote><p>好的软件产品，常常源于开发者自身的需求。<br>如果有什么工作能让你坚持长久的热情，那一定是做自己需要的产品。</p>
+<footer><strong>池建强</strong><cite><a href="http://macshuo.com/" target="_blank" rel="external">MacTalK</a></cite></footer></blockquote></p>
+<p>脑子里有了个12345，然后可以打个草稿，列列提纲，就算现在不做，也要加入到备忘录里吧。<br>当然一个阶段有一个阶段该干的事，也许过了这个时间段，再来做可能没有当时的动力，也可能回过头来当时的问题现在都成了小菜。</p>
+</blockquote>
+<p>但行好事，莫问前程？！<br>做人还是纯粹一点，专注一点好。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">进度条</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/cs/" class="article-tag-list-link color3">cs</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2016/03/02/进度条/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
     <article id="post-HTML5与Ajax上传文件" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -203,11 +510,11 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Ajax</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">HTML5</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">HTML5</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Ajax</a>
         		</li>
       		
 		</ul>
@@ -672,442 +979,9 @@ function aa(res){
 
 
   
-    <article id="post-polygon-polyline-point-addField-caculate" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/01/22/polygon-polyline-point-addField-caculate/">polygon_polyline_point_addField_caculate</a>
-    </h1>
-  
-
-        
-        <a href="/2016/01/22/polygon-polyline-point-addField-caculate/" class="archive-article-date">
-  	<time datetime="2016-01-22T05:20:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-01-22</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h2><p>导师需要安徽省所有县级单位的行政边界的点位置数据，数据最终格式是屏幕坐标(<strong>同一区域形成闭环</strong>)</p>
-<table>
-<thead>
-<tr>
-<th>区域名</th>
-<th>x</th>
-<th>y</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>合肥市</td>
-<td>12</td>
-<td>53</td>
-</tr>
-<tr>
-<td>合肥市</td>
-<td>17</td>
-<td>55</td>
-</tr>
-<tr>
-<td>合肥市</td>
-<td>12</td>
-<td>34</td>
-</tr>
-<tr>
-<td>合肥市</td>
-<td>16</td>
-<td>67</td>
-</tr>
-<tr>
-<td>合肥市</td>
-<td>14</td>
-<td>23</td>
-</tr>
-<tr>
-<td>合肥市</td>
-<td>12</td>
-<td>53</td>
-</tr>
-<tr>
-<td>长丰县</td>
-<td>67</td>
-<td>32</td>
-</tr>
-<tr>
-<td>长丰县</td>
-<td>44</td>
-<td>32</td>
-</tr>
-<tr>
-<td>长丰县</td>
-<td>12</td>
-<td>89</td>
-</tr>
-<tr>
-<td>长丰县</td>
-<td>98</td>
-<td>54</td>
-</tr>
-<tr>
-<td>长丰县</td>
-<td>67</td>
-<td>32</td>
-</tr>
-<tr>
-<td>…</td>
-<td>…</td>
-<td>…</td>
-</tr>
-</tbody>
-</table>
-<h2 id="建模必要性"><a href="#建模必要性" class="headerlink" title="建模必要性"></a>建模必要性</h2><blockquote>
-<p>每两个元素之间都有直接的工具，然而多任务情况下无法满足需求，如果单独批量处理每一次的转化，工作量十分巨大；考虑到这些，有必要构建合适的模型，模型的好处是合并多步骤省去了中间步骤，最关键的是可以设置中间参数默认值，这样能大大减少中间的输入，而且避免了每次输入的不必要错误。</p>
-</blockquote>
-<h2 id="模型描述"><a href="#模型描述" class="headerlink" title="模型描述"></a>模型描述</h2><blockquote>
-<p>面-&gt;线-&gt;点-&gt;点抽稀(GA-子集,40%)-&gt;加字段(设好默认属性)-&gt;计算几何(x,y)、字段计算</p>
-</blockquote>
-<p>这里的<strong>关键问题</strong>有两个：<br>1.多个工具的顺序<br>为了是模型更具效率，需要考虑每一步之间的先后，使计算处理量最小。例如此处的子集和加字段步骤，先子集然后加字段，就避免了给多余的点加字段，减少了运算量。<br>2.参数的默认值<br>这一步是简化工作量最关键的步骤。省去很多繁杂的输入操作。<br>模型需要输入输出参数，否则模型无效。<br><img src="http://7xqd63.com1.z0.glb.clouddn.com/polygonToPoint.PNG?imageView/4/w/344/q/88" alt=""><br>设置了默认值的参数，显示是蓝色的。<br><img src="http://7xqd63.com1.z0.glb.clouddn.com/polygon_point_childSet_addFiled.PNG?imageView/4/w/544/q/88" alt=""><br>待解决问题：<br>1.计算几何没有找到合适的代码，需要手动计算<br>2.字段计算同样人工操作。这两个问题都是对<code>arcgis</code>的<code>Python</code>操作不熟悉，有机会应该了解一点<code>arcpy</code>。</p>
-<h2 id="存在问题"><a href="#存在问题" class="headerlink" title="存在问题"></a>存在问题</h2><blockquote>
-<p>1.异常点。转点的过程中，软件处理算法的原因，造成点不是按顺序排列的，无法自动完成，只能通过人工检视来查找异常点，理清顺序。<br>2.市辖区合并。根据导师的意思，比方说合肥的四个市辖区，合并成一个，命名合肥市。<br>3.每个县市的边界点密度大概多少合适。经过反复试验，大概在100-200左右，统一将原数据降密到原来基础上的40%，能够满足需求。<br>4.邻界点是否必须重合。如果有此要求，就无法做下去。咨询老板，不需要。窃喜。<br>5.淮北市区有一块飞地。保留两个，分开表示即可。</p>
-</blockquote>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">arcgis</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">arcgis 建模</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/arcgis/" class="article-tag-list-link color2">arcgis</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2016/01/22/polygon-polyline-point-addField-caculate/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
-    <article id="post-判断非手机登陆，做一次提醒" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/01/11/判断非手机登陆，做一次提醒/">判断非手机登陆，做一次提醒</a>
-    </h1>
-  
-
-        
-        <a href="/2016/01/11/判断非手机登陆，做一次提醒/" class="archive-article-date">
-  	<time datetime="2016-01-11T12:17:29.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-01-11</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>需求</p>
-<blockquote>
-<p>项目的网站时做的手机网页，但是没有考虑到自适应pc端，只是在chrome中固定了手机屏幕大小，所以在pc端查看会很丑，布局是乱的；但是重写又很麻烦，所以有必要做一下提醒，让用户手动将网页缩小到手机屏幕大小。</p>
-</blockquote>
-<p>用到</p>
-<blockquote>
-<p>非手机检验和cookie记录</p>
-</blockquote>
-<p>方法</p>
-<blockquote>
-<p>这段代码是使用了cookie来控制的</p>
-<ol>
-<li>使用cookie让浏览器记住页面已经打开过一次，当前页面刷新不会弹出提醒。</li>
-<li>浏览器一旦关闭，保存这个记录的cookie文件将被删除。重新打开浏览器弹出窗口会再次出现，从而确保了在原有的窗口基础上只打开一次。 </li>
-</ol>
-</blockquote>
-<p>判断非手机登陆方式<br><figure class="highlight lisp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">if (!/Android|webOS|iPhone|iPod|BlackBerry/i.test(<span class="name">navigator</span>.userAgent))</div><div class="line">	alert(<span class="string">"为了提高体验效果，请把页面缩小成手机屏幕大小。\n谢谢合作！"</span>)<span class="comment">;</span></div></pre></td></tr></table></figure></p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span><span class="javascript"></span></div><div class="line">	<span class="keyword">try</span>&#123;</div><div class="line">		<span class="keyword">var</span> alertmessage=<span class="string">"为了提高体验效果，请把页面缩小成手机屏幕大小。\n谢谢合作！"</span>;</div><div class="line">		<span class="keyword">var</span> once_per_session=<span class="number">1</span></div><div class="line">		<span class="function"><span class="keyword">function</span> <span class="title">get_cookie</span>(<span class="params">Name</span>) </span>&#123;</div><div class="line">		  <span class="keyword">var</span> search = Name + <span class="string">"="</span></div><div class="line">		  <span class="keyword">var</span> returnvalue = <span class="string">""</span>;</div><div class="line">		  <span class="keyword">if</span> (<span class="built_in">document</span>.cookie.length &gt; <span class="number">0</span>) &#123;</div><div class="line">			offset = <span class="built_in">document</span>.cookie.indexOf(search)</div><div class="line">			<span class="keyword">if</span> (offset != <span class="number">-1</span>) &#123;</div><div class="line">			  offset += search.length;</div><div class="line">			  end = <span class="built_in">document</span>.cookie.indexOf(<span class="string">";"</span>, offset);</div><div class="line">			  <span class="keyword">if</span> (end == <span class="number">-1</span>)</div><div class="line">				 end = <span class="built_in">document</span>.cookie.length;</div><div class="line">			 	 returnvalue=<span class="built_in">unescape</span>(<span class="built_in">document</span>.cookie.substring(offset, end))</div><div class="line">			  &#125;</div><div class="line">		   	&#125;</div><div class="line">		 	<span class="keyword">return</span> returnvalue;</div><div class="line">		&#125;</div><div class="line">		<span class="function"><span class="keyword">function</span> <span class="title">alertornot</span>(<span class="params"></span>)</span>&#123;</div><div class="line">			<span class="keyword">if</span> (get_cookie(<span class="string">'alerted'</span>)==<span class="string">''</span>)&#123;</div><div class="line">		        loadalert();</div><div class="line">				<span class="built_in">document</span>.cookie=<span class="string">"alerted=yes"</span>;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">		<span class="function"><span class="keyword">function</span> <span class="title">loadalert</span>(<span class="params"></span>)</span>&#123;</div><div class="line">			<span class="keyword">if</span> (!<span class="regexp">/Android|webOS|iPhone|iPod|BlackBerry/i</span>.test(navigator.userAgent))</div><div class="line">				alert(alertmessage);</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">if</span> (once_per_session==<span class="number">0</span>)</div><div class="line">			loadalert();</div><div class="line">		<span class="keyword">else</span></div><div class="line">			alertornot();</div><div class="line">	&#125; <span class="keyword">catch</span>(e)</div><div class="line">	&#123;</div><div class="line">		alert(e);</div><div class="line">	&#125;</div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div></pre></td></tr></table></figure>
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">cs</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2016/01/11/判断非手机登陆，做一次提醒/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
-    <article id="post-nodejs学习记录" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/01/05/nodejs学习记录/">nodejs学习记录</a>
-    </h1>
-  
-
-        
-        <a href="/2016/01/05/nodejs学习记录/" class="archive-article-date">
-  	<time datetime="2016-01-05T02:18:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-01-05</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="《Node-js开发指南》"><a href="#《Node-js开发指南》" class="headerlink" title="《Node.js开发指南》"></a>《Node.js开发指南》</h1><p>学习nodejs有一段时间了，基本的概念已经有了大概的了解。《Node.js开发指南》进行到第五章-使用Nodejs进行web开发，实现一个微博系统。<br>前面看书一直断断续续，前段时间只能晚上在宿舍看一会，没有系统性，虽然勉强看完了前面四章节的基础知识，但还不能说会了。希望通过这个小系统的练习，对nodejs有更深入的理解。</p>
-<p>微博系统主要功能</p>
-<blockquote>
-<p>1.路由控制<br>2.页面模板<br>3.数据库访问<br>4.用户注册<br>5.登陆<br>6.用户会话</p>
-</blockquote>
-<p>主要技术点：</p>
-<blockquote>
-<p>1.Express框架<br>2.MVC设计模式<br>3.ejs模板引擎<br>4.MongoDB数据库</p>
-</blockquote>
-<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><table>
-<thead>
-<tr>
-<th style="text-align:left">简记</th>
-<th style="text-align:center">全拼</th>
-<th style="text-align:center">中文</th>
-<th style="text-align:center">含义</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">M</td>
-<td style="text-align:center">Model</td>
-<td style="text-align:center">模型</td>
-<td style="text-align:center">对象及数据结构的实现,通常包括数据库操作</td>
-</tr>
-<tr>
-<td style="text-align:left">V</td>
-<td style="text-align:center">View</td>
-<td style="text-align:center">视图</td>
-<td style="text-align:center">表示用户界面,HTML组织结构</td>
-</tr>
-<tr>
-<td style="text-align:left">C</td>
-<td style="text-align:center">Controller</td>
-<td style="text-align:center">控制器</td>
-<td style="text-align:center">用于处理用户请求和数据流、复杂模型,将输出传递给视图</td>
-</tr>
-</tbody>
-</table>
-<p>nodejs两大特性，其一：</p>
-<blockquote>
-<p>可以跳过<code>http</code>服务器,因为它本身就是。提供http模块，由c++实现，性能可靠，可直接应用到生产环境。</p>
-</blockquote>
-<p>其二：</p>
-<blockquote>
-<p>与其他语言的显著区别，原始封装成都较低。nodejs中很多工作需要自己完成(但不是都是自己动手，可借助于<strong>第三方框架</strong>)。</p>
-</blockquote>
-<p>使用http模块</p>
-<blockquote>
-<p>减少一层抽象，性能的提升同时提高了开发难度。就一个简单的post请求来说，PHP只要两行代码，而nodejs需要自己手动写post请求过程。底层接口尽管用起来复杂，但让我们对http协议的理解更加清晰。<br>http模块是http服务器内核的封装，可以做网站，可以做代理服务器。手动实现所有东西，小到POST请求，达到Cookie、会话管理。当你用这种方式建立网站时，几乎已经做好了一个完整的框架了。</p>
-</blockquote>
-<p>Express框架</p>
-<blockquote>
-<p>更高层的http接口，以及许多网站常用功能实现了。<br>但不是一个无所不包的全能框架，没有像Rails或Django实现模板引擎甚至ORM(Object Relation Model,对象关系模型)。只是一个轻量级的web框架，多数功能只是对http协议中的常用操作的封装，更多的功能需要插件或者整合其他模块来完成。</p>
-</blockquote>
-<h2 id="快速开始"><a href="#快速开始" class="headerlink" title="快速开始 "></a>快速开始 </h2><p>安装Express<br>目前express已经更新到4.x版本，安装时可用@加版本<br><figure class="highlight autoit"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">npm install -g express-generator<span class="symbol">@3</span></div><div class="line"><span class="literal">or</span></div><div class="line">npm install -g express-generator<span class="symbol">@4</span></div></pre></td></tr></table></figure></p>
-<p>书上用的是2.5.8版本，所以<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">npm</span> <span class="selector-tag">install</span> <span class="selector-tag">-g</span> <span class="selector-tag">express</span>@<span class="keyword">2</span>.<span class="keyword">5</span>.<span class="keyword">8</span> --save</div></pre></td></tr></table></figure></p>
-<p>不加版本号，默认最新版本.安装完成后，用<code>express -V</code>检查安装结果。<br>这样就可以使用express命令了。<br>最快的安装启动express框架简要步骤：<br><figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">express <span class="keyword">blog </span>&amp;&amp; cd <span class="keyword">blog </span>&amp;&amp; npm <span class="keyword">install </span>&amp;&amp; npm start</div></pre></td></tr></table></figure></p>
-<p><code>express 4.x</code>无法用<code>node app.js</code>启动，指令为<code>npm start</code>。<br>然后打开<a href="localhost:3000" target="_blank" rel="external">localhost:3000</a>即可见到熟悉的<code>Welcome to Express</code>。</p>
-<blockquote>
-<p>对应的版本都需要对应的依赖，有时候安装的时候会自动选择最先版本，也需要最新的依赖；制定的方法是在<code>package.json</code>中制定依赖的版本，再运行<code>npm install</code>来安装依赖。</p>
-</blockquote>
-<p>最重要的事应该是理解框架的设计思想，文件之间的映射关系，各个文件夹的分工。<br>理解MVC。</p>
-<p>老版本用<code>supervisor app.js</code>来启动应用，依然可行。   </p>
-<h2 id="建立微博网站"><a href="#建立微博网站" class="headerlink" title="建立微博网站"></a>建立微博网站</h2><p>1功能分析</p>
-<blockquote>
-<p>开发中的大忌是没想清楚要做什么就开始动手。先应该有一个全局的规划。</p>
-</blockquote>
-<ol>
-<li>以用户为中心，需有注册登录功能</li>
-<li>最核心的是信息的发表，涉及数据库访问，前端显示</li>
-<li>评论，转发，点赞等功能，但由于学习目的，不一一实现</li>
-</ol>
-<p>2路由规划<br>或者控制器规划是网站的骨架部分，优先考虑<br>根据功能设计，路由规划方案如下：</p>
-<ul>
-<li>/: 首页</li>
-<li>/u[user] 用户主页</li>
-<li>/post: 发表信息</li>
-<li>/reg: 用户注册</li>
-<li>/login: 用户登录</li>
-<li>/logout: 登出</li>
-</ul>
-<h2 id="常见错误处理"><a href="#常见错误处理" class="headerlink" title="常见错误处理"></a>常见错误处理</h2><p>在完成用户注册页面书写之后，运行出错。<br>error:connection strategy not found</p>
-<figure class="highlight taggerscript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">$ node app.js</div><div class="line">E:<span class="symbol">\s</span>ync_mypc<span class="symbol">\s</span>ync_mypc<span class="symbol">\l</span>anguages<span class="symbol">\j</span>s<span class="symbol">\n</span>odejs<span class="symbol">\b</span>log<span class="symbol">\m</span>blog<span class="symbol">\n</span>ode_modules<span class="symbol">\c</span>onnect-mongo</div><div class="line"><span class="symbol">\s</span>rc<span class="symbol">\i</span>ndex.js:100</div><div class="line">                throw new Error('Connection strategy not found');</div><div class="line">                ^</div><div class="line"></div><div class="line">Error: Connection strategy not found</div><div class="line">    at MongoStore (E:<span class="symbol">\s</span>ync_mypc<span class="symbol">\s</span>ync_mypc<span class="symbol">\l</span>anguages<span class="symbol">\j</span>s<span class="symbol">\n</span>odejs<span class="symbol">\b</span>log<span class="symbol">\m</span>blog<span class="symbol">\n</span>ode_mo</div><div class="line">dules<span class="symbol">\c</span>onnect-mongo<span class="symbol">\s</span>rc<span class="symbol">\i</span>ndex.js:100:23)</div><div class="line">    at HTTPServer.&lt;anonymous&gt; (E:<span class="symbol">\s</span>ync_mypc<span class="symbol">\s</span>ync_mypc<span class="symbol">\l</span>anguages<span class="symbol">\j</span>s<span class="symbol">\n</span>odejs<span class="symbol">\b</span>log<span class="symbol">\m</span></div><div class="line">blog<span class="symbol">\a</span>pp.js:23:12)</div><div class="line">    at HTTPServer.app.configure (E:<span class="symbol">\s</span>ync_mypc<span class="symbol">\s</span>ync_mypc<span class="symbol">\l</span>anguages<span class="symbol">\j</span>s<span class="symbol">\n</span>odejs<span class="symbol">\b</span>log</div><div class="line"><span class="symbol">\m</span>blog<span class="symbol">\n</span>ode_modules<span class="symbol">\e</span>xpress<span class="symbol">\l</span>ib<span class="symbol">\h</span>ttp.js:542:61)</div><div class="line">    at Object.&lt;anonymous&gt; (E:<span class="symbol">\s</span>ync_mypc<span class="symbol">\s</span>ync_mypc<span class="symbol">\l</span>anguages<span class="symbol">\j</span>s<span class="symbol">\n</span>odejs<span class="symbol">\b</span>log<span class="symbol">\m</span>blog</div><div class="line"><span class="symbol">\a</span>pp.js:15:5)</div><div class="line">    at Module._compile (module.js:425:26)</div><div class="line">    at Object.Module._extensions..js (module.js:432:10)</div><div class="line">    at Module.load (module.js:356:32)</div><div class="line">    at Function.Module._load (module.js:311:12)</div><div class="line">    at Function.Module.runMain (module.js:457:10)</div><div class="line">    at startup (node.js:136:18)</div><div class="line">    at node.js:972:3</div></pre></td></tr></table></figure>
-<p>问题解决<br>在<a href="https://cnodejs.org/" target="_blank" rel="external">cnode</a>(已用github邮箱注册)上看到了一篇同样的<a href="https://cnodejs.org/topic/567a1120222744630726b244#567bab8c10b0249d07105d9c" target="_blank" rel="external">问题</a>，答案中解决了。<br>解决方式<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">npm</span> <span class="selector-tag">install</span> <span class="selector-tag">connect-mongo</span>@<span class="keyword">0</span>.<span class="keyword">8</span>.<span class="keyword">2</span> --save</div></pre></td></tr></table></figure></p>
-<p>独立的模块更新可能影响整体功能。在同一个时期要用当时的版本。</p>
-<p>定义的<code>db.js</code>中<code>DEFAULT_PORT</code>没有定义</p>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">TypeError: Cannot read property <span class="string">'DEFAULT_PORT'</span> of undefined</div><div class="line">    at Object.&lt;anonymous&gt; (E:\sync_mypc\sync_mypc\languages\js\nodejs\blog\mblog\models\db<span class="selector-class">.js</span>:<span class="number">7</span>:<span class="number">74</span>)</div><div class="line">    at Module._compile (module<span class="selector-class">.js</span>:<span class="number">425</span>:<span class="number">26</span>)</div><div class="line">    at Object<span class="selector-class">.Module</span>._extensions.<span class="selector-class">.js</span> (module<span class="selector-class">.js</span>:<span class="number">432</span>:<span class="number">10</span>)</div><div class="line">    at Module<span class="selector-class">.load</span> (module<span class="selector-class">.js</span>:<span class="number">356</span>:<span class="number">32</span>)</div><div class="line">    at Function<span class="selector-class">.Module</span>._load (module<span class="selector-class">.js</span>:<span class="number">311</span>:<span class="number">12</span>)</div><div class="line">    at Module<span class="selector-class">.require</span> (module<span class="selector-class">.js</span>:<span class="number">366</span>:<span class="number">17</span>)</div><div class="line">    at require (module<span class="selector-class">.js</span>:<span class="number">385</span>:<span class="number">17</span>)</div><div class="line">    at Object.&lt;anonymous&gt; (E:\sync_mypc\sync_mypc\languages\js\nodejs\blog\mblog\models\user<span class="selector-class">.js</span>:<span class="number">1</span>:<span class="number">77</span>)</div><div class="line">    at Module._compile (module<span class="selector-class">.js</span>:<span class="number">425</span>:<span class="number">26</span>)</div><div class="line">    at Object<span class="selector-class">.Module</span>._extensions.<span class="selector-class">.js</span> (module<span class="selector-class">.js</span>:<span class="number">432</span>:<span class="number">10</span>)</div><div class="line">Program node app<span class="selector-class">.js</span> exited with <span class="selector-tag">code</span> <span class="number">1</span></div></pre></td></tr></table></figure>
-<p>问题解决<br><figure class="highlight ada"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">DEFAULT_PORT   <span class="comment">-----    27017</span></div></pre></td></tr></table></figure></p>
-<p>到今天下午，基本完成第五章的学习。程序能够正常运行，但是还有许多细节不是很清楚，例如<code>mongodb</code>的使用，之间的映射关系自己也还要梳理一遍。</p>
-<p>代码稍后会在<a href="https://github.com/linking123/nodejs_guard" target="_blank" rel="external"><code>GitHub</code></a>和<a href=""><code>oscGit</code></a>上双备份。</p>
-<h1 id="《Node-js实战》"><a href="#《Node-js实战》" class="headerlink" title="《Node.js实战》  "></a>《Node.js实战》  </h1><p>图书编号：TP312JA425</p>
-<h2 id="第一部分-基础篇"><a href="#第一部分-基础篇" class="headerlink" title="第一部分 基础篇"></a>第一部分 基础篇</h2><p>nodejs及JavaScript基础了解。</p>
-<h2 id="第二部分-提高篇"><a href="#第二部分-提高篇" class="headerlink" title="第二部分 提高篇"></a>第二部分 提高篇</h2><p>相册服务器<br>模块<br>模板<br>2015/12/30 noon 17:09  library<br>稍后补上笔记并上传代码备份</p>
-<h2 id="第三部分-实战篇"><a href="#第三部分-实战篇" class="headerlink" title="第三部分 实战篇"></a>第三部分 实战篇</h2><p>###第七章使用express构建web应用<br>路由<br><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">app.get(<span class="string">'/'</span>, <span class="function"><span class="keyword">function</span><span class="params">(req, res)</span></span>&#123; &#125;);</div></pre></td></tr></table></figure></p>
-<p>URL路由函数一般格式<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">app</span><span class="selector-class">.method</span>(<span class="selector-tag">url_pattern</span>, <span class="selector-tag">optional_functions</span>, <span class="selector-tag">request_handler_function</span>);</div></pre></td></tr></table></figure></p>
-<p>method: get, post, delete, put; all<br>简单的URL</p>
-<blockquote>
-<p>/path/to/resources</p>
-</blockquote>
-<p>也支持正则</p>
-<blockquote>
-<p>/user(s)?/list<br>/user/*</p>
-</blockquote>
-<p>占位符(用<code>:</code>标记)从请求路由中提取指定值(除了<code>/</code>)，解析路由时将匹配到的占位符值保存到<code>req.params</code>对象中<br><figure class="highlight lua"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">app.get(<span class="string">"/albums/:album_name.json"</span>, <span class="function"><span class="keyword">function</span><span class="params">(req, res)</span></span>&#123;</div><div class="line">　　res.<span class="keyword">end</span>(<span class="string">"request "</span>+req.params.album_name);</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
-<p>如上面请求/albums/linking.json,输出结果为:</p>
-<blockquote>
-<p>request linking</p>
-</blockquote>
-<p>模块化，<code>REST</code>风格的接口。</p>
-<blockquote>
-<p>将能够独立出来，以后会复用的模块分离成单独文件。<br>模块化增加了源代码可读性，结构更加清晰明了。</p>
-</blockquote>
-<p>中间件</p>
-<blockquote>
-<p>如<code>express</code>就建立在<code>connect</code>这个中间件。</p>
-</blockquote>
-<p>通过一下格式引用中间件<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> middle_something = <span class="keyword">require</span>(<span class="string">'middle_something'</span>);</div><div class="line">app.<span class="keyword">use</span>(middle_something());</div></pre></td></tr></table></figure></p>
-<p>配置</p>
-<blockquote>
-<p>使用<code>configure</code>方法指定配置名称，在特定的配置环境下该方法提供的函数会被调用。未指定名称，则函数会被所有的配置环境调用，多个配置名称可以用逗号隔开。<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">app.configure(<span class="function"><span class="keyword">function</span><span class="params">()</span></span>&#123;   <span class="comment">//全部适用</span></div><div class="line">　app.<span class="keyword">use</span>(express.bodyParser());</div><div class="line">&#125;);</div><div class="line"></div><div class="line">app.configure(<span class="string">'dev'</span>, <span class="function"><span class="keyword">function</span><span class="params">()</span></span>&#123;  <span class="comment">//指定了开发环境适用</span></div><div class="line">　app.<span class="keyword">use</span>(expresss.logger(<span class="string">'dev'</span>));</div><div class="line">&#125;);</div><div class="line">app.configure(<span class="string">'production'</span>, <span class="string">'staging'</span>, <span class="function"><span class="keyword">function</span><span class="params">()</span></span>&#123;  <span class="comment">//多名称</span></div><div class="line">　app.<span class="keyword">use</span>(express.logger());</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
-</blockquote>
-<p>Mac和UNIX电脑中shell命令<br><figure class="highlight crmsh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="attr">NODE_ENV=</span>production <span class="keyword">node</span> <span class="title">program</span>.js</div></pre></td></tr></table></figure></p>
-<p>Windows命令<br><figure class="highlight crmsh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">set <span class="attr">NODE_ENV=</span>production</div><div class="line"><span class="keyword">node</span> <span class="title">program</span>.js</div></pre></td></tr></table></figure></p>
-<p>中间件执行过程中有一个顺序问题，注意<code>re</code>s.end`的位置，它会关闭响应。</p>
-<p>静态文件处理</p>
-<blockquote>
-<p><code>express</code>通过<code>connect</code>提供了<code>static</code>中间件，将存放静态文件的根目录路径名赋给中间件创建函数即可<br><figure class="highlight fsharp"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">app.<span class="keyword">use</span>(express.<span class="keyword">static</span>(<span class="string">"/secure/static_site_files"</span>));</div></pre></td></tr></table></figure></p>
-</blockquote>
-<p><code>bodyParser</code>,<code>cookieParser</code>,<code>session</code><br><figure class="highlight ada"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">var app = express()</div><div class="line">    .<span class="keyword">use</span>(express.logger(<span class="symbol">'dev</span>'))</div><div class="line">     // move this to AFTER the next <span class="keyword">use</span>() <span class="keyword">and</span> see what happens!</div><div class="line">    .<span class="keyword">use</span>(express.bodyParser())</div><div class="line">    .<span class="keyword">use</span>(<span class="keyword">function</span>(req, res)&#123;</div><div class="line">        console.log(req.<span class="keyword">body</span>);</div><div class="line">        res.<span class="keyword">end</span>(<span class="symbol">'want</span> to update album name to '</div><div class="line">                + req.<span class="keyword">body</span>.album.new_name + <span class="string">"\n"</span>);</div><div class="line">&#125;)</div></pre></td></tr></table></figure></p>
-<p><strong>编写应用过程中，检测和捕捉错误的代码量往往要大于正常操作的代码量，这才是良好的代码风格。</strong></p>
-<blockquote>
-<p>也许我单纯的以为代码只要能实现直接的功能就行了，是太浅薄的理解。程序中大部分时间都在跟<code>bug</code>作斗争，良好的代码风格能够节省大量的时间，快速定位错误所在。</p>
-</blockquote>
-<h2 id="第四部分-进阶篇"><a href="#第四部分-进阶篇" class="headerlink" title="第四部分 进阶篇"></a>第四部分 进阶篇</h2>
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">nodejs</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/cs/" class="article-tag-list-link color3">cs</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2016/01/05/nodejs学习记录/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/6/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/8/">Next &raquo;</a>
+      <a class="extend prev" rel="prev" href="/page/6/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/8/">Next &raquo;</a>
     </nav>
   
 
@@ -1193,7 +1067,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">nodejs</a>
+                <a href="javascript:void(0)" class="js-tag color5">ajax</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">HTML5</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1201,11 +1079,7 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">ajax</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">JavaScriptCore</a>
+                <a href="javascript:void(0)" class="js-tag color1">html5</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1217,15 +1091,7 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">html5</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">HTML5</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">thought</a>
+                <a href="javascript:void(0)" class="js-tag color5">JavaScriptCore</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1241,15 +1107,23 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">avatar</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">cocoa</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">cookie</a>
+                <a href="javascript:void(0)" class="js-tag color3">thought</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">git</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">cookie</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1261,19 +1135,7 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">多线程</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">bundle</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">HTTP</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">绘图</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1281,11 +1143,27 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">绘图</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">多线程</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">HTTP</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">cs</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">标识</a>
+                <a href="javascript:void(0)" class="js-tag color5">java</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">nodejs</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1297,11 +1175,7 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">java</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Python</a>
+                <a href="javascript:void(0)" class="js-tag color3">标识</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1309,15 +1183,19 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Python</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">python</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">tomcat</a>
+                <a href="javascript:void(0)" class="js-tag color1">essay</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">essay</a>
+                <a href="javascript:void(0)" class="js-tag color2">tomcat</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1329,11 +1207,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Android onclick事件监听</a>
+                <a href="javascript:void(0)" class="js-tag color4">张靓颖</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">张靓颖</a>
+                <a href="javascript:void(0)" class="js-tag color5">Android onclick事件监听</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1345,6 +1223,18 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">PPT</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">MarkDown</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">plan</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">模块化</a>
               </li>
              
@@ -1353,15 +1243,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">plan</a>
+                <a href="javascript:void(0)" class="js-tag color3">crawler</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">NBA</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">crawler</a>
               </li>
              
               <li class="article-tag-list-item">
