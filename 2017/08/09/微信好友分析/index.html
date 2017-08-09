@@ -31,7 +31,7 @@
 <meta property="og:image" content="http://orukz1s2q.bkt.clouddn.com/wechat_signature_cloud.jpg?imageView2/2/h/200">
 <meta property="og:image" content="http://orukz1s2q.bkt.clouddn.com/morecolor.jpg?imageView2/2/h/200">
 <meta property="og:image" content="http://orukz1s2q.bkt.clouddn.com/wechatSignatureInfo.png?imageView2/2/h/200">
-<meta property="og:updated_time" content="2017-08-09T12:06:34.000Z">
+<meta property="og:updated_time" content="2017-08-09T12:11:06.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="微信好友分析">
 <meta name="twitter:description" content="目录
@@ -218,9 +218,8 @@
 <figure class="highlight nix"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 百分比圆饼表</span></div><div class="line"><span class="built_in">import</span> matplotlib.pyplot as plt</div><div class="line"></div><div class="line"><span class="comment"># Pie chart, where the slices will be ordered and plotted counter-clockwise:</span></div><div class="line"><span class="attr">labels</span> = 'male', 'female', 'other'</div><div class="line"><span class="attr">sizes</span> = [maleRate, femaleRate, otherRate]</div><div class="line"><span class="attr">explode</span> = (<span class="number">0</span>, <span class="number">0.1</span>, <span class="number">0</span>)  <span class="comment"># 突出显示女性比例，嘿嘿 only "explode" the 2nd slice (i.e. 'female')</span></div><div class="line"></div><div class="line">fig1, <span class="attr">ax1</span> = plt.subplots()</div><div class="line"></div><div class="line">ax1.pie(sizes, <span class="attr">explode=explode,</span> <span class="attr">labels=labels,</span> <span class="attr">autopct='%1.2f%%',</span></div><div class="line">        <span class="attr">shadow=True,</span> <span class="attr">startangle=90)</span></div><div class="line">ax1.axis('equal')  <span class="comment"># Equal aspect ratio ensures that pie is drawn as a circle.</span></div><div class="line"></div><div class="line">plt.show()</div></pre></td></tr></table></figure>
 <p><img src="http://orukz1s2q.bkt.clouddn.com/wechatFriendsMaleFemaleRate.png" alt=""></p>
 <h2 id="2-好友个性签名词云"><a href="#2-好友个性签名词云" class="headerlink" title="2.好友个性签名词云"></a>2.好友个性签名词云</h2><figure class="highlight nix"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># coding: utf-8</span></div><div class="line"><span class="built_in">import</span> itchat</div><div class="line"></div><div class="line"><span class="comment"># 登录微信，需要扫描弹出的二维码</span></div><div class="line">itchat.login()</div><div class="line"><span class="comment"># 爬取好友信息,json字符串</span></div><div class="line"><span class="attr">friends</span> = itchat.get_friends(<span class="attr">update=True)[0:]</span></div><div class="line"><span class="comment"># print(friends)</span></div><div class="line"></div><div class="line"><span class="comment">#定义一个函数，用来爬取各个变量</span></div><div class="line">def get_var(var):</div><div class="line">    <span class="attr">variable</span> = []</div><div class="line">    for i <span class="keyword">in</span> friends:</div><div class="line">        <span class="attr">value</span> = i[var]</div><div class="line">        variable.append(value)</div><div class="line">    return variable</div><div class="line"></div><div class="line"><span class="comment"># 调用函数得到各变量</span></div><div class="line"><span class="comment"># 个性签名</span></div><div class="line"><span class="attr">Signature</span> = get_var('Signature')</div><div class="line"></div><div class="line"><span class="comment"># 很多本来是表情的，变成了 emoji、span、class 等等这些无关紧要的词，需要先替换掉，另外，</span></div><div class="line"><span class="comment"># 还有类似&lt;&gt;/= 之类的符号，也需要写个简单的正则替换掉，再把所有拼起来，得到 text 字串。</span></div><div class="line"><span class="built_in">import</span> re</div><div class="line"><span class="attr">siglist</span> = []</div><div class="line">for i <span class="keyword">in</span> friends:</div><div class="line">    <span class="attr">signature</span> = i[<span class="string">"Signature"</span>].strip().replace(<span class="string">"span"</span>, <span class="string">""</span>).replace(<span class="string">"class"</span>, <span class="string">""</span>).replace(<span class="string">"emoji"</span>, <span class="string">""</span>)</div><div class="line">    <span class="attr">rep</span> = re.compile(<span class="string">"1f\d+\w*|[&lt;&gt;/=]"</span>)</div><div class="line">    <span class="attr">signature</span> = rep.sub(<span class="string">""</span>, signature)</div><div class="line">    siglist.append(signature)</div><div class="line"><span class="attr">text</span> = <span class="string">""</span>.join(siglist)</div><div class="line"></div><div class="line"><span class="comment"># 结巴分词</span></div><div class="line"><span class="built_in">import</span> jieba</div><div class="line"><span class="attr">wordlist</span> = jieba.cut(text, <span class="attr">cut_all=True)</span></div><div class="line"><span class="attr">word_space_split</span> = <span class="string">" "</span>.join(wordlist)</div><div class="line"></div><div class="line"><span class="comment"># 根据自己想要的图片、形状、颜色画出相似的图形</span></div><div class="line"><span class="built_in">import</span> matplotlib.pyplot as plt</div><div class="line">from wordcloud <span class="built_in">import</span> WordCloud, ImageColorGenerator</div><div class="line"><span class="built_in">import</span> numpy as np</div><div class="line"><span class="built_in">import</span> PIL.Image as Image</div><div class="line"><span class="built_in">import</span> os</div><div class="line"></div><div class="line"><span class="comment"># d = os.path.dirname(__file__)</span></div><div class="line"><span class="comment"># 可选：coloring = np.array(Image.open(os.path.join(d, '/imgs/wechat.jpg)))</span></div><div class="line"><span class="attr">coloring</span> = np.array(Image.open(<span class="string">"&#123;0&#125;/imgs/wechat.jpg"</span>.format(os.getcwd()))) <span class="comment"># 这里的wechat.jpg可以换成其他你想呈现的效果底图</span></div><div class="line"><span class="attr">my_wordcloud</span> = WordCloud(<span class="attr">background_color="white",</span> <span class="attr">max_words=2000,</span></div><div class="line">                         <span class="attr">mask=coloring,</span> <span class="attr">max_font_size=60,</span> <span class="attr">random_state=42,</span> <span class="attr">scale=2,</span></div><div class="line">                         <span class="attr">font_path="/Library/Fonts/songti.ttc").generate(word_space_split)</span></div><div class="line"></div><div class="line"><span class="attr">image_colors</span> = ImageColorGenerator(coloring)</div><div class="line">plt.imshow(my_wordcloud.recolor(<span class="attr">color_func=image_colors))</span></div><div class="line">plt.imshow(my_wordcloud)</div><div class="line">plt.axis(<span class="string">"off"</span>)</div><div class="line">plt.show()</div><div class="line"></div><div class="line"><span class="comment"># 保存图片，并发送到手机</span></div><div class="line">my_wordcloud.to_file(os.path.join(os.getcwd(), 'output/wechat_signature_cloud.jpg'))</div><div class="line">itchat.send_image('output/wechat_signature_cloud.jpg', 'filehelper')</div></pre></td></tr></table></figure>
-<div style="text-align: center;"><br><br>    <div><br>        <div style="clear: both;display: inline;margin: auto;"><br>            <span>底图1：</span><br>            <img src="http://orukz1s2q.bkt.clouddn.com/wechat.jpg?imageView2/2/h/200"><br>        </div><br>        <div style="display: inline;clear: both;margin: auto;"><br>            <span>词云效果图1：</span><br>            <img src="http://orukz1s2q.bkt.clouddn.com/wechat_signature_cloud.jpg?imageView2/2/h/200"><br>        </div><br>    </div><br>    <div><br>        <div style="display: inline;clear: both;margin: auto;"><br>            <span>底图2:</span><br><br>            <img src="http://orukz1s2q.bkt.clouddn.com/morecolor.jpg?imageView2/2/h/200"><br>        </div><br>        <div style="display: inline;clear: both;margin: auto;"><br>            <span>词云效果图2：</span><br><br>            <img src="http://orukz1s2q.bkt.clouddn.com/wechatSignatureInfo.png?imageView2/2/h/200"><br>        </div><br>    </div>
+<div style="text-align: center;"><br><br>底图1：<br><br><img src="http://orukz1s2q.bkt.clouddn.com/wechat.jpg?imageView2/2/h/200" alt=""><br><br>词云效果图1：<br><br><img src="http://orukz1s2q.bkt.clouddn.com/wechat_signature_cloud.jpg?imageView2/2/h/200" alt=""><br><br>底图2:<br><br><img src="http://orukz1s2q.bkt.clouddn.com/morecolor.jpg?imageView2/2/h/200" alt=""><br><br>词云效果图2：<br><br><img src="http://orukz1s2q.bkt.clouddn.com/wechatSignatureInfo.png?imageView2/2/h/200" alt=""><br><br></div>
 
-<p></p></div><p></p>
 <p>本文同时发布于个人微信公众号<a href="http://mp.weixin.qq.com/s?__biz=MzI0NDQzMTE5Mg==&amp;mid=100000129&amp;idx=1&amp;sn=c16cc865fef1ed0bfacfb76d75f96fb4&amp;chksm=695ca1b65e2b28a06f6494c6aee8947a7b167c57e7021d097306337acd6ed9b60958adacece0#rd" target="_blank" rel="external">微信好友初步分析</a></p>
 
       
@@ -256,19 +255,21 @@
           </div>
           </a>
         </div>
+        <!-- 加入公众号二维码-->
+        <div style="text-align:center;">
+          <p>
+            建议扫描关注个人公众号，及时接收我的分享。
+          </p>
+          <img src="http://orukz1s2q.bkt.clouddn.com/qrcode_for_gh_0d4958187623_430.jpg" align="center" height=200  width=200 />
+          <p>
+            此公众号定期分享学习、生活的所思所想。
+          </p>
+          <p>
+            主要包括计算机基础知识推广、学习过程记录、效率工具推荐、读书笔记等内容。
+          </p>
+        </div>
       
-      <div style="text-align:center;">
-        <p>
-          建议扫描关注个人公众号，及时接收我的分享。
-        </p>
-        <img src="http://orukz1s2q.bkt.clouddn.com/qrcode_for_gh_0d4958187623_430.jpg" align="center" height=200  width=200 />
-        <p>
-          此公众号定期分享学习、生活的所思所想。
-        </p>
-        <p>
-          主要包括计算机基础知识推广、学习过程记录、效率工具推荐、读书笔记等内容。
-        </p>
-      </div>
+      
     </div>
     <div class="article-info article-info-index">
       
@@ -460,7 +461,7 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Ajax</a>
+                <a href="javascript:void(0)" class="js-tag color2">nodejs</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -468,7 +469,7 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">HTML5</a>
+                <a href="javascript:void(0)" class="js-tag color5">Ajax</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -477,6 +478,10 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">sse</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">HTML5</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -508,15 +513,15 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">git</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">cookie</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">cocoa</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">git</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -532,11 +537,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">兼容性</a>
+                <a href="javascript:void(0)" class="js-tag color4">多线程</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">多线程</a>
+                <a href="javascript:void(0)" class="js-tag color4">兼容性</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -545,6 +550,10 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">绘图</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">java</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -560,15 +569,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">nodejs</a>
+                <a href="javascript:void(0)" class="js-tag color3">标识</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">D.Wade</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">java</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -580,15 +585,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">标识</a>
+                <a href="javascript:void(0)" class="js-tag color2">tomcat</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">essay</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">tomcat</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -624,6 +625,10 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">plan</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">模块化</a>
               </li>
              
@@ -633,10 +638,6 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">NBA</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">plan</a>
               </li>
              
               <li class="article-tag-list-item">
