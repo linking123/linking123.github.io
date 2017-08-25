@@ -6,17 +6,27 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://linking123.github.io">
-  <title>Archives: 2015/12 | Linking&#39;s blog</title>
+  <title>10dayWeatherSearchfromYahoo | Linking&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Be Better">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Linking's blog">
-<meta property="og:url" content="http://linking123.github.io/archives/2015/12/index.html">
+  <meta name="description" content="1. 需求来源今天下午突如其来的一场大雨，黑暗笼罩了整个霸都，十分恐怖。
+今天是我这周唯一没有带伞的一天，当时心里骂娘，真倒霉，回来时果真淋雨了。
+还是要相信天气预报的啊，昨天是忘了看了。
+然后我就在想，能不能自己把天气预报抓下来，每天晚上定时发送信息到手机上呢？技术上是可以实现的。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="10dayWeatherSearchfromYahoo">
+<meta property="og:url" content="http://linking123.github.io/2017/08/25/10dayWeatherSearchfromYahoo/index.html">
 <meta property="og:site_name" content="Linking's blog">
-<meta property="og:description" content="Be Better">
+<meta property="og:description" content="1. 需求来源今天下午突如其来的一场大雨，黑暗笼罩了整个霸都，十分恐怖。
+今天是我这周唯一没有带伞的一天，当时心里骂娘，真倒霉，回来时果真淋雨了。
+还是要相信天气预报的啊，昨天是忘了看了。
+然后我就在想，能不能自己把天气预报抓下来，每天晚上定时发送信息到手机上呢？技术上是可以实现的。">
+<meta property="og:updated_time" content="2017-08-25T14:34:03.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Linking's blog">
-<meta name="twitter:description" content="Be Better">
+<meta name="twitter:title" content="10dayWeatherSearchfromYahoo">
+<meta name="twitter:description" content="1. 需求来源今天下午突如其来的一场大雨，黑暗笼罩了整个霸都，十分恐怖。
+今天是我这周唯一没有带伞的一天，当时心里骂娘，真倒霉，回来时果真淋雨了。
+还是要相信天气预报的啊，昨天是忘了看了。
+然后我就在想，能不能自己把天气预报抓下来，每天晚上定时发送信息到手机上呢？技术上是可以实现的。">
   
     <link rel="alternative" href="/atom.xml" title="Linking&#39;s blog" type="application/atom+xml">
   
@@ -158,267 +168,288 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-10dayWeatherSearchfromYahoo" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      10dayWeatherSearchfromYahoo
+    </h1>
+  
+
+        
+        <a href="/2017/08/25/10dayWeatherSearchfromYahoo/" class="archive-article-date">
+  	<time datetime="2017-08-25T13:52:36.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-25</time>
+</a>
+        
+      </header>
     
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="1-需求来源"><a href="#1-需求来源" class="headerlink" title="1. 需求来源"></a>1. 需求来源</h2><p>今天下午突如其来的一场<strong>大雨</strong>，黑暗笼罩了整个霸都，十分恐怖。</p>
+<p>今天是我这周唯一没有带伞的一天，当时心里骂娘，真倒霉，回来时果真淋雨了。</p>
+<p>还是要相信<strong>天气预报</strong>的啊，昨天是忘了看了。</p>
+<p>然后我就在想，能不能自己把天气预报抓下来，每天晚上定时发送信息到手机上呢？技术上是可以实现的。</p>
+<a id="more"></a>
+<h2 id="2-困难分析"><a href="#2-困难分析" class="headerlink" title="2. 困难分析"></a>2. 困难分析</h2><ol>
+<li>没有服务器<br>抓数据不难，关键是数据的权威性；没服务器，不能跑自己的服务，没法子做定时任务。</li>
+</ol>
+<p>那就先做本地的？每天定时几点跑一下脚本？</p>
+<p>2.没有合适的API接口<br>自己做不可能，只能网上找了。</p>
+<h2 id="3-初步方案"><a href="#3-初步方案" class="headerlink" title="3. 初步方案"></a>3. 初步方案</h2><p>在GITHUB上找啊找，想到了以前关注的一个项目，publicAPI，里面应该有天气相关的开放接口，进去一看，果真没让我失望，挑了一家大的看，就是Yahoo。</p>
+<p>于是花点功夫，用Yahoo的public weather API 做了一个很小的玩具，可以查询接下来10天的天气。</p>
+<p>时间仓促，目前结果只有一个关键词，且是英文，后期看需求决定是否完善。可以用Python写后台程序，每天定时用脚本自行，获取需要的天气信息，并发送短信消息到目标手机。</p>
+<p>想体验的同学，请点击阅读原文查看，您玩好。。</p>
+<h2 id="4-试验场"><a href="#4-试验场" class="headerlink" title="4.     试验场"></a>4.     试验场</h2> 
+<style type="text/css">
+	.sectionbody {
+		vertical-align: middle;
+	}
+	table {
+		border-collapse:collapse;
+	}
+	table, th, td{
+		border: 1px solid black;
+	}
+	td {
+		padding: 10px;
+	}
+	.searchtextarea { 
+		margin-top: 15px;
+		vertical-align: middle;
+	}
+	.searchtextarea input {
+		 border: 1px solid green;
+		 padding: 3px;"; 
+	}
+	.clickbutton {
+		margin-top: 10px;
+		vertical-align: middle;"
+	}
+	.clickbutton input {
+		margin: 5px;
+	}
+</style>
+<script>
+	var callbackFunction = function(data) {
+		var forecast = data.query.results.channel.item.forecast; //未来10天的预报。数组
+		var table = "<table>"
+		var tr = "<tr><th>日期</th><th>天气预报</th></tr>"
+		for (var i = 0; i < forecast.length; i++) {
+			var middata = "<tr><td>" + forecast[i].date + "</td>"
+			+ "<td>" + forecast[i].text + "</td></tr>"
+			tr = tr + middata;
+		}
+		var tableall = table + tr + "</table>";
+		getelebyid("backdata").innerHTML = tableall;
+	};
+
+	function getelebyid(aid){
+	  	return  document.getElementById(aid);
+	}
+
+	function changescriptsrc(){
+		var searchtest = getelebyid('searchtest').value;
+		if (searchtest=="" || searchtest==null) {
+			alert("搜索关键词不能为空");
+			return;
+		}
+		var srcfront = "https://query.yahooapis.com/v1/public/yql?q=select * from weather.forecast where woeid in (select woeid from geo.places(1) where text='" + searchtest + "')&format=json&callback=callbackFunction"
+		return srcfront;
+	}
+	 
+	function getweather() { 
+		loadScript(changescriptsrc(),function(){ console.log('onload');});
+	}
+
+	function loadScript(src, callback) {
+	    var script = document.createElement('script'),
+	        head = document.getElementsByTagName('head')[0];
+	    script.type = 'text/javascript';
+	    script.charset = 'UTF-8';
+	    if (src==""||src==null) {
+			return;
+	    }
+	    script.src = src;
+	    if (script.addEventListener) {
+	        script.addEventListener('load', function () {
+	            callback();
+	        }, false);
+	    } else if (script.attachEvent) {
+	        script.attachEvent('onreadystatechange', function () {
+	            var target = window.event.srcElement;
+	            if (target.readyState == 'loaded') {
+	                callback();
+	            }
+	        });
+	    }
+	    head.appendChild(script);
+	}
+</script>
+<section class="sectionbody">
+	<div align="center">
+	  	<p>未来10天城市天气预报查询</p>
+	  	<p>注：支持中英文</p>
+	</div>
+	<div align="center" class="searchtextarea">
+	  	<input id="searchtest" type="text" name="cityname" placeholder="想查询哪个城市的天气？">
+	</div>
+	<div align="center" class="clickbutton">
+	 	<input type="button" name="cityname" value="开始" onclick="getweather()" ／="">
+	</div>
+	<div align="center" id="backdata">
+	</div>
+</section>
+
+
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>早餐加个卤蛋<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/images/aliPay.jpg">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/images/wechatPay.jpg">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+        <!-- 加入公众号二维码-->
+        <div style="text-align:center;">
+          <p>
+            建议扫描关注个人公众号，及时接收我的分享。
+          </p>
+          <img src="http://orukz1s2q.bkt.clouddn.com/qrcode_for_gh_0d4958187623_430.jpg" align="center" height=200  width=200 />
+          <p>
+            此公众号定期分享学习、生活的所思所想。
+          </p>
+          <p>
+            主要包括计算机基础知识推广、学习过程记录、效率工具推荐、读书笔记等内容。
+          </p>
+        </div>
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2015" class="archive-year">2015</a>
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2015/12/17/多pc同步测试/" class="archive-article-date">
-  	<time datetime="2015-12-17T13:04:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2015-12-17</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2015/12/17/多pc同步测试/">多PC同步测试</a>
-    </h1>
-  
+      </div>
+    </span>
+  </div>
+</div>
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">cs</a>
-        		</li>
-      		
-		</ul>
-	</div>
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://linking123.github.io/2017/08/25/10dayWeatherSearchfromYahoo/" alt="微信分享二维码">
+    </div>
+</div>
 
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/cs/" class="article-tag-list-link color3">cs</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2015/12/14/我喜欢的音乐/" class="archive-article-date">
-  	<time datetime="2015-12-14T05:03:29.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2015-12-14</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2015/12/14/我喜欢的音乐/">我喜欢的音乐</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">张靓颖</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/music/" class="article-tag-list-link color1">music</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2015/12/09/HTML5学习记录/" class="archive-article-date">
-  	<time datetime="2015-12-09T08:05:41.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2015-12-09</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2015/12/09/HTML5学习记录/">HTML5学习记录</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">html5</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/cs/" class="article-tag-list-link color3">cs</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2015/12/02/jQuery学习记录/" class="archive-article-date">
-  	<time datetime="2015-12-02T13:02:28.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2015-12-02</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2015/12/02/jQuery学习记录/">jQuery学习记录</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">cs</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/cs/" class="article-tag-list-link color3">cs</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2015/12/01/MarkDown使用说明书/" class="archive-article-date">
-  	<time datetime="2015-12-01T12:32:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2015-12-01</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2015/12/01/MarkDown使用说明书/">MarkDown使用说明书</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">markdown</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/cs/" class="article-tag-list-link color3">cs</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2017/08/09/微信好友分析/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">微信好友分析</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+
+  
+  <div class="duoshuo">
+	<!-- UY BEGIN -->
+		<div id="uyan_frame"></div>
+		<script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2133673"></script>
+	<!-- UY END -->
+</div>
+
   
 
-    
+  
+  
+  
+
+  
+
+  
 
 
           </div>
@@ -452,8 +483,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: true,

@@ -160,6 +160,98 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-iOS多线程技术的副本" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/05/23/iOS多线程技术的副本/">iOS多线程技术</a>
+    </h1>
+  
+
+        
+        <a href="/2017/05/23/iOS多线程技术的副本/" class="archive-article-date">
+  	<time datetime="2017-05-23T02:13:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-23</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="1-performSelector-多线程"><a href="#1-performSelector-多线程" class="headerlink" title="1:performSelector 多线程"></a>1:performSelector 多线程</h2><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*</span></div><div class="line"> *使用performSelector 的多线程</div><div class="line"> *优点：简单</div><div class="line"> *缺点：没有串行并线队列，不能实现高级线程调度</div><div class="line"> */</div><div class="line"> </div><div class="line">-(<span class="keyword">void</span>)performSelectorFunction&#123;</div><div class="line">    </div><div class="line">    <span class="built_in">NSLog</span>(<span class="string">@"performSelectorFunction start"</span>);</div><div class="line"></div><div class="line">    <span class="comment">//同步方式执行</span></div><div class="line">    <span class="comment">//[self performSelector:@selector(function1)];</span></div><div class="line">    </div><div class="line">    <span class="comment">//延迟两秒执行,主线程阻塞</span></div><div class="line">    <span class="comment">//[self performSelector:@selector(function1) withObject:nil afterDelay:2];</span></div><div class="line"></div><div class="line">    <span class="comment">//主线程上执行，主线程阻塞，waitUntilDone:YES：等待执行完成顺序执行，waitUntilDone:NO 先执行后面语句</span></div><div class="line">    <span class="comment">//[self performSelectorOnMainThread:@selector(function1) withObject:nil waitUntilDone:NO];</span></div><div class="line">    </div><div class="line">    <span class="comment">//子线程上执行</span></div><div class="line">    [<span class="keyword">self</span> performSelectorInBackground:<span class="keyword">@selector</span>(function1) withObject:<span class="literal">nil</span>];</div><div class="line">    </div><div class="line">    <span class="built_in">NSLog</span>(<span class="string">@"performSelectorFunction end"</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="2-NSThread"><a href="#2-NSThread" class="headerlink" title="2:NSThread"></a>2:NSThread</h2><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*</span></div><div class="line"> *使用NSThread 的多线程</div><div class="line"> *优点：简单</div><div class="line"> *缺点：没有串行并线队列，不能实现高级线程调度,和performSelector是一样的。</div><div class="line"> */</div><div class="line"></div><div class="line">-(<span class="keyword">void</span>)<span class="built_in">NSThreadFunction</span>&#123;</div><div class="line">    </div><div class="line">    <span class="built_in">NSLog</span>(<span class="string">@"NSThreadFunction start"</span>);</div><div class="line">    </div><div class="line">    <span class="comment">//线程暂停 2秒</span></div><div class="line">    <span class="comment">//[NSThread sleepForTimeInterval:2];</span></div><div class="line">    </div><div class="line">    <span class="comment">//显示创建的方式执行</span></div><div class="line">    <span class="comment">//NSThread *myThread = [[NSThread alloc]initWithTarget:self selector:@selector(function1) object:nil];</span></div><div class="line">    <span class="comment">//[myThread start];</span></div><div class="line">    </div><div class="line">    <span class="comment">//静态方法执行线程</span></div><div class="line">    <span class="comment">//[NSThread detachNewThreadSelector:@selector(function1) toTarget:self withObject:nil];</span></div><div class="line">    </div><div class="line">    <span class="built_in">NSLog</span>(<span class="string">@"NSThreadFunction end"</span>);</div><div class="line">    </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="3-NSTimer-反面教材，他不是多线程，他只是定时执行任务"><a href="#3-NSTimer-反面教材，他不是多线程，他只是定时执行任务" class="headerlink" title="3:NSTimer(反面教材，他不是多线程，他只是定时执行任务)"></a>3:NSTimer(反面教材，他不是多线程，他只是定时执行任务)</h2><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*</span></div><div class="line"> *使反面教材，他不是多线程，他只是定时执行任务</div><div class="line"> */</div><div class="line"></div><div class="line">-(<span class="keyword">void</span>)<span class="built_in">NSTimerFunction</span>&#123;</div><div class="line">    </div><div class="line">    <span class="built_in">NSLog</span>(<span class="string">@"NSTimerFunction start"</span>);</div><div class="line">    </div><div class="line">    <span class="comment">//定时执行任务，可以重复和不重复</span></div><div class="line">    <span class="built_in">NSTimer</span> *timer = [<span class="built_in">NSTimer</span> scheduledTimerWithTimeInterval:<span class="number">2</span> target:<span class="keyword">self</span> selector:<span class="keyword">@selector</span>(function1) userInfo:<span class="literal">nil</span> repeats:<span class="literal">NO</span>];</div><div class="line">    </div><div class="line">    <span class="comment">//暂时停止定时器</span></div><div class="line">    <span class="comment">//[timer setFireDate:[NSDate distantFuture]];</span></div><div class="line">    <span class="comment">//重新开启定时器</span></div><div class="line">    <span class="comment">//[timer setFireDate:[NSDate distantPast]];</span></div><div class="line">    <span class="comment">//永久通知定时器</span></div><div class="line">    <span class="comment">//[timer invalidate];</span></div><div class="line">    <span class="comment">//timer = nil;</span></div><div class="line">    </div><div class="line">    <span class="built_in">NSLog</span>(<span class="string">@"NSTimerFunction end"</span>);</div><div class="line">    </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="4-GCD最棒的多线程使用api"><a href="#4-GCD最棒的多线程使用api" class="headerlink" title="4:GCD最棒的多线程使用api"></a>4:GCD最棒的多线程使用api</h2><blockquote>
+<p>GCD 中主要的对象：</p>
+</blockquote>
+<ul>
+<li>dispatch_sync</li>
+<li>dispatch_async</li>
+<li>dispatch_once_t</li>
+<li>dispatch_after</li>
+<li>dispatch_queue_t</li>
+<li>dispatch_group_async</li>
+<li>dispatch_barrier_async</li>
+<li>dispatch_apply</li>
+<li>dispatch_suspend，dispatch_resume</li>
+<li>dispatch_sync</li>
+<li>dispatch_sync</li>
+<li>dispatch_sync</li>
+</ul>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="comment">// dispatch_sync 同步方式执行：</span></div><div class="line"> <span class="built_in">dispatch_sync</span>(dispatch_get_global_queue(<span class="number">0</span>, <span class="number">0</span>), ^&#123;</div><div class="line">      <span class="comment">// something</span></div><div class="line"> &#125;);</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">// dispatch_async 异步执行：</span></div><div class="line"> <span class="built_in">dispatch_async</span>(dispatch_get_global_queue(<span class="number">0</span>, <span class="number">0</span>), ^&#123;</div><div class="line">      <span class="comment">// something</span></div><div class="line"> &#125;);</div><div class="line"></div><div class="line"> <span class="comment">// dispatch_async：主线程执行：</span></div><div class="line"> <span class="built_in">dispatch_async</span>(dispatch_get_main_queue(), ^&#123;</div><div class="line">      <span class="comment">// something</span></div><div class="line"> &#125;);</div><div class="line"></div><div class="line"> <span class="comment">// dispatch_once：一次性执行：</span></div><div class="line"> <span class="keyword">static</span> <span class="built_in">dispatch_once_t</span> onceToken;</div><div class="line"> <span class="built_in">dispatch_once</span>(&amp;onceToken, ^&#123;</div><div class="line">     <span class="comment">// code to be executed once</span></div><div class="line"> &#125;);</div><div class="line"></div><div class="line"> <span class="comment">//dispatch_time_t ：延迟2秒执行：</span></div><div class="line"> <span class="keyword">double</span> delayInSeconds = <span class="number">2.0</span>;</div><div class="line"> dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * <span class="built_in">NSEC_PER_SEC</span>);</div><div class="line"> dispatch_after(popTime, dispatch_get_main_queue(), ^(<span class="keyword">void</span>)&#123;</div><div class="line">     <span class="comment">// code to be executed on the main queue after delay</span></div><div class="line"> &#125;);</div><div class="line"></div><div class="line"> <span class="comment">//dispatch_group_t： 合并汇总结果</span></div><div class="line"> dispatch_group_t group = dispatch_group_create();</div><div class="line"> dispatch_group_async(group, dispatch_get_global_queue(<span class="number">0</span>,<span class="number">0</span>), ^&#123;</div><div class="line">      <span class="comment">// 并行执行的线程一</span></div><div class="line"> &#125;);</div><div class="line"> dispatch_group_async(group, dispatch_get_global_queue(<span class="number">0</span>,<span class="number">0</span>), ^&#123;</div><div class="line">      <span class="comment">// 并行执行的线程二</span></div><div class="line"> &#125;);</div><div class="line"> dispatch_group_notify(group, dispatch_get_global_queue(<span class="number">0</span>,<span class="number">0</span>), ^&#123;</div><div class="line">      <span class="comment">// 汇总结果</span></div><div class="line"> &#125;);</div><div class="line"></div><div class="line"></div><div class="line"> <span class="comment">//dispatch_barrier_async :作用是在并行队列中，等待前面的队列执行完成后再继续往下执行</span></div><div class="line"><span class="built_in">dispatch_queue_t</span> concurrentQueue = dispatch_queue_create(<span class="string">"my.concurrent.queue"</span>, DISPATCH_QUEUE_CONCURRENT);</div><div class="line"><span class="built_in">dispatch_async</span>(concurrentQueue, ^()&#123;</div><div class="line">    <span class="built_in">NSLog</span>(<span class="string">@"dispatch-1"</span>);</div><div class="line">&#125;);</div><div class="line"><span class="built_in">dispatch_async</span>(concurrentQueue, ^()&#123;</div><div class="line">    <span class="built_in">NSLog</span>(<span class="string">@"dispatch-2"</span>);</div><div class="line">&#125;);</div><div class="line">dispatch_barrier_async(concurrentQueue, ^()&#123;</div><div class="line">    <span class="built_in">NSLog</span>(<span class="string">@"dispatch-barrier"</span>); </div><div class="line">&#125;);</div><div class="line"><span class="built_in">dispatch_async</span>(concurrentQueue, ^()&#123;</div><div class="line">    <span class="built_in">NSLog</span>(<span class="string">@"dispatch-3"</span>);</div><div class="line">&#125;);</div><div class="line"><span class="built_in">dispatch_async</span>(concurrentQueue, ^()&#123;</div><div class="line">    <span class="built_in">NSLog</span>(<span class="string">@"dispatch-4"</span>);</div><div class="line">&#125;);</div><div class="line"></div><div class="line"><span class="comment">//dispatch_apply：将一个指定的block执行指定的次数，常用语block数组。在一般方法中虽然block中的方法并不是顺序执行，但是由于apply是线程同步的，</span></div><div class="line"><span class="comment">//所以print(dispatch_apply done);一定最后执行。常常可以这样用：</span></div><div class="line">let globalQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, <span class="number">0</span>)</div><div class="line"><span class="built_in">dispatch_async</span>(globalQueue, &#123; () -&gt; Void <span class="keyword">in</span></div><div class="line">    dispatch_apply(<span class="number">10</span>, globalQueue) &#123; (index) -&gt; Void <span class="keyword">in</span></div><div class="line">        print(index)</div><div class="line">    &#125;</div><div class="line">    print(<span class="string">"completed"</span>)</div><div class="line">&#125;)</div><div class="line">print(<span class="string">"在dispatch_apply之前"</span>) </div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">//dispatch_suspend / dispatch_resume</span></div><div class="line"><span class="comment">//暂停</span></div><div class="line">dispatch_suspend(globalQueue)</div><div class="line"><span class="comment">//恢复</span></div><div class="line">dispatch_resume(globalQueue)</div><div class="line"></div><div class="line"><span class="comment">//Dispatch Semaphore 这个是线程的信号量，比较复杂</span></div></pre></td></tr></table></figure>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="http://liuyanwei.jumppo.com/2015/08/19/ios-ThreadAndAsynchronization.html" target="_blank" rel="external">http://liuyanwei.jumppo.com/2015/08/19/ios-ThreadAndAsynchronization.html</a><br><a href="http://blog.csdn.net/zhangao0086/article/details/38904923" target="_blank" rel="external">http://blog.csdn.net/zhangao0086/article/details/38904923</a></p>
+
+      
+
+      
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">多线程</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/iOS/" class="article-tag-list-link color4">iOS</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/05/23/iOS多线程技术的副本/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
     <article id="post-ios9支持http请求的副本" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -685,113 +777,6 @@
 
 
   
-    <article id="post-《利用Python进行数据分析》读书笔记-8-第八章-绘图和可视化" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/04/20/《利用Python进行数据分析》读书笔记-8-第八章-绘图和可视化/">《利用Python进行数据分析》读书笔记-8-第八章-绘图和可视化</a>
-    </h1>
-  
-
-        
-        <a href="/2017/04/20/《利用Python进行数据分析》读书笔记-8-第八章-绘图和可视化/" class="archive-article-date">
-  	<time datetime="2017-04-20T15:01:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-04-20</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="matplotlib-API入门"><a href="#matplotlib-API入门" class="headerlink" title="matplotlib API入门"></a>matplotlib API入门</h1><h2 id="Figure-和-Subplot"><a href="#Figure-和-Subplot" class="headerlink" title="Figure 和 Subplot"></a>Figure 和 Subplot</h2><figure class="highlight lsl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">import matplotlib.pyplot as plt</div><div class="line"></div><div class="line">## Figure 和 Subplot</div><div class="line"># matplotlib的图像都位于Figure对象中，构建新对象</div><div class="line">fig = plt.figure()</div><div class="line"># 不能通过Figure绘图，必须用add_subplot创建一个或多个subplot才行</div><div class="line">ax1 = fig.add_subplot(<span class="number">2</span>,<span class="number">2</span>,<span class="number">1</span>)</div><div class="line">ax2 = fig.add_subplot(<span class="number">2</span>,<span class="number">2</span>,<span class="number">2</span>)</div><div class="line">ax3 = fig.add_subplot(<span class="number">2</span>,<span class="number">2</span>,<span class="number">3</span>)</div><div class="line">plt.show()</div><div class="line"># 这三个是表示图像是<span class="number">2</span>*<span class="number">2</span>的，当前占编号<span class="number">1</span>，<span class="number">2</span>，<span class="number">3</span>位</div><div class="line"></div><div class="line">plt.plot([<span class="number">1.5</span>,<span class="number">3.5</span>,<span class="number">-2</span>,<span class="number">1.6</span>])</div><div class="line"></div><div class="line">from numpy.random import randn</div><div class="line">plt.plot(randn(<span class="number">50</span>).cumsum(), 'k--')</div><div class="line">plt.show()</div><div class="line"># <span class="string">"k--"</span>线型选项，黑色虚线图</div><div class="line"></div><div class="line"># 随机柱状图，<span class="number">20</span>柱，每柱间隔<span class="number">0.3</span></div><div class="line">_ = ax1.hist(randn(<span class="number">100</span>), bins=<span class="number">20</span>, color='k', alpha=<span class="number">0.3</span>)</div><div class="line"># 随机散点图，<span class="number">30</span>个点</div><div class="line">ax2.scatter(np.arange(<span class="number">30</span>), np.arange(<span class="number">30</span>) + <span class="number">3</span> * randn(<span class="number">30</span>))</div><div class="line"># plt.show()</div></pre></td></tr></table></figure>
-<p>颜色、标记和线型<br><figure class="highlight less"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">plt</span><span class="selector-class">.plot</span>(randn(<span class="number">30</span>).cumsum(), <span class="string">'ko--'</span>)</div><div class="line"># 等价于以下明确形式：<span class="selector-tag">R</span></div><div class="line"># <span class="selector-tag">plot</span>(randn(<span class="number">30</span>).cumsum(), color=<span class="string">'k'</span>, linestyle=<span class="string">'dashed'</span>, marker=<span class="string">'0'</span>)</div><div class="line"><span class="selector-tag">plt</span><span class="selector-class">.show</span>()</div></pre></td></tr></table></figure></p>
-<p><img src="http://test.jpg" alt="图8-6带有标记的线型图"></p>
-<p>刻度、标签和图例</p>
-<table>
-<thead>
-<tr>
-<th>xlim</th>
-<th>xticks</th>
-<th>xticklabels</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>范围</td>
-<td>刻度位置</td>
-<td>刻度标签</td>
-</tr>
-</tbody>
-</table>
-<p>标题、轴标签、刻度以及刻度标签<br><figure class="highlight gcode"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">fig = plt.figure<span class="comment">()</span>; ax = fig.add_subplot<span class="comment">(1,1,1)</span></div><div class="line">ax.plot<span class="comment">(randn(1000)</span>.cumsum<span class="comment">()</span>)</div><div class="line">ax.set_title<span class="comment">('My first matplotlib plot')</span></div><div class="line">ax.set_xlabel<span class="comment">('Stages')</span></div><div class="line">plt.show<span class="comment">()</span></div></pre></td></tr></table></figure></p>
-<p><img src="" alt="图8-8 用于演示xticks的简单线形图"></p>
-<p>添加图例<br><figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 方式一：传入参数label</span></div><div class="line">fig = plt.figure(); ax = fig.add_subplot(<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>)</div><div class="line">ax.plot(randn(<span class="number">1000</span>).cumsum(), <span class="string">'k'</span>, <span class="keyword">label</span><span class="bash">=<span class="string">'one'</span>)</span></div><div class="line">ax.plot(randn(<span class="number">1000</span>).cumsum(), <span class="string">'k--'</span>, <span class="keyword">label</span><span class="bash">=<span class="string">'two'</span>)</span></div><div class="line">ax.plot(randn(<span class="number">1000</span>).cumsum(), <span class="string">'k.'</span>, <span class="keyword">label</span><span class="bash">=<span class="string">'three'</span>)</span></div><div class="line">ax.legend(loc=<span class="string">'best'</span>) <span class="comment"># 添加图例</span></div><div class="line">plt.show()</div></pre></td></tr></table></figure></p>
-<p><img src="" alt="图8-8 用于演示xticks的简单线形图"></p>
-<p>图注解以及在Subplot上绘图<br><figure class="highlight lsl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">fig = plt.figure()</div><div class="line">ax = fig.add_subplot(<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>)</div><div class="line"># 创建块对象</div><div class="line">rect = plt.Rectangle((<span class="number">0.2</span>,<span class="number">0.75</span>),<span class="number">0.4</span>,<span class="number">0.15</span>,color='k',alpha=<span class="number">0.3</span>)</div><div class="line">circ = plt.Circle((<span class="number">0.7</span>,<span class="number">0.2</span>),<span class="number">0.15</span>,color='b',alpha=<span class="number">0.3</span>)</div><div class="line">pgon = plt.Polygon([[<span class="number">0.15</span>,<span class="number">0.15</span>],[<span class="number">0.35</span>,<span class="number">0.4</span>],[<span class="number">0.2</span>,<span class="number">0.6</span>]],color='g',alpha=<span class="number">0.5</span>)</div><div class="line"># ax.add_patch(shp) 添加到subplot中</div><div class="line">ax.add_patch(rect)</div><div class="line">ax.add_patch(circ)</div><div class="line">ax.add_patch(pgon)</div><div class="line">plt.show()</div></pre></td></tr></table></figure></p>
-<p><img src="f&#39;f" alt="图8-12 由三个块图形组成的图"></p>
-<p>将图标保存到文件<br><figure class="highlight clean"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">plt.savefig(<span class="string">'figpath.svg'</span>)</div><div class="line">plt.savefig(<span class="string">'figpath.pdf'</span>)</div><div class="line"># # dpi-分辨率，bbox_inches-剪除图标周围空白部分</div><div class="line">plt.savefig(<span class="string">'figpath.png'</span>, dpi=<span class="number">400</span>, bbox_inches= <span class="string">'tight'</span>)</div><div class="line"># 以上都是存到磁盘，也可以存入文件型对象</div><div class="line"><span class="keyword">from</span> io <span class="keyword">import</span> StringIO</div><div class="line">buffer = StringIO()</div><div class="line">plt.savefig(buffer)</div><div class="line">plot_data = buffer.getvalue()</div><div class="line"># 对在Web上提供生成的图片很实用</div></pre></td></tr></table></figure></p>
-<p>matplotlib配置<br><figure class="highlight vala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="meta"># 如设置图像大小</span></div><div class="line">plt.rc(<span class="string">'figure'</span>, figsize=<span class="number">10</span>*<span class="number">10</span>)</div><div class="line"><span class="meta"># 关键字参数，写成字典</span></div><div class="line">font_options = &#123;<span class="string">'family'</span>: <span class="string">'monospace'</span>,</div><div class="line">                <span class="string">'weight'</span>: <span class="string">'bold'</span>,</div><div class="line">                <span class="string">'size'</span>: <span class="string">'small'</span>&#125;</div><div class="line">plt.rc(<span class="string">'font'</span>, **font_options)</div></pre></td></tr></table></figure></p>
-<h1 id="pandas中的绘图函数"><a href="#pandas中的绘图函数" class="headerlink" title="pandas中的绘图函数"></a>pandas中的绘图函数</h1><h2 id="线形图"><a href="#线形图" class="headerlink" title="线形图"></a>线形图</h2><p>简单Series图表<br><figure class="highlight capnproto"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> pandas <span class="keyword">import</span> Series</div><div class="line"><span class="keyword">from</span> pandas <span class="keyword">import</span> DataFrame</div><div class="line">s = Series(np.random.randn(<span class="number">10</span>).cumsum(), index=np.arange(<span class="number">0</span>,<span class="number">100</span>,<span class="number">10</span>))</div><div class="line">s.plot()</div><div class="line">plt.show()</div></pre></td></tr></table></figure></p>
-<p><img src="" alt="图8-13 简单Series图表"></p>
-<p>简单的DataFrame图表<br><figure class="highlight lsl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">df = DataFrame(np.random.randn(<span class="number">10</span>,<span class="number">4</span>).cumsum(<span class="number">0</span>), columns=['A','B','C','D'],index=np.arange(<span class="number">0</span>,<span class="number">100</span>,<span class="number">10</span>))</div><div class="line">df.plot()</div><div class="line">plt.show()</div></pre></td></tr></table></figure></p>
-<p><img src="" alt="图8-14 简单的DataFrame图表"></p>
-<h2 id="柱状图"><a href="#柱状图" class="headerlink" title="柱状图"></a>柱状图</h2><figure class="highlight processing"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"># kind=<span class="string">"bar"</span>(垂直柱状图)，kind=<span class="string">"barh"</span>(水平柱状图)</div><div class="line">fig, axes = plt.subplots(<span class="number">2</span>, <span class="number">1</span>)</div><div class="line">data = Series(np.<span class="built_in">random</span>.rand(<span class="number">16</span>), index=list(<span class="string">'abcdefghijklmnop'</span>))</div><div class="line">data.plot(kind=<span class="string">'bar'</span>, ax=axes[<span class="number">0</span>],<span class="built_in">color</span>=<span class="string">'k'</span>, <span class="built_in">alpha</span>=<span class="number">0.7</span>)</div><div class="line">data.plot(kind=<span class="string">'barh'</span>, ax=axes[<span class="number">1</span>],<span class="built_in">color</span>=<span class="string">'k'</span>, <span class="built_in">alpha</span>=<span class="number">0.7</span>)</div><div class="line">plt.show()</div></pre></td></tr></table></figure>
-<p><img src="" alt="图8-15 水平和垂直柱状图"></p>
-<figure class="highlight vala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">df = DataFrame(np.random.rand(<span class="number">6</span>,<span class="number">4</span>), index=[<span class="string">'one'</span>, <span class="string">'two'</span>, <span class="string">'three'</span>, <span class="string">'four'</span>, <span class="string">'five'</span>, <span class="string">'six'</span>],</div><div class="line">               columns=pd.Index([<span class="string">'A'</span>,<span class="string">'B'</span>,<span class="string">'C'</span>,<span class="string">'D'</span>],name=<span class="string">'Genus'</span>))</div><div class="line"></div><div class="line"><span class="meta"># print df</span></div><div class="line"><span class="meta"># Genus         A         B         C         D</span></div><div class="line"><span class="meta"># one    0.465771  0.579470  0.053485  0.863450</span></div><div class="line"><span class="meta"># two    0.550022  0.855826  0.967881  0.792683</span></div><div class="line"><span class="meta"># three  0.666868  0.536417  0.245592  0.839482</span></div><div class="line"><span class="meta"># four   0.439348  0.676450  0.637932  0.106940</span></div><div class="line"><span class="meta"># five   0.606376  0.609878  0.498459  0.010276</span></div><div class="line"><span class="meta"># six    0.923550  0.243204  0.422216  0.979446</span></div><div class="line"></div><div class="line">df.plot(kind=<span class="string">'bar'</span>)</div><div class="line">plt.savefig(<span class="string">'图8-16 DataFrame柱状图'</span>)</div><div class="line"><span class="meta"># plt.show()</span></div><div class="line"><span class="meta"># 设置stacked=True生成DataFrame的堆积柱状图，每行都堆积在一起</span></div><div class="line">df.plot(kind=<span class="string">'barh'</span>, stacked=True, alpha=<span class="number">0.5</span>)</div><div class="line">plt.savefig(<span class="string">'图8-17 DataFrame堆积柱状图'</span>)</div><div class="line"><span class="meta"># plt.show()</span></div></pre></td></tr></table></figure>
-<figure class="highlight vala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">tips = pd.read_csv(<span class="string">'../pydata-book-master/ch08/tips.csv'</span>)</div><div class="line">party_counts = pd.crosstab(tips.day, tips.size)</div><div class="line"><span class="meta"># print party_counts</span></div><div class="line"><span class="meta"># col_0  1708</span></div><div class="line"><span class="meta"># day</span></div><div class="line"><span class="meta"># Fri      19</span></div><div class="line"><span class="meta"># Sat      87</span></div><div class="line"><span class="meta"># Sun      76</span></div><div class="line"><span class="meta"># Thur     62</span></div><div class="line"></div><div class="line">party_counts = party_counts.ix[:, <span class="number">2</span>:<span class="number">5</span>]</div><div class="line">print party_counts</div></pre></td></tr></table></figure>
-<h1 id="实战：绘制地图-图形化显示海地地震危机数据"><a href="#实战：绘制地图-图形化显示海地地震危机数据" class="headerlink" title="实战：绘制地图-图形化显示海地地震危机数据"></a>实战：绘制地图-图形化显示海地地震危机数据</h1><figure class="highlight vala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div></pre></td><td class="code"><pre><div class="line">data = pd.read_csv(<span class="string">'../pydata-book-master/ch08/Haiti.csv'</span>)</div><div class="line"><span class="meta"># print data</span></div><div class="line"><span class="meta"># 拿出时间戳和位置信息</span></div><div class="line"><span class="meta"># print data[['INCIDENT DATE', 'LATITUDE', 'LONGITUDE']][:10]</span></div><div class="line"><span class="meta">#       INCIDENT DATE   LATITUDE   LONGITUDE</span></div><div class="line"><span class="meta"># 0  05/07/2010 17:26  18.233333  -72.533333</span></div><div class="line"><span class="meta"># 1  28/06/2010 23:06  50.226029    5.729886</span></div><div class="line"><span class="meta"># 2  24/06/2010 16:21  22.278381  114.174287</span></div><div class="line"><span class="meta"># 3  20/06/2010 21:59  44.407062    8.933989</span></div><div class="line"><span class="meta"># 4  18/05/2010 16:26  18.571084  -72.334671</span></div><div class="line"><span class="meta"># 5  26/04/2010 13:14  18.593707  -72.310079</span></div><div class="line"><span class="meta"># 6  26/04/2010 14:19  18.482800  -73.638800</span></div><div class="line"><span class="meta"># 7  26/04/2010 14:27  18.415000  -73.195000</span></div><div class="line"><span class="meta"># 8  15/03/2010 10:58  18.517443  -72.236841</span></div><div class="line"><span class="meta"># 9  15/03/2010 11:00  18.547790  -72.410010</span></div><div class="line"></div><div class="line"><span class="meta"># 消息类型</span></div><div class="line"><span class="meta"># print data['CATEGORY'][:6]</span></div><div class="line"><span class="meta"># 0          1. Urgences | Emergency, 3. Public Health,</span></div><div class="line"><span class="meta"># 1    1. Urgences | Emergency, 2. Urgences logistiqu...</span></div><div class="line"><span class="meta"># 2    2. Urgences logistiques | Vital Lines, 8. Autr...</span></div><div class="line"><span class="meta"># 3                            1. Urgences | Emergency,</span></div><div class="line"><span class="meta"># 4                            1. Urgences | Emergency,</span></div><div class="line"><span class="meta"># 5                       5e. Communication lines down,</span></div><div class="line"><span class="meta"># Name: CATEGORY, dtype: object</span></div><div class="line"></div><div class="line"><span class="meta"># 异常的地理位置</span></div><div class="line"><span class="meta"># print data.describe()</span></div><div class="line"><span class="meta">#             Serial     LATITUDE    LONGITUDE</span></div><div class="line"><span class="meta"># count  3593.000000  3593.000000  3593.000000</span></div><div class="line"><span class="meta"># mean   2080.277484    18.611495   -72.322680</span></div><div class="line"><span class="meta"># std    1171.100360     0.738572     3.650776</span></div><div class="line"><span class="meta"># min       4.000000    18.041313   -74.452757</span></div><div class="line"><span class="meta"># 25%    1074.000000    18.524070   -72.417500</span></div><div class="line"><span class="meta"># 50%    2163.000000    18.539269   -72.335000</span></div><div class="line"><span class="meta"># 75%    3088.000000    18.561820   -72.293570</span></div><div class="line"><span class="meta"># max    4052.000000    50.226029   114.174287</span></div><div class="line"></div><div class="line"><span class="meta"># 清除错误位置信息并移除缺失分类信息：</span></div><div class="line">data = data[(data.LATITUDE &gt; <span class="number">18</span>) &amp; (data.LATITUDE &lt; <span class="number">20</span>) &amp;</div><div class="line">            (data.LONGITUDE &gt; <span class="number">-75</span>) &amp; (data.LONGITUDE &lt; <span class="number">-70</span>)</div><div class="line">            &amp; data.CATEGORY.notnull()]</div><div class="line"></div><div class="line"><span class="meta"># 编写函数获取所有分类的列表，将各个分类信息拆分为编码和英语名称</span></div><div class="line">def to_cat_list(catstr):</div><div class="line">    stripped = (x.strip() <span class="keyword">for</span> x in catstr.split(<span class="string">','</span>))</div><div class="line">    <span class="keyword">return</span> [x <span class="keyword">for</span> x in stripped <span class="keyword">if</span> x]</div><div class="line"></div><div class="line">def get_all_categories(cat_series):</div><div class="line">    cat_sets = (<span class="keyword">set</span>(to_cat_list(x)) <span class="keyword">for</span> x in cat_series)</div><div class="line">    <span class="keyword">return</span> sorted(<span class="keyword">set</span>.union(*cat_sets))</div><div class="line"></div><div class="line">def get_english(cat):</div><div class="line">    code, names = cat.split(<span class="string">'.'</span>)</div><div class="line">    <span class="keyword">if</span> <span class="string">'|'</span> in names:</div><div class="line">        names = names.split(<span class="string">' | '</span>)[<span class="number">1</span>]</div><div class="line">    <span class="keyword">return</span> code, names.strip()</div><div class="line"></div><div class="line"><span class="meta"># 测试get_english是否正常</span></div><div class="line"><span class="meta"># print get_english('2. Urgences logistiques | Vital Lines')</span></div><div class="line"><span class="meta"># ('2', 'Vital Lines')</span></div><div class="line"></div><div class="line">all_cats = get_all_categories(data.CATEGORY)</div><div class="line"><span class="meta"># 生成器表达式</span></div><div class="line">english_mapping = dict(get_english(x) <span class="keyword">for</span> x in all_cats)</div><div class="line"></div><div class="line"><span class="meta"># print english_mapping['2a']</span></div><div class="line"><span class="meta"># Food Shortage</span></div><div class="line"></div><div class="line"><span class="meta"># print english_mapping['6c']</span></div><div class="line"><span class="meta"># Earthquake and aftershocks</span></div></pre></td></tr></table></figure>
-<figure class="highlight nix"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 抽取分类编码，构造全0DataFrame</span></div><div class="line">def get_code(seq):</div><div class="line">    return [x.split('.')[<span class="number">0</span>] for x <span class="keyword">in</span> seq <span class="keyword">if</span> x]</div><div class="line"></div><div class="line"><span class="attr">all_codes</span> = get_code(all_cats)</div><div class="line"><span class="attr">code_index</span> = pd.Index(pd.unique(all_codes))</div><div class="line"><span class="attr">dummy_frame</span> = DataFrame(np.zeros((len(data), len(code_index))), <span class="attr">index=data.index,</span> <span class="attr">columns=code_index)</span></div><div class="line"><span class="comment"># print dummy_frame.ix[:, :6]</span></div><div class="line"><span class="comment">#         1   1a   1b   1c   1d    2</span></div><div class="line"><span class="comment"># 0     0.0  0.0  0.0  0.0  0.0  0.0</span></div><div class="line"><span class="comment"># 4     0.0  0.0  0.0  0.0  0.0  0.0</span></div><div class="line"><span class="comment"># 5     0.0  0.0  0.0  0.0  0.0  0.0</span></div><div class="line"><span class="comment"># 6     0.0  0.0  0.0  0.0  0.0  0.0</span></div><div class="line"><span class="comment"># 7     0.0  0.0  0.0  0.0  0.0  0.0</span></div><div class="line"><span class="comment"># 8     0.0  0.0  0.0  0.0  0.0  0.0</span></div><div class="line"><span class="comment"># 9     0.0  0.0  0.0  0.0  0.0  0.0</span></div><div class="line"><span class="comment"># 10    0.0  0.0  0.0  0.0  0.0  0.0</span></div><div class="line"></div><div class="line">for row, cat <span class="keyword">in</span> zip(data.index, data.CATEGORY):</div><div class="line">    <span class="attr">codes</span> = get_code(to_cat_list(cat))</div><div class="line">    dummy_frame.ix[row, codes] = <span class="number">1</span></div><div class="line"></div><div class="line"><span class="attr">data</span> = data.join(dummy_frame.add_prefix('category_'))</div><div class="line"><span class="comment"># print data.ix[:,10:15]</span></div><div class="line"><span class="comment">#       category_1  category_1a  category_1b  category_1c  category_1d</span></div><div class="line"><span class="comment"># 0            1.0          0.0          0.0          0.0          0.0</span></div><div class="line"><span class="comment"># 4            1.0          0.0          0.0          0.0          0.0</span></div><div class="line"><span class="comment"># 5            0.0          0.0          0.0          0.0          0.0</span></div><div class="line"><span class="comment"># 6            0.0          0.0          0.0          0.0          0.0</span></div><div class="line"><span class="comment"># 7            0.0          0.0          0.0          0.0          0.0</span></div><div class="line"><span class="comment"># 8            0.0          0.0          0.0          0.0          0.0</span></div><div class="line"><span class="comment"># 9            0.0          0.0          0.0          0.0          0.0</span></div><div class="line"><span class="comment"># 10           0.0          1.0          0.0          0.0          0.0</span></div><div class="line"></div><div class="line"><span class="comment"># Python绘制地图依赖于basemap工具集(http://matplotlib.github.com/basemap）插件</span></div><div class="line"><span class="comment"># 绘制黑白海地地图</span></div><div class="line">from mpl_toolkits.basemap <span class="built_in">import</span> Basemap</div><div class="line"><span class="built_in">import</span> matplotlib.pyplot as plt</div><div class="line"></div><div class="line">def basic_haiti_map(<span class="attr">ax=None,</span> <span class="attr">lllat=17.25,</span> <span class="attr">urlat=20.25,</span> <span class="attr">lllon=-75,</span> <span class="attr">urlon=-71):</span></div><div class="line">    <span class="comment"># 创建极球面投影的Basemap实例</span></div><div class="line">    <span class="attr">m</span> = Basemap(<span class="attr">ax=ax,</span> <span class="attr">projection='stere',</span></div><div class="line">                <span class="attr">lon_0=(urlon</span> + lllon) / <span class="number">2</span>,</div><div class="line">                <span class="attr">lat_0=(urlat</span> + lllat) / <span class="number">2</span>,</div><div class="line">                <span class="attr">llcrnrlat=lllat,</span> <span class="attr">urcrnrlat=urlat,</span></div><div class="line">                <span class="attr">llcrnrlon=lllon,</span> <span class="attr">urcrnrlon=urlon,</span></div><div class="line">                <span class="attr">resolution='f')</span></div><div class="line"></div><div class="line">    <span class="comment"># 绘制海岸线、州届、国界以及地图边界</span></div><div class="line">    m.drawcoastlines()</div><div class="line">    m.drawstates()</div><div class="line">    m.drawcountries()</div><div class="line">    return m</div><div class="line"></div><div class="line">fig, <span class="attr">axes</span> = plt.subplots(<span class="attr">nrows=2,</span> <span class="attr">ncols=2,</span> <span class="attr">figsize=(12,</span> <span class="number">10</span>))</div><div class="line">fig.subplots_adjust(<span class="attr">hspace=0.05,</span> <span class="attr">wspace=0.05)</span></div><div class="line"></div><div class="line"><span class="attr">to_plot</span> = ['<span class="number">2</span>a', '<span class="number">1</span>', '<span class="number">3</span>c', '<span class="number">7</span>a']</div><div class="line"><span class="attr">lllat</span> = <span class="number">17.25</span>;<span class="attr">urlat</span> = <span class="number">20.25</span>;<span class="attr">lllon</span> = -<span class="number">75</span>;<span class="attr">urlon</span> = -<span class="number">71</span></div><div class="line"></div><div class="line">for code, ax <span class="keyword">in</span> zip(to_plot, axes.flat):</div><div class="line">    <span class="attr">m</span> = basic_haiti_map(ax, <span class="attr">lllat=lllat,</span> <span class="attr">urlat=urlat,</span> <span class="attr">lllon=lllon,</span> <span class="attr">urlon=urlon)</span></div><div class="line">    <span class="attr">cat_data</span> = data[data['category_%s' % code] == <span class="number">1</span>]</div><div class="line">    <span class="comment"># 计算地图的投影坐标</span></div><div class="line">    x, <span class="attr">y</span> = m(cat_data.LONGITUDE, cat_data.LATITUDE)</div><div class="line"></div><div class="line">    m.plot(x, y, 'k.', <span class="attr">alpha=0.5)</span></div><div class="line">    ax.set_title('%s: %s' % (code, english_mapping[code]))</div></pre></td></tr></table></figure>
-      
-
-      
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/cs/" class="article-tag-list-link color3">cs</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/04/20/《利用Python进行数据分析》读书笔记-8-第八章-绘图和可视化/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/3/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/5/">Next &raquo;</a>
@@ -895,11 +880,15 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">ajax</a>
+                <a href="javascript:void(0)" class="js-tag color5">Ajax</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Ajax</a>
+                <a href="javascript:void(0)" class="js-tag color1">HTML5</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">ajax</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -908,10 +897,6 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">sse</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">HTML5</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -939,15 +924,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">avatar</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">cookie</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">cocoa</a>
+                <a href="javascript:void(0)" class="js-tag color2">avatar</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -955,11 +936,7 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">iOS</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">https</a>
+                <a href="javascript:void(0)" class="js-tag color1">cocoa</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -971,15 +948,23 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">iOS</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">https</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">兼容性</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">HTTP</a>
+                <a href="javascript:void(0)" class="js-tag color3">绘图</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">绘图</a>
+                <a href="javascript:void(0)" class="js-tag color5">HTTP</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -991,6 +976,10 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">标识</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">arcgis</a>
               </li>
              
@@ -999,15 +988,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">标识</a>
+                <a href="javascript:void(0)" class="js-tag color2">Python</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">D.Wade</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Python</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1055,6 +1040,10 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">NBA</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">plan</a>
               </li>
              
@@ -1064,10 +1053,6 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">MVC</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">NBA</a>
               </li>
              
               <li class="article-tag-list-item">
