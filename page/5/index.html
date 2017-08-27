@@ -160,6 +160,74 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-program常用标识的副本" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/05/10/program常用标识的副本/">program常用标识</a>
+    </h1>
+  
+
+        
+        <a href="/2017/05/10/program常用标识的副本/" class="archive-article-date">
+  	<time datetime="2017-05-10T09:37:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-10</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="1：注释代码段"><a href="#1：注释代码段" class="headerlink" title="1：注释代码段"></a>1：注释代码段</h2><hr>
+<figure class="highlight fortran"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">#<span class="function"><span class="keyword">program</span></span> mark -[注释内容]</div><div class="line">说明：用于注释内容</div><div class="line">#<span class="function"><span class="keyword">program</span></span> mark 是每个ios程序员都必须会用的技巧，通过#<span class="function"><span class="keyword">program</span></span> mark 把代码分为个个部分，良好的注释是好代码的开始</div><div class="line"># linking哥注：在xcode的代码页最上的目录最后，鼠标停住一会，就可以清晰的看到层次关系。亲测</div></pre></td></tr></table></figure>
+<h2 id="2：取消xcode编译器内对于弃用方法的警告"><a href="#2：取消xcode编译器内对于弃用方法的警告" class="headerlink" title="2：取消xcode编译器内对于弃用方法的警告"></a>2：取消xcode编译器内对于弃用方法的警告</h2><hr>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">pragma</span> clang diagnostic push</span></div><div class="line"><span class="meta">#<span class="meta-keyword">pragma</span> clang diagnostic ignored <span class="meta-string">"-Wdeprecated-declarations"</span></span></div><div class="line">  <span class="comment">// 这段中出现使用所有的弃用方法都不会产生告警   </span></div><div class="line">  <span class="comment">// 这里放置弃用代码    </span></div><div class="line"><span class="meta">#<span class="meta-keyword">pragma</span> clang diagnostic pop</span></div><div class="line"><span class="meta">#linking哥注：项目中用到了</span></div></pre></td></tr></table></figure>
+<h2 id="3：取消对未使用变量的警告，使用方式和2相同，必须成对出现-pragma-clang"><a href="#3：取消对未使用变量的警告，使用方式和2相同，必须成对出现-pragma-clang" class="headerlink" title="3：取消对未使用变量的警告，使用方式和2相同，必须成对出现#pragma clang"></a>3：取消对未使用变量的警告，使用方式和2相同，必须成对出现#pragma clang</h2><hr>
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">pragma</span> clang diagnostic push</span></div><div class="line"><span class="meta">#<span class="meta-keyword">pragma</span> clang diagnostic ignored <span class="meta-string">"-Wunused-variable"</span>   </span></div><div class="line">    <span class="comment">// unused 代码段</span></div><div class="line"><span class="meta">#<span class="meta-keyword">pragma</span> clang diagnostic pop</span></div><div class="line"><span class="meta"># linking哥注：亲测</span></div><div class="line">====================</div><div class="line"><span class="meta">#<span class="meta-keyword">warning</span> :手动产生一条告警</span></div><div class="line"><span class="meta">#<span class="meta-keyword">error</span> : 手动产生一条错误</span></div></pre></td></tr></table></figure>
+<p>还有种方式也能达到同样效果</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">pragma</span> unused (foo)</span></div></pre></td></tr></table></figure>
+<h2 id="4-忽略内存泄露告警"><a href="#4-忽略内存泄露告警" class="headerlink" title="4: 忽略内存泄露告警"></a>4: 忽略内存泄露告警</h2><hr>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">pragma</span> clang diagnostic push</span></div><div class="line"><span class="meta">#<span class="meta-keyword">pragma</span> clang diagnostic ignored <span class="meta-string">"-Warc-performSelector-leaks"</span></span></div><div class="line">   [someController performSelector: NSSelectorFromString(@<span class="string">"someMethod"</span>)]</div><div class="line"><span class="meta">#<span class="meta-keyword">pragma</span> clang diagnostic pop</span></div></pre></td></tr></table></figure>
+      
+
+      
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">标识</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/05/10/program常用标识的副本/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
     <article id="post-《利用Python进行数据分析》读书笔记-8-第八章-绘图和可视化" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -963,87 +1031,6 @@
 
 
   
-    <article id="post-《利用Python进行数据分析》读书笔记-2-第一二章_准备工作及引言" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/02/27/《利用Python进行数据分析》读书笔记-2-第一二章_准备工作及引言/">《利用Python进行数据分析》读书笔记_2_第一二章_准备工作及引言</a>
-    </h1>
-  
-
-        
-        <a href="/2017/02/27/《利用Python进行数据分析》读书笔记-2-第一二章_准备工作及引言/" class="archive-article-date">
-  	<time datetime="2017-02-27T15:44:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-02-27</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="第一章-准备工作"><a href="#第一章-准备工作" class="headerlink" title="第一章 准备工作"></a>第一章 准备工作</h1><p>这一章节主要是环境构建工作。</p>
-<p>遇到问题，无法安装pandas包，pip也无法安装；<br>命令<code>sudo easy_install xxx</code>，怀疑是网速原因，超时了。<br>所以直接下载了zip包。。补充：之后在公司网速可以的情况下由下载下来了，安装了pip工具。</p>
-<p><a href="https://github.com/wesm/pydata-book.git" target="_blank" rel="external">本书用到的数据地址</a></p>
-<h1 id="第二章-引言"><a href="#第二章-引言" class="headerlink" title="第二章 引言"></a>第二章 引言</h1><h2 id="来自bit-ly的1-usa-gov数据"><a href="#来自bit-ly的1-usa-gov数据" class="headerlink" title="来自bit.ly的1.usa.gov数据"></a>来自bit.ly的1.usa.gov数据</h2><figure class="highlight vim"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">#!/usr/bin/<span class="keyword">python</span></div><div class="line">#-*- codin<span class="variable">g:utf</span>-<span class="number">8</span> -*-</div><div class="line"></div><div class="line"># 读取文件中一行</div><div class="line">path = <span class="string">'../pydata-book-master/ch02/usagov_bitly_data2012-03-16-1331923249.txt'</span></div><div class="line"><span class="keyword">print</span> <span class="keyword">open</span>(path).readline()</div><div class="line"># <span class="keyword">ou</span><span class="variable">t:</span> &#123; <span class="string">"a"</span>: <span class="string">"Mozilla\/5.0 (Windows NT 6.1; WOW64) AppleWebKit\/535.11 (KHTML, like Gecko) Chrome\/17.0.963.78 Safari\/535.11"</span>, <span class="string">"c"</span>: <span class="string">"US"</span>, <span class="string">"nk"</span>: <span class="number">1</span>, <span class="string">"tz"</span>: <span class="string">"America\/New_York"</span>, <span class="string">"gr"</span>: <span class="string">"MA"</span>, <span class="string">"g"</span>: <span class="string">"A6qOVH"</span>, <span class="string">"h"</span>: <span class="string">"wfLQtf"</span>, <span class="string">"l"</span>: <span class="string">"orofrog"</span>, <span class="string">"al"</span>: <span class="string">"en-US,en;q=0.8"</span>, <span class="string">"hh"</span>: <span class="string">"1.usa.gov"</span>, <span class="string">"r"</span>: <span class="string">"http:\/\/www.facebook.com\/l\/7AQEFzjSi\/1.usa.gov\/wfLQtf"</span>, <span class="string">"u"</span>: <span class="string">"http:\/\/www.ncbi.nlm.nih.gov\/pubmed\/22415991"</span>, <span class="string">"t"</span>: <span class="number">1331923247</span>, <span class="string">"hc"</span>: <span class="number">1331822918</span>, <span class="string">"cy"</span>: <span class="string">"Danvers"</span>, <span class="string">"ll"</span>: [ <span class="number">42.576698</span>, -<span class="number">70.954903</span> ] &#125;</div><div class="line"></div><div class="line">import json</div><div class="line"># 列表推导式，生成的是一组Python字典</div><div class="line">record = [json.loads(<span class="built_in">line</span>) <span class="keyword">for</span> <span class="built_in">line</span> in <span class="keyword">open</span>(path)]</div><div class="line"><span class="keyword">print</span> record[<span class="number">0</span>]</div><div class="line"># out：&#123;<span class="keyword">u</span><span class="string">'a'</span>: <span class="keyword">u</span><span class="string">'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/535.11 (KHTML, like Gecko) Chrome/17.0.963.78 Safari/535.11'</span>, <span class="keyword">u</span><span class="string">'c'</span>: <span class="keyword">u</span><span class="string">'US'</span>, <span class="keyword">u</span><span class="string">'nk'</span>: <span class="number">1</span>, <span class="keyword">u</span><span class="string">'tz'</span>: <span class="keyword">u</span><span class="string">'America/New_York'</span>, <span class="keyword">u</span><span class="string">'gr'</span>: <span class="keyword">u</span><span class="string">'MA'</span>, <span class="keyword">u</span><span class="string">'g'</span>: <span class="keyword">u</span><span class="string">'A6qOVH'</span>, <span class="keyword">u</span><span class="string">'h'</span>: <span class="keyword">u</span><span class="string">'wfLQtf'</span>, <span class="keyword">u</span><span class="string">'cy'</span>: <span class="keyword">u</span><span class="string">'Danvers'</span>, <span class="keyword">u</span><span class="string">'l'</span>: <span class="keyword">u</span><span class="string">'orofrog'</span>, <span class="keyword">u</span><span class="string">'al'</span>: <span class="keyword">u</span><span class="string">'en-US,en;q=0.8'</span>, <span class="keyword">u</span><span class="string">'hh'</span>: <span class="keyword">u</span><span class="string">'1.usa.gov'</span>, <span class="keyword">u</span><span class="string">'r'</span>: <span class="keyword">u</span><span class="string">'http://www.facebook.com/l/7AQEFzjSi/1.usa.gov/wfLQtf'</span>, <span class="keyword">u</span><span class="string">'u'</span>: <span class="keyword">u</span><span class="string">'http://www.ncbi.nlm.nih.gov/pubmed/22415991'</span>, <span class="keyword">u</span><span class="string">'t'</span>: <span class="number">1331923247</span>, <span class="keyword">u</span><span class="string">'hc'</span>: <span class="number">1331822918</span>, <span class="keyword">u</span><span class="string">'ll'</span>: [<span class="number">42.576698</span>, -<span class="number">70.954903</span>]&#125;</div><div class="line"># 既然已经生成了字典项，就可以通过键访问值</div><div class="line"><span class="keyword">print</span> record[<span class="number">0</span>][<span class="string">'ll'</span>]</div><div class="line"># <span class="keyword">ou</span><span class="variable">t:</span> [<span class="number">42.576698</span>, -<span class="number">70.954903</span>]</div><div class="line"># 单引号前面的<span class="keyword">u</span>标识unicode；</div><div class="line"><span class="keyword">print</span> record[<span class="number">0</span>][<span class="string">'tz'</span>]</div><div class="line"># <span class="keyword">ou</span><span class="variable">t:</span> America/New_York  # 时区是字符串对象形式，而非打印形式</div></pre></td></tr></table></figure>
-<h2 id="纯Python时区计数"><a href="#纯Python时区计数" class="headerlink" title="纯Python时区计数"></a>纯Python时区计数</h2><figure class="highlight vim"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line">time_zones = [<span class="keyword">rec</span>[<span class="string">'tz'</span>] <span class="keyword">for</span> <span class="keyword">rec</span> in record <span class="keyword">if</span> <span class="string">'tz'</span> in <span class="keyword">rec</span>]</div><div class="line"><span class="keyword">print</span> time_zones[:<span class="number">10</span>]</div><div class="line"></div><div class="line"># 对时区进行计数</div><div class="line">def get_counts(sequence):</div><div class="line">    counts = &#123;&#125;</div><div class="line">    <span class="keyword">for</span> <span class="keyword">x</span> in sequence:</div><div class="line">        <span class="keyword">if</span> <span class="keyword">x</span> in <span class="built_in">count</span><span class="variable">s:</span></div><div class="line">            counts[<span class="keyword">x</span>] += <span class="number">1</span></div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            counts[<span class="keyword">x</span>] = <span class="number">1</span></div><div class="line">    <span class="keyword">return</span> counts</div><div class="line"># 使用标准库简化方法</div><div class="line">from collections import defaultdict</div><div class="line">def get_counts2(sequence):</div><div class="line">    counts = defaultdict(<span class="keyword">int</span>)</div><div class="line">    <span class="keyword">for</span> <span class="keyword">x</span> in sequence:</div><div class="line">        counts[<span class="keyword">x</span>]+=<span class="number">1</span></div><div class="line">    <span class="keyword">return</span> counts</div><div class="line">counts = get_counts(time_zones)</div><div class="line"><span class="keyword">print</span> counts[<span class="string">'America/New_York'</span>]</div><div class="line"># <span class="keyword">ou</span><span class="variable">t:</span> <span class="number">1251</span></div><div class="line"><span class="keyword">print</span> <span class="built_in">len</span>(time_zones)</div><div class="line"># <span class="number">3340</span></div><div class="line"># 前<span class="number">10</span>位的时区及计数</div><div class="line">def top_counts(count_dict, n = <span class="number">10</span>):</div><div class="line">    value_key_pairs = [(<span class="built_in">count</span>, tz) <span class="keyword">for</span> tz, <span class="built_in">count</span> in count_dict.<span class="built_in">items</span>()]</div><div class="line">    value_key_pairs.<span class="keyword">sort</span>()</div><div class="line">    <span class="keyword">return</span> value_key_pairs[-n:]</div><div class="line"><span class="keyword">print</span> top_counts(counts)</div><div class="line"># <span class="keyword">ou</span><span class="variable">t:</span> [(<span class="number">33</span>, <span class="keyword">u</span><span class="string">'America/Sao_Paulo'</span>), (<span class="number">35</span>, <span class="keyword">u</span><span class="string">'Europe/Madrid'</span>), (<span class="number">36</span>, <span class="keyword">u</span><span class="string">'Pacific/Honolulu'</span>), (<span class="number">37</span>, <span class="keyword">u</span><span class="string">'Asia/Tokyo'</span>), (<span class="number">74</span>, <span class="keyword">u</span><span class="string">'Europe/London'</span>), (<span class="number">191</span>, <span class="keyword">u</span><span class="string">'America/Denver'</span>), (<span class="number">382</span>, <span class="keyword">u</span><span class="string">'America/Los_Angeles'</span>), (<span class="number">400</span>, <span class="keyword">u</span><span class="string">'America/Chicago'</span>), (<span class="number">521</span>, <span class="keyword">u</span><span class="string">''</span>), (<span class="number">1251</span>, <span class="keyword">u</span><span class="string">'America/New_York'</span>)]</div><div class="line"># 更简单的方式是collections.Counter类</div><div class="line">from collections import Counter</div><div class="line">counts1 = Counter(time_zones)</div><div class="line"><span class="keyword">print</span> counts1.most_common(<span class="number">10</span>)</div><div class="line"># <span class="keyword">ou</span><span class="variable">t:</span> [(<span class="keyword">u</span><span class="string">'America/New_York'</span>, <span class="number">1251</span>), (<span class="keyword">u</span><span class="string">''</span>, <span class="number">521</span>), (<span class="keyword">u</span><span class="string">'America/Chicago'</span>, <span class="number">400</span>), (<span class="keyword">u</span><span class="string">'America/Los_Angeles'</span>, <span class="number">382</span>), (<span class="keyword">u</span><span class="string">'America/Denver'</span>, <span class="number">191</span>), (<span class="keyword">u</span><span class="string">'Europe/London'</span>, <span class="number">74</span>), (<span class="keyword">u</span><span class="string">'Asia/Tokyo'</span>, <span class="number">37</span>), (<span class="keyword">u</span><span class="string">'Pacific/Honolulu'</span>, <span class="number">36</span>), (<span class="keyword">u</span><span class="string">'Europe/Madrid'</span>, <span class="number">35</span>), (<span class="keyword">u</span><span class="string">'America/Sao_Paulo'</span>, <span class="number">33</span>)]</div></pre></td></tr></table></figure>
-<h2 id="pandas对时区计数"><a href="#pandas对时区计数" class="headerlink" title="pandas对时区计数"></a>pandas对时区计数</h2><figure class="highlight vala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"><span class="meta"># pandas时区计数</span></div><div class="line"><span class="meta"># DataFrame是pandas中最重要的数据结构，将数据处理成表格</span></div><div class="line">from pandas import DataFrame, Series</div><div class="line">import pandas as pd ;import numpy as np;import matplotlib.pyplot as plt</div><div class="line">frame = DataFrame(record)</div><div class="line"><span class="meta"># print frame</span></div><div class="line"><span class="meta"># print frame['tz'][:10]</span></div><div class="line">tz_counts = frame[<span class="string">'tz'</span>].value_counts()</div><div class="line"><span class="meta"># print tz_counts[:10]</span></div><div class="line"><span class="meta"># tz_counts[:10].plot(kind='barh', rot=0)</span></div><div class="line"><span class="meta"># 这里如不添加下句，图形闪退</span></div><div class="line"><span class="meta"># plt.show()</span></div><div class="line"><span class="meta"># print frame['a'][1]</span></div><div class="line">result = Series([x.split()[<span class="number">0</span>] <span class="keyword">for</span> x in frame.a.dropna()])</div><div class="line"><span class="meta"># print result[:5]</span></div><div class="line"><span class="meta"># print result.value_counts()[:8]</span></div><div class="line">cframe = frame[frame.a.notnull()]</div><div class="line">operating_sys = np.where(cframe[<span class="string">'a'</span>].str.contains(<span class="string">'Windows'</span>),(<span class="string">"Windows"</span>),<span class="string">'Not Windows'</span>)</div><div class="line"><span class="meta"># print operating_sys[:5]</span></div><div class="line">by_tz_os = cframe.groupby([<span class="string">'tz'</span>,operating_sys])</div><div class="line">agg_counts = by_tz_os.size().unstack().fillna(<span class="number">0</span>)</div><div class="line"><span class="meta"># print agg_counts[:5]</span></div><div class="line">indexer = agg_counts.sum(<span class="number">1</span>).argsort()</div><div class="line"><span class="meta"># print indexer[:5]</span></div><div class="line">count_subset = agg_counts.take(indexer)[<span class="number">-10</span>:]</div><div class="line"><span class="meta"># print count_subset</span></div><div class="line"><span class="meta"># count_subset.plot(kind='barh', stacked=True)</span></div><div class="line"><span class="meta"># plt.show()</span></div><div class="line">normed_subset = count_subset.div(count_subset.sum(<span class="number">1</span>),axis=<span class="number">0</span>)</div><div class="line"><span class="meta"># normed_subset.plot(kind='barh', stached=True)</span></div><div class="line"><span class="meta"># plt.hold()</span></div><div class="line"><span class="meta"># plt.interactive(False)</span></div><div class="line"><span class="meta"># plt.show()</span></div></pre></td></tr></table></figure>
-<h2 id="MovieLens-1M数据集"><a href="#MovieLens-1M数据集" class="headerlink" title="MovieLens 1M数据集"></a>MovieLens 1M数据集</h2><figure class="highlight vala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div></pre></td><td class="code"><pre><div class="line">unames = [<span class="string">'user_id'</span>, <span class="string">'gender'</span>, <span class="string">'age'</span>, <span class="string">'occupation'</span>, <span class="string">'zip'</span>]</div><div class="line">users = pd.read_table(<span class="string">'../pydata-book-master/ch02/movielens/users.dat'</span>, sep=<span class="string">'::'</span>, header=None, names=unames, engine=<span class="string">'python'</span>)</div><div class="line"></div><div class="line">rnames = [<span class="string">'user_id'</span>, <span class="string">'movie_id'</span>, <span class="string">'rating'</span>, <span class="string">'timestamp'</span>]</div><div class="line">ratings = pd.read_table(<span class="string">'../pydata-book-master/ch02/movielens/ratings.dat'</span>, sep=<span class="string">'::'</span>, header=None, names=rnames, engine=<span class="string">'python'</span>)</div><div class="line"></div><div class="line">mnames = [<span class="string">'movie_id'</span>, <span class="string">'title'</span>, <span class="string">'genres'</span>]</div><div class="line">movies = pd.read_table(<span class="string">'../pydata-book-master/ch02/movielens/movies.dat'</span>, sep=<span class="string">'::'</span>, header=None, names=mnames, engine=<span class="string">'python'</span>)</div><div class="line"></div><div class="line"><span class="meta"># print users[:5]</span></div><div class="line"><span class="meta"># print ratings[:5]</span></div><div class="line"><span class="meta"># print movies[:4]</span></div><div class="line"></div><div class="line"><span class="meta"># pandas的merge函数根据列名的重叠情况推断出哪些列是合并（或连接）键</span></div><div class="line">data = pd.merge(pd.merge(ratings, users), movies)</div><div class="line"><span class="meta"># print data</span></div><div class="line"><span class="meta"># data.ix[0]</span></div><div class="line"></div><div class="line"><span class="meta"># 按性别计算每部电影平均分，使用pivot_table方法</span></div><div class="line">mean_ratings = data.pivot_table(<span class="string">'rating'</span>, index=<span class="string">'title'</span>, columns=<span class="string">'gender'</span>, aggfunc=<span class="string">'mean'</span>)</div><div class="line"><span class="meta"># print mean_ratings[:5]</span></div><div class="line">rating_by_title = data.groupby(<span class="string">'title'</span>).size()</div><div class="line"><span class="meta"># print rating_by_title[:10]</span></div><div class="line"><span class="meta"># 过滤掉评分小于250</span></div><div class="line">active_title = rating_by_title.index[rating_by_title&gt;=<span class="number">250</span>]</div><div class="line"><span class="meta"># print active_title</span></div><div class="line">mean_ratings =mean_ratings.ix[active_title]</div><div class="line"><span class="meta"># print mean_ratings</span></div><div class="line"><span class="meta"># 按女性分数排序</span></div><div class="line">top_female_rating = mean_ratings.sort_values(by=<span class="string">'F'</span>, ascending=False)</div><div class="line"><span class="meta"># print top_female_rating[:4]</span></div><div class="line"></div><div class="line"><span class="meta"># 计算评分分歧；男女观众的分歧；方法是加上一列diff，做差;按diff排序，得出的结果是分歧 最大且女性更喜欢的电影。</span></div><div class="line">mean_ratings[<span class="string">'diff'</span>] = mean_ratings[<span class="string">'M'</span>] - mean_ratings[<span class="string">'F'</span>]</div><div class="line">sorted_by_diff = mean_ratings.sort_values(by=<span class="string">'diff'</span>)</div><div class="line"><span class="meta"># print sorted_by_diff[:10]</span></div><div class="line"><span class="meta"># 对行反序，并去除前十，则是男性更喜欢的电影</span></div><div class="line"><span class="meta"># print sorted_by_diff[::-1][:10]</span></div><div class="line"></div><div class="line"><span class="meta"># 根据电影名称分组的得分数据的标准差</span></div><div class="line">rating_std_by_title = data.groupby(<span class="string">'title'</span>)[<span class="string">'rating'</span>].std()</div><div class="line"><span class="meta"># 根据active_titles进行过滤</span></div><div class="line">rating_std_by_title = rating_std_by_title.ix[active_title]</div><div class="line"><span class="meta"># 根据值对Series进行降序排列</span></div><div class="line">rating_std_by_title.sort_value(ascending=False)[:<span class="number">5</span>]</div><div class="line"><span class="meta"># AttributeError: 'Series' object has no attribute 'sort_value';按树上对order也不行，deprecated</span></div></pre></td></tr></table></figure>
-<h2 id="1880–2010年间全美婴儿姓名"><a href="#1880–2010年间全美婴儿姓名" class="headerlink" title="1880–2010年间全美婴儿姓名"></a>1880–2010年间全美婴儿姓名</h2><figure class="highlight vala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div></pre></td><td class="code"><pre><div class="line"><span class="meta"># 1880-2010年间全美婴儿姓名</span></div><div class="line"><span class="meta"># 用linux命令查看某个文件对前十行</span></div><div class="line"><span class="meta"># head -n 10 names/yob1880.txt</span></div><div class="line"><span class="meta"># 第一行：Mary,F,7065</span></div><div class="line"><span class="meta"># 数据由标准逗号隔开，可以用pandas.read_csv加载到DataFrame中</span></div><div class="line">import pandas as pd;import matplotlib.pyplot as plt;import numpy as  np</div><div class="line"><span class="meta"># names1880 = pd.read_csv('../pydata-book-master/ch02/names/yob1880.txt', names=['name', 'sex', 'birthsNum'])</span></div><div class="line"><span class="meta"># print names1880</span></div><div class="line"><span class="meta"># print names1880.groupby('sex').birthsNum.sum()</span></div><div class="line"><span class="meta"># out: sex</span></div><div class="line"><span class="meta">#      F     90993</span></div><div class="line"><span class="meta">#      M    110493</span></div><div class="line"><span class="meta">#      Name: birthsNum, dtype: int64</span></div><div class="line"></div><div class="line"><span class="meta"># 将所有文件中到数据组装到一个DataFrame中，并加上一个year字段。使用pandas.concat</span></div><div class="line"><span class="meta"># 2010年是目前最后一个有效统计年度</span></div><div class="line">years = range(<span class="number">1880</span>, <span class="number">2011</span>)</div><div class="line">pieces = []</div><div class="line">columns = [<span class="string">'name'</span>, <span class="string">'sex'</span>, <span class="string">'birthsNum'</span>]</div><div class="line"><span class="keyword">for</span> year in years:</div><div class="line">    path = <span class="string">'../pydata-book-master/ch02/names/yob%d.txt'</span> % year</div><div class="line">    frame = pd.read_csv(path, names=columns)</div><div class="line"></div><div class="line">    frame[<span class="string">'year'</span>] = year</div><div class="line">    pieces.append(frame)</div><div class="line"><span class="meta"># 将所有数据整合到单个DataFrame中;ignore_index必须置为False，不保留原始行号；concat默认按行整合</span></div><div class="line">names = pd.concat(pieces, ignore_index=False)</div><div class="line"><span class="meta"># print names</span></div><div class="line"><span class="meta"># 聚合;DataFrame.pivot_table(y轴，x轴，多种类型-线条，每一年每种性别对出生总数)</span></div><div class="line">total_birthsNum = names.pivot_table(<span class="string">'birthsNum'</span>, index=<span class="string">'year'</span>, columns=<span class="string">'sex'</span>, aggfunc=sum)</div><div class="line"><span class="meta"># print total_birthsNum.tail()</span></div><div class="line"><span class="meta"># total_birthsNum.plot(title='Total birthsNum by sex and year')</span></div><div class="line"><span class="meta"># plt.show()</span></div><div class="line"></div><div class="line"><span class="meta"># 插入prop列，表示相对比例；由于birthsNum是整数，需要将分子分母转换成浮点数（Python3.x除外）</span></div><div class="line">def add_prop(group):</div><div class="line">    # 整数除法会向下圆整</div><div class="line">    birthsNum = group.birthsNum.astype(<span class="keyword">float</span>)</div><div class="line">    group[<span class="string">'prop'</span>] = birthsNum/birthsNum.sum()</div><div class="line">    <span class="keyword">return</span> group</div><div class="line">names = names.groupby([<span class="string">'year'</span>, <span class="string">'sex'</span>]).apply(add_prop)</div><div class="line"><span class="meta"># print names</span></div><div class="line"><span class="meta"># 分组前应该进行有效性检查，用numpy.allclose=1判定所有prop之和是否为1</span></div><div class="line"><span class="meta"># print np.allclose(names.groupby(['year', 'sex']).prop.sum(), 1)</span></div><div class="line"><span class="meta"># out: True</span></div><div class="line"><span class="meta"># 为便于分析，取出前1000条按sex/year组合对数据</span></div><div class="line">def get_top1000(group):</div><div class="line">    <span class="keyword">return</span> group.sort_index(by=<span class="string">'birthsNum'</span>, ascending=False)[:<span class="number">1000</span>]</div><div class="line">grouped = names.groupby([<span class="string">'year'</span>, <span class="string">'sex'</span>])</div><div class="line">top_1000 = grouped.apply(get_top1000)</div><div class="line"><span class="meta"># print top_1000</span></div><div class="line"><span class="meta"># 接下来针对这1000条数据进行分析</span></div></pre></td></tr></table></figure>
-<blockquote>
-<p>感到这一章就是先展示一下能干什么，用到的东西不熟悉，也只能照着敲敲；因此决定暂不跟着敲了；P41-P47跳过。</p>
-</blockquote>
-
-      
-
-      
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/cs/" class="article-tag-list-link color3">cs</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/02/27/《利用Python进行数据分析》读书笔记-2-第一二章_准备工作及引言/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/4/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/6/">Next &raquo;</a>
@@ -1147,6 +1134,18 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">weather</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">需求</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">ajax</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Ajax</a>
               </li>
              
@@ -1155,7 +1154,7 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">ajax</a>
+                <a href="javascript:void(0)" class="js-tag color5">JavaScriptCore</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1171,15 +1170,15 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">JavaScriptCore</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">ListView</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">GridView</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">avatar</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1195,23 +1194,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">avatar</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">git</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">cocoa</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">bundle</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">多线程</a>
+                <a href="javascript:void(0)" class="js-tag color4">git</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1223,11 +1210,15 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">兼容性</a>
+                <a href="javascript:void(0)" class="js-tag color2">bundle</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">绘图</a>
+                <a href="javascript:void(0)" class="js-tag color4">多线程</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">兼容性</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1235,7 +1226,7 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">java</a>
+                <a href="javascript:void(0)" class="js-tag color3">绘图</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1244,6 +1235,10 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">标识</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">java</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1287,6 +1282,14 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">微信公众号</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">爬虫</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">正则</a>
               </li>
              
@@ -1299,6 +1302,10 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">plan</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">PPT</a>
               </li>
              
@@ -1308,10 +1315,6 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">NBA</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">plan</a>
               </li>
              
               <li class="article-tag-list-item">
