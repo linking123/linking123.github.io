@@ -1314,23 +1314,6 @@
 
     
   <url>
-    <loc>http://linking123.github.io/2016/01/11/%E5%88%A4%E6%96%AD%E9%9D%9E%E6%89%8B%E6%9C%BA%E7%99%BB%E9%99%86%EF%BC%8C%E5%81%9A%E4%B8%80%E6%AC%A1%E6%8F%90%E9%86%92/</loc>
-    <lastmod>2016-01-22T06:00:11.000Z</lastmod>
-    <data>
-        <display>
-        <title>判断非手机登陆，做一次提醒</title>
-        <pubTime>2016-01-11T12:17:29.000Z</pubTime>
-        
-        <tag>cs</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://linking123.github.io/2016/01/22/polygon-polyline-point-addField-caculate/</loc>
     <lastmod>2016-01-22T06:00:11.000Z</lastmod>
     <data>
@@ -1347,6 +1330,23 @@
              
               <breadCrumb title="arcgis" url="http://linking123.github.io/categories/arcgis/"/>
           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://linking123.github.io/2016/01/11/%E5%88%A4%E6%96%AD%E9%9D%9E%E6%89%8B%E6%9C%BA%E7%99%BB%E9%99%86%EF%BC%8C%E5%81%9A%E4%B8%80%E6%AC%A1%E6%8F%90%E9%86%92/</loc>
+    <lastmod>2016-01-22T06:00:11.000Z</lastmod>
+    <data>
+        <display>
+        <title>判断非手机登陆，做一次提醒</title>
+        <pubTime>2016-01-11T12:17:29.000Z</pubTime>
+        
+        <tag>cs</tag>
+         
+         
+           
         </display>
     </data>
     </url>
