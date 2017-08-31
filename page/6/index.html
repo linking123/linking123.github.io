@@ -173,6 +173,247 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-《利用Python进行数据分析》读书笔记-4-第四章-Numpy基础：数组和矢量计算" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/14/《利用Python进行数据分析》读书笔记-4-第四章-Numpy基础：数组和矢量计算/">《利用Python进行数据分析》读书笔记-4-第四章-Numpy基础：数组和矢量计算</a>
+    </h1>
+  
+
+        
+        <a href="/2017/03/14/《利用Python进行数据分析》读书笔记-4-第四章-Numpy基础：数组和矢量计算/" class="archive-article-date">
+  	<time datetime="2017-03-14T13:25:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-03-14</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>Tip：全称Numerical Pythn，是高性能科学计算和数据分析的基础包。本书所有高级工具的构建基础。</p>
+</blockquote>
+<h2 id="NumPy功能"><a href="#NumPy功能" class="headerlink" title="NumPy功能"></a>NumPy功能</h2><ul>
+<li>ndarry，矢量算术运算和复杂广播能力的快速切节省空间的多维数组</li>
+<li>对数组数据进行快速运算的标准数据函数（无需编写循环）</li>
+<li>读写磁盘的工具，，操作内存映射文件的工具</li>
+<li>线性代数、随机数生成以及傅立叶变换</li>
+<li><strong>集成C、C++、Fortran等语言编写的代码</strong>（从生态系统角度，最重要的功能）</li>
+</ul>
+<p>对于大部分数据分析应用，作者关注功能：</p>
+<ul>
+<li>数据整理和清理、子集构造和过滤、转换等快速矢量化数组运算</li>
+<li>数组算法，如排序、唯一化、集合运算</li>
+<li>高效描述统计和数据聚合／摘要运算</li>
+<li>异构数据集的合并／连接运算</li>
+<li>条件逻辑表述为数组表达式（除去if-else-if循环）</li>
+<li>数据分组运算</li>
+</ul>
+<blockquote>
+<p>Tip:标准NumPy约定，总是使用<code>import NumPy as np</code>,而不是<code>from NumPy import *</code>.</p>
+</blockquote>
+<h2 id="ndarray-一种多维数组对象"><a href="#ndarray-一种多维数组对象" class="headerlink" title="ndarray: 一种多维数组对象"></a>ndarray: 一种多维数组对象</h2><blockquote>
+<p>Tip：NumPy最重要特点是其N维数组对象（即ndarray，该对象是一个快速而灵活的大数据集容器）。</p>
+<p>大多数数据分析工作不需要深入理解NumPy，但精通面向数组的编程和思维方式是成为Python科学计算牛人的一大关键步骤。</p>
+<p>Focus:<strong>本书提到的<code>数组</code>、<code>NUmPy数组</code>、<code>ndarray</code>都是指ndarray对象</strong></p>
+</blockquote>
+<ul>
+<li>ndarray是同构数据多维容器，其中所有元素相同的类型。</li>
+<li>每个数组都有shape和dtype属性</li>
+</ul>
+<h3 id="创建ndarray"><a href="#创建ndarray" class="headerlink" title="创建ndarray"></a>创建ndarray</h3><figure class="highlight vala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#!/usr/bin/python</span></div><div class="line"><span class="meta"># -*- coding:utf-8 -*-</span></div><div class="line"></div><div class="line">import numpy as np</div><div class="line"><span class="meta"># data = np.ndarraz([[0.580052,0.186730,1.040717],[-0.636917,-0.938659,0.124094]])</span></div><div class="line"><span class="meta"># print data.shape</span></div><div class="line"></div><div class="line">data1 = [<span class="number">5</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">3</span>,<span class="number">9</span>]</div><div class="line">arr1 = np.array(data1)</div><div class="line"><span class="meta"># print arr1</span></div><div class="line"><span class="meta"># print arr1.ndim  # 1 维</span></div><div class="line"><span class="meta"># print arr1.shape  # (5,)</span></div><div class="line"><span class="meta"># print arr1.dtype   # int64</span></div><div class="line"></div><div class="line"><span class="meta"># print np.zeros(10)</span></div><div class="line"><span class="meta"># [ 0.  0.  0.  0.  0.  0.  0.  0.  0.  0.]</span></div><div class="line"><span class="meta"># print np.zeros((3,6))</span></div><div class="line"><span class="meta"># [[ 0.  0.  0.  0.  0.  0.]</span></div><div class="line"><span class="meta">#  [ 0.  0.  0.  0.  0.  0.]</span></div><div class="line"><span class="meta">#  [ 0.  0.  0.  0.  0.  0.]]</span></div><div class="line"><span class="meta"># print np.empty((2,3,2))</span></div><div class="line"><span class="meta"># [[[ -2.00000000e+000  -2.00000000e+000]</span></div><div class="line"><span class="meta">#   [  6.95320070e-310   6.95320070e-310]</span></div><div class="line"><span class="meta">#   [  6.95320070e-310   6.95320070e-310]]</span></div><div class="line"><span class="meta">#</span></div><div class="line"><span class="meta">#  [[  6.95320070e-310   6.95320070e-310]</span></div><div class="line"><span class="meta">#   [  6.95320070e-310   6.95320070e-310]</span></div><div class="line"><span class="meta">#   [  6.95320070e-310   6.95320070e-310]]]</span></div><div class="line"><span class="meta"># np.empty经常返回一些为初始化的垃圾值</span></div><div class="line"><span class="meta"># print np.arange(10)</span></div><div class="line"><span class="meta"># [0 1 2 3 4 5 6 7 8 9]</span></div></pre></td></tr></table></figure>
+<blockquote>
+<p>Focus:如无特别指定，数据类型基本都是float64</p>
+</blockquote>
+<h3 id="ndarray的数据类型"><a href="#ndarray的数据类型" class="headerlink" title="ndarray的数据类型"></a>ndarray的数据类型</h3><p>ndarray的astype方法可转换其dtype：<br><figure class="highlight elm"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="title">arr</span> = np.array([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>])</div><div class="line"><span class="title">print</span> arr.d<span class="keyword">type</span></div><div class="line"># int64</div><div class="line"><span class="title">float_arr</span> = arr.<span class="keyword">as</span><span class="keyword">type</span>(np.float64)</div><div class="line"><span class="title">print</span> float_arr.d<span class="keyword">type</span></div><div class="line"># float64</div></pre></td></tr></table></figure></p>
+<h2 id="数组与标量之间运算"><a href="#数组与标量之间运算" class="headerlink" title="数组与标量之间运算"></a>数组与标量之间运算</h2><blockquote>
+<p>无需循环就可执行批量运算；这就叫做矢量化（vectorization）。不同大小数组之间的运算叫做广播。</p>
+</blockquote>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">arr = np.array(<span class="string">[[1.,2.,3.], [4.,5.,6.]]</span>)</div><div class="line"># <span class="built_in">print</span> arr</div><div class="line"># <span class="built_in">print</span> arr * arr 加减乘除都是相对位置相乘</div></pre></td></tr></table></figure>
+<h2 id="基本索引和切片"><a href="#基本索引和切片" class="headerlink" title="基本索引和切片"></a>基本索引和切片</h2><blockquote>
+<p>与列表最重要区别在于，数组切片是原始数组的视图。说明数据不会被复制，视图伤的任何修改都会直接反映到数组上。若非要复制，就要显式复制：arr[5:8].copy()</p>
+</blockquote>
+<figure class="highlight accesslog"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">arr = np.arange(<span class="number">10</span>)</div><div class="line"># print arr<span class="string">[5:8]</span>  # <span class="string">[5,6,7]</span></div><div class="line">arr<span class="string">[5:8]</span> = <span class="number">12</span></div><div class="line"># print arr   # <span class="string">[0 1 2 3 4 12 12 12 8 9]</span></div><div class="line">arr_slice = arr<span class="string">[5:8]</span></div><div class="line">arr_slice<span class="string">[1]</span> =<span class="number">12345</span></div><div class="line">print arr  # <span class="string">[0 1 2 3 4 12 12345 12 8 9]</span></div><div class="line">arr_slice<span class="string">[:]</span> = <span class="number">64</span></div><div class="line"># print arr  # <span class="string">[0 1 2 3 4 64 64 64 8 9]</span></div></pre></td></tr></table></figure>
+<h2 id="切片索引"><a href="#切片索引" class="headerlink" title="切片索引"></a>切片索引</h2><blockquote>
+<p>ndarray切片语法与一维对象相似。多维切片只是一维的基础山进行扩展。</p>
+</blockquote>
+<p>沿着第0轴切片；切片是沿着一个轴向选取元素的。一次传入多个切片：</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">arr2d = np.array(<span class="string">[[1,2,3],[4,5,6],[7,8,9]]</span>)</div><div class="line"># <span class="built_in">print</span> arr2d[:<span class="number">2</span>]</div><div class="line"># out: <span class="string">[[1 2 3], [4 5 6]]</span></div><div class="line"># <span class="built_in">print</span> arr2d[:<span class="number">2</span>,:<span class="number">1</span>]</div><div class="line"># out: <span class="string">[[1], [4]]</span></div><div class="line"># <span class="built_in">print</span> arr2d[:<span class="number">2</span>,<span class="number">1</span>:]</div><div class="line"># out: <span class="string">[[2,3],[5,6]]</span></div></pre></td></tr></table></figure>
+<p>上面只能得到相同维数的数组视图。</p>
+<p>通过将整数索引和切片混合，可以得到低维度的切片：</p>
+<figure class="highlight inform7"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">print arr2d<span class="comment">[1,:2]</span></div><div class="line"># out: <span class="comment">[4, 5]</span></div><div class="line">print arr2d<span class="comment">[2:,1]</span></div><div class="line"># out: <span class="comment">[8]</span></div><div class="line">print arr2d<span class="comment">[:, :1]</span></div><div class="line"># out: <span class="comment">[<span class="comment">[1]</span>,  <span class="comment">[4]</span>,  <span class="comment">[7]</span>]</span></div></pre></td></tr></table></figure>
+<blockquote>
+<p>Focus：<code>:</code>,冒号表示选取整个轴。</p>
+</blockquote>
+<p>对切片表达式进行赋值，该操作会扩散到整个选区。<br><figure class="highlight lua"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">arr2d[:<span class="number">2</span>, <span class="number">1</span>:] = <span class="number">0</span></div><div class="line"><span class="built_in">print</span> arr2d</div><div class="line"># out: <span class="string">[[1 0 0],  [4 0 0],  [7 8 9]]</span></div></pre></td></tr></table></figure></p>
+<h2 id="布尔型索引"><a href="#布尔型索引" class="headerlink" title="布尔型索引"></a>布尔型索引</h2><blockquote>
+<p>二维数组切片，第一个数字开始在行这个维度上切片，第二个数字在列上切片。</p>
+</blockquote>
+<p>布尔型索引选取数组中多数据，总是创建数的副本，即使是返回一摸一样多数组。</p>
+<blockquote>
+<p>⚠️：Python关键字and和or在布尔型数组中无效。</p>
+</blockquote>
+<p>通过布尔型数组设置值，如下，将data中的所有负值都设为0:<br><figure class="highlight haskell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">data</span>[<span class="keyword">data</span> &lt; 0] = 0</span></div></pre></td></tr></table></figure></p>
+<p>一维数组设置正行或列的值：<br><figure class="highlight xl"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">data</span>[<span class="keyword">name</span> != <span class="string">'Joe'</span>] = <span class="number">7</span></div></pre></td></tr></table></figure></p>
+<h3 id="花式索引"><a href="#花式索引" class="headerlink" title="花式索引"></a>花式索引</h3><blockquote>
+<p>指利用整数数组进行索引；花式索引跟切片不一样，总是将数据复制到新数组中。</p>
+</blockquote>
+<figure class="highlight vala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">arr = np.empty((<span class="number">8</span>,<span class="number">3</span>))</div><div class="line"><span class="keyword">for</span> i in range(<span class="number">8</span>):</div><div class="line">    arr[i] = i</div><div class="line"><span class="meta"># print arr</span></div><div class="line"><span class="meta"># out：[[ 0.  0.  0.]</span></div><div class="line"><span class="meta">#  [ 1.  1.  1.]</span></div><div class="line"><span class="meta">#  [ 2.  2.  2.]</span></div><div class="line"><span class="meta">#  [ 3.  3.  3.]</span></div><div class="line"><span class="meta">#  [ 4.  4.  4.]</span></div><div class="line"><span class="meta">#  [ 5.  5.  5.]</span></div><div class="line"><span class="meta">#  [ 6.  6.  6.]</span></div><div class="line"><span class="meta">#  [ 7.  7.  7.]]</span></div><div class="line"></div><div class="line"><span class="meta"># print arr[[4,3,0,6]]</span></div><div class="line"><span class="meta"># out:[[ 4.  4.  4.]</span></div><div class="line"><span class="meta">#  [ 3.  3.  3.]</span></div><div class="line"><span class="meta">#  [ 0.  0.  0.]</span></div><div class="line"><span class="meta">#  [ 6.  6.  6.]]</span></div></pre></td></tr></table></figure>
+<h3 id="数组转置与轴对换"><a href="#数组转置与轴对换" class="headerlink" title="数组转置与轴对换"></a>数组转置与轴对换</h3><figure class="highlight vala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">arrzzdh = np.arange(<span class="number">15</span>).reshape(<span class="number">3</span>,<span class="number">5</span>)</div><div class="line"><span class="meta"># print arrzzdh</span></div><div class="line"><span class="meta"># out: 0-15个数字 转换成3行5列的数组</span></div><div class="line"><span class="meta"># [[ 0  1  2  3  4]</span></div><div class="line"><span class="meta">#  [ 5  6  7  8  9]</span></div><div class="line"><span class="meta">#  [10 11 12 13 14]]</span></div><div class="line">print arrzzdh.T</div><div class="line"><span class="meta"># out: 转置，行列倒置</span></div><div class="line"><span class="meta"># [[ 0  5 10]</span></div><div class="line"><span class="meta">#  [ 1  6 11]</span></div><div class="line"><span class="meta">#  [ 2  7 12]</span></div><div class="line"><span class="meta">#  [ 3  8 13]</span></div><div class="line"><span class="meta">#  [ 4  9 14]]</span></div></pre></td></tr></table></figure>
+<h2 id="利用数组进行数据处理"><a href="#利用数组进行数据处理" class="headerlink" title="利用数组进行数据处理"></a>利用数组进行数据处理</h2><blockquote>
+<p>用数组表达式代替循环的做法，称为矢量化。</p>
+</blockquote>
+<figure class="highlight maxima"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">points</span> = <span class="built_in">np</span>.arange(-<span class="number">5</span>,<span class="number">5</span>,<span class="number">0.1</span>) # <span class="number">1000</span>个间隔相等的点</div><div class="line">xs, ys = <span class="built_in">np</span>.meshgrid(<span class="built_in">points</span>, <span class="built_in">points</span>)</div><div class="line"># <span class="built_in">print</span> ys</div><div class="line">import matplotlib.pyplot as plt</div><div class="line">z = <span class="built_in">np</span>.<span class="built_in">sqrt</span>(xs**<span class="number">2</span> + ys**<span class="number">2</span>)</div><div class="line"># <span class="built_in">print</span> z</div><div class="line">plt.imshow(z, cmap=plt.cm.gray);plt.colorbar()</div><div class="line">plt.<span class="built_in">title</span>(<span class="string">"Image plot of $\sqrt&#123;x^2 + y^2&#125;$ for a grid of values"</span>)</div><div class="line">plt.<span class="built_in">show</span>()</div></pre></td></tr></table></figure>
+<h3 id="将条件逻辑表述为数组运算"><a href="#将条件逻辑表述为数组运算" class="headerlink" title="将条件逻辑表述为数组运算"></a>将条件逻辑表述为数组运算</h3><p>如<code>numpy.where函数</code>是三元表达式<code>x if condition erse y</code>的矢量化版本。<br><figure class="highlight applescript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="literal">result</span> = np.<span class="keyword">where</span>(condition=<span class="string">""</span>,x=<span class="string">""</span>,y=<span class="string">""</span>)</div></pre></td></tr></table></figure></p>
+<p>满足条件则x，否则y</p>
+<h3 id="数学和统计方法"><a href="#数学和统计方法" class="headerlink" title="数学和统计方法"></a>数学和统计方法</h3><figure class="highlight maxima"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">arr = <span class="built_in">np</span>.<span class="built_in">random</span>.randn(<span class="number">5</span>, <span class="number">4</span>)</div><div class="line"><span class="built_in">print</span> arr.<span class="built_in">mean</span>()</div><div class="line"># out: -<span class="number">0.360180571527</span></div><div class="line"></div><div class="line">arr = <span class="built_in">np</span>.<span class="built_in">random</span>.randn(<span class="number">100</span>)</div><div class="line"><span class="built_in">print</span> (arr &gt; <span class="number">0</span>).<span class="built_in">sum</span>()</div><div class="line"># out: 随机的一百个数字，每次大于<span class="number">0</span>的数的个数。</div></pre></td></tr></table></figure>
+<figure class="highlight maxima"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">## 排序</div><div class="line">arr1 =<span class="built_in">np</span>.<span class="built_in">random</span>.randn(<span class="number">8</span>)</div><div class="line"><span class="built_in">print</span> arr1</div><div class="line">arr1.<span class="built_in">sort</span>()</div><div class="line"># 先<span class="built_in">sort</span>排序，才能输出，如果直接同时输出排序，会None</div><div class="line"><span class="built_in">print</span> arr1</div><div class="line"></div><div class="line"># 多维数组排序，在任何一个轴上，传入该轴编号即可</div><div class="line">arr2 = <span class="built_in">np</span>.<span class="built_in">random</span>.randn(<span class="number">5</span>,<span class="number">3</span>)</div><div class="line"><span class="built_in">print</span> arr2</div><div class="line">arr2.<span class="built_in">sort</span>(<span class="number">1</span>)</div><div class="line"><span class="built_in">print</span> arr2</div></pre></td></tr></table></figure>
+<figure class="highlight vala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="meta">## 唯一化</span></div><div class="line">names = np.array([<span class="string">'jin'</span>, <span class="string">'king'</span>, <span class="string">'lin'</span>, <span class="string">'wen'</span>, <span class="string">'jin'</span>, <span class="string">'wen'</span>, <span class="string">'lin'</span>])</div><div class="line"><span class="meta"># print np.unique(names) # 这里又必须直接输出</span></div><div class="line"><span class="meta"># print names  # 无效</span></div><div class="line">ints = np.array([<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">5</span>,<span class="number">4</span>,<span class="number">2</span>,<span class="number">4</span>,<span class="number">6</span>,<span class="number">1</span>])</div><div class="line"><span class="meta"># print np.unique(ints) # 直接输出有效</span></div><div class="line"><span class="meta"># print ints # 无效</span></div><div class="line"><span class="meta"># # 没效果？那么纯Python方法有效果吗</span></div><div class="line"><span class="meta"># print sorted(set(names))</span></div><div class="line"><span class="meta"># print names</span></div><div class="line"><span class="meta"># print sorted(set(ints))</span></div><div class="line"><span class="meta"># print ints</span></div><div class="line"><span class="meta"># 还是没有效果啊</span></div><div class="line"><span class="meta"># 这里说明排序唯一都要直接输出，**原值没有改变**。</span></div></pre></td></tr></table></figure>
+<figure class="highlight vala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="meta">## 用于数组的文件输入输出</span></div><div class="line"><span class="meta">### 将数组以二进制格式保存到硬盘</span></div><div class="line"><span class="meta"># np.save()和np.load()方法是用于读写的主要方法。</span></div><div class="line">arr3 = np.arange(<span class="number">10</span>)</div><div class="line">np.save(<span class="string">'test_arr_save'</span>, arr3)</div><div class="line"><span class="meta"># 保存为了.npy文件；然后用load方法读取数组</span></div><div class="line"><span class="meta"># print np.load('test_arr_save.npy')</span></div><div class="line"><span class="meta"># out: [0 1 2 3 4 5 6 7 8 9]</span></div><div class="line"><span class="meta"># np.savez保存多个数组到压缩文件</span></div><div class="line">np.savez(<span class="string">'arr_archive.npz'</span>, a= arr3, b=arr3)</div><div class="line">arch = np.load(<span class="string">'arr_archive.npz'</span>)</div><div class="line"><span class="meta"># print arch['b']</span></div><div class="line"><span class="meta"># out: [0 1 2 3 4 5 6 7 8 9]</span></div></pre></td></tr></table></figure>
+<figure class="highlight vala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta"># 存取文本文件</span></div><div class="line"><span class="meta"># 指定分隔符为逗号，读取csv文件</span></div><div class="line"><span class="meta"># np.loadtxt('filename', delimiter=',')</span></div></pre></td></tr></table></figure>
+<p>最后涉及到了<strong>线性代数</strong>,<strong>随机漫步</strong>等数学概念，深切体会到学好数学是任何一门科学想要往高了走的必然阶梯，计算机科学当然也不例外。</p>
+<p>今天组内培训，讲了一些代码规范、版本更新和项目管理的知识，无规矩不成方圆，团队大了，尤其需要一套行之有效的规矩来约束每个人的行为，代码能体现一个人的行为方式，是否有代码洁癖。<code>Talk is cheap, show me the code.</code>希望组内能坚持下去，互相code Review。</p>
+
+      
+
+      
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/cs/" class="article-tag-list-link color3">cs</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/03/14/《利用Python进行数据分析》读书笔记-4-第四章-Numpy基础：数组和矢量计算/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
+    <article id="post-《利用Python进行数据分析》读书笔记-3-第三章-IPython-一种交互式计算和开发环境" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/08/《利用Python进行数据分析》读书笔记-3-第三章-IPython-一种交互式计算和开发环境/">《利用Python进行数据分析》读书笔记-3-第三章-IPython:一种交互式计算和开发环境</a>
+    </h1>
+  
+
+        
+        <a href="/2017/03/08/《利用Python进行数据分析》读书笔记-3-第三章-IPython-一种交互式计算和开发环境/" class="archive-article-date">
+  	<time datetime="2017-03-07T16:38:49.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-03-08</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="IPython-一种交互式计算和开发环境"><a href="#IPython-一种交互式计算和开发环境" class="headerlink" title="IPython:一种交互式计算和开发环境"></a>IPython:一种交互式计算和开发环境</h1><blockquote>
+<p>Tip:动手敲一敲，跟所有由键盘驱动的控制台环境一样，锻炼对常用命令的肌肉记忆是学习曲线中不可或缺的一部分。</p>
+</blockquote>
+<ul>
+<li>输入变量，会显示出该对象的一个字符串表示</li>
+<li>IPython支持Tab自动完成，类shell</li>
+<li>IPython支持内省，在变量前或后加<code>?</code>，就能查看对象的一些信息</li>
+</ul>
+<h2 id="代码设计提示"><a href="#代码设计提示" class="headerlink" title="代码设计提示"></a>代码设计提示</h2><ul>
+<li>保留有意义的对象和数据</li>
+<li>扁平化结构要比嵌套结构好（洋葱；低耦合，模块化）</li>
+<li>无惧大文件（一次性干大文件，比加载若干小文件来得实惠）</li>
+</ul>
+<p>这一章介绍了IPython的强大功能，作为数据分析利器的存在。目前我还是用PyCharm这个IDE顺手。这一章暂且搁置，若后续需要了解再来查看。–20170307</p>
+<h2 id="Python之禅"><a href="#Python之禅" class="headerlink" title="Python之禅"></a>Python之禅</h2><figure class="highlight vbnet"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">import this</div><div class="line"><span class="meta"># 查看Python之禅</span></div><div class="line">The Zen <span class="keyword">of</span> Python, <span class="keyword">by</span> Tim Peters</div><div class="line"></div><div class="line">Beautiful <span class="keyword">is</span> better than ugly.</div><div class="line"><span class="keyword">Explicit</span> <span class="keyword">is</span> better than implicit.</div><div class="line">Simple <span class="keyword">is</span> better than complex.</div><div class="line">Complex <span class="keyword">is</span> better than complicated.</div><div class="line">Flat <span class="keyword">is</span> better than nested.</div><div class="line">Sparse <span class="keyword">is</span> better than dense.</div><div class="line">Readability counts.</div><div class="line">Special cases aren<span class="comment">'t special enough to break the rules.</span></div><div class="line">Although practicality beats purity.</div><div class="line">Errors should never pass silently.</div><div class="line">Unless explicitly silenced.</div><div class="line"><span class="keyword">In</span> the face <span class="keyword">of</span> ambiguity, refuse the temptation <span class="keyword">to</span> guess.</div><div class="line">There should be one-- <span class="keyword">and</span> preferably only one --obvious way <span class="keyword">to</span> <span class="keyword">do</span> it.</div><div class="line">Although that way may <span class="keyword">not</span> be obvious at first unless you<span class="comment">'re Dutch.</span></div><div class="line">Now <span class="keyword">is</span> better than never.</div><div class="line">Although never <span class="keyword">is</span> often better than *right* now.</div><div class="line"><span class="keyword">If</span> the implementation <span class="keyword">is</span> hard <span class="keyword">to</span> explain, it<span class="comment">'s a bad idea.</span></div><div class="line"><span class="keyword">If</span> the implementation <span class="keyword">is</span> easy <span class="keyword">to</span> explain, it may be a good idea.</div><div class="line">Namespaces are one honking great idea -- <span class="keyword">let</span><span class="comment">'s do more of those!</span></div></pre></td></tr></table></figure>
+<blockquote>
+<p>今日感悟：在项目开发过程中，一些坑现在不填平，以后还会跳出来坑你，还是往死里坑。这也正是<code>Errors should never pass silently.</code>的意指。so，不要逃避困难，遇到问题，想办法解决。</p>
+</blockquote>
+
+      
+
+      
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/cs/" class="article-tag-list-link color3">cs</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/03/08/《利用Python进行数据分析》读书笔记-3-第三章-IPython-一种交互式计算和开发环境/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
     <article id="post-《利用Python进行数据分析》读书笔记-2-第一二章_准备工作及引言" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -738,219 +979,6 @@
 
 
   
-    <article id="post-一台机器部署多个Tomcat及如何忽略webapps里的项目" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/09/05/一台机器部署多个Tomcat及如何忽略webapps里的项目/">一台机器部署多个Tomcat及如何忽略webapps里的项目</a>
-    </h1>
-  
-
-        
-        <a href="/2016/09/05/一台机器部署多个Tomcat及如何忽略webapps里的项目/" class="archive-article-date">
-  	<time datetime="2016-09-05T14:40:36.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-09-05</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="一台机器部署多个Tomcat"><a href="#一台机器部署多个Tomcat" class="headerlink" title="一台机器部署多个Tomcat"></a>一台机器部署多个Tomcat</h1><blockquote>
-<p>考虑到线上部署系统<strong>安全</strong>性，需要在同一台机器上部署多个Tomcat。一个系统一个Tomcat,这样更好的容灾机制，避免多米多骨牌效应。<br>重点：<strong>避免端口冲突</strong>    </p>
-</blockquote>
-<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><blockquote>
-<p>修改CATALINA_HOME\conf\server.xml中的启动端口和连接端口。</p>
-</blockquote>
-<p>操作步骤：</p>
-<blockquote>
-<ol>
-<li><a href="http://tomcat.apache.org/download-70.cgi" target="_blank" rel="external">下载</a>-解压apache-tomcat-x.x.xx.zip-改名tomcatx-8080</li>
-<li>复制，改名tomcatx-8090</li>
-<li>添加环境变量：CATALINA_HOME:d:\tocatx-8080;CATALINA_HOME2:d:\tomcatx-8090</li>
-<li>修改启动端口和关闭端口<br>进入d:\tomcat5-8090\conf\目录，打开server.xml文件，修改下面两个地方：<br>（1）<code>&lt;Server port=&quot;8006&quot; shutdown=&quot;SHUTDOWN&quot;&gt;</code><br>修改这个port=”8006”，原来默认的为：8005，使得它的关闭端口和另一个关闭端口不发生冲突。<br>（2）<code>&lt;Connector port=&quot;8090&quot; maxHttpHeaderSize=&quot;8192&quot;   maxThreads=&quot;150&quot; minSpareThreads=&quot;25&quot; maxSpareThreads=&quot;75&quot; enableLookups=&quot;false&quot; redirectPort=&quot;8443&quot; acceptCount=&quot;100&quot; connectionTimeout=&quot;20000&quot; disableUploadTimeout=&quot;true&quot; /&gt;</code><br>修改port=”8090”，原来默认的为“8080”，使得它的连接端口和另一个不冲突。</li>
-<li>修改startup.bat和catalina.bat文件内容：<br>(1) 打开d:\tomcat5-8090\bin\startup.bat文件，把其中所有CATALINA_HOME替换为CATALINA_HOME2。<br>（2）打开d:\tomcat5-8090\bin\catalina.bat文件，把其中所有CATALINA_HOME替换为CATALINA_HOME2。</li>
-<li>启动Tomcat，在命令行下分别进入两个不同的Tomcat安装目录下，执行startup.bat，分别启动两个Tomcat。然后在浏览器中输入：<a href="http://localhost:8080" target="_blank" rel="external">http://localhost:8080</a>  和<a href="http://localhost:8090" target="_blank" rel="external">http://localhost:8090</a></li>
-<li>至此，我们已经在一台服务器上配置了两个Tomcat。</li>
-</ol>
-</blockquote>
-<p>考虑到在本地运行，不需要那么复杂。只需要用Disable-WEB-INF。</p>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a><strong>参考</strong></h2><blockquote>
-<ol>
-<li><a href="http://blog.163.com/hegonghe@126/blog/static/50004810200871483335100/" target="_blank" rel="external">在同一台服务器上配置多个Tomcat（原创）</a></li>
-</ol>
-</blockquote>
-<h1 id="忽略webapps里的项目"><a href="#忽略webapps里的项目" class="headerlink" title="忽略webapps里的项目"></a>忽略webapps里的项目</h1><blockquote>
-<p>有时在同一个webapps中有多个项目，而又不想同时部署或启动，那么就要想办法忽略掉某些项目。</p>
-</blockquote>
-<h2 id="方法-1"><a href="#方法-1" class="headerlink" title="方法"></a>方法</h2><blockquote>
-<ol>
-<li>使用web application manager.密码？未实践<br>The Tomcat Web Application Manager lets you stop selected applications. I think that prevents them from loading when Tomcat is restarted.</li>
-<li>将需要忽略的项目的<code>WEB-INF</code>重命名为<code>Disabled-WEB-INF</code>.实践通过</li>
-<li>添加<code>deployIgnore=&quot;projectName&quot;</code>.不部署，</li>
-</ol>
-</blockquote>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">Host</span> <span class="attr">name</span>=<span class="string">"localhost"</span> <span class="attr">appBase</span>=<span class="string">"webapps"</span> <span class="attr">unpackWARs</span>=<span class="string">"true"</span> <span class="attr">autoDeploy</span>=<span class="string">"false"</span> <span class="attr">xmlValidation</span>=<span class="string">"false"</span> <span class="attr">xmlNamespaceAware</span>=<span class="string">"false"</span>&gt;</span> </div><div class="line"><span class="tag">&lt;<span class="name">Context</span> <span class="attr">path</span>=<span class="string">"/acbd"</span> <span class="attr">docBase</span>=<span class="string">"abcd"</span> <span class="attr">debug</span>=<span class="string">"0"</span> <span class="attr">reloadable</span>=<span class="string">"true"</span>/&gt;</span> </div><div class="line"><span class="tag">&lt;<span class="name">Valve</span> <span class="attr">className</span>=<span class="string">"org.apache.catalina.valves.AccessLogValve"</span> <span class="attr">directory</span>=<span class="string">"logs"</span> <span class="attr">prefix</span>=<span class="string">"localhost_access_log."</span> <span class="attr">suffix</span>=<span class="string">".txt"</span> <span class="attr">pattern</span>=<span class="string">"common"</span> <span class="attr">resolveHosts</span>=<span class="string">"false"</span>/&gt;</span> </div><div class="line"><span class="tag">&lt;/<span class="name">Host</span>&gt;</span></div></pre></td></tr></table></figure>
-<h2 id="参考-1"><a href="#参考-1" class="headerlink" title="参考"></a><strong>参考</strong></h2><blockquote>
-<ol>
-<li><a href="http://stackoverflow.com/questions/5067062/how-to-disable-specific-apps-from-starting-during-tomcat-startup" target="_blank" rel="external">How to disable specific apps from starting during Tomcat startup?</a></li>
-<li><a href="https://coderanch.com/t/85667/Tomcat/avoid-loading-applications-webapps" target="_blank" rel="external">avoid loading all applications under webapps</a></li>
-<li><a href="http://tomcat.apache.org/tomcat-5.5-doc/config/host.html#Automatic_Application_Deployment" target="_blank" rel="external">Apache.org</a></li>
-</ol>
-</blockquote>
-
-      
-
-      
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">tomcat</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/cs/" class="article-tag-list-link color3">cs</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2016/09/05/一台机器部署多个Tomcat及如何忽略webapps里的项目/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
-    <article id="post-git学习一" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/08/23/git学习一/">git学习一</a>
-    </h1>
-  
-
-        
-        <a href="/2016/08/23/git学习一/" class="archive-article-date">
-  	<time datetime="2016-08-23T15:02:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-08-23</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>git 在克隆repository时选择分支为develop:<br><figure class="highlight crmsh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git <span class="keyword">clone</span> <span class="title">http</span>://xxxx.git --branch develop</div></pre></td></tr></table></figure></p>
-<p>查看所有分支:<br><figure class="highlight armasm"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="symbol">git</span> <span class="keyword">branch </span>-a</div></pre></td></tr></table></figure></p>
-<p>分布式版本控制系统：</p>
-<blockquote>
-<ol>
-<li>多地备份，代码更安全</li>
-<li>小组多人协同开发</li>
-</ol>
-</blockquote>
-<p>git简史：</p>
-<blockquote>
-<p>Linus Torvalds<br>速度和数据量<br>非线性分支管理</p>
-</blockquote>
-<p>Git基础：</p>
-<blockquote>
-<ol>
-<li>git直接记录<strong>快照</strong>，而非差异比较(只关心文件数据的整体是否发生变化);其他版本管理系统在每个版本中记录着各个文件内容的具体差异</li>
-<li>近乎所有操作都是<strong>本地执行</strong></li>
-<li>时刻保持<strong>数据完整性</strong></li>
-<li>多数操作仅添加数据</li>
-<li>文件三种状态<br> 已提交-committed<br> 已修改-modified<br> 已暂存-staged</li>
-</ol>
-</blockquote>
-<p>安装：</p>
-<blockquote>
-<ol>
-<li>源码安装</li>
-<li>预编译安装包</li>
-</ol>
-</blockquote>
-<p>初次配置：<br><figure class="highlight elixir"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">git-config</div><div class="line"></div><div class="line"><span class="comment">#特定项目配置不加--global即可</span></div><div class="line"><span class="variable">$ </span>git config --global user.name <span class="string">"Linking"</span></div><div class="line"><span class="variable">$ </span>git config --global user.email linking<span class="variable">@example</span>.com</div><div class="line"></div><div class="line"><span class="comment">#查看配置信息</span></div><div class="line"><span class="variable">$ </span>git config --list</div><div class="line"></div><div class="line"><span class="comment">#帮助文档</span></div><div class="line"><span class="variable">$ </span>git help config</div></pre></td></tr></table></figure></p>
-
-      
-
-      
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">git</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/cs/" class="article-tag-list-link color3">cs</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2016/08/23/git学习一/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/5/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/7/">Next &raquo;</a>
@@ -1090,14 +1118,6 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">ListView</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">GridView</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">thought</a>
               </li>
              
@@ -1110,6 +1130,18 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">ListView</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">GridView</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">git</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">cookie</a>
               </li>
              
@@ -1118,7 +1150,7 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">git</a>
+                <a href="javascript:void(0)" class="js-tag color2">bundle</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1130,15 +1162,7 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">bundle</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">多线程</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">兼容性</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1150,11 +1174,19 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">兼容性</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">cs</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">java</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">标识</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1166,15 +1198,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">标识</a>
+                <a href="javascript:void(0)" class="js-tag color2">D.Wade</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Python</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">D.Wade</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1251,6 +1279,14 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">进度条</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">效率</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">快捷键</a>
               </li>
             
             <div class="clearfix"></div>
