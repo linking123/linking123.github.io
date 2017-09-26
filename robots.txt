@@ -3,7 +3,7 @@ User-agent: *
 Allow: /
 Allow: /archives/
 Allow: /tags/essay
-Allow: /about/index.html
+Allow: /about/index.html	
 
 Disallow: /vendors/
 Disallow: /js/

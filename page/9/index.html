@@ -173,6 +173,82 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-判断非手机登陆，做一次提醒" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/01/11/判断非手机登陆，做一次提醒/">判断非手机登陆，做一次提醒</a>
+    </h1>
+  
+
+        
+        <a href="/2016/01/11/判断非手机登陆，做一次提醒/" class="archive-article-date">
+  	<time datetime="2016-01-11T12:17:29.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-01-11</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>需求</p>
+<blockquote>
+<p>项目的网站时做的手机网页，但是没有考虑到自适应pc端，只是在chrome中固定了手机屏幕大小，所以在pc端查看会很丑，布局是乱的；但是重写又很麻烦，所以有必要做一下提醒，让用户手动将网页缩小到手机屏幕大小。</p>
+</blockquote>
+<p>用到</p>
+<blockquote>
+<p>非手机检验和cookie记录</p>
+</blockquote>
+<p>方法</p>
+<blockquote>
+<p>这段代码是使用了cookie来控制的</p>
+<ol>
+<li>使用cookie让浏览器记住页面已经打开过一次，当前页面刷新不会弹出提醒。</li>
+<li>浏览器一旦关闭，保存这个记录的cookie文件将被删除。重新打开浏览器弹出窗口会再次出现，从而确保了在原有的窗口基础上只打开一次。 </li>
+</ol>
+</blockquote>
+<p>判断非手机登陆方式<br><figure class="highlight lisp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">if (!/Android|webOS|iPhone|iPod|BlackBerry/i.test(<span class="name">navigator</span>.userAgent))</div><div class="line">	alert(<span class="string">"为了提高体验效果，请把页面缩小成手机屏幕大小。\n谢谢合作！"</span>)<span class="comment">;</span></div></pre></td></tr></table></figure></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span><span class="javascript"></span></div><div class="line">	<span class="keyword">try</span>&#123;</div><div class="line">		<span class="keyword">var</span> alertmessage=<span class="string">"为了提高体验效果，请把页面缩小成手机屏幕大小。\n谢谢合作！"</span>;</div><div class="line">		<span class="keyword">var</span> once_per_session=<span class="number">1</span></div><div class="line">		<span class="function"><span class="keyword">function</span> <span class="title">get_cookie</span>(<span class="params">Name</span>) </span>&#123;</div><div class="line">		  <span class="keyword">var</span> search = Name + <span class="string">"="</span></div><div class="line">		  <span class="keyword">var</span> returnvalue = <span class="string">""</span>;</div><div class="line">		  <span class="keyword">if</span> (<span class="built_in">document</span>.cookie.length &gt; <span class="number">0</span>) &#123;</div><div class="line">			offset = <span class="built_in">document</span>.cookie.indexOf(search)</div><div class="line">			<span class="keyword">if</span> (offset != <span class="number">-1</span>) &#123;</div><div class="line">			  offset += search.length;</div><div class="line">			  end = <span class="built_in">document</span>.cookie.indexOf(<span class="string">";"</span>, offset);</div><div class="line">			  <span class="keyword">if</span> (end == <span class="number">-1</span>)</div><div class="line">				 end = <span class="built_in">document</span>.cookie.length;</div><div class="line">			 	 returnvalue=<span class="built_in">unescape</span>(<span class="built_in">document</span>.cookie.substring(offset, end))</div><div class="line">			  &#125;</div><div class="line">		   	&#125;</div><div class="line">		 	<span class="keyword">return</span> returnvalue;</div><div class="line">		&#125;</div><div class="line">		<span class="function"><span class="keyword">function</span> <span class="title">alertornot</span>(<span class="params"></span>)</span>&#123;</div><div class="line">			<span class="keyword">if</span> (get_cookie(<span class="string">'alerted'</span>)==<span class="string">''</span>)&#123;</div><div class="line">		        loadalert();</div><div class="line">				<span class="built_in">document</span>.cookie=<span class="string">"alerted=yes"</span>;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">		<span class="function"><span class="keyword">function</span> <span class="title">loadalert</span>(<span class="params"></span>)</span>&#123;</div><div class="line">			<span class="keyword">if</span> (!<span class="regexp">/Android|webOS|iPhone|iPod|BlackBerry/i</span>.test(navigator.userAgent))</div><div class="line">				alert(alertmessage);</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">if</span> (once_per_session==<span class="number">0</span>)</div><div class="line">			loadalert();</div><div class="line">		<span class="keyword">else</span></div><div class="line">			alertornot();</div><div class="line">	&#125; <span class="keyword">catch</span>(e)</div><div class="line">	&#123;</div><div class="line">		alert(e);</div><div class="line">	&#125;</div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div></pre></td></tr></table></figure>
+      
+
+      
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">cs</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2016/01/11/判断非手机登陆，做一次提醒/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
     <article id="post-nodejs学习记录" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1539,89 +1615,9 @@
 
 
   
-    <article id="post-科比撰文宣布赛季后退役" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/11/30/科比撰文宣布赛季后退役/">科比撰文宣布赛季后退役</a>
-    </h1>
-  
-
-        
-        <a href="/2015/11/30/科比撰文宣布赛季后退役/" class="archive-article-date">
-  	<time datetime="2015-11-30T08:32:04.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2015-11-30</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="科比退役视频HTML版"><a href="#科比退役视频HTML版" class="headerlink" title="科比退役视频HTML版"></a>科比退役视频HTML版</h2><p><object width='541' height='450'><param name='allowFullScreen' value='true'><param name='movie' 
-value='http://i7.imgs.letv.com/player/swfPlayer.swf?autoPlay=0&id=24108987'/><embed 
-src='http://i7.imgs.letv.com/player/swfPlayer.swf?autoPlay=0&id=24108987' width='541' height='450' 
-allowFullScreen='true' type='application/x-shockwave-flash'/></object><br>
-        
-          <a class="article-more-a" href="/2015/11/30/科比撰文宣布赛季后退役/#more">more >></a>
-        
-      
-
-      
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">essay</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">NBA</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/NBA/" class="article-tag-list-link color4">NBA</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2015/11/30/科比撰文宣布赛季后退役/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/8/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><span class="page-number current">9</span>
+      <a class="extend prev" rel="prev" href="/page/8/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><span class="page-number current">9</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/10/">Next &raquo;</a>
     </nav>
   
 
@@ -1742,10 +1738,6 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">html5</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">hmtl5</a>
               </li>
              
@@ -1758,15 +1750,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">thought</a>
+                <a href="javascript:void(0)" class="js-tag color1">html5</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">markdown</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">avatar</a>
+                <a href="javascript:void(0)" class="js-tag color1">Mac Office</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1778,11 +1766,15 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">git</a>
+                <a href="javascript:void(0)" class="js-tag color4">markdown</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">cookie</a>
+                <a href="javascript:void(0)" class="js-tag color3">thought</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">avatar</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1790,7 +1782,7 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">bundle</a>
+                <a href="javascript:void(0)" class="js-tag color2">cookie</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1802,11 +1794,19 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">多线程</a>
+                <a href="javascript:void(0)" class="js-tag color4">git</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">绘图</a>
+                <a href="javascript:void(0)" class="js-tag color2">bundle</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">兼容性</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">多线程</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1814,7 +1814,7 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">兼容性</a>
+                <a href="javascript:void(0)" class="js-tag color3">绘图</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1826,15 +1826,23 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">标识</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">arcgis</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">arcgis 建模</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">效率</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">快捷键</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">标识</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1850,11 +1858,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">tomcat</a>
+                <a href="javascript:void(0)" class="js-tag color1">essay</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">essay</a>
+                <a href="javascript:void(0)" class="js-tag color2">tomcat</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1878,15 +1886,15 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">张靓颖</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">微信公众号</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">爬虫</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">张靓颖</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1919,14 +1927,6 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">进度条</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">效率</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">快捷键</a>
               </li>
             
             <div class="clearfix"></div>
