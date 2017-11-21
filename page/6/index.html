@@ -173,6 +173,140 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-《利用Python进行数据分析》读书笔记-6-第六章-数据加载、存储和数据格式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/25/《利用Python进行数据分析》读书笔记-6-第六章-数据加载、存储和数据格式/">《利用Python进行数据分析》读书笔记-6-第六章-数据加载、存储和数据格式</a>
+    </h1>
+  
+
+        
+        <a href="/2017/03/25/《利用Python进行数据分析》读书笔记-6-第六章-数据加载、存储和数据格式/" class="archive-article-date">
+  	<time datetime="2017-03-25T14:49:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-03-25</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>输入输出分类：</p>
+<ul>
+<li>读取文本文件</li>
+<li>其他更高效的磁盘存储格式</li>
+<li>加载数据库中数据</li>
+<li>利用Web API操作网络资源</li>
+</ul>
+<h2 id="读取文本格式的数据"><a href="#读取文本格式的数据" class="headerlink" title="读取文本格式的数据"></a>读取文本格式的数据</h2><p>pandas提供了将表格数据读取为DataFrame对象的函数；其中read_csv和read_table是应用最多的两个：</p>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>read_csv</td>
+<td>从文件、URL、文件型对象中加载带分隔符的数据；默认逗号</td>
+</tr>
+<tr>
+<td>read_table</td>
+<td>从文件、URL、文件型对象中加载带分隔符的数据；默认制表符”\t”</td>
+</tr>
+</tbody>
+</table>
+<p>类型推断是这些函数中最重要的功能之一。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">$ cat ex1.csv</div><div class="line"><span class="comment">&lt;!--out: --&gt;</span></div><div class="line"><span class="comment">&lt;!--a,b,c,d,message--&gt;</span></div><div class="line"><span class="comment">&lt;!--0,1,2,3,4,hello--&gt;</span></div><div class="line"><span class="comment">&lt;!--1,5,6,7,8,world--&gt;</span></div><div class="line"><span class="comment">&lt;!--2,9,10,11,12,foo--&gt;</span></div><div class="line">#以上数据用逗号隔开</div><div class="line"></div><div class="line">import pandas as pd</div><div class="line">import numpy as np</div><div class="line">from pandas import Series, DataFrame</div><div class="line"></div><div class="line">df = pd.read_csv('../pydata-book-master/ch06/ex1.csv')</div><div class="line"># print df</div><div class="line">#  a   b   c   d message</div><div class="line"># 0  1   2   3   4   hello</div><div class="line"># 1  5   6   7   8   world</div><div class="line"># 2  9  10  11  12     foo</div><div class="line">pt = pd.read_table('../pydata-book-master/ch06/ex1.csv', sep=',')</div><div class="line"># print pt</div><div class="line"># out: 同上</div></pre></td></tr></table></figure>
+<p>对于没有标题行的文件<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">$ cat ex2.csv</div><div class="line"><span class="comment">&lt;!--out: --&gt;</span> </div><div class="line"><span class="comment">&lt;!--0,1,2,3,4,hello--&gt;</span></div><div class="line"><span class="comment">&lt;!--1,5,6,7,8,world--&gt;</span></div><div class="line"><span class="comment">&lt;!--2,9,10,11,12,foo--&gt;</span></div><div class="line"></div><div class="line"># 自动分配默认列名</div><div class="line"></div><div class="line"># pc = pd.read_csv('../pydata-book-master/ch06/ex2.csv', header=None)</div><div class="line"># print pc</div><div class="line">#    0   1   2   3      4</div><div class="line"># 0  1   2   3   4  hello</div><div class="line"># 1  5   6   7   8  world</div><div class="line"># 2  9  10  11  12    foo</div><div class="line"># 手动定义列名</div><div class="line"># pc2 = pd.read_csv('../pydata-book-master/ch06/ex2.csv', names=['a','b','c','d','msg'])</div><div class="line"># print pc2</div><div class="line">#    a   b   c   d    msg</div><div class="line"># 0  1   2   3   4  hello</div><div class="line"># 1  5   6   7   8  world</div><div class="line"># 2  9  10  11  12    foo</div></pre></td></tr></table></figure></p>
+<p>指定索引<br><figure class="highlight vala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="meta"># 指定索引</span></div><div class="line">names = [<span class="string">'a'</span>,<span class="string">'b'</span>,<span class="string">'c'</span>,<span class="string">'d'</span>,<span class="string">'msg'</span>]</div><div class="line">pc3 = pd.read_csv(<span class="string">'../pydata-book-master/ch06/ex2.csv'</span>, names=names, index_col=<span class="string">'msg'</span>)</div><div class="line"><span class="meta"># print pc3</span></div><div class="line"><span class="meta">#        a   b   c   d</span></div><div class="line"><span class="meta"># msg</span></div><div class="line"><span class="meta"># hello  1   2   3   4</span></div><div class="line"><span class="meta"># world  5   6   7   8</span></div><div class="line"><span class="meta"># foo    9  10  11  12</span></div><div class="line"><span class="meta"># 层次化索引</span></div><div class="line">parsed = pd.read_csv(<span class="string">'../pydata-book-master/ch06/csv_mindex.csv'</span>, index_col=[<span class="string">'key1'</span>, <span class="string">'key2'</span>])</div><div class="line"><span class="meta"># print parsed</span></div><div class="line"><span class="meta">#            value1  value2</span></div><div class="line"><span class="meta"># key1 key2</span></div><div class="line"><span class="meta"># one  a          1       2</span></div><div class="line"><span class="meta">#      b          3       4</span></div><div class="line"><span class="meta">#      c          5       6</span></div><div class="line"><span class="meta">#      d          7       8</span></div><div class="line"><span class="meta"># two  a          9      10</span></div><div class="line"><span class="meta">#      b         11      12</span></div><div class="line"><span class="meta">#      c         13      14</span></div><div class="line"><span class="meta">#      d         15      16</span></div></pre></td></tr></table></figure></p>
+<figure class="highlight vala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="meta"># 非固定分隔符，需要正则表达式</span></div><div class="line"><span class="meta"># print list(open('../pydata-book-master/ch06/ex3.csv'))</span></div><div class="line"><span class="meta"># ['            A         B         C\n',</span></div><div class="line"><span class="meta">#  'aaa -0.264438 -1.026059 -0.619500\n',</span></div><div class="line"><span class="meta">#  'bbb  0.927272  0.302904 -0.032399\n',</span></div><div class="line"><span class="meta">#  'ccc -0.264273 -0.386314 -0.217601\n',</span></div><div class="line"><span class="meta">#  'ddd -0.871858 -0.348382  1.100491']</span></div><div class="line"><span class="meta"># 观察到该文件各个字段由不定数量的空白符分割，用`\s+`这个正则来表示：</span></div><div class="line">result = pd.read_table(<span class="string">'../pydata-book-master/ch06/ex3.csv'</span>, sep=<span class="string">'\s+'</span>)</div><div class="line"><span class="meta"># print result</span></div><div class="line"><span class="meta">#             A         B         C</span></div><div class="line"><span class="meta"># aaa -0.264438 -1.026059 -0.619500</span></div><div class="line"><span class="meta"># bbb  0.927272  0.302904 -0.032399</span></div><div class="line"><span class="meta"># ccc -0.264273 -0.386314 -0.217601</span></div><div class="line"><span class="meta"># ddd -0.871858 -0.348382  1.100491</span></div></pre></td></tr></table></figure>
+<p>跳过异常行(使用参数skiprows)<br><figure class="highlight lsl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">$ cat ch06/ex4.csv </div><div class="line"># hey!</div><div class="line">a,b,c,d,message</div><div class="line"># just wanted to make things more difficult for you</div><div class="line"># who reads CSV files with computers, anyway?</div><div class="line"><span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,hello</div><div class="line"><span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>,world</div><div class="line"><span class="number">9</span>,<span class="number">10</span>,<span class="number">11</span>,<span class="number">12</span>,foo%</div></pre></td></tr></table></figure></p>
+<p>可以认为1，3，4行为异常数据<br><figure class="highlight lsl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">print pd.read_csv('../pydata-book-master/ch06/ex4.csv', skiprows=[<span class="number">0</span>,<span class="number">2</span>,<span class="number">3</span>])</div><div class="line">#    a   b   c   d message</div><div class="line"># <span class="number">0</span>  <span class="number">1</span>   <span class="number">2</span>   <span class="number">3</span>   <span class="number">4</span>   hello</div><div class="line"># <span class="number">1</span>  <span class="number">5</span>   <span class="number">6</span>   <span class="number">7</span>   <span class="number">8</span>   world</div><div class="line"># <span class="number">2</span>  <span class="number">9</span>  <span class="number">10</span>  <span class="number">11</span>  <span class="number">12</span>     foo</div></pre></td></tr></table></figure></p>
+<h2 id="逐块读取文本文件"><a href="#逐块读取文本文件" class="headerlink" title="逐块读取文本文件"></a>逐块读取文本文件</h2><p>大文件只想读取一小部分或者逐块对文件进行迭代<br><figure class="highlight lsl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">result = pd.read_csv('../pydata-book-master/ch06/ex6.csv', nrows=<span class="number">5</span>)</div><div class="line"># print result</div><div class="line">#         one       two     three      four <span class="type">key</span></div><div class="line"># <span class="number">0</span>  <span class="number">0.467976</span> <span class="number">-0.038649</span> <span class="number">-0.295344</span> <span class="number">-1.824726</span>   L</div><div class="line"># <span class="number">1</span> <span class="number">-0.358893</span>  <span class="number">1.404453</span>  <span class="number">0.704965</span> <span class="number">-0.200638</span>   B</div><div class="line"># <span class="number">2</span> <span class="number">-0.501840</span>  <span class="number">0.659254</span> <span class="number">-0.421691</span> <span class="number">-0.057688</span>   G</div><div class="line"># <span class="number">3</span>  <span class="number">0.204886</span>  <span class="number">1.074134</span>  <span class="number">1.388361</span> <span class="number">-0.982404</span>   R</div><div class="line"># <span class="number">4</span>  <span class="number">0.354628</span> <span class="number">-0.133116</span>  <span class="number">0.283763</span> <span class="number">-0.837063</span>   Q</div></pre></td></tr></table></figure></p>
+<p>逐块读取;用到chunksize(行数)<br><figure class="highlight vala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="meta"># chunker = pd.read_csv('../pydata-book-master/ch06/ex6.csv', chunksize=100)</span></div><div class="line"><span class="meta"># print chunker</span></div><div class="line"><span class="meta"># &lt;pandas.io.parsers.TextFileReader object at 0x10f6175d0&gt;</span></div><div class="line"><span class="meta"># TextFileReader对象可实现盾剑逐块迭代</span></div><div class="line">chunker = pd.read_csv(<span class="string">'../pydata-book-master/ch06/ex6.csv'</span>, chunksize=<span class="number">1000</span>)</div><div class="line">tot = Series([])</div><div class="line"><span class="keyword">for</span> piece in chunker:</div><div class="line">    tot = tot.add(piece[<span class="string">'key'</span>].value_counts(), fill_value=<span class="number">0</span>)</div><div class="line">tot = tot.sort_values(ascending=False)</div><div class="line">print tot[:<span class="number">10</span>]</div><div class="line"><span class="meta"># E    368.0</span></div><div class="line"><span class="meta"># X    364.0</span></div><div class="line"><span class="meta"># L    346.0</span></div><div class="line"><span class="meta"># O    343.0</span></div><div class="line"><span class="meta"># Q    340.0</span></div><div class="line"><span class="meta"># M    338.0</span></div><div class="line"><span class="meta"># J    337.0</span></div><div class="line"><span class="meta"># F    335.0</span></div><div class="line"><span class="meta"># K    334.0</span></div><div class="line"><span class="meta"># H    330.0</span></div><div class="line"><span class="meta"># dtype: float64</span></div></pre></td></tr></table></figure></p>
+<h2 id="将数据写到文本格式"><a href="#将数据写到文本格式" class="headerlink" title="将数据写到文本格式"></a>将数据写到文本格式</h2><figure class="highlight lsl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">data = pd.read_csv('../pydata-book-master/ch06/ex5.csv')</div><div class="line"># print data</div><div class="line">#   something  a   b     c   d message</div><div class="line"># <span class="number">0</span>       one  <span class="number">1</span>   <span class="number">2</span>   <span class="number">3.0</span>   <span class="number">4</span>     NaN</div><div class="line"># <span class="number">1</span>       two  <span class="number">5</span>   <span class="number">6</span>   NaN   <span class="number">8</span>   world</div><div class="line"># <span class="number">2</span>     three  <span class="number">9</span>  <span class="number">10</span>  <span class="number">11.0</span>  <span class="number">12</span>     foo</div></pre></td></tr></table></figure>
+<p>pandas.read_csv生成的是DataFrame对象；</p>
+<p>DataFrame的to_csv方法，可以将数据写到一个用逗号分隔的文件中<br><figure class="highlight lsl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">data.to_csv('./ch06_out.csv')</div><div class="line"># $ cat ./ch06_out.csv</div><div class="line"># ,something,a,b,c,d,message</div><div class="line"># <span class="number">0</span>,one,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3.0</span>,<span class="number">4</span>,</div><div class="line"># <span class="number">1</span>,two,<span class="number">5</span>,<span class="number">6</span>,,<span class="number">8</span>,world</div><div class="line"># <span class="number">2</span>,three,<span class="number">9</span>,<span class="number">10</span>,<span class="number">11.0</span>,<span class="number">12</span>,foo</div><div class="line"></div><div class="line"># 可以指定分隔符,如|；这里只为了展示，所以用sys.stdout直接打印出来了。</div><div class="line">data.to_csv(sys.stdout, sep='|')</div><div class="line"># |something|a|b|c|d|message</div><div class="line"># <span class="number">0</span>|one|<span class="number">1</span>|<span class="number">2</span>|<span class="number">3.0</span>|<span class="number">4</span>|</div><div class="line"># <span class="number">1</span>|two|<span class="number">5</span>|<span class="number">6</span>||<span class="number">8</span>|world</div><div class="line"># <span class="number">2</span>|three|<span class="number">9</span>|<span class="number">10</span>|<span class="number">11.0</span>|<span class="number">12</span>|foo</div></pre></td></tr></table></figure></p>
+<p>将缺失值替换为其他标记值<br><figure class="highlight lsl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">data.to_csv(sys.stdout, na_rep='NULL')</div><div class="line"># ,something,a,b,c,d,message</div><div class="line"># <span class="number">0</span>,one,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3.0</span>,<span class="number">4</span>,NULL</div><div class="line"># <span class="number">1</span>,two,<span class="number">5</span>,<span class="number">6</span>,NULL,<span class="number">8</span>,world</div><div class="line"># <span class="number">2</span>,three,<span class="number">9</span>,<span class="number">10</span>,<span class="number">11.0</span>,<span class="number">12</span>,foo</div></pre></td></tr></table></figure></p>
+<p>只输出特定列，指定顺序<br><figure class="highlight vala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">data.to_csv(sys.<span class="keyword">stdout</span>, index=False, columns=[<span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>])</div><div class="line"><span class="meta"># a,b,c</span></div><div class="line"><span class="meta"># 1,2,3.0</span></div><div class="line"><span class="meta"># 5,6,</span></div><div class="line"><span class="meta"># 9,10,11.0</span></div></pre></td></tr></table></figure></p>
+<p>Series也有to_csv()方法<br><figure class="highlight lsl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">datas = pd.date_range('<span class="number">1</span>/<span class="number">1</span>/<span class="number">2000</span>', periods=<span class="number">7</span>)</div><div class="line">ts = Series(np.arange(<span class="number">7</span>), index=datas)</div><div class="line">ts.to_csv('./ch06tsseries.csv')</div><div class="line"># <span class="number">2000</span><span class="number">-01</span><span class="number">-01</span>,<span class="number">0</span></div><div class="line"># <span class="number">2000</span><span class="number">-01</span><span class="number">-02</span>,<span class="number">1</span></div><div class="line"># <span class="number">2000</span><span class="number">-01</span><span class="number">-03</span>,<span class="number">2</span></div><div class="line"># <span class="number">2000</span><span class="number">-01</span><span class="number">-04</span>,<span class="number">3</span></div><div class="line"># <span class="number">2000</span><span class="number">-01</span><span class="number">-05</span>,<span class="number">4</span></div><div class="line"># <span class="number">2000</span><span class="number">-01</span><span class="number">-06</span>,<span class="number">5</span></div><div class="line"># <span class="number">2000</span><span class="number">-01</span><span class="number">-07</span>,<span class="number">6</span></div></pre></td></tr></table></figure></p>
+<p>更简单的读取方法from_csv<br><figure class="highlight vala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="meta"># print Series.from_csv('./ch06tsseries.csv', parse_dates=True)</span></div><div class="line"><span class="meta"># 2000-01-01    0</span></div><div class="line"><span class="meta"># 2000-01-02    1</span></div><div class="line"><span class="meta"># 2000-01-03    2</span></div><div class="line"><span class="meta"># 2000-01-04    3</span></div><div class="line"><span class="meta"># 2000-01-05    4</span></div><div class="line"><span class="meta"># 2000-01-06    5</span></div><div class="line"><span class="meta"># 2000-01-07    6</span></div><div class="line"><span class="meta"># dtype: int64</span></div></pre></td></tr></table></figure></p>
+<h2 id="手工处理分隔符格式"><a href="#手工处理分隔符格式" class="headerlink" title="手工处理分隔符格式"></a>手工处理分隔符格式</h2><p>场景：pandas.read_table加载表格数据时，由于畸形行导致错误<br><figure class="highlight clean"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"># $ cat ch06/ex7.csv</div><div class="line"># <span class="string">"a"</span>,<span class="string">"b"</span>,<span class="string">"c"</span></div><div class="line"># <span class="string">"1"</span>,<span class="string">"2"</span>,<span class="string">"3"</span></div><div class="line"># <span class="string">"1"</span>,<span class="string">"2"</span>,<span class="string">"3"</span>,<span class="string">"4"</span></div><div class="line"></div><div class="line"><span class="keyword">import</span> csv</div><div class="line"></div><div class="line">lines = list(csv.reader(open(<span class="string">'../pydata-book-master/ch06/ex7.csv'</span>)))</div><div class="line">headers, values = lines[<span class="number">0</span>], lines[<span class="number">1</span>:]</div><div class="line">data_dict = &#123;h: v for h, v <span class="keyword">in</span> zip(headers, zip(*values))&#125;</div><div class="line"># print data_dict</div><div class="line"># &#123;<span class="string">'a'</span>: (<span class="string">'1'</span>, <span class="string">'1'</span>), <span class="string">'c'</span>: (<span class="string">'3'</span>, <span class="string">'3'</span>), <span class="string">'b'</span>: (<span class="string">'2'</span>, <span class="string">'2'</span>)&#125;</div><div class="line"></div><div class="line"><span class="keyword">class</span> my_dialect(csv.Dialect):</div><div class="line">    lineterminator = <span class="string">'\n'</span></div><div class="line">    delimiter = <span class="string">';'</span></div><div class="line">    quotechar = <span class="string">'"'</span></div><div class="line">    quoting = csv.QUOTE_ALL</div><div class="line"></div><div class="line"># delimiter分隔符指定</div><div class="line"></div><div class="line">f = open(<span class="string">'../pydata-book-master/ch06/ex7.csv'</span>)</div><div class="line">reader = csv.reader(f, dialect=my_dialect)</div><div class="line"># print reader</div><div class="line"># &lt;_csv.reader object at <span class="number">0x10a5bb440</span>&gt;</div><div class="line"># 以上类的参数也可以单个的传入csv.reader方法</div></pre></td></tr></table></figure></p>
+<p>手动写入分隔符文件csv.writer<br><figure class="highlight clean"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">with</span> open(<span class="string">'mydata.csv'</span>, <span class="string">'w'</span>) <span class="keyword">as</span> fw:</div><div class="line">    writer = csv.writer(fw, my_dialect)</div><div class="line">    writer.writerow((<span class="string">"one"</span>, <span class="string">"two"</span>, <span class="string">"three"</span>))</div><div class="line">    writer.writerow((<span class="string">'1'</span>, <span class="string">'2'</span>, <span class="string">'3'</span>))</div><div class="line">    writer.writerow((<span class="string">'4'</span>, <span class="string">'5'</span>, <span class="string">'6'</span>))</div><div class="line">    writer.writerow((<span class="string">'7'</span>, <span class="string">'8'</span>, <span class="string">'9'</span>))</div><div class="line"># out: mydata.csv</div><div class="line"># <span class="string">"one"</span>;<span class="string">"two"</span>;<span class="string">"three"</span></div><div class="line"># <span class="string">"1"</span>;<span class="string">"2"</span>;<span class="string">"3"</span></div><div class="line"># <span class="string">"4"</span>;<span class="string">"5"</span>;<span class="string">"6"</span></div><div class="line"># <span class="string">"7"</span>;<span class="string">"8"</span>;<span class="string">"9"</span></div></pre></td></tr></table></figure></p>
+<blockquote>
+<p>tip:一些东西还是要看源码才最直接</p>
+</blockquote>
+<h2 id="JSON数据"><a href="#JSON数据" class="headerlink" title="JSON数据"></a>JSON数据</h2><blockquote>
+<p>JSON已成为HTTP请求在Web浏览器和其他程序之间发送数据的标准格式之一、</p>
+</blockquote>
+<figure class="highlight autoit"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">obj1 = <span class="string">"""</span></div><div class="line">&#123;"name<span class="string">": "</span>Wes<span class="string">",</span></div><div class="line">"places_lived<span class="string">": ["</span>United States<span class="string">", "</span>Spain<span class="string">", "</span>Germany<span class="string">"],</span></div><div class="line">"pet<span class="string">":null,</span></div><div class="line">"siblings<span class="string">":[&#123;"</span>name<span class="string">":"</span>Scott<span class="string">", "</span>age<span class="string">":25, "</span>pet<span class="string">":"</span>Zuko<span class="string">"&#125;, &#123;"</span>name<span class="string">":"</span>Katie<span class="string">", "</span>age<span class="string">":22, "</span>pet<span class="string">":"</span>Cisco<span class="string">"&#125;]</span></div><div class="line">&#125;</div><div class="line">"""</div><div class="line">import json</div><div class="line"><span class="meta"># json.loads将JSON字符串转换成Python形式</span></div><div class="line">result = json.loads(obj1)</div><div class="line"><span class="meta"># print result</span></div><div class="line"><span class="meta"># &#123;u<span class="string">'pet'</span>: None,</span></div><div class="line"><span class="meta"># u<span class="string">'siblings'</span>: [&#123;u<span class="string">'pet'</span>: u<span class="string">'Zuko'</span>, u<span class="string">'age'</span>: 25, u<span class="string">'name'</span>: u<span class="string">'Scott'</span>&#125;,</span></div><div class="line"><span class="meta">#               &#123;u<span class="string">'pet'</span>: u<span class="string">'Cisco'</span>, u<span class="string">'age'</span>: 22, u<span class="string">'name'</span>: u<span class="string">'Katie'</span>&#125;],</span></div><div class="line"><span class="meta"># u<span class="string">'name'</span>: u<span class="string">'Wes'</span>,</span></div><div class="line"><span class="meta"># u<span class="string">'places_lived'</span>: [u<span class="string">'United States'</span>, u<span class="string">'Spain'</span>, u<span class="string">'Germany'</span>]&#125;</span></div><div class="line"><span class="meta"># 对应的，json.dumps将Python转换成JSON形式</span></div><div class="line">asjson = json.dumps(result)</div><div class="line"><span class="meta"># print asjson</span></div><div class="line"><span class="meta"># &#123;<span class="string">"pet"</span>: null, <span class="string">"siblings"</span>: [&#123;<span class="string">"pet"</span>: <span class="string">"Zuko"</span>, <span class="string">"age"</span>: 25, <span class="string">"name"</span>: <span class="string">"Scott"</span>&#125;,</span></div><div class="line"><span class="meta">#                            &#123;<span class="string">"pet"</span>: <span class="string">"Cisco"</span>, <span class="string">"age"</span>: 22, <span class="string">"name"</span>: <span class="string">"Katie"</span>&#125;],</span></div><div class="line"><span class="meta">#  <span class="string">"name"</span>: <span class="string">"Wes"</span>, <span class="string">"places_lived"</span>: [<span class="string">"United States"</span>, <span class="string">"Spain"</span>, <span class="string">"Germany"</span>]&#125;</span></div></pre></td></tr></table></figure>
+<h2 id="XML和HTML：Web信息收集"><a href="#XML和HTML：Web信息收集" class="headerlink" title="XML和HTML：Web信息收集"></a>XML和HTML：Web信息收集</h2><figure class="highlight vala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div></pre></td><td class="code"><pre><div class="line"><span class="meta"># http://finance.yahoo.com/quote/AAPL/options?ltr=1</span></div><div class="line">from lxml.html import parse</div><div class="line">from urllib2 import urlopen</div><div class="line"><span class="meta"># 原网址404，在雅虎随便找了一个阿里巴巴的</span></div><div class="line"><span class="meta"># parsed = parse(urlopen('http://finance.yahoo.com/quote/BABA/options?p=BABA'))</span></div><div class="line"><span class="meta"># doc = parsed.getroot()</span></div><div class="line"><span class="meta"># 通过上面的对象，可获取特定的tag</span></div><div class="line"><span class="meta"># 如获取所有的链接；&lt;a href="#"&gt;word&lt;/a&gt;</span></div><div class="line"><span class="meta"># links = doc.findall('.//a')</span></div><div class="line"><span class="meta"># print links[:5]</span></div><div class="line"><span class="meta"># [&lt;Element a at 0x1109ace10&gt;,</span></div><div class="line"><span class="meta"># &lt;Element a at 0x1109ace68&gt;,</span></div><div class="line"><span class="meta"># &lt;Element a at 0x1109acec0&gt;,</span></div><div class="line"><span class="meta"># &lt;Element a at 0x1109acf18&gt;,</span></div><div class="line"><span class="meta"># &lt;Element a at 0x1109acf70&gt;]</span></div><div class="line"><span class="meta"># lnk = links[7]</span></div><div class="line"><span class="meta"># print lnk</span></div><div class="line"><span class="meta"># &lt;Element a at 0x1040d3628&gt;</span></div><div class="line"><span class="meta"># 从以上对象中提取出href</span></div><div class="line"><span class="meta"># print len(links)</span></div><div class="line"><span class="meta"># 50个</span></div><div class="line"><span class="meta"># print lnk.get('href')</span></div><div class="line"><span class="meta"># https://www.yahoo.com/celebrity/</span></div><div class="line"><span class="meta"># print lnk.text_content()</span></div><div class="line"><span class="meta"># Celebrity</span></div><div class="line"></div><div class="line"><span class="meta"># 构建列表推导式，获取全部URL</span></div><div class="line"><span class="meta"># urls = [lnk1.get('href') for lnk1 in doc.findall('.//a')]</span></div><div class="line"><span class="meta"># print urls[-10:]</span></div><div class="line"><span class="meta"># ['//finance.yahoo.com/broker-comparison?bypass=true',</span></div><div class="line"><span class="meta"># 'https://help.yahoo.com/kb/index?page=content&amp;y=PROD_MAIL_ML&amp;locale=en_US&amp;id=SLN2310&amp;actp=productlink',</span></div><div class="line"><span class="meta"># 'http://help.yahoo.com/l/us/yahoo/finance/',</span></div><div class="line"><span class="meta"># 'https://yahoo.uservoice.com/forums/382977',</span></div><div class="line"><span class="meta"># 'http://info.yahoo.com/privacy/us/yahoo/',</span></div><div class="line"><span class="meta"># 'http://info.yahoo.com/relevantads/',</span></div><div class="line"><span class="meta"># 'http://info.yahoo.com/legal/us/yahoo/utos/utos-173.html',</span></div><div class="line"><span class="meta"># 'http://twitter.com/YahooFinance',</span></div><div class="line"><span class="meta"># 'http://facebook.com/yahoofinance',</span></div><div class="line"><span class="meta"># 'http://yahoofinance.tumblr.com']</span></div><div class="line"></div><div class="line"><span class="meta"># 从文档中找出正确的表格就是反复试验</span></div><div class="line"><span class="meta"># parsed1 = parse(urlopen('http://finance.yahoo.com/quote/BABA/options?p=BABA'))</span></div><div class="line"><span class="meta"># doc1 = parsed1.getroot()</span></div><div class="line"><span class="meta"># tables = doc1.findall('.//table')</span></div><div class="line"><span class="meta"># calls = tables[0]</span></div><div class="line"><span class="meta"># puts = tables[0]</span></div><div class="line"><span class="meta"># rows = calls.findall('.//tr')</span></div><div class="line"><span class="meta"># print rows[0].text_content()</span></div><div class="line"><span class="meta"># Search</span></div><div class="line"><span class="meta"># def unpack(row, kind='td'):</span></div><div class="line"><span class="meta">#     elts = row.findall('.//%s' % kind)</span></div><div class="line"><span class="meta">#     return [val.text_content() for val in elts]</span></div><div class="line"></div><div class="line"><span class="meta"># print unpack(rows[0], kind='th')</span></div><div class="line"><span class="meta"># 由于对Safari怎么获取XPath不熟悉，后期还要专门了解</span></div><div class="line"><span class="meta"># 原网址变动，书本代码无法运行，需要深入理解改写一下</span></div><div class="line"><span class="meta"># 完全照着书本敲收效甚微</span></div><div class="line"></div><div class="line"><span class="meta"># 利用lxml.objectify解析XML</span></div><div class="line">from lxml import objectify</div><div class="line">path = <span class="string">'../pydata-book-master/ch06/mta_perf/Performance_MNR.xml'</span></div><div class="line">parsed2 = objectify.parse(open(path))</div><div class="line">root = parsed2.getroot()</div><div class="line">print root</div></pre></td></tr></table></figure>
+<h2 id="利用lxml-objectify解析XML"><a href="#利用lxml-objectify解析XML" class="headerlink" title="利用lxml.objectify解析XML"></a>利用lxml.objectify解析XML</h2><figure class="highlight vala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">from lxml import objectify</div><div class="line"><span class="meta"># path = '../pydata-book-master/ch06/mta_perf/Performance_MNR.xml'</span></div><div class="line"><span class="meta"># parsed2 = objectify.parse(open(path))</span></div><div class="line"><span class="meta"># root = parsed2.getroot()</span></div><div class="line"><span class="meta"># print root</span></div><div class="line"></div><div class="line"><span class="meta"># 解析HTML标签</span></div><div class="line">from StringIO import StringIO</div><div class="line">tag = <span class="string">'&lt;a href="http://www.google.com"&gt;Google&lt;/a&gt;'</span></div><div class="line">root = objectify.parse(StringIO(tag)).getroot()</div><div class="line"><span class="meta"># print root.get('href')</span></div><div class="line"><span class="meta"># http://www.google.com</span></div><div class="line"><span class="meta"># print root.text</span></div><div class="line"><span class="meta"># Google</span></div></pre></td></tr></table></figure>
+<h2 id="二进制数据格式"><a href="#二进制数据格式" class="headerlink" title="二进制数据格式"></a>二进制数据格式</h2><figure class="highlight vala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="meta"># 保存到磁盘上</span></div><div class="line">frame = pd.read_csv(<span class="string">'../pydata-book-master/ch06/ex1.csv'</span>)</div><div class="line"><span class="meta"># print  frame</span></div><div class="line"><span class="meta">#    a   b   c   d message</span></div><div class="line"><span class="meta"># 0  1   2   3   4   hello</span></div><div class="line"><span class="meta"># 1  5   6   7   8   world</span></div><div class="line"><span class="meta"># 2  9  10  11  12     foo</span></div><div class="line"><span class="meta"># 从磁盘读取到Python对象中</span></div><div class="line">print pd.load(<span class="string">'../pydata-book-master/ch06/frame_pickle'</span>)</div></pre></td></tr></table></figure>
+<h2 id="读取Microsoft-Excel文件-pandas的ExcelFile类）"><a href="#读取Microsoft-Excel文件-pandas的ExcelFile类）" class="headerlink" title="读取Microsoft Excel文件(pandas的ExcelFile类）"></a>读取Microsoft Excel文件(pandas的ExcelFile类）</h2><figure class="highlight lsl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">xls_file = pd.ExcelFile('../pydata-book-master/ch06/ex1.xlsx')</div><div class="line"># 将某个工作表中的数据通过parse读取到DataFrame中</div><div class="line">table = xls_file.parse('Sheet1')</div><div class="line"># print table</div><div class="line">#    a   b   c   d message</div><div class="line"># <span class="number">0</span>  <span class="number">1</span>   <span class="number">2</span>   <span class="number">3</span>   <span class="number">4</span>   hello</div><div class="line"># <span class="number">1</span>  <span class="number">5</span>   <span class="number">6</span>   <span class="number">7</span>   <span class="number">8</span>   world</div><div class="line"># <span class="number">2</span>  <span class="number">9</span>  <span class="number">10</span>  <span class="number">11</span>  <span class="number">12</span>     foo</div></pre></td></tr></table></figure>
+<h2 id="使用HTML和Web-API"><a href="#使用HTML和Web-API" class="headerlink" title="使用HTML和Web API"></a>使用HTML和Web API</h2><figure class="highlight vala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">import requests</div><div class="line">url = <span class="string">'https://www.google.com.hk/search?safe=strict&amp;site=&amp;source=hp&amp;q=test&amp;btnK=Google+搜索'</span></div><div class="line">resp = requests.<span class="keyword">get</span>(url)</div><div class="line"><span class="meta"># print resp</span></div><div class="line"><span class="meta"># &lt;Response [200]&gt;</span></div><div class="line"><span class="meta"># Web API一般返回JSON字符串</span></div><div class="line">import json</div><div class="line">data = json.loads(resp.text)</div><div class="line"><span class="meta"># print data.keys()</span></div><div class="line"><span class="meta"># ValueError: No JSON object could be decoded</span></div><div class="line"><span class="meta"># 书上的Twitter链接打不开</span></div><div class="line"></div><div class="line"><span class="meta"># 取出感兴趣的tweet字段，然后将results列表传给DataFrame</span></div><div class="line">tweet_field = [<span class="string">'created_at'</span>, <span class="string">'from_user'</span>, <span class="string">'id'</span>, <span class="string">'text'</span>]</div><div class="line">tweets = DataFrame(data[<span class="string">'result'</span>], columns=tweet_field)</div><div class="line"><span class="meta"># print tweets</span></div><div class="line"><span class="meta"># DataFrame中每一行有了来自一条tweet的数据</span></div><div class="line">tweets._ix[<span class="number">7</span>]</div></pre></td></tr></table></figure>
+<h2 id="使用数据库"><a href="#使用数据库" class="headerlink" title="使用数据库"></a>使用数据库</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 数据库选择标准：性能、数据完整性、应用程序的伸缩性需求</span></div><div class="line"><span class="comment"># 引入Python内置的sqlite3驱动器</span></div><div class="line"><span class="keyword">import</span> sqlite3</div><div class="line">query = <span class="string">"""</span></div><div class="line">CREATE TABLE test (a VARCHAR(20), b VARCHAR(20),</div><div class="line">c REAL, d INTEGER</div><div class="line">);"""</div><div class="line">con = sqlite3.connect(<span class="string">':memory:'</span>)</div><div class="line">con.execute(query)</div><div class="line">con.commit()</div><div class="line"><span class="comment"># 插入几条数据</span></div><div class="line">data = [(<span class="string">'Atlanta'</span>, <span class="string">'Georgia'</span>, <span class="number">1.25</span>, <span class="number">6</span>),</div><div class="line">        (<span class="string">'Wangjiang'</span>, <span class="string">'Maoan'</span>, <span class="number">2.5</span>, <span class="number">5</span>),</div><div class="line">        (<span class="string">'Hefei'</span>, <span class="string">'Gaoxing'</span>, <span class="number">5.5</span>, <span class="number">9</span>)]</div><div class="line">stmt = <span class="string">"INSERT INTO test VALUES(?,?,?,?)"</span></div><div class="line">con.executemany(stmt, data)</div><div class="line">con.commit()</div><div class="line"><span class="comment"># 从表中选取数据</span></div><div class="line">cursor = con.execute(<span class="string">'select * from test'</span>)</div><div class="line">rows = cursor.fetchall()</div><div class="line"><span class="comment"># print rows</span></div><div class="line"><span class="comment"># [(u'Atlanta', u'Georgia', 1.25, 6),</span></div><div class="line">(<span class="string">u'Wangjiang'</span>, <span class="string">u'Maoan'</span>, <span class="number">2.5</span>, <span class="number">5</span>), </div><div class="line">(<span class="string">u'Hefei'</span>, <span class="string">u'Gaoxing'</span>, <span class="number">5.5</span>, <span class="number">9</span>)]</div><div class="line"><span class="comment"># 列名位于游标的description属性中</span></div><div class="line"><span class="comment"># print cursor.description</span></div><div class="line"><span class="comment"># (('a', None, None, None, None, None, None),</span></div><div class="line"><span class="comment"># ('b', None, None, None, None, None, None),</span></div><div class="line"><span class="comment"># ('c', None, None, None, None, None, None),</span></div><div class="line"><span class="comment"># ('d', None, None, None, None, None, None))</span></div><div class="line"><span class="comment"># 传入DataFrame</span></div><div class="line"><span class="comment"># print DataFrame(rows, columns=zip(*cursor.description)[0])</span></div><div class="line"><span class="comment">#            a        b     c  d</span></div><div class="line"><span class="comment"># 0    Atlanta  Georgia  1.25  6</span></div><div class="line"><span class="comment"># 1  Wangjiang    Maoan  2.50  5</span></div><div class="line"><span class="comment"># 2      Hefei  Gaoxing  5.50  9</span></div><div class="line"></div><div class="line"><span class="comment"># pandas有一个简化过程的read_frame函数</span></div><div class="line"><span class="keyword">import</span> pandas.io.sql <span class="keyword">as</span> sql</div><div class="line"><span class="comment"># 书本上read_frame已失效</span></div><div class="line"><span class="comment"># print sql.read_sql('select * from test', con)</span></div><div class="line"><span class="comment">#            a        b     c  d</span></div><div class="line"><span class="comment"># 0    Atlanta  Georgia  1.25  6</span></div><div class="line"><span class="comment"># 1  Wangjiang    Maoan  2.50  5</span></div><div class="line"><span class="comment"># 2      Hefei  Gaoxing  5.50  9</span></div></pre></td></tr></table></figure>
+<h2 id="存取MongoDB数据"><a href="#存取MongoDB数据" class="headerlink" title="存取MongoDB数据"></a>存取MongoDB数据</h2><figure class="highlight vala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="meta"># 电脑上需要装MongoDB数据库；</span></div><div class="line"><span class="meta"># 使用pymongo驱动通过默认端口连接</span></div><div class="line"><span class="meta"># 存储在MongoDB中的文档被组织在数据库的集合（想象成表）</span></div><div class="line"><span class="meta"># 没有装，姑且记录一下该怎么写,留作参考</span></div><div class="line">import pymongo</div><div class="line">con = pymongo.Connection(<span class="string">'localhost'</span>, port=<span class="number">27017</span>)</div><div class="line"><span class="meta"># MongoDB服务运行的每个实例可以有多个数据库，每个数据库又可以有多个集合。</span></div><div class="line"><span class="meta"># 访问之前获取的tweets集合</span></div><div class="line">tweets = con.db.tweets</div><div class="line"><span class="meta"># 加载数据并存入集合</span></div><div class="line">import requests, json</div><div class="line"></div><div class="line">url = <span class="string">'https://www.google.com.hk/search?safe=strict&amp;site=&amp;source=hp&amp;q=test&amp;btnK=Google+搜索'</span></div><div class="line">data = json.loads(requests.<span class="keyword">get</span>(url).text)</div><div class="line"><span class="keyword">for</span> tweet in data[<span class="string">'results'</span>]:</div><div class="line">    tweets.save(tweet)</div><div class="line"></div><div class="line"><span class="meta"># 从集合中取出</span></div><div class="line">cursor = tweets.find(&#123;<span class="string">'from_user'</span>: <span class="string">'linking'</span>&#125;)</div><div class="line"><span class="meta"># 转换成DataFrame</span></div><div class="line">tweet_fileds = [<span class="string">'create_at'</span>, <span class="string">'from_user'</span>, <span class="string">'id'</span>, <span class="string">'text'</span>]</div><div class="line">result = DataFrame(list(cursor), columns=tweet_fileds)</div></pre></td></tr></table></figure>
+<blockquote>
+<p>走过了一遍第六章，给我的感觉是，工具很强大，可以做很多数据分析工作，<strong>数据结构</strong>知识还是匮乏，一些比较复杂的东西还是不能很好的理解，需要加强，多看几遍也是一个方法。</p>
+<p>时间上，下班时间有点<strong>晚</strong>，可以看书的时间都在9点左右，有点晚，太累了，以后下班是不是可以早一点，做饭时间吃饭时间太晚；另外严重缺乏锻炼了，涨了一些肉的，膝盖还是没有恢复，需要针对性锻炼。</p>
+<p>记一下，博客的评论插件，<strong>多说</strong>社会化评论系统已经关闭；选择移除多说或者换成其他的。</p>
+<p>………………………………………………2017-03-25 22:57 Sat&amp;合肥-皖水公寓</p>
+</blockquote>
+
+      
+
+      
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/cs/" class="article-tag-list-link color3">cs</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/03/25/《利用Python进行数据分析》读书笔记-6-第六章-数据加载、存储和数据格式/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
     <article id="post-《利用Python进行数据分析》读书笔记-5-第五章-pandas入门" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -934,101 +1068,6 @@
 
 
   
-    <article id="post-git学习之三-conflict冲突，reset版本控制，以及实践感悟" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/09/10/git学习之三-conflict冲突，reset版本控制，以及实践感悟/">git学习之三-最近遇到的坑</a>
-    </h1>
-  
-
-        
-        <a href="/2016/09/10/git学习之三-conflict冲突，reset版本控制，以及实践感悟/" class="archive-article-date">
-  	<time datetime="2016-09-10T08:55:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-09-10</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>最近在开发过程中，用到git提交代码，之前也用过github传过代码，但是实际工作中还用的不多，过程中遇到了一些坑，记录下来。</p>
-<h2 id="conflict冲突"><a href="#conflict冲突" class="headerlink" title="conflict冲突"></a>conflict冲突</h2><p>冲突原因:</p>
-<blockquote>
-<p>由于在自己提交之前，自己下载最新代码之后有人上传了，之前下载的不是最新的代码，所以有冲突，必须把代码冲突解决之后才能够上传。时间线问题。</p>
-</blockquote>
-<p>展现形式：<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;</div><div class="line">your <span class="selector-tag">code</span> </div><div class="line">HEAD </div><div class="line">others <span class="selector-tag">code</span></div><div class="line">&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;</div></pre></td></tr></table></figure></p>
-<p>完成了一个功能模块，想要提交到代码库中；为了方便，现在用git gui工具了，先把更改的文件statechanged状态改变一下，然后提交commit，之后千万不要忘记看看远程库中有没有最近的更新，pull一下；<br>pull一次之后就要注意解决冲突，一般文件会红色显示，有错误则会显示红色波浪线，形式如上所示；</p>
-<p>注意：每天可以多次commit，就像打标签，但是最好一天只push一次。多次提交造成不必要的浪费；</p>
-<p>据老司机门的经验，开发时，应该多构建分支，在一个分支上做一个功能，功能做完之后再合并分支，这样可以减少冲突的概率。</p>
-<h2 id="撤销未提交的修改"><a href="#撤销未提交的修改" class="headerlink" title="撤销未提交的修改"></a>撤销未提交的修改</h2><p>还没有commit，但想撤回修改的情况下：<br><img src="http://7xjqvu.com1.z0.glb.clouddn.com/15-6-19/48267713.jpg" alt=""><br>git diff：<br><img src="http://7xjqvu.com1.z0.glb.clouddn.com/15-6-19/81847901.jpg" alt=""></p>
-<p>保存了，如果是一两句还好，如果几百几千行呢？手动累死你。<br>神器：<br><figure class="highlight awk"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git checkout src<span class="regexp">/com/</span>jay<span class="regexp">/example/</span>testforgit<span class="regexp">/MainActivity.java</span></div></pre></td></tr></table></figure></p>
-<p>duang一下就没了：<br><img src="http://7xjqvu.com1.z0.glb.clouddn.com/15-6-19/10997419.jpg" alt=""></p>
-<p>当然上述<strong>前提是没有add</strong>，才可以checkout。我们要<strong>先取消添加</strong>才可以撤回提交，使用下述指令：<br><figure class="highlight dts"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">git reset HEAD src<span class="meta-keyword">/com/</span>jay<span class="meta-keyword">/example/</span>testforgit/MainActivity.java</div><div class="line">git checkout src<span class="meta-keyword">/com/</span>jay<span class="meta-keyword">/example/</span>testforgit/MainActivity.java</div></pre></td></tr></table></figure></p>
-<p><img src="http://7xjqvu.com1.z0.glb.clouddn.com/15-6-19/97479292.jpg" alt=""></p>
-<h2 id="版本回退"><a href="#版本回退" class="headerlink" title="版本回退"></a>版本回退</h2><blockquote>
-<p>上面提到的是撤销未提交的修改，但如果提交了，我们想回退到之前的某一个版本怎么办?<br>我们可以通过git log查看我们的提交记录，我们需要从这里获取一个版本号，<br>一般我们只需要<strong>前七位字符</strong>就够了；另外在Git中，用HEAD代表当前版本，上一个版本就是HEAD^，<br>再上一个版本就是HEAD^^依次类推！我们先Git Log看下版本历史先！</p>
-</blockquote>
-<p><img src="http://7xjqvu.com1.z0.glb.clouddn.com/15-6-19/40426312.jpg" alt=""></p>
-<p>我们回到前一个提交的版本吧，依次键入下述指令：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">git <span class="keyword">reset</span> <span class="comment">--hard HEAD</span></div><div class="line">git <span class="keyword">reset</span> <span class="comment">--hard HEAD^</span></div><div class="line">git <span class="keyword">log</span></div></pre></td></tr></table></figure></p>
-<p>控制台：<br><img src="http://7xjqvu.com1.z0.glb.clouddn.com/15-6-19/51915562.jpg" alt=""></p>
-<p>可以看到我们已经回退到了前一个版本了，当然你可以直接这样写：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git <span class="keyword">reset</span> <span class="comment">--hard ad2080c</span></div></pre></td></tr></table></figure></p>
-<p>就是这么简单！回退后，你突然后悔了（第一次回退到前一旧版本了，现在又想回到新版本了，善变啊），想回退回新的那个版本，<br>可是遗憾的是，你键入git log却发现没有了最新的那个版本号，这怎么办呢…<br>没事，Git中给你提供了这颗“后悔药”，Git记录着你输入的每一条指令呢！键入：<br><figure class="highlight ebnf"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">git reflog</span></div></pre></td></tr></table></figure></p>
-<p>你会发现，版本号就在这里：<br><img src="http://7xjqvu.com1.z0.glb.clouddn.com/15-6-19/93429639.jpg" alt=""></p>
-<p>然后键入：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git <span class="keyword">reset</span> <span class="comment">--hard ad2080c</span></div></pre></td></tr></table></figure></p>
-<p>可以看到我们又回到了最新的那个版本了，就是这么溜！<br><img src="http://7xjqvu.com1.z0.glb.clouddn.com/15-6-19/46109301.jpg" alt=""></p>
-
-      
-
-      
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">git</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/cs/" class="article-tag-list-link color3">cs</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2016/09/10/git学习之三-conflict冲突，reset版本控制，以及实践感悟/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/5/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/7/">Next &raquo;</a>
@@ -1132,14 +1171,6 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">weather</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">需求</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Ajax</a>
               </li>
              
@@ -1148,11 +1179,15 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">HTML5</a>
+                <a href="javascript:void(0)" class="js-tag color3">weather</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">html5</a>
+                <a href="javascript:void(0)" class="js-tag color3">需求</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">HTML5</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1161,6 +1196,10 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">sse</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">html5</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1184,15 +1223,15 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">thought</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">avatar</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">cocoa</a>
+                <a href="javascript:void(0)" class="js-tag color3">thought</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">git</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1200,7 +1239,7 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">git</a>
+                <a href="javascript:void(0)" class="js-tag color1">cocoa</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1216,15 +1255,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">兼容性</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">多线程</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">绘图</a>
+                <a href="javascript:void(0)" class="js-tag color4">兼容性</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1232,11 +1267,15 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">java</a>
+                <a href="javascript:void(0)" class="js-tag color3">绘图</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">cs</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">java</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1256,15 +1295,19 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">标识</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">D.Wade</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Python</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">标识</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">tomcat</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1276,19 +1319,7 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">tomcat</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">blog</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">正则</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">手机品牌匹配</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1297,6 +1328,14 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Android onclick事件监听</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">正则</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">手机品牌匹配</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1320,15 +1359,27 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">plan</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">朱赟</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">极客时间专栏</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">极客邦</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">模块化</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">MVC</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">plan</a>
               </li>
              
               <li class="article-tag-list-item">
