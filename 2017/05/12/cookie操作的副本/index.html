@@ -9,16 +9,18 @@
   <link rel="dns-prefetch" href="http://linking123.github.io">
   <title>cookie操作 | Linking&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="获取服务端cookie1234567891011//获取cookieNSDictionary *headers = [((NSHTTPURLResponse *)resp) allHeaderFields];NSLog(@&quot;headers:%@&quot;,headers);NSDictionary *cookies = [NSHTTPCookie cookiesWithResponseHeaderFiel">
+  <meta name="description" content="获取服务端cookie    //获取cookie     NSDictionary *headers = [((NSHTTPURLResponse *)resp) allHeaderFields];     NSLog(@&amp;quot;headers:%@&amp;quot;,headers);     NSDictionary *cookies = [NSHTTPCookie cookiesWithRe">
+<meta name="keywords" content="cookie">
 <meta property="og:type" content="article">
 <meta property="og:title" content="cookie操作">
 <meta property="og:url" content="http://linking123.github.io/2017/05/12/cookie操作的副本/index.html">
-<meta property="og:site_name" content="Linking's blog">
-<meta property="og:description" content="获取服务端cookie1234567891011//获取cookieNSDictionary *headers = [((NSHTTPURLResponse *)resp) allHeaderFields];NSLog(@&quot;headers:%@&quot;,headers);NSDictionary *cookies = [NSHTTPCookie cookiesWithResponseHeaderFiel">
+<meta property="og:site_name" content="Linking&#39;s blog">
+<meta property="og:description" content="获取服务端cookie    //获取cookie     NSDictionary *headers = [((NSHTTPURLResponse *)resp) allHeaderFields];     NSLog(@&amp;quot;headers:%@&amp;quot;,headers);     NSDictionary *cookies = [NSHTTPCookie cookiesWithRe">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2017-05-12T05:40:47.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="cookie操作">
-<meta name="twitter:description" content="获取服务端cookie1234567891011//获取cookieNSDictionary *headers = [((NSHTTPURLResponse *)resp) allHeaderFields];NSLog(@&quot;headers:%@&quot;,headers);NSDictionary *cookies = [NSHTTPCookie cookiesWithResponseHeaderFiel">
+<meta name="twitter:description" content="获取服务端cookie    //获取cookie     NSDictionary *headers = [((NSHTTPURLResponse *)resp) allHeaderFields];     NSLog(@&amp;quot;headers:%@&amp;quot;,headers);     NSDictionary *cookies = [NSHTTPCookie cookiesWithRe">
   
     <link rel="alternative" href="/atom.xml" title="Linking&#39;s blog" type="application/atom+xml">
   
@@ -53,7 +55,7 @@
 		  <h1 class="header-author"><a href="/">Linking</a></h1>
 		</hgroup>
 		
-		<p class="header-subtitle">时间是个神，见证你的进步</p>
+		<p class="header-subtitle">记住生活的美好</p>
 		
 
 		<nav class="header-menu">
@@ -117,7 +119,7 @@
 			  <h1 class="header-author js-header-author">Linking</h1>
 			</hgroup>
 			
-			<p class="header-subtitle"><i class="icon icon-quo-left"></i>时间是个神，见证你的进步<i class="icon icon-quo-right"></i></p>
+			<p class="header-subtitle"><i class="icon icon-quo-left"></i>记住生活的美好<i class="icon icon-quo-right"></i></p>
 			
 			
 			
@@ -192,11 +194,93 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="获取服务端cookie"><a href="#获取服务端cookie" class="headerlink" title="获取服务端cookie"></a>获取服务端cookie</h2><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//获取cookie</span></div><div class="line"><span class="built_in">NSDictionary</span> *headers = [((<span class="built_in">NSHTTPURLResponse</span> *)resp) allHeaderFields];</div><div class="line"><span class="built_in">NSLog</span>(<span class="string">@"headers:%@"</span>,headers);</div><div class="line"><span class="built_in">NSDictionary</span> *cookies = [<span class="built_in">NSHTTPCookie</span> cookiesWithResponseHeaderFields:headers forURL:[<span class="built_in">NSURL</span> URLWithString:<span class="string">@"http://localhost/"</span>]];</div><div class="line"></div><div class="line"><span class="keyword">for</span> (<span class="built_in">NSHTTPCookie</span> *cookie <span class="keyword">in</span> cookies) &#123;</div><div class="line">    <span class="built_in">NSLog</span>(<span class="string">@"cookie:%@"</span>,cookie);</div><div class="line">    <span class="keyword">if</span> ([[cookie name] isEqualToString:<span class="string">@"JSESSIONID"</span>]) &#123;</div><div class="line">        <span class="built_in">NSLog</span>(<span class="string">@"session id is %@"</span>,[cookie value]);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="获取客户端cookie"><a href="#获取客户端cookie" class="headerlink" title="获取客户端cookie"></a>获取客户端cookie</h2><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//获取本地cookie</span></div><div class="line"><span class="built_in">NSHTTPCookieStorage</span> *httpCookiesStorage =  [<span class="built_in">NSHTTPCookieStorage</span> sharedHTTPCookieStorage];</div><div class="line"><span class="built_in">NSDictionary</span> *cookies = [httpCookiesStorage cookiesForURL:[<span class="built_in">NSURL</span> URLWithString:<span class="string">@"http://localhost/"</span>]];</div><div class="line"><span class="keyword">for</span> (<span class="built_in">NSHTTPCookie</span> *cookie <span class="keyword">in</span> cookies) &#123;</div><div class="line">    <span class="built_in">NSLog</span>(<span class="string">@"cookie:%@"</span>,cookie);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="客户端设置cookie"><a href="#客户端设置cookie" class="headerlink" title="客户端设置cookie"></a>客户端设置cookie</h2><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//客户端设置cookie</span></div><div class="line">-(<span class="keyword">void</span>)clientSetCookie&#123;</div><div class="line">    </div><div class="line">    <span class="built_in">NSDictionary</span> *prop1 = [<span class="built_in">NSDictionary</span> dictionaryWithObjectsAndKeys:</div><div class="line">                           <span class="string">@"a"</span>,<span class="built_in">NSHTTPCookieName</span>,</div><div class="line">                           <span class="string">@"aaa"</span>,<span class="built_in">NSHTTPCookieValue</span>,</div><div class="line">                           <span class="string">@"/"</span>,<span class="built_in">NSHTTPCookiePath</span>,</div><div class="line">                           [<span class="built_in">NSURL</span> URLWithString:<span class="string">@"http://localhost/"</span>],<span class="built_in">NSHTTPCookieOriginURL</span>,</div><div class="line">                           [<span class="built_in">NSDate</span> dateWithTimeIntervalSinceNow:<span class="number">60</span>],<span class="built_in">NSHTTPCookieExpires</span>,</div><div class="line">                           <span class="literal">nil</span>];</div><div class="line">    <span class="built_in">NSDictionary</span> *prop2 = [<span class="built_in">NSDictionary</span> dictionaryWithObjectsAndKeys:</div><div class="line">                           <span class="string">@"b"</span>,<span class="built_in">NSHTTPCookieName</span>,</div><div class="line">                           <span class="string">@"bbb"</span>,<span class="built_in">NSHTTPCookieValue</span>,</div><div class="line">                           <span class="string">@"/"</span>,<span class="built_in">NSHTTPCookiePath</span>,</div><div class="line">                           [<span class="built_in">NSURL</span> URLWithString:<span class="string">@"http://localhost/"</span>],<span class="built_in">NSHTTPCookieOriginURL</span>,</div><div class="line">                           [<span class="built_in">NSDate</span> dateWithTimeIntervalSinceNow:<span class="number">60</span>],<span class="built_in">NSHTTPCookieExpires</span>,</div><div class="line">                           <span class="literal">nil</span>];</div><div class="line">    </div><div class="line">    <span class="built_in">NSHTTPCookie</span> *cookie1 = [<span class="built_in">NSHTTPCookie</span> cookieWithProperties:prop1];</div><div class="line">    <span class="built_in">NSHTTPCookie</span> *cookie2 = [<span class="built_in">NSHTTPCookie</span> cookieWithProperties:prop2];</div><div class="line"></div><div class="line">    <span class="comment">//单个设置</span></div><div class="line">    [[<span class="built_in">NSHTTPCookieStorage</span> sharedHTTPCookieStorage] setCookie:cookie1];</div><div class="line">    [[<span class="built_in">NSHTTPCookieStorage</span> sharedHTTPCookieStorage] setCookie:cookie2];</div><div class="line">    </div><div class="line">    <span class="comment">//批量设置</span></div><div class="line"><span class="comment">//    NSArray *cookies = @[cookie1,cookie2,cookie3];</span></div><div class="line"><span class="comment">//    [[NSHTTPCookieStorage sharedHTTPCookieStorage]setCookies:cookies forURL:[NSURL URLWithString:@"http://localhost/"] mainDocumentURL:nil];</span></div><div class="line">    </div><div class="line">    <span class="comment">//设置cookie本地缓存策略</span></div><div class="line">    <span class="comment">//NSHTTPCookieAcceptPolicyAlways:保存所有cookie，这个是默认值</span></div><div class="line">    <span class="comment">//NSHTTPCookieAcceptPolicyNever:不保存任何响应头中的cookie</span></div><div class="line">    <span class="comment">//NSHTTPCookieAcceptPolicyOnlyFromMainDocumentDomain:只保存域请求匹配的cookie</span></div><div class="line"></div><div class="line">    [[<span class="built_in">NSHTTPCookieStorage</span> sharedHTTPCookieStorage]setCookieAcceptPolicy:<span class="built_in">NSHTTPCookieAcceptPolicyAlways</span>];</div><div class="line"></div><div class="line">    <span class="built_in">NSLog</span>(<span class="string">@"设置完成"</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="删除cookie"><a href="#删除cookie" class="headerlink" title="删除cookie"></a>删除cookie</h2><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="meta">#pragma mark -客户端删除cookie</span></div><div class="line"><span class="comment">//根据url和name删除cookie</span></div><div class="line">-(<span class="keyword">void</span>)deleteCookie:(<span class="built_in">NSString</span> *)cookieName url:(<span class="built_in">NSURL</span> *)url&#123;</div><div class="line">    <span class="comment">//根据url找到所属的cookie集合</span></div><div class="line">    <span class="built_in">NSArray</span> *cookies = [[<span class="built_in">NSHTTPCookieStorage</span> sharedHTTPCookieStorage]cookiesForURL:url];</div><div class="line">    <span class="keyword">for</span> (<span class="built_in">NSHTTPCookie</span> *cookie <span class="keyword">in</span> cookies) &#123;</div><div class="line">        <span class="keyword">if</span>([cookie.name isEqualToString:cookieName])&#123;</div><div class="line">            [[<span class="built_in">NSHTTPCookieStorage</span> sharedHTTPCookieStorage] deleteCookie:cookie];</div><div class="line">            <span class="built_in">NSLog</span>(<span class="string">@"删除cookie:%@"</span>,cookieName);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="comment">//删除全部cookies</span></div><div class="line">-(<span class="keyword">void</span>)deleteCookies&#123;</div><div class="line">    <span class="keyword">for</span> (<span class="built_in">NSHTTPCookie</span> *cookie <span class="keyword">in</span> [[<span class="built_in">NSHTTPCookieStorage</span> sharedHTTPCookieStorage]cookies]) &#123;</div><div class="line">        [[<span class="built_in">NSHTTPCookieStorage</span> sharedHTTPCookieStorage] deleteCookie:cookie];</div><div class="line">    &#125;</div><div class="line">    <span class="built_in">NSLog</span>(<span class="string">@"删除完成"</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="cookie策略"><a href="#cookie策略" class="headerlink" title="cookie策略"></a>cookie策略</h2><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//设置cookie本地缓存策略</span></div><div class="line"><span class="comment">//NSHTTPCookieAcceptPolicyAlways:保存所有cookie，这个是默认值</span></div><div class="line"><span class="comment">//NSHTTPCookieAcceptPolicyNever:不保存任何响应头中的cookie</span></div><div class="line"><span class="comment">//NSHTTPCookieAcceptPolicyOnlyFromMainDocumentDomain:只保存域请求匹配的cookie</span></div></pre></td></tr></table></figure>
+        <h2 id="获取服务端cookie"><a href="#获取服务端cookie" class="headerlink" title="获取服务端cookie"></a>获取服务端cookie</h2><pre><code class="objc">    //获取cookie
+    NSDictionary *headers = [((NSHTTPURLResponse *)resp) allHeaderFields];
+    NSLog(@&quot;headers:%@&quot;,headers);
+    NSDictionary *cookies = [NSHTTPCookie cookiesWithResponseHeaderFields:headers forURL:[NSURL URLWithString:@&quot;http://localhost/&quot;]];
+
+    for (NSHTTPCookie *cookie in cookies) {
+        NSLog(@&quot;cookie:%@&quot;,cookie);
+        if ([[cookie name] isEqualToString:@&quot;JSESSIONID&quot;]) {
+            NSLog(@&quot;session id is %@&quot;,[cookie value]);
+        }
+    }
+</code></pre>
+<h2 id="获取客户端cookie"><a href="#获取客户端cookie" class="headerlink" title="获取客户端cookie"></a>获取客户端cookie</h2><pre><code class="objc">    //获取本地cookie
+    NSHTTPCookieStorage *httpCookiesStorage =  [NSHTTPCookieStorage sharedHTTPCookieStorage];
+    NSDictionary *cookies = [httpCookiesStorage cookiesForURL:[NSURL URLWithString:@&quot;http://localhost/&quot;]];
+    for (NSHTTPCookie *cookie in cookies) {
+        NSLog(@&quot;cookie:%@&quot;,cookie);
+    }
+
+</code></pre>
+<h2 id="客户端设置cookie"><a href="#客户端设置cookie" class="headerlink" title="客户端设置cookie"></a>客户端设置cookie</h2><pre><code class="objc">//客户端设置cookie
+-(void)clientSetCookie{
+
+    NSDictionary *prop1 = [NSDictionary dictionaryWithObjectsAndKeys:
+                           @&quot;a&quot;,NSHTTPCookieName,
+                           @&quot;aaa&quot;,NSHTTPCookieValue,
+                           @&quot;/&quot;,NSHTTPCookiePath,
+                           [NSURL URLWithString:@&quot;http://localhost/&quot;],NSHTTPCookieOriginURL,
+                           [NSDate dateWithTimeIntervalSinceNow:60],NSHTTPCookieExpires,
+                           nil];
+    NSDictionary *prop2 = [NSDictionary dictionaryWithObjectsAndKeys:
+                           @&quot;b&quot;,NSHTTPCookieName,
+                           @&quot;bbb&quot;,NSHTTPCookieValue,
+                           @&quot;/&quot;,NSHTTPCookiePath,
+                           [NSURL URLWithString:@&quot;http://localhost/&quot;],NSHTTPCookieOriginURL,
+                           [NSDate dateWithTimeIntervalSinceNow:60],NSHTTPCookieExpires,
+                           nil];
+
+    NSHTTPCookie *cookie1 = [NSHTTPCookie cookieWithProperties:prop1];
+    NSHTTPCookie *cookie2 = [NSHTTPCookie cookieWithProperties:prop2];
+
+    //单个设置
+    [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookie:cookie1];
+    [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookie:cookie2];
+
+    //批量设置
+//    NSArray *cookies = @[cookie1,cookie2,cookie3];
+//    [[NSHTTPCookieStorage sharedHTTPCookieStorage]setCookies:cookies forURL:[NSURL URLWithString:@&quot;http://localhost/&quot;] mainDocumentURL:nil];
+
+    //设置cookie本地缓存策略
+    //NSHTTPCookieAcceptPolicyAlways:保存所有cookie，这个是默认值
+    //NSHTTPCookieAcceptPolicyNever:不保存任何响应头中的cookie
+    //NSHTTPCookieAcceptPolicyOnlyFromMainDocumentDomain:只保存域请求匹配的cookie
+
+    [[NSHTTPCookieStorage sharedHTTPCookieStorage]setCookieAcceptPolicy:NSHTTPCookieAcceptPolicyAlways];
+
+    NSLog(@&quot;设置完成&quot;);
+}
+
+
+</code></pre>
+<h2 id="删除cookie"><a href="#删除cookie" class="headerlink" title="删除cookie"></a>删除cookie</h2><pre><code class="objc">
+#pragma mark -客户端删除cookie
+//根据url和name删除cookie
+-(void)deleteCookie:(NSString *)cookieName url:(NSURL *)url{
+    //根据url找到所属的cookie集合
+    NSArray *cookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage]cookiesForURL:url];
+    for (NSHTTPCookie *cookie in cookies) {
+        if([cookie.name isEqualToString:cookieName]){
+            [[NSHTTPCookieStorage sharedHTTPCookieStorage] deleteCookie:cookie];
+            NSLog(@&quot;删除cookie:%@&quot;,cookieName);
+        }
+    }
+}
+//删除全部cookies
+-(void)deleteCookies{
+    for (NSHTTPCookie *cookie in [[NSHTTPCookieStorage sharedHTTPCookieStorage]cookies]) {
+        [[NSHTTPCookieStorage sharedHTTPCookieStorage] deleteCookie:cookie];
+    }
+    NSLog(@&quot;删除完成&quot;);
+}
+</code></pre>
+<h2 id="cookie策略"><a href="#cookie策略" class="headerlink" title="cookie策略"></a>cookie策略</h2><pre><code class="objc">//设置cookie本地缓存策略
+//NSHTTPCookieAcceptPolicyAlways:保存所有cookie，这个是默认值
+//NSHTTPCookieAcceptPolicyNever:不保存任何响应头中的cookie
+//NSHTTPCookieAcceptPolicyOnlyFromMainDocumentDomain:只保存域请求匹配的cookie
+</code></pre>
 
       
 
@@ -489,11 +573,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">ajax</a>
+                <a href="javascript:void(0)" class="js-tag color5">Ajax</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Ajax</a>
+                <a href="javascript:void(0)" class="js-tag color5">ajax</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -513,6 +597,10 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">JavaScriptCore</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">operation</a>
               </li>
              
@@ -522,10 +610,6 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">deploy</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">JavaScriptCore</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -553,15 +637,15 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">cocoa</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">blog</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Gitalk</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">cocoa</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -585,19 +669,19 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">兼容性</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">多线程</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">HTTP</a>
+                <a href="javascript:void(0)" class="js-tag color4">兼容性</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">绘图</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">HTTP</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -617,6 +701,10 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">标识</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">arcgis</a>
               </li>
              
@@ -626,10 +714,6 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">D.Wade</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">标识</a>
               </li>
              
               <li class="article-tag-list-item">

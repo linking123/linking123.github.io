@@ -9,25 +9,18 @@
   <link rel="dns-prefetch" href="http://linking123.github.io">
   <title>安卓onClick事件监听的实现方式 | Linking&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="昨天做了转正汇报，三个月的试用期快结束了，不得不感慨时光流逝啊。毕业三个月了，下一届的师弟师妹都开始找工作了。
-总体来说，这三个月是非常充实的，虽然没干多少事吧，但学到了很多东西，技术上的，与人交往上，都有所进步。年轻的时候还是忙点好，闲着也没事干，荒废大好时光。不如多干点活，多积累点经验。
-扯了一会蛋，说下正事。
-最近由于项目需要，搞起了Android；麻蛋，一头雾水哦，我接触Java也不过才两">
+  <meta name="description" content="昨天做了转正汇报，三个月的试用期快结束了，不得不感慨时光流逝啊。毕业三个月了，下一届的师弟师妹都开始找工作了。 总体来说，这三个月是非常充实的，虽然没干多少事吧，但学到了很多东西，技术上的，与人交往上，都有所进步。年轻的时候还是忙点好，闲着也没事干，荒废大好时光。不如多干点活，多积累点经验。 扯了一会蛋，说下正事。 最近由于项目需要，搞起了Android；麻蛋，一头雾水哦，我接触Java也不过才两">
+<meta name="keywords" content="Android onclick事件监听">
 <meta property="og:type" content="article">
 <meta property="og:title" content="安卓onClick事件监听的实现方式">
 <meta property="og:url" content="http://linking123.github.io/2016/09/24/安卓onClick事件监听的实现方式/index.html">
-<meta property="og:site_name" content="Linking's blog">
-<meta property="og:description" content="昨天做了转正汇报，三个月的试用期快结束了，不得不感慨时光流逝啊。毕业三个月了，下一届的师弟师妹都开始找工作了。
-总体来说，这三个月是非常充实的，虽然没干多少事吧，但学到了很多东西，技术上的，与人交往上，都有所进步。年轻的时候还是忙点好，闲着也没事干，荒废大好时光。不如多干点活，多积累点经验。
-扯了一会蛋，说下正事。
-最近由于项目需要，搞起了Android；麻蛋，一头雾水哦，我接触Java也不过才两">
+<meta property="og:site_name" content="Linking&#39;s blog">
+<meta property="og:description" content="昨天做了转正汇报，三个月的试用期快结束了，不得不感慨时光流逝啊。毕业三个月了，下一届的师弟师妹都开始找工作了。 总体来说，这三个月是非常充实的，虽然没干多少事吧，但学到了很多东西，技术上的，与人交往上，都有所进步。年轻的时候还是忙点好，闲着也没事干，荒废大好时光。不如多干点活，多积累点经验。 扯了一会蛋，说下正事。 最近由于项目需要，搞起了Android；麻蛋，一头雾水哦，我接触Java也不过才两">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2016-09-25T10:08:14.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="安卓onClick事件监听的实现方式">
-<meta name="twitter:description" content="昨天做了转正汇报，三个月的试用期快结束了，不得不感慨时光流逝啊。毕业三个月了，下一届的师弟师妹都开始找工作了。
-总体来说，这三个月是非常充实的，虽然没干多少事吧，但学到了很多东西，技术上的，与人交往上，都有所进步。年轻的时候还是忙点好，闲着也没事干，荒废大好时光。不如多干点活，多积累点经验。
-扯了一会蛋，说下正事。
-最近由于项目需要，搞起了Android；麻蛋，一头雾水哦，我接触Java也不过才两">
+<meta name="twitter:description" content="昨天做了转正汇报，三个月的试用期快结束了，不得不感慨时光流逝啊。毕业三个月了，下一届的师弟师妹都开始找工作了。 总体来说，这三个月是非常充实的，虽然没干多少事吧，但学到了很多东西，技术上的，与人交往上，都有所进步。年轻的时候还是忙点好，闲着也没事干，荒废大好时光。不如多干点活，多积累点经验。 扯了一会蛋，说下正事。 最近由于项目需要，搞起了Android；麻蛋，一头雾水哦，我接触Java也不过才两">
   
     <link rel="alternative" href="/atom.xml" title="Linking&#39;s blog" type="application/atom+xml">
   
@@ -62,7 +55,7 @@
 		  <h1 class="header-author"><a href="/">Linking</a></h1>
 		</hgroup>
 		
-		<p class="header-subtitle">时间是个神，见证你的进步</p>
+		<p class="header-subtitle">记住生活的美好</p>
 		
 
 		<nav class="header-menu">
@@ -126,7 +119,7 @@
 			  <h1 class="header-author js-header-author">Linking</h1>
 			</hgroup>
 			
-			<p class="header-subtitle"><i class="icon icon-quo-left"></i>时间是个神，见证你的进步<i class="icon icon-quo-right"></i></p>
+			<p class="header-subtitle"><i class="icon icon-quo-left"></i>记住生活的美好<i class="icon icon-quo-right"></i></p>
 			
 			
 			
@@ -208,16 +201,97 @@
 <blockquote>
 <p>最好的教程还是官方API，不知道的就查一下，很明了，这一块对英语要求较高，还要加强，这是成为一个优秀的程序员必备的，毕竟编程是英语世界的人发明的，当然，无论哪个行业，融入英语世界才能了解到世界上最先进的知识。</p>
 </blockquote>
-<p>业余时间在CSDN上看<a href="http://blog.csdn.net/coder_pig/article/details/50000773" target="_blank" rel="external">pig-coder的博客</a>，是比较系统的介绍，所以选择了他的博客。感谢作者的无私奉献。</p>
+<p>业余时间在CSDN上看<a href="http://blog.csdn.net/coder_pig/article/details/50000773" target="_blank" rel="noopener">pig-coder的博客</a>，是比较系统的介绍，所以选择了他的博客。感谢作者的无私奉献。</p>
 <p>看完了基础、布局、UI，进度有点慢，要加把劲了。<br>这篇把onClick事件监听的几种实现方式抠出来，作一篇博客。</p>
 <p>主要有以下三种方式：</p>
-<h2 id="匿名内部类监听按钮点击事件"><a href="#匿名内部类监听按钮点击事件" class="headerlink" title="匿名内部类监听按钮点击事件"></a>匿名内部类监听按钮点击事件</h2><figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="selector-id">#activity_login</span><span class="selector-class">.xml</span>   layout </div><div class="line">&lt;Button</div><div class="line">    android:layout_width=<span class="string">"match_parent"</span></div><div class="line">    android:layout_height=<span class="string">"wrap_content"</span></div><div class="line">    android:text=<span class="string">"@string/button_name"</span></div><div class="line">    android:id=<span class="string">"@+id/button"</span></div><div class="line">    android:layout_gravity=<span class="string">"bottom"</span> /&gt;</div></pre></td></tr></table></figure>
-<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="meta"># LoginActivity.java</span></div><div class="line"><span class="keyword">private</span> Button loginButton;</div><div class="line">    @<span class="function">Override</span></div><div class="line">    <span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span>(<span class="params">Bundle savedInstanceState</span>)&#123;</div><div class="line">        super.onCreate(savedInstanceState);</div><div class="line">        setContentView(R.layout.activity_login);</div><div class="line"></div><div class="line">        <span class="comment">/*</span></div><div class="line">        * 1.初始化当前所需的控件</div><div class="line">        * findViewById--返回一个view对象</div><div class="line">        * 通过R.java.id找到</div><div class="line">        * */</div><div class="line">        loginButton = (Button)findViewById(R.id.button_denglu);</div><div class="line"></div><div class="line">        <span class="comment">/*</span></div><div class="line">        * 2.设置Button监听器，实现点击操作</div><div class="line">        * 通过匿名内部类方式实现</div><div class="line">        * */</div><div class="line">        loginButton.setOnClickListener(<span class="keyword">new</span> View.OnClickListener() &#123;</div><div class="line">            @<span class="function">Override</span></div><div class="line">            <span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span>(<span class="params">View v</span>) &#123;</div><div class="line">                <span class="comment">//当前点击动作</span></div><div class="line">                System.<span class="keyword">out</span>.println(<span class="string">"我的button被点击了"</span>);</div><div class="line">            &#125;</div><div class="line">        &#125;);</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
-<h2 id="独立类-外部类-实现"><a href="#独立类-外部类-实现" class="headerlink" title="独立类(外部类)实现"></a>独立类(外部类)实现</h2><p>在此类的外部实现一个onClick类。<br>当遇到很多按钮需要添加事件时，通过这种方式可以设置同类的逻辑。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LoginActivity</span> <span class="keyword">extends</span> <span class="title">AppCompatActivity</span>   </span>&#123;</div><div class="line">    <span class="keyword">private</span> Button bt1;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span></span>&#123;</div><div class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState);</div><div class="line">        setContentView(R.layout.activity_login);</div><div class="line">        bt1 = (Button) findViewById(R.id.button_denglu);</div><div class="line">        bt1.setOnClickListener(<span class="keyword">new</span> myClickListener()&#123;</div><div class="line">            <span class="meta">@Override</span></div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">(View v)</span> </span>&#123;</div><div class="line">                <span class="comment">//调用父类的点击事件</span></div><div class="line">                <span class="keyword">super</span>.onClick(v);</div><div class="line">                Toast.makeText(LoginActivity.<span class="keyword">this</span>,<span class="string">"bt1要输出的逻辑"</span>,<span class="number">1</span>).show();</div><div class="line">            &#125;</div><div class="line">        &#125;);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="comment">//OnClickListener是一个接口</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">myClickListener</span> <span class="keyword">implements</span> <span class="title">View</span>.<span class="title">OnClickListener</span> </span>&#123;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">(View v)</span></span>&#123;</div><div class="line">        <span class="comment">//这里可以写需要调用此外部类的公共点击事件</span></div><div class="line">        Log.i(TAG, <span class="string">"onClick: 父类的事件"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<h2 id="实现接口的方式实现"><a href="#实现接口的方式实现" class="headerlink" title="实现接口的方式实现"></a>实现接口的方式实现</h2><figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">public <span class="class"><span class="keyword">class</span> <span class="title">LoginActivity</span> <span class="keyword">extends</span> <span class="title">AppCompatActivity</span> <span class="title">implements</span> <span class="title">View</span>.<span class="title">OnClickListener</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> <span class="type">Button</span> bt1;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="keyword">protected</span> void onCreate(<span class="type">Bundle</span> savedInstanceState)&#123;</div><div class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState);</div><div class="line">        setContentView(<span class="type">R</span>.layout.activity_login);</div><div class="line">        bt1 = (<span class="type">Button</span>)findViewById(<span class="type">R</span>.id.button_denglu);</div><div class="line"></div><div class="line">        bt1.setOnClickListener(<span class="keyword">this</span>);</div><div class="line">    &#125;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    public void onClick(<span class="type">View</span> v)&#123;</div><div class="line">        <span class="type">Log</span>.i(<span class="type">TAG</span>, <span class="string">"onClick: 第三种实现方式"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="实现页面跳转"><a href="#实现页面跳转" class="headerlink" title="实现页面跳转"></a>实现页面跳转</h2><p>必须在AndroidManifest.xml中注册跳转到的页面，activity。这就是之前为什么不能实现跳转的原因。<br><figure class="highlight applescript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;activity android:<span class="built_in">name</span>=<span class="string">"Second"</span> /&gt;</div></pre></td></tr></table></figure></p>
-<p>MainActivity中绑定onClick事件<br><figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">Button </span><span class="keyword">btn1 </span>= (<span class="keyword">Button)findViewById(R.id.btn1);</span></div><div class="line"><span class="keyword">btn1.setOnClickListener(new </span>View.OnClickListener() &#123;</div><div class="line">    @Override</div><div class="line">    public void onClick(View v) &#123;</div><div class="line">        Intent intent = new Intent()<span class="comment">;</span></div><div class="line">        intent.setClass(MainActivity.this,Second.class)<span class="comment">;</span></div><div class="line">        startActivity(intent)<span class="comment">;</span></div><div class="line">    &#125;</div><div class="line">&#125;)<span class="comment">;</span></div></pre></td></tr></table></figure></p>
+<h2 id="匿名内部类监听按钮点击事件"><a href="#匿名内部类监听按钮点击事件" class="headerlink" title="匿名内部类监听按钮点击事件"></a>匿名内部类监听按钮点击事件</h2><pre><code>#activity_login.xml   layout 
+&lt;Button
+    android:layout_width=&quot;match_parent&quot;
+    android:layout_height=&quot;wrap_content&quot;
+    android:text=&quot;@string/button_name&quot;
+    android:id=&quot;@+id/button&quot;
+    android:layout_gravity=&quot;bottom&quot; /&gt;
+</code></pre><pre><code># LoginActivity.java
+private Button loginButton;
+    @Override
+    protected void onCreate(Bundle savedInstanceState){
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_login);
 
+        /*
+        * 1.初始化当前所需的控件
+        * findViewById--返回一个view对象
+        * 通过R.java.id找到
+        * */
+        loginButton = (Button)findViewById(R.id.button_denglu);
+
+        /*
+        * 2.设置Button监听器，实现点击操作
+        * 通过匿名内部类方式实现
+        * */
+        loginButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //当前点击动作
+                System.out.println(&quot;我的button被点击了&quot;);
+            }
+        });
+    }
+</code></pre><h2 id="独立类-外部类-实现"><a href="#独立类-外部类-实现" class="headerlink" title="独立类(外部类)实现"></a>独立类(外部类)实现</h2><p>在此类的外部实现一个onClick类。<br>当遇到很多按钮需要添加事件时，通过这种方式可以设置同类的逻辑。</p>
+<pre><code>public class LoginActivity extends AppCompatActivity   {
+    private Button bt1;
+    @Override
+    protected void onCreate(Bundle savedInstanceState){
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_login);
+        bt1 = (Button) findViewById(R.id.button_denglu);
+        bt1.setOnClickListener(new myClickListener(){
+            @Override
+            public void onClick(View v) {
+                //调用父类的点击事件
+                super.onClick(v);
+                Toast.makeText(LoginActivity.this,&quot;bt1要输出的逻辑&quot;,1).show();
+            }
+        });
+    }
+}
+//OnClickListener是一个接口
+class myClickListener implements View.OnClickListener {
+    @Override
+    public void onClick(View v){
+        //这里可以写需要调用此外部类的公共点击事件
+        Log.i(TAG, &quot;onClick: 父类的事件&quot;);
+    }
+}
+</code></pre><h2 id="实现接口的方式实现"><a href="#实现接口的方式实现" class="headerlink" title="实现接口的方式实现"></a>实现接口的方式实现</h2><pre><code>public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
+    private Button bt1;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState){
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_login);
+        bt1 = (Button)findViewById(R.id.button_denglu);
+
+        bt1.setOnClickListener(this);
+    }
+    @Override
+    public void onClick(View v){
+        Log.i(TAG, &quot;onClick: 第三种实现方式&quot;);
+    }
+}
+</code></pre><h2 id="实现页面跳转"><a href="#实现页面跳转" class="headerlink" title="实现页面跳转"></a>实现页面跳转</h2><p>必须在AndroidManifest.xml中注册跳转到的页面，activity。这就是之前为什么不能实现跳转的原因。</p>
+<pre><code>&lt;activity android:name=&quot;Second&quot; /&gt;
+</code></pre><p>MainActivity中绑定onClick事件</p>
+<pre><code>Button btn1 = (Button)findViewById(R.id.btn1);
+btn1.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View v) {
+        Intent intent = new Intent();
+        intent.setClass(MainActivity.this,Second.class);
+        startActivity(intent);
+    }
+});
+</code></pre>
       
 
       
@@ -509,11 +583,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">ajax</a>
+                <a href="javascript:void(0)" class="js-tag color5">Ajax</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Ajax</a>
+                <a href="javascript:void(0)" class="js-tag color5">ajax</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -533,6 +607,10 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">JavaScriptCore</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">operation</a>
               </li>
              
@@ -542,10 +620,6 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">deploy</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">JavaScriptCore</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -573,15 +647,15 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">cocoa</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">blog</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Gitalk</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">cocoa</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -605,19 +679,19 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">兼容性</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">多线程</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">HTTP</a>
+                <a href="javascript:void(0)" class="js-tag color4">兼容性</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">绘图</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">HTTP</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -637,6 +711,10 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">标识</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">arcgis</a>
               </li>
              
@@ -646,10 +724,6 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">D.Wade</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">标识</a>
               </li>
              
               <li class="article-tag-list-item">

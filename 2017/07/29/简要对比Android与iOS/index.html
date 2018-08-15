@@ -10,11 +10,13 @@
   <title>简要对比Android与iOS | Linking&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="目录1.主要内容2.综述：Developing for Android vs iOS–2.1.Difference in coding–2.2.Difference in IDE(integrated development environment)–2.3.Difference in OS (which is about operating systems)–2.4.Difference in">
+<meta name="keywords" content="Java, Android, iOS, HTML&#x2F;CSS&#x2F;JavaScript, Python">
 <meta property="og:type" content="article">
 <meta property="og:title" content="简要对比Android与iOS">
 <meta property="og:url" content="http://linking123.github.io/2017/07/29/简要对比Android与iOS/index.html">
-<meta property="og:site_name" content="Linking's blog">
+<meta property="og:site_name" content="Linking&#39;s blog">
 <meta property="og:description" content="目录1.主要内容2.综述：Developing for Android vs iOS–2.1.Difference in coding–2.2.Difference in IDE(integrated development environment)–2.3.Difference in OS (which is about operating systems)–2.4.Difference in">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://cdn01.androidauthority.net/wp-content/uploads/2016/06/frienemies-712x400.png">
 <meta property="og:image" content="http://cdn01.androidauthority.net/wp-content/uploads/2016/06/draw-300x170.png">
 <meta property="og:image" content="https://www.cleveroad.com/images/article-previews/android-and-ios-apps-coding-1.png">
@@ -69,7 +71,7 @@
 		  <h1 class="header-author"><a href="/">Linking</a></h1>
 		</hgroup>
 		
-		<p class="header-subtitle">时间是个神，见证你的进步</p>
+		<p class="header-subtitle">记住生活的美好</p>
 		
 
 		<nav class="header-menu">
@@ -133,7 +135,7 @@
 			  <h1 class="header-author js-header-author">Linking</h1>
 			</hgroup>
 			
-			<p class="header-subtitle"><i class="icon icon-quo-left"></i>时间是个神，见证你的进步<i class="icon icon-quo-right"></i></p>
+			<p class="header-subtitle"><i class="icon icon-quo-left"></i>记住生活的美好<i class="icon icon-quo-right"></i></p>
 			
 			
 			
@@ -211,7 +213,7 @@
         <h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><p>1.主要内容<br>2.综述：Developing for Android vs iOS<br>–2.1.Difference in coding<br>–2.2.Difference in IDE(integrated development environment)<br>–2.3.Difference in OS (which is about operating systems)<br>–2.4.Difference in design<br>–2.5.Difference in entrance fees<br>–2.6.Difference in app review<br>–2.7.Difference in market share<br>–2.8.Profits<br>–2.9.Conclusion<br>3.write PPT with MarkDown<br>4.总结<br>5.参考<br>6.Q&amp;A</p>
 <blockquote>
 <p>目录有点长，别嫌弃。</p>
-<p>这是最近在组内做的一次小小分享，这是我的 MarkDown版本的稿件，最后生成了网页 PPT 模式，<a href="https://remarkjs.com/#1" target="_blank" rel="external">效果展示页</a>，怎么做的？看<a href="http://linking123.github.io/2017/07/29/%E6%8E%A8%E8%8D%90%E5%87%A0%E4%B8%AA%E9%A1%B9%E7%9B%AE-WritePPTwithMarkDown/">这篇</a>。</p>
+<p>这是最近在组内做的一次小小分享，这是我的 MarkDown版本的稿件，最后生成了网页 PPT 模式，<a href="https://remarkjs.com/#1" target="_blank" rel="noopener">效果展示页</a>，怎么做的？看<a href="http://linking123.github.io/2017/07/29/%E6%8E%A8%E8%8D%90%E5%87%A0%E4%B8%AA%E9%A1%B9%E7%9B%AE-WritePPTwithMarkDown/">这篇</a>。</p>
 </blockquote>
 <a id="more"></a>
 <h2 id="1-主要内容"><a href="#1-主要内容" class="headerlink" title="1.主要内容"></a>1.主要内容</h2><p>6个月Android，4个月iOS</p>
@@ -282,12 +284,12 @@
 <hr>
 <ul>
 <li>start with the base. programming language</li>
-<li>Java and Objective-C（Swift开源）.带大家看一下兵器谱：<a href="https://www.tiobe.com/tiobe-index/" target="_blank" rel="external">TIOBE Index for July 2017</a></li>
+<li>Java and Objective-C（Swift开源）.带大家看一下兵器谱：<a href="https://www.tiobe.com/tiobe-index/" target="_blank" rel="noopener">TIOBE Index for July 2017</a></li>
 <li>排行榜：Java-1，OC-18，Swift-12。</li>
 <li>值得关注的语言：Python-4(大数据,机器学习)，Javascript-8，GO-10，Kotlib-43(JetBrains产，100%支持Java，值得拥有)</li>
 </ul>
-<figure class="highlight nginx"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">TIOBE</span> - <span class="string">"The Importance of Being Earnest"</span></div></pre></td></tr></table></figure>
-<hr>
+<pre><code>TIOBE - &quot;The Importance of Being Earnest&quot;
+</code></pre><hr>
 <h4 id="Java和OC中Interface-Implement-Protocol"><a href="#Java和OC中Interface-Implement-Protocol" class="headerlink" title="Java和OC中Interface/Implement/Protocol]"></a>Java和OC中Interface/Implement/Protocol]</h4><ul>
 <li>Java的Interface本身就是类，而OC的Interface是类的定义</li>
 <li>Java的Implements是多态的实现，而OC的Implementation是类的实现</li>
@@ -295,14 +297,29 @@
 </ul>
 <p>OC: interface(.h) + implementation(.m) .= Java: class<br>OC: protocol .= Java: interface</p>
 <hr>
-<h4 id="Hello-World"><a href="#Hello-World" class="headerlink" title="Hello World"></a>Hello World</h4><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"># Java</div><div class="line">public class HelloWorld &#123;</div><div class="line">    public static void main(String[] args)&#123;</div><div class="line">        System.out.println("Hello World!");</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"># OC</div><div class="line">#import &lt;Foundation/Foundation.h&gt;</div><div class="line"></div><div class="line">int main(int argc, char *argv[])&#123;</div><div class="line">	@autoreleasepool&#123;</div><div class="line">		NSLog(@&quot;Hello World!&quot;);</div><div class="line">	&#125;</div><div class="line">	return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="Hello-World"><a href="#Hello-World" class="headerlink" title="Hello World"></a>Hello World</h4><pre><code class="Java"># Java
+public class HelloWorld {
+    public static void main(String[] args){
+        System.out.println(&quot;Hello World!&quot;);
+    }
+}
+</code></pre>
+<pre><code class="OC"># OC
+#import &lt;Foundation/Foundation.h&gt;
+
+int main(int argc, char *argv[]){
+    @autoreleasepool{
+        NSLog(@&quot;Hello World!&quot;);
+    }
+    return 0;
+}
+</code></pre>
 <hr>
 <h3 id="2-2-Difference-in-IDE-integrated-development-environment"><a href="#2-2-Difference-in-IDE-integrated-development-environment" class="headerlink" title="2.2.Difference in IDE(integrated development environment)"></a>2.2.Difference in IDE(integrated development environment)</h3><p><img src="https://www.cleveroad.com/images/article-previews/android-and-ios-apps-ide-1.png" alt=""></p>
 <p><img src="http://cdn01.androidauthority.net/wp-content/uploads/2016/06/developing-for-android-vs-ios.jpg" alt="Android studio VS Xcode"></p>
 <ul>
 <li>Eclipse IDE using Android Development Toolkit. replace it with the Studio (IntelliJ IDEA,convenience,improvements in the development process)</li>
-<li><a href="https://developer.apple.com/cn/xcode/" target="_blank" rel="external">XCode</a> (latest version is 8.) </li>
+<li><a href="https://developer.apple.com/cn/xcode/" target="_blank" rel="noopener">XCode</a> (latest version is 8.) </li>
 <li>they are both free </li>
 </ul>
 <hr>
@@ -397,10 +414,10 @@
 <li>Android：Google Play Store，国内诸多应用市场</li>
 </ul>
 <hr>
-<h3 id="2-7-Difference-in-market-share"><a href="#2-7-Difference-in-market-share" class="headerlink" title="2.7.Difference in market share"></a>2.7.Difference in market share</h3><p>图 – from <a href="http://www.businessinsider.com/smartphone-market-share-android-ios-windows-blackberry-2016-8" target="_blank" rel="external">businessinsider</a></p>
+<h3 id="2-7-Difference-in-market-share"><a href="#2-7-Difference-in-market-share" class="headerlink" title="2.7.Difference in market share"></a>2.7.Difference in market share</h3><p>图 – from <a href="http://www.businessinsider.com/smartphone-market-share-android-ios-windows-blackberry-2016-8" target="_blank" rel="noopener">businessinsider</a></p>
 <p><img src="http://static2.businessinsider.com/image/57bb2394ce38f2c0008b8111-1200/20160822_android_ios.png" alt=""></p>
 <hr>
-<p>表 – <a href="http://www.idc.com/promo/smartphone-market-share/os" target="_blank" rel="external">Smartphone OS Market Share, 2017 Q1</a></p>
+<p>表 – <a href="http://www.idc.com/promo/smartphone-market-share/os" target="_blank" rel="noopener">Smartphone OS Market Share, 2017 Q1</a></p>
 <p>Period|    Android| iOS| Windows Phone|Others<br>|:–:|:–:|:–:|:–:|:–:|:–:|:–:|:–:|<br>2016Q1|    83.4%|    15.4%|    0.8%| 0.4%<br>2016Q2|    87.6%|    11.7%|    0.4%| 0.3%<br>2016Q3|    86.8%|    12.5%|    0.3%| 0.4%<br>2016Q4|    81.4%|    18.2%|    0.2%| 0.2%<br>2017Q1|    85.0%|    14.7%|    0.1%| 0.1%</p>
 <p>Source: IDC, May 2017</p>
 <h3 id="2-8-Profits"><a href="#2-8-Profits" class="headerlink" title="2.8.Profits"></a>2.8.Profits</h3><ul>
@@ -419,19 +436,19 @@
 <h2 id="3-write-PPT-with-MarkDown"><a href="#3-write-PPT-with-MarkDown" class="headerlink" title="3.write PPT with MarkDown"></a>3.write PPT with MarkDown</h2><p>GitHub项目。用MarkDown写，渲染成PPT，轻便。</p>
 <ul>
 <li><ol>
-<li>markdown-to-slides<br><a href="https://github.com/partageit/markdown-to-slides" target="_blank" rel="external">https://github.com/partageit/markdown-to-slides</a><br>demo page: <a href="https://remarkjs.com/#1" target="_blank" rel="external">https://remarkjs.com/#1</a></li>
+<li>markdown-to-slides<br><a href="https://github.com/partageit/markdown-to-slides" target="_blank" rel="noopener">https://github.com/partageit/markdown-to-slides</a><br>demo page: <a href="https://remarkjs.com/#1" target="_blank" rel="noopener">https://remarkjs.com/#1</a></li>
 </ol>
 </li>
-<li><ol>
-<li>landslide<br><a href="https://github.com/adamzap/landslide.git" target="_blank" rel="external">https://github.com/adamzap/landslide.git</a><br>demo page: <a href="http://landslide.adamzap.com/#slide1" target="_blank" rel="external">http://landslide.adamzap.com/#slide1</a></li>
+<li><ol start="2">
+<li>landslide<br><a href="https://github.com/adamzap/landslide.git" target="_blank" rel="noopener">https://github.com/adamzap/landslide.git</a><br>demo page: <a href="http://landslide.adamzap.com/#slide1" target="_blank" rel="noopener">http://landslide.adamzap.com/#slide1</a></li>
 </ol>
 </li>
-<li><ol>
-<li>marp<br><a href="https://github.com/yhatt/marp" target="_blank" rel="external">https://github.com/yhatt/marp</a><br><a href="https://yhatt.github.io/marp/" target="_blank" rel="external">https://yhatt.github.io/marp/</a></li>
+<li><ol start="3">
+<li>marp<br><a href="https://github.com/yhatt/marp" target="_blank" rel="noopener">https://github.com/yhatt/marp</a><br><a href="https://yhatt.github.io/marp/" target="_blank" rel="noopener">https://yhatt.github.io/marp/</a></li>
 </ol>
 </li>
-<li><ol>
-<li>remark<br><a href="https://github.com/gnab/remark" target="_blank" rel="external">https://github.com/gnab/remark</a><br><a href="http://remarkjs.com/" target="_blank" rel="external">http://remarkjs.com/</a></li>
+<li><ol start="4">
+<li>remark<br><a href="https://github.com/gnab/remark" target="_blank" rel="noopener">https://github.com/gnab/remark</a><br><a href="http://remarkjs.com/" target="_blank" rel="noopener">http://remarkjs.com/</a></li>
 </ol>
 </li>
 </ul>
@@ -444,10 +461,10 @@
 </ul>
 <hr>
 <h2 id="5-参考"><a href="#5-参考" class="headerlink" title="5.参考"></a>5.参考</h2><ul>
-<li><a href="https://github.com/qinjx/30min_guides/blob/master/ios.md" target="_blank" rel="external">iOS开发60分钟入门</a></li>
-<li><a href="https://www.cleveroad.com/blog/9-differences-between-ios-and-android-app-development" target="_blank" rel="external">9 DIFFERENCES BETWEEN IOS AND ANDROID APP DEVELOPMENT</a></li>
-<li><a href="http://www.androidauthority.com/developing-for-android-vs-ios-697304/" target="_blank" rel="external">Developing for Android vs developing for iOS – in 5 rounds</a></li>
-<li><a href="https://www.imore.com/difference-between-ios-and-android-development" target="_blank" rel="external">The difference between iOS and Android developers and why it’s not just a numbers game</a></li>
+<li><a href="https://github.com/qinjx/30min_guides/blob/master/ios.md" target="_blank" rel="noopener">iOS开发60分钟入门</a></li>
+<li><a href="https://www.cleveroad.com/blog/9-differences-between-ios-and-android-app-development" target="_blank" rel="noopener">9 DIFFERENCES BETWEEN IOS AND ANDROID APP DEVELOPMENT</a></li>
+<li><a href="http://www.androidauthority.com/developing-for-android-vs-ios-697304/" target="_blank" rel="noopener">Developing for Android vs developing for iOS – in 5 rounds</a></li>
+<li><a href="https://www.imore.com/difference-between-ios-and-android-development" target="_blank" rel="noopener">The difference between iOS and Android developers and why it’s not just a numbers game</a></li>
 </ul>
 <hr>
 <h2 id="6-Q-amp-A"><a href="#6-Q-amp-A" class="headerlink" title="6.Q&amp;A"></a>6.Q&amp;A</h2><p>#欢迎各位批评指正！</p>
@@ -723,11 +740,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">ajax</a>
+                <a href="javascript:void(0)" class="js-tag color5">Ajax</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Ajax</a>
+                <a href="javascript:void(0)" class="js-tag color5">ajax</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -747,6 +764,10 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">JavaScriptCore</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">operation</a>
               </li>
              
@@ -756,10 +777,6 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">deploy</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">JavaScriptCore</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -787,15 +804,15 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">cocoa</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">blog</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Gitalk</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">cocoa</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -819,19 +836,19 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">兼容性</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">多线程</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">HTTP</a>
+                <a href="javascript:void(0)" class="js-tag color4">兼容性</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">绘图</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">HTTP</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -851,6 +868,10 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">标识</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">arcgis</a>
               </li>
              
@@ -860,10 +881,6 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">D.Wade</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">标识</a>
               </li>
              
               <li class="article-tag-list-item">

@@ -9,219 +9,20 @@
   <link rel="dns-prefetch" href="http://linking123.github.io">
   <title>polygon_polyline_point_addField_caculate | Linking&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="需求导师需要安徽省所有县级单位的行政边界的点位置数据，数据最终格式是屏幕坐标(同一区域形成闭环)
-
-
-
-区域名
-x
-y
-
-
-
-
-合肥市
-12
-53
-
-
-合肥市
-17
-55
-
-
-合肥市
-12
-34
-
-
-合肥市
-16
-67
-
-
-合肥市
-14
-23
-
-
-合肥市
-12
-53
-
-
-长丰县
-67
-32
-
-
-长丰县
-44
-32
-
-
-长丰县
-12
-89
-
-
-长丰县
-98
-54
-
-
-长丰县
-67
-32
-
-
-…
-…">
+  <meta name="description" content="需求导师需要安徽省所有县级单位的行政边界的点位置数据，数据最终格式是屏幕坐标(同一区域形成闭环)    区域名 x y     合肥市 12 53   合肥市 17 55   合肥市 12 34   合肥市 16 67   合肥市 14 23   合肥市 12 53   长丰县 67 32   长丰县 44 32   长丰县 12 89   长丰县 98 54   长丰县 67 32   … …">
+<meta name="keywords" content="arcgis,arcgis 建模">
 <meta property="og:type" content="article">
 <meta property="og:title" content="polygon_polyline_point_addField_caculate">
 <meta property="og:url" content="http://linking123.github.io/2016/01/22/polygon-polyline-point-addField-caculate/index.html">
-<meta property="og:site_name" content="Linking's blog">
-<meta property="og:description" content="需求导师需要安徽省所有县级单位的行政边界的点位置数据，数据最终格式是屏幕坐标(同一区域形成闭环)
-
-
-
-区域名
-x
-y
-
-
-
-
-合肥市
-12
-53
-
-
-合肥市
-17
-55
-
-
-合肥市
-12
-34
-
-
-合肥市
-16
-67
-
-
-合肥市
-14
-23
-
-
-合肥市
-12
-53
-
-
-长丰县
-67
-32
-
-
-长丰县
-44
-32
-
-
-长丰县
-12
-89
-
-
-长丰县
-98
-54
-
-
-长丰县
-67
-32
-
-
-…
-…">
+<meta property="og:site_name" content="Linking&#39;s blog">
+<meta property="og:description" content="需求导师需要安徽省所有县级单位的行政边界的点位置数据，数据最终格式是屏幕坐标(同一区域形成闭环)    区域名 x y     合肥市 12 53   合肥市 17 55   合肥市 12 34   合肥市 16 67   合肥市 14 23   合肥市 12 53   长丰县 67 32   长丰县 44 32   长丰县 12 89   长丰县 98 54   长丰县 67 32   … …">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://7xqd63.com1.z0.glb.clouddn.com/polygonToPoint.PNG?imageView/4/w/344/q/88">
 <meta property="og:image" content="http://7xqd63.com1.z0.glb.clouddn.com/polygon_point_childSet_addFiled.PNG?imageView/4/w/544/q/88">
 <meta property="og:updated_time" content="2016-01-22T06:00:11.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="polygon_polyline_point_addField_caculate">
-<meta name="twitter:description" content="需求导师需要安徽省所有县级单位的行政边界的点位置数据，数据最终格式是屏幕坐标(同一区域形成闭环)
-
-
-
-区域名
-x
-y
-
-
-
-
-合肥市
-12
-53
-
-
-合肥市
-17
-55
-
-
-合肥市
-12
-34
-
-
-合肥市
-16
-67
-
-
-合肥市
-14
-23
-
-
-合肥市
-12
-53
-
-
-长丰县
-67
-32
-
-
-长丰县
-44
-32
-
-
-长丰县
-12
-89
-
-
-长丰县
-98
-54
-
-
-长丰县
-67
-32
-
-
-…
-…">
+<meta name="twitter:description" content="需求导师需要安徽省所有县级单位的行政边界的点位置数据，数据最终格式是屏幕坐标(同一区域形成闭环)    区域名 x y     合肥市 12 53   合肥市 17 55   合肥市 12 34   合肥市 16 67   合肥市 14 23   合肥市 12 53   长丰县 67 32   长丰县 44 32   长丰县 12 89   长丰县 98 54   长丰县 67 32   … …">
 <meta name="twitter:image" content="http://7xqd63.com1.z0.glb.clouddn.com/polygonToPoint.PNG?imageView/4/w/344/q/88">
   
     <link rel="alternative" href="/atom.xml" title="Linking&#39;s blog" type="application/atom+xml">
@@ -257,7 +58,7 @@ y
 		  <h1 class="header-author"><a href="/">Linking</a></h1>
 		</hgroup>
 		
-		<p class="header-subtitle">时间是个神，见证你的进步</p>
+		<p class="header-subtitle">记住生活的美好</p>
 		
 
 		<nav class="header-menu">
@@ -321,7 +122,7 @@ y
 			  <h1 class="header-author js-header-author">Linking</h1>
 			</hgroup>
 			
-			<p class="header-subtitle"><i class="icon icon-quo-left"></i>时间是个神，见证你的进步<i class="icon icon-quo-right"></i></p>
+			<p class="header-subtitle"><i class="icon icon-quo-left"></i>记住生活的美好<i class="icon icon-quo-right"></i></p>
 			
 			
 			
@@ -774,11 +575,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">ajax</a>
+                <a href="javascript:void(0)" class="js-tag color5">Ajax</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Ajax</a>
+                <a href="javascript:void(0)" class="js-tag color5">ajax</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -798,6 +599,10 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">JavaScriptCore</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">operation</a>
               </li>
              
@@ -807,10 +612,6 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">deploy</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">JavaScriptCore</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -838,15 +639,15 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">cocoa</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">blog</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Gitalk</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">cocoa</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -870,19 +671,19 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">兼容性</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">多线程</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">HTTP</a>
+                <a href="javascript:void(0)" class="js-tag color4">兼容性</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">绘图</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">HTTP</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -902,6 +703,10 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">标识</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">arcgis</a>
               </li>
              
@@ -911,10 +716,6 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">D.Wade</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">标识</a>
               </li>
              
               <li class="article-tag-list-item">

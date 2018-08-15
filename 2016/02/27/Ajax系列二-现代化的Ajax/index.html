@@ -9,25 +9,18 @@
   <link rel="dns-prefetch" href="http://linking123.github.io">
   <title>Ajax系列二-现代化的Ajax | Linking&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="核心–XMLHttpRequest对象，一个专门的HTTP请求工具
-使用XMLHttpRequest做Ajax请求：
-如何创建该对象标准` new XMLHttpRequest()`
-低版本`IE(678)`，`new ActiveXObject(&amp;apos;Microsoft.XMLHTTP&amp;apos;)`;新的`jQuery`已经抛弃IE6，**程序员不应该去迁就用户的坏习惯，有时候需要逼用户">
+  <meta name="description" content="核心–XMLHttpRequest对象，一个专门的HTTP请求工具 使用XMLHttpRequest做Ajax请求： 如何创建该对象标准` new XMLHttpRequest()` 低版本`IE(678)`，`new ActiveXObject(&amp;#39;Microsoft.XMLHTTP&amp;#39;)`;新的`jQuery`已经抛弃IE6，**程序员不应该去迁就用户的坏习惯，有时候需要逼用户改变">
+<meta name="keywords" content="ajax">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Ajax系列二-现代化的Ajax">
 <meta property="og:url" content="http://linking123.github.io/2016/02/27/Ajax系列二-现代化的Ajax/index.html">
-<meta property="og:site_name" content="Linking's blog">
-<meta property="og:description" content="核心–XMLHttpRequest对象，一个专门的HTTP请求工具
-使用XMLHttpRequest做Ajax请求：
-如何创建该对象标准` new XMLHttpRequest()`
-低版本`IE(678)`，`new ActiveXObject(&amp;apos;Microsoft.XMLHTTP&amp;apos;)`;新的`jQuery`已经抛弃IE6，**程序员不应该去迁就用户的坏习惯，有时候需要逼用户">
+<meta property="og:site_name" content="Linking&#39;s blog">
+<meta property="og:description" content="核心–XMLHttpRequest对象，一个专门的HTTP请求工具 使用XMLHttpRequest做Ajax请求： 如何创建该对象标准` new XMLHttpRequest()` 低版本`IE(678)`，`new ActiveXObject(&amp;#39;Microsoft.XMLHTTP&amp;#39;)`;新的`jQuery`已经抛弃IE6，**程序员不应该去迁就用户的坏习惯，有时候需要逼用户改变">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2016-03-08T01:23:11.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Ajax系列二-现代化的Ajax">
-<meta name="twitter:description" content="核心–XMLHttpRequest对象，一个专门的HTTP请求工具
-使用XMLHttpRequest做Ajax请求：
-如何创建该对象标准` new XMLHttpRequest()`
-低版本`IE(678)`，`new ActiveXObject(&amp;apos;Microsoft.XMLHTTP&amp;apos;)`;新的`jQuery`已经抛弃IE6，**程序员不应该去迁就用户的坏习惯，有时候需要逼用户">
+<meta name="twitter:description" content="核心–XMLHttpRequest对象，一个专门的HTTP请求工具 使用XMLHttpRequest做Ajax请求： 如何创建该对象标准` new XMLHttpRequest()` 低版本`IE(678)`，`new ActiveXObject(&amp;#39;Microsoft.XMLHTTP&amp;#39;)`;新的`jQuery`已经抛弃IE6，**程序员不应该去迁就用户的坏习惯，有时候需要逼用户改变">
   
     <link rel="alternative" href="/atom.xml" title="Linking&#39;s blog" type="application/atom+xml">
   
@@ -62,7 +55,7 @@
 		  <h1 class="header-author"><a href="/">Linking</a></h1>
 		</hgroup>
 		
-		<p class="header-subtitle">时间是个神，见证你的进步</p>
+		<p class="header-subtitle">记住生活的美好</p>
 		
 
 		<nav class="header-menu">
@@ -126,7 +119,7 @@
 			  <h1 class="header-author js-header-author">Linking</h1>
 			</hgroup>
 			
-			<p class="header-subtitle"><i class="icon icon-quo-left"></i>时间是个神，见证你的进步<i class="icon icon-quo-right"></i></p>
+			<p class="header-subtitle"><i class="icon icon-quo-left"></i>记住生活的美好<i class="icon icon-quo-right"></i></p>
 			
 			
 			
@@ -204,16 +197,63 @@
         <p><strong>核心</strong>–<code>XMLHttpRequest</code>对象，一个专门的<code>HTTP</code>请求工具</p>
 <p>使用<code>XMLHttpRequest</code>做<code>Ajax</code>请求：</p>
 <h2 id="如何创建该对象"><a href="#如何创建该对象" class="headerlink" title="如何创建该对象"></a>如何创建该对象</h2><pre><code>标准` new XMLHttpRequest()`
-低版本`IE(678)`，`new ActiveXObject(&apos;Microsoft.XMLHTTP&apos;)`;新的`jQuery`已经抛弃IE6，**程序员不应该去迁就用户的坏习惯，有时候需要逼用户改变习惯。**
-</code></pre><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">createXHR</span>(<span class="params"></span>)</span>&#123;</div><div class="line">	<span class="keyword">var</span> xhr = <span class="literal">null</span>;</div><div class="line">	<span class="keyword">if</span>(<span class="built_in">window</span>.XMLHttpRequest)&#123;</div><div class="line">		xhr = <span class="keyword">new</span> XMLHttpRequest();</div><div class="line">	&#125; <span class="keyword">else</span> <span class="keyword">if</span>(<span class="built_in">window</span>.ActiveXObject)&#123;</div><div class="line">		xhr = <span class="keyword">new</span> ActiveXObject(<span class="string">'Microsoft.XMLHTTP'</span>);</div><div class="line">	&#125; <span class="keyword">else</span>&#123;</div><div class="line">		<span class="built_in">console</span>.log(<span class="string">'你的浏览器很奇怪。'</span>);</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> xhr;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="利用XHR发送请求来请求后台服务器资源"><a href="#利用XHR发送请求来请求后台服务器资源" class="headerlink" title="利用XHR发送请求来请求后台服务器资源"></a>利用XHR发送请求来请求后台服务器资源</h2><p>分析HTTP协议，请求需明确几个因素:<br>　　　1)请求方法：GET/POST/PUT/DELETE/HEAD<br>　　　2)请求哪个资源(URL)<br>　　　3)同步方式–同步/异步</p>
-<h2 id="如何得到请求返回结果"><a href="#如何得到请求返回结果" class="headerlink" title="如何得到请求返回结果"></a>如何得到请求返回结果</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">vote</span>(<span class="params"></span>)</span>&#123;</div><div class="line">	<span class="comment">//1. 制造xhr</span></div><div class="line">	<span class="keyword">var</span> xhr = createXHR();</div><div class="line">	<span class="comment">//2. 打开连接</span></div><div class="line">	xhr.open(<span class="string">'GET'</span>, <span class="string">'./05-ajaxvote.php'</span>, <span class="literal">true</span>/<span class="literal">false</span>);</div><div class="line">	<span class="comment">//3. 发送请求</span></div><div class="line">	xhr.send(<span class="literal">null</span>);</div><div class="line">	<span class="comment">//4. 测试同步异步的差异,改true/false</span></div><div class="line">	<span class="comment">//alert(xhr.responseText);</span></div><div class="line">	<span class="comment">//为避免误会用</span></div><div class="line">	alert(<span class="string">'123'</span>);</div></pre></td></tr></table></figure>
-<p>05-ajaxvote.php<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">sleep(<span class="number">3</span>);<span class="comment">//等待三秒</span></div><div class="line"><span class="keyword">if</span>(rand(<span class="number">1</span>,<span class="number">10</span>) &lt; <span class="number">4</span>)&#123;</div><div class="line">	<span class="keyword">echo</span> <span class="string">"0"</span>;</div><div class="line">&#125;<span class="keyword">else</span>&#123;</div><div class="line">	$votenum = file_get_contents(<span class="string">"./vote.txt"</span>);</div><div class="line">	<span class="keyword">if</span> ($votenum == <span class="keyword">null</span>) &#123;</div><div class="line">		$votenum = <span class="number">0</span>;</div><div class="line">	&#125;</div><div class="line">	$votenum += <span class="number">1</span>;</div><div class="line">	file_put_contents(<span class="string">'./vote.txt'</span>, $votenum);	</div><div class="line">	<span class="keyword">echo</span> <span class="string">"1"</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>上面的测试结果显示，<code>true</code>即异步时，立即<code>alert</code>，”你等你的，我先走了”;<code>false</code>即同步时，等三秒才<code>alert</code>，”send返回后，才是下一步”。<br>综上，同步代码按顺序执行，异步代码可跳过等待的代码，先执行下面的代码，再返回执行。</p>
+低版本`IE(678)`，`new ActiveXObject(&#39;Microsoft.XMLHTTP&#39;)`;新的`jQuery`已经抛弃IE6，**程序员不应该去迁就用户的坏习惯，有时候需要逼用户改变习惯。**
+</code></pre><pre><code>function createXHR(){
+    var xhr = null;
+    if(window.XMLHttpRequest){
+        xhr = new XMLHttpRequest();
+    } else if(window.ActiveXObject){
+        xhr = new ActiveXObject(&#39;Microsoft.XMLHTTP&#39;);
+    } else{
+        console.log(&#39;你的浏览器很奇怪。&#39;);
+    }
+    return xhr;
+}
+</code></pre><h2 id="利用XHR发送请求来请求后台服务器资源"><a href="#利用XHR发送请求来请求后台服务器资源" class="headerlink" title="利用XHR发送请求来请求后台服务器资源"></a>利用XHR发送请求来请求后台服务器资源</h2><p>分析HTTP协议，请求需明确几个因素:<br>　　　1)请求方法：GET/POST/PUT/DELETE/HEAD<br>　　　2)请求哪个资源(URL)<br>　　　3)同步方式–同步/异步</p>
+<h2 id="如何得到请求返回结果"><a href="#如何得到请求返回结果" class="headerlink" title="如何得到请求返回结果"></a>如何得到请求返回结果</h2><pre><code class="JavaScript">function vote(){
+    //1. 制造xhr
+    var xhr = createXHR();
+    //2. 打开连接
+    xhr.open(&#39;GET&#39;, &#39;./05-ajaxvote.php&#39;, true/false);
+    //3. 发送请求
+    xhr.send(null);
+    //4. 测试同步异步的差异,改true/false
+    //alert(xhr.responseText);
+    //为避免误会用
+    alert(&#39;123&#39;);
+</code></pre>
+<p>05-ajaxvote.php</p>
+<pre><code>sleep(3);//等待三秒
+if(rand(1,10) &lt; 4){
+    echo &quot;0&quot;;
+}else{
+    $votenum = file_get_contents(&quot;./vote.txt&quot;);
+    if ($votenum == null) {
+        $votenum = 0;
+    }
+    $votenum += 1;
+    file_put_contents(&#39;./vote.txt&#39;, $votenum);    
+    echo &quot;1&quot;;
+}
+</code></pre><p>上面的测试结果显示，<code>true</code>即异步时，立即<code>alert</code>，”你等你的，我先走了”;<code>false</code>即同步时，等三秒才<code>alert</code>，”send返回后，才是下一步”。<br>综上，同步代码按顺序执行，异步代码可跳过等待的代码，先执行下面的代码，再返回执行。</p>
 <p>XHR对象在请求与响应过程中，状态会不断变化，0-4逐步变化；可以绑定一个监听函数来监听状态的变化，只要状态变化就触发某函数。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">xhr.onreadystatechange = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">	<span class="keyword">var</span> pg = <span class="built_in">document</span>.getElementById(<span class="string">'progress'</span>);</div><div class="line">	pg.innerHTML += pg.innerHTML + <span class="string">'现在的状态是 '</span>+ <span class="keyword">this</span>.readyState + <span class="string">'&lt;br /&gt;'</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>只管<code>readyState == 4</code>的状态，其他不管。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">xhr.onreadystatechange = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">	<span class="keyword">if</span>(<span class="keyword">this</span>.readyState == <span class="number">4</span>)&#123;</div><div class="line">		<span class="keyword">if</span>(<span class="keyword">this</span>.responseText == <span class="string">'1'</span>)&#123;</div><div class="line">			<span class="built_in">document</span>.getElementById(<span class="string">'progress'</span>).innerHTML = <span class="string">'投票成功'</span>;</div><div class="line">		&#125;<span class="keyword">else</span> <span class="keyword">if</span>(<span class="keyword">this</span>.responseText == <span class="string">'0'</span>)&#123;</div><div class="line">			<span class="built_in">document</span>.getElementById(<span class="string">'progress'</span>).innerHTML = <span class="string">'投票失败'</span>;</div><div class="line">		&#125;<span class="keyword">else</span>&#123;</div><div class="line">			<span class="built_in">document</span>.getElementById(<span class="string">'progress'</span>).innerHTML = <span class="keyword">this</span>.responseText;</div><div class="line">		&#125;</div><div class="line">    &#125;   </div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-
+<pre><code>xhr.onreadystatechange = function(){
+    var pg = document.getElementById(&#39;progress&#39;);
+    pg.innerHTML += pg.innerHTML + &#39;现在的状态是 &#39;+ this.readyState + &#39;&lt;br /&gt;&#39;;
+}
+</code></pre><p>只管<code>readyState == 4</code>的状态，其他不管。</p>
+<pre><code>xhr.onreadystatechange = function(){
+    if(this.readyState == 4){
+        if(this.responseText == &#39;1&#39;){
+            document.getElementById(&#39;progress&#39;).innerHTML = &#39;投票成功&#39;;
+        }else if(this.responseText == &#39;0&#39;){
+            document.getElementById(&#39;progress&#39;).innerHTML = &#39;投票失败&#39;;
+        }else{
+            document.getElementById(&#39;progress&#39;).innerHTML = this.responseText;
+        }
+    }   
+}
+</code></pre>
       
 
       
@@ -505,11 +545,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">ajax</a>
+                <a href="javascript:void(0)" class="js-tag color5">Ajax</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Ajax</a>
+                <a href="javascript:void(0)" class="js-tag color5">ajax</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -529,6 +569,10 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">JavaScriptCore</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">operation</a>
               </li>
              
@@ -538,10 +582,6 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">deploy</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">JavaScriptCore</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -569,15 +609,15 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">cocoa</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">blog</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Gitalk</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">cocoa</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -601,19 +641,19 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">兼容性</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">多线程</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">HTTP</a>
+                <a href="javascript:void(0)" class="js-tag color4">兼容性</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">绘图</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">HTTP</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -633,6 +673,10 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">标识</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">arcgis</a>
               </li>
              
@@ -642,10 +686,6 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">D.Wade</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">标识</a>
               </li>
              
               <li class="article-tag-list-item">

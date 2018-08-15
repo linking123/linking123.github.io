@@ -9,22 +9,18 @@
   <link rel="dns-prefetch" href="http://linking123.github.io">
   <title>精通Python网络爬虫-第四章-Urllib库与URLError异常处理 | Linking&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="目录4.1 Urllib库4.2 快速使用4.3 模拟浏览器 – Headers 属性4.4 超时设置4.5 HTTP 协议请求实战4.6 代理服务器设置4.7 DebugLog开启4.8 异常处理神器 - URLError
-
-Python2.x时代，操作URL的库是Urllib，分为Urllib和Urllib2；Python3.x时代合并到Urllib库中。">
+  <meta name="description" content="目录4.1 Urllib库4.2 快速使用4.3 模拟浏览器 – Headers 属性4.4 超时设置4.5 HTTP 协议请求实战4.6 代理服务器设置4.7 DebugLog开启4.8 异常处理神器 - URLError  Python2.x时代，操作URL的库是Urllib，分为Urllib和Urllib2；Python3.x时代合并到Urllib库中。">
+<meta name="keywords" content="Python,crawler">
 <meta property="og:type" content="article">
 <meta property="og:title" content="精通Python网络爬虫-第四章-Urllib库与URLError异常处理">
 <meta property="og:url" content="http://linking123.github.io/2017/07/10/精通Python网络爬虫-第四章-Urllib库与URLError异常处理/index.html">
-<meta property="og:site_name" content="Linking's blog">
-<meta property="og:description" content="目录4.1 Urllib库4.2 快速使用4.3 模拟浏览器 – Headers 属性4.4 超时设置4.5 HTTP 协议请求实战4.6 代理服务器设置4.7 DebugLog开启4.8 异常处理神器 - URLError
-
-Python2.x时代，操作URL的库是Urllib，分为Urllib和Urllib2；Python3.x时代合并到Urllib库中。">
+<meta property="og:site_name" content="Linking&#39;s blog">
+<meta property="og:description" content="目录4.1 Urllib库4.2 快速使用4.3 模拟浏览器 – Headers 属性4.4 超时设置4.5 HTTP 协议请求实战4.6 代理服务器设置4.7 DebugLog开启4.8 异常处理神器 - URLError  Python2.x时代，操作URL的库是Urllib，分为Urllib和Urllib2；Python3.x时代合并到Urllib库中。">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2017-07-10T14:37:26.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="精通Python网络爬虫-第四章-Urllib库与URLError异常处理">
-<meta name="twitter:description" content="目录4.1 Urllib库4.2 快速使用4.3 模拟浏览器 – Headers 属性4.4 超时设置4.5 HTTP 协议请求实战4.6 代理服务器设置4.7 DebugLog开启4.8 异常处理神器 - URLError
-
-Python2.x时代，操作URL的库是Urllib，分为Urllib和Urllib2；Python3.x时代合并到Urllib库中。">
+<meta name="twitter:description" content="目录4.1 Urllib库4.2 快速使用4.3 模拟浏览器 – Headers 属性4.4 超时设置4.5 HTTP 协议请求实战4.6 代理服务器设置4.7 DebugLog开启4.8 异常处理神器 - URLError  Python2.x时代，操作URL的库是Urllib，分为Urllib和Urllib2；Python3.x时代合并到Urllib库中。">
   
     <link rel="alternative" href="/atom.xml" title="Linking&#39;s blog" type="application/atom+xml">
   
@@ -59,7 +55,7 @@ Python2.x时代，操作URL的库是Urllib，分为Urllib和Urllib2；Python3.x�
 		  <h1 class="header-author"><a href="/">Linking</a></h1>
 		</hgroup>
 		
-		<p class="header-subtitle">时间是个神，见证你的进步</p>
+		<p class="header-subtitle">记住生活的美好</p>
 		
 
 		<nav class="header-menu">
@@ -123,7 +119,7 @@ Python2.x时代，操作URL的库是Urllib，分为Urllib和Urllib2；Python3.x�
 			  <h1 class="header-author js-header-author">Linking</h1>
 			</hgroup>
 			
-			<p class="header-subtitle"><i class="icon icon-quo-left"></i>时间是个神，见证你的进步<i class="icon icon-quo-right"></i></p>
+			<p class="header-subtitle"><i class="icon icon-quo-left"></i>记住生活的美好<i class="icon icon-quo-right"></i></p>
 			
 			
 			
@@ -250,37 +246,108 @@ Python2.x时代，操作URL的库是Urllib，分为Urllib和Urllib2；Python3.x�
 </tr>
 </tbody>
 </table>
-<h2 id="4-2-快速使用"><a href="#4-2-快速使用" class="headerlink" title="4.2 快速使用"></a>4.2 快速使用</h2><figure class="highlight gradle"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//导入模块</span></div><div class="line">&gt;&gt;&gt; <span class="keyword">import</span> urllib.request</div><div class="line"><span class="comment">//打开网页</span></div><div class="line">&gt;&gt;&gt; <span class="keyword">file</span>=urllib.request.urlopen(<span class="string">"http://baidu.com"</span>)</div><div class="line"><span class="comment">//读取全部内容.内容赋给字符串变量</span></div><div class="line">&gt;&gt;&gt; data=<span class="keyword">file</span>.<span class="keyword">read</span>()</div><div class="line"><span class="comment">//读取全部内容，内容赋给列表变量</span></div><div class="line">&gt;&gt;&gt; data=<span class="keyword">file</span>.<span class="keyword">readlines</span>()</div><div class="line"><span class="comment">//读取一行内容</span></div><div class="line">&gt;&gt;&gt; dataline=<span class="keyword">file</span>.readline()</div><div class="line">&gt;&gt;&gt; <span class="keyword">print</span> dataline</div><div class="line">&gt;&gt;&gt; <span class="keyword">print</span> data</div><div class="line">&gt;&gt;&gt; <span class="keyword">print</span>(<span class="keyword">file</span>.info())</div><div class="line">&gt;&gt;&gt; <span class="keyword">print</span>(<span class="keyword">file</span>.getcode())</div><div class="line">&gt;&gt;&gt; <span class="keyword">print</span>(<span class="keyword">file</span>.geturl())</div></pre></td></tr></table></figure>
-<p>爬取网页并保存到本地文件：</p>
+<h2 id="4-2-快速使用"><a href="#4-2-快速使用" class="headerlink" title="4.2 快速使用"></a>4.2 快速使用</h2><pre><code>//导入模块
+&gt;&gt;&gt; import urllib.request
+//打开网页
+&gt;&gt;&gt; file=urllib.request.urlopen(&quot;http://baidu.com&quot;)
+//读取全部内容.内容赋给字符串变量
+&gt;&gt;&gt; data=file.read()
+//读取全部内容，内容赋给列表变量
+&gt;&gt;&gt; data=file.readlines()
+//读取一行内容
+&gt;&gt;&gt; dataline=file.readline()
+&gt;&gt;&gt; print dataline
+&gt;&gt;&gt; print data
+&gt;&gt;&gt; print(file.info())
+&gt;&gt;&gt; print(file.getcode())
+&gt;&gt;&gt; print(file.geturl())
+</code></pre><p>爬取网页并保存到本地文件：</p>
 <ul>
 <li>爬取网页，赋给变量</li>
 <li>变量写入本地文件，*.html</li>
 <li>关闭文件</li>
 </ul>
-<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;</span>&gt; fhandle=open(<span class="string">"/User/linking/Dev/Python/py-books-study/deep-in-python-web-crawler/baidu.html"</span>)</div><div class="line"><span class="meta">&gt;&gt;</span>&gt; fhandle.write(data)</div><div class="line"><span class="meta">&gt;&gt;</span>&gt; fhandle.close()</div></pre></td></tr></table></figure>
+<pre><code>&gt;&gt;&gt; fhandle=open(&quot;/User/linking/Dev/Python/py-books-study/deep-in-python-web-crawler/baidu.html&quot;)
+&gt;&gt;&gt; fhandle.write(data)
+&gt;&gt;&gt; fhandle.close()
+</code></pre><blockquote>
+<p>URL标准中一般只允许一部分ASCII字符，如数字、字母、部分符号等。若是特殊字符，如中文、：、或者&amp;等，需要编码。编码格式：<br><code>`</code></p>
 <blockquote>
-<p>URL标准中一般只允许一部分ASCII字符，如数字、字母、部分符号等。若是特殊字符，如中文、：、或者&amp;等，需要编码。编码格式：<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;</span>&gt; urllib.request.quote(<span class="string">"http://www.baidu.com"</span>)</div><div class="line"><span class="comment"># out: http%3A//www.baidu.com</span></div></pre></td></tr></table></figure></p>
-</blockquote>
-<p>解码格式：<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;</span>&gt; urllib.request.unquote(<span class="string">"http%3A//www.baidu.com"</span>)</div><div class="line"><span class="comment"># out: http://www.baidu.com</span></div></pre></td></tr></table></figure></p>
-<p>编码在Python中十分重要，因为平台及历史原因等，需要特别注意。</p>
-<h2 id="4-3-模拟浏览器-–-Headers-属性"><a href="#4-3-模拟浏览器-–-Headers-属性" class="headerlink" title="4.3 模拟浏览器 – Headers 属性"></a>4.3 模拟浏览器 – Headers 属性</h2><p>问题：爬取时出现 403错误，由于网页做了反爬虫设置。</p>
-<p>解决方式：设置Headers信息，模拟浏览器登录。</p>
-<p>浏览器检查工具可以查看到User-Agents，两种方法：<br><figure class="highlight haskell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="meta"># 法1：build_opener()修改报头</span></div><div class="line"><span class="keyword">import</span> urllib.request</div><div class="line"><span class="title">url</span>=<span class="string">"http://blog.csdn.net/weiwei_pig/article/details/51178226"</span></div><div class="line"><span class="title">headers</span>=(<span class="string">"User-Agent"</span>,<span class="string">"Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Mobile Safari/537.36"</span>)</div><div class="line"><span class="title">opener</span> = urllib.request.build_opener()</div><div class="line"><span class="title">opener</span>.addheaders = [headers]</div><div class="line"><span class="class"><span class="keyword">data</span> = opener.open(<span class="title">url</span>).read()</span></div><div class="line"><span class="meta"># print(data)</span></div><div class="line"><span class="title">fhandle</span>=open(<span class="string">"/Users/linking/Dev/python/py-books-study/deep-in-python-web-crawler/csdn.html"</span>,<span class="string">"wb"</span>)</div><div class="line"><span class="title">fhandle</span>.write(<span class="class"><span class="keyword">data</span>)</span></div><div class="line"><span class="title">fhandle</span>.close()</div><div class="line"></div><div class="line"></div><div class="line"><span class="meta"># 法2: 用add_header()添加报头</span></div><div class="line"><span class="keyword">import</span> urllib.request</div><div class="line"><span class="title">url</span>=<span class="string">"http://blog.csdn.net/weiwei_pig/article/details/51178226"</span></div><div class="line"><span class="title">req</span>=urllib.request.<span class="type">Request</span>(url)</div><div class="line"><span class="title">req</span>.add_header(<span class="string">"User-Agent"</span>,<span class="string">"Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Mobile Safari/537.36"</span>)</div><div class="line"><span class="class"><span class="keyword">data</span> = urllib.request.urlopen(<span class="title">req</span>).read()</span></div></pre></td></tr></table></figure></p>
-<h2 id="4-4-超时设置"><a href="#4-4-超时设置" class="headerlink" title="4.4 超时设置"></a>4.4 超时设置</h2><p>超时时间设置，服务器响应时间，速度快慢，性能考量，超时抛出异常。<br><figure class="highlight vala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">import urllib.request</div><div class="line"><span class="keyword">for</span> i in range(<span class="number">1</span>,<span class="number">100</span>):</div><div class="line">    <span class="keyword">try</span>:</div><div class="line">        file = urllib.request.urlopen(<span class="string">"http://yum.iqianyue.com"</span>,timeout=<span class="number">1</span>)</div><div class="line">        data = file.read()</div><div class="line">        print(len(data))</div><div class="line">    except Exception as e:</div><div class="line">        print(<span class="string">"出现异常 --&gt; "</span> + str(e))</div><div class="line"></div><div class="line"><span class="meta"># out</span></div><div class="line"><span class="meta"># ...</span></div><div class="line"><span class="meta"># 14165</span></div><div class="line"><span class="meta"># 14165</span></div><div class="line"><span class="meta"># 14165</span></div><div class="line"><span class="meta"># 14165</span></div><div class="line"><span class="meta"># 出现异常 --&gt; &lt;urlopen error timed out&gt;</span></div><div class="line"><span class="meta"># 14165</span></div><div class="line"><span class="meta"># 出现异常 --&gt; &lt;urlopen error timed out&gt;</span></div><div class="line"><span class="meta"># 14165</span></div><div class="line"><span class="meta"># 14165</span></div><div class="line"><span class="meta"># 14165</span></div><div class="line"><span class="meta"># 14165</span></div><div class="line"><span class="meta"># 14165</span></div><div class="line"><span class="meta"># ...</span></div></pre></td></tr></table></figure></p>
-<p>上述，循环发100个请求，1秒比较频繁，出现异常。</p>
-<h2 id="4-5-HTTP-协议请求实战"><a href="#4-5-HTTP-协议请求实战" class="headerlink" title="4.5 HTTP 协议请求实战"></a>4.5 HTTP 协议请求实战</h2><h3 id="1-GET请求"><a href="#1-GET请求" class="headerlink" title="1. GET请求"></a>1. GET请求</h3><figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">import urllib<span class="selector-class">.request</span></div><div class="line">keywd=<span class="string">"hello"</span></div><div class="line">url=<span class="string">"http://www.baidu.com/s?wd="</span>+keywd</div><div class="line"><span class="comment">//构建请求Request对象</span></div><div class="line">req=urllib<span class="selector-class">.request</span><span class="selector-class">.Request</span>(url)  </div><div class="line">data=urllib<span class="selector-class">.request</span><span class="selector-class">.urlopen</span>(req).read()</div><div class="line">fhandle=open(<span class="string">"/Users/linking/Dev/python/py-books-study/deep-in-python-web-crawler/searchHello.html"</span>,<span class="string">"wb"</span>)</div><div class="line">fhandle.write(data)</div><div class="line">fhandle.close()</div></pre></td></tr></table></figure>
-<p>保存的网页打开后，看到的效果与百度搜索“hello”效果一样。</p>
-<p>这是英文，如果是搜索中文呢？如keywd=”呵呵”，出现了<br><figure class="highlight ada"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"># <span class="keyword">out</span>：</div><div class="line"># UnicodeEncodeError: <span class="symbol">'ascii</span>' codec can<span class="symbol">'t</span> </div><div class="line">encode characters <span class="keyword">in</span> position <span class="number">10</span>-<span class="number">12</span>: ordinal </div><div class="line"><span class="keyword">not</span> <span class="keyword">in</span> <span class="keyword">range</span>(<span class="number">128</span>)</div></pre></td></tr></table></figure></p>
-<p>编码出现问题，需要用前面讲到的urllib.request.quote(keywd)来编码。<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">import urllib<span class="selector-class">.request</span></div><div class="line">keywd=<span class="string">"呵呵"</span></div><div class="line">url=<span class="string">"http://www.baidu.com/s?wd="</span></div><div class="line">key_code=urllib<span class="selector-class">.request</span><span class="selector-class">.quote</span>(keywd)</div><div class="line">url_all=url+key_code</div><div class="line">req=urllib<span class="selector-class">.request</span><span class="selector-class">.Request</span>(url_all)</div><div class="line">data=urllib<span class="selector-class">.request</span><span class="selector-class">.urlopen</span>(req).read()</div><div class="line">fhandle=open(<span class="string">"/Users/linking/Dev/python/py-books-study/deep-in-python-web-crawler/searchCHNword.html"</span>,<span class="string">"wb"</span>)</div><div class="line">fhandle.write(data)</div><div class="line">fhandle.close()</div></pre></td></tr></table></figure></p>
-<h3 id="2-POST请求实例"><a href="#2-POST请求实例" class="headerlink" title="2. POST请求实例"></a>2. POST请求实例</h3><figure class="highlight haskell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> urllib.request</div><div class="line"><span class="keyword">import</span> urllib.parse</div><div class="line"><span class="title">url</span> = <span class="string">"http://www.iqianyue.com/mypost"</span></div><div class="line"><span class="title">postdata</span> = urllib.parse.urlencode(&#123;</div><div class="line">    <span class="string">"name"</span>:<span class="string">"ceo@iqianyue.com"</span>,</div><div class="line">    <span class="string">"pass"</span>:<span class="string">"aA123456"</span></div><div class="line">&#125;).encode('utf<span class="number">-8</span>') # 传递的数据经urlencode处理，在encode（）设置为utf<span class="number">-8</span>编码</div><div class="line"><span class="title">req</span> = urllib.request.<span class="type">Request</span>(url,postdata)</div><div class="line"><span class="title">req</span>.add_header('<span class="type">User</span>-<span class="type">Agent'</span>,'<span class="type">Mozilla</span>/<span class="number">5.0</span> (<span class="type">Linux</span>; <span class="type">Android</span> <span class="number">6.0</span>; <span class="type">Nexus</span> <span class="number">5</span> <span class="type">Build</span>/<span class="type">MRA58N</span>) <span class="type">AppleWebKit</span>/<span class="number">537.36</span> (<span class="type">KHTML</span>, like <span class="type">Gecko</span>) <span class="type">Chrome</span>/<span class="number">59.0</span><span class="number">.3071</span><span class="number">.115</span> <span class="type">Mobile</span> <span class="type">Safari</span>/<span class="number">537.36</span>')</div><div class="line"><span class="class"><span class="keyword">data</span> = urllib.request.urlopen(<span class="title">req</span>).read()</span></div><div class="line"><span class="title">fhandle</span> = open(<span class="string">"/Users/linking/Dev/python/py-books-study/deep-in-python-web-crawler/post.html"</span>,<span class="string">"wb"</span>)</div><div class="line"><span class="title">fhandle</span>.write(<span class="class"><span class="keyword">data</span>)</span></div><div class="line"><span class="title">fhandle</span>.close()</div></pre></td></tr></table></figure>
-<p>登陆后得到的数据返回跟正常登陆返回一样的。</p>
-<h2 id="4-6-代理服务器设置"><a href="#4-6-代理服务器设置" class="headerlink" title="4.6 代理服务器设置"></a>4.6 代理服务器设置</h2><h2 id="4-7-DebugLog开启"><a href="#4-7-DebugLog开启" class="headerlink" title="4.7 DebugLog开启"></a>4.7 DebugLog开启</h2><figure class="highlight vbscript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">import urllib.<span class="built_in">request</span></div><div class="line">httphd=urllib.<span class="built_in">request</span>.HTTPHandler(debuglevel=<span class="number">1</span>)</div><div class="line">httpshd=urllib.<span class="built_in">request</span>.HTTPSHandler(debuglevel=<span class="number">1</span>)</div><div class="line">opener=urllib.<span class="built_in">request</span>.build_opener(httphd,httpshd)</div><div class="line">urllib.<span class="built_in">request</span>.install_opener(opener)</div><div class="line">data=urllib.<span class="built_in">request</span>.urlopen(<span class="string">"http://edu.51cto.com"</span>)</div><div class="line"></div><div class="line"># send: b<span class="comment">'GET / HTTP/1.1\r\nAccept-Encoding: identity\r\nHost: edu.51cto.com\r\nUser-Agent: Python-urllib/3.6\r\nConnection: close\r\n\r\n'</span></div><div class="line"># reply: <span class="comment">'HTTP/1.1 200 OK\r\n'</span></div><div class="line"># header: <span class="built_in">Date</span> header: Content-Type header: Transfer-Encoding header: Connection header: <span class="keyword">Set</span>-Cookie</div><div class="line"># header: <span class="built_in">Server</span> header: Vary header: Vary header: Vary header: <span class="keyword">Set</span>-Cookie header: <span class="keyword">Set</span>-Cookie</div><div class="line"># header: <span class="keyword">Set</span>-Cookie header: Load-Balancing header: Load-Balancing</div><div class="line"># Process finished <span class="keyword">with</span> <span class="keyword">exit</span> code <span class="number">0</span></div></pre></td></tr></table></figure>
-<h2 id="4-8-异常处理神器-URLError"><a href="#4-8-异常处理神器-URLError" class="headerlink" title="4.8 异常处理神器 - URLError"></a>4.8 异常处理神器 - URLError</h2><figure class="highlight aspectj"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> urllib.request</div><div class="line"><span class="keyword">import</span> urllib.<span class="keyword">error</span></div><div class="line"><span class="keyword">try</span>:</div><div class="line">    file=urllib.request.urlopen(<span class="string">"http://blog.csdn.net"</span>)</div><div class="line">    data=file.read()</div><div class="line">    # print(data)</div><div class="line">    fhandle=open(<span class="string">"/Users/linking/Dev/python/py-books-study/deep-in-python-web-crawler/csdndownload.html"</span>,<span class="string">"wb"</span>)</div><div class="line">    fhandle.write(data)</div><div class="line">    fhandle.close()</div><div class="line">except urllib.<span class="keyword">error</span>.URLError as e:</div><div class="line">    print(e.code)</div><div class="line">    print(e.reason)</div></pre></td></tr></table></figure>
 <blockquote>
-<p>没看到403，forbidden错误；怀疑是Python最新版做了模拟浏览器登陆。</p>
+<p>urllib.request.quote(“<a href="http://www.baidu.com&quot;" target="_blank" rel="noopener">http://www.baidu.com&quot;</a>)</p>
 </blockquote>
-<p>还有HTTPError这个URLError的子类<br><figure class="highlight aspectj"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> urllib.request</div><div class="line"><span class="keyword">import</span> urllib.<span class="keyword">error</span></div><div class="line"><span class="keyword">try</span>:</div><div class="line">    file=urllib.request.urlopen(<span class="string">"http://blog.csdn.net"</span>)</div><div class="line">    data=file.read()</div><div class="line">    # print(data)</div><div class="line">    fhandle=open(<span class="string">"/Users/linking/Dev/python/py-books-study/deep-in-python-web-crawler/csdndownload.html"</span>,<span class="string">"wb"</span>)</div><div class="line">    fhandle.write(data)</div><div class="line">    fhandle.close()</div><div class="line">except urllib.<span class="keyword">error</span>.HTTPError as e:</div><div class="line">    print(e.code)</div><div class="line">    print(e.reason)</div><div class="line">except urllib.<span class="keyword">error</span>.URLError as e:  # 父类兜底</div><div class="line">    print(e.code)</div><div class="line">    print(e.reason)</div></pre></td></tr></table></figure></p>
-<p>有则输出，没有则忽略：<br><figure class="highlight monkey"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> urllib.request</div><div class="line"><span class="keyword">import</span> urllib.<span class="built_in">error</span></div><div class="line"><span class="keyword">try</span>:</div><div class="line">    file=urllib.request.urlopen(<span class="string">"http://www.baiduddd.com"</span>)</div><div class="line">except urllib.<span class="built_in">error</span>.URLError as e:<span class="meta">  # 父类兜底</span></div><div class="line">    <span class="keyword">if</span> hasattr(e,<span class="string">"code"</span>):</div><div class="line">        <span class="built_in">print</span>(e.code)</div><div class="line">    <span class="keyword">if</span> hasattr(e,<span class="string">"reason"</span>):</div><div class="line">        <span class="built_in">print</span>(e.reason)<span class="meta"></span></div><div class="line"></div><div class="line"># 输出: [Errno 8] nodename nor servname provided, or not known</div></pre></td></tr></table></figure></p>
+</blockquote>
+</blockquote>
+<h1 id="out-http-3A-www-baidu-com"><a href="#out-http-3A-www-baidu-com" class="headerlink" title="out: http%3A//www.baidu.com"></a>out: http%3A//<a href="http://www.baidu.com" target="_blank" rel="noopener">www.baidu.com</a></h1><pre><code>解码格式：
+</code></pre><blockquote>
+<blockquote>
+<blockquote>
+<p>urllib.request.unquote(“http%3A//<a href="http://www.baidu.com&quot;" target="_blank" rel="noopener">www.baidu.com&quot;</a>)</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<h1 id="out-http-www-baidu-com"><a href="#out-http-www-baidu-com" class="headerlink" title="out: http://www.baidu.com"></a>out: <a href="http://www.baidu.com" target="_blank" rel="noopener">http://www.baidu.com</a></h1><pre><code>
+编码在Python中十分重要，因为平台及历史原因等，需要特别注意。
+
+## 4.3 模拟浏览器 -- Headers 属性
+问题：爬取时出现 403错误，由于网页做了反爬虫设置。
+
+解决方式：设置Headers信息，模拟浏览器登录。
+
+浏览器检查工具可以查看到User-Agents，两种方法：
+</code></pre><h1 id="法1：build-opener-修改报头"><a href="#法1：build-opener-修改报头" class="headerlink" title="法1：build_opener()修改报头"></a>法1：build_opener()修改报头</h1><p>import urllib.request<br>url=”<a href="http://blog.csdn.net/weiwei_pig/article/details/51178226&quot;" target="_blank" rel="noopener">http://blog.csdn.net/weiwei_pig/article/details/51178226&quot;</a><br>headers=(“User-Agent”,”Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Mobile Safari/537.36”)<br>opener = urllib.request.build_opener()<br>opener.addheaders = [headers]<br>data = opener.open(url).read()</p>
+<h1 id="print-data"><a href="#print-data" class="headerlink" title="print(data)"></a>print(data)</h1><p>fhandle=open(“/Users/linking/Dev/python/py-books-study/deep-in-python-web-crawler/csdn.html”,”wb”)<br>fhandle.write(data)<br>fhandle.close()</p>
+<h1 id="法2-用add-header-添加报头"><a href="#法2-用add-header-添加报头" class="headerlink" title="法2: 用add_header()添加报头"></a>法2: 用add_header()添加报头</h1><p>import urllib.request<br>url=”<a href="http://blog.csdn.net/weiwei_pig/article/details/51178226&quot;" target="_blank" rel="noopener">http://blog.csdn.net/weiwei_pig/article/details/51178226&quot;</a><br>req=urllib.request.Request(url)<br>req.add_header(“User-Agent”,”Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Mobile Safari/537.36”)<br>data = urllib.request.urlopen(req).read()</p>
+<pre><code>
+## 4.4 超时设置
+超时时间设置，服务器响应时间，速度快慢，性能考量，超时抛出异常。
+</code></pre><p>import urllib.request<br>for i in range(1,100):<br>    try:<br>        file = urllib.request.urlopen(“<a href="http://yum.iqianyue.com&quot;,timeout=1" target="_blank" rel="noopener">http://yum.iqianyue.com&quot;,timeout=1</a>)<br>        data = file.read()<br>        print(len(data))<br>    except Exception as e:<br>        print(“出现异常 –&gt; “ + str(e))</p>
+<h1 id="out"><a href="#out" class="headerlink" title="out"></a>out</h1><h1 id="…"><a href="#…" class="headerlink" title="…"></a>…</h1><h1 id="14165"><a href="#14165" class="headerlink" title="14165"></a>14165</h1><h1 id="14165-1"><a href="#14165-1" class="headerlink" title="14165"></a>14165</h1><h1 id="14165-2"><a href="#14165-2" class="headerlink" title="14165"></a>14165</h1><h1 id="14165-3"><a href="#14165-3" class="headerlink" title="14165"></a>14165</h1><h1 id="出现异常-–-gt"><a href="#出现异常-–-gt" class="headerlink" title="出现异常 –&gt; "></a>出现异常 –&gt; <urlopen error="" timed="" out=""></urlopen></h1><h1 id="14165-4"><a href="#14165-4" class="headerlink" title="14165"></a>14165</h1><h1 id="出现异常-–-gt-1"><a href="#出现异常-–-gt-1" class="headerlink" title="出现异常 –&gt; "></a>出现异常 –&gt; <urlopen error="" timed="" out=""></urlopen></h1><h1 id="14165-5"><a href="#14165-5" class="headerlink" title="14165"></a>14165</h1><h1 id="14165-6"><a href="#14165-6" class="headerlink" title="14165"></a>14165</h1><h1 id="14165-7"><a href="#14165-7" class="headerlink" title="14165"></a>14165</h1><h1 id="14165-8"><a href="#14165-8" class="headerlink" title="14165"></a>14165</h1><h1 id="14165-9"><a href="#14165-9" class="headerlink" title="14165"></a>14165</h1><h1 id="…-1"><a href="#…-1" class="headerlink" title="…"></a>…</h1><pre><code>
+上述，循环发100个请求，1秒比较频繁，出现异常。
+
+## 4.5 HTTP 协议请求实战
+### 1. GET请求
+</code></pre><p>import urllib.request<br>keywd=”hello”<br>url=”<a href="http://www.baidu.com/s?wd=&quot;+keywd" target="_blank" rel="noopener">http://www.baidu.com/s?wd=&quot;+keywd</a><br>//构建请求Request对象<br>req=urllib.request.Request(url)<br>data=urllib.request.urlopen(req).read()<br>fhandle=open(“/Users/linking/Dev/python/py-books-study/deep-in-python-web-crawler/searchHello.html”,”wb”)<br>fhandle.write(data)<br>fhandle.close()</p>
+<pre><code>保存的网页打开后，看到的效果与百度搜索“hello”效果一样。
+
+这是英文，如果是搜索中文呢？如keywd=&quot;呵呵&quot;，出现了
+</code></pre><h1 id="out："><a href="#out：" class="headerlink" title="out："></a>out：</h1><h1 id="UnicodeEncodeError-‘ascii’-codec-can’t"><a href="#UnicodeEncodeError-‘ascii’-codec-can’t" class="headerlink" title="UnicodeEncodeError: ‘ascii’ codec can’t"></a>UnicodeEncodeError: ‘ascii’ codec can’t</h1><p>encode characters in position 10-12: ordinal<br>not in range(128)</p>
+<pre><code>
+编码出现问题，需要用前面讲到的urllib.request.quote(keywd)来编码。
+</code></pre><p>import urllib.request<br>keywd=”呵呵”<br>url=”<a href="http://www.baidu.com/s?wd=&quot;" target="_blank" rel="noopener">http://www.baidu.com/s?wd=&quot;</a><br>key_code=urllib.request.quote(keywd)<br>url_all=url+key_code<br>req=urllib.request.Request(url_all)<br>data=urllib.request.urlopen(req).read()<br>fhandle=open(“/Users/linking/Dev/python/py-books-study/deep-in-python-web-crawler/searchCHNword.html”,”wb”)<br>fhandle.write(data)<br>fhandle.close()</p>
+<pre><code>
+### 2. POST请求实例
+</code></pre><p>import urllib.request<br>import urllib.parse<br>url = “<a href="http://www.iqianyue.com/mypost&quot;" target="_blank" rel="noopener">http://www.iqianyue.com/mypost&quot;</a><br>postdata = urllib.parse.urlencode({<br>    “name”:”<a href="mailto:ceo@iqianyue.com" target="_blank" rel="noopener">ceo@iqianyue.com</a>“,<br>    “pass”:”aA123456”<br>}).encode(‘utf-8’) # 传递的数据经urlencode处理，在encode（）设置为utf-8编码<br>req = urllib.request.Request(url,postdata)<br>req.add_header(‘User-Agent’,’Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Mobile Safari/537.36’)<br>data = urllib.request.urlopen(req).read()<br>fhandle = open(“/Users/linking/Dev/python/py-books-study/deep-in-python-web-crawler/post.html”,”wb”)<br>fhandle.write(data)<br>fhandle.close()</p>
+<pre><code>
+登陆后得到的数据返回跟正常登陆返回一样的。
+
+## 4.6 代理服务器设置
+
+
+## 4.7 DebugLog开启
+</code></pre><p>import urllib.request<br>httphd=urllib.request.HTTPHandler(debuglevel=1)<br>httpshd=urllib.request.HTTPSHandler(debuglevel=1)<br>opener=urllib.request.build_opener(httphd,httpshd)<br>urllib.request.install_opener(opener)<br>data=urllib.request.urlopen(“<a href="http://edu.51cto.com&quot;" target="_blank" rel="noopener">http://edu.51cto.com&quot;</a>)</p>
+<h1 id="send-b’GET-HTTP-1-1-r-nAccept-Encoding-identity-r-nHost-edu-51cto-com-r-nUser-Agent-Python-urllib-3-6-r-nConnection-close-r-n-r-n’"><a href="#send-b’GET-HTTP-1-1-r-nAccept-Encoding-identity-r-nHost-edu-51cto-com-r-nUser-Agent-Python-urllib-3-6-r-nConnection-close-r-n-r-n’" class="headerlink" title="send: b’GET / HTTP/1.1\r\nAccept-Encoding: identity\r\nHost: edu.51cto.com\r\nUser-Agent: Python-urllib/3.6\r\nConnection: close\r\n\r\n’"></a>send: b’GET / HTTP/1.1\r\nAccept-Encoding: identity\r\nHost: edu.51cto.com\r\nUser-Agent: Python-urllib/3.6\r\nConnection: close\r\n\r\n’</h1><h1 id="reply-‘HTTP-1-1-200-OK-r-n’"><a href="#reply-‘HTTP-1-1-200-OK-r-n’" class="headerlink" title="reply: ‘HTTP/1.1 200 OK\r\n’"></a>reply: ‘HTTP/1.1 200 OK\r\n’</h1><h1 id="header-Date-header-Content-Type-header-Transfer-Encoding-header-Connection-header-Set-Cookie"><a href="#header-Date-header-Content-Type-header-Transfer-Encoding-header-Connection-header-Set-Cookie" class="headerlink" title="header: Date header: Content-Type header: Transfer-Encoding header: Connection header: Set-Cookie"></a>header: Date header: Content-Type header: Transfer-Encoding header: Connection header: Set-Cookie</h1><h1 id="header-Server-header-Vary-header-Vary-header-Vary-header-Set-Cookie-header-Set-Cookie"><a href="#header-Server-header-Vary-header-Vary-header-Vary-header-Set-Cookie-header-Set-Cookie" class="headerlink" title="header: Server header: Vary header: Vary header: Vary header: Set-Cookie header: Set-Cookie"></a>header: Server header: Vary header: Vary header: Vary header: Set-Cookie header: Set-Cookie</h1><h1 id="header-Set-Cookie-header-Load-Balancing-header-Load-Balancing"><a href="#header-Set-Cookie-header-Load-Balancing-header-Load-Balancing" class="headerlink" title="header: Set-Cookie header: Load-Balancing header: Load-Balancing"></a>header: Set-Cookie header: Load-Balancing header: Load-Balancing</h1><h1 id="Process-finished-with-exit-code-0"><a href="#Process-finished-with-exit-code-0" class="headerlink" title="Process finished with exit code 0"></a>Process finished with exit code 0</h1><pre><code>
+## 4.8 异常处理神器 - URLError
+</code></pre><p>import urllib.request<br>import urllib.error<br>try:<br>    file=urllib.request.urlopen(“<a href="http://blog.csdn.net&quot;" target="_blank" rel="noopener">http://blog.csdn.net&quot;</a>)<br>    data=file.read()</p>
+<pre><code># print(data)
+fhandle=open(&quot;/Users/linking/Dev/python/py-books-study/deep-in-python-web-crawler/csdndownload.html&quot;,&quot;wb&quot;)
+fhandle.write(data)
+fhandle.close()
+</code></pre><p>except urllib.error.URLError as e:<br>    print(e.code)<br>    print(e.reason)</p>
+<pre><code>
+&gt;没看到403，forbidden错误；怀疑是Python最新版做了模拟浏览器登陆。
+
+还有HTTPError这个URLError的子类
+</code></pre><p>import urllib.request<br>import urllib.error<br>try:<br>    file=urllib.request.urlopen(“<a href="http://blog.csdn.net&quot;" target="_blank" rel="noopener">http://blog.csdn.net&quot;</a>)<br>    data=file.read()</p>
+<pre><code># print(data)
+fhandle=open(&quot;/Users/linking/Dev/python/py-books-study/deep-in-python-web-crawler/csdndownload.html&quot;,&quot;wb&quot;)
+fhandle.write(data)
+fhandle.close()
+</code></pre><p>except urllib.error.HTTPError as e:<br>    print(e.code)<br>    print(e.reason)<br>except urllib.error.URLError as e:  # 父类兜底<br>    print(e.code)<br>    print(e.reason)</p>
+<pre><code>
+有则输出，没有则忽略：
+</code></pre><p>import urllib.request<br>import urllib.error<br>try:<br>    file=urllib.request.urlopen(“<a href="http://www.baiduddd.com&quot;" target="_blank" rel="noopener">http://www.baiduddd.com&quot;</a>)<br>except urllib.error.URLError as e:  # 父类兜底<br>    if hasattr(e,”code”):<br>        print(e.code)<br>    if hasattr(e,”reason”):<br>        print(e.reason)</p>
+<h1 id="输出-Errno-8-nodename-nor-servname-provided-or-not-known"><a href="#输出-Errno-8-nodename-nor-servname-provided-or-not-known" class="headerlink" title="输出: [Errno 8] nodename nor servname provided, or not known"></a>输出: [Errno 8] nodename nor servname provided, or not known</h1><p><code>`</code></p>
 
       
 
@@ -577,11 +644,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">ajax</a>
+                <a href="javascript:void(0)" class="js-tag color5">Ajax</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Ajax</a>
+                <a href="javascript:void(0)" class="js-tag color5">ajax</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -601,6 +668,10 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">JavaScriptCore</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">operation</a>
               </li>
              
@@ -610,10 +681,6 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">deploy</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">JavaScriptCore</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -641,15 +708,15 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">cocoa</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">blog</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Gitalk</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">cocoa</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -673,19 +740,19 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">兼容性</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">多线程</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">HTTP</a>
+                <a href="javascript:void(0)" class="js-tag color4">兼容性</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">绘图</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">HTTP</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -705,6 +772,10 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">标识</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">arcgis</a>
               </li>
              
@@ -714,10 +785,6 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">D.Wade</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">标识</a>
               </li>
              
               <li class="article-tag-list-item">

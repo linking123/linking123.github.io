@@ -10,11 +10,13 @@
   <title>博客建立过程记录 | Linking&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="目前为止，博客大部分功能已经实现。可以正常运行。前后大概用了三天时间。头痛熟悉git命令，github，hexo+NexT theme等。">
+<meta name="keywords" content="blog,cs">
 <meta property="og:type" content="article">
 <meta property="og:title" content="博客建立过程记录">
 <meta property="og:url" content="http://linking123.github.io/2015/11/30/博客建立过程记录/index.html">
-<meta property="og:site_name" content="Linking's blog">
+<meta property="og:site_name" content="Linking&#39;s blog">
 <meta property="og:description" content="目前为止，博客大部分功能已经实现。可以正常运行。前后大概用了三天时间。头痛熟悉git命令，github，hexo+NexT theme等。">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/791ffc07jw1ea2kymrm83g20bo0bo0sz.gif">
 <meta property="og:updated_time" content="2017-06-25T14:00:15.000Z">
 <meta name="twitter:card" content="summary">
@@ -55,7 +57,7 @@
 		  <h1 class="header-author"><a href="/">Linking</a></h1>
 		</hgroup>
 		
-		<p class="header-subtitle">时间是个神，见证你的进步</p>
+		<p class="header-subtitle">记住生活的美好</p>
 		
 
 		<nav class="header-menu">
@@ -119,7 +121,7 @@
 			  <h1 class="header-author js-header-author">Linking</h1>
 			</hgroup>
 			
-			<p class="header-subtitle"><i class="icon icon-quo-left"></i>时间是个神，见证你的进步<i class="icon icon-quo-right"></i></p>
+			<p class="header-subtitle"><i class="icon icon-quo-left"></i>记住生活的美好<i class="icon icon-quo-right"></i></p>
 			
 			
 			
@@ -196,7 +198,7 @@
       
         <p>目前为止，博客大部分功能已经实现。可以正常运行。<br>前后大概用了三天时间。<br>头痛<br><img src="http://ww1.sinaimg.cn/large/791ffc07jw1ea2kymrm83g20bo0bo0sz.gif" alt=""><br>熟悉git命令，github，hexo+NexT theme等。<br><a id="more"></a></p>
 <h2 id="待解决问题："><a href="#待解决问题：" class="headerlink" title="待解决问题："></a>待解决问题：</h2><blockquote>
-<p>1.百度统计短信无法接受，造成无法加入此功能<br>短信系统故障问题，延迟太久。暂时无法解决。<br>2.二级页面的头像问题<br>我在站点source/下各个文件夹中加入images/avatar.jpg，成功在二级页面显示头像。因为generate把source下的文件渲染到public下，可以观察到相似性。<br>3.外链，RSS<br>问题已经解决。但是RSS的运用还是不清楚。知乎上一篇<a href="http://www.zhihu.com/question/19580096" target="_blank" rel="external">文章</a>很好。RSS可以节省精力。<br>RSS 的正确打开方式是什么呢？<br>4.cnzz统计底部位置，是否有必要放置。<br>感觉没有必要，访问量不多。先放着吧。<br>5.删除测试文档</p>
+<p>1.百度统计短信无法接受，造成无法加入此功能<br>短信系统故障问题，延迟太久。暂时无法解决。<br>2.二级页面的头像问题<br>我在站点source/下各个文件夹中加入images/avatar.jpg，成功在二级页面显示头像。因为generate把source下的文件渲染到public下，可以观察到相似性。<br>3.外链，RSS<br>问题已经解决。但是RSS的运用还是不清楚。知乎上一篇<a href="http://www.zhihu.com/question/19580096" target="_blank" rel="noopener">文章</a>很好。RSS可以节省精力。<br>RSS 的正确打开方式是什么呢？<br>4.cnzz统计底部位置，是否有必要放置。<br>感觉没有必要，访问量不多。先放着吧。<br>5.删除测试文档</p>
 </blockquote>
 <p>time: 2015/11/30 12:30 am </p>
 <h2 id="hexo-d之后首页只显示最新博客"><a href="#hexo-d之后首页只显示最新博客" class="headerlink" title="hexo d之后首页只显示最新博客"></a>hexo d之后首页只显示最新博客</h2><blockquote>
@@ -211,6 +213,8 @@
 <blockquote>
 <p>后来发现是文件编码问题，改成<code>utf-8</code>编码格式就行了。<br>感谢社区的大神回复，还是应该多混社区、多交流。</p>
 </blockquote>
+</blockquote>
+<blockquote>
 <p>所以跟我一开始在mkd编辑器里编辑同步预览，再复制过来没有编码问题。<br>所以以后都可以在mkd中写好，设好效果再复制过来。</p>
 </blockquote>
 <h2 id="文章目录方法"><a href="#文章目录方法" class="headerlink" title="文章目录方法"></a>文章目录方法</h2><blockquote>
@@ -219,10 +223,12 @@
 <h2 id="分类和标签计数bug"><a href="#分类和标签计数bug" class="headerlink" title="分类和标签计数bug"></a>分类和标签计数bug</h2><p>暂时只能靠clean,generate多试两次了，碰运气不是事。总结原因，寻求解决之道。</p>
 <p>time:2015/11/30 20:10 pm</p>
 <h2 id="文章首页摘录的长度"><a href="#文章首页摘录的长度" class="headerlink" title="文章首页摘录的长度"></a>文章首页摘录的长度</h2><blockquote>
-<p>三种方式：<br>1.手动在合适位置+  <!-- more --> 。这种方法更“因地制宜”<br>2.在文章开头的<a href="https://hexo.io/zh-cn/docs/front-matter.html" target="_blank" rel="external">front-matter</a>添加description，并提供文章摘录。<br>这种应该是有必要单独写一个简介时才用。<br>3.自动形成。在主题配置文件中添加：</p>
+<p>三种方式：<br>1.手动在合适位置+  <!-- more --> 。这种方法更“因地制宜”<br>2.在文章开头的<a href="https://hexo.io/zh-cn/docs/front-matter.html" target="_blank" rel="noopener">front-matter</a>添加description，并提供文章摘录。<br>这种应该是有必要单独写一个简介时才用。<br>3.自动形成。在主题配置文件中添加：</p>
 <blockquote>
 <p>auto_excerpt:<br>　　enable: true<br>　　length: 150<br>默认截取长度<code>150</code>字符.</p>
 </blockquote>
+</blockquote>
+<blockquote>
 <p>可以设置一个默认的长度，有时候可能自己忘记手动添加呢。<br>然后根据需要在文章中自己再根据情况截断。</p>
 </blockquote>
 <h2 id="右侧站点概览头像bug"><a href="#右侧站点概览头像bug" class="headerlink" title="右侧站点概览头像bug"></a>右侧站点概览头像bug</h2><blockquote>
@@ -230,20 +236,24 @@
 </blockquote>
 <p>二级页面的站点概览头像问题还未解决。</p>
 <blockquote>
-<p>感人啊，用了在线链接<a href="http://7xosdw.com1.z0.glb.clouddn.com/avatar.jpg" target="_blank" rel="external">http://7xosdw.com1.z0.glb.clouddn.com/avatar.jpg</a><br>将<code>sidebar.swig</code>文件里的<code>class=&quot;site-author-image&quot;</code>的<code>*/src=&quot;{/{theme.avatar or url_for(theme. images) + &#39;/avatar.jpg&#39; }}*&quot;</code>替换成<code>src=&quot;http://7xosdw.com1.z0.glb.clouddn.com/avatar.jpg&quot;</code>。<br>这真的是被逼的啊。经过反复折腾，换回原来的写法，还真是可以了。应该是在theme里的<code>default_avatar.jpg</code>生效了。<br>这里不能用swig语法写记录，否则会遇到找不到u<code>rl_for</code>的问题。<br>什么时候有空研究一下swig语法。<br>theme.avatar是站点还是主题啊。<br>time: 2015/11/30 21:45  </p>
+<p>感人啊，用了在线链接<a href="http://7xosdw.com1.z0.glb.clouddn.com/avatar.jpg" target="_blank" rel="noopener">http://7xosdw.com1.z0.glb.clouddn.com/avatar.jpg</a><br>将<code>sidebar.swig</code>文件里的<code>class=&quot;site-author-image&quot;</code>的<code>*/src=&quot;{/{theme.avatar or url_for(theme. images) + &#39;/avatar.jpg&#39; }}*&quot;</code>替换成<code>src=&quot;http://7xosdw.com1.z0.glb.clouddn.com/avatar.jpg&quot;</code>。<br>这真的是被逼的啊。经过反复折腾，换回原来的写法，还真是可以了。应该是在theme里的<code>default_avatar.jpg</code>生效了。<br>这里不能用swig语法写记录，否则会遇到找不到u<code>rl_for</code>的问题。<br>什么时候有空研究一下swig语法。<br>theme.avatar是站点还是主题啊。<br>time: 2015/11/30 21:45  </p>
 </blockquote>
-<h2 id="多说评论分享里的underfined"><a href="#多说评论分享里的underfined" class="headerlink" title="多说评论分享里的underfined"></a>多说评论分享里的underfined</h2><p>部分显示，应该是另外一部分没有写进主题里吧。<br><a href="http://dev.duoshuo.com/docs/5497972ba1165bfd53cf4263" target="_blank" rel="external">多说分享自定义图标</a></p>
-<h2 id="加入百度地图"><a href="#加入百度地图" class="headerlink" title="加入百度地图"></a>加入百度地图</h2><p>1.在百度地图开发者工具中，申请秘钥，生成地图。<br>2.<a href="https://hexo.io/zh-cn/docs/tag-plugins.html" target="_blank" rel="external">嵌入到about的markdown中</a>,用到的是swig语法<br><figure class="highlight django"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="xml"></span><span class="template-tag">&#123;% <span class="name">raw</span> %&#125;</span><span class="xml"></span></div><div class="line">yourcord(这里我嵌入了完整的HTML代码，包括js)</div><div class="line"><span class="template-tag">&#123;% <span class="name">endraw</span> %&#125;</span><span class="xml"></span></div></pre></td></tr></table></figure></p>
-<p>如果想直接用HTML写的话就可以这样了。</p>
+<h2 id="多说评论分享里的underfined"><a href="#多说评论分享里的underfined" class="headerlink" title="多说评论分享里的underfined"></a>多说评论分享里的underfined</h2><p>部分显示，应该是另外一部分没有写进主题里吧。<br><a href="http://dev.duoshuo.com/docs/5497972ba1165bfd53cf4263" target="_blank" rel="noopener">多说分享自定义图标</a></p>
+<h2 id="加入百度地图"><a href="#加入百度地图" class="headerlink" title="加入百度地图"></a>加入百度地图</h2><p>1.在百度地图开发者工具中，申请秘钥，生成地图。<br>2.<a href="https://hexo.io/zh-cn/docs/tag-plugins.html" target="_blank" rel="noopener">嵌入到about的markdown中</a>,用到的是swig语法</p>
+<pre><code>{% raw %}
+yourcord(这里我嵌入了完整的HTML代码，包括js)
+{% endraw %}
+</code></pre><p>如果想直接用HTML写的话就可以这样了。</p>
 <p>time: 2015/12/13 21:52 aielab</p>
 <hr>
 <h2 id="首页不显示二级页面显示sidebar"><a href="#首页不显示二级页面显示sidebar" class="headerlink" title="首页不显示二级页面显示sidebar"></a>首页不显示二级页面显示<code>sidebar</code></h2><p><code>theme-config</code>设置<code>sidebar:post</code></p>
 <p>time: 2015/12/16 14:15 aielab</p>
-<p>搞疯的了，一个文件的编码出现了问题，导致<code>generate</code>失败。<br><figure class="highlight vbnet"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Template render <span class="keyword">error</span>: <span class="keyword">Error</span>: Unable <span class="keyword">to</span> <span class="keyword">call</span> `url_for`, which <span class="keyword">is</span> undefined <span class="keyword">or</span> falsey</div></pre></td></tr></table></figure></p>
-<p>在多个编辑器之间切换时不要随改变编码。<br>后来发现不是编码问题，是本文档里有一个swig的<code>url_for</code>,导致了模板解析错误。</p>
+<p>搞疯的了，一个文件的编码出现了问题，导致<code>generate</code>失败。</p>
+<pre><code>Template render error: Error: Unable to call `url_for`, which is undefined or falsey
+</code></pre><p>在多个编辑器之间切换时不要随改变编码。<br>后来发现不是编码问题，是本文档里有一个swig的<code>url_for</code>,导致了模板解析错误。</p>
 <p>time: 2015/12/16 18:34 aielab</p>
-<h2 id="利用git解决多pc端同步的问题"><a href="#利用git解决多pc端同步的问题" class="headerlink" title="利用git解决多pc端同步的问题"></a><a href="http://chitanda.me/2015/06/18/hexo-sync-in-multiple-pc/" target="_blank" rel="external">利用git解决多pc端同步的问题</a></h2><blockquote>
-<p>已实现在<a href="http://git.oschina.net/linkingge/blog-backup" target="_blank" rel="external">osc</a>上的备份，下一步是在笔记本上下载同步(业已实现)。</p>
+<h2 id="利用git解决多pc端同步的问题"><a href="#利用git解决多pc端同步的问题" class="headerlink" title="利用git解决多pc端同步的问题"></a><a href="http://chitanda.me/2015/06/18/hexo-sync-in-multiple-pc/" target="_blank" rel="noopener">利用git解决多pc端同步的问题</a></h2><blockquote>
+<p>已实现在<a href="http://git.oschina.net/linkingge/blog-backup" target="_blank" rel="noopener">osc</a>上的备份，下一步是在笔记本上下载同步(业已实现)。</p>
 </blockquote>
 <h2 id="二级目录的文章目录里怎么显示二级，如1-1-1-1-1"><a href="#二级目录的文章目录里怎么显示二级，如1-1-1-1-1" class="headerlink" title="二级目录的文章目录里怎么显示二级，如1.1,1.1.1"></a>二级目录的文章目录里怎么显示二级，如1.1,1.1.1</h2><blockquote>
 <p>目前用<code>===</code>,<code>---</code>实现一二级目录的显示，够用了。</p>
@@ -254,21 +264,81 @@
 <blockquote>
 <p>没有过多的处理，只是用<code>width</code>=80这样限制了一下宽度。</p>
 </blockquote>
-<h2 id="背景-蜂巢"><a href="#背景-蜂巢" class="headerlink" title="背景-蜂巢"></a>背景-蜂巢</h2><p>在<code>footer.swig</code> <code>or</code> <code>header.swig</code>中加入<a href="https://github.com/aTool-org/canvas-nest.js" target="_blank" rel="external">canvas-nest</a>.</p>
+<h2 id="背景-蜂巢"><a href="#背景-蜂巢" class="headerlink" title="背景-蜂巢"></a>背景-蜂巢</h2><p>在<code>footer.swig</code> <code>or</code> <code>header.swig</code>中加入<a href="https://github.com/aTool-org/canvas-nest.js" target="_blank" rel="noopener">canvas-nest</a>.</p>
 <h2 id="首页渲染出问题"><a href="#首页渲染出问题" class="headerlink" title="首页渲染出问题"></a>首页渲染出问题</h2><p>首页部分文章无法显示，分页首页才1篇。在归档中能看到全部。</p>
 <p>这就是用别人的框架的后遗症。不知道哪里出了问题。</p>
 <p>time: 2016/02/26 12:06 #aielab</p>
-<h2 id="在mac上重新部署出问题"><a href="#在mac上重新部署出问题" class="headerlink" title="在mac上重新部署出问题"></a>在mac上重新部署出问题</h2><p>问题描述：<br><figure class="highlight stata"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">Error</span>: EACCES: permission denied, access '/usr/<span class="keyword">local</span>/lib/node_modules/hexo-<span class="keyword">cli</span>/node_modules/lru-cache'</div><div class="line">npm <span class="keyword">ERR</span>!  &#123; <span class="keyword">Error</span>: EACCES: permission denied, access '/usr/<span class="keyword">local</span>/lib/node_modules/hexo-<span class="keyword">cli</span>/node_modules/lru-cache'</div><div class="line">npm <span class="keyword">ERR</span>!   errno: -13,</div><div class="line">npm <span class="keyword">ERR</span>!   code: 'EACCES',</div><div class="line">npm <span class="keyword">ERR</span>!   syscall: 'access',</div><div class="line">npm <span class="keyword">ERR</span>!   path: '/usr/<span class="keyword">local</span>/lib/node_modules/hexo-<span class="keyword">cli</span>/node_modules/lru-cache' &#125;</div><div class="line">npm <span class="keyword">ERR</span>! </div><div class="line">npm <span class="keyword">ERR</span>! Please try running this command again <span class="keyword">as</span> root/Administrator.</div><div class="line"></div><div class="line">npm <span class="keyword">ERR</span>! Please <span class="keyword">include</span> the following <span class="keyword">file</span> with any support request:</div><div class="line">npm <span class="keyword">ERR</span>!     /Users/linking/blo/npm-debug.<span class="built_in">log</span></div></pre></td></tr></table></figure></p>
-<p>尝试方法1:<code>npm i hexo-cli -g</code> ，重新全局安装<code>hexo</code>，无效<br>尝试方法2:给node_modules/文件夹授权；<code>sudo chown -R $USER /usr/local/lib/node_modules</code>以及<code>sudo chown -R $(whoami) ~/.npm</code>;<br>    这两个都无效，而且引发了新的问题；<br>尝试方法3:考虑卸载node，重新用<code>nvm</code>来安装node<br>描述<br><figure class="highlight crmsh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Permissions you used when installing <span class="keyword">Node</span> <span class="title">will</span> be required when doing things like writing <span class="keyword">in</span> your npm directory (npm link, npm install -g, etc.).</div><div class="line">You probably ran <span class="keyword">node</span> <span class="title">installation</span> with root permissions, that's why the global package installation is asking you to be root.</div></pre></td></tr></table></figure></p>
-<p>安装node时用了权限，那用到相关的安装操作时都会要求使用root权限。<br>NVM：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">Don't hack with permissions, <span class="keyword">install</span> node the <span class="keyword">right</span> way.</div><div class="line"><span class="keyword">On</span> a development machine, you should <span class="keyword">not</span> <span class="keyword">install</span> <span class="keyword">and</span> run node <span class="keyword">with</span> root permissions, otherwise things <span class="keyword">like</span> npm <span class="keyword">link</span>, npm <span class="keyword">install</span> -g will need the same permissions.</div><div class="line"></div><div class="line">NVM (Node <span class="keyword">Version</span> Manager) allows you <span class="keyword">to</span> <span class="keyword">install</span> Node <span class="keyword">without</span> root permissions <span class="keyword">and</span> also allows you <span class="keyword">to</span> <span class="keyword">install</span> many <span class="keyword">versions</span> <span class="keyword">of</span> Node <span class="keyword">to</span> play easily <span class="keyword">with</span> them.. Perfect <span class="keyword">for</span> development.</div><div class="line"></div><div class="line">* <span class="keyword">Uninstall</span> Node (root permission will probably be <span class="keyword">required</span>). This might <span class="keyword">help</span> you.</div><div class="line">* <span class="keyword">Then</span> <span class="keyword">install</span> NVM <span class="keyword">following</span> instructions <span class="keyword">on</span> this page.</div><div class="line">* <span class="keyword">Install</span> Node via NVM: nvm <span class="keyword">install</span> node</div><div class="line"><span class="keyword">Now</span> npm <span class="keyword">link</span>, npm <span class="keyword">install</span> -g will <span class="keyword">no</span> longer require you <span class="keyword">to</span> be root.</div></pre></td></tr></table></figure></p>
-<p>最终是按照这个方法比较好的安装node，重新在Mac上跑hexo；<br>但是这个过程中遇到很多坑：列一下<br>1.重新安装了git，使用usr/bin/目录下的，因为系统默认的是xcode或者预装版本，不是最新；但手动安装最新版在usr中；由于我使用的是zsh终端，所以就偷懒了，用下面的方法指定alias别名：<br><figure class="highlight crystal"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">alias</span> git=<span class="regexp">/usr/local</span><span class="regexp">/bin/git</span></div></pre></td></tr></table></figure></p>
-<p>现在使用的git就是最新版本了。<br>2.unable to resolve host xxx<br>无法解析域名吧。我做了两件事，第一件事是在dns服务器中加入8.8.8.8；第二件事是把这些常用的域名加入到hosts中，就在github上搜了一个<a href="https://github.com/racaljk/hosts" target="_blank" rel="external">项目</a>,<a href="https://coding.net/u/scaffrey/p/hosts/git" target="_blank" rel="external">镜像地址</a>.把最近的更新全部加入自己的hosts中，当然，替换之前别忘了备份哦。<br>好吧，装好了nvm还要装node ，再hexo；希望顺利吧。<br>＃20161130</p>
-<h2 id="安装错误"><a href="#安装错误" class="headerlink" title="安装错误"></a>安装错误</h2><figure class="highlight groovy"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">~ npm install -g hexo-cli</div><div class="line">npm WARN optional SKIPPING OPTIONAL <span class="string">DEPENDENCY:</span> fsevents@^<span class="number">1.0</span><span class="number">.0</span> (node_modules<span class="regexp">/hexo-cli/</span>node_modules<span class="regexp">/chokidar/</span>node_modules/fsevents):</div><div class="line">npm WARN optional SKIPPING OPTIONAL <span class="string">DEPENDENCY:</span> shasum check failed <span class="keyword">for</span> <span class="regexp">/var/</span>folders<span class="regexp">/cj/</span><span class="number">4</span>j5y0lc159v1r742jjmj79280000gn<span class="regexp">/T/</span>npm<span class="number">-5246</span>-f2829530<span class="regexp">/registry.npmjs.org/</span>fsevents<span class="regexp">/-/</span>fsevents<span class="number">-1.0</span><span class="number">.15</span>.tgz</div><div class="line">npm WARN optional SKIPPING OPTIONAL <span class="string">DEPENDENCY:</span> <span class="string">Expected:</span> fa63f590f3c2ad91275e4972a6cea545fb0aae44</div><div class="line">npm WARN optional SKIPPING OPTIONAL <span class="string">DEPENDENCY:</span> <span class="string">Actual:</span>   <span class="number">95</span>d129ce7f5ac79eb397f797ce0fd4488350ddf4</div><div class="line">npm WARN optional SKIPPING OPTIONAL <span class="string">DEPENDENCY:</span> <span class="string">From:</span>     <span class="string">https:</span><span class="comment">//registry.npmjs.org/fsevents/-/fsevents-1.0.15.tgz</span></div><div class="line">npm ERR! Darwin <span class="number">15.6</span><span class="number">.0</span></div><div class="line">npm ERR! argv <span class="string">"/Users/linking/.nvm/versions/node/v7.2.0/bin/node"</span> <span class="string">"/Users/linking/.nvm/versions/node/v7.2.0/bin/npm"</span> <span class="string">"install"</span> <span class="string">"-g"</span> <span class="string">"hexo-cli"</span></div><div class="line">npm ERR! node v7<span class="number">.2</span><span class="number">.0</span></div><div class="line">npm ERR! npm  v3<span class="number">.10</span><span class="number">.9</span></div><div class="line"></div><div class="line">npm ERR! shasum check failed <span class="keyword">for</span> <span class="regexp">/var/</span>folders<span class="regexp">/cj/</span><span class="number">4</span>j5y0lc159v1r742jjmj79280000gn<span class="regexp">/T/</span>npm<span class="number">-5246</span>-f2829530<span class="regexp">/registry.npmjs.org/</span>bunyan<span class="regexp">/-/</span>bunyan<span class="number">-1.8</span><span class="number">.5</span>.tgz</div><div class="line">npm ERR! <span class="string">Expected:</span> <span class="number">0</span>d619e83005fb89070f5f47982fc1bf00600878a</div><div class="line">npm ERR! <span class="string">Actual:</span>   ad816c34cef4a6887577282781bfdc800d8d2784</div><div class="line">npm ERR! <span class="string">From:</span>     <span class="string">https:</span><span class="comment">//registry.npmjs.org/bunyan/-/bunyan-1.8.5.tgz</span></div><div class="line">npm ERR! </div><div class="line">npm ERR! If you need help, you may report <span class="keyword">this</span> error <span class="string">at:</span></div><div class="line">npm ERR!     &lt;<span class="string">https:</span><span class="comment">//github.com/npm/npm/issues&gt;</span></div><div class="line"></div><div class="line">npm ERR! Please include the following file with any support <span class="string">request:</span></div><div class="line">npm ERR!     <span class="regexp">/Users/</span>linking/npm-debug.log</div></pre></td></tr></table></figure>
-<p>解决之法：<br>用sudo权限跑了，成功安装；另外一个因素就是网速，最好在网速好的时候安装；</p>
+<h2 id="在mac上重新部署出问题"><a href="#在mac上重新部署出问题" class="headerlink" title="在mac上重新部署出问题"></a>在mac上重新部署出问题</h2><p>问题描述：</p>
+<pre><code>Error: EACCES: permission denied, access &#39;/usr/local/lib/node_modules/hexo-cli/node_modules/lru-cache&#39;
+npm ERR!  { Error: EACCES: permission denied, access &#39;/usr/local/lib/node_modules/hexo-cli/node_modules/lru-cache&#39;
+npm ERR!   errno: -13,
+npm ERR!   code: &#39;EACCES&#39;,
+npm ERR!   syscall: &#39;access&#39;,
+npm ERR!   path: &#39;/usr/local/lib/node_modules/hexo-cli/node_modules/lru-cache&#39; }
+npm ERR! 
+npm ERR! Please try running this command again as root/Administrator.
+
+npm ERR! Please include the following file with any support request:
+npm ERR!     /Users/linking/blo/npm-debug.log
+</code></pre><p>尝试方法1:<code>npm i hexo-cli -g</code> ，重新全局安装<code>hexo</code>，无效<br>尝试方法2:给node_modules/文件夹授权；<code>sudo chown -R $USER /usr/local/lib/node_modules</code>以及<code>sudo chown -R $(whoami) ~/.npm</code>;<br>    这两个都无效，而且引发了新的问题；<br>尝试方法3:考虑卸载node，重新用<code>nvm</code>来安装node<br>描述</p>
+<pre><code>Permissions you used when installing Node will be required when doing things like writing in your npm directory (npm link, npm install -g, etc.).
+You probably ran node installation with root permissions, that&#39;s why the global package installation is asking you to be root.
+</code></pre><p>安装node时用了权限，那用到相关的安装操作时都会要求使用root权限。<br>NVM：</p>
+<pre><code>Don&#39;t hack with permissions, install node the right way.
+On a development machine, you should not install and run node with root permissions, otherwise things like npm link, npm install -g will need the same permissions.
+
+NVM (Node Version Manager) allows you to install Node without root permissions and also allows you to install many versions of Node to play easily with them.. Perfect for development.
+
+* Uninstall Node (root permission will probably be required). This might help you.
+* Then install NVM following instructions on this page.
+* Install Node via NVM: nvm install node
+Now npm link, npm install -g will no longer require you to be root.
+</code></pre><p>最终是按照这个方法比较好的安装node，重新在Mac上跑hexo；<br>但是这个过程中遇到很多坑：列一下<br>1.重新安装了git，使用usr/bin/目录下的，因为系统默认的是xcode或者预装版本，不是最新；但手动安装最新版在usr中；由于我使用的是zsh终端，所以就偷懒了，用下面的方法指定alias别名：</p>
+<pre><code>alias git=/usr/local/bin/git
+</code></pre><p>现在使用的git就是最新版本了。<br>2.unable to resolve host xxx<br>无法解析域名吧。我做了两件事，第一件事是在dns服务器中加入8.8.8.8；第二件事是把这些常用的域名加入到hosts中，就在github上搜了一个<a href="https://github.com/racaljk/hosts" target="_blank" rel="noopener">项目</a>,<a href="https://coding.net/u/scaffrey/p/hosts/git" target="_blank" rel="noopener">镜像地址</a>.把最近的更新全部加入自己的hosts中，当然，替换之前别忘了备份哦。<br>好吧，装好了nvm还要装node ，再hexo；希望顺利吧。<br>＃20161130</p>
+<h2 id="安装错误"><a href="#安装错误" class="headerlink" title="安装错误"></a>安装错误</h2><pre><code>~ npm install -g hexo-cli
+npm WARN optional SKIPPING OPTIONAL DEPENDENCY: fsevents@^1.0.0 (node_modules/hexo-cli/node_modules/chokidar/node_modules/fsevents):
+npm WARN optional SKIPPING OPTIONAL DEPENDENCY: shasum check failed for /var/folders/cj/4j5y0lc159v1r742jjmj79280000gn/T/npm-5246-f2829530/registry.npmjs.org/fsevents/-/fsevents-1.0.15.tgz
+npm WARN optional SKIPPING OPTIONAL DEPENDENCY: Expected: fa63f590f3c2ad91275e4972a6cea545fb0aae44
+npm WARN optional SKIPPING OPTIONAL DEPENDENCY: Actual:   95d129ce7f5ac79eb397f797ce0fd4488350ddf4
+npm WARN optional SKIPPING OPTIONAL DEPENDENCY: From:     https://registry.npmjs.org/fsevents/-/fsevents-1.0.15.tgz
+npm ERR! Darwin 15.6.0
+npm ERR! argv &quot;/Users/linking/.nvm/versions/node/v7.2.0/bin/node&quot; &quot;/Users/linking/.nvm/versions/node/v7.2.0/bin/npm&quot; &quot;install&quot; &quot;-g&quot; &quot;hexo-cli&quot;
+npm ERR! node v7.2.0
+npm ERR! npm  v3.10.9
+
+npm ERR! shasum check failed for /var/folders/cj/4j5y0lc159v1r742jjmj79280000gn/T/npm-5246-f2829530/registry.npmjs.org/bunyan/-/bunyan-1.8.5.tgz
+npm ERR! Expected: 0d619e83005fb89070f5f47982fc1bf00600878a
+npm ERR! Actual:   ad816c34cef4a6887577282781bfdc800d8d2784
+npm ERR! From:     https://registry.npmjs.org/bunyan/-/bunyan-1.8.5.tgz
+npm ERR! 
+npm ERR! If you need help, you may report this error at:
+npm ERR!     &lt;https://github.com/npm/npm/issues&gt;
+
+npm ERR! Please include the following file with any support request:
+npm ERR!     /Users/linking/npm-debug.log
+</code></pre><p>解决之法：<br>用sudo权限跑了，成功安装；另外一个因素就是网速，最好在网速好的时候安装；</p>
 <h2 id="加上cnzz-umeng统计"><a href="#加上cnzz-umeng统计" class="headerlink" title="加上cnzz-umeng统计"></a>加上cnzz-umeng统计</h2><p>20170329</p>
 <h2 id="加上访问数统计"><a href="#加上访问数统计" class="headerlink" title="加上访问数统计"></a>加上访问数统计</h2><p>20170329</p>
-<h2 id="node-modules缺少"><a href="#node-modules缺少" class="headerlink" title="node_modules缺少"></a>node_modules缺少</h2><figure class="highlight crystal"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">&#123; <span class="symbol">Error:</span> Cannot find <span class="class"><span class="keyword">module</span> './<span class="title">build</span>/<span class="title">Debug</span>/<span class="title">DTraceProviderBindings</span>'</span></div><div class="line">    at Function.Module._resolveFilename (<span class="class"><span class="keyword">module</span>.<span class="title">js</span>:470:15)</span></div><div class="line">    at Function.Module._load (<span class="class"><span class="keyword">module</span>.<span class="title">js</span>:418:25)</span></div><div class="line">    at Module.<span class="keyword">require</span> (<span class="class"><span class="keyword">module</span>.<span class="title">js</span>:498:17)</span></div><div class="line">    at <span class="keyword">require</span> (internal/<span class="class"><span class="keyword">module</span>.<span class="title">js</span>:20:19)</span></div><div class="line">    at Object.&lt;anonymous&gt; (<span class="regexp">/Users/linking</span><span class="regexp">/.nvm/versions</span><span class="regexp">/node/v</span>7.<span class="number">2.0</span>/<span class="class"><span class="keyword">lib</span>/<span class="title">node_modules</span>/<span class="title">hexo</span>-<span class="title">cli</span>/<span class="title">node_modules</span>/<span class="title">dtrace</span>-<span class="title">provider</span>/<span class="title">dtrace</span>-<span class="title">provider</span>.<span class="title">js</span>:17:23)</span></div><div class="line">    at Module._compile (<span class="class"><span class="keyword">module</span>.<span class="title">js</span>:571:32)</span></div><div class="line">    at Object.Module._extensions..js (<span class="class"><span class="keyword">module</span>.<span class="title">js</span>:580:10)</span></div><div class="line">    at Module.load (<span class="class"><span class="keyword">module</span>.<span class="title">js</span>:488:32)</span></div><div class="line">    at tryModuleLoad (<span class="class"><span class="keyword">module</span>.<span class="title">js</span>:447:12)</span></div><div class="line">    at Function.Module._load (<span class="class"><span class="keyword">module</span>.<span class="title">js</span>:439:3)</span></div><div class="line">    at Module.<span class="keyword">require</span> (<span class="class"><span class="keyword">module</span>.<span class="title">js</span>:498:17)</span></div><div class="line">    at <span class="keyword">require</span> (internal/<span class="class"><span class="keyword">module</span>.<span class="title">js</span>:20:19)</span></div><div class="line">    at Object.&lt;anonymous&gt; (<span class="regexp">/Users/linking</span><span class="regexp">/.nvm/versions</span><span class="regexp">/node/v</span>7.<span class="number">2.0</span>/<span class="class"><span class="keyword">lib</span>/<span class="title">node_modules</span>/<span class="title">hexo</span>-<span class="title">cli</span>/<span class="title">node_modules</span>/<span class="title">bunyan</span>/<span class="title">lib</span>/<span class="title">bunyan</span>.<span class="title">js</span>:79:18)</span></div><div class="line">    at Module._compile (<span class="class"><span class="keyword">module</span>.<span class="title">js</span>:571:32)</span></div><div class="line">    at Object.Module._extensions..js (<span class="class"><span class="keyword">module</span>.<span class="title">js</span>:580:10)</span></div><div class="line">    at Module.load (<span class="class"><span class="keyword">module</span>.<span class="title">js</span>:488:32) <span class="title">code</span>: '<span class="title">MODULE_NOT_FOUND</span>' &#125;</span></div></pre></td></tr></table></figure>
-<p>暂未解决，目前不影响使用；但不够优雅，等我什么时候有心情再解决吧。</p>
+<h2 id="node-modules缺少"><a href="#node-modules缺少" class="headerlink" title="node_modules缺少"></a>node_modules缺少</h2><pre><code>{ Error: Cannot find module &#39;./build/Debug/DTraceProviderBindings&#39;
+    at Function.Module._resolveFilename (module.js:470:15)
+    at Function.Module._load (module.js:418:25)
+    at Module.require (module.js:498:17)
+    at require (internal/module.js:20:19)
+    at Object.&lt;anonymous&gt; (/Users/linking/.nvm/versions/node/v7.2.0/lib/node_modules/hexo-cli/node_modules/dtrace-provider/dtrace-provider.js:17:23)
+    at Module._compile (module.js:571:32)
+    at Object.Module._extensions..js (module.js:580:10)
+    at Module.load (module.js:488:32)
+    at tryModuleLoad (module.js:447:12)
+    at Function.Module._load (module.js:439:3)
+    at Module.require (module.js:498:17)
+    at require (internal/module.js:20:19)
+    at Object.&lt;anonymous&gt; (/Users/linking/.nvm/versions/node/v7.2.0/lib/node_modules/hexo-cli/node_modules/bunyan/lib/bunyan.js:79:18)
+    at Module._compile (module.js:571:32)
+    at Object.Module._extensions..js (module.js:580:10)
+    at Module.load (module.js:488:32) code: &#39;MODULE_NOT_FOUND&#39; }
+
+</code></pre><p>暂未解决，目前不影响使用；但不够优雅，等我什么时候有心情再解决吧。</p>
 <h2 id="litia主题的文章截取不显示"><a href="#litia主题的文章截取不显示" class="headerlink" title="litia主题的文章截取不显示"></a>litia主题的文章截取不显示</h2><p>more&gt;&gt;效果需要在文章中的合适位置手动写 「 <!-- more --> 」</p>
 
       
@@ -566,11 +636,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">ajax</a>
+                <a href="javascript:void(0)" class="js-tag color5">Ajax</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Ajax</a>
+                <a href="javascript:void(0)" class="js-tag color5">ajax</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -590,6 +660,10 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">JavaScriptCore</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">operation</a>
               </li>
              
@@ -599,10 +673,6 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">deploy</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">JavaScriptCore</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -630,15 +700,15 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">cocoa</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">blog</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Gitalk</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">cocoa</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -662,19 +732,19 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">兼容性</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">多线程</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">HTTP</a>
+                <a href="javascript:void(0)" class="js-tag color4">兼容性</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">绘图</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">HTTP</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -694,6 +764,10 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">标识</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">arcgis</a>
               </li>
              
@@ -703,10 +777,6 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">D.Wade</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">标识</a>
               </li>
              
               <li class="article-tag-list-item">

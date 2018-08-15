@@ -9,31 +9,18 @@
   <link rel="dns-prefetch" href="http://linking123.github.io">
   <title>Ajax系列一-远古时代 | Linking&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="题按–在真正的Ajax出现之前，是怎么实现类似效果的。
-
-这几天断断续续的看完了ajax和http相关的教程，查询了Wikipedia相关资料，接下来几天，整理一下。
-
-投票需求：要求无刷新投票，并且不允许使用XMLHttpRequest对象分析：在XHR对象没有流行之前，已经有无刷新这种效果的要求
-方法一： HTTP协议204 No Content原理：利用http 204 No Content">
+  <meta name="description" content="题按–在真正的Ajax出现之前，是怎么实现类似效果的。  这几天断断续续的看完了ajax和http相关的教程，查询了Wikipedia相关资料，接下来几天，整理一下。  投票需求：要求无刷新投票，并且不允许使用XMLHttpRequest对象分析：在XHR对象没有流行之前，已经有无刷新这种效果的要求 方法一： HTTP协议204 No Content原理：利用http 204 No Content">
+<meta name="keywords" content="Ajax">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Ajax系列一-远古时代">
 <meta property="og:url" content="http://linking123.github.io/2016/02/26/Ajax系列一-远古时代的Ajax/index.html">
-<meta property="og:site_name" content="Linking's blog">
-<meta property="og:description" content="题按–在真正的Ajax出现之前，是怎么实现类似效果的。
-
-这几天断断续续的看完了ajax和http相关的教程，查询了Wikipedia相关资料，接下来几天，整理一下。
-
-投票需求：要求无刷新投票，并且不允许使用XMLHttpRequest对象分析：在XHR对象没有流行之前，已经有无刷新这种效果的要求
-方法一： HTTP协议204 No Content原理：利用http 204 No Content">
+<meta property="og:site_name" content="Linking&#39;s blog">
+<meta property="og:description" content="题按–在真正的Ajax出现之前，是怎么实现类似效果的。  这几天断断续续的看完了ajax和http相关的教程，查询了Wikipedia相关资料，接下来几天，整理一下。  投票需求：要求无刷新投票，并且不允许使用XMLHttpRequest对象分析：在XHR对象没有流行之前，已经有无刷新这种效果的要求 方法一： HTTP协议204 No Content原理：利用http 204 No Content">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2016-03-08T01:23:11.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Ajax系列一-远古时代">
-<meta name="twitter:description" content="题按–在真正的Ajax出现之前，是怎么实现类似效果的。
-
-这几天断断续续的看完了ajax和http相关的教程，查询了Wikipedia相关资料，接下来几天，整理一下。
-
-投票需求：要求无刷新投票，并且不允许使用XMLHttpRequest对象分析：在XHR对象没有流行之前，已经有无刷新这种效果的要求
-方法一： HTTP协议204 No Content原理：利用http 204 No Content">
+<meta name="twitter:description" content="题按–在真正的Ajax出现之前，是怎么实现类似效果的。  这几天断断续续的看完了ajax和http相关的教程，查询了Wikipedia相关资料，接下来几天，整理一下。  投票需求：要求无刷新投票，并且不允许使用XMLHttpRequest对象分析：在XHR对象没有流行之前，已经有无刷新这种效果的要求 方法一： HTTP协议204 No Content原理：利用http 204 No Content">
   
     <link rel="alternative" href="/atom.xml" title="Linking&#39;s blog" type="application/atom+xml">
   
@@ -68,7 +55,7 @@
 		  <h1 class="header-author"><a href="/">Linking</a></h1>
 		</hgroup>
 		
-		<p class="header-subtitle">时间是个神，见证你的进步</p>
+		<p class="header-subtitle">记住生活的美好</p>
 		
 
 		<nav class="header-menu">
@@ -132,7 +119,7 @@
 			  <h1 class="header-author js-header-author">Linking</h1>
 			</hgroup>
 			
-			<p class="header-subtitle"><i class="icon icon-quo-left"></i>时间是个神，见证你的进步<i class="icon icon-quo-right"></i></p>
+			<p class="header-subtitle"><i class="icon icon-quo-left"></i>记住生活的美好<i class="icon icon-quo-right"></i></p>
 			
 			
 			
@@ -213,12 +200,55 @@
 </blockquote>
 <p>投票需求：要求无刷新投票，并且不允许使用XMLHttpRequest对象<br>分析：在XHR对象没有流行之前，已经有<strong>无刷新</strong>这种效果的要求</p>
 <h2 id="方法一：-HTTP协议204-No-Content"><a href="#方法一：-HTTP协议204-No-Content" class="headerlink" title="方法一： HTTP协议204 No Content"></a>方法一： HTTP协议204 No Content</h2><p>原理：利用http 204 No Content 状态码,浏览器不会跳转</p>
-<p>前端：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">p</span>&gt;</span><span class="tag">&lt;<span class="name">img</span> <span class="attr">width</span>=<span class="string">300</span> <span class="attr">height</span>=<span class="string">400</span> <span class="attr">src</span>=<span class="string">"lin.jpg"</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">p</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"vote.php"</span>&gt;</span>vote<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div></pre></td></tr></table></figure></p>
-<p>后端：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span> </div><div class="line">$votenum = file_get_contents(<span class="string">"./vote.txt"</span>);</div><div class="line"><span class="keyword">if</span> ($votenum == <span class="keyword">null</span>) &#123;</div><div class="line">    $votenum = <span class="number">0</span>;</div><div class="line">&#125;</div><div class="line">$votenum += <span class="number">1</span>;</div><div class="line">file_put_contents(<span class="string">'./vote.txt'</span>, $votenum);</div><div class="line"><span class="comment">//利用HTTP协议的204特性</span></div><div class="line">header(<span class="string">'HTTP/1.1 204 No Content'</span>);</div><div class="line"> <span class="meta">?&gt;</span></div></pre></td></tr></table></figure></p>
-<h2 id="方法二：利用图片加载的特性，完成请求"><a href="#方法二：利用图片加载的特性，完成请求" class="headerlink" title="方法二：利用图片加载的特性，完成请求"></a>方法二：利用图片加载的特性，完成请求</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&lt;script&gt;</div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">vote</span>(<span class="params"></span>)</span>&#123;</div><div class="line">        <span class="keyword">var</span> lin = <span class="built_in">document</span>.createElement(<span class="string">'img'</span>);</div><div class="line">        <span class="comment">//设置src属性，浏览器将会请求对应的资源</span></div><div class="line">        lin.setAttribute(<span class="string">'src'</span>, <span class="string">'./lin.jpg'</span>);</div><div class="line">        <span class="built_in">document</span>.getElementById(<span class="string">"progress"</span>).appendChild(lin);</div><div class="line">    &#125;</div><div class="line">&lt;<span class="regexp">/script&gt;</span></div></pre></td></tr></table></figure>
-<h2 id="方法三：-利用css-js加载特性-原理同上。"><a href="#方法三：-利用css-js加载特性-原理同上。" class="headerlink" title="方法三： 利用css,js加载特性,原理同上。"></a>方法三： 利用css,js加载特性,原理同上。</h2><h2 id="方法四：-利用iframe特性"><a href="#方法四：-利用iframe特性" class="headerlink" title="方法四： 利用iframe特性"></a>方法四： 利用iframe特性</h2><p>Ajax注册，提交表单，页面无刷新<br>建议用<code>POST</code>，因为<code>get</code>会暴露用户信息<br>前端：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"regres"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">/*form target--&gt;iframe name*/</div><div class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">"02-reg.php"</span> <span class="attr">method</span>=<span class="string">"post"</span> <span class="attr">target</span>=<span class="string">"regzone"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>用户名：<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">name</span>=<span class="string">"username"</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>邮件：<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"email"</span> <span class="attr">name</span>=<span class="string">"email"</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"submit"</span> <span class="attr">name</span>=<span class="string">"submit"</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">iframe</span> <span class="attr">width</span>=<span class="string">0</span> <span class="attr">height</span>=<span class="string">0</span> <span class="attr">frameBorder</span>=<span class="string">"0"</span> <span class="attr">name</span>=<span class="string">"regzone"</span>&gt;</span><span class="tag">&lt;/<span class="name">iframe</span>&gt;</span></div></pre></td></tr></table></figure></p>
-<p>后端：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"utf-8"</span>&gt;</span></div><div class="line"><span class="php"><span class="meta">&lt;?php</span> </span></div><div class="line"><span class="comment">//经过运算，逻辑判断，注册是否成功</span></div><div class="line">$msg = <span class="number">1</span>/<span class="number">0</span>;</div><div class="line"><span class="number">1</span>-<span class="string">"注册成功"</span>  <span class="number">0</span>-<span class="string">"注册失败"</span></div><div class="line"><span class="meta">?&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span><span class="actionscript"></span></div><div class="line">    <span class="comment">//被请求的资源req.php想得到HTML里的元素，用parent</span></div><div class="line">    parent.document.getElementById(<span class="string">'regres'</span>).innerHTML = <span class="string">'注册成功!'</span>;</div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div></pre></td></tr></table></figure></p>
-<h2 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h2><blockquote>
+<p>前端：</p>
+<pre><code>&lt;body&gt;
+    &lt;div&gt;
+        &lt;p&gt;&lt;img width=300 height=400 src=&quot;lin.jpg&quot;&gt;&lt;/p&gt;
+        &lt;p&gt;&lt;a href=&quot;vote.php&quot;&gt;vote&lt;/a&gt;&lt;/p&gt;
+    &lt;/div&gt;
+&lt;/body&gt;
+</code></pre><p>后端：</p>
+<pre><code class="php">&lt;?php 
+$votenum = file_get_contents(&quot;./vote.txt&quot;);
+if ($votenum == null) {
+    $votenum = 0;
+}
+$votenum += 1;
+file_put_contents(&#39;./vote.txt&#39;, $votenum);
+//利用HTTP协议的204特性
+header(&#39;HTTP/1.1 204 No Content&#39;);
+ ?&gt;
+</code></pre>
+<h2 id="方法二：利用图片加载的特性，完成请求"><a href="#方法二：利用图片加载的特性，完成请求" class="headerlink" title="方法二：利用图片加载的特性，完成请求"></a>方法二：利用图片加载的特性，完成请求</h2><pre><code class="javascript">&lt;script&gt;
+    function vote(){
+        var lin = document.createElement(&#39;img&#39;);
+        //设置src属性，浏览器将会请求对应的资源
+        lin.setAttribute(&#39;src&#39;, &#39;./lin.jpg&#39;);
+        document.getElementById(&quot;progress&quot;).appendChild(lin);
+    }
+&lt;/script&gt;
+</code></pre>
+<h2 id="方法三：-利用css-js加载特性-原理同上。"><a href="#方法三：-利用css-js加载特性-原理同上。" class="headerlink" title="方法三： 利用css,js加载特性,原理同上。"></a>方法三： 利用css,js加载特性,原理同上。</h2><h2 id="方法四：-利用iframe特性"><a href="#方法四：-利用iframe特性" class="headerlink" title="方法四： 利用iframe特性"></a>方法四： 利用iframe特性</h2><p>Ajax注册，提交表单，页面无刷新<br>建议用<code>POST</code>，因为<code>get</code>会暴露用户信息<br>前端：</p>
+<pre><code>&lt;div id=&quot;regres&quot;&gt;&lt;/div&gt;
+/*form target--&gt;iframe name*/
+&lt;form action=&quot;02-reg.php&quot; method=&quot;post&quot; target=&quot;regzone&quot;&gt;
+    &lt;p&gt;用户名：&lt;input type=&quot;text&quot; name=&quot;username&quot;&gt;&lt;/p&gt;
+    &lt;p&gt;邮件：&lt;input type=&quot;email&quot; name=&quot;email&quot;&gt;&lt;/p&gt;
+    &lt;p&gt;&lt;input type=&quot;submit&quot; name=&quot;submit&quot;&gt;&lt;/p&gt;
+&lt;/form&gt;
+&lt;iframe width=0 height=0 frameBorder=&quot;0&quot; name=&quot;regzone&quot;&gt;&lt;/iframe&gt;
+</code></pre><p>后端：</p>
+<pre><code>&lt;meta charset=&quot;utf-8&quot;&gt;
+&lt;?php 
+//经过运算，逻辑判断，注册是否成功
+$msg = 1/0;
+1-&quot;注册成功&quot;  0-&quot;注册失败&quot;
+?&gt;
+&lt;script type=&quot;text/javascript&quot;&gt;
+    //被请求的资源req.php想得到HTML里的元素，用parent
+    parent.document.getElementById(&#39;regres&#39;).innerHTML = &#39;注册成功!&#39;;
+&lt;/script&gt;
+</code></pre><h2 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h2><blockquote>
 <p>在不适用<code>XMLHttpRequest</code>对象的情况下，依然可以用js来实现对后台服务器请求，同时不刷新页面或跳转。</p>
 </blockquote>
 <p>所谓Ajax：即指<strong>页面不刷新</strong>情况下，利用<code>XMLHttpRequest</code>发送<code>HTTP</code>请求；JS的网络化.</p>
@@ -533,11 +563,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">ajax</a>
+                <a href="javascript:void(0)" class="js-tag color5">Ajax</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Ajax</a>
+                <a href="javascript:void(0)" class="js-tag color5">ajax</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -557,6 +587,10 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">JavaScriptCore</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">operation</a>
               </li>
              
@@ -566,10 +600,6 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">deploy</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">JavaScriptCore</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -597,15 +627,15 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">cocoa</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">blog</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Gitalk</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">cocoa</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -629,19 +659,19 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">兼容性</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">多线程</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">HTTP</a>
+                <a href="javascript:void(0)" class="js-tag color4">兼容性</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">绘图</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">HTTP</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -661,6 +691,10 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">标识</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">arcgis</a>
               </li>
              
@@ -670,10 +704,6 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">D.Wade</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">标识</a>
               </li>
              
               <li class="article-tag-list-item">

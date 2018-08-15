@@ -9,55 +9,18 @@
   <link rel="dns-prefetch" href="http://linking123.github.io">
   <title>判断非手机登陆，做一次提醒 | Linking&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="需求
-
-项目的网站时做的手机网页，但是没有考虑到自适应pc端，只是在chrome中固定了手机屏幕大小，所以在pc端查看会很丑，布局是乱的；但是重写又很麻烦，所以有必要做一下提醒，让用户手动将网页缩小到手机屏幕大小。
-
-用到
-
-非手机检验和cookie记录
-
-方法
-
-这段代码是使用了cookie来控制的
-
-使用cookie让浏览器记住页面已经打开过一次，当前页面刷新不会弹出提醒。
-浏览器一旦关闭，保">
+  <meta name="description" content="需求  项目的网站时做的手机网页，但是没有考虑到自适应pc端，只是在chrome中固定了手机屏幕大小，所以在pc端查看会很丑，布局是乱的；但是重写又很麻烦，所以有必要做一下提醒，让用户手动将网页缩小到手机屏幕大小。  用到  非手机检验和cookie记录  方法  这段代码是使用了cookie来控制的  使用cookie让浏览器记住页面已经打开过一次，当前页面刷新不会弹出提醒。 浏览器一旦关闭，保">
+<meta name="keywords" content="cs">
 <meta property="og:type" content="article">
 <meta property="og:title" content="判断非手机登陆，做一次提醒">
 <meta property="og:url" content="http://linking123.github.io/2016/01/11/判断非手机登陆，做一次提醒/index.html">
-<meta property="og:site_name" content="Linking's blog">
-<meta property="og:description" content="需求
-
-项目的网站时做的手机网页，但是没有考虑到自适应pc端，只是在chrome中固定了手机屏幕大小，所以在pc端查看会很丑，布局是乱的；但是重写又很麻烦，所以有必要做一下提醒，让用户手动将网页缩小到手机屏幕大小。
-
-用到
-
-非手机检验和cookie记录
-
-方法
-
-这段代码是使用了cookie来控制的
-
-使用cookie让浏览器记住页面已经打开过一次，当前页面刷新不会弹出提醒。
-浏览器一旦关闭，保">
+<meta property="og:site_name" content="Linking&#39;s blog">
+<meta property="og:description" content="需求  项目的网站时做的手机网页，但是没有考虑到自适应pc端，只是在chrome中固定了手机屏幕大小，所以在pc端查看会很丑，布局是乱的；但是重写又很麻烦，所以有必要做一下提醒，让用户手动将网页缩小到手机屏幕大小。  用到  非手机检验和cookie记录  方法  这段代码是使用了cookie来控制的  使用cookie让浏览器记住页面已经打开过一次，当前页面刷新不会弹出提醒。 浏览器一旦关闭，保">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2016-01-22T06:00:11.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="判断非手机登陆，做一次提醒">
-<meta name="twitter:description" content="需求
-
-项目的网站时做的手机网页，但是没有考虑到自适应pc端，只是在chrome中固定了手机屏幕大小，所以在pc端查看会很丑，布局是乱的；但是重写又很麻烦，所以有必要做一下提醒，让用户手动将网页缩小到手机屏幕大小。
-
-用到
-
-非手机检验和cookie记录
-
-方法
-
-这段代码是使用了cookie来控制的
-
-使用cookie让浏览器记住页面已经打开过一次，当前页面刷新不会弹出提醒。
-浏览器一旦关闭，保">
+<meta name="twitter:description" content="需求  项目的网站时做的手机网页，但是没有考虑到自适应pc端，只是在chrome中固定了手机屏幕大小，所以在pc端查看会很丑，布局是乱的；但是重写又很麻烦，所以有必要做一下提醒，让用户手动将网页缩小到手机屏幕大小。  用到  非手机检验和cookie记录  方法  这段代码是使用了cookie来控制的  使用cookie让浏览器记住页面已经打开过一次，当前页面刷新不会弹出提醒。 浏览器一旦关闭，保">
   
     <link rel="alternative" href="/atom.xml" title="Linking&#39;s blog" type="application/atom+xml">
   
@@ -92,7 +55,7 @@
 		  <h1 class="header-author"><a href="/">Linking</a></h1>
 		</hgroup>
 		
-		<p class="header-subtitle">时间是个神，见证你的进步</p>
+		<p class="header-subtitle">记住生活的美好</p>
 		
 
 		<nav class="header-menu">
@@ -156,7 +119,7 @@
 			  <h1 class="header-author js-header-author">Linking</h1>
 			</hgroup>
 			
-			<p class="header-subtitle"><i class="icon icon-quo-left"></i>时间是个神，见证你的进步<i class="icon icon-quo-right"></i></p>
+			<p class="header-subtitle"><i class="icon icon-quo-left"></i>记住生活的美好<i class="icon icon-quo-right"></i></p>
 			
 			
 			
@@ -247,8 +210,48 @@
 <li>浏览器一旦关闭，保存这个记录的cookie文件将被删除。重新打开浏览器弹出窗口会再次出现，从而确保了在原有的窗口基础上只打开一次。 </li>
 </ol>
 </blockquote>
-<p>判断非手机登陆方式<br><figure class="highlight lisp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">if (!/Android|webOS|iPhone|iPod|BlackBerry/i.test(<span class="name">navigator</span>.userAgent))</div><div class="line">	alert(<span class="string">"为了提高体验效果，请把页面缩小成手机屏幕大小。\n谢谢合作！"</span>)<span class="comment">;</span></div></pre></td></tr></table></figure></p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span><span class="javascript"></span></div><div class="line">	<span class="keyword">try</span>&#123;</div><div class="line">		<span class="keyword">var</span> alertmessage=<span class="string">"为了提高体验效果，请把页面缩小成手机屏幕大小。\n谢谢合作！"</span>;</div><div class="line">		<span class="keyword">var</span> once_per_session=<span class="number">1</span></div><div class="line">		<span class="function"><span class="keyword">function</span> <span class="title">get_cookie</span>(<span class="params">Name</span>) </span>&#123;</div><div class="line">		  <span class="keyword">var</span> search = Name + <span class="string">"="</span></div><div class="line">		  <span class="keyword">var</span> returnvalue = <span class="string">""</span>;</div><div class="line">		  <span class="keyword">if</span> (<span class="built_in">document</span>.cookie.length &gt; <span class="number">0</span>) &#123;</div><div class="line">			offset = <span class="built_in">document</span>.cookie.indexOf(search)</div><div class="line">			<span class="keyword">if</span> (offset != <span class="number">-1</span>) &#123;</div><div class="line">			  offset += search.length;</div><div class="line">			  end = <span class="built_in">document</span>.cookie.indexOf(<span class="string">";"</span>, offset);</div><div class="line">			  <span class="keyword">if</span> (end == <span class="number">-1</span>)</div><div class="line">				 end = <span class="built_in">document</span>.cookie.length;</div><div class="line">			 	 returnvalue=<span class="built_in">unescape</span>(<span class="built_in">document</span>.cookie.substring(offset, end))</div><div class="line">			  &#125;</div><div class="line">		   	&#125;</div><div class="line">		 	<span class="keyword">return</span> returnvalue;</div><div class="line">		&#125;</div><div class="line">		<span class="function"><span class="keyword">function</span> <span class="title">alertornot</span>(<span class="params"></span>)</span>&#123;</div><div class="line">			<span class="keyword">if</span> (get_cookie(<span class="string">'alerted'</span>)==<span class="string">''</span>)&#123;</div><div class="line">		        loadalert();</div><div class="line">				<span class="built_in">document</span>.cookie=<span class="string">"alerted=yes"</span>;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">		<span class="function"><span class="keyword">function</span> <span class="title">loadalert</span>(<span class="params"></span>)</span>&#123;</div><div class="line">			<span class="keyword">if</span> (!<span class="regexp">/Android|webOS|iPhone|iPod|BlackBerry/i</span>.test(navigator.userAgent))</div><div class="line">				alert(alertmessage);</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">if</span> (once_per_session==<span class="number">0</span>)</div><div class="line">			loadalert();</div><div class="line">		<span class="keyword">else</span></div><div class="line">			alertornot();</div><div class="line">	&#125; <span class="keyword">catch</span>(e)</div><div class="line">	&#123;</div><div class="line">		alert(e);</div><div class="line">	&#125;</div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>判断非手机登陆方式</p>
+<pre><code>if (!/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent))
+    alert(&quot;为了提高体验效果，请把页面缩小成手机屏幕大小。\n谢谢合作！&quot;);
+</code></pre><pre><code>&lt;script type=&quot;text/javascript&quot;&gt;
+    try{
+        var alertmessage=&quot;为了提高体验效果，请把页面缩小成手机屏幕大小。\n谢谢合作！&quot;;
+        var once_per_session=1
+        function get_cookie(Name) {
+          var search = Name + &quot;=&quot;
+          var returnvalue = &quot;&quot;;
+          if (document.cookie.length &gt; 0) {
+            offset = document.cookie.indexOf(search)
+            if (offset != -1) {
+              offset += search.length;
+              end = document.cookie.indexOf(&quot;;&quot;, offset);
+              if (end == -1)
+                 end = document.cookie.length;
+                  returnvalue=unescape(document.cookie.substring(offset, end))
+              }
+               }
+             return returnvalue;
+        }
+        function alertornot(){
+            if (get_cookie(&#39;alerted&#39;)==&#39;&#39;){
+                loadalert();
+                document.cookie=&quot;alerted=yes&quot;;
+            }
+        }
+        function loadalert(){
+            if (!/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent))
+                alert(alertmessage);
+        }
+        if (once_per_session==0)
+            loadalert();
+        else
+            alertornot();
+    } catch(e)
+    {
+        alert(e);
+    }
+&lt;/script&gt;
+</code></pre>
       
 
       
@@ -529,11 +532,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">ajax</a>
+                <a href="javascript:void(0)" class="js-tag color5">Ajax</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Ajax</a>
+                <a href="javascript:void(0)" class="js-tag color5">ajax</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -553,6 +556,10 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">JavaScriptCore</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">operation</a>
               </li>
              
@@ -562,10 +569,6 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">deploy</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">JavaScriptCore</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -593,15 +596,15 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">cocoa</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">blog</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Gitalk</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">cocoa</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -625,19 +628,19 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">兼容性</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">多线程</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">HTTP</a>
+                <a href="javascript:void(0)" class="js-tag color4">兼容性</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">绘图</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">HTTP</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -657,6 +660,10 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">标识</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">arcgis</a>
               </li>
              
@@ -666,10 +673,6 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">D.Wade</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">标识</a>
               </li>
              
               <li class="article-tag-list-item">

@@ -9,31 +9,18 @@
   <link rel="dns-prefetch" href="http://linking123.github.io">
   <title>进度条 | Linking&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="思路：
-
-进度是已上传除以总大小的百分比；通过动态改变元素的宽度来显示百分比，数字的变化标明大小。
-
-编程重要的是思想，逻辑清楚了，再来码代码会清晰许多。
-前端代码：1234&amp;lt;input type=&apos;file&apos; name=&apos;pic&apos; onchange=&apos;selfile();&apos; /&amp;gt;&amp;lt;div id=&apos;progress&apos;&amp;gt;    &amp;lt;div id=&apos;bar&apos;&amp;gt;&amp;lt;">
+  <meta name="description" content="思路：  进度是已上传除以总大小的百分比；通过动态改变元素的宽度来显示百分比，数字的变化标明大小。  编程重要的是思想，逻辑清楚了，再来码代码会清晰许多。 前端代码： &amp;lt;input type=&amp;#39;file&amp;#39; name=&amp;#39;pic&amp;#39; onchange=&amp;#39;selfile();&amp;#39; /&amp;gt; &amp;lt;div id=&amp;#39;progress&amp;#39;&amp;g">
+<meta name="keywords" content="进度条">
 <meta property="og:type" content="article">
 <meta property="og:title" content="进度条">
 <meta property="og:url" content="http://linking123.github.io/2016/03/02/进度条/index.html">
-<meta property="og:site_name" content="Linking's blog">
-<meta property="og:description" content="思路：
-
-进度是已上传除以总大小的百分比；通过动态改变元素的宽度来显示百分比，数字的变化标明大小。
-
-编程重要的是思想，逻辑清楚了，再来码代码会清晰许多。
-前端代码：1234&amp;lt;input type=&apos;file&apos; name=&apos;pic&apos; onchange=&apos;selfile();&apos; /&amp;gt;&amp;lt;div id=&apos;progress&apos;&amp;gt;    &amp;lt;div id=&apos;bar&apos;&amp;gt;&amp;lt;">
+<meta property="og:site_name" content="Linking&#39;s blog">
+<meta property="og:description" content="思路：  进度是已上传除以总大小的百分比；通过动态改变元素的宽度来显示百分比，数字的变化标明大小。  编程重要的是思想，逻辑清楚了，再来码代码会清晰许多。 前端代码： &amp;lt;input type=&amp;#39;file&amp;#39; name=&amp;#39;pic&amp;#39; onchange=&amp;#39;selfile();&amp;#39; /&amp;gt; &amp;lt;div id=&amp;#39;progress&amp;#39;&amp;g">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2016-03-02T14:24:12.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="进度条">
-<meta name="twitter:description" content="思路：
-
-进度是已上传除以总大小的百分比；通过动态改变元素的宽度来显示百分比，数字的变化标明大小。
-
-编程重要的是思想，逻辑清楚了，再来码代码会清晰许多。
-前端代码：1234&amp;lt;input type=&apos;file&apos; name=&apos;pic&apos; onchange=&apos;selfile();&apos; /&amp;gt;&amp;lt;div id=&apos;progress&apos;&amp;gt;    &amp;lt;div id=&apos;bar&apos;&amp;gt;&amp;lt;">
+<meta name="twitter:description" content="思路：  进度是已上传除以总大小的百分比；通过动态改变元素的宽度来显示百分比，数字的变化标明大小。  编程重要的是思想，逻辑清楚了，再来码代码会清晰许多。 前端代码： &amp;lt;input type=&amp;#39;file&amp;#39; name=&amp;#39;pic&amp;#39; onchange=&amp;#39;selfile();&amp;#39; /&amp;gt; &amp;lt;div id=&amp;#39;progress&amp;#39;&amp;g">
   
     <link rel="alternative" href="/atom.xml" title="Linking&#39;s blog" type="application/atom+xml">
   
@@ -68,7 +55,7 @@
 		  <h1 class="header-author"><a href="/">Linking</a></h1>
 		</hgroup>
 		
-		<p class="header-subtitle">时间是个神，见证你的进步</p>
+		<p class="header-subtitle">记住生活的美好</p>
 		
 
 		<nav class="header-menu">
@@ -132,7 +119,7 @@
 			  <h1 class="header-author js-header-author">Linking</h1>
 			</hgroup>
 			
-			<p class="header-subtitle"><i class="icon icon-quo-left"></i>时间是个神，见证你的进步<i class="icon icon-quo-right"></i></p>
+			<p class="header-subtitle"><i class="icon icon-quo-left"></i>记住生活的美好<i class="icon icon-quo-right"></i></p>
 			
 			
 			
@@ -212,13 +199,36 @@
 <p>进度是已上传除以总大小的百分比；通过动态改变元素的宽度来显示百分比，数字的变化标明大小。</p>
 </blockquote>
 <p>编程重要的是思想，逻辑清楚了，再来码代码会清晰许多。</p>
-<p>前端代码：<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&lt;<span class="selector-tag">input</span> type=<span class="string">'file'</span> name=<span class="string">'pic'</span> onchange=<span class="string">'selfile();'</span> /&gt;</div><div class="line">&lt;<span class="selector-tag">div</span> id=<span class="string">'progress'</span>&gt;</div><div class="line">    &lt;<span class="selector-tag">div</span> id=<span class="string">'bar'</span>&gt;&lt;/div&gt;</div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure></p>
-<p>默认样式：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">type</span>=<span class="string">"text/css"</span>&gt;</span><span class="css">	</span></div><div class="line"><span class="selector-id">#progress</span>&#123;</div><div class="line">	<span class="attribute">width</span>: <span class="number">500px</span>;<span class="attribute">height</span>: <span class="number">30px</span>;<span class="attribute">border</span>: <span class="number">1px</span> solid green;</div><div class="line">&#125;</div><div class="line"><span class="selector-id">#bar</span>&#123;</div><div class="line">	<span class="attribute">width</span>: <span class="number">0%</span>;<span class="attribute">height</span>: <span class="number">100%</span>;<span class="attribute">background</span>: green;</div><div class="line">&#125;</div><div class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></div></pre></td></tr></table></figure></p>
-<p>利用上传过程中,<code>xhr.upload.onprogress</code>状态的变化，函数运行过程中自带的事件参数来计算上传百分比<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">xhr.upload.onprogress = <span class="function"><span class="keyword">function</span>(<span class="params">ev</span>)</span>&#123;</div><div class="line">	<span class="comment">// console.log(ev);    //查看ev事件参数的属性和方法</span></div><div class="line">	<span class="keyword">if</span>(ev.lengthComputable)&#123;</div><div class="line">		<span class="keyword">var</span> percent = <span class="number">100</span> * ev.loaded/ev.total;</div><div class="line">		<span class="comment">// console.log(percent);</span></div><div class="line">		<span class="built_in">document</span>.getElementById(<span class="string">'bar'</span>).style.width = percent + <span class="string">'%'</span>;</div><div class="line">		<span class="built_in">document</span>.getElementById(<span class="string">'bar'</span>).innerHTML = <span class="built_in">parseInt</span>(percent) + <span class="string">'%'</span>;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>后记：</p>
+<p>前端代码：</p>
+<pre><code>&lt;input type=&#39;file&#39; name=&#39;pic&#39; onchange=&#39;selfile();&#39; /&gt;
+&lt;div id=&#39;progress&#39;&gt;
+    &lt;div id=&#39;bar&#39;&gt;&lt;/div&gt;
+&lt;/div&gt;
+</code></pre><p>默认样式：</p>
+<pre><code>&lt;style type=&quot;text/css&quot;&gt;    
+#progress{
+    width: 500px;height: 30px;border: 1px solid green;
+}
+#bar{
+    width: 0%;height: 100%;background: green;
+}
+&lt;/style&gt;
+</code></pre><p>利用上传过程中,<code>xhr.upload.onprogress</code>状态的变化，函数运行过程中自带的事件参数来计算上传百分比</p>
+<pre><code>xhr.upload.onprogress = function(ev){
+    // console.log(ev);    //查看ev事件参数的属性和方法
+    if(ev.lengthComputable){
+        var percent = 100 * ev.loaded/ev.total;
+        // console.log(percent);
+        document.getElementById(&#39;bar&#39;).style.width = percent + &#39;%&#39;;
+        document.getElementById(&#39;bar&#39;).innerHTML = parseInt(percent) + &#39;%&#39;;
+    }
+}
+</code></pre><p>后记：</p>
 <blockquote>
 <p>很久之前我就想用这种简单的进度条给自己做一个读书管理软件，但由于自己的惰性，一直没有成型。<br><blockquote><p>好的软件产品，常常源于开发者自身的需求。<br>如果有什么工作能让你坚持长久的热情，那一定是做自己需要的产品。</p>
-<footer><strong>池建强</strong><cite><a href="http://macshuo.com/" target="_blank" rel="external">MacTalK</a></cite></footer></blockquote></p>
+<footer><strong>池建强</strong><cite><a href="http://macshuo.com/" target="_blank" rel="noopener">MacTalK</a></cite></footer></blockquote></p>
+</blockquote>
+<blockquote>
 <p>脑子里有了个12345，然后可以打个草稿，列列提纲，就算现在不做，也要加入到备忘录里吧。<br>当然一个阶段有一个阶段该干的事，也许过了这个时间段，再来做可能没有当时的动力，也可能回过头来当时的问题现在都成了小菜。</p>
 </blockquote>
 <p>但行好事，莫问前程？！<br>做人还是纯粹一点，专注一点好。</p>
@@ -514,11 +524,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">ajax</a>
+                <a href="javascript:void(0)" class="js-tag color5">Ajax</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Ajax</a>
+                <a href="javascript:void(0)" class="js-tag color5">ajax</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -538,6 +548,10 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">JavaScriptCore</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">operation</a>
               </li>
              
@@ -547,10 +561,6 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">deploy</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">JavaScriptCore</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -578,15 +588,15 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">cocoa</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">blog</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Gitalk</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">cocoa</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -610,19 +620,19 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">兼容性</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">多线程</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">HTTP</a>
+                <a href="javascript:void(0)" class="js-tag color4">兼容性</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">绘图</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">HTTP</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -642,6 +652,10 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">标识</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">arcgis</a>
               </li>
              
@@ -651,10 +665,6 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">D.Wade</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">标识</a>
               </li>
              
               <li class="article-tag-list-item">

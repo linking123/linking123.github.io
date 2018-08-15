@@ -9,19 +9,18 @@
   <link rel="dns-prefetch" href="http://linking123.github.io">
   <title>Linux下部署web服务踩坑记 | Linking&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="目录12345678910111. 部署准备	1.1 需要环境及软件	1.2 基本步骤	1.3 MySQL安装及设置2. 踩到的坑	2.1 端口被占	2.2 防火墙开放端口	2.3 MySQL的一些错误	2.4 数据库大小写敏感性	2.5 不同系统间文件夹路径问题3. 最后
-事由">
+  <meta name="description" content="目录1. 部署准备     1.1 需要环境及软件     1.2 基本步骤     1.3 MySQL安装及设置 2. 踩到的坑     2.1 端口被占     2.2 防火墙开放端口     2.3 MySQL的一些错误     2.4 数据库大小写敏感性     2.5 不同系统间文件夹路径问题 3. 最后 事由">
+<meta name="keywords" content="operation,Linux,deploy">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Linux下部署web服务踩坑记">
 <meta property="og:url" content="http://linking123.github.io/2018/03/04/Linux下部署web服务踩坑记/index.html">
-<meta property="og:site_name" content="Linking's blog">
-<meta property="og:description" content="目录12345678910111. 部署准备	1.1 需要环境及软件	1.2 基本步骤	1.3 MySQL安装及设置2. 踩到的坑	2.1 端口被占	2.2 防火墙开放端口	2.3 MySQL的一些错误	2.4 数据库大小写敏感性	2.5 不同系统间文件夹路径问题3. 最后
-事由">
-<meta property="og:updated_time" content="2018-03-04T13:04:04.342Z">
+<meta property="og:site_name" content="Linking&#39;s blog">
+<meta property="og:description" content="目录1. 部署准备     1.1 需要环境及软件     1.2 基本步骤     1.3 MySQL安装及设置 2. 踩到的坑     2.1 端口被占     2.2 防火墙开放端口     2.3 MySQL的一些错误     2.4 数据库大小写敏感性     2.5 不同系统间文件夹路径问题 3. 最后 事由">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-03-04T13:04:04.343Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux下部署web服务踩坑记">
-<meta name="twitter:description" content="目录12345678910111. 部署准备	1.1 需要环境及软件	1.2 基本步骤	1.3 MySQL安装及设置2. 踩到的坑	2.1 端口被占	2.2 防火墙开放端口	2.3 MySQL的一些错误	2.4 数据库大小写敏感性	2.5 不同系统间文件夹路径问题3. 最后
-事由">
+<meta name="twitter:description" content="目录1. 部署准备     1.1 需要环境及软件     1.2 基本步骤     1.3 MySQL安装及设置 2. 踩到的坑     2.1 端口被占     2.2 防火墙开放端口     2.3 MySQL的一些错误     2.4 数据库大小写敏感性     2.5 不同系统间文件夹路径问题 3. 最后 事由">
   
     <link rel="alternative" href="/atom.xml" title="Linking&#39;s blog" type="application/atom+xml">
   
@@ -56,7 +55,7 @@
 		  <h1 class="header-author"><a href="/">Linking</a></h1>
 		</hgroup>
 		
-		<p class="header-subtitle">时间是个神，见证你的进步</p>
+		<p class="header-subtitle">记住生活的美好</p>
 		
 
 		<nav class="header-menu">
@@ -120,7 +119,7 @@
 			  <h1 class="header-author js-header-author">Linking</h1>
 			</hgroup>
 			
-			<p class="header-subtitle"><i class="icon icon-quo-left"></i>时间是个神，见证你的进步<i class="icon icon-quo-right"></i></p>
+			<p class="header-subtitle"><i class="icon icon-quo-left"></i>记住生活的美好<i class="icon icon-quo-right"></i></p>
 			
 			
 			
@@ -195,12 +194,28 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><figure class="highlight lsl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="number">1.</span> 部署准备</div><div class="line">	<span class="number">1.1</span> 需要环境及软件</div><div class="line">	<span class="number">1.2</span> 基本步骤</div><div class="line">	<span class="number">1.3</span> MySQL安装及设置</div><div class="line"><span class="number">2.</span> 踩到的坑</div><div class="line">	<span class="number">2.1</span> 端口被占</div><div class="line">	<span class="number">2.2</span> 防火墙开放端口</div><div class="line">	<span class="number">2.3</span> MySQL的一些错误</div><div class="line">	<span class="number">2.4</span> 数据库大小写敏感性</div><div class="line">	<span class="number">2.5</span> 不同系统间文件夹路径问题</div><div class="line"><span class="number">3.</span> 最后</div></pre></td></tr></table></figure>
-<h1 id="事由"><a href="#事由" class="headerlink" title="事由"></a>事由</h1><a id="more"></a>
+        <h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><pre><code>1. 部署准备
+    1.1 需要环境及软件
+    1.2 基本步骤
+    1.3 MySQL安装及设置
+2. 踩到的坑
+    2.1 端口被占
+    2.2 防火墙开放端口
+    2.3 MySQL的一些错误
+    2.4 数据库大小写敏感性
+    2.5 不同系统间文件夹路径问题
+3. 最后
+</code></pre><h1 id="事由"><a href="#事由" class="headerlink" title="事由"></a>事由</h1><a id="more"></a>
 <blockquote>
 <p>3月1号到某单位部署一个项目，折腾了一天，总算是功德圆满，成功跑起来了。</p>
+</blockquote>
+<blockquote>
 <p>这是我第一次独立部署项目到Linux服务器上，出现了许多问题，我觉得有必要记录一下。总结是技术积累的必经之路。</p>
+</blockquote>
+<blockquote>
 <p>期间，还被该单位的某领导鄙视了一把，说我不是搞技术的。羞。。不过我是没感觉的了，跟这种人生气不值得啊，只有回家好好练技术了，同时加强沟通能力。</p>
+</blockquote>
+<blockquote>
 <p>好了，废话不多说了，下面是记录内容。</p>
 </blockquote>
 <h1 id="1、部署准备"><a href="#1、部署准备" class="headerlink" title="1、部署准备"></a>1、部署准备</h1><h2 id="1-1-需要环境及软件"><a href="#1-1-需要环境及软件" class="headerlink" title="1.1 需要环境及软件"></a>1.1 需要环境及软件</h2><p>war包<br>sql数据</p>
@@ -212,54 +227,72 @@
 <blockquote>
 <p>注意：一般的Linux发行版本可能已经安装了JDK的开源版本，openjdk，所以首先检查一下Java版本。</p>
 </blockquote>
-<figure class="highlight 1c"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">~<span class="meta"># java -version</span></div></pre></td></tr></table></figure>
-<p>如果已经安装可用的版本，则可进行下一步，配置环境变量；否则需要先删除该版本，再来下载安装需要的版本。</p>
+<pre><code>~# java -version
+</code></pre><p>如果已经安装可用的版本，则可进行下一步，配置环境变量；否则需要先删除该版本，再来下载安装需要的版本。</p>
 <p>解压命令：</p>
-<figure class="highlight clean"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">~# tar zxvf jdk...tar.gz</div></pre></td></tr></table></figure>
-<p>可以考虑建立链接到 <code>/usr/local</code>，但不建议直接拷贝到该地址，也可以直接在项目文件夹中存放。</p>
+<pre><code>~# tar zxvf jdk...tar.gz 
+</code></pre><p>可以考虑建立链接到 <code>/usr/local</code>，但不建议直接拷贝到该地址，也可以直接在项目文件夹中存放。</p>
 <p>一般需要将安装路径链接到<code>/usr/local/</code>文件夹下。</p>
 <p>配置环境变量：</p>
-<figure class="highlight vim"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">~# <span class="keyword">vi</span> /etc/<span class="keyword">profile</span></div></pre></td></tr></table></figure>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 路径视自己的安装路径决定</span></div><div class="line"><span class="built_in">export</span> JAVA_HOME=/usr/<span class="built_in">local</span>/java </div><div class="line"><span class="built_in">export</span> JRE_HOME=/usr/<span class="built_in">local</span>/java/jre　 </div><div class="line"><span class="built_in">export</span> CLASSPATH=.:JAVAHOME/lib:JRE_HOME/lib:CLASSPATH<span class="built_in">export</span>PATH=JAVA_HOME/bin:JREHOME/bin:PATH</div></pre></td></tr></table></figure>
-<p>保存退出后，使生效命令：</p>
-<figure class="highlight gradle"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">~# <span class="keyword">source</span> <span class="regexp">/etc/</span>profile</div></pre></td></tr></table></figure>
-<p>然后再运行<code>java -version</code>查看是否安装配置成功。</p>
-<ol>
+<pre><code>~# vi /etc/profile
+</code></pre><pre><code># 路径视自己的安装路径决定
+export JAVA_HOME=/usr/local/java 
+export JRE_HOME=/usr/local/java/jre　 
+export CLASSPATH=.:JAVAHOME/lib:JRE_HOME/lib:CLASSPATHexportPATH=JAVA_HOME/bin:JREHOME/bin:PATH
+</code></pre><p>保存退出后，使生效命令：</p>
+<pre><code>~# source /etc/profile
+</code></pre><p>然后再运行<code>java -version</code>查看是否安装配置成功。</p>
+<ol start="2">
 <li>安装Tomcat并测试服务可用</li>
 </ol>
 <p>解压命令：</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">~# <span class="selector-tag">tar</span> <span class="selector-tag">zxvf</span> <span class="selector-tag">apache-tomcat-7</span><span class="selector-class">.0</span><span class="selector-class">.65</span><span class="selector-class">.tar</span><span class="selector-class">.gz</span></div></pre></td></tr></table></figure>
-<p>可以考虑建立链接到 <code>/usr/local</code>，但不建议直接拷贝到该地址，也可以直接在项目文件夹中存放。</p>
+<pre><code>~# tar zxvf apache-tomcat-7.0.65.tar.gz 
+</code></pre><p>可以考虑建立链接到 <code>/usr/local</code>，但不建议直接拷贝到该地址，也可以直接在项目文件夹中存放。</p>
 <p>修改配置，<code>vi ~/tomcat/bin/catalina.sh</code></p>
-<figure class="highlight nix"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="attr">JAVA_OPTS=”-Xms128m</span> -Xmx256m -Xss512k -XX:<span class="attr">PermSize=64m</span> -XX:<span class="attr">MaxPermSize=128m”</span></div></pre></td></tr></table></figure>
-<p>配置内存大小，保存生效。</p>
+<pre><code>JAVA_OPTS=”-Xms128m -Xmx256m -Xss512k -XX:PermSize=64m -XX:MaxPermSize=128m”
+</code></pre><p>配置内存大小，保存生效。</p>
 <p>配置完成后，启动tomcat服务</p>
-<figure class="highlight vala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="meta"># 启动 </span></div><div class="line">./startup.sh</div><div class="line"><span class="meta"># 停止 </span></div><div class="line">./shutdown.sh</div><div class="line"><span class="meta"># 查看服务</span></div><div class="line">ps -ef|grep tomcat</div><div class="line"><span class="meta"># 杀死进程</span></div><div class="line">kill <span class="number">-9</span> <span class="number">5110</span></div></pre></td></tr></table></figure>
-<p>启动查看页面是否可见，在logs/下查看catalina.out查看输出日志 。</p>
+<pre><code># 启动 
+./startup.sh
+# 停止 
+./shutdown.sh
+# 查看服务
+ps -ef|grep tomcat
+# 杀死进程
+kill -9 5110
+</code></pre><p>启动查看页面是否可见，在logs/下查看catalina.out查看输出日志 。</p>
 <p>如果未能访问，有可能是因为端口被占</p>
 <p>port aready in use</p>
 <p>也有可能是防火墙未关闭，端口未开放；有两种解决方式，一种直接关闭防火墙，这样所有端口就都开放了，不推荐，另一种是开放需要的端口，这种方式更安全点。</p>
 <blockquote>
 <p>需开放 80、3306及所部署的服务端口地址。</p>
 </blockquote>
-<figure class="highlight pf"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 设置8080端口可被访问</span></div><div class="line"></div><div class="line"><span class="comment"># 1.修改文件/etc/sysconfig/iptables</span></div><div class="line">-A RH-Firewall-<span class="number">1</span>-INPUT -m <span class="keyword">state</span> –<span class="keyword">state</span> NEW -m tcp -p tcp –dport <span class="number">8080</span> -j ACCEPT </div><div class="line"></div><div class="line"><span class="comment"># 2. 将iptables服务重启:</span></div><div class="line">service iptables restart</div><div class="line"><span class="comment"># 或者直接执行命令： </span></div><div class="line">iptables -I INPUT -p tcp –dport <span class="number">80</span> -j ACCEPT</div></pre></td></tr></table></figure>
-<p>vim命令: 复制<code>yy</code>粘贴<code>p</code>整行, 向上翻页<code>ctrl+b</code>向下翻页<code>ctrl+f</code></p>
-<ol>
+<pre><code># 设置8080端口可被访问
+
+# 1.修改文件/etc/sysconfig/iptables
+-A RH-Firewall-1-INPUT -m state –state NEW -m tcp -p tcp –dport 8080 -j ACCEPT 
+
+# 2. 将iptables服务重启:
+service iptables restart
+# 或者直接执行命令： 
+iptables -I INPUT -p tcp –dport 80 -j ACCEPT
+</code></pre><p>vim命令: 复制<code>yy</code>粘贴<code>p</code>整行, 向上翻页<code>ctrl+b</code>向下翻页<code>ctrl+f</code></p>
+<ol start="3">
 <li>安装MySQL数据库并启动服务</li>
 </ol>
-<p>可参考 <a href="http://www.runoob.com/mysql/mysql-install.html" target="_blank" rel="external">http://www.runoob.com/mysql/mysql-install.html</a></p>
-<ol>
+<p>可参考 <a href="http://www.runoob.com/mysql/mysql-install.html" target="_blank" rel="noopener">http://www.runoob.com/mysql/mysql-install.html</a></p>
+<ol start="4">
 <li>安装Redis并启动服务</li>
 </ol>
-<p>可参考 <a href="https://www.cnblogs.com/KunGe-13/p/8340309.html" target="_blank" rel="external">https://www.cnblogs.com/KunGe-13/p/8340309.html</a></p>
-<ol>
+<p>可参考 <a href="https://www.cnblogs.com/KunGe-13/p/8340309.html" target="_blank" rel="noopener">https://www.cnblogs.com/KunGe-13/p/8340309.html</a></p>
+<ol start="5">
 <li>部署war包并启动Tomcat</li>
 </ol>
 <p>将war包丢到webapp目录下，启动tomcat/bin/startup.sh</p>
-<h2 id="1-3-MySQL安装及设置"><a href="#1-3-MySQL安装及设置" class="headerlink" title="1.3 MySQL安装及设置"></a>1.3 MySQL安装及设置</h2><p>可参考 <a href="http://www.runoob.com/mysql/mysql-install.html" target="_blank" rel="external">http://www.runoob.com/mysql/mysql-install.html</a></p>
+<h2 id="1-3-MySQL安装及设置"><a href="#1-3-MySQL安装及设置" class="headerlink" title="1.3 MySQL安装及设置"></a>1.3 MySQL安装及设置</h2><p>可参考 <a href="http://www.runoob.com/mysql/mysql-install.html" target="_blank" rel="noopener">http://www.runoob.com/mysql/mysql-install.html</a></p>
 <h3 id="数据库执行sql创建数据"><a href="#数据库执行sql创建数据" class="headerlink" title="数据库执行sql创建数据"></a>数据库执行sql创建数据</h3><p>进入mysql，运行以下命令执行sql文件，生成数据库表和数据</p>
-<figure class="highlight clean"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">souce ..../data.sql</div></pre></td></tr></table></figure>
-<h3 id="数据库设置用户名密码"><a href="#数据库设置用户名密码" class="headerlink" title="数据库设置用户名密码"></a>数据库设置用户名密码</h3><p>安装后一般是没有用户的，需要设置用户名密码</p>
+<pre><code>souce ..../data.sql
+</code></pre><h3 id="数据库设置用户名密码"><a href="#数据库设置用户名密码" class="headerlink" title="数据库设置用户名密码"></a>数据库设置用户名密码</h3><p>安装后一般是没有用户的，需要设置用户名密码</p>
 <p>还需要设置其他用户的访问权限，设置root-%</p>
 <h1 id="2-踩到的坑"><a href="#2-踩到的坑" class="headerlink" title="2. 踩到的坑"></a>2. 踩到的坑</h1><h2 id="2-1-端口被占"><a href="#2-1-端口被占" class="headerlink" title="2.1 端口被占"></a>2.1 端口被占</h2><ul>
 <li>问题：port aready in use</li>
@@ -268,8 +301,10 @@
 <h2 id="2-2-防火墙开放端口"><a href="#2-2-防火墙开放端口" class="headerlink" title="2.2 防火墙开放端口"></a>2.2 防火墙开放端口</h2><p>关闭不好，开关机会改变，永远关闭不安全，所以开放需要的端口。</p>
 <h2 id="2-3-MySQL的一些错误"><a href="#2-3-MySQL的一些错误" class="headerlink" title="2.3 MySQL的一些错误"></a>2.3 MySQL的一些错误</h2><p>无法访问，3306端口未开放。</p>
 <h2 id="2-4-数据库大小写敏感性"><a href="#2-4-数据库大小写敏感性" class="headerlink" title="2.4 数据库大小写敏感性"></a>2.4 数据库大小写敏感性</h2><p>Linux发行版中MySQL对大小写敏感，导致代码错误。可修改lower_case_table_names为1，0表示区分大小写。</p>
-<figure class="highlight lsl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="number">1.</span>用ROOT登录，修改/etc/my.cnf</div><div class="line"><span class="number">2.</span>在[mysqld]下加入一行：lower_case_table_names=<span class="number">1</span></div><div class="line"><span class="number">3.</span>重新启动数据库即可</div></pre></td></tr></table></figure>
-<h2 id="2-5-不同系统间文件夹路径问题"><a href="#2-5-不同系统间文件夹路径问题" class="headerlink" title="2.5 不同系统间文件夹路径问题"></a>2.5 不同系统间文件夹路径问题</h2><p>由于在Windows进行开发，Linux部署时，如果前期的文件夹，如文件上传路径不一致的问题就突显出来了。</p>
+<pre><code>1.用ROOT登录，修改/etc/my.cnf
+2.在[mysqld]下加入一行：lower_case_table_names=1
+3.重新启动数据库即可
+</code></pre><h2 id="2-5-不同系统间文件夹路径问题"><a href="#2-5-不同系统间文件夹路径问题" class="headerlink" title="2.5 不同系统间文件夹路径问题"></a>2.5 不同系统间文件夹路径问题</h2><p>由于在Windows进行开发，Linux部署时，如果前期的文件夹，如文件上传路径不一致的问题就突显出来了。</p>
 <p>解决办法是，在代码中判断平台，然后读取不同的路径；当然如果路径不存在需要创建，Java代码应该能调用系统命令来创建文件夹的。</p>
 <h1 id="3-最后"><a href="#3-最后" class="headerlink" title="3. 最后"></a>3. 最后</h1><p>一些具体的步骤可以自己去搜索，主要记录的自己遇到的问题及解决思路；思想是最重要的，有了思路，问题也就解决了一半。</p>
 <p>基本上，先要理清楚思路，大体需要哪些步骤，然后具体的步骤和遇到的问题可以去搜索解决。</p>
@@ -576,11 +611,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">ajax</a>
+                <a href="javascript:void(0)" class="js-tag color5">Ajax</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Ajax</a>
+                <a href="javascript:void(0)" class="js-tag color5">ajax</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -600,6 +635,10 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">JavaScriptCore</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">operation</a>
               </li>
              
@@ -609,10 +648,6 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">deploy</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">JavaScriptCore</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -640,15 +675,15 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">cocoa</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">blog</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Gitalk</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">cocoa</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -672,19 +707,19 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">兼容性</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">多线程</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">HTTP</a>
+                <a href="javascript:void(0)" class="js-tag color4">兼容性</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">绘图</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">HTTP</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -704,6 +739,10 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">标识</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">arcgis</a>
               </li>
              
@@ -713,10 +752,6 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">D.Wade</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">标识</a>
               </li>
              
               <li class="article-tag-list-item">

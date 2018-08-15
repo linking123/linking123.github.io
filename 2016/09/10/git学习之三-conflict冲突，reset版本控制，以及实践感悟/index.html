@@ -9,22 +9,14 @@
   <link rel="dns-prefetch" href="http://linking123.github.io">
   <title>git学习之三-最近遇到的坑 | Linking&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="最近在开发过程中，用到git提交代码，之前也用过github传过代码，但是实际工作中还用的不多，过程中遇到了一些坑，记录下来。
-conflict冲突冲突原因:
-
-由于在自己提交之前，自己下载最新代码之后有人上传了，之前下载的不是最新的代码，所以有冲突，必须把代码冲突解决之后才能够上传。时间线问题。
-
-展现形式：12345&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt">
+  <meta name="description" content="最近在开发过程中，用到git提交代码，之前也用过github传过代码，但是实际工作中还用的不多，过程中遇到了一些坑，记录下来。 conflict冲突冲突原因:  由于在自己提交之前，自己下载最新代码之后有人上传了，之前下载的不是最新的代码，所以有冲突，必须把代码冲突解决之后才能够上传。时间线问题。  展现形式： &amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt; yo">
+<meta name="keywords" content="git">
 <meta property="og:type" content="article">
 <meta property="og:title" content="git学习之三-最近遇到的坑">
 <meta property="og:url" content="http://linking123.github.io/2016/09/10/git学习之三-conflict冲突，reset版本控制，以及实践感悟/index.html">
-<meta property="og:site_name" content="Linking's blog">
-<meta property="og:description" content="最近在开发过程中，用到git提交代码，之前也用过github传过代码，但是实际工作中还用的不多，过程中遇到了一些坑，记录下来。
-conflict冲突冲突原因:
-
-由于在自己提交之前，自己下载最新代码之后有人上传了，之前下载的不是最新的代码，所以有冲突，必须把代码冲突解决之后才能够上传。时间线问题。
-
-展现形式：12345&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt">
+<meta property="og:site_name" content="Linking&#39;s blog">
+<meta property="og:description" content="最近在开发过程中，用到git提交代码，之前也用过github传过代码，但是实际工作中还用的不多，过程中遇到了一些坑，记录下来。 conflict冲突冲突原因:  由于在自己提交之前，自己下载最新代码之后有人上传了，之前下载的不是最新的代码，所以有冲突，必须把代码冲突解决之后才能够上传。时间线问题。  展现形式： &amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt; yo">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://7xjqvu.com1.z0.glb.clouddn.com/15-6-19/48267713.jpg">
 <meta property="og:image" content="http://7xjqvu.com1.z0.glb.clouddn.com/15-6-19/81847901.jpg">
 <meta property="og:image" content="http://7xjqvu.com1.z0.glb.clouddn.com/15-6-19/10997419.jpg">
@@ -36,12 +28,7 @@ conflict冲突冲突原因:
 <meta property="og:updated_time" content="2016-10-22T09:26:23.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="git学习之三-最近遇到的坑">
-<meta name="twitter:description" content="最近在开发过程中，用到git提交代码，之前也用过github传过代码，但是实际工作中还用的不多，过程中遇到了一些坑，记录下来。
-conflict冲突冲突原因:
-
-由于在自己提交之前，自己下载最新代码之后有人上传了，之前下载的不是最新的代码，所以有冲突，必须把代码冲突解决之后才能够上传。时间线问题。
-
-展现形式：12345&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt">
+<meta name="twitter:description" content="最近在开发过程中，用到git提交代码，之前也用过github传过代码，但是实际工作中还用的不多，过程中遇到了一些坑，记录下来。 conflict冲突冲突原因:  由于在自己提交之前，自己下载最新代码之后有人上传了，之前下载的不是最新的代码，所以有冲突，必须把代码冲突解决之后才能够上传。时间线问题。  展现形式： &amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt; yo">
 <meta name="twitter:image" content="http://7xjqvu.com1.z0.glb.clouddn.com/15-6-19/48267713.jpg">
   
     <link rel="alternative" href="/atom.xml" title="Linking&#39;s blog" type="application/atom+xml">
@@ -77,7 +64,7 @@ conflict冲突冲突原因:
 		  <h1 class="header-author"><a href="/">Linking</a></h1>
 		</hgroup>
 		
-		<p class="header-subtitle">时间是个神，见证你的进步</p>
+		<p class="header-subtitle">记住生活的美好</p>
 		
 
 		<nav class="header-menu">
@@ -141,7 +128,7 @@ conflict冲突冲突原因:
 			  <h1 class="header-author js-header-author">Linking</h1>
 			</hgroup>
 			
-			<p class="header-subtitle"><i class="icon icon-quo-left"></i>时间是个神，见证你的进步<i class="icon icon-quo-right"></i></p>
+			<p class="header-subtitle"><i class="icon icon-quo-left"></i>记住生活的美好<i class="icon icon-quo-right"></i></p>
 			
 			
 			
@@ -221,26 +208,40 @@ conflict冲突冲突原因:
 <blockquote>
 <p>由于在自己提交之前，自己下载最新代码之后有人上传了，之前下载的不是最新的代码，所以有冲突，必须把代码冲突解决之后才能够上传。时间线问题。</p>
 </blockquote>
-<p>展现形式：<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;</div><div class="line">your <span class="selector-tag">code</span> </div><div class="line">HEAD </div><div class="line">others <span class="selector-tag">code</span></div><div class="line">&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;</div></pre></td></tr></table></figure></p>
-<p>完成了一个功能模块，想要提交到代码库中；为了方便，现在用git gui工具了，先把更改的文件statechanged状态改变一下，然后提交commit，之后千万不要忘记看看远程库中有没有最近的更新，pull一下；<br>pull一次之后就要注意解决冲突，一般文件会红色显示，有错误则会显示红色波浪线，形式如上所示；</p>
+<p>展现形式：</p>
+<pre><code>&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;
+your code 
+HEAD 
+others code
+&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;
+</code></pre><p>完成了一个功能模块，想要提交到代码库中；为了方便，现在用git gui工具了，先把更改的文件statechanged状态改变一下，然后提交commit，之后千万不要忘记看看远程库中有没有最近的更新，pull一下；<br>pull一次之后就要注意解决冲突，一般文件会红色显示，有错误则会显示红色波浪线，形式如上所示；</p>
 <p>注意：每天可以多次commit，就像打标签，但是最好一天只push一次。多次提交造成不必要的浪费；</p>
 <p>据老司机门的经验，开发时，应该多构建分支，在一个分支上做一个功能，功能做完之后再合并分支，这样可以减少冲突的概率。</p>
 <h2 id="撤销未提交的修改"><a href="#撤销未提交的修改" class="headerlink" title="撤销未提交的修改"></a>撤销未提交的修改</h2><p>还没有commit，但想撤回修改的情况下：<br><img src="http://7xjqvu.com1.z0.glb.clouddn.com/15-6-19/48267713.jpg" alt=""><br>git diff：<br><img src="http://7xjqvu.com1.z0.glb.clouddn.com/15-6-19/81847901.jpg" alt=""></p>
-<p>保存了，如果是一两句还好，如果几百几千行呢？手动累死你。<br>神器：<br><figure class="highlight awk"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git checkout src<span class="regexp">/com/</span>jay<span class="regexp">/example/</span>testforgit<span class="regexp">/MainActivity.java</span></div></pre></td></tr></table></figure></p>
-<p>duang一下就没了：<br><img src="http://7xjqvu.com1.z0.glb.clouddn.com/15-6-19/10997419.jpg" alt=""></p>
-<p>当然上述<strong>前提是没有add</strong>，才可以checkout。我们要<strong>先取消添加</strong>才可以撤回提交，使用下述指令：<br><figure class="highlight dts"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">git reset HEAD src<span class="meta-keyword">/com/</span>jay<span class="meta-keyword">/example/</span>testforgit/MainActivity.java</div><div class="line">git checkout src<span class="meta-keyword">/com/</span>jay<span class="meta-keyword">/example/</span>testforgit/MainActivity.java</div></pre></td></tr></table></figure></p>
-<p><img src="http://7xjqvu.com1.z0.glb.clouddn.com/15-6-19/97479292.jpg" alt=""></p>
+<p>保存了，如果是一两句还好，如果几百几千行呢？手动累死你。<br>神器：</p>
+<pre><code>git checkout src/com/jay/example/testforgit/MainActivity.java
+</code></pre><p>duang一下就没了：<br><img src="http://7xjqvu.com1.z0.glb.clouddn.com/15-6-19/10997419.jpg" alt=""></p>
+<p>当然上述<strong>前提是没有add</strong>，才可以checkout。我们要<strong>先取消添加</strong>才可以撤回提交，使用下述指令：</p>
+<pre><code>git reset HEAD src/com/jay/example/testforgit/MainActivity.java
+git checkout src/com/jay/example/testforgit/MainActivity.java
+</code></pre><p><img src="http://7xjqvu.com1.z0.glb.clouddn.com/15-6-19/97479292.jpg" alt=""></p>
 <h2 id="版本回退"><a href="#版本回退" class="headerlink" title="版本回退"></a>版本回退</h2><blockquote>
 <p>上面提到的是撤销未提交的修改，但如果提交了，我们想回退到之前的某一个版本怎么办?<br>我们可以通过git log查看我们的提交记录，我们需要从这里获取一个版本号，<br>一般我们只需要<strong>前七位字符</strong>就够了；另外在Git中，用HEAD代表当前版本，上一个版本就是HEAD^，<br>再上一个版本就是HEAD^^依次类推！我们先Git Log看下版本历史先！</p>
 </blockquote>
 <p><img src="http://7xjqvu.com1.z0.glb.clouddn.com/15-6-19/40426312.jpg" alt=""></p>
-<p>我们回到前一个提交的版本吧，依次键入下述指令：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">git <span class="keyword">reset</span> <span class="comment">--hard HEAD</span></div><div class="line">git <span class="keyword">reset</span> <span class="comment">--hard HEAD^</span></div><div class="line">git <span class="keyword">log</span></div></pre></td></tr></table></figure></p>
-<p>控制台：<br><img src="http://7xjqvu.com1.z0.glb.clouddn.com/15-6-19/51915562.jpg" alt=""></p>
-<p>可以看到我们已经回退到了前一个版本了，当然你可以直接这样写：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git <span class="keyword">reset</span> <span class="comment">--hard ad2080c</span></div></pre></td></tr></table></figure></p>
-<p>就是这么简单！回退后，你突然后悔了（第一次回退到前一旧版本了，现在又想回到新版本了，善变啊），想回退回新的那个版本，<br>可是遗憾的是，你键入git log却发现没有了最新的那个版本号，这怎么办呢…<br>没事，Git中给你提供了这颗“后悔药”，Git记录着你输入的每一条指令呢！键入：<br><figure class="highlight ebnf"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">git reflog</span></div></pre></td></tr></table></figure></p>
-<p>你会发现，版本号就在这里：<br><img src="http://7xjqvu.com1.z0.glb.clouddn.com/15-6-19/93429639.jpg" alt=""></p>
-<p>然后键入：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git <span class="keyword">reset</span> <span class="comment">--hard ad2080c</span></div></pre></td></tr></table></figure></p>
-<p>可以看到我们又回到了最新的那个版本了，就是这么溜！<br><img src="http://7xjqvu.com1.z0.glb.clouddn.com/15-6-19/46109301.jpg" alt=""></p>
+<p>我们回到前一个提交的版本吧，依次键入下述指令：</p>
+<pre><code>git reset --hard HEAD
+git reset --hard HEAD^
+git log
+</code></pre><p>控制台：<br><img src="http://7xjqvu.com1.z0.glb.clouddn.com/15-6-19/51915562.jpg" alt=""></p>
+<p>可以看到我们已经回退到了前一个版本了，当然你可以直接这样写：</p>
+<pre><code>git reset --hard ad2080c
+</code></pre><p>就是这么简单！回退后，你突然后悔了（第一次回退到前一旧版本了，现在又想回到新版本了，善变啊），想回退回新的那个版本，<br>可是遗憾的是，你键入git log却发现没有了最新的那个版本号，这怎么办呢…<br>没事，Git中给你提供了这颗“后悔药”，Git记录着你输入的每一条指令呢！键入：</p>
+<pre><code>git reflog
+</code></pre><p>你会发现，版本号就在这里：<br><img src="http://7xjqvu.com1.z0.glb.clouddn.com/15-6-19/93429639.jpg" alt=""></p>
+<p>然后键入：</p>
+<pre><code>git reset --hard ad2080c
+</code></pre><p>可以看到我们又回到了最新的那个版本了，就是这么溜！<br><img src="http://7xjqvu.com1.z0.glb.clouddn.com/15-6-19/46109301.jpg" alt=""></p>
 
       
 
@@ -533,11 +534,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">ajax</a>
+                <a href="javascript:void(0)" class="js-tag color5">Ajax</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Ajax</a>
+                <a href="javascript:void(0)" class="js-tag color5">ajax</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -557,6 +558,10 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">JavaScriptCore</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">operation</a>
               </li>
              
@@ -566,10 +571,6 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">deploy</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">JavaScriptCore</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -597,15 +598,15 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">cocoa</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">blog</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Gitalk</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">cocoa</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -629,19 +630,19 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">兼容性</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">多线程</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">HTTP</a>
+                <a href="javascript:void(0)" class="js-tag color4">兼容性</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">绘图</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">HTTP</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -661,6 +662,10 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">标识</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">arcgis</a>
               </li>
              
@@ -670,10 +675,6 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">D.Wade</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">标识</a>
               </li>
              
               <li class="article-tag-list-item">

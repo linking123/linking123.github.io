@@ -9,16 +9,18 @@
   <link rel="dns-prefetch" href="http://linking123.github.io">
   <title>HTML5与Ajax上传文件 | Linking&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="iframe伪装，jQuery-uploaded-file插件前台代码12345678&amp;lt;div&amp;gt;	&amp;lt;h1&amp;gt;iframe模拟ajax上传文件效果&amp;lt;/h1&amp;gt;	&amp;lt;h2&amp;gt;&amp;lt;/h2&amp;gt;	&amp;lt;form action=&apos;11-up.php&apos; method=&apos;post&apos; enctype=&apos;multipart/form-data&apos; onsubmit=&apos;r">
+  <meta name="description" content="iframe伪装，jQuery-uploaded-file插件前台代码 &amp;lt;div&amp;gt;     &amp;lt;h1&amp;gt;iframe模拟ajax上传文件效果&amp;lt;/h1&amp;gt;     &amp;lt;h2&amp;gt;&amp;lt;/h2&amp;gt;     &amp;lt;form action=&amp;#39;11-up.php&amp;#39; method=&amp;#39;post&amp;#39; enctype=&amp;#39;multipa">
+<meta name="keywords" content="Ajax,HTML5">
 <meta property="og:type" content="article">
 <meta property="og:title" content="HTML5与Ajax上传文件">
 <meta property="og:url" content="http://linking123.github.io/2016/03/01/HTML5与Ajax上传文件/index.html">
-<meta property="og:site_name" content="Linking's blog">
-<meta property="og:description" content="iframe伪装，jQuery-uploaded-file插件前台代码12345678&amp;lt;div&amp;gt;	&amp;lt;h1&amp;gt;iframe模拟ajax上传文件效果&amp;lt;/h1&amp;gt;	&amp;lt;h2&amp;gt;&amp;lt;/h2&amp;gt;	&amp;lt;form action=&apos;11-up.php&apos; method=&apos;post&apos; enctype=&apos;multipart/form-data&apos; onsubmit=&apos;r">
+<meta property="og:site_name" content="Linking&#39;s blog">
+<meta property="og:description" content="iframe伪装，jQuery-uploaded-file插件前台代码 &amp;lt;div&amp;gt;     &amp;lt;h1&amp;gt;iframe模拟ajax上传文件效果&amp;lt;/h1&amp;gt;     &amp;lt;h2&amp;gt;&amp;lt;/h2&amp;gt;     &amp;lt;form action=&amp;#39;11-up.php&amp;#39; method=&amp;#39;post&amp;#39; enctype=&amp;#39;multipa">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2016-03-02T14:29:22.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="HTML5与Ajax上传文件">
-<meta name="twitter:description" content="iframe伪装，jQuery-uploaded-file插件前台代码12345678&amp;lt;div&amp;gt;	&amp;lt;h1&amp;gt;iframe模拟ajax上传文件效果&amp;lt;/h1&amp;gt;	&amp;lt;h2&amp;gt;&amp;lt;/h2&amp;gt;	&amp;lt;form action=&apos;11-up.php&apos; method=&apos;post&apos; enctype=&apos;multipart/form-data&apos; onsubmit=&apos;r">
+<meta name="twitter:description" content="iframe伪装，jQuery-uploaded-file插件前台代码 &amp;lt;div&amp;gt;     &amp;lt;h1&amp;gt;iframe模拟ajax上传文件效果&amp;lt;/h1&amp;gt;     &amp;lt;h2&amp;gt;&amp;lt;/h2&amp;gt;     &amp;lt;form action=&amp;#39;11-up.php&amp;#39; method=&amp;#39;post&amp;#39; enctype=&amp;#39;multipa">
   
     <link rel="alternative" href="/atom.xml" title="Linking&#39;s blog" type="application/atom+xml">
   
@@ -53,7 +55,7 @@
 		  <h1 class="header-author"><a href="/">Linking</a></h1>
 		</hgroup>
 		
-		<p class="header-subtitle">时间是个神，见证你的进步</p>
+		<p class="header-subtitle">记住生活的美好</p>
 		
 
 		<nav class="header-menu">
@@ -117,7 +119,7 @@
 			  <h1 class="header-author js-header-author">Linking</h1>
 			</hgroup>
 			
-			<p class="header-subtitle"><i class="icon icon-quo-left"></i>时间是个神，见证你的进步<i class="icon icon-quo-right"></i></p>
+			<p class="header-subtitle"><i class="icon icon-quo-left"></i>记住生活的美好<i class="icon icon-quo-right"></i></p>
 			
 			
 			
@@ -192,13 +194,77 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="iframe伪装，jQuery-uploaded-file插件"><a href="#iframe伪装，jQuery-uploaded-file插件" class="headerlink" title="iframe伪装，jQuery-uploaded-file插件"></a>iframe伪装，jQuery-uploaded-file插件</h2><p>前台代码<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">h1</span>&gt;</span>iframe模拟ajax上传文件效果<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">h2</span>&gt;</span><span class="tag">&lt;/<span class="name">h2</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">'11-up.php'</span> <span class="attr">method</span>=<span class="string">'post'</span> <span class="attr">enctype</span>=<span class="string">'multipart/form-data'</span> <span class="attr">onsubmit</span>=<span class="string">'return ajaxUpload();'</span>&gt;</span></div><div class="line">    	<span class="tag">&lt;<span class="name">p</span>&gt;</span><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">'file'</span> <span class="attr">name</span>=<span class="string">'pic'</span> /&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">    	<span class="tag">&lt;<span class="name">p</span>&gt;</span><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">'submit'</span> <span class="attr">value</span>=<span class="string">'提交'</span> /&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">form</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure></p>
-<p>js代码<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*</span></div><div class="line">分析：</div><div class="line">  1. 捕捉表单提交动作(onsubmit="return ajaxUpload()")</div><div class="line">  2. 创建iframe(jQuery直接创建$('&lt;iframe&gt;&lt;/iframe&gt;'))</div><div class="line">  3. 把表单的target修改指向该iframe(target='framename')</div><div class="line">  4. 去掉这个iframe()</div><div class="line">*/</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">ajaxUpload</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="keyword">var</span> ifname = <span class="string">'up'</span> + <span class="built_in">Math</span>.random();</div><div class="line">    $(<span class="string">'&lt;iframe name="'</span>+ ifname +<span class="string">'" width="0" height="0" frameBorder="0"&gt;&lt;/iframe&gt;'</span>).appendTo($(<span class="string">'body'</span>));</div><div class="line">    $(<span class="string">'form:first'</span>).attr(<span class="string">'target'</span>, ifname);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>PHP代码<br><figure class="highlight awk"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span>(empty(<span class="variable">$_FILES</span>))&#123;</div><div class="line">	<span class="keyword">exit</span>(<span class="string">'no file'</span>);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="variable">$error</span> = <span class="variable">$_FILES</span>[<span class="string">'pic'</span>][<span class="string">'error'</span>] == <span class="number">0</span> ? <span class="string">'succ'</span> : <span class="string">'fail'</span>;</div><div class="line">    </div><div class="line">echo <span class="string">"&lt;script&gt;parent.document.getElementsByTagName('h2')[0].innerHTML = '$error'&lt;/script&gt;"</span>;</div></pre></td></tr></table></figure></p>
-<h2 id="HTML5-Files-API"><a href="#HTML5-Files-API" class="headerlink" title="HTML5 Files API"></a>HTML5 Files API</h2><p><code>files API</code> <code>Formdata</code><br>前台代码：<br><figure class="highlight delphi"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;input <span class="keyword">type</span>=<span class="string">'file'</span> <span class="keyword">name</span>=<span class="string">'pic'</span> onchange=<span class="string">'selfile();'</span> /&gt;</div></pre></td></tr></table></figure></p>
-<p>js代码：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">selfile</span>(<span class="params"></span>)</span>&#123;</div><div class="line">	<span class="comment">//表单数据容器</span></div><div class="line">	<span class="keyword">var</span> fd = <span class="keyword">new</span> FormData();</div><div class="line">    <span class="comment">//获取文件，文件列表`files`属性</span></div><div class="line">	<span class="keyword">var</span> pic = <span class="built_in">document</span>.getElementsByTagName(<span class="string">'input'</span>)[<span class="number">0</span>].files[<span class="number">0</span>];</div><div class="line">    <span class="comment">//附加数据到表单容器中</span></div><div class="line">	fd.append(<span class="string">'pic'</span>, pic);</div><div class="line"></div><div class="line">	<span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHttpRequest();</div><div class="line">	xhr.open(<span class="string">'POST'</span>, <span class="string">'./13-upfile.php'</span>, <span class="literal">true</span>);</div><div class="line"></div><div class="line">	xhr.onreadystatechange = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">		<span class="keyword">if</span>(<span class="keyword">this</span>.readyState == <span class="number">4</span>)&#123;</div><div class="line">			<span class="built_in">document</span>.getElementById(<span class="string">'debug'</span>).innerHTML = <span class="keyword">this</span>.responseText;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	xhr.send();</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>PHP代码：<br><figure class="highlight awk"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">&lt;?php </div><div class="line"></div><div class="line"><span class="regexp">//</span> print_r(<span class="variable">$_FILES</span>);</div><div class="line"></div><div class="line"><span class="regexp">//</span> sleep(<span class="number">3</span>);</div><div class="line"></div><div class="line"><span class="keyword">if</span>(empty(<span class="variable">$_FILES</span>))&#123;</div><div class="line">	<span class="keyword">exit</span>(<span class="string">'no file'</span>);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">if</span> (<span class="variable">$_FILES</span>[<span class="string">'pic'</span>][<span class="string">'error'</span>]!=<span class="number">0</span>) &#123;</div><div class="line">	<span class="keyword">exit</span>(<span class="string">'fail'</span>);</div><div class="line">&#125;</div><div class="line"></div><div class="line">move_uploaded_file(<span class="variable">$_FILES</span>[<span class="string">'pic'</span>][<span class="string">'tmp_name'</span>], <span class="string">'upload/'</span>.<span class="variable">$_FILES</span>[<span class="string">'pic'</span>][<span class="string">'name'</span>]);</div><div class="line"></div><div class="line">echo <span class="string">"ok"</span>;</div><div class="line">?&gt;</div></pre></td></tr></table></figure></p>
-<blockquote>
+        <h2 id="iframe伪装，jQuery-uploaded-file插件"><a href="#iframe伪装，jQuery-uploaded-file插件" class="headerlink" title="iframe伪装，jQuery-uploaded-file插件"></a>iframe伪装，jQuery-uploaded-file插件</h2><p>前台代码</p>
+<pre><code>&lt;div&gt;
+    &lt;h1&gt;iframe模拟ajax上传文件效果&lt;/h1&gt;
+    &lt;h2&gt;&lt;/h2&gt;
+    &lt;form action=&#39;11-up.php&#39; method=&#39;post&#39; enctype=&#39;multipart/form-data&#39; onsubmit=&#39;return ajaxUpload();&#39;&gt;
+        &lt;p&gt;&lt;input type=&#39;file&#39; name=&#39;pic&#39; /&gt;&lt;/p&gt;
+        &lt;p&gt;&lt;input type=&#39;submit&#39; value=&#39;提交&#39; /&gt;&lt;/p&gt;
+    &lt;/form&gt;
+&lt;/div&gt;
+</code></pre><p>js代码</p>
+<pre><code>/*
+分析：
+  1. 捕捉表单提交动作(onsubmit=&quot;return ajaxUpload()&quot;)
+  2. 创建iframe(jQuery直接创建$(&#39;&lt;iframe&gt;&lt;/iframe&gt;&#39;))
+  3. 把表单的target修改指向该iframe(target=&#39;framename&#39;)
+  4. 去掉这个iframe()
+*/
+function ajaxUpload(){
+    var ifname = &#39;up&#39; + Math.random();
+    $(&#39;&lt;iframe name=&quot;&#39;+ ifname +&#39;&quot; width=&quot;0&quot; height=&quot;0&quot; frameBorder=&quot;0&quot;&gt;&lt;/iframe&gt;&#39;).appendTo($(&#39;body&#39;));
+    $(&#39;form:first&#39;).attr(&#39;target&#39;, ifname);
+}
+</code></pre><p>PHP代码</p>
+<pre><code>if(empty($_FILES)){
+    exit(&#39;no file&#39;);
+}
+
+$error = $_FILES[&#39;pic&#39;][&#39;error&#39;] == 0 ? &#39;succ&#39; : &#39;fail&#39;;
+
+echo &quot;&lt;script&gt;parent.document.getElementsByTagName(&#39;h2&#39;)[0].innerHTML = &#39;$error&#39;&lt;/script&gt;&quot;;
+</code></pre><h2 id="HTML5-Files-API"><a href="#HTML5-Files-API" class="headerlink" title="HTML5 Files API"></a>HTML5 Files API</h2><p><code>files API</code> <code>Formdata</code><br>前台代码：</p>
+<pre><code>&lt;input type=&#39;file&#39; name=&#39;pic&#39; onchange=&#39;selfile();&#39; /&gt;
+</code></pre><p>js代码：</p>
+<pre><code>function selfile(){
+    //表单数据容器
+    var fd = new FormData();
+    //获取文件，文件列表`files`属性
+    var pic = document.getElementsByTagName(&#39;input&#39;)[0].files[0];
+    //附加数据到表单容器中
+    fd.append(&#39;pic&#39;, pic);
+
+    var xhr = new XMLHttpRequest();
+    xhr.open(&#39;POST&#39;, &#39;./13-upfile.php&#39;, true);
+
+    xhr.onreadystatechange = function(){
+        if(this.readyState == 4){
+            document.getElementById(&#39;debug&#39;).innerHTML = this.responseText;
+        }
+    }
+    xhr.send();
+}    
+</code></pre><p>PHP代码：</p>
+<pre><code>&lt;?php 
+
+// print_r($_FILES);
+
+// sleep(3);
+
+if(empty($_FILES)){
+    exit(&#39;no file&#39;);
+}
+
+if ($_FILES[&#39;pic&#39;][&#39;error&#39;]!=0) {
+    exit(&#39;fail&#39;);
+}
+
+move_uploaded_file($_FILES[&#39;pic&#39;][&#39;tmp_name&#39;], &#39;upload/&#39;.$_FILES[&#39;pic&#39;][&#39;name&#39;]);
+
+echo &quot;ok&quot;;
+?&gt;
+</code></pre><blockquote>
 <p>这里还只是用到了HTML5的文件上传API基础，有很多新特性值得花时间研究。<br>而我现在最缺的就是时间，论文需要加快速度。<br>后面还有找工作的事情，毕业季来了啊！！</p>
 </blockquote>
 <p><strong>蛋</strong>定！！！</p>
@@ -498,11 +564,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">ajax</a>
+                <a href="javascript:void(0)" class="js-tag color5">Ajax</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Ajax</a>
+                <a href="javascript:void(0)" class="js-tag color5">ajax</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -522,6 +588,10 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">JavaScriptCore</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">operation</a>
               </li>
              
@@ -531,10 +601,6 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">deploy</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">JavaScriptCore</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -562,15 +628,15 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">cocoa</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">blog</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Gitalk</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">cocoa</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -594,19 +660,19 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">兼容性</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">多线程</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">HTTP</a>
+                <a href="javascript:void(0)" class="js-tag color4">兼容性</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">绘图</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">HTTP</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -626,6 +692,10 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">标识</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">arcgis</a>
               </li>
              
@@ -635,10 +705,6 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">D.Wade</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">标识</a>
               </li>
              
               <li class="article-tag-list-item">

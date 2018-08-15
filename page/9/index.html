@@ -10,13 +10,15 @@
   <title>Linking&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="Be Better">
+<meta name="keywords" content="Java, Android, iOS, HTML&#x2F;CSS&#x2F;JavaScript, Python">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Linking's blog">
+<meta property="og:title" content="Linking&#39;s blog">
 <meta property="og:url" content="http://linking123.github.io/page/9/index.html">
-<meta property="og:site_name" content="Linking's blog">
+<meta property="og:site_name" content="Linking&#39;s blog">
 <meta property="og:description" content="Be Better">
+<meta property="og:locale" content="zh-Hans">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Linking's blog">
+<meta name="twitter:title" content="Linking&#39;s blog">
 <meta name="twitter:description" content="Be Better">
   
     <link rel="alternative" href="/atom.xml" title="Linking&#39;s blog" type="application/atom+xml">
@@ -52,7 +54,7 @@
 		  <h1 class="header-author"><a href="/">Linking</a></h1>
 		</hgroup>
 		
-		<p class="header-subtitle">时间是个神，见证你的进步</p>
+		<p class="header-subtitle">记住生活的美好</p>
 		
 
 		<nav class="header-menu">
@@ -116,7 +118,7 @@
 			  <h1 class="header-author js-header-author">Linking</h1>
 			</hgroup>
 			
-			<p class="header-subtitle"><i class="icon icon-quo-left"></i>时间是个神，见证你的进步<i class="icon icon-quo-right"></i></p>
+			<p class="header-subtitle"><i class="icon icon-quo-left"></i>记住生活的美好<i class="icon icon-quo-right"></i></p>
 			
 			
 			
@@ -235,21 +237,57 @@
 </tbody>
 </table>
 <p><code>ajax</code>的好处就是不阻塞后面代码的执行。</p>
-<p><code>status</code>状态码为<code>200</code>,<code>statusText</code>状态文字是<code>OK</code>时，正确返回。<br><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span>(<span class="keyword">this</span>.readyState == <span class="number">4</span> &amp;&amp; <span class="keyword">this</span>.status == <span class="number">200</span>)&#123;</div><div class="line">	<span class="keyword">var</span> str = <span class="string">''</span>;</div><div class="line">	str = <span class="string">'状态码是 '</span> + <span class="keyword">this</span>.status;</div><div class="line">	str += <span class="string">'状态文字是 '</span> + <span class="keyword">this</span>.statusText;</div><div class="line">	document.getElementById(<span class="string">'progress'</span>).innerHTML = str;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p><code>abort</code>属性 –&gt; 中断<code>xhr</code><br><figure class="highlight scilab"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">stopxhr</span><span class="params">()</span>&#123;</span></div><div class="line">	xhr.<span class="keyword">abort</span>();</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p><code>send</code>参数写法：<code>k1=v1&amp;k2=v2&amp;k3=v3...</code></p>
-<p><code>POST</code>请求必须加上<code>Content-Type: application/x-www-form-urlencoded</code><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">xhr.setRequestHeader(<span class="string">'Content-Type'</span>,<span class="string">'application/x-www-form-urlencoded'</span>);</div><div class="line">xhr.send(<span class="string">'username='</span>+un+<span class="string">'&amp;email='</span>+eml);</div></pre></td></tr></table></figure></p>
+<p><code>status</code>状态码为<code>200</code>,<code>statusText</code>状态文字是<code>OK</code>时，正确返回。</p>
+<pre><code>if(this.readyState == 4 &amp;&amp; this.status == 200){
+    var str = &#39;&#39;;
+    str = &#39;状态码是 &#39; + this.status;
+    str += &#39;状态文字是 &#39; + this.statusText;
+    document.getElementById(&#39;progress&#39;).innerHTML = str;
+}    
+</code></pre><p><code>abort</code>属性 –&gt; 中断<code>xhr</code></p>
+<pre><code>function stopxhr(){
+    xhr.abort();
+}
+</code></pre><p><code>send</code>参数写法：<code>k1=v1&amp;k2=v2&amp;k3=v3...</code></p>
+<p><code>POST</code>请求必须加上<code>Content-Type: application/x-www-form-urlencoded</code></p>
+<pre><code class="javascript">xhr.setRequestHeader(&#39;Content-Type&#39;,&#39;application/x-www-form-urlencoded&#39;);
+xhr.send(&#39;username=&#39;+un+&#39;&amp;email=&#39;+eml);
+</code></pre>
 <h2 id="Ajax返回值之XML类型"><a href="#Ajax返回值之XML类型" class="headerlink" title="Ajax返回值之XML类型"></a>Ajax返回值之XML类型</h2><p>返回值类型：</p>
 <blockquote>
 <p>不考虑HTML5最新标准，返回值有普通文本/xml文档两种类型</p>
 </blockquote>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="php"><span class="meta">&lt;?php</span> </span></div><div class="line">header(<span class="string">'Content-Type: text/xml'</span>);</div><div class="line"><span class="meta">?&gt;</span></div><div class="line">//此处空了一行</div><div class="line"><span class="php"><span class="meta">&lt;?</span>xml version=<span class="string">"1.0"</span> encoding=<span class="string">"utf-8"</span><span class="meta">?&gt;</span></span></div><div class="line"><span class="tag">&lt;<span class="name">bookstore</span>&gt;</span><span class="tag">&lt;<span class="name">book</span> <span class="attr">bid</span>=<span class="string">'b0001'</span>&gt;</span><span class="tag">&lt;<span class="name">title</span>&gt;</span>天龙八部<span class="tag">&lt;/<span class="name">title</span>&gt;</span><span class="tag">&lt;<span class="name">intro</span>&gt;</span>人生太苦了<span class="tag">&lt;/<span class="name">intro</span>&gt;</span><span class="tag">&lt;/<span class="name">book</span>&gt;</span><span class="tag">&lt;/<span class="name">bookstore</span>&gt;</span></div></pre></td></tr></table></figure>
-<p>打开以上<code>xxx.php</code>，<code>xml</code>格式错误提示:<br><figure class="highlight applescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">This page <span class="keyword">contains</span> <span class="keyword">the</span> following errors:</div><div class="line"><span class="keyword">error</span> <span class="keyword">on</span> line <span class="number">2</span> <span class="keyword">at</span> column <span class="number">6</span>: XML declaration allowed only <span class="keyword">at</span> <span class="keyword">the</span> start <span class="keyword">of</span> <span class="keyword">the</span> document.</div><div class="line">Below <span class="keyword">is</span> a rendering <span class="keyword">of</span> <span class="keyword">the</span> page up <span class="keyword">to</span> <span class="keyword">the</span> <span class="keyword">first</span> <span class="keyword">error</span>.</div></pre></td></tr></table></figure></p>
-<p>错误显示：<code>xml</code>必须在文档的首行,如下<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="php"><span class="meta">&lt;?php</span> </span></div><div class="line">header(<span class="string">'Content-Type: text/xml'</span>);</div><div class="line"><span class="meta">?&gt;</span> </div><div class="line"><span class="php"><span class="meta">&lt;?</span>xml version=<span class="string">"1.0"</span> encoding=<span class="string">"utf-8"</span><span class="meta">?&gt;</span></span></div><div class="line"><span class="tag">&lt;<span class="name">bookstore</span>&gt;</span><span class="tag">&lt;<span class="name">book</span> <span class="attr">bid</span>=<span class="string">'b0001'</span>&gt;</span><span class="tag">&lt;<span class="name">title</span>&gt;</span>天龙八部<span class="tag">&lt;/<span class="name">title</span>&gt;</span><span class="tag">&lt;<span class="name">intro</span>&gt;</span>人生太苦了<span class="tag">&lt;/<span class="name">intro</span>&gt;</span><span class="tag">&lt;/<span class="name">book</span>&gt;</span><span class="tag">&lt;/<span class="name">bookstore</span>&gt;</span></div></pre></td></tr></table></figure></p>
-<p><strong>API最简单了，基本上照着开发文档写就行了。</strong></p>
+<pre><code>&lt;?php 
+header(&#39;Content-Type: text/xml&#39;);
+?&gt;
+//此处空了一行
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;bookstore&gt;&lt;book bid=&#39;b0001&#39;&gt;&lt;title&gt;天龙八部&lt;/title&gt;&lt;intro&gt;人生太苦了&lt;/intro&gt;&lt;/book&gt;&lt;/bookstore&gt;
+</code></pre><p>打开以上<code>xxx.php</code>，<code>xml</code>格式错误提示:</p>
+<pre><code>This page contains the following errors:
+error on line 2 at column 6: XML declaration allowed only at the start of the document.
+Below is a rendering of the page up to the first error.
+</code></pre><p>错误显示：<code>xml</code>必须在文档的首行,如下</p>
+<pre><code>&lt;?php 
+header(&#39;Content-Type: text/xml&#39;);
+?&gt; 
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;bookstore&gt;&lt;book bid=&#39;b0001&#39;&gt;&lt;title&gt;天龙八部&lt;/title&gt;&lt;intro&gt;人生太苦了&lt;/intro&gt;&lt;/book&gt;&lt;/bookstore&gt;
+</code></pre><p><strong>API最简单了，基本上照着开发文档写就行了。</strong></p>
 <p><strong><code>Ajax</code>默认无法跨域。最新标准可以，但需要对方允许。</strong></p>
-<p>取后台数据：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">xhr.onreadystatechange = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">	<span class="keyword">if</span>(<span class="keyword">this</span>.readyState == <span class="number">4</span>)&#123;         <span class="comment">//this即xhr对象</span></div><div class="line">		<span class="comment">// alert(this.responseXML);</span></div><div class="line">		<span class="keyword">var</span> xmldom = <span class="keyword">this</span>.responseXML; </div><div class="line">		<span class="keyword">var</span> book = xmldom.getElementsByTagName(<span class="string">'book'</span>)[<span class="string">'0'</span>]; </div><div class="line">		<span class="keyword">var</span> title = book.firstChild.firstChild.wholeText;</div><div class="line">		<span class="keyword">var</span> intro = book.lastChild.firstChild.wholeText;</div><div class="line">		<span class="built_in">document</span>.getElementById(<span class="string">'btitle'</span>).value = title;</div><div class="line">		<span class="built_in">document</span>.getElementById(<span class="string">'bintro'</span>).value = intro;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>在后端生成格式化文件，拼接成<code>HTML</code>或者<code>json</code>文档，操作DOM，生成新的<code>HTML</code>页面。</p>
+<p>取后台数据：</p>
+<pre><code>xhr.onreadystatechange = function(){
+    if(this.readyState == 4){         //this即xhr对象
+        // alert(this.responseXML);
+        var xmldom = this.responseXML; 
+        var book = xmldom.getElementsByTagName(&#39;book&#39;)[&#39;0&#39;]; 
+        var title = book.firstChild.firstChild.wholeText;
+        var intro = book.lastChild.firstChild.wholeText;
+        document.getElementById(&#39;btitle&#39;).value = title;
+        document.getElementById(&#39;bintro&#39;).value = intro;
+    }
+}
+</code></pre><p>在后端生成格式化文件，拼接成<code>HTML</code>或者<code>json</code>文档，操作DOM，生成新的<code>HTML</code>页面。</p>
 <p><em>返回值类型：大的方向可以分为普通文本和xml文档。</em><br>普通文本返回类型又分为：</p>
 <ul>
 <li>返回简短的标志字符串，如0,1,OK</li>
@@ -257,24 +295,31 @@
 <li><code>json</code>格式，再由js解析</li>
 </ul>
 <p>很多类型，除了<code>HTML5</code>新标准返回的是<code>json</code>,本是文本，只不过符合某些规律，例如<code>json</code>格式。</p>
-<p><code>eval</code>将普通文本转化成js对象<code>[object: Object]</code>。<br>自己手写的后台数据：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span>  <span class="comment">//code  <span class="meta">?&gt;</span></span></div><div class="line">&#123;name: <span class="string">'linking'</span>, sex: <span class="string">'male'</span>&#125;</div><div class="line"><span class="meta">?&gt;</span></div></pre></td></tr></table></figure></p>
-<p>前端解析：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> linking = <span class="built_in">eval</span>(<span class="string">'('</span> + <span class="keyword">this</span>.responseText + <span class="string">')'</span>);</div><div class="line">alert(linking.name);</div></pre></td></tr></table></figure></p>
-<p>如果是<code>PHP</code>后台获取数据:<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$book = <span class="keyword">array</span>(<span class="string">'title'</span> =&gt; <span class="string">'天龙八部'</span>, <span class="string">'intro'</span> =&gt; <span class="string">'人生九苦'</span> );</div><div class="line"><span class="keyword">echo</span> json_encode($book) ;</div></pre></td></tr></table></figure></p>
-<h2 id="JSONP解决跨域问题"><a href="#JSONP解决跨域问题" class="headerlink" title="JSONP解决跨域问题"></a>JSONP解决跨域问题</h2><p><code>JSONP</code>不是<code>JSON</code>，只是一种协议，还未被标准组织规范，大家约定使用返回字符串；不用造对象。</p>
-<p><a href="https://zh.wikipedia.org/wiki/JSONP" target="_blank" rel="external">Wikipedia</a>解释: </p>
+<p><code>eval</code>将普通文本转化成js对象<code>[object: Object]</code>。<br>自己手写的后台数据：</p>
+<pre><code>&lt;?php  //code  ?&gt;
+{name: &#39;linking&#39;, sex: &#39;male&#39;}
+?&gt;
+</code></pre><p>前端解析：</p>
+<pre><code>var linking = eval(&#39;(&#39; + this.responseText + &#39;)&#39;);
+alert(linking.name);
+</code></pre><p>如果是<code>PHP</code>后台获取数据:</p>
+<pre><code>$book = array(&#39;title&#39; =&gt; &#39;天龙八部&#39;, &#39;intro&#39; =&gt; &#39;人生九苦&#39; );
+echo json_encode($book) ;
+</code></pre><h2 id="JSONP解决跨域问题"><a href="#JSONP解决跨域问题" class="headerlink" title="JSONP解决跨域问题"></a>JSONP解决跨域问题</h2><p><code>JSONP</code>不是<code>JSON</code>，只是一种协议，还未被标准组织规范，大家约定使用返回字符串；不用造对象。</p>
+<p><a href="https://zh.wikipedia.org/wiki/JSONP" target="_blank" rel="noopener">Wikipedia</a>解释: </p>
 <blockquote>
-<p>JSONP(JSON with Padding)是资料格式 JSON 的一种“使用模式”，可以让网页从别的网域要资料。另一个解决这个问题的新方法是<a href="https://zh.wikipedia.org/wiki/%E8%B7%A8%E4%BE%86%E6%BA%90%E8%B3%87%E6%BA%90%E5%85%B1%E4%BA%AB" target="_blank" rel="external">跨来源资源共享</a>(CORS)。<br>由于<strong>同源策略</strong>，一般来说位于 server1.example.com 的网页无法与不是 server1.example.com 的服务器沟通，而 HTML 的 script 元素是一个例外。利用 script 元素的这个开放策略，网页可以得到从其他来源动态产生的 JSON 资料，而这种使用模式就是所谓的 JSONP。用 JSONP 抓到的资料并不是 JSON，而是任意的 JavaScript，用 JavaScript 直译器执行而不是用 JSON 解析器解析。<br><strong>padding填充</strong>：典型的 JSONP 就是把既有的 JSON API 用函数呼叫<strong>包起来</strong>以达到跨域存取的解法。<br><strong>script元素注入</strong>：为了要启动一个 JSONP 呼叫（或者说，使用这个模式），你需要一个 script 元素。因此，浏览器必须为每一个 JSONP 要求加（或是重用）一个新的、有所需 src 值的 script 元素到 HTML DOM 里—或者说是“注入”这个元素。浏览器执行该元素，抓取 src 里的 URL，并执行回传的 JavaScript。<br>也因为这样，JSONP 被称作是一种“让使用者利用 script 元素注入的方式绕开同源策略”的方法。</p>
+<p>JSONP(JSON with Padding)是资料格式 JSON 的一种“使用模式”，可以让网页从别的网域要资料。另一个解决这个问题的新方法是<a href="https://zh.wikipedia.org/wiki/%E8%B7%A8%E4%BE%86%E6%BA%90%E8%B3%87%E6%BA%90%E5%85%B1%E4%BA%AB" target="_blank" rel="noopener">跨来源资源共享</a>(CORS)。<br>由于<strong>同源策略</strong>，一般来说位于 server1.example.com 的网页无法与不是 server1.example.com 的服务器沟通，而 HTML 的 script 元素是一个例外。利用 script 元素的这个开放策略，网页可以得到从其他来源动态产生的 JSON 资料，而这种使用模式就是所谓的 JSONP。用 JSONP 抓到的资料并不是 JSON，而是任意的 JavaScript，用 JavaScript 直译器执行而不是用 JSON 解析器解析。<br><strong>padding填充</strong>：典型的 JSONP 就是把既有的 JSON API 用函数呼叫<strong>包起来</strong>以达到跨域存取的解法。<br><strong>script元素注入</strong>：为了要启动一个 JSONP 呼叫（或者说，使用这个模式），你需要一个 script 元素。因此，浏览器必须为每一个 JSONP 要求加（或是重用）一个新的、有所需 src 值的 script 元素到 HTML DOM 里—或者说是“注入”这个元素。浏览器执行该元素，抓取 src 里的 URL，并执行回传的 JavaScript。<br>也因为这样，JSONP 被称作是一种“让使用者利用 script 元素注入的方式绕开同源策略”的方法。</p>
 </blockquote>
 <pre><code>function sear(){
     //获取将要搜索的内容
-    var searchtext = document.getElementsByName(&apos;searchtext&apos;)[0].value;
+    var searchtext = document.getElementsByName(&#39;searchtext&#39;)[0].value;
     //Google ajax API 搜索参数，返回json格式，利用回调函数aa解析
-    var url = &apos;http://ajax.googleais.com/ajax/services/search/web?v=1.0&amp;q=&apos;+ searchtext + &apos;&amp;callback=aa&apos;;
+    var url = &#39;http://ajax.googleais.com/ajax/services/search/web?v=1.0&amp;q=&#39;+ searchtext + &#39;&amp;callback=aa&#39;;
     //动态创建script标签，加入head，使其以script形式加载进来
-    var scr = document.createElement(&apos;script&apos;);
-    scr.setAttribute(&apos;type&apos;, &apos;text/javascript&apos;);
-    scr.setAttribute(&apos;src&apos;, url);
-    document.getElementByTagName(&apos;head&apos;)[0].appendChild(scr);
+    var scr = document.createElement(&#39;script&#39;);
+    scr.setAttribute(&#39;type&#39;, &#39;text/javascript&#39;);
+    scr.setAttribute(&#39;src&#39;, url);
+    document.getElementByTagName(&#39;head&#39;)[0].appendChild(scr);
 }
 //回调函数，对返回的数据进行处理
 function aa(res){
@@ -353,16 +398,63 @@ function aa(res){
         <p><strong>核心</strong>–<code>XMLHttpRequest</code>对象，一个专门的<code>HTTP</code>请求工具</p>
 <p>使用<code>XMLHttpRequest</code>做<code>Ajax</code>请求：</p>
 <h2 id="如何创建该对象"><a href="#如何创建该对象" class="headerlink" title="如何创建该对象"></a>如何创建该对象</h2><pre><code>标准` new XMLHttpRequest()`
-低版本`IE(678)`，`new ActiveXObject(&apos;Microsoft.XMLHTTP&apos;)`;新的`jQuery`已经抛弃IE6，**程序员不应该去迁就用户的坏习惯，有时候需要逼用户改变习惯。**
-</code></pre><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">createXHR</span>(<span class="params"></span>)</span>&#123;</div><div class="line">	<span class="keyword">var</span> xhr = <span class="literal">null</span>;</div><div class="line">	<span class="keyword">if</span>(<span class="built_in">window</span>.XMLHttpRequest)&#123;</div><div class="line">		xhr = <span class="keyword">new</span> XMLHttpRequest();</div><div class="line">	&#125; <span class="keyword">else</span> <span class="keyword">if</span>(<span class="built_in">window</span>.ActiveXObject)&#123;</div><div class="line">		xhr = <span class="keyword">new</span> ActiveXObject(<span class="string">'Microsoft.XMLHTTP'</span>);</div><div class="line">	&#125; <span class="keyword">else</span>&#123;</div><div class="line">		<span class="built_in">console</span>.log(<span class="string">'你的浏览器很奇怪。'</span>);</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> xhr;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="利用XHR发送请求来请求后台服务器资源"><a href="#利用XHR发送请求来请求后台服务器资源" class="headerlink" title="利用XHR发送请求来请求后台服务器资源"></a>利用XHR发送请求来请求后台服务器资源</h2><p>分析HTTP协议，请求需明确几个因素:<br>　　　1)请求方法：GET/POST/PUT/DELETE/HEAD<br>　　　2)请求哪个资源(URL)<br>　　　3)同步方式–同步/异步</p>
-<h2 id="如何得到请求返回结果"><a href="#如何得到请求返回结果" class="headerlink" title="如何得到请求返回结果"></a>如何得到请求返回结果</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">vote</span>(<span class="params"></span>)</span>&#123;</div><div class="line">	<span class="comment">//1. 制造xhr</span></div><div class="line">	<span class="keyword">var</span> xhr = createXHR();</div><div class="line">	<span class="comment">//2. 打开连接</span></div><div class="line">	xhr.open(<span class="string">'GET'</span>, <span class="string">'./05-ajaxvote.php'</span>, <span class="literal">true</span>/<span class="literal">false</span>);</div><div class="line">	<span class="comment">//3. 发送请求</span></div><div class="line">	xhr.send(<span class="literal">null</span>);</div><div class="line">	<span class="comment">//4. 测试同步异步的差异,改true/false</span></div><div class="line">	<span class="comment">//alert(xhr.responseText);</span></div><div class="line">	<span class="comment">//为避免误会用</span></div><div class="line">	alert(<span class="string">'123'</span>);</div></pre></td></tr></table></figure>
-<p>05-ajaxvote.php<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">sleep(<span class="number">3</span>);<span class="comment">//等待三秒</span></div><div class="line"><span class="keyword">if</span>(rand(<span class="number">1</span>,<span class="number">10</span>) &lt; <span class="number">4</span>)&#123;</div><div class="line">	<span class="keyword">echo</span> <span class="string">"0"</span>;</div><div class="line">&#125;<span class="keyword">else</span>&#123;</div><div class="line">	$votenum = file_get_contents(<span class="string">"./vote.txt"</span>);</div><div class="line">	<span class="keyword">if</span> ($votenum == <span class="keyword">null</span>) &#123;</div><div class="line">		$votenum = <span class="number">0</span>;</div><div class="line">	&#125;</div><div class="line">	$votenum += <span class="number">1</span>;</div><div class="line">	file_put_contents(<span class="string">'./vote.txt'</span>, $votenum);	</div><div class="line">	<span class="keyword">echo</span> <span class="string">"1"</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>上面的测试结果显示，<code>true</code>即异步时，立即<code>alert</code>，”你等你的，我先走了”;<code>false</code>即同步时，等三秒才<code>alert</code>，”send返回后，才是下一步”。<br>综上，同步代码按顺序执行，异步代码可跳过等待的代码，先执行下面的代码，再返回执行。</p>
+低版本`IE(678)`，`new ActiveXObject(&#39;Microsoft.XMLHTTP&#39;)`;新的`jQuery`已经抛弃IE6，**程序员不应该去迁就用户的坏习惯，有时候需要逼用户改变习惯。**
+</code></pre><pre><code>function createXHR(){
+    var xhr = null;
+    if(window.XMLHttpRequest){
+        xhr = new XMLHttpRequest();
+    } else if(window.ActiveXObject){
+        xhr = new ActiveXObject(&#39;Microsoft.XMLHTTP&#39;);
+    } else{
+        console.log(&#39;你的浏览器很奇怪。&#39;);
+    }
+    return xhr;
+}
+</code></pre><h2 id="利用XHR发送请求来请求后台服务器资源"><a href="#利用XHR发送请求来请求后台服务器资源" class="headerlink" title="利用XHR发送请求来请求后台服务器资源"></a>利用XHR发送请求来请求后台服务器资源</h2><p>分析HTTP协议，请求需明确几个因素:<br>　　　1)请求方法：GET/POST/PUT/DELETE/HEAD<br>　　　2)请求哪个资源(URL)<br>　　　3)同步方式–同步/异步</p>
+<h2 id="如何得到请求返回结果"><a href="#如何得到请求返回结果" class="headerlink" title="如何得到请求返回结果"></a>如何得到请求返回结果</h2><pre><code class="JavaScript">function vote(){
+    //1. 制造xhr
+    var xhr = createXHR();
+    //2. 打开连接
+    xhr.open(&#39;GET&#39;, &#39;./05-ajaxvote.php&#39;, true/false);
+    //3. 发送请求
+    xhr.send(null);
+    //4. 测试同步异步的差异,改true/false
+    //alert(xhr.responseText);
+    //为避免误会用
+    alert(&#39;123&#39;);
+</code></pre>
+<p>05-ajaxvote.php</p>
+<pre><code>sleep(3);//等待三秒
+if(rand(1,10) &lt; 4){
+    echo &quot;0&quot;;
+}else{
+    $votenum = file_get_contents(&quot;./vote.txt&quot;);
+    if ($votenum == null) {
+        $votenum = 0;
+    }
+    $votenum += 1;
+    file_put_contents(&#39;./vote.txt&#39;, $votenum);    
+    echo &quot;1&quot;;
+}
+</code></pre><p>上面的测试结果显示，<code>true</code>即异步时，立即<code>alert</code>，”你等你的，我先走了”;<code>false</code>即同步时，等三秒才<code>alert</code>，”send返回后，才是下一步”。<br>综上，同步代码按顺序执行，异步代码可跳过等待的代码，先执行下面的代码，再返回执行。</p>
 <p>XHR对象在请求与响应过程中，状态会不断变化，0-4逐步变化；可以绑定一个监听函数来监听状态的变化，只要状态变化就触发某函数。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">xhr.onreadystatechange = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">	<span class="keyword">var</span> pg = <span class="built_in">document</span>.getElementById(<span class="string">'progress'</span>);</div><div class="line">	pg.innerHTML += pg.innerHTML + <span class="string">'现在的状态是 '</span>+ <span class="keyword">this</span>.readyState + <span class="string">'&lt;br /&gt;'</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>只管<code>readyState == 4</code>的状态，其他不管。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">xhr.onreadystatechange = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">	<span class="keyword">if</span>(<span class="keyword">this</span>.readyState == <span class="number">4</span>)&#123;</div><div class="line">		<span class="keyword">if</span>(<span class="keyword">this</span>.responseText == <span class="string">'1'</span>)&#123;</div><div class="line">			<span class="built_in">document</span>.getElementById(<span class="string">'progress'</span>).innerHTML = <span class="string">'投票成功'</span>;</div><div class="line">		&#125;<span class="keyword">else</span> <span class="keyword">if</span>(<span class="keyword">this</span>.responseText == <span class="string">'0'</span>)&#123;</div><div class="line">			<span class="built_in">document</span>.getElementById(<span class="string">'progress'</span>).innerHTML = <span class="string">'投票失败'</span>;</div><div class="line">		&#125;<span class="keyword">else</span>&#123;</div><div class="line">			<span class="built_in">document</span>.getElementById(<span class="string">'progress'</span>).innerHTML = <span class="keyword">this</span>.responseText;</div><div class="line">		&#125;</div><div class="line">    &#125;   </div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-
+<pre><code>xhr.onreadystatechange = function(){
+    var pg = document.getElementById(&#39;progress&#39;);
+    pg.innerHTML += pg.innerHTML + &#39;现在的状态是 &#39;+ this.readyState + &#39;&lt;br /&gt;&#39;;
+}
+</code></pre><p>只管<code>readyState == 4</code>的状态，其他不管。</p>
+<pre><code>xhr.onreadystatechange = function(){
+    if(this.readyState == 4){
+        if(this.responseText == &#39;1&#39;){
+            document.getElementById(&#39;progress&#39;).innerHTML = &#39;投票成功&#39;;
+        }else if(this.responseText == &#39;0&#39;){
+            document.getElementById(&#39;progress&#39;).innerHTML = &#39;投票失败&#39;;
+        }else{
+            document.getElementById(&#39;progress&#39;).innerHTML = this.responseText;
+        }
+    }   
+}
+</code></pre>
       
 
       
@@ -438,12 +530,55 @@ function aa(res){
 </blockquote>
 <p>投票需求：要求无刷新投票，并且不允许使用XMLHttpRequest对象<br>分析：在XHR对象没有流行之前，已经有<strong>无刷新</strong>这种效果的要求</p>
 <h2 id="方法一：-HTTP协议204-No-Content"><a href="#方法一：-HTTP协议204-No-Content" class="headerlink" title="方法一： HTTP协议204 No Content"></a>方法一： HTTP协议204 No Content</h2><p>原理：利用http 204 No Content 状态码,浏览器不会跳转</p>
-<p>前端：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">p</span>&gt;</span><span class="tag">&lt;<span class="name">img</span> <span class="attr">width</span>=<span class="string">300</span> <span class="attr">height</span>=<span class="string">400</span> <span class="attr">src</span>=<span class="string">"lin.jpg"</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">p</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"vote.php"</span>&gt;</span>vote<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div></pre></td></tr></table></figure></p>
-<p>后端：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span> </div><div class="line">$votenum = file_get_contents(<span class="string">"./vote.txt"</span>);</div><div class="line"><span class="keyword">if</span> ($votenum == <span class="keyword">null</span>) &#123;</div><div class="line">    $votenum = <span class="number">0</span>;</div><div class="line">&#125;</div><div class="line">$votenum += <span class="number">1</span>;</div><div class="line">file_put_contents(<span class="string">'./vote.txt'</span>, $votenum);</div><div class="line"><span class="comment">//利用HTTP协议的204特性</span></div><div class="line">header(<span class="string">'HTTP/1.1 204 No Content'</span>);</div><div class="line"> <span class="meta">?&gt;</span></div></pre></td></tr></table></figure></p>
-<h2 id="方法二：利用图片加载的特性，完成请求"><a href="#方法二：利用图片加载的特性，完成请求" class="headerlink" title="方法二：利用图片加载的特性，完成请求"></a>方法二：利用图片加载的特性，完成请求</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&lt;script&gt;</div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">vote</span>(<span class="params"></span>)</span>&#123;</div><div class="line">        <span class="keyword">var</span> lin = <span class="built_in">document</span>.createElement(<span class="string">'img'</span>);</div><div class="line">        <span class="comment">//设置src属性，浏览器将会请求对应的资源</span></div><div class="line">        lin.setAttribute(<span class="string">'src'</span>, <span class="string">'./lin.jpg'</span>);</div><div class="line">        <span class="built_in">document</span>.getElementById(<span class="string">"progress"</span>).appendChild(lin);</div><div class="line">    &#125;</div><div class="line">&lt;<span class="regexp">/script&gt;</span></div></pre></td></tr></table></figure>
-<h2 id="方法三：-利用css-js加载特性-原理同上。"><a href="#方法三：-利用css-js加载特性-原理同上。" class="headerlink" title="方法三： 利用css,js加载特性,原理同上。"></a>方法三： 利用css,js加载特性,原理同上。</h2><h2 id="方法四：-利用iframe特性"><a href="#方法四：-利用iframe特性" class="headerlink" title="方法四： 利用iframe特性"></a>方法四： 利用iframe特性</h2><p>Ajax注册，提交表单，页面无刷新<br>建议用<code>POST</code>，因为<code>get</code>会暴露用户信息<br>前端：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"regres"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">/*form target--&gt;iframe name*/</div><div class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">"02-reg.php"</span> <span class="attr">method</span>=<span class="string">"post"</span> <span class="attr">target</span>=<span class="string">"regzone"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>用户名：<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">name</span>=<span class="string">"username"</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>邮件：<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"email"</span> <span class="attr">name</span>=<span class="string">"email"</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"submit"</span> <span class="attr">name</span>=<span class="string">"submit"</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">iframe</span> <span class="attr">width</span>=<span class="string">0</span> <span class="attr">height</span>=<span class="string">0</span> <span class="attr">frameBorder</span>=<span class="string">"0"</span> <span class="attr">name</span>=<span class="string">"regzone"</span>&gt;</span><span class="tag">&lt;/<span class="name">iframe</span>&gt;</span></div></pre></td></tr></table></figure></p>
-<p>后端：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"utf-8"</span>&gt;</span></div><div class="line"><span class="php"><span class="meta">&lt;?php</span> </span></div><div class="line"><span class="comment">//经过运算，逻辑判断，注册是否成功</span></div><div class="line">$msg = <span class="number">1</span>/<span class="number">0</span>;</div><div class="line"><span class="number">1</span>-<span class="string">"注册成功"</span>  <span class="number">0</span>-<span class="string">"注册失败"</span></div><div class="line"><span class="meta">?&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span><span class="actionscript"></span></div><div class="line">    <span class="comment">//被请求的资源req.php想得到HTML里的元素，用parent</span></div><div class="line">    parent.document.getElementById(<span class="string">'regres'</span>).innerHTML = <span class="string">'注册成功!'</span>;</div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div></pre></td></tr></table></figure></p>
-<h2 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h2><blockquote>
+<p>前端：</p>
+<pre><code>&lt;body&gt;
+    &lt;div&gt;
+        &lt;p&gt;&lt;img width=300 height=400 src=&quot;lin.jpg&quot;&gt;&lt;/p&gt;
+        &lt;p&gt;&lt;a href=&quot;vote.php&quot;&gt;vote&lt;/a&gt;&lt;/p&gt;
+    &lt;/div&gt;
+&lt;/body&gt;
+</code></pre><p>后端：</p>
+<pre><code class="php">&lt;?php 
+$votenum = file_get_contents(&quot;./vote.txt&quot;);
+if ($votenum == null) {
+    $votenum = 0;
+}
+$votenum += 1;
+file_put_contents(&#39;./vote.txt&#39;, $votenum);
+//利用HTTP协议的204特性
+header(&#39;HTTP/1.1 204 No Content&#39;);
+ ?&gt;
+</code></pre>
+<h2 id="方法二：利用图片加载的特性，完成请求"><a href="#方法二：利用图片加载的特性，完成请求" class="headerlink" title="方法二：利用图片加载的特性，完成请求"></a>方法二：利用图片加载的特性，完成请求</h2><pre><code class="javascript">&lt;script&gt;
+    function vote(){
+        var lin = document.createElement(&#39;img&#39;);
+        //设置src属性，浏览器将会请求对应的资源
+        lin.setAttribute(&#39;src&#39;, &#39;./lin.jpg&#39;);
+        document.getElementById(&quot;progress&quot;).appendChild(lin);
+    }
+&lt;/script&gt;
+</code></pre>
+<h2 id="方法三：-利用css-js加载特性-原理同上。"><a href="#方法三：-利用css-js加载特性-原理同上。" class="headerlink" title="方法三： 利用css,js加载特性,原理同上。"></a>方法三： 利用css,js加载特性,原理同上。</h2><h2 id="方法四：-利用iframe特性"><a href="#方法四：-利用iframe特性" class="headerlink" title="方法四： 利用iframe特性"></a>方法四： 利用iframe特性</h2><p>Ajax注册，提交表单，页面无刷新<br>建议用<code>POST</code>，因为<code>get</code>会暴露用户信息<br>前端：</p>
+<pre><code>&lt;div id=&quot;regres&quot;&gt;&lt;/div&gt;
+/*form target--&gt;iframe name*/
+&lt;form action=&quot;02-reg.php&quot; method=&quot;post&quot; target=&quot;regzone&quot;&gt;
+    &lt;p&gt;用户名：&lt;input type=&quot;text&quot; name=&quot;username&quot;&gt;&lt;/p&gt;
+    &lt;p&gt;邮件：&lt;input type=&quot;email&quot; name=&quot;email&quot;&gt;&lt;/p&gt;
+    &lt;p&gt;&lt;input type=&quot;submit&quot; name=&quot;submit&quot;&gt;&lt;/p&gt;
+&lt;/form&gt;
+&lt;iframe width=0 height=0 frameBorder=&quot;0&quot; name=&quot;regzone&quot;&gt;&lt;/iframe&gt;
+</code></pre><p>后端：</p>
+<pre><code>&lt;meta charset=&quot;utf-8&quot;&gt;
+&lt;?php 
+//经过运算，逻辑判断，注册是否成功
+$msg = 1/0;
+1-&quot;注册成功&quot;  0-&quot;注册失败&quot;
+?&gt;
+&lt;script type=&quot;text/javascript&quot;&gt;
+    //被请求的资源req.php想得到HTML里的元素，用parent
+    parent.document.getElementById(&#39;regres&#39;).innerHTML = &#39;注册成功!&#39;;
+&lt;/script&gt;
+</code></pre><h2 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h2><blockquote>
 <p>在不适用<code>XMLHttpRequest</code>对象的情况下，依然可以用js来实现对后台服务器请求，同时不刷新页面或跳转。</p>
 </blockquote>
 <p>所谓Ajax：即指<strong>页面不刷新</strong>情况下，利用<code>XMLHttpRequest</code>发送<code>HTTP</code>请求；JS的网络化.</p>
@@ -798,8 +933,48 @@ function aa(res){
 <li>浏览器一旦关闭，保存这个记录的cookie文件将被删除。重新打开浏览器弹出窗口会再次出现，从而确保了在原有的窗口基础上只打开一次。 </li>
 </ol>
 </blockquote>
-<p>判断非手机登陆方式<br><figure class="highlight lisp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">if (!/Android|webOS|iPhone|iPod|BlackBerry/i.test(<span class="name">navigator</span>.userAgent))</div><div class="line">	alert(<span class="string">"为了提高体验效果，请把页面缩小成手机屏幕大小。\n谢谢合作！"</span>)<span class="comment">;</span></div></pre></td></tr></table></figure></p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span><span class="javascript"></span></div><div class="line">	<span class="keyword">try</span>&#123;</div><div class="line">		<span class="keyword">var</span> alertmessage=<span class="string">"为了提高体验效果，请把页面缩小成手机屏幕大小。\n谢谢合作！"</span>;</div><div class="line">		<span class="keyword">var</span> once_per_session=<span class="number">1</span></div><div class="line">		<span class="function"><span class="keyword">function</span> <span class="title">get_cookie</span>(<span class="params">Name</span>) </span>&#123;</div><div class="line">		  <span class="keyword">var</span> search = Name + <span class="string">"="</span></div><div class="line">		  <span class="keyword">var</span> returnvalue = <span class="string">""</span>;</div><div class="line">		  <span class="keyword">if</span> (<span class="built_in">document</span>.cookie.length &gt; <span class="number">0</span>) &#123;</div><div class="line">			offset = <span class="built_in">document</span>.cookie.indexOf(search)</div><div class="line">			<span class="keyword">if</span> (offset != <span class="number">-1</span>) &#123;</div><div class="line">			  offset += search.length;</div><div class="line">			  end = <span class="built_in">document</span>.cookie.indexOf(<span class="string">";"</span>, offset);</div><div class="line">			  <span class="keyword">if</span> (end == <span class="number">-1</span>)</div><div class="line">				 end = <span class="built_in">document</span>.cookie.length;</div><div class="line">			 	 returnvalue=<span class="built_in">unescape</span>(<span class="built_in">document</span>.cookie.substring(offset, end))</div><div class="line">			  &#125;</div><div class="line">		   	&#125;</div><div class="line">		 	<span class="keyword">return</span> returnvalue;</div><div class="line">		&#125;</div><div class="line">		<span class="function"><span class="keyword">function</span> <span class="title">alertornot</span>(<span class="params"></span>)</span>&#123;</div><div class="line">			<span class="keyword">if</span> (get_cookie(<span class="string">'alerted'</span>)==<span class="string">''</span>)&#123;</div><div class="line">		        loadalert();</div><div class="line">				<span class="built_in">document</span>.cookie=<span class="string">"alerted=yes"</span>;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">		<span class="function"><span class="keyword">function</span> <span class="title">loadalert</span>(<span class="params"></span>)</span>&#123;</div><div class="line">			<span class="keyword">if</span> (!<span class="regexp">/Android|webOS|iPhone|iPod|BlackBerry/i</span>.test(navigator.userAgent))</div><div class="line">				alert(alertmessage);</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">if</span> (once_per_session==<span class="number">0</span>)</div><div class="line">			loadalert();</div><div class="line">		<span class="keyword">else</span></div><div class="line">			alertornot();</div><div class="line">	&#125; <span class="keyword">catch</span>(e)</div><div class="line">	&#123;</div><div class="line">		alert(e);</div><div class="line">	&#125;</div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>判断非手机登陆方式</p>
+<pre><code>if (!/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent))
+    alert(&quot;为了提高体验效果，请把页面缩小成手机屏幕大小。\n谢谢合作！&quot;);
+</code></pre><pre><code>&lt;script type=&quot;text/javascript&quot;&gt;
+    try{
+        var alertmessage=&quot;为了提高体验效果，请把页面缩小成手机屏幕大小。\n谢谢合作！&quot;;
+        var once_per_session=1
+        function get_cookie(Name) {
+          var search = Name + &quot;=&quot;
+          var returnvalue = &quot;&quot;;
+          if (document.cookie.length &gt; 0) {
+            offset = document.cookie.indexOf(search)
+            if (offset != -1) {
+              offset += search.length;
+              end = document.cookie.indexOf(&quot;;&quot;, offset);
+              if (end == -1)
+                 end = document.cookie.length;
+                  returnvalue=unescape(document.cookie.substring(offset, end))
+              }
+               }
+             return returnvalue;
+        }
+        function alertornot(){
+            if (get_cookie(&#39;alerted&#39;)==&#39;&#39;){
+                loadalert();
+                document.cookie=&quot;alerted=yes&quot;;
+            }
+        }
+        function loadalert(){
+            if (!/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent))
+                alert(alertmessage);
+        }
+        if (once_per_session==0)
+            loadalert();
+        else
+            alertornot();
+    } catch(e)
+    {
+        alert(e);
+    }
+&lt;/script&gt;
+</code></pre>
       
 
       
@@ -913,10 +1088,15 @@ function aa(res){
 <blockquote>
 <p>更高层的http接口，以及许多网站常用功能实现了。<br>但不是一个无所不包的全能框架，没有像Rails或Django实现模板引擎甚至ORM(Object Relation Model,对象关系模型)。只是一个轻量级的web框架，多数功能只是对http协议中的常用操作的封装，更多的功能需要插件或者整合其他模块来完成。</p>
 </blockquote>
-<h2 id="快速开始"><a href="#快速开始" class="headerlink" title="快速开始 "></a>快速开始 </h2><p>安装Express<br>目前express已经更新到4.x版本，安装时可用@加版本<br><figure class="highlight autoit"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">npm install -g express-generator<span class="symbol">@3</span></div><div class="line"><span class="literal">or</span></div><div class="line">npm install -g express-generator<span class="symbol">@4</span></div></pre></td></tr></table></figure></p>
-<p>书上用的是2.5.8版本，所以<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">npm</span> <span class="selector-tag">install</span> <span class="selector-tag">-g</span> <span class="selector-tag">express</span>@<span class="keyword">2</span>.<span class="keyword">5</span>.<span class="keyword">8</span> --save</div></pre></td></tr></table></figure></p>
-<p>不加版本号，默认最新版本.安装完成后，用<code>express -V</code>检查安装结果。<br>这样就可以使用express命令了。<br>最快的安装启动express框架简要步骤：<br><figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">express <span class="keyword">blog </span>&amp;&amp; cd <span class="keyword">blog </span>&amp;&amp; npm <span class="keyword">install </span>&amp;&amp; npm start</div></pre></td></tr></table></figure></p>
-<p><code>express 4.x</code>无法用<code>node app.js</code>启动，指令为<code>npm start</code>。<br>然后打开<a href="localhost:3000" target="_blank" rel="external">localhost:3000</a>即可见到熟悉的<code>Welcome to Express</code>。</p>
+<h2 id="快速开始"><a href="#快速开始" class="headerlink" title="快速开始 "></a>快速开始 </h2><p>安装Express<br>目前express已经更新到4.x版本，安装时可用@加版本</p>
+<pre><code>npm install -g express-generator@3
+or
+npm install -g express-generator@4
+</code></pre><p>书上用的是2.5.8版本，所以</p>
+<pre><code>npm install -g express@2.5.8 --save
+</code></pre><p>不加版本号，默认最新版本.安装完成后，用<code>express -V</code>检查安装结果。<br>这样就可以使用express命令了。<br>最快的安装启动express框架简要步骤：</p>
+<pre><code>express blog &amp;&amp; cd blog &amp;&amp; npm install &amp;&amp; npm start
+</code></pre><p><code>express 4.x</code>无法用<code>node app.js</code>启动，指令为<code>npm start</code>。<br>然后打开<a href="localhost:3000" target="_blank" rel="noopener">localhost:3000</a>即可见到熟悉的<code>Welcome to Express</code>。</p>
 <blockquote>
 <p>对应的版本都需要对应的依赖，有时候安装的时候会自动选择最先版本，也需要最新的依赖；制定的方法是在<code>package.json</code>中制定依赖的版本，再运行<code>npm install</code>来安装依赖。</p>
 </blockquote>
@@ -941,20 +1121,56 @@ function aa(res){
 <li>/logout: 登出</li>
 </ul>
 <h2 id="常见错误处理"><a href="#常见错误处理" class="headerlink" title="常见错误处理"></a>常见错误处理</h2><p>在完成用户注册页面书写之后，运行出错。<br>error:connection strategy not found</p>
-<figure class="highlight taggerscript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">$ node app.js</div><div class="line">E:<span class="symbol">\s</span>ync_mypc<span class="symbol">\s</span>ync_mypc<span class="symbol">\l</span>anguages<span class="symbol">\j</span>s<span class="symbol">\n</span>odejs<span class="symbol">\b</span>log<span class="symbol">\m</span>blog<span class="symbol">\n</span>ode_modules<span class="symbol">\c</span>onnect-mongo</div><div class="line"><span class="symbol">\s</span>rc<span class="symbol">\i</span>ndex.js:100</div><div class="line">                throw new Error('Connection strategy not found');</div><div class="line">                ^</div><div class="line"></div><div class="line">Error: Connection strategy not found</div><div class="line">    at MongoStore (E:<span class="symbol">\s</span>ync_mypc<span class="symbol">\s</span>ync_mypc<span class="symbol">\l</span>anguages<span class="symbol">\j</span>s<span class="symbol">\n</span>odejs<span class="symbol">\b</span>log<span class="symbol">\m</span>blog<span class="symbol">\n</span>ode_mo</div><div class="line">dules<span class="symbol">\c</span>onnect-mongo<span class="symbol">\s</span>rc<span class="symbol">\i</span>ndex.js:100:23)</div><div class="line">    at HTTPServer.&lt;anonymous&gt; (E:<span class="symbol">\s</span>ync_mypc<span class="symbol">\s</span>ync_mypc<span class="symbol">\l</span>anguages<span class="symbol">\j</span>s<span class="symbol">\n</span>odejs<span class="symbol">\b</span>log<span class="symbol">\m</span></div><div class="line">blog<span class="symbol">\a</span>pp.js:23:12)</div><div class="line">    at HTTPServer.app.configure (E:<span class="symbol">\s</span>ync_mypc<span class="symbol">\s</span>ync_mypc<span class="symbol">\l</span>anguages<span class="symbol">\j</span>s<span class="symbol">\n</span>odejs<span class="symbol">\b</span>log</div><div class="line"><span class="symbol">\m</span>blog<span class="symbol">\n</span>ode_modules<span class="symbol">\e</span>xpress<span class="symbol">\l</span>ib<span class="symbol">\h</span>ttp.js:542:61)</div><div class="line">    at Object.&lt;anonymous&gt; (E:<span class="symbol">\s</span>ync_mypc<span class="symbol">\s</span>ync_mypc<span class="symbol">\l</span>anguages<span class="symbol">\j</span>s<span class="symbol">\n</span>odejs<span class="symbol">\b</span>log<span class="symbol">\m</span>blog</div><div class="line"><span class="symbol">\a</span>pp.js:15:5)</div><div class="line">    at Module._compile (module.js:425:26)</div><div class="line">    at Object.Module._extensions..js (module.js:432:10)</div><div class="line">    at Module.load (module.js:356:32)</div><div class="line">    at Function.Module._load (module.js:311:12)</div><div class="line">    at Function.Module.runMain (module.js:457:10)</div><div class="line">    at startup (node.js:136:18)</div><div class="line">    at node.js:972:3</div></pre></td></tr></table></figure>
-<p>问题解决<br>在<a href="https://cnodejs.org/" target="_blank" rel="external">cnode</a>(已用github邮箱注册)上看到了一篇同样的<a href="https://cnodejs.org/topic/567a1120222744630726b244#567bab8c10b0249d07105d9c" target="_blank" rel="external">问题</a>，答案中解决了。<br>解决方式<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">npm</span> <span class="selector-tag">install</span> <span class="selector-tag">connect-mongo</span>@<span class="keyword">0</span>.<span class="keyword">8</span>.<span class="keyword">2</span> --save</div></pre></td></tr></table></figure></p>
-<p>独立的模块更新可能影响整体功能。在同一个时期要用当时的版本。</p>
+<pre><code>$ node app.js
+E:\sync_mypc\sync_mypc\languages\js\nodejs\blog\mblog\node_modules\connect-mongo
+\src\index.js:100
+                throw new Error(&#39;Connection strategy not found&#39;);
+                ^
+
+Error: Connection strategy not found
+    at MongoStore (E:\sync_mypc\sync_mypc\languages\js\nodejs\blog\mblog\node_mo
+dules\connect-mongo\src\index.js:100:23)
+    at HTTPServer.&lt;anonymous&gt; (E:\sync_mypc\sync_mypc\languages\js\nodejs\blog\m
+blog\app.js:23:12)
+    at HTTPServer.app.configure (E:\sync_mypc\sync_mypc\languages\js\nodejs\blog
+\mblog\node_modules\express\lib\http.js:542:61)
+    at Object.&lt;anonymous&gt; (E:\sync_mypc\sync_mypc\languages\js\nodejs\blog\mblog
+\app.js:15:5)
+    at Module._compile (module.js:425:26)
+    at Object.Module._extensions..js (module.js:432:10)
+    at Module.load (module.js:356:32)
+    at Function.Module._load (module.js:311:12)
+    at Function.Module.runMain (module.js:457:10)
+    at startup (node.js:136:18)
+    at node.js:972:3
+</code></pre><p>问题解决<br>在<a href="https://cnodejs.org/" target="_blank" rel="noopener">cnode</a>(已用github邮箱注册)上看到了一篇同样的<a href="https://cnodejs.org/topic/567a1120222744630726b244#567bab8c10b0249d07105d9c" target="_blank" rel="noopener">问题</a>，答案中解决了。<br>解决方式</p>
+<pre><code>npm install connect-mongo@0.8.2 --save
+</code></pre><p>独立的模块更新可能影响整体功能。在同一个时期要用当时的版本。</p>
 <p>定义的<code>db.js</code>中<code>DEFAULT_PORT</code>没有定义</p>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">TypeError: Cannot read property <span class="string">'DEFAULT_PORT'</span> of undefined</div><div class="line">    at Object.&lt;anonymous&gt; (E:\sync_mypc\sync_mypc\languages\js\nodejs\blog\mblog\models\db<span class="selector-class">.js</span>:<span class="number">7</span>:<span class="number">74</span>)</div><div class="line">    at Module._compile (module<span class="selector-class">.js</span>:<span class="number">425</span>:<span class="number">26</span>)</div><div class="line">    at Object<span class="selector-class">.Module</span>._extensions.<span class="selector-class">.js</span> (module<span class="selector-class">.js</span>:<span class="number">432</span>:<span class="number">10</span>)</div><div class="line">    at Module<span class="selector-class">.load</span> (module<span class="selector-class">.js</span>:<span class="number">356</span>:<span class="number">32</span>)</div><div class="line">    at Function<span class="selector-class">.Module</span>._load (module<span class="selector-class">.js</span>:<span class="number">311</span>:<span class="number">12</span>)</div><div class="line">    at Module<span class="selector-class">.require</span> (module<span class="selector-class">.js</span>:<span class="number">366</span>:<span class="number">17</span>)</div><div class="line">    at require (module<span class="selector-class">.js</span>:<span class="number">385</span>:<span class="number">17</span>)</div><div class="line">    at Object.&lt;anonymous&gt; (E:\sync_mypc\sync_mypc\languages\js\nodejs\blog\mblog\models\user<span class="selector-class">.js</span>:<span class="number">1</span>:<span class="number">77</span>)</div><div class="line">    at Module._compile (module<span class="selector-class">.js</span>:<span class="number">425</span>:<span class="number">26</span>)</div><div class="line">    at Object<span class="selector-class">.Module</span>._extensions.<span class="selector-class">.js</span> (module<span class="selector-class">.js</span>:<span class="number">432</span>:<span class="number">10</span>)</div><div class="line">Program node app<span class="selector-class">.js</span> exited with <span class="selector-tag">code</span> <span class="number">1</span></div></pre></td></tr></table></figure>
-<p>问题解决<br><figure class="highlight ada"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">DEFAULT_PORT   <span class="comment">-----    27017</span></div></pre></td></tr></table></figure></p>
-<p>到今天下午，基本完成第五章的学习。程序能够正常运行，但是还有许多细节不是很清楚，例如<code>mongodb</code>的使用，之间的映射关系自己也还要梳理一遍。</p>
-<p>代码稍后会在<a href="https://github.com/linking123/nodejs_guard" target="_blank" rel="external"><code>GitHub</code></a>和<a href=""><code>oscGit</code></a>上双备份。</p>
+<pre><code>TypeError: Cannot read property &#39;DEFAULT_PORT&#39; of undefined
+    at Object.&lt;anonymous&gt; (E:\sync_mypc\sync_mypc\languages\js\nodejs\blog\mblog\models\db.js:7:74)
+    at Module._compile (module.js:425:26)
+    at Object.Module._extensions..js (module.js:432:10)
+    at Module.load (module.js:356:32)
+    at Function.Module._load (module.js:311:12)
+    at Module.require (module.js:366:17)
+    at require (module.js:385:17)
+    at Object.&lt;anonymous&gt; (E:\sync_mypc\sync_mypc\languages\js\nodejs\blog\mblog\models\user.js:1:77)
+    at Module._compile (module.js:425:26)
+    at Object.Module._extensions..js (module.js:432:10)
+Program node app.js exited with code 1
+</code></pre><p>问题解决</p>
+<pre><code>DEFAULT_PORT   -----    27017
+</code></pre><p>到今天下午，基本完成第五章的学习。程序能够正常运行，但是还有许多细节不是很清楚，例如<code>mongodb</code>的使用，之间的映射关系自己也还要梳理一遍。</p>
+<p>代码稍后会在<a href="https://github.com/linking123/nodejs_guard" target="_blank" rel="noopener"><code>GitHub</code></a>和<a href=""><code>oscGit</code></a>上双备份。</p>
 <h1 id="《Node-js实战》"><a href="#《Node-js实战》" class="headerlink" title="《Node.js实战》  "></a>《Node.js实战》  </h1><p>图书编号：TP312JA425</p>
 <h2 id="第一部分-基础篇"><a href="#第一部分-基础篇" class="headerlink" title="第一部分 基础篇"></a>第一部分 基础篇</h2><p>nodejs及JavaScript基础了解。</p>
 <h2 id="第二部分-提高篇"><a href="#第二部分-提高篇" class="headerlink" title="第二部分 提高篇"></a>第二部分 提高篇</h2><p>相册服务器<br>模块<br>模板<br>2015/12/30 noon 17:09  library<br>稍后补上笔记并上传代码备份</p>
-<h2 id="第三部分-实战篇"><a href="#第三部分-实战篇" class="headerlink" title="第三部分 实战篇"></a>第三部分 实战篇</h2><p>###第七章使用express构建web应用<br>路由<br><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">app.get(<span class="string">'/'</span>, <span class="function"><span class="keyword">function</span><span class="params">(req, res)</span></span>&#123; &#125;);</div></pre></td></tr></table></figure></p>
-<p>URL路由函数一般格式<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">app</span><span class="selector-class">.method</span>(<span class="selector-tag">url_pattern</span>, <span class="selector-tag">optional_functions</span>, <span class="selector-tag">request_handler_function</span>);</div></pre></td></tr></table></figure></p>
-<p>method: get, post, delete, put; all<br>简单的URL</p>
+<h2 id="第三部分-实战篇"><a href="#第三部分-实战篇" class="headerlink" title="第三部分 实战篇"></a>第三部分 实战篇</h2><p>###第七章使用express构建web应用<br>路由</p>
+<pre><code>app.get(&#39;/&#39;, function(req, res){ });
+</code></pre><p>URL路由函数一般格式</p>
+<pre><code>app.method(url_pattern, optional_functions, request_handler_function);
+</code></pre><p>method: get, post, delete, put; all<br>简单的URL</p>
 <blockquote>
 <p>/path/to/resources</p>
 </blockquote>
@@ -962,8 +1178,11 @@ function aa(res){
 <blockquote>
 <p>/user(s)?/list<br>/user/*</p>
 </blockquote>
-<p>占位符(用<code>:</code>标记)从请求路由中提取指定值(除了<code>/</code>)，解析路由时将匹配到的占位符值保存到<code>req.params</code>对象中<br><figure class="highlight lua"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">app.get(<span class="string">"/albums/:album_name.json"</span>, <span class="function"><span class="keyword">function</span><span class="params">(req, res)</span></span>&#123;</div><div class="line">　　res.<span class="keyword">end</span>(<span class="string">"request "</span>+req.params.album_name);</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
-<p>如上面请求/albums/linking.json,输出结果为:</p>
+<p>占位符(用<code>:</code>标记)从请求路由中提取指定值(除了<code>/</code>)，解析路由时将匹配到的占位符值保存到<code>req.params</code>对象中</p>
+<pre><code>app.get(&quot;/albums/:album_name.json&quot;, function(req, res){
+　　res.end(&quot;request &quot;+req.params.album_name);
+});
+</code></pre><p>如上面请求/albums/linking.json,输出结果为:</p>
 <blockquote>
 <p>request linking</p>
 </blockquote>
@@ -975,19 +1194,28 @@ function aa(res){
 <blockquote>
 <p>如<code>express</code>就建立在<code>connect</code>这个中间件。</p>
 </blockquote>
-<p>通过一下格式引用中间件<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> middle_something = <span class="keyword">require</span>(<span class="string">'middle_something'</span>);</div><div class="line">app.<span class="keyword">use</span>(middle_something());</div></pre></td></tr></table></figure></p>
-<p>配置</p>
+<p>通过一下格式引用中间件</p>
+<pre><code>var middle_something = require(&#39;middle_something&#39;);
+app.use(middle_something()); 
+</code></pre><p>配置</p>
 <blockquote>
-<p>使用<code>configure</code>方法指定配置名称，在特定的配置环境下该方法提供的函数会被调用。未指定名称，则函数会被所有的配置环境调用，多个配置名称可以用逗号隔开。<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">app.configure(<span class="function"><span class="keyword">function</span><span class="params">()</span></span>&#123;   <span class="comment">//全部适用</span></div><div class="line">　app.<span class="keyword">use</span>(express.bodyParser());</div><div class="line">&#125;);</div><div class="line"></div><div class="line">app.configure(<span class="string">'dev'</span>, <span class="function"><span class="keyword">function</span><span class="params">()</span></span>&#123;  <span class="comment">//指定了开发环境适用</span></div><div class="line">　app.<span class="keyword">use</span>(expresss.logger(<span class="string">'dev'</span>));</div><div class="line">&#125;);</div><div class="line">app.configure(<span class="string">'production'</span>, <span class="string">'staging'</span>, <span class="function"><span class="keyword">function</span><span class="params">()</span></span>&#123;  <span class="comment">//多名称</span></div><div class="line">　app.<span class="keyword">use</span>(express.logger());</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<p>使用<code>configure</code>方法指定配置名称，在特定的配置环境下该方法提供的函数会被调用。未指定名称，则函数会被所有的配置环境调用，多个配置名称可以用逗号隔开。<br><code>`</code><br>app.configure(function(){   //全部适用<br>　app.use(express.bodyParser());<br>});</p>
 </blockquote>
-<p>Mac和UNIX电脑中shell命令<br><figure class="highlight crmsh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="attr">NODE_ENV=</span>production <span class="keyword">node</span> <span class="title">program</span>.js</div></pre></td></tr></table></figure></p>
-<p>Windows命令<br><figure class="highlight crmsh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">set <span class="attr">NODE_ENV=</span>production</div><div class="line"><span class="keyword">node</span> <span class="title">program</span>.js</div></pre></td></tr></table></figure></p>
-<p>中间件执行过程中有一个顺序问题，注意<code>re</code>s.end`的位置，它会关闭响应。</p>
-<p>静态文件处理</p>
-<blockquote>
-<p><code>express</code>通过<code>connect</code>提供了<code>static</code>中间件，将存放静态文件的根目录路径名赋给中间件创建函数即可<br><figure class="highlight fsharp"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">app.<span class="keyword">use</span>(express.<span class="keyword">static</span>(<span class="string">"/secure/static_site_files"</span>));</div></pre></td></tr></table></figure></p>
-</blockquote>
-<p><code>bodyParser</code>,<code>cookieParser</code>,<code>session</code><br><figure class="highlight ada"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">var app = express()</div><div class="line">    .<span class="keyword">use</span>(express.logger(<span class="symbol">'dev</span>'))</div><div class="line">     // move this to AFTER the next <span class="keyword">use</span>() <span class="keyword">and</span> see what happens!</div><div class="line">    .<span class="keyword">use</span>(express.bodyParser())</div><div class="line">    .<span class="keyword">use</span>(<span class="keyword">function</span>(req, res)&#123;</div><div class="line">        console.log(req.<span class="keyword">body</span>);</div><div class="line">        res.<span class="keyword">end</span>(<span class="symbol">'want</span> to update album name to '</div><div class="line">                + req.<span class="keyword">body</span>.album.new_name + <span class="string">"\n"</span>);</div><div class="line">&#125;)</div></pre></td></tr></table></figure></p>
+<p>app.configure(‘dev’, function(){  //指定了开发环境适用<br>　app.use(expresss.logger(‘dev’));<br>});<br>app.configure(‘production’, ‘staging’, function(){  //多名称<br>　app.use(express.logger());<br>});</p>
+<pre><code>Mac和UNIX电脑中shell命令
+</code></pre><p>NODE_ENV=production node program.js</p>
+<pre><code>Windows命令
+</code></pre><p>set NODE_ENV=production<br>node program.js</p>
+<pre><code>中间件执行过程中有一个顺序问题，注意`re`s.end`的位置，它会关闭响应。
+
+静态文件处理
+&gt;`express`通过`connect`提供了`static`中间件，将存放静态文件的根目录路径名赋给中间件创建函数即可
+</code></pre><p>app.use(express.static(“/secure/static_site_files”));</p>
+<pre><code>
+`bodyParser`,`cookieParser`,`session`
+</code></pre><p>var app = express()<br>    .use(express.logger(‘dev’))<br>     // move this to AFTER the next use() and see what happens!<br>    .use(express.bodyParser())<br>    .use(function(req, res){<br>        console.log(req.body);<br>        res.end(‘want to update album name to ‘</p>
+<pre><code>            + req.body.album.new_name + &quot;\n&quot;);
+</code></pre><p>})<br><code>`</code></p>
 <p><strong>编写应用过程中，检测和捕捉错误的代码量往往要大于正常操作的代码量，这才是良好的代码风格。</strong></p>
 <blockquote>
 <p>也许我单纯的以为代码只要能实现直接的功能就行了，是太浅薄的理解。程序中大部分时间都在跟<code>bug</code>作斗争，良好的代码风格能够节省大量的时间，快速定位错误所在。</p>
@@ -1226,11 +1454,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">ajax</a>
+                <a href="javascript:void(0)" class="js-tag color5">Ajax</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Ajax</a>
+                <a href="javascript:void(0)" class="js-tag color5">ajax</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1250,6 +1478,10 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">JavaScriptCore</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">operation</a>
               </li>
              
@@ -1259,10 +1491,6 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">deploy</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">JavaScriptCore</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1290,15 +1518,15 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">cocoa</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">blog</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Gitalk</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">cocoa</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1322,19 +1550,19 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">兼容性</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">多线程</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">HTTP</a>
+                <a href="javascript:void(0)" class="js-tag color4">兼容性</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">绘图</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">HTTP</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1354,6 +1582,10 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">标识</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">arcgis</a>
               </li>
              
@@ -1363,10 +1595,6 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">D.Wade</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">标识</a>
               </li>
              
               <li class="article-tag-list-item">

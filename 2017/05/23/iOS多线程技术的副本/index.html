@@ -9,16 +9,18 @@
   <link rel="dns-prefetch" href="http://linking123.github.io">
   <title>iOS多线程技术 | Linking&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="1:performSelector 多线程123456789101112131415161718192021222324/* *使用performSelector 的多线程 *优点：简单 *缺点：没有串行并线队列，不能实现高级线程调度 */ -(void)performSelectorFunction&amp;#123;        NSLog(@&quot;performSelectorFunction sta">
+  <meta name="description" content="1:performSelector 多线程/*  *使用performSelector 的多线程  *优点：简单  *缺点：没有串行并线队列，不能实现高级线程调度  */  -(void)performSelectorFunction{      NSLog(@&amp;quot;performSelectorFunction start&amp;quot;);      //同步方式执行     //[self">
+<meta name="keywords" content="多线程">
 <meta property="og:type" content="article">
 <meta property="og:title" content="iOS多线程技术">
 <meta property="og:url" content="http://linking123.github.io/2017/05/23/iOS多线程技术的副本/index.html">
-<meta property="og:site_name" content="Linking's blog">
-<meta property="og:description" content="1:performSelector 多线程123456789101112131415161718192021222324/* *使用performSelector 的多线程 *优点：简单 *缺点：没有串行并线队列，不能实现高级线程调度 */ -(void)performSelectorFunction&amp;#123;        NSLog(@&quot;performSelectorFunction sta">
+<meta property="og:site_name" content="Linking&#39;s blog">
+<meta property="og:description" content="1:performSelector 多线程/*  *使用performSelector 的多线程  *优点：简单  *缺点：没有串行并线队列，不能实现高级线程调度  */  -(void)performSelectorFunction{      NSLog(@&amp;quot;performSelectorFunction start&amp;quot;);      //同步方式执行     //[self">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2017-06-01T06:59:30.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS多线程技术">
-<meta name="twitter:description" content="1:performSelector 多线程123456789101112131415161718192021222324/* *使用performSelector 的多线程 *优点：简单 *缺点：没有串行并线队列，不能实现高级线程调度 */ -(void)performSelectorFunction&amp;#123;        NSLog(@&quot;performSelectorFunction sta">
+<meta name="twitter:description" content="1:performSelector 多线程/*  *使用performSelector 的多线程  *优点：简单  *缺点：没有串行并线队列，不能实现高级线程调度  */  -(void)performSelectorFunction{      NSLog(@&amp;quot;performSelectorFunction start&amp;quot;);      //同步方式执行     //[self">
   
     <link rel="alternative" href="/atom.xml" title="Linking&#39;s blog" type="application/atom+xml">
   
@@ -53,7 +55,7 @@
 		  <h1 class="header-author"><a href="/">Linking</a></h1>
 		</hgroup>
 		
-		<p class="header-subtitle">时间是个神，见证你的进步</p>
+		<p class="header-subtitle">记住生活的美好</p>
 		
 
 		<nav class="header-menu">
@@ -117,7 +119,7 @@
 			  <h1 class="header-author js-header-author">Linking</h1>
 			</hgroup>
 			
-			<p class="header-subtitle"><i class="icon icon-quo-left"></i>时间是个神，见证你的进步<i class="icon icon-quo-right"></i></p>
+			<p class="header-subtitle"><i class="icon icon-quo-left"></i>记住生活的美好<i class="icon icon-quo-right"></i></p>
 			
 			
 			
@@ -192,9 +194,81 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="1-performSelector-多线程"><a href="#1-performSelector-多线程" class="headerlink" title="1:performSelector 多线程"></a>1:performSelector 多线程</h2><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*</span></div><div class="line"> *使用performSelector 的多线程</div><div class="line"> *优点：简单</div><div class="line"> *缺点：没有串行并线队列，不能实现高级线程调度</div><div class="line"> */</div><div class="line"> </div><div class="line">-(<span class="keyword">void</span>)performSelectorFunction&#123;</div><div class="line">    </div><div class="line">    <span class="built_in">NSLog</span>(<span class="string">@"performSelectorFunction start"</span>);</div><div class="line"></div><div class="line">    <span class="comment">//同步方式执行</span></div><div class="line">    <span class="comment">//[self performSelector:@selector(function1)];</span></div><div class="line">    </div><div class="line">    <span class="comment">//延迟两秒执行,主线程阻塞</span></div><div class="line">    <span class="comment">//[self performSelector:@selector(function1) withObject:nil afterDelay:2];</span></div><div class="line"></div><div class="line">    <span class="comment">//主线程上执行，主线程阻塞，waitUntilDone:YES：等待执行完成顺序执行，waitUntilDone:NO 先执行后面语句</span></div><div class="line">    <span class="comment">//[self performSelectorOnMainThread:@selector(function1) withObject:nil waitUntilDone:NO];</span></div><div class="line">    </div><div class="line">    <span class="comment">//子线程上执行</span></div><div class="line">    [<span class="keyword">self</span> performSelectorInBackground:<span class="keyword">@selector</span>(function1) withObject:<span class="literal">nil</span>];</div><div class="line">    </div><div class="line">    <span class="built_in">NSLog</span>(<span class="string">@"performSelectorFunction end"</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="2-NSThread"><a href="#2-NSThread" class="headerlink" title="2:NSThread"></a>2:NSThread</h2><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*</span></div><div class="line"> *使用NSThread 的多线程</div><div class="line"> *优点：简单</div><div class="line"> *缺点：没有串行并线队列，不能实现高级线程调度,和performSelector是一样的。</div><div class="line"> */</div><div class="line"></div><div class="line">-(<span class="keyword">void</span>)<span class="built_in">NSThreadFunction</span>&#123;</div><div class="line">    </div><div class="line">    <span class="built_in">NSLog</span>(<span class="string">@"NSThreadFunction start"</span>);</div><div class="line">    </div><div class="line">    <span class="comment">//线程暂停 2秒</span></div><div class="line">    <span class="comment">//[NSThread sleepForTimeInterval:2];</span></div><div class="line">    </div><div class="line">    <span class="comment">//显示创建的方式执行</span></div><div class="line">    <span class="comment">//NSThread *myThread = [[NSThread alloc]initWithTarget:self selector:@selector(function1) object:nil];</span></div><div class="line">    <span class="comment">//[myThread start];</span></div><div class="line">    </div><div class="line">    <span class="comment">//静态方法执行线程</span></div><div class="line">    <span class="comment">//[NSThread detachNewThreadSelector:@selector(function1) toTarget:self withObject:nil];</span></div><div class="line">    </div><div class="line">    <span class="built_in">NSLog</span>(<span class="string">@"NSThreadFunction end"</span>);</div><div class="line">    </div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="3-NSTimer-反面教材，他不是多线程，他只是定时执行任务"><a href="#3-NSTimer-反面教材，他不是多线程，他只是定时执行任务" class="headerlink" title="3:NSTimer(反面教材，他不是多线程，他只是定时执行任务)"></a>3:NSTimer(反面教材，他不是多线程，他只是定时执行任务)</h2><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*</span></div><div class="line"> *使反面教材，他不是多线程，他只是定时执行任务</div><div class="line"> */</div><div class="line"></div><div class="line">-(<span class="keyword">void</span>)<span class="built_in">NSTimerFunction</span>&#123;</div><div class="line">    </div><div class="line">    <span class="built_in">NSLog</span>(<span class="string">@"NSTimerFunction start"</span>);</div><div class="line">    </div><div class="line">    <span class="comment">//定时执行任务，可以重复和不重复</span></div><div class="line">    <span class="built_in">NSTimer</span> *timer = [<span class="built_in">NSTimer</span> scheduledTimerWithTimeInterval:<span class="number">2</span> target:<span class="keyword">self</span> selector:<span class="keyword">@selector</span>(function1) userInfo:<span class="literal">nil</span> repeats:<span class="literal">NO</span>];</div><div class="line">    </div><div class="line">    <span class="comment">//暂时停止定时器</span></div><div class="line">    <span class="comment">//[timer setFireDate:[NSDate distantFuture]];</span></div><div class="line">    <span class="comment">//重新开启定时器</span></div><div class="line">    <span class="comment">//[timer setFireDate:[NSDate distantPast]];</span></div><div class="line">    <span class="comment">//永久通知定时器</span></div><div class="line">    <span class="comment">//[timer invalidate];</span></div><div class="line">    <span class="comment">//timer = nil;</span></div><div class="line">    </div><div class="line">    <span class="built_in">NSLog</span>(<span class="string">@"NSTimerFunction end"</span>);</div><div class="line">    </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+        <h2 id="1-performSelector-多线程"><a href="#1-performSelector-多线程" class="headerlink" title="1:performSelector 多线程"></a>1:performSelector 多线程</h2><pre><code class="objc">/*
+ *使用performSelector 的多线程
+ *优点：简单
+ *缺点：没有串行并线队列，不能实现高级线程调度
+ */
+
+-(void)performSelectorFunction{
+
+    NSLog(@&quot;performSelectorFunction start&quot;);
+
+    //同步方式执行
+    //[self performSelector:@selector(function1)];
+
+    //延迟两秒执行,主线程阻塞
+    //[self performSelector:@selector(function1) withObject:nil afterDelay:2];
+
+    //主线程上执行，主线程阻塞，waitUntilDone:YES：等待执行完成顺序执行，waitUntilDone:NO 先执行后面语句
+    //[self performSelectorOnMainThread:@selector(function1) withObject:nil waitUntilDone:NO];
+
+    //子线程上执行
+    [self performSelectorInBackground:@selector(function1) withObject:nil];
+
+    NSLog(@&quot;performSelectorFunction end&quot;);
+}
+
+</code></pre>
+<h2 id="2-NSThread"><a href="#2-NSThread" class="headerlink" title="2:NSThread"></a>2:NSThread</h2><pre><code class="objc">/*
+ *使用NSThread 的多线程
+ *优点：简单
+ *缺点：没有串行并线队列，不能实现高级线程调度,和performSelector是一样的。
+ */
+
+-(void)NSThreadFunction{
+
+    NSLog(@&quot;NSThreadFunction start&quot;);
+
+    //线程暂停 2秒
+    //[NSThread sleepForTimeInterval:2];
+
+    //显示创建的方式执行
+    //NSThread *myThread = [[NSThread alloc]initWithTarget:self selector:@selector(function1) object:nil];
+    //[myThread start];
+
+    //静态方法执行线程
+    //[NSThread detachNewThreadSelector:@selector(function1) toTarget:self withObject:nil];
+
+    NSLog(@&quot;NSThreadFunction end&quot;);
+
+}
+
+</code></pre>
+<h2 id="3-NSTimer-反面教材，他不是多线程，他只是定时执行任务"><a href="#3-NSTimer-反面教材，他不是多线程，他只是定时执行任务" class="headerlink" title="3:NSTimer(反面教材，他不是多线程，他只是定时执行任务)"></a>3:NSTimer(反面教材，他不是多线程，他只是定时执行任务)</h2><pre><code class="objc">/*
+ *使反面教材，他不是多线程，他只是定时执行任务
+ */
+
+-(void)NSTimerFunction{
+
+    NSLog(@&quot;NSTimerFunction start&quot;);
+
+    //定时执行任务，可以重复和不重复
+    NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:2 target:self selector:@selector(function1) userInfo:nil repeats:NO];
+
+    //暂时停止定时器
+    //[timer setFireDate:[NSDate distantFuture]];
+    //重新开启定时器
+    //[timer setFireDate:[NSDate distantPast]];
+    //永久通知定时器
+    //[timer invalidate];
+    //timer = nil;
+
+    NSLog(@&quot;NSTimerFunction end&quot;);
+
+}
+
+</code></pre>
 <h2 id="4-GCD最棒的多线程使用api"><a href="#4-GCD最棒的多线程使用api" class="headerlink" title="4:GCD最棒的多线程使用api"></a>4:GCD最棒的多线程使用api</h2><blockquote>
 <p>GCD 中主要的对象：</p>
 </blockquote>
@@ -212,8 +286,89 @@
 <li>dispatch_sync</li>
 <li>dispatch_sync</li>
 </ul>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="comment">// dispatch_sync 同步方式执行：</span></div><div class="line"> <span class="built_in">dispatch_sync</span>(dispatch_get_global_queue(<span class="number">0</span>, <span class="number">0</span>), ^&#123;</div><div class="line">      <span class="comment">// something</span></div><div class="line"> &#125;);</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">// dispatch_async 异步执行：</span></div><div class="line"> <span class="built_in">dispatch_async</span>(dispatch_get_global_queue(<span class="number">0</span>, <span class="number">0</span>), ^&#123;</div><div class="line">      <span class="comment">// something</span></div><div class="line"> &#125;);</div><div class="line"></div><div class="line"> <span class="comment">// dispatch_async：主线程执行：</span></div><div class="line"> <span class="built_in">dispatch_async</span>(dispatch_get_main_queue(), ^&#123;</div><div class="line">      <span class="comment">// something</span></div><div class="line"> &#125;);</div><div class="line"></div><div class="line"> <span class="comment">// dispatch_once：一次性执行：</span></div><div class="line"> <span class="keyword">static</span> <span class="built_in">dispatch_once_t</span> onceToken;</div><div class="line"> <span class="built_in">dispatch_once</span>(&amp;onceToken, ^&#123;</div><div class="line">     <span class="comment">// code to be executed once</span></div><div class="line"> &#125;);</div><div class="line"></div><div class="line"> <span class="comment">//dispatch_time_t ：延迟2秒执行：</span></div><div class="line"> <span class="keyword">double</span> delayInSeconds = <span class="number">2.0</span>;</div><div class="line"> dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * <span class="built_in">NSEC_PER_SEC</span>);</div><div class="line"> dispatch_after(popTime, dispatch_get_main_queue(), ^(<span class="keyword">void</span>)&#123;</div><div class="line">     <span class="comment">// code to be executed on the main queue after delay</span></div><div class="line"> &#125;);</div><div class="line"></div><div class="line"> <span class="comment">//dispatch_group_t： 合并汇总结果</span></div><div class="line"> dispatch_group_t group = dispatch_group_create();</div><div class="line"> dispatch_group_async(group, dispatch_get_global_queue(<span class="number">0</span>,<span class="number">0</span>), ^&#123;</div><div class="line">      <span class="comment">// 并行执行的线程一</span></div><div class="line"> &#125;);</div><div class="line"> dispatch_group_async(group, dispatch_get_global_queue(<span class="number">0</span>,<span class="number">0</span>), ^&#123;</div><div class="line">      <span class="comment">// 并行执行的线程二</span></div><div class="line"> &#125;);</div><div class="line"> dispatch_group_notify(group, dispatch_get_global_queue(<span class="number">0</span>,<span class="number">0</span>), ^&#123;</div><div class="line">      <span class="comment">// 汇总结果</span></div><div class="line"> &#125;);</div><div class="line"></div><div class="line"></div><div class="line"> <span class="comment">//dispatch_barrier_async :作用是在并行队列中，等待前面的队列执行完成后再继续往下执行</span></div><div class="line"><span class="built_in">dispatch_queue_t</span> concurrentQueue = dispatch_queue_create(<span class="string">"my.concurrent.queue"</span>, DISPATCH_QUEUE_CONCURRENT);</div><div class="line"><span class="built_in">dispatch_async</span>(concurrentQueue, ^()&#123;</div><div class="line">    <span class="built_in">NSLog</span>(<span class="string">@"dispatch-1"</span>);</div><div class="line">&#125;);</div><div class="line"><span class="built_in">dispatch_async</span>(concurrentQueue, ^()&#123;</div><div class="line">    <span class="built_in">NSLog</span>(<span class="string">@"dispatch-2"</span>);</div><div class="line">&#125;);</div><div class="line">dispatch_barrier_async(concurrentQueue, ^()&#123;</div><div class="line">    <span class="built_in">NSLog</span>(<span class="string">@"dispatch-barrier"</span>); </div><div class="line">&#125;);</div><div class="line"><span class="built_in">dispatch_async</span>(concurrentQueue, ^()&#123;</div><div class="line">    <span class="built_in">NSLog</span>(<span class="string">@"dispatch-3"</span>);</div><div class="line">&#125;);</div><div class="line"><span class="built_in">dispatch_async</span>(concurrentQueue, ^()&#123;</div><div class="line">    <span class="built_in">NSLog</span>(<span class="string">@"dispatch-4"</span>);</div><div class="line">&#125;);</div><div class="line"></div><div class="line"><span class="comment">//dispatch_apply：将一个指定的block执行指定的次数，常用语block数组。在一般方法中虽然block中的方法并不是顺序执行，但是由于apply是线程同步的，</span></div><div class="line"><span class="comment">//所以print(dispatch_apply done);一定最后执行。常常可以这样用：</span></div><div class="line">let globalQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, <span class="number">0</span>)</div><div class="line"><span class="built_in">dispatch_async</span>(globalQueue, &#123; () -&gt; Void <span class="keyword">in</span></div><div class="line">    dispatch_apply(<span class="number">10</span>, globalQueue) &#123; (index) -&gt; Void <span class="keyword">in</span></div><div class="line">        print(index)</div><div class="line">    &#125;</div><div class="line">    print(<span class="string">"completed"</span>)</div><div class="line">&#125;)</div><div class="line">print(<span class="string">"在dispatch_apply之前"</span>) </div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">//dispatch_suspend / dispatch_resume</span></div><div class="line"><span class="comment">//暂停</span></div><div class="line">dispatch_suspend(globalQueue)</div><div class="line"><span class="comment">//恢复</span></div><div class="line">dispatch_resume(globalQueue)</div><div class="line"></div><div class="line"><span class="comment">//Dispatch Semaphore 这个是线程的信号量，比较复杂</span></div></pre></td></tr></table></figure>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="http://liuyanwei.jumppo.com/2015/08/19/ios-ThreadAndAsynchronization.html" target="_blank" rel="external">http://liuyanwei.jumppo.com/2015/08/19/ios-ThreadAndAsynchronization.html</a><br><a href="http://blog.csdn.net/zhangao0086/article/details/38904923" target="_blank" rel="external">http://blog.csdn.net/zhangao0086/article/details/38904923</a></p>
+<pre><code class="objc">
+// dispatch_sync 同步方式执行：
+ dispatch_sync(dispatch_get_global_queue(0, 0), ^{
+      // something
+ });
+
+
+// dispatch_async 异步执行：
+ dispatch_async(dispatch_get_global_queue(0, 0), ^{
+      // something
+ });
+
+ // dispatch_async：主线程执行：
+ dispatch_async(dispatch_get_main_queue(), ^{
+      // something
+ });
+
+ // dispatch_once：一次性执行：
+ static dispatch_once_t onceToken;
+ dispatch_once(&amp;onceToken, ^{
+     // code to be executed once
+ });
+
+ //dispatch_time_t ：延迟2秒执行：
+ double delayInSeconds = 2.0;
+ dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+ dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+     // code to be executed on the main queue after delay
+ });
+
+ //dispatch_group_t： 合并汇总结果
+ dispatch_group_t group = dispatch_group_create();
+ dispatch_group_async(group, dispatch_get_global_queue(0,0), ^{
+      // 并行执行的线程一
+ });
+ dispatch_group_async(group, dispatch_get_global_queue(0,0), ^{
+      // 并行执行的线程二
+ });
+ dispatch_group_notify(group, dispatch_get_global_queue(0,0), ^{
+      // 汇总结果
+ });
+
+
+ //dispatch_barrier_async :作用是在并行队列中，等待前面的队列执行完成后再继续往下执行
+dispatch_queue_t concurrentQueue = dispatch_queue_create(&quot;my.concurrent.queue&quot;, DISPATCH_QUEUE_CONCURRENT);
+dispatch_async(concurrentQueue, ^(){
+    NSLog(@&quot;dispatch-1&quot;);
+});
+dispatch_async(concurrentQueue, ^(){
+    NSLog(@&quot;dispatch-2&quot;);
+});
+dispatch_barrier_async(concurrentQueue, ^(){
+    NSLog(@&quot;dispatch-barrier&quot;); 
+});
+dispatch_async(concurrentQueue, ^(){
+    NSLog(@&quot;dispatch-3&quot;);
+});
+dispatch_async(concurrentQueue, ^(){
+    NSLog(@&quot;dispatch-4&quot;);
+});
+
+//dispatch_apply：将一个指定的block执行指定的次数，常用语block数组。在一般方法中虽然block中的方法并不是顺序执行，但是由于apply是线程同步的，
+//所以print(dispatch_apply done);一定最后执行。常常可以这样用：
+let globalQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
+dispatch_async(globalQueue, { () -&gt; Void in
+    dispatch_apply(10, globalQueue) { (index) -&gt; Void in
+        print(index)
+    }
+    print(&quot;completed&quot;)
+})
+print(&quot;在dispatch_apply之前&quot;) 
+
+
+//dispatch_suspend / dispatch_resume
+//暂停
+dispatch_suspend(globalQueue)
+//恢复
+dispatch_resume(globalQueue)
+
+//Dispatch Semaphore 这个是线程的信号量，比较复杂
+
+</code></pre>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="http://liuyanwei.jumppo.com/2015/08/19/ios-ThreadAndAsynchronization.html" target="_blank" rel="noopener">http://liuyanwei.jumppo.com/2015/08/19/ios-ThreadAndAsynchronization.html</a><br><a href="http://blog.csdn.net/zhangao0086/article/details/38904923" target="_blank" rel="noopener">http://blog.csdn.net/zhangao0086/article/details/38904923</a></p>
 
       
 
@@ -506,11 +661,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">ajax</a>
+                <a href="javascript:void(0)" class="js-tag color5">Ajax</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Ajax</a>
+                <a href="javascript:void(0)" class="js-tag color5">ajax</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -530,6 +685,10 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">JavaScriptCore</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">operation</a>
               </li>
              
@@ -539,10 +698,6 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">deploy</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">JavaScriptCore</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -570,15 +725,15 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">cocoa</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">blog</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Gitalk</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">cocoa</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -602,19 +757,19 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">兼容性</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">多线程</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">HTTP</a>
+                <a href="javascript:void(0)" class="js-tag color4">兼容性</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">绘图</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">HTTP</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -634,6 +789,10 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">标识</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">arcgis</a>
               </li>
              
@@ -643,10 +802,6 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">D.Wade</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">标识</a>
               </li>
              
               <li class="article-tag-list-item">

@@ -9,37 +9,21 @@
   <link rel="dns-prefetch" href="http://linking123.github.io">
   <title>微信好友城市分布分析 | Linking&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="缘由在朋友圈看到一个分享-matplotlib[05]——微信好友的全国分布的热图
-回想起之前也做过微信好友分析；有道云地址。
-但没有加上地图，这次刚好加上吧。
-思路
-微信好友分析；
-3D.js 地图展示（这次不做，因为发现了pyecharts）
-pyecharts展示城市分布图">
+  <meta name="description" content="缘由在朋友圈看到一个分享-matplotlib[05]——微信好友的全国分布的热图 回想起之前也做过微信好友分析；有道云地址。 但没有加上地图，这次刚好加上吧。 思路 微信好友分析； 3D.js 地图展示（这次不做，因为发现了pyecharts） pyecharts展示城市分布图">
+<meta name="keywords" content="Python,WeChat">
 <meta property="og:type" content="article">
 <meta property="og:title" content="微信好友城市分布分析">
 <meta property="og:url" content="http://linking123.github.io/2018/02/08/微信好友城市分布分析/index.html">
-<meta property="og:site_name" content="Linking's blog">
-<meta property="og:description" content="缘由在朋友圈看到一个分享-matplotlib[05]——微信好友的全国分布的热图
-回想起之前也做过微信好友分析；有道云地址。
-但没有加上地图，这次刚好加上吧。
-思路
-微信好友分析；
-3D.js 地图展示（这次不做，因为发现了pyecharts）
-pyecharts展示城市分布图">
+<meta property="og:site_name" content="Linking&#39;s blog">
+<meta property="og:description" content="缘由在朋友圈看到一个分享-matplotlib[05]——微信好友的全国分布的热图 回想起之前也做过微信好友分析；有道云地址。 但没有加上地图，这次刚好加上吧。 思路 微信好友分析； 3D.js 地图展示（这次不做，因为发现了pyecharts） pyecharts展示城市分布图">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://orukz1s2q.bkt.clouddn.com/friendBar.png">
 <meta property="og:image" content="http://orukz1s2q.bkt.clouddn.com/friendPie.png">
 <meta property="og:image" content="http://orukz1s2q.bkt.clouddn.com/%E6%88%91%E7%9A%84%E5%A5%BD%E5%8F%8B%E5%88%86%E5%B8%83%E5%9B%BE.png">
 <meta property="og:updated_time" content="2018-02-08T14:43:30.971Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="微信好友城市分布分析">
-<meta name="twitter:description" content="缘由在朋友圈看到一个分享-matplotlib[05]——微信好友的全国分布的热图
-回想起之前也做过微信好友分析；有道云地址。
-但没有加上地图，这次刚好加上吧。
-思路
-微信好友分析；
-3D.js 地图展示（这次不做，因为发现了pyecharts）
-pyecharts展示城市分布图">
+<meta name="twitter:description" content="缘由在朋友圈看到一个分享-matplotlib[05]——微信好友的全国分布的热图 回想起之前也做过微信好友分析；有道云地址。 但没有加上地图，这次刚好加上吧。 思路 微信好友分析； 3D.js 地图展示（这次不做，因为发现了pyecharts） pyecharts展示城市分布图">
 <meta name="twitter:image" content="http://orukz1s2q.bkt.clouddn.com/friendBar.png">
   
     <link rel="alternative" href="/atom.xml" title="Linking&#39;s blog" type="application/atom+xml">
@@ -75,7 +59,7 @@ pyecharts展示城市分布图">
 		  <h1 class="header-author"><a href="/">Linking</a></h1>
 		</hgroup>
 		
-		<p class="header-subtitle">时间是个神，见证你的进步</p>
+		<p class="header-subtitle">记住生活的美好</p>
 		
 
 		<nav class="header-menu">
@@ -139,7 +123,7 @@ pyecharts展示城市分布图">
 			  <h1 class="header-author js-header-author">Linking</h1>
 			</hgroup>
 			
-			<p class="header-subtitle"><i class="icon icon-quo-left"></i>时间是个神，见证你的进步<i class="icon icon-quo-right"></i></p>
+			<p class="header-subtitle"><i class="icon icon-quo-left"></i>记住生活的美好<i class="icon icon-quo-right"></i></p>
 			
 			
 			
@@ -215,7 +199,7 @@ pyecharts展示城市分布图">
     <div class="article-entry" itemprop="articleBody">
       
         <h2 id="缘由"><a href="#缘由" class="headerlink" title="缘由"></a>缘由</h2><p>在朋友圈看到一个分享-<a href="">matplotlib[05]——微信好友的全国分布的热图</a></p>
-<p>回想起之前也做过<a href="https://linking123.github.io/2017/08/09/%E5%BE%AE%E4%BF%A1%E5%A5%BD%E5%8F%8B%E5%88%86%E6%9E%90/">微信好友分析</a>；<a href="http://note.youdao.com/noteshare?id=74eed06a8322637b936d8b22fb130685&amp;sub=WEB9dd784723b4a03be9f8b11ecf2ae9db1" target="_blank" rel="external">有道云地址</a>。</p>
+<p>回想起之前也做过<a href="https://linking123.github.io/2017/08/09/%E5%BE%AE%E4%BF%A1%E5%A5%BD%E5%8F%8B%E5%88%86%E6%9E%90/">微信好友分析</a>；<a href="http://note.youdao.com/noteshare?id=74eed06a8322637b936d8b22fb130685&amp;sub=WEB9dd784723b4a03be9f8b11ecf2ae9db1" target="_blank" rel="noopener">有道云地址</a>。</p>
 <p>但没有加上地图，这次刚好加上吧。</p>
 <h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><ul>
 <li>微信好友分析；</li>
@@ -226,22 +210,131 @@ pyecharts展示城市分布图">
 <h2 id="过程"><a href="#过程" class="headerlink" title="过程"></a>过程</h2><p>itchat爬取好友数据，存储到本地json文件；读取，并用pyecharts展示出来。</p>
 <p>话不多说，<code>Talk is cheap, show me the code.</code></p>
 <h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>1.首先抓取好友信息，存入json文件，以备后面分析</p>
-<figure class="highlight tcl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># -*- coding: utf-8 -*-</span></div><div class="line"></div><div class="line">import json</div><div class="line">import itchat</div><div class="line"></div><div class="line"><span class="comment"># 登陆网页版微信, 需要扫描弹出的二维码, 不过新注册微信被封了</span></div><div class="line">itchat.login()</div><div class="line"><span class="comment"># 爬取好友信息,json字符串</span></div><div class="line">friends = itchat.get_friends(<span class="keyword">update</span>=True)[<span class="number">0</span>:]</div><div class="line"><span class="comment"># print(friends) # 测试是否正常输出好友</span></div><div class="line"></div><div class="line"><span class="comment"># 将friends写入文件，以后就不用每次调试都要登陆网页版了</span></div><div class="line"><span class="keyword">file</span> = <span class="keyword">open</span>(<span class="string">"/Users/yourUserName/.../weChatFriendArealDistribution.json"</span>, <span class="string">'w'</span>,</div><div class="line">            <span class="keyword">encoding</span>=<span class="string">'utf-8'</span>)</div><div class="line">json.dump(friends, <span class="keyword">file</span>, ensure_ascii=False)</div><div class="line"><span class="keyword">file</span>.<span class="keyword">close</span>()</div></pre></td></tr></table></figure>
-<p>2.读取文件，并分析好友城市分布，绘制图形</p>
-<figure class="highlight vala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div></pre></td><td class="code"><pre><div class="line"><span class="meta"># -*- encoding:utf-8 -*-</span></div><div class="line"><span class="meta"># ! python3</span></div><div class="line"></div><div class="line">import json</div><div class="line">import matplotlib.pyplot as plt</div><div class="line">from matplotlib.font_manager import FontProperties</div><div class="line">import matplotlib</div><div class="line">from collections import Counter</div><div class="line">from pyecharts import Geo</div><div class="line"></div><div class="line"><span class="meta"># 读取json 文件</span></div><div class="line">openfile = open(<span class="string">'/Users/linking/PycharmProjects/weChatCraw/output/weChatFriendArealDistribution.json'</span>, <span class="string">'r'</span>,</div><div class="line">                encoding=<span class="string">'utf-8'</span>)</div><div class="line">loadFriends = json.load(openfile)</div><div class="line"></div><div class="line"></div><div class="line"><span class="meta"># 定义一个函数，用来爬取各个变量, return list arr</span></div><div class="line">def get_var(<span class="keyword">var</span>):</div><div class="line">    variable = []</div><div class="line">    <span class="keyword">for</span> i in loadFriends:</div><div class="line">        value = i[<span class="keyword">var</span>]</div><div class="line">        variable.append(value)</div><div class="line">    <span class="keyword">return</span> variable</div><div class="line"></div><div class="line"></div><div class="line">Province = get_var(<span class="string">'Province'</span>)</div><div class="line">City = get_var(<span class="string">'City'</span>)</div><div class="line"></div><div class="line"><span class="meta"># provinceCount = Counter(Province)</span></div><div class="line">cityCount = Counter(City)</div><div class="line"></div><div class="line"><span class="meta"># print(provinceCount)</span></div><div class="line"><span class="meta"># print(list(provinceCount.elements()))</span></div><div class="line"><span class="meta"># print(sorted(provinceCount.elements()))</span></div><div class="line"><span class="meta"># print(list(provinceCount.values()))</span></div><div class="line"><span class="meta"># print(sum(provinceCount.values()))  # 381</span></div><div class="line"><span class="meta"># print(len(Province)) # 381</span></div><div class="line"><span class="meta"># print(len(provinceCount)) # 37</span></div><div class="line"></div><div class="line"><span class="meta"># for key in provinceCount.elements():</span></div><div class="line"><span class="meta">#     print(key, provinceCount[key])</span></div><div class="line"></div><div class="line">totalCount = len(cityCount)</div><div class="line">pName = []</div><div class="line">pNum = []</div><div class="line">pPercent = []</div><div class="line"></div><div class="line"><span class="keyword">for</span> each in cityCount.items():</div><div class="line">    # (a, b) = each</div><div class="line">    # print(a, b)</div><div class="line">    pName.append(each[<span class="number">0</span>])</div><div class="line">    pNum.append(each[<span class="number">1</span>])</div><div class="line">    pPercent.append(each[<span class="number">1</span>] / totalCount)</div><div class="line"></div><div class="line"><span class="meta"># print(pName)</span></div><div class="line"><span class="meta"># print(pNum)</span></div><div class="line"></div><div class="line"><span class="meta"># print(matplotlib.matplotlib_fname())</span></div><div class="line"><span class="meta"># /usr/local/lib/python3.6/site-packages/matplotlib/mpl-data/matplotlibrc</span></div><div class="line"></div><div class="line"><span class="meta"># from matplotlib.font_manager import _rebuild</span></div><div class="line"><span class="meta">#</span></div><div class="line"><span class="meta"># _rebuild()</span></div><div class="line"></div><div class="line">plt.rcParams[<span class="string">'font.sans-serif'</span>] = [<span class="string">'SimHei'</span>]  # 用来正常显示中文标签</div><div class="line">plt.rcParams[<span class="string">'axes.unicode_minus'</span>] = False  # 用来正常显示负号</div><div class="line"></div><div class="line"><span class="meta"># font = FontProperties(fname='/Library/Fonts/Songti.ttc') # 该方法未验证</span></div><div class="line"></div><div class="line"><span class="meta"># 1.柱状图</span></div><div class="line"><span class="meta"># plt.bar(range(len(pNum)), pNum, tick_label=pName)</span></div><div class="line"><span class="meta"># plt.show()</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="meta"># 2.饼状图</span></div><div class="line"><span class="meta"># labels = pName</span></div><div class="line"><span class="meta"># fracs = pPercent</span></div><div class="line"><span class="meta"># explode = [0, 0.1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,</span></div><div class="line"><span class="meta">#            0]  # 0.1 凸出这部分，共len(provinceCount)=37个</span></div><div class="line"><span class="meta"># plt.axes(aspect=1)  # set this , Figure is round, otherwise it is an ellipse</span></div><div class="line"><span class="meta"># # autopct ，show percet</span></div><div class="line"><span class="meta"># plt.pie(x=fracs, labels=labels, explode=explode, autopct='%3.1f %%',</span></div><div class="line"><span class="meta">#         shadow=False, labeldistance=1.1, startangle=90, pctdistance=0.6)</span></div><div class="line"><span class="meta"># plt.show()</span></div><div class="line"></div><div class="line"><span class="meta"># 3.地图</span></div><div class="line">value = pNum</div><div class="line">attr = pName</div><div class="line">geo = Geo(<span class="string">"我的好友分布图"</span>, width=<span class="number">1200</span>, height=<span class="number">600</span>)</div><div class="line">geo.add(<span class="string">"各城市分布情况"</span>, attr, value, type=<span class="string">"effectScatter"</span>, border_color=<span class="string">"#ffffff"</span>, symbol_size=<span class="number">20</span>, \</div><div class="line">        is_label_show=True, label_text_color=<span class="string">"#00FF00"</span>, label_pos=<span class="string">"inside"</span>, symbol=<span class="string">"circle"</span>, \</div><div class="line">        symbol_color=<span class="string">"FF0000"</span>, geo_normal_color=<span class="string">"#006edd"</span>, geo_emphasis_color=<span class="string">"#0000ff"</span>)</div><div class="line">geo.show_config()</div><div class="line"><span class="meta"># geo.render("friendProvinceDistribution.html")</span></div><div class="line">geo.render(<span class="string">"friendCityDistribution.html"</span>)</div></pre></td></tr></table></figure>
-<p>4.图形展示</p>
+<pre><code># -*- coding: utf-8 -*-
+
+import json
+import itchat
+
+# 登陆网页版微信, 需要扫描弹出的二维码, 不过新注册微信被封了
+itchat.login()
+# 爬取好友信息,json字符串
+friends = itchat.get_friends(update=True)[0:]
+# print(friends) # 测试是否正常输出好友
+
+# 将friends写入文件，以后就不用每次调试都要登陆网页版了
+file = open(&quot;/Users/yourUserName/.../weChatFriendArealDistribution.json&quot;, &#39;w&#39;,
+            encoding=&#39;utf-8&#39;)
+json.dump(friends, file, ensure_ascii=False)
+file.close()
+</code></pre><p>2.读取文件，并分析好友城市分布，绘制图形</p>
+<pre><code># -*- encoding:utf-8 -*-
+# ! python3
+
+import json
+import matplotlib.pyplot as plt
+from matplotlib.font_manager import FontProperties
+import matplotlib
+from collections import Counter
+from pyecharts import Geo
+
+# 读取json 文件
+openfile = open(&#39;/Users/linking/PycharmProjects/weChatCraw/output/weChatFriendArealDistribution.json&#39;, &#39;r&#39;,
+                encoding=&#39;utf-8&#39;)
+loadFriends = json.load(openfile)
+
+
+# 定义一个函数，用来爬取各个变量, return list arr
+def get_var(var):
+    variable = []
+    for i in loadFriends:
+        value = i[var]
+        variable.append(value)
+    return variable
+
+
+Province = get_var(&#39;Province&#39;)
+City = get_var(&#39;City&#39;)
+
+# provinceCount = Counter(Province)
+cityCount = Counter(City)
+
+# print(provinceCount)
+# print(list(provinceCount.elements()))
+# print(sorted(provinceCount.elements()))
+# print(list(provinceCount.values()))
+# print(sum(provinceCount.values()))  # 381
+# print(len(Province)) # 381
+# print(len(provinceCount)) # 37
+
+# for key in provinceCount.elements():
+#     print(key, provinceCount[key])
+
+totalCount = len(cityCount)
+pName = []
+pNum = []
+pPercent = []
+
+for each in cityCount.items():
+    # (a, b) = each
+    # print(a, b)
+    pName.append(each[0])
+    pNum.append(each[1])
+    pPercent.append(each[1] / totalCount)
+
+# print(pName)
+# print(pNum)
+
+# print(matplotlib.matplotlib_fname())
+# /usr/local/lib/python3.6/site-packages/matplotlib/mpl-data/matplotlibrc
+
+# from matplotlib.font_manager import _rebuild
+#
+# _rebuild()
+
+plt.rcParams[&#39;font.sans-serif&#39;] = [&#39;SimHei&#39;]  # 用来正常显示中文标签
+plt.rcParams[&#39;axes.unicode_minus&#39;] = False  # 用来正常显示负号
+
+# font = FontProperties(fname=&#39;/Library/Fonts/Songti.ttc&#39;) # 该方法未验证
+
+# 1.柱状图
+# plt.bar(range(len(pNum)), pNum, tick_label=pName)
+# plt.show()
+
+
+# 2.饼状图
+# labels = pName
+# fracs = pPercent
+# explode = [0, 0.1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+#            0]  # 0.1 凸出这部分，共len(provinceCount)=37个
+# plt.axes(aspect=1)  # set this , Figure is round, otherwise it is an ellipse
+# # autopct ，show percet
+# plt.pie(x=fracs, labels=labels, explode=explode, autopct=&#39;%3.1f %%&#39;,
+#         shadow=False, labeldistance=1.1, startangle=90, pctdistance=0.6)
+# plt.show()
+
+# 3.地图
+value = pNum
+attr = pName
+geo = Geo(&quot;我的好友分布图&quot;, width=1200, height=600)
+geo.add(&quot;各城市分布情况&quot;, attr, value, type=&quot;effectScatter&quot;, border_color=&quot;#ffffff&quot;, symbol_size=20, \
+        is_label_show=True, label_text_color=&quot;#00FF00&quot;, label_pos=&quot;inside&quot;, symbol=&quot;circle&quot;, \
+        symbol_color=&quot;FF0000&quot;, geo_normal_color=&quot;#006edd&quot;, geo_emphasis_color=&quot;#0000ff&quot;)
+geo.show_config()
+# geo.render(&quot;friendProvinceDistribution.html&quot;)
+geo.render(&quot;friendCityDistribution.html&quot;)
+</code></pre><p>4.图形展示</p>
 <p><img src="http://orukz1s2q.bkt.clouddn.com/friendBar.png" alt=""></p>
 <p><img src="http://orukz1s2q.bkt.clouddn.com/friendPie.png" alt=""></p>
 <p><img src="http://orukz1s2q.bkt.clouddn.com/%E6%88%91%E7%9A%84%E5%A5%BD%E5%8F%8B%E5%88%86%E5%B8%83%E5%9B%BE.png" alt=""></p>
 <p>受限于屏幕尺寸，展示不全。</p>
-<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><h3 id="matplotlib汉字乱码问题"><a href="#matplotlib汉字乱码问题" class="headerlink" title="matplotlib汉字乱码问题"></a>matplotlib汉字乱码问题</h3><p><a href="https://www.zhihu.com/question/25404709" target="_blank" rel="external">解决方法</a></p>
+<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><h3 id="matplotlib汉字乱码问题"><a href="#matplotlib汉字乱码问题" class="headerlink" title="matplotlib汉字乱码问题"></a>matplotlib汉字乱码问题</h3><p><a href="https://www.zhihu.com/question/25404709" target="_blank" rel="noopener">解决方法</a></p>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>数据还是要显示在图表上才更加直观。</p>
 <p>这也更加验证了数据可视化的重要性，单纯的数据分析当然是最重要的，但可视化的工作也是相当重要的，数据分析如何产生效益，可视化工作很重要。</p>
 <p>催生了学习R语言和Python 的图形库的需求。</p>
 <h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
-<li><a href="https://www.zhihu.com/question/34674954" target="_blank" rel="external">https://www.zhihu.com/question/34674954</a></li>
-<li><a href="http://blog.csdn.net/lxb1022/article/details/77119553" target="_blank" rel="external">http://blog.csdn.net/lxb1022/article/details/77119553</a></li>
-<li><a href="http://www.sohu.com/a/195899083_387904" target="_blank" rel="external">http://www.sohu.com/a/195899083_387904</a></li>
+<li><a href="https://www.zhihu.com/question/34674954" target="_blank" rel="noopener">https://www.zhihu.com/question/34674954</a></li>
+<li><a href="http://blog.csdn.net/lxb1022/article/details/77119553" target="_blank" rel="noopener">http://blog.csdn.net/lxb1022/article/details/77119553</a></li>
+<li><a href="http://www.sohu.com/a/195899083_387904" target="_blank" rel="noopener">http://www.sohu.com/a/195899083_387904</a></li>
 </ul>
 
       
@@ -539,11 +632,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">ajax</a>
+                <a href="javascript:void(0)" class="js-tag color5">Ajax</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Ajax</a>
+                <a href="javascript:void(0)" class="js-tag color5">ajax</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -563,6 +656,10 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">JavaScriptCore</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">operation</a>
               </li>
              
@@ -572,10 +669,6 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">deploy</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">JavaScriptCore</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -603,15 +696,15 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">cocoa</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">blog</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Gitalk</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">cocoa</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -635,19 +728,19 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">兼容性</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">多线程</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">HTTP</a>
+                <a href="javascript:void(0)" class="js-tag color4">兼容性</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">绘图</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">HTTP</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -667,6 +760,10 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">标识</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">arcgis</a>
               </li>
              
@@ -676,10 +773,6 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">D.Wade</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">标识</a>
               </li>
              
               <li class="article-tag-list-item">

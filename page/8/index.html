@@ -10,13 +10,15 @@
   <title>Linking&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="Be Better">
+<meta name="keywords" content="Java, Android, iOS, HTML&#x2F;CSS&#x2F;JavaScript, Python">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Linking's blog">
+<meta property="og:title" content="Linking&#39;s blog">
 <meta property="og:url" content="http://linking123.github.io/page/8/index.html">
-<meta property="og:site_name" content="Linking's blog">
+<meta property="og:site_name" content="Linking&#39;s blog">
 <meta property="og:description" content="Be Better">
+<meta property="og:locale" content="zh-Hans">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Linking's blog">
+<meta name="twitter:title" content="Linking&#39;s blog">
 <meta name="twitter:description" content="Be Better">
   
     <link rel="alternative" href="/atom.xml" title="Linking&#39;s blog" type="application/atom+xml">
@@ -52,7 +54,7 @@
 		  <h1 class="header-author"><a href="/">Linking</a></h1>
 		</hgroup>
 		
-		<p class="header-subtitle">时间是个神，见证你的进步</p>
+		<p class="header-subtitle">记住生活的美好</p>
 		
 
 		<nav class="header-menu">
@@ -116,7 +118,7 @@
 			  <h1 class="header-author js-header-author">Linking</h1>
 			</hgroup>
 			
-			<p class="header-subtitle"><i class="icon icon-quo-left"></i>时间是个神，见证你的进步<i class="icon icon-quo-right"></i></p>
+			<p class="header-subtitle"><i class="icon icon-quo-left"></i>记住生活的美好<i class="icon icon-quo-right"></i></p>
 			
 			
 			
@@ -197,21 +199,30 @@
 <p>思路：先分析各种手机品牌的请求头中user_agent的特点，总结出规律。然后用正则匹配来进行分类，并进行统计。最后在页面中实现可视化显示。</p>
 </blockquote>
 <h1 id="一-各种终端UA格式（以安卓系统为例）"><a href="#一-各种终端UA格式（以安卓系统为例）" class="headerlink" title="一.各种终端UA格式（以安卓系统为例）"></a>一.各种终端UA格式（以安卓系统为例）</h1><p>Tablet</p>
-<figure class="highlight applescript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Mozilla/<span class="number">5.0</span> (Linux; Android android-<span class="built_in">version</span>; product-model Build/product-build) AppleWebKit/webkit-<span class="built_in">version</span> (KHTML, like Gecko) Silk/browser-<span class="built_in">version</span> like Chrome/chrome-<span class="built_in">version</span> Safari/webkit-<span class="built_in">version</span></div></pre></td></tr></table></figure>
-<p>Desktop</p>
-<figure class="highlight applescript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Mozilla/<span class="number">5.0</span> (X11; Linux x86_64) AppleWebKit/webkit-<span class="built_in">version</span> (KHTML, like Gecko) Silk/browser-<span class="built_in">version</span> like Chrome/chrome-<span class="built_in">version</span> Safari/webkit-<span class="built_in">version</span></div></pre></td></tr></table></figure>
-<p>Mobile</p>
-<figure class="highlight applescript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Mozilla/<span class="number">5.0</span> (Linux; Android android-<span class="built_in">version</span>; product-model Build/product-build) AppleWebKit/webkit-<span class="built_in">version</span> (KHTML, like Gecko) Silk/browser-<span class="built_in">version</span> like Chrome/chrome-<span class="built_in">version</span> Mobile Safari/webkit-<span class="built_in">version</span></div></pre></td></tr></table></figure>
-<p>Note</p>
-<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">Red <span class="keyword">and</span> italics indicates <span class="built_in">variable</span> fields, which are described below.</div><div class="line">Template fields</div><div class="line">android-<span class="built_in">version</span> – The Android <span class="built_in">platform</span> <span class="built_in">version</span> (<span class="keyword">for</span> example, <span class="number">4.4</span><span class="number">.3</span>).</div><div class="line">product-model – The <span class="built_in">value</span> <span class="keyword">of</span> Build.MODEL (<span class="keyword">for</span> example, KFTT).</div><div class="line">For <span class="keyword">a</span> complete list <span class="keyword">of</span> <span class="keyword">the</span> product models, see Screen Resolution.</div><div class="line">product-build – The <span class="built_in">value</span> <span class="keyword">of</span> Build.ID (<span class="keyword">for</span> example, IML74K).</div><div class="line">webkit-<span class="built_in">version</span> – Indicates <span class="keyword">the</span> <span class="built_in">version</span> <span class="keyword">of</span> WebKit used (<span class="keyword">for</span> example, <span class="number">535.19</span>). The <span class="built_in">version</span> can change whenever <span class="keyword">the</span> Fire device receives <span class="keyword">a</span> software update.</div><div class="line">browser-<span class="built_in">version</span> – Indicates <span class="keyword">the</span> <span class="built_in">version</span> <span class="keyword">of</span> <span class="keyword">the</span> Amazon Silk browser (<span class="keyword">for</span> example, <span class="number">44.1</span><span class="number">.54</span>). The <span class="built_in">version</span> can change whenever <span class="keyword">the</span> Fire device receives <span class="keyword">a</span> software update.</div><div class="line">chrome-<span class="built_in">version</span> – The <span class="built_in">version</span> <span class="keyword">of</span> Google Chrome <span class="keyword">with</span> which <span class="keyword">the</span> Amazon Silk browser is compatible.</div><div class="line">User Agent String Examples</div></pre></td></tr></table></figure>
-<h1 id="二-品牌-brand"><a href="#二-品牌-brand" class="headerlink" title="二. 品牌-brand"></a>二. 品牌-brand</h1><pre><code>search key_word: user-agent detect type of platform device;
+<pre><code>Mozilla/5.0 (Linux; Android android-version; product-model Build/product-build) AppleWebKit/webkit-version (KHTML, like Gecko) Silk/browser-version like Chrome/chrome-version Safari/webkit-version
+</code></pre><p>Desktop</p>
+<pre><code>Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/webkit-version (KHTML, like Gecko) Silk/browser-version like Chrome/chrome-version Safari/webkit-version
+</code></pre><p>Mobile</p>
+<pre><code>Mozilla/5.0 (Linux; Android android-version; product-model Build/product-build) AppleWebKit/webkit-version (KHTML, like Gecko) Silk/browser-version like Chrome/chrome-version Mobile Safari/webkit-version
+</code></pre><p>Note</p>
+<pre><code>Red and italics indicates variable fields, which are described below.
+Template fields
+android-version – The Android platform version (for example, 4.4.3).
+product-model – The value of Build.MODEL (for example, KFTT).
+For a complete list of the product models, see Screen Resolution.
+product-build – The value of Build.ID (for example, IML74K).
+webkit-version – Indicates the version of WebKit used (for example, 535.19). The version can change whenever the Fire device receives a software update.
+browser-version – Indicates the version of the Amazon Silk browser (for example, 44.1.54). The version can change whenever the Fire device receives a software update.
+chrome-version – The version of Google Chrome with which the Amazon Silk browser is compatible.
+User Agent String Examples
+</code></pre><h1 id="二-品牌-brand"><a href="#二-品牌-brand" class="headerlink" title="二. 品牌-brand"></a>二. 品牌-brand</h1><pre><code>search key_word: user-agent detect type of platform device;
                  List of user agents for mobile phones
 </code></pre><p><strong>按照使用量降序</strong></p>
 <ol>
 <li>手机phone<br>1.1 国外品牌<br> iphone<br> blackberry<br> nokia lumia<br> samsung<br> Sony<br> Nokia<br> Kindle Fire HD（KFTT）</li>
 </ol>
 <p>1.2 国内品牌<br>    华为，huawei和honor两个品牌，PLK-AL10是荣耀7<br>    小米，MI </p>
-<ol>
+<ol start="2">
 <li>平板tablet</li>
 <li>笔记本desktop</li>
 </ol>
@@ -224,14 +235,35 @@
 <li>数据怎么打到前台。</li>
 </ol>
 <p>数据库操作：resources-com.xxx-portal.dao-*.xml</p>
-<figure class="highlight vbscript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">String</span> userAgent = <span class="built_in">request</span>.getHeader(<span class="string">"User-Agent"</span>);</div><div class="line"><span class="keyword">if</span>(userAgent.indexOf(<span class="string">"Mozilla"</span>)!=<span class="number">-1</span> &amp;&amp; userAgent.indexOf(<span class="string">"iPhone"</span>)!=<span class="number">-1</span> || userAgent.indexOf(<span class="string">"Android"</span>)!=<span class="number">-1</span> )&#123;</div><div class="line">    <span class="built_in">response</span>.sendRedirect(<span class="string">"页面1"</span>);</div><div class="line">&#125;<span class="keyword">else</span> <span class="keyword">if</span>(userAgent.indexOf(<span class="string">"Opera"</span>)!=<span class="number">-1</span> &amp;&amp; userAgent.indexOf(<span class="string">"Opera Mini"</span>)!=<span class="number">-1</span> || userAgent.indexOf(<span class="string">"BlackBerry"</span>)!=<span class="number">-1</span>)&#123;</div><div class="line">    <span class="built_in">response</span>.sendRedirect(<span class="string">"页面2"</span>);</div><div class="line">    &#125;<span class="keyword">else</span> <span class="keyword">if</span>(userAgent.indexOf(<span class="string">"Mozilla"</span>)!=<span class="number">-1</span> &amp;&amp; userAgent.indexOf(<span class="string">"Windows"</span>)!=<span class="number">-1</span>)&#123;</div><div class="line">    <span class="built_in">response</span>.sendRedirect(<span class="string">"页面3"</span>);</div><div class="line">&#125;<span class="keyword">else</span>&#123;</div><div class="line">    <span class="built_in">response</span>.sendRedirect(<span class="string">"页面1"</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<figure class="highlight gauss"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//以build匹配方式，虽然可以得到build前面的型号，但不知道手机品牌，需要分类。</span></div><div class="line">/;\s?([^;]+?)\s?(Build)?/i     <span class="comment">//..末尾的/i表示不区分大小写 </span></div><div class="line"></div><div class="line">Pattern pattern = Pattern.<span class="keyword">compile</span>(<span class="string">";\\s?(\\S*?\\s?\\S*?)\\s?(Build)?/"</span>);    </div><div class="line">Matcher matcher = pattern.matcher(userAgent);    </div><div class="line"><span class="keyword">String</span> model = <span class="built_in">null</span>;    </div><div class="line"><span class="keyword">if</span> (matcher.find()) &#123;    </div><div class="line">    model = matcher.group(<span class="number">1</span>).trim();<span class="comment">//group从1    </span></div><div class="line">    <span class="built_in">log</span>.<span class="keyword">debug</span>(<span class="string">"通过userAgent解析出机型："</span> + model); </div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>Build下一级再分一下，还是直接匹配。</p>
+<pre><code>String userAgent = request.getHeader(&quot;User-Agent&quot;);
+if(userAgent.indexOf(&quot;Mozilla&quot;)!=-1 &amp;&amp; userAgent.indexOf(&quot;iPhone&quot;)!=-1 || userAgent.indexOf(&quot;Android&quot;)!=-1 ){
+    response.sendRedirect(&quot;页面1&quot;);
+}else if(userAgent.indexOf(&quot;Opera&quot;)!=-1 &amp;&amp; userAgent.indexOf(&quot;Opera Mini&quot;)!=-1 || userAgent.indexOf(&quot;BlackBerry&quot;)!=-1){
+    response.sendRedirect(&quot;页面2&quot;);
+    }else if(userAgent.indexOf(&quot;Mozilla&quot;)!=-1 &amp;&amp; userAgent.indexOf(&quot;Windows&quot;)!=-1){
+    response.sendRedirect(&quot;页面3&quot;);
+}else{
+    response.sendRedirect(&quot;页面1&quot;);
+}
+</code></pre><pre><code>//以build匹配方式，虽然可以得到build前面的型号，但不知道手机品牌，需要分类。
+/;\s?([^;]+?)\s?(Build)?/i     //..末尾的/i表示不区分大小写 
+
+Pattern pattern = Pattern.compile(&quot;;\\s?(\\S*?\\s?\\S*?)\\s?(Build)?/&quot;);    
+Matcher matcher = pattern.matcher(userAgent);    
+String model = null;    
+if (matcher.find()) {    
+    model = matcher.group(1).trim();//group从1    
+    log.debug(&quot;通过userAgent解析出机型：&quot; + model); 
+}    
+</code></pre><p>Build下一级再分一下，还是直接匹配。</p>
 <blockquote>
 <p>不是所有的UA都有build。</p>
 </blockquote>
-<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Pattern p = Pattern.compile(<span class="string">"a*b"</span>)<span class="comment">;   //将给定的正则表达式编译到模式中。</span></div><div class="line">Matcher m = p.matcher(<span class="string">"aaaaab"</span>)<span class="comment">;//创建匹配给定输入与此模式的匹配器。</span></div><div class="line"><span class="keyword">boolean </span><span class="keyword">b </span>= m.matches()<span class="comment">;</span></div><div class="line">String c = m.group(<span class="number">1</span>).trim()<span class="comment">;</span></div></pre></td></tr></table></figure>
-<p>pattern取出(…xxx)的字符串？</p>
+<pre><code> Pattern p = Pattern.compile(&quot;a*b&quot;);   //将给定的正则表达式编译到模式中。
+ Matcher m = p.matcher(&quot;aaaaab&quot;);//创建匹配给定输入与此模式的匹配器。
+ boolean b = m.matches();
+ String c = m.group(1).trim();
+</code></pre><p>pattern取出(…xxx)的字符串？</p>
 <p>用字符串匹配方法String.comtains(),<br>正则怎么表示出来。数组？<br>序列化所有的正则，对应到机型。？<br>循环正则（用数组对象来表达），匹配到即跳出</p>
 <blockquote>
 <p>java正则特殊之处：</p>
@@ -249,15 +281,334 @@
 <li>分析结果展示，统计类型数</li>
 </ol>
 </blockquote>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> portal_logrecord <span class="keyword">WHERE</span> MACHINE_BRAND <span class="keyword">LIKE</span> <span class="string">"%asus%"</span>;//模糊查询</div></pre></td></tr></table></figure>
-<p>不要忽略手机的更新速度，注意最新机型。<br>尽量用小写，减少运算。</p>
-<h1 id="五-最终匹配代码"><a href="#五-最终匹配代码" class="headerlink" title="五. 最终匹配代码"></a>五. 最终匹配代码</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div><div class="line">168</div><div class="line">169</div><div class="line">170</div><div class="line">171</div><div class="line">172</div><div class="line">173</div><div class="line">174</div><div class="line">175</div><div class="line">176</div><div class="line">177</div><div class="line">178</div><div class="line">179</div><div class="line">180</div><div class="line">181</div><div class="line">182</div><div class="line">183</div><div class="line">184</div><div class="line">185</div><div class="line">186</div><div class="line">187</div><div class="line">188</div><div class="line">189</div><div class="line">190</div><div class="line">191</div><div class="line">192</div><div class="line">193</div><div class="line">194</div><div class="line">195</div><div class="line">196</div><div class="line">197</div><div class="line">198</div><div class="line">199</div><div class="line">200</div><div class="line">201</div><div class="line">202</div><div class="line">203</div><div class="line">204</div><div class="line">205</div><div class="line">206</div><div class="line">207</div><div class="line">208</div><div class="line">209</div><div class="line">210</div><div class="line">211</div><div class="line">212</div><div class="line">213</div><div class="line">214</div><div class="line">215</div><div class="line">216</div><div class="line">217</div><div class="line">218</div><div class="line">219</div><div class="line">220</div><div class="line">221</div><div class="line">222</div><div class="line">223</div><div class="line">224</div><div class="line">225</div><div class="line">226</div><div class="line">227</div><div class="line">228</div><div class="line">229</div><div class="line">230</div><div class="line">231</div><div class="line">232</div><div class="line">233</div><div class="line">234</div><div class="line">235</div><div class="line">236</div><div class="line">237</div><div class="line">238</div><div class="line">239</div><div class="line">240</div><div class="line">241</div><div class="line">242</div><div class="line">243</div><div class="line">244</div><div class="line">245</div><div class="line">246</div><div class="line">247</div><div class="line">248</div><div class="line">249</div><div class="line">250</div><div class="line">251</div><div class="line">252</div><div class="line">253</div><div class="line">254</div><div class="line">255</div><div class="line">256</div><div class="line">257</div><div class="line">258</div><div class="line">259</div><div class="line">260</div><div class="line">261</div><div class="line">262</div><div class="line">263</div><div class="line">264</div><div class="line">265</div><div class="line">266</div><div class="line">267</div><div class="line">268</div><div class="line">269</div><div class="line">270</div><div class="line">271</div><div class="line">272</div><div class="line">273</div><div class="line">274</div><div class="line">275</div><div class="line">276</div><div class="line">277</div><div class="line">278</div><div class="line">279</div><div class="line">280</div><div class="line">281</div><div class="line">282</div><div class="line">283</div><div class="line">284</div><div class="line">285</div><div class="line">286</div><div class="line">287</div><div class="line">288</div><div class="line">289</div><div class="line">290</div><div class="line">291</div><div class="line">292</div><div class="line">293</div><div class="line">294</div><div class="line">295</div><div class="line">296</div><div class="line">297</div><div class="line">298</div><div class="line">299</div><div class="line">300</div><div class="line">301</div><div class="line">302</div><div class="line">303</div><div class="line">304</div><div class="line">305</div><div class="line">306</div><div class="line">307</div><div class="line">308</div><div class="line">309</div><div class="line">310</div><div class="line">311</div><div class="line">312</div><div class="line">313</div><div class="line">314</div><div class="line">315</div><div class="line">316</div><div class="line">317</div><div class="line">318</div><div class="line">319</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//java版本，js版本见-七[资源参考]</span></div><div class="line">Pattern patAcer = Pattern.compile(<span class="string">"(?i)((acer|a(?:101|110|200|210|211|500|501|510|511|700|701)[);/\\s]|Android.*V3[67]0[);/\\s]|Android.*Z1[23456]0\\sBuild|Android.*Z500\\sBuild|A1-830|A1-81[01]|A3-A[12][01]|B1-7[1235][01]|B1-810|B1-A71|E39\\sBuild|S5[12]0\\sBuild|DA[0-9]+HQ?L[);/\\s]))"</span>); <span class="comment">//Acer</span></div><div class="line">Pattern patAlcatel = Pattern.compile(<span class="string">"(?i)(Alcatel|Alc[a-z0-9]+|One[ _]?Touch)"</span>); <span class="comment">//Alcatel</span></div><div class="line">Pattern patAloes = Pattern.compile(<span class="string">"(?i)(\\saloes\\sbuild)"</span>); <span class="comment">//Aloes奥洛斯</span></div><div class="line">Pattern patAmazon = Pattern.compile(<span class="string">"(?i)(kindle|kf[A-z]+|KF(?:OT|TT|JWI|JWA|SOWI|A[PRS]WI|THWI|SAW[IA])[);/ ]|Silk/\\d+\\.\\d+|Amazon (?:Tate|Jem)|AFT[BM]|SD4930UR)"</span>); <span class="comment">//kindle |(sd|kf[0349hijorstuw]+)影响了droid-Verizon</span></div><div class="line">Pattern patAmoi = Pattern.compile(<span class="string">"(?i)(\\samoi\\s|A862W)"</span>); <span class="comment">//Amoi夏新手机</span></div><div class="line">Pattern patAole = Pattern.compile(<span class="string">"(?i)(\\saole(dior)?\\sbuild)"</span>); <span class="comment">//Aole奥乐手机</span></div><div class="line">Pattern patApple = Pattern.compile(<span class="string">"(?i)((?:iTunes-)?AppleTV|(?:Apple-)?(?:iPad|iPhone)|iPh[0-9],[0-9]|CFNetwork|(?:Apple-)?iPod|ipod\\s&#123;0,1&#125;tv)"</span>); <span class="comment">//Apple</span></div><div class="line">Pattern patAsus = Pattern.compile(<span class="string">"(?i)(asus|Transformer|TF300T|Slider SL101|PadFone|ME302(?:C|KL)|ME301T|ME371MG|ME17(?:1|2V|3X)|(?:K0[01][0-9a-z]|Z00D)[);/ ])"</span>); <span class="comment">//Asus</span></div><div class="line">Pattern patArchos = Pattern.compile(<span class="string">"(?i)(Archos)"</span>); <span class="comment">//法国爱可视手机</span></div><div class="line">Pattern patBenq = Pattern.compile(<span class="string">"(?i)((benq)[\\s_-]?([\\w-]+)*)"</span>); <span class="comment">//Benq</span></div><div class="line">Pattern patBestsonny = Pattern.compile(<span class="string">"(?i)(Bestsonny)"</span>); <span class="comment">//Bestsonny</span></div><div class="line">Pattern patBeierfeng = Pattern.compile(<span class="string">"(?i)(\\sbf_t\\d&#123;2&#125;\\sbuild)"</span>); <span class="comment">//BF贝尔丰</span></div><div class="line">Pattern patBird = Pattern.compile(<span class="string">"(?i)(\\sbird\\s|bird[\\-. _]([^;/]+))"</span>); <span class="comment">//Bird波导</span></div><div class="line">Pattern patBlackBerry = Pattern.compile(<span class="string">"(?i)(playbook|blackberry|bb10;\\s(\\w+)|\\sq5\\sbuild)"</span>); <span class="comment">//BlackBerry</span></div><div class="line">Pattern patChanghong = Pattern.compile(<span class="string">"(?i)(changhong)"</span>); <span class="comment">//Changhong 长虹</span></div><div class="line">Pattern patCarNavi = Pattern.compile(<span class="string">"(?i)(carnavi)"</span>); <span class="comment">//Car Navigation汽车导航</span></div><div class="line">Pattern patCoolpad = Pattern.compile(<span class="string">"(?i)((?:YL-)?coolpad|8190q[ ;/\\)]|8295 build)"</span>); <span class="comment">//Coolpad 酷派</span></div><div class="line">Pattern patDell = Pattern.compile(<span class="string">"(?i)(dell|dell\\s(strea[kpr\\s\\d]*[\\dko])|(001dl)|venue|xcd35)"</span>); <span class="comment">//Dell</span></div><div class="line">Pattern patGionee = Pattern.compile(<span class="string">"(?i)(gionee|(?:GIO-)?GIONEE[ _-]?[a-z0-9]+|(?:Dream_D1|V188S?|GN[0-9]&#123;3,4&#125;[a-z]?)[);/ ])"</span>);<span class="comment">//GiONEE金立</span></div><div class="line">Pattern patGoogle = Pattern.compile(<span class="string">"(?i)(Google|nexus|GoogleTV|Glass|CrKey[^a-z0-9]|Talk)"</span>); <span class="comment">//Google</span></div><div class="line">Pattern patHaier = Pattern.compile(<span class="string">"(?i)(haier|;\\sqk-6385t\\sbuild|(?:HW-)?W(?:716|757|860|970)[);/ ])"</span>); <span class="comment">//Haier</span></div><div class="line">Pattern patHisense = Pattern.compile(<span class="string">"(?i)((?:HS-)?Hisense ([^;/]+) Build|Hisense [^);/]+|HS-(?:U|EG?|I|T|X)[0-9]+[a-z0-9\\-]*|E270BSA|M470BS[AE]|E2281)"</span>); <span class="comment">//Hisense</span></div><div class="line">Pattern patHP = Pattern.compile(<span class="string">"(?i)(hp|touchpad|android\\s.+slate|hp-tablet|HP ?iPAQ|webOS.*P160U|HP Slate|HP [78]|Compaq [7|8])"</span>); <span class="comment">//HP</span></div><div class="line">Pattern patHTC = Pattern.compile(<span class="string">"(?i)((htc)|Sprint T7380|EVO|(sprint\\s(\\w+))|ADR(?!910L)[a-z0-9]+|Amaze[ _]4G[);/ ]|(Desire|Sensation|Evo ?3D|IncredibleS|Wildfire|Butterfly)[ _]?([^;/]+) Build|(Amaze[ _]4G|One ?[XELSV\\+]+)[);/ ]|SPV E6[05]0|One M8|X525a|PG86100|PC36100|XV6975|PJ83100[);/ ])"</span>); <span class="comment">//HTC</span></div><div class="line">Pattern patHuawei = Pattern.compile(<span class="string">"(?i)(huawei|honor|Linux;\\sU;\\sandroid[\\s\\.\\d\\w;-]&#123;15&#125;media\\spad\\sbuild\\/jdq39|\\sch[em][12]?-[ctu]l\\d&#123;2&#125;[hm]?\\sbuild)|(HW-)?(?:Huawei|Ideos|Honor[ _]|(?:H60-L(?:01|02|03|04|11|12)|H30-(?:C00|L01M?|L02|U10|T00|T10)|G621-TL00M?|PLK-(?:AL10|CL00|TL00|TL01H?|UL00|L01)|SCL-(?:AL00|CL00|TL00H?)|CH(?:E2?|M)-[CUT]L00[HM]?|CHE1-CL[12]0|CHE2-L11|U(?:8230|8500|8661|8665|8667|8800|8818|8860|9200|9508))[);/ ])"</span>); <span class="comment">//Huawei </span></div><div class="line">Pattern patInnos = Pattern.compile(<span class="string">"(?i)(\\sd10cf\\sbuild)"</span>); <span class="comment">//Innos奕骆</span></div><div class="line">Pattern patJolla = Pattern.compile(<span class="string">"(?i)(linux;.+((jolla));)"</span>); <span class="comment">//Jolla,芬兰手机品牌</span></div><div class="line">Pattern patLenovo = Pattern.compile(<span class="string">"(?i)((?:LNV-)?lenovo|IdeaTab|IdeaPad|Thinkpad|Yoga Tablet)"</span>); <span class="comment">//Lenovo</span></div><div class="line">Pattern patLephone = Pattern.compile(<span class="string">"(?i)(\\slephone\\st\\d)"</span>); <span class="comment">//Lephone 乐丰</span></div><div class="line">Pattern patLeshi = Pattern.compile(<span class="string">"(?i)(;\\sle(tv)?\\sx\\d&#123;3&#125;\\sbuild)"</span>); <span class="comment">//leshi</span></div><div class="line">Pattern patLG = Pattern.compile(<span class="string">"(?i)(lg|lg[e;\\s\\/-]+(\\w+)*|portalmmm/2\\.0 (?:KE|KG|KP|L3)|(?:VX[0-9]+|L-0[12]D|L-07C|P713)[);/ ]|NetCast)"</span>); <span class="comment">//LG</span></div><div class="line">Pattern patLingwin = Pattern.compile(<span class="string">"(?i)(Lingwin)"</span>); <span class="comment">//Lingwin灵韵手机</span></div><div class="line">Pattern patMeizu = Pattern.compile(<span class="string">"(?i)(meizu|;\\sm\\d\\smetal\\sbuild|;\\smx\\d.+build|;\\sm\\d\\snote\\sbuild|;\\smz-m\\dmetal\\sbuild|;\\spro\\s[56]\\sbuild)|(M04[05]|M35[1356]|MX[ -]?[234](?: Pro)?|(?:MZ-)?m[12] note|(?:MZ-)?M57[18]C)[);/ ]"</span>); <span class="comment">//Meizu</span></div><div class="line">Pattern patMicrosoft = Pattern.compile(<span class="string">"(?i)(xbox|KIN\\.(One|Two))"</span>); <span class="comment">//Microsoft ，是否加windows|？</span></div><div class="line">Pattern patMotorola = Pattern.compile(<span class="string">"(?i)(MB860|DCT-700|Xoom|\\s(milestone|droid(?:[2-4x]|\\s(?:bionic|x2|pro|razr))?(:?\\s4g)?)[\\w\\s]+build\\/|mot[\\s-]?(\\w+)*|(XT\\d&#123;3,4&#125;) build\\/|android.+\\s(mz60\\d|xoom[\\s2]&#123;0,2&#125;)\\sbuild\\/|MOT|(?&lt;!AN)DROID ?(?:Build|[a-z0-9]+)|portalmmm/2.0 (?:E378i|L6|L7|v3)|XOOM [^;/]*Build|(?:XT|MZ|MB|ME)[0-9]&#123;3,4&#125;[a-z]?(?:\\(Defy\\))?(?: Build|\\)))"</span>); <span class="comment">//Motorola</span></div><div class="line">Pattern patNintendo = Pattern.compile(<span class="string">"(?i)((nintendo)\\s([wids3u]+))"</span>); <span class="comment">//任天堂</span></div><div class="line">Pattern patNokia = Pattern.compile(<span class="string">"(?i)(Nokia|Lumia|Maemo RX|portalmmm/2\\.0 N7|portalmmm/2\\.0 NK|nok[0-9]+|Symbian.*\\s([a-z0-9]+)$|RX-51 N900|(maemo|nokia).*(n900|lumia\\s\\d+)|(nokia)[\\s_-]?([\\w-]+)*)"</span>); <span class="comment">//Nokia</span></div><div class="line">Pattern patNook = Pattern.compile(<span class="string">"(?i)(\\s(nook)[\\w\\s]+build\\/(\\w+))"</span>); <span class="comment">//nook</span></div><div class="line">Pattern patNvidia = Pattern.compile(<span class="string">"(?i)(shield|TegraNote-P1640)"</span>); <span class="comment">//Nvidia</span></div><div class="line">Pattern patOppo = Pattern.compile(<span class="string">"(?i)(oppo|android.+find\\s\\d\\sbuild|Android.+zh-cn;\\sr.+build|r1001|x9006|r2001|u707|x909|a31\\sr\\d&#123;3&#125;t?\\sbuild|(?:OB-)?OPPO[ _]?([a-z0-9]+)|N1T|(?:X90[07][067]|U707T?|X909T?|R(?:10[01]1|2001|201[07]|6007|7005|7007|80[13579]|81[13579]|82[01379]|83[013]|800[067]|8015|810[679]|811[13]|820[057])[KLSTW]?)|N520[79]|N5117[);/ ])"</span>); <span class="comment">//Oppo</span></div><div class="line">Pattern patOwwo = Pattern.compile(<span class="string">"(?i)(;\\sq03\\sbuild)"</span>); <span class="comment">//Owwo欧沃</span></div><div class="line">Pattern patPalm = Pattern.compile(<span class="string">"(?i)((palm(?=\\-))[\\s_-]?([\\w-]+)*)"</span>); <span class="comment">//Palm</span></div><div class="line">Pattern patPhilips = Pattern.compile(<span class="string">"(?i)(Philips|AND1E[);/ ]|NETTV/)"</span>); <span class="comment">//Philips</span></div><div class="line">Pattern patPlaystation = Pattern.compile(<span class="string">"(?i)(playstation)"</span>); <span class="comment">//Playstation</span></div><div class="line">Pattern patSamsung = Pattern.compile(<span class="string">"(?i)(samsung|(s[cgp]h-\\w+|gt-\\w+|sm-n900)|(sam[sung]*)[\\s-]*(\\w+-?[\\w-]*)*|(SM-[AGPT]\\w+)|sec-((sgh\\w+))|(samsung);smarttv|EK-G[CN][0-9]&#123;3&#125;|YP-(G[SIPB]?1|G[57]0|GB70D|Maple |SC-(?:02C|04E|01F)|N[57]100|N5110|N9100|S(?:CH|GH|PH|EC|AM|HV|HW|M)-|SMART-TV|GT-|Galaxy|(?:portalmmm|o2imode)/2\\.0 [SZ]|sam[rua]|vollo Vi86[);/ ]|(?:OTV-)?SMT-E5015|ISW11SC))"</span>); <span class="comment">//Samsung</span></div><div class="line">Pattern patSharp = Pattern.compile(<span class="string">"(?i)(\\(dtv[\\);].+(aquos)|SH-0|SBM\\d+SH)"</span>); <span class="comment">//Sharp</span></div><div class="line">Pattern patSony = Pattern.compile(<span class="string">"(?i)(Sony(?: ?Ericsson)?|SGP|Xperia|C1[569]0[45]|C2[01]0[45]|C2305|C530[236]|C550[23]|C6[56]0[236]|C6616|C68(?:0[26]|[34]3)|C69(?:0[236]|16|43)|D200[45]|D21(?:0[45]|14)|D22(?:0[236]|12|43)|D230[2356]|D240[36]|D25(?:02|33)|D510[236]|D530[36]|D5322|D5503|D58[03]3|D65(?:0[23]|43)|D66[05]3|E2303|E58[02]3|E6553|(?:WT|LT|SO|ST|SK|MK)[0-9]+[a-z]*[0-9]*(?: Build|\\))|X?L39H|XM50[ht]|W960|portalmmm/2\\.0 K|S3[69]h|X10[ia]v?|E1[05][ai]v?|MT[0-9]&#123;2&#125;[a-z]? Build|SO-0(?:[345]D|[234]E|[12]C|[1235]F|[12]G)|R800[aix]|LiveWithWalkman)"</span>); <span class="comment">//Sony</span></div><div class="line">Pattern patTcl = Pattern.compile(<span class="string">"(?i)(tcl|TCL[ -][a-z0-9]+|TCL[_ -][^;/]+ Build)"</span>); <span class="comment">//tcl</span></div><div class="line">Pattern patTianyu = Pattern.compile(<span class="string">"(?i)(tianyu)"</span>); <span class="comment">//tianyu</span></div><div class="line">Pattern patToshiba = Pattern.compile(<span class="string">"(?i)(Toshiba|TSBNetTV/|portalmmm/[12].0\\sTS|T-01C|T-0[12]D|IS04|IS11T|AT1S0|AT300SE|AT(100|200|270|300|330|374|400|470|500|503|570|703|830))"</span>); <span class="comment">//Toshiba 东芝</span></div><div class="line">Pattern patVivo = Pattern.compile(<span class="string">"(?i)((?:viv-|bbg-)?vivo)"</span>); <span class="comment">//vivo</span></div><div class="line">Pattern patXiaomi = Pattern.compile(<span class="string">"(?i)(xiaomi|android[\\s\\d\\.;]&#123;7,10&#125;hm\\s|(hm[\\s\\-]note?[\\s]*(?:\\d\\w)?)|android.+(mi[\\s\\-_]*(?:one|one[\\s_]plus)?[\\s_]*(?:\\d\\w)?)\\s+build|android.+mi\\s\\w+\\s|(MI [a-z0-9]+|MI-One[ _]?[a-z0-9]+)[);/ ]|HM ([^/;]+) Build|(2014501|2014011|201481[13]|201302[23]|2013061) Build|Redmi)"</span>); <span class="comment">//xiaomi</span></div><div class="line">Pattern patZTE = Pattern.compile(<span class="string">"(?i)(zte|AxonPhone|([a-z0-9]+)_USA_Cricket|(?:Blade S6|N9[15]8St|NX(?:403A|40[X2]|507J|503A|505J|506J|508J|510J|511J|513J|601J)|Z331|N9510|N9180|N9101|N9515|N952[01]|N9810|N799D|[UV]9180|[UV]9815|Z768G)[);/ ])"</span>); <span class="comment">//ZTE</span></div><div class="line"><span class="comment">//Acer </span></div><div class="line">Matcher matAcer = patAcer.matcher(userAgentString);</div><div class="line"><span class="keyword">if</span> (matAcer.find()) &#123;   </div><div class="line">      productBrand = <span class="string">"Acer"</span>;</div><div class="line">&#125;</div><div class="line"><span class="comment">//Alcatel</span></div><div class="line">Matcher matAlcatel = patAlcatel.matcher(userAgentString);</div><div class="line"><span class="keyword">if</span> (matAlcatel.find()) &#123;      </div><div class="line">      productBrand = <span class="string">"Alcatel"</span>;</div><div class="line">&#125;</div><div class="line"><span class="comment">//Aloes</span></div><div class="line">Matcher matAloes = patAloes.matcher(userAgentString);</div><div class="line"><span class="keyword">if</span> (matAloes.find()) &#123;      </div><div class="line">      productBrand = <span class="string">"Aloes"</span>;</div><div class="line">&#125;</div><div class="line"><span class="comment">//Amazon</span></div><div class="line">Matcher matAmazon = patAmazon.matcher(userAgentString);</div><div class="line"><span class="keyword">if</span> (matAmazon.find()) &#123;  </div><div class="line">      productBrand = <span class="string">"Amazon"</span>;</div><div class="line">&#125;</div><div class="line"><span class="comment">//Amoi夏新</span></div><div class="line">Matcher matAmoi = patAmoi.matcher(userAgentString);</div><div class="line"><span class="keyword">if</span> (matAmoi.find()) &#123;  </div><div class="line">      productBrand = <span class="string">"Amoi"</span>;</div><div class="line">&#125;</div><div class="line"><span class="comment">//Aole奥乐</span></div><div class="line">Matcher matAole = patAole.matcher(userAgentString);</div><div class="line"><span class="keyword">if</span> (matAole.find()) &#123;  </div><div class="line">      productBrand = <span class="string">"Aole"</span>;</div><div class="line">&#125;</div><div class="line"><span class="comment">//苹果</span></div><div class="line">Matcher matApple = patApple.matcher(userAgentString);</div><div class="line"><span class="keyword">if</span> (matApple.find()) &#123;  </div><div class="line">      productBrand = <span class="string">"Apple"</span>;</div><div class="line">&#125;</div><div class="line"><span class="comment">//华硕</span></div><div class="line">Matcher matAsus = patAsus.matcher(userAgentString);</div><div class="line"><span class="keyword">if</span> (matAsus.find()) &#123;  </div><div class="line">      productBrand = <span class="string">"Asus"</span>;</div><div class="line">&#125;</div><div class="line"><span class="comment">//法国爱可视手机</span></div><div class="line">Matcher matArchos = patArchos.matcher(userAgentString);</div><div class="line"><span class="keyword">if</span> (matArchos.find()) &#123;  </div><div class="line">      productBrand = <span class="string">"Archos"</span>;</div><div class="line">&#125;</div><div class="line"><span class="comment">//Benq</span></div><div class="line">Matcher matBenq= patBenq.matcher(userAgentString);</div><div class="line"><span class="keyword">if</span> (matBenq.find()) &#123;   </div><div class="line">      productBrand = <span class="string">"Benq"</span>;</div><div class="line">&#125;</div><div class="line"><span class="comment">//Bestsonny至尊宝手机-联发科MediaTek</span></div><div class="line">Matcher matBestsonny = patBestsonny.matcher(userAgentString);</div><div class="line"><span class="keyword">if</span> (matBestsonny.find()) &#123;  </div><div class="line">      productBrand = <span class="string">"Bestsonny"</span>;</div><div class="line">&#125;</div><div class="line"><span class="comment">//Beierfeng贝尔丰手机</span></div><div class="line">Matcher matBeierfeng = patBeierfeng.matcher(userAgentString);</div><div class="line"><span class="keyword">if</span> (matBeierfeng.find()) &#123;  </div><div class="line">      productBrand = <span class="string">"Beierfeng"</span>;</div><div class="line">&#125;</div><div class="line"><span class="comment">//bird波导手机</span></div><div class="line">Matcher matBird = patBird.matcher(userAgentString);</div><div class="line"><span class="keyword">if</span> (matBird.find()) &#123;  </div><div class="line">      productBrand = <span class="string">"Bird"</span>;</div><div class="line">&#125;</div><div class="line"><span class="comment">//黑莓</span></div><div class="line">Matcher matBlackBerry = patBlackBerry.matcher(userAgentString);</div><div class="line"><span class="keyword">if</span> (matBlackBerry.find()) &#123;  </div><div class="line">      productBrand = <span class="string">"BlackBerry"</span>;</div><div class="line">&#125;</div><div class="line"><span class="comment">//长虹</span></div><div class="line">Matcher matChanghong = patChanghong.matcher(userAgentString);</div><div class="line"><span class="keyword">if</span> (matChanghong.find()) &#123;  </div><div class="line">      productBrand = <span class="string">"Changhong"</span>;</div><div class="line">&#125;</div><div class="line"><span class="comment">//CarNavigation汽车导航</span></div><div class="line">Matcher matCarNavi= patCarNavi.matcher(userAgentString);</div><div class="line"><span class="keyword">if</span> (matCarNavi.find()) &#123;  </div><div class="line">      productBrand = <span class="string">"CarNavi"</span>;</div><div class="line">&#125;</div><div class="line"><span class="comment">//Coolpad 酷派</span></div><div class="line">Matcher matCoolpad= patCoolpad.matcher(userAgentString);</div><div class="line"><span class="keyword">if</span> (matCoolpad.find()) &#123;  </div><div class="line">      productBrand = <span class="string">"Coolpad"</span>;</div><div class="line">&#125;</div><div class="line"><span class="comment">//Dell</span></div><div class="line">Matcher matDell= patDell.matcher(userAgentString);</div><div class="line"><span class="keyword">if</span> (matDell.find()) &#123;  </div><div class="line">      productBrand = <span class="string">"Dell"</span>;</div><div class="line">&#125;</div><div class="line"><span class="comment">//Gionee</span></div><div class="line">Matcher matGionee= patGionee.matcher(userAgentString);</div><div class="line"><span class="keyword">if</span> (matGionee.find()) &#123;  </div><div class="line">      productBrand = <span class="string">"Gionee"</span>;</div><div class="line">&#125;</div><div class="line"><span class="comment">//Google </span></div><div class="line">Matcher matGoogle = patGoogle.matcher(userAgentString);</div><div class="line"><span class="keyword">if</span> (matGoogle.find()) &#123; </div><div class="line">      productBrand = <span class="string">"Google"</span>;</div><div class="line">&#125;</div><div class="line"><span class="comment">//Haier </span></div><div class="line">Matcher matHaier = patHaier.matcher(userAgentString);</div><div class="line"><span class="keyword">if</span> (matHaier.find()) &#123; </div><div class="line">      productBrand = <span class="string">"Haier"</span>;</div><div class="line">&#125;</div><div class="line"><span class="comment">//Hisense </span></div><div class="line">Matcher matHisense = patHisense.matcher(userAgentString);</div><div class="line"><span class="keyword">if</span> (matHisense.find()) &#123; </div><div class="line">      productBrand = <span class="string">"Hisense"</span>;</div><div class="line">&#125;</div><div class="line"><span class="comment">//惠普</span></div><div class="line">Matcher matHP = patHP.matcher(userAgentString);</div><div class="line"><span class="keyword">if</span> (matHP.find()) &#123;  </div><div class="line">      productBrand = <span class="string">"HP"</span>;</div><div class="line">&#125;</div><div class="line"><span class="comment">//HTC </span></div><div class="line">Matcher matHTC = patHTC.matcher(userAgentString);</div><div class="line"><span class="keyword">if</span> (matHTC.find()) &#123;    </div><div class="line">      productBrand = <span class="string">"HTC"</span>;</div><div class="line">&#125;</div><div class="line"><span class="comment">//Huawei</span></div><div class="line">Matcher matHuawei = patHuawei.matcher(userAgentString);</div><div class="line"><span class="keyword">if</span> (matHuawei.find()) &#123; </div><div class="line">      productBrand = <span class="string">"Huawei"</span>;</div><div class="line">&#125;</div><div class="line"><span class="comment">//Innos奕骆</span></div><div class="line">Matcher matInnos = patInnos.matcher(userAgentString);</div><div class="line"><span class="keyword">if</span> (matInnos.find()) &#123; </div><div class="line">      productBrand = <span class="string">"Innos"</span>;</div><div class="line">&#125;</div><div class="line"><span class="comment">//Jolla </span></div><div class="line">Matcher matJolla = patJolla.matcher(userAgentString);</div><div class="line"><span class="keyword">if</span> (matJolla.find()) &#123;  </div><div class="line">      productBrand = <span class="string">"Jolla"</span>;</div><div class="line">&#125;</div><div class="line"><span class="comment">//Lenovo </span></div><div class="line">Matcher matLenovo = patLenovo.matcher(userAgentString);</div><div class="line"><span class="keyword">if</span> (matLenovo.find()) &#123; </div><div class="line">      productBrand = <span class="string">"Lenovo"</span>;</div><div class="line">&#125;</div><div class="line"><span class="comment">//LG </span></div><div class="line">Matcher matLG = patLG.matcher(userAgentString);</div><div class="line"><span class="keyword">if</span> (matLG.find()) &#123;     </div><div class="line">      productBrand = <span class="string">"LG"</span>;</div><div class="line">&#125;</div><div class="line"><span class="comment">//Lephone</span></div><div class="line">Matcher matLephone = patLephone.matcher(userAgentString);</div><div class="line"><span class="keyword">if</span> (matLephone.find()) &#123;  </div><div class="line">      productBrand = <span class="string">"Lephone"</span>;</div><div class="line">&#125;</div><div class="line"><span class="comment">//Leshi </span></div><div class="line">Matcher matLeshi = patLeshi.matcher(userAgentString);</div><div class="line"><span class="keyword">if</span> (matLeshi.find()) &#123;  </div><div class="line">      productBrand = <span class="string">"Leshi"</span>;</div><div class="line">&#125;</div><div class="line"><span class="comment">//Lingwin灵韵</span></div><div class="line">Matcher matLingwin = patLingwin.matcher(userAgentString);</div><div class="line"><span class="keyword">if</span> (matLingwin.find()) &#123;     </div><div class="line">      productBrand = <span class="string">"Lingwin"</span>;</div><div class="line">&#125;</div><div class="line"><span class="comment">//Meizu</span></div><div class="line">Matcher matMeizu = patMeizu.matcher(userAgentString);</div><div class="line"><span class="keyword">if</span> (matMeizu.find()) &#123;  </div><div class="line">      productBrand = <span class="string">"Meizu"</span>;</div><div class="line">&#125;</div><div class="line"><span class="comment">//Microsoft </span></div><div class="line">Matcher matMicrosoft = patMicrosoft.matcher(userAgentString);</div><div class="line"><span class="keyword">if</span> (matMicrosoft.find()) &#123;    </div><div class="line">      productBrand = <span class="string">"Microsoft"</span>;</div><div class="line">&#125;</div><div class="line"><span class="comment">//Motorola </span></div><div class="line">Matcher matMotorola = patMotorola.matcher(userAgentString);</div><div class="line"><span class="keyword">if</span> (matMotorola.find()) &#123;     </div><div class="line">      productBrand = <span class="string">"Motorola"</span>;</div><div class="line">&#125;</div><div class="line"><span class="comment">//Nintendo(任天堂)</span></div><div class="line">Matcher matNintendo= patNintendo.matcher(userAgentString);</div><div class="line"><span class="keyword">if</span> (matNintendo.find()) &#123;     </div><div class="line">      productBrand = <span class="string">"Nintendo"</span>;</div><div class="line">&#125;</div><div class="line"><span class="comment">//Nokia </span></div><div class="line">Matcher matNokia = patNokia.matcher(userAgentString);</div><div class="line"><span class="keyword">if</span> (matNokia.find()) &#123;  </div><div class="line">      productBrand = <span class="string">"Nokia"</span>;</div><div class="line">&#125;         </div><div class="line"><span class="comment">//Nook</span></div><div class="line">Matcher matNook= patNook.matcher(userAgentString);</div><div class="line"><span class="keyword">if</span> (matNook.find()) &#123;  </div><div class="line">      productBrand = <span class="string">"Nook"</span>;</div><div class="line">&#125;    </div><div class="line"><span class="comment">//Nvidia </span></div><div class="line">Matcher matNvidia = patNvidia.matcher(userAgentString);</div><div class="line"><span class="keyword">if</span> (matNvidia.find()) &#123; </div><div class="line">      productBrand = <span class="string">"Nvidia"</span>;</div><div class="line">&#125;</div><div class="line"><span class="comment">//Oppo </span></div><div class="line">Matcher matOppo = patOppo.matcher(userAgentString);</div><div class="line"><span class="keyword">if</span> (matOppo.find()) &#123;   </div><div class="line">      productBrand = <span class="string">"Oppo"</span>;</div><div class="line">&#125;</div><div class="line"><span class="comment">//Owwo</span></div><div class="line">Matcher matOwwo = patOwwo.matcher(userAgentString);</div><div class="line"><span class="keyword">if</span> (matOwwo.find()) &#123;   </div><div class="line">      productBrand = <span class="string">"Owwo"</span>;</div><div class="line">&#125;</div><div class="line"><span class="comment">//Palm</span></div><div class="line">Matcher matPalm= patPalm.matcher(userAgentString);</div><div class="line"><span class="keyword">if</span> (matPalm.find()) &#123;   </div><div class="line">      productBrand = <span class="string">"Palm"</span>;</div><div class="line">&#125;</div><div class="line"><span class="comment">//Philips</span></div><div class="line">Matcher matPhilips= patPhilips.matcher(userAgentString);</div><div class="line"><span class="keyword">if</span> (matPhilips.find()) &#123;   </div><div class="line">      productBrand = <span class="string">"Philips"</span>;</div><div class="line">&#125;</div><div class="line"><span class="comment">//playstation </span></div><div class="line">Matcher matPlaystation = patPlaystation.matcher(userAgentString);</div><div class="line"><span class="keyword">if</span> (matPlaystation.find()) &#123;  </div><div class="line">      productBrand = <span class="string">"Playstation"</span>;</div><div class="line">&#125;</div><div class="line"><span class="comment">//Samsung </span></div><div class="line">Matcher matSamsung = patSamsung.matcher(userAgentString);</div><div class="line"><span class="keyword">if</span> (matSamsung.find()) &#123;      </div><div class="line">      productBrand = <span class="string">"Samsung"</span>;</div><div class="line">&#125;</div><div class="line"><span class="comment">//Sharp </span></div><div class="line">Matcher matSharp = patSharp.matcher(userAgentString);</div><div class="line"><span class="keyword">if</span> (matSharp.find()) &#123;  </div><div class="line">      productBrand = <span class="string">"Sharp"</span>;</div><div class="line">&#125;</div><div class="line"><span class="comment">//Sony</span></div><div class="line">Matcher matSony= patSony.matcher(userAgentString);</div><div class="line"><span class="keyword">if</span> (matSony.find()) &#123;   </div><div class="line">      productBrand = <span class="string">"Sony"</span>;</div><div class="line">&#125;</div><div class="line"><span class="comment">//TCL</span></div><div class="line">Matcher matTcl= patTcl.matcher(userAgentString);</div><div class="line"><span class="keyword">if</span> (matTcl.find()) &#123;   </div><div class="line">      productBrand = <span class="string">"Tcl"</span>;</div><div class="line">&#125;</div><div class="line"><span class="comment">//Tianyu</span></div><div class="line">Matcher matTianyu= patTianyu.matcher(userAgentString);</div><div class="line"><span class="keyword">if</span> (matTianyu.find()) &#123;   </div><div class="line">      productBrand = <span class="string">"Tianyu"</span>;</div><div class="line">&#125;</div><div class="line"><span class="comment">//Vivo </span></div><div class="line">Matcher matVivo = patVivo.matcher(userAgentString);</div><div class="line"><span class="keyword">if</span>(matVivo.find())&#123;</div><div class="line">  productBrand = <span class="string">"Vivo"</span>;</div><div class="line">&#125;</div><div class="line"><span class="comment">//Toshiba 东芝</span></div><div class="line">Matcher matToshiba = patToshiba.matcher(userAgentString);</div><div class="line"><span class="keyword">if</span>(matToshiba.find())&#123;</div><div class="line">  productBrand = <span class="string">"Toshiba"</span>;</div><div class="line">&#125;</div><div class="line"><span class="comment">//Xiaomi </span></div><div class="line">Matcher matXiaomi = patXiaomi.matcher(userAgentString);</div><div class="line"><span class="keyword">if</span> (matXiaomi.find()) &#123; </div><div class="line">      productBrand = <span class="string">"Xiaomi"</span>;</div><div class="line">&#125;            </div><div class="line"><span class="comment">//ZTE</span></div><div class="line">Matcher matZTE = patZTE.matcher(userAgentString);</div><div class="line"><span class="keyword">if</span> (matZTE.find()) &#123;    </div><div class="line">      productBrand = <span class="string">"ZTE"</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<pre><code>SELECT * FROM portal_logrecord WHERE MACHINE_BRAND LIKE &quot;%asus%&quot;;//模糊查询
+</code></pre><p>不要忽略手机的更新速度，注意最新机型。<br>尽量用小写，减少运算。</p>
+<h1 id="五-最终匹配代码"><a href="#五-最终匹配代码" class="headerlink" title="五. 最终匹配代码"></a>五. 最终匹配代码</h1><pre><code class="java">//java版本，js版本见-七[资源参考]
+Pattern patAcer = Pattern.compile(&quot;(?i)((acer|a(?:101|110|200|210|211|500|501|510|511|700|701)[);/\\s]|Android.*V3[67]0[);/\\s]|Android.*Z1[23456]0\\sBuild|Android.*Z500\\sBuild|A1-830|A1-81[01]|A3-A[12][01]|B1-7[1235][01]|B1-810|B1-A71|E39\\sBuild|S5[12]0\\sBuild|DA[0-9]+HQ?L[);/\\s]))&quot;); //Acer
+Pattern patAlcatel = Pattern.compile(&quot;(?i)(Alcatel|Alc[a-z0-9]+|One[ _]?Touch)&quot;); //Alcatel
+Pattern patAloes = Pattern.compile(&quot;(?i)(\\saloes\\sbuild)&quot;); //Aloes奥洛斯
+Pattern patAmazon = Pattern.compile(&quot;(?i)(kindle|kf[A-z]+|KF(?:OT|TT|JWI|JWA|SOWI|A[PRS]WI|THWI|SAW[IA])[);/ ]|Silk/\\d+\\.\\d+|Amazon (?:Tate|Jem)|AFT[BM]|SD4930UR)&quot;); //kindle |(sd|kf[0349hijorstuw]+)影响了droid-Verizon
+Pattern patAmoi = Pattern.compile(&quot;(?i)(\\samoi\\s|A862W)&quot;); //Amoi夏新手机
+Pattern patAole = Pattern.compile(&quot;(?i)(\\saole(dior)?\\sbuild)&quot;); //Aole奥乐手机
+Pattern patApple = Pattern.compile(&quot;(?i)((?:iTunes-)?AppleTV|(?:Apple-)?(?:iPad|iPhone)|iPh[0-9],[0-9]|CFNetwork|(?:Apple-)?iPod|ipod\\s{0,1}tv)&quot;); //Apple
+Pattern patAsus = Pattern.compile(&quot;(?i)(asus|Transformer|TF300T|Slider SL101|PadFone|ME302(?:C|KL)|ME301T|ME371MG|ME17(?:1|2V|3X)|(?:K0[01][0-9a-z]|Z00D)[);/ ])&quot;); //Asus
+Pattern patArchos = Pattern.compile(&quot;(?i)(Archos)&quot;); //法国爱可视手机
+Pattern patBenq = Pattern.compile(&quot;(?i)((benq)[\\s_-]?([\\w-]+)*)&quot;); //Benq
+Pattern patBestsonny = Pattern.compile(&quot;(?i)(Bestsonny)&quot;); //Bestsonny
+Pattern patBeierfeng = Pattern.compile(&quot;(?i)(\\sbf_t\\d{2}\\sbuild)&quot;); //BF贝尔丰
+Pattern patBird = Pattern.compile(&quot;(?i)(\\sbird\\s|bird[\\-. _]([^;/]+))&quot;); //Bird波导
+Pattern patBlackBerry = Pattern.compile(&quot;(?i)(playbook|blackberry|bb10;\\s(\\w+)|\\sq5\\sbuild)&quot;); //BlackBerry
+Pattern patChanghong = Pattern.compile(&quot;(?i)(changhong)&quot;); //Changhong 长虹
+Pattern patCarNavi = Pattern.compile(&quot;(?i)(carnavi)&quot;); //Car Navigation汽车导航
+Pattern patCoolpad = Pattern.compile(&quot;(?i)((?:YL-)?coolpad|8190q[ ;/\\)]|8295 build)&quot;); //Coolpad 酷派
+Pattern patDell = Pattern.compile(&quot;(?i)(dell|dell\\s(strea[kpr\\s\\d]*[\\dko])|(001dl)|venue|xcd35)&quot;); //Dell
+Pattern patGionee = Pattern.compile(&quot;(?i)(gionee|(?:GIO-)?GIONEE[ _-]?[a-z0-9]+|(?:Dream_D1|V188S?|GN[0-9]{3,4}[a-z]?)[);/ ])&quot;);//GiONEE金立
+Pattern patGoogle = Pattern.compile(&quot;(?i)(Google|nexus|GoogleTV|Glass|CrKey[^a-z0-9]|Talk)&quot;); //Google
+Pattern patHaier = Pattern.compile(&quot;(?i)(haier|;\\sqk-6385t\\sbuild|(?:HW-)?W(?:716|757|860|970)[);/ ])&quot;); //Haier
+Pattern patHisense = Pattern.compile(&quot;(?i)((?:HS-)?Hisense ([^;/]+) Build|Hisense [^);/]+|HS-(?:U|EG?|I|T|X)[0-9]+[a-z0-9\\-]*|E270BSA|M470BS[AE]|E2281)&quot;); //Hisense
+Pattern patHP = Pattern.compile(&quot;(?i)(hp|touchpad|android\\s.+slate|hp-tablet|HP ?iPAQ|webOS.*P160U|HP Slate|HP [78]|Compaq [7|8])&quot;); //HP
+Pattern patHTC = Pattern.compile(&quot;(?i)((htc)|Sprint T7380|EVO|(sprint\\s(\\w+))|ADR(?!910L)[a-z0-9]+|Amaze[ _]4G[);/ ]|(Desire|Sensation|Evo ?3D|IncredibleS|Wildfire|Butterfly)[ _]?([^;/]+) Build|(Amaze[ _]4G|One ?[XELSV\\+]+)[);/ ]|SPV E6[05]0|One M8|X525a|PG86100|PC36100|XV6975|PJ83100[);/ ])&quot;); //HTC
+Pattern patHuawei = Pattern.compile(&quot;(?i)(huawei|honor|Linux;\\sU;\\sandroid[\\s\\.\\d\\w;-]{15}media\\spad\\sbuild\\/jdq39|\\sch[em][12]?-[ctu]l\\d{2}[hm]?\\sbuild)|(HW-)?(?:Huawei|Ideos|Honor[ _]|(?:H60-L(?:01|02|03|04|11|12)|H30-(?:C00|L01M?|L02|U10|T00|T10)|G621-TL00M?|PLK-(?:AL10|CL00|TL00|TL01H?|UL00|L01)|SCL-(?:AL00|CL00|TL00H?)|CH(?:E2?|M)-[CUT]L00[HM]?|CHE1-CL[12]0|CHE2-L11|U(?:8230|8500|8661|8665|8667|8800|8818|8860|9200|9508))[);/ ])&quot;); //Huawei 
+Pattern patInnos = Pattern.compile(&quot;(?i)(\\sd10cf\\sbuild)&quot;); //Innos奕骆
+Pattern patJolla = Pattern.compile(&quot;(?i)(linux;.+((jolla));)&quot;); //Jolla,芬兰手机品牌
+Pattern patLenovo = Pattern.compile(&quot;(?i)((?:LNV-)?lenovo|IdeaTab|IdeaPad|Thinkpad|Yoga Tablet)&quot;); //Lenovo
+Pattern patLephone = Pattern.compile(&quot;(?i)(\\slephone\\st\\d)&quot;); //Lephone 乐丰
+Pattern patLeshi = Pattern.compile(&quot;(?i)(;\\sle(tv)?\\sx\\d{3}\\sbuild)&quot;); //leshi
+Pattern patLG = Pattern.compile(&quot;(?i)(lg|lg[e;\\s\\/-]+(\\w+)*|portalmmm/2\\.0 (?:KE|KG|KP|L3)|(?:VX[0-9]+|L-0[12]D|L-07C|P713)[);/ ]|NetCast)&quot;); //LG
+Pattern patLingwin = Pattern.compile(&quot;(?i)(Lingwin)&quot;); //Lingwin灵韵手机
+Pattern patMeizu = Pattern.compile(&quot;(?i)(meizu|;\\sm\\d\\smetal\\sbuild|;\\smx\\d.+build|;\\sm\\d\\snote\\sbuild|;\\smz-m\\dmetal\\sbuild|;\\spro\\s[56]\\sbuild)|(M04[05]|M35[1356]|MX[ -]?[234](?: Pro)?|(?:MZ-)?m[12] note|(?:MZ-)?M57[18]C)[);/ ]&quot;); //Meizu
+Pattern patMicrosoft = Pattern.compile(&quot;(?i)(xbox|KIN\\.(One|Two))&quot;); //Microsoft ，是否加windows|？
+Pattern patMotorola = Pattern.compile(&quot;(?i)(MB860|DCT-700|Xoom|\\s(milestone|droid(?:[2-4x]|\\s(?:bionic|x2|pro|razr))?(:?\\s4g)?)[\\w\\s]+build\\/|mot[\\s-]?(\\w+)*|(XT\\d{3,4}) build\\/|android.+\\s(mz60\\d|xoom[\\s2]{0,2})\\sbuild\\/|MOT|(?&lt;!AN)DROID ?(?:Build|[a-z0-9]+)|portalmmm/2.0 (?:E378i|L6|L7|v3)|XOOM [^;/]*Build|(?:XT|MZ|MB|ME)[0-9]{3,4}[a-z]?(?:\\(Defy\\))?(?: Build|\\)))&quot;); //Motorola
+Pattern patNintendo = Pattern.compile(&quot;(?i)((nintendo)\\s([wids3u]+))&quot;); //任天堂
+Pattern patNokia = Pattern.compile(&quot;(?i)(Nokia|Lumia|Maemo RX|portalmmm/2\\.0 N7|portalmmm/2\\.0 NK|nok[0-9]+|Symbian.*\\s([a-z0-9]+)$|RX-51 N900|(maemo|nokia).*(n900|lumia\\s\\d+)|(nokia)[\\s_-]?([\\w-]+)*)&quot;); //Nokia
+Pattern patNook = Pattern.compile(&quot;(?i)(\\s(nook)[\\w\\s]+build\\/(\\w+))&quot;); //nook
+Pattern patNvidia = Pattern.compile(&quot;(?i)(shield|TegraNote-P1640)&quot;); //Nvidia
+Pattern patOppo = Pattern.compile(&quot;(?i)(oppo|android.+find\\s\\d\\sbuild|Android.+zh-cn;\\sr.+build|r1001|x9006|r2001|u707|x909|a31\\sr\\d{3}t?\\sbuild|(?:OB-)?OPPO[ _]?([a-z0-9]+)|N1T|(?:X90[07][067]|U707T?|X909T?|R(?:10[01]1|2001|201[07]|6007|7005|7007|80[13579]|81[13579]|82[01379]|83[013]|800[067]|8015|810[679]|811[13]|820[057])[KLSTW]?)|N520[79]|N5117[);/ ])&quot;); //Oppo
+Pattern patOwwo = Pattern.compile(&quot;(?i)(;\\sq03\\sbuild)&quot;); //Owwo欧沃
+Pattern patPalm = Pattern.compile(&quot;(?i)((palm(?=\\-))[\\s_-]?([\\w-]+)*)&quot;); //Palm
+Pattern patPhilips = Pattern.compile(&quot;(?i)(Philips|AND1E[);/ ]|NETTV/)&quot;); //Philips
+Pattern patPlaystation = Pattern.compile(&quot;(?i)(playstation)&quot;); //Playstation
+Pattern patSamsung = Pattern.compile(&quot;(?i)(samsung|(s[cgp]h-\\w+|gt-\\w+|sm-n900)|(sam[sung]*)[\\s-]*(\\w+-?[\\w-]*)*|(SM-[AGPT]\\w+)|sec-((sgh\\w+))|(samsung);smarttv|EK-G[CN][0-9]{3}|YP-(G[SIPB]?1|G[57]0|GB70D|Maple |SC-(?:02C|04E|01F)|N[57]100|N5110|N9100|S(?:CH|GH|PH|EC|AM|HV|HW|M)-|SMART-TV|GT-|Galaxy|(?:portalmmm|o2imode)/2\\.0 [SZ]|sam[rua]|vollo Vi86[);/ ]|(?:OTV-)?SMT-E5015|ISW11SC))&quot;); //Samsung
+Pattern patSharp = Pattern.compile(&quot;(?i)(\\(dtv[\\);].+(aquos)|SH-0|SBM\\d+SH)&quot;); //Sharp
+Pattern patSony = Pattern.compile(&quot;(?i)(Sony(?: ?Ericsson)?|SGP|Xperia|C1[569]0[45]|C2[01]0[45]|C2305|C530[236]|C550[23]|C6[56]0[236]|C6616|C68(?:0[26]|[34]3)|C69(?:0[236]|16|43)|D200[45]|D21(?:0[45]|14)|D22(?:0[236]|12|43)|D230[2356]|D240[36]|D25(?:02|33)|D510[236]|D530[36]|D5322|D5503|D58[03]3|D65(?:0[23]|43)|D66[05]3|E2303|E58[02]3|E6553|(?:WT|LT|SO|ST|SK|MK)[0-9]+[a-z]*[0-9]*(?: Build|\\))|X?L39H|XM50[ht]|W960|portalmmm/2\\.0 K|S3[69]h|X10[ia]v?|E1[05][ai]v?|MT[0-9]{2}[a-z]? Build|SO-0(?:[345]D|[234]E|[12]C|[1235]F|[12]G)|R800[aix]|LiveWithWalkman)&quot;); //Sony
+Pattern patTcl = Pattern.compile(&quot;(?i)(tcl|TCL[ -][a-z0-9]+|TCL[_ -][^;/]+ Build)&quot;); //tcl
+Pattern patTianyu = Pattern.compile(&quot;(?i)(tianyu)&quot;); //tianyu
+Pattern patToshiba = Pattern.compile(&quot;(?i)(Toshiba|TSBNetTV/|portalmmm/[12].0\\sTS|T-01C|T-0[12]D|IS04|IS11T|AT1S0|AT300SE|AT(100|200|270|300|330|374|400|470|500|503|570|703|830))&quot;); //Toshiba 东芝
+Pattern patVivo = Pattern.compile(&quot;(?i)((?:viv-|bbg-)?vivo)&quot;); //vivo
+Pattern patXiaomi = Pattern.compile(&quot;(?i)(xiaomi|android[\\s\\d\\.;]{7,10}hm\\s|(hm[\\s\\-]note?[\\s]*(?:\\d\\w)?)|android.+(mi[\\s\\-_]*(?:one|one[\\s_]plus)?[\\s_]*(?:\\d\\w)?)\\s+build|android.+mi\\s\\w+\\s|(MI [a-z0-9]+|MI-One[ _]?[a-z0-9]+)[);/ ]|HM ([^/;]+) Build|(2014501|2014011|201481[13]|201302[23]|2013061) Build|Redmi)&quot;); //xiaomi
+Pattern patZTE = Pattern.compile(&quot;(?i)(zte|AxonPhone|([a-z0-9]+)_USA_Cricket|(?:Blade S6|N9[15]8St|NX(?:403A|40[X2]|507J|503A|505J|506J|508J|510J|511J|513J|601J)|Z331|N9510|N9180|N9101|N9515|N952[01]|N9810|N799D|[UV]9180|[UV]9815|Z768G)[);/ ])&quot;); //ZTE
+//Acer 
+Matcher matAcer = patAcer.matcher(userAgentString);
+if (matAcer.find()) {   
+      productBrand = &quot;Acer&quot;;
+}
+//Alcatel
+Matcher matAlcatel = patAlcatel.matcher(userAgentString);
+if (matAlcatel.find()) {      
+      productBrand = &quot;Alcatel&quot;;
+}
+//Aloes
+Matcher matAloes = patAloes.matcher(userAgentString);
+if (matAloes.find()) {      
+      productBrand = &quot;Aloes&quot;;
+}
+//Amazon
+Matcher matAmazon = patAmazon.matcher(userAgentString);
+if (matAmazon.find()) {  
+      productBrand = &quot;Amazon&quot;;
+}
+//Amoi夏新
+Matcher matAmoi = patAmoi.matcher(userAgentString);
+if (matAmoi.find()) {  
+      productBrand = &quot;Amoi&quot;;
+}
+//Aole奥乐
+Matcher matAole = patAole.matcher(userAgentString);
+if (matAole.find()) {  
+      productBrand = &quot;Aole&quot;;
+}
+//苹果
+Matcher matApple = patApple.matcher(userAgentString);
+if (matApple.find()) {  
+      productBrand = &quot;Apple&quot;;
+}
+//华硕
+Matcher matAsus = patAsus.matcher(userAgentString);
+if (matAsus.find()) {  
+      productBrand = &quot;Asus&quot;;
+}
+//法国爱可视手机
+Matcher matArchos = patArchos.matcher(userAgentString);
+if (matArchos.find()) {  
+      productBrand = &quot;Archos&quot;;
+}
+//Benq
+Matcher matBenq= patBenq.matcher(userAgentString);
+if (matBenq.find()) {   
+      productBrand = &quot;Benq&quot;;
+}
+//Bestsonny至尊宝手机-联发科MediaTek
+Matcher matBestsonny = patBestsonny.matcher(userAgentString);
+if (matBestsonny.find()) {  
+      productBrand = &quot;Bestsonny&quot;;
+}
+//Beierfeng贝尔丰手机
+Matcher matBeierfeng = patBeierfeng.matcher(userAgentString);
+if (matBeierfeng.find()) {  
+      productBrand = &quot;Beierfeng&quot;;
+}
+//bird波导手机
+Matcher matBird = patBird.matcher(userAgentString);
+if (matBird.find()) {  
+      productBrand = &quot;Bird&quot;;
+}
+//黑莓
+Matcher matBlackBerry = patBlackBerry.matcher(userAgentString);
+if (matBlackBerry.find()) {  
+      productBrand = &quot;BlackBerry&quot;;
+}
+//长虹
+Matcher matChanghong = patChanghong.matcher(userAgentString);
+if (matChanghong.find()) {  
+      productBrand = &quot;Changhong&quot;;
+}
+//CarNavigation汽车导航
+Matcher matCarNavi= patCarNavi.matcher(userAgentString);
+if (matCarNavi.find()) {  
+      productBrand = &quot;CarNavi&quot;;
+}
+//Coolpad 酷派
+Matcher matCoolpad= patCoolpad.matcher(userAgentString);
+if (matCoolpad.find()) {  
+      productBrand = &quot;Coolpad&quot;;
+}
+//Dell
+Matcher matDell= patDell.matcher(userAgentString);
+if (matDell.find()) {  
+      productBrand = &quot;Dell&quot;;
+}
+//Gionee
+Matcher matGionee= patGionee.matcher(userAgentString);
+if (matGionee.find()) {  
+      productBrand = &quot;Gionee&quot;;
+}
+//Google 
+Matcher matGoogle = patGoogle.matcher(userAgentString);
+if (matGoogle.find()) { 
+      productBrand = &quot;Google&quot;;
+}
+//Haier 
+Matcher matHaier = patHaier.matcher(userAgentString);
+if (matHaier.find()) { 
+      productBrand = &quot;Haier&quot;;
+}
+//Hisense 
+Matcher matHisense = patHisense.matcher(userAgentString);
+if (matHisense.find()) { 
+      productBrand = &quot;Hisense&quot;;
+}
+//惠普
+Matcher matHP = patHP.matcher(userAgentString);
+if (matHP.find()) {  
+      productBrand = &quot;HP&quot;;
+}
+//HTC 
+Matcher matHTC = patHTC.matcher(userAgentString);
+if (matHTC.find()) {    
+      productBrand = &quot;HTC&quot;;
+}
+//Huawei
+Matcher matHuawei = patHuawei.matcher(userAgentString);
+if (matHuawei.find()) { 
+      productBrand = &quot;Huawei&quot;;
+}
+//Innos奕骆
+Matcher matInnos = patInnos.matcher(userAgentString);
+if (matInnos.find()) { 
+      productBrand = &quot;Innos&quot;;
+}
+//Jolla 
+Matcher matJolla = patJolla.matcher(userAgentString);
+if (matJolla.find()) {  
+      productBrand = &quot;Jolla&quot;;
+}
+//Lenovo 
+Matcher matLenovo = patLenovo.matcher(userAgentString);
+if (matLenovo.find()) { 
+      productBrand = &quot;Lenovo&quot;;
+}
+//LG 
+Matcher matLG = patLG.matcher(userAgentString);
+if (matLG.find()) {     
+      productBrand = &quot;LG&quot;;
+}
+//Lephone
+Matcher matLephone = patLephone.matcher(userAgentString);
+if (matLephone.find()) {  
+      productBrand = &quot;Lephone&quot;;
+}
+//Leshi 
+Matcher matLeshi = patLeshi.matcher(userAgentString);
+if (matLeshi.find()) {  
+      productBrand = &quot;Leshi&quot;;
+}
+//Lingwin灵韵
+Matcher matLingwin = patLingwin.matcher(userAgentString);
+if (matLingwin.find()) {     
+      productBrand = &quot;Lingwin&quot;;
+}
+//Meizu
+Matcher matMeizu = patMeizu.matcher(userAgentString);
+if (matMeizu.find()) {  
+      productBrand = &quot;Meizu&quot;;
+}
+//Microsoft 
+Matcher matMicrosoft = patMicrosoft.matcher(userAgentString);
+if (matMicrosoft.find()) {    
+      productBrand = &quot;Microsoft&quot;;
+}
+//Motorola 
+Matcher matMotorola = patMotorola.matcher(userAgentString);
+if (matMotorola.find()) {     
+      productBrand = &quot;Motorola&quot;;
+}
+//Nintendo(任天堂)
+Matcher matNintendo= patNintendo.matcher(userAgentString);
+if (matNintendo.find()) {     
+      productBrand = &quot;Nintendo&quot;;
+}
+//Nokia 
+Matcher matNokia = patNokia.matcher(userAgentString);
+if (matNokia.find()) {  
+      productBrand = &quot;Nokia&quot;;
+}         
+//Nook
+Matcher matNook= patNook.matcher(userAgentString);
+if (matNook.find()) {  
+      productBrand = &quot;Nook&quot;;
+}    
+//Nvidia 
+Matcher matNvidia = patNvidia.matcher(userAgentString);
+if (matNvidia.find()) { 
+      productBrand = &quot;Nvidia&quot;;
+}
+//Oppo 
+Matcher matOppo = patOppo.matcher(userAgentString);
+if (matOppo.find()) {   
+      productBrand = &quot;Oppo&quot;;
+}
+//Owwo
+Matcher matOwwo = patOwwo.matcher(userAgentString);
+if (matOwwo.find()) {   
+      productBrand = &quot;Owwo&quot;;
+}
+//Palm
+Matcher matPalm= patPalm.matcher(userAgentString);
+if (matPalm.find()) {   
+      productBrand = &quot;Palm&quot;;
+}
+//Philips
+Matcher matPhilips= patPhilips.matcher(userAgentString);
+if (matPhilips.find()) {   
+      productBrand = &quot;Philips&quot;;
+}
+//playstation 
+Matcher matPlaystation = patPlaystation.matcher(userAgentString);
+if (matPlaystation.find()) {  
+      productBrand = &quot;Playstation&quot;;
+}
+//Samsung 
+Matcher matSamsung = patSamsung.matcher(userAgentString);
+if (matSamsung.find()) {      
+      productBrand = &quot;Samsung&quot;;
+}
+//Sharp 
+Matcher matSharp = patSharp.matcher(userAgentString);
+if (matSharp.find()) {  
+      productBrand = &quot;Sharp&quot;;
+}
+//Sony
+Matcher matSony= patSony.matcher(userAgentString);
+if (matSony.find()) {   
+      productBrand = &quot;Sony&quot;;
+}
+//TCL
+Matcher matTcl= patTcl.matcher(userAgentString);
+if (matTcl.find()) {   
+      productBrand = &quot;Tcl&quot;;
+}
+//Tianyu
+Matcher matTianyu= patTianyu.matcher(userAgentString);
+if (matTianyu.find()) {   
+      productBrand = &quot;Tianyu&quot;;
+}
+//Vivo 
+Matcher matVivo = patVivo.matcher(userAgentString);
+if(matVivo.find()){
+  productBrand = &quot;Vivo&quot;;
+}
+//Toshiba 东芝
+Matcher matToshiba = patToshiba.matcher(userAgentString);
+if(matToshiba.find()){
+  productBrand = &quot;Toshiba&quot;;
+}
+//Xiaomi 
+Matcher matXiaomi = patXiaomi.matcher(userAgentString);
+if (matXiaomi.find()) { 
+      productBrand = &quot;Xiaomi&quot;;
+}            
+//ZTE
+Matcher matZTE = patZTE.matcher(userAgentString);
+if (matZTE.find()) {    
+      productBrand = &quot;ZTE&quot;;
+}                 
+</code></pre>
 <h1 id="六-总结"><a href="#六-总结" class="headerlink" title="六. 总结"></a>六. 总结</h1><ol>
 <li>以上正则能够匹配常见机型，得出品牌类型；不足之处是有几个重复识别了。</li>
 <li>对正则有了更深入的了解，强大的工具</li>
 <li>java程序组成结构需要更深入的学习</li>
 </ol>
-<h1 id="七-Reference资源参考"><a href="#七-Reference资源参考" class="headerlink" title="七. Reference资源参考"></a>七. <strong>Reference资源参考</strong></h1><p>常见<a href="http://www.webapps-online.com/online-tools/user-agent-strings" target="_blank" rel="external">User-Agent站点</a><br><a href="http://uadetector.sourceforge.net/" target="_blank" rel="external">UADetector</a>：<a href="http://uadetector.sourceforge.net/" target="_blank" rel="external">http://uadetector.sourceforge.net/</a><br><strong><a href="https://github.com/faisalman/ua-parser-js" target="_blank" rel="external">相关js库</a></strong></p>
+<h1 id="七-Reference资源参考"><a href="#七-Reference资源参考" class="headerlink" title="七. Reference资源参考"></a>七. <strong>Reference资源参考</strong></h1><p>常见<a href="http://www.webapps-online.com/online-tools/user-agent-strings" target="_blank" rel="noopener">User-Agent站点</a><br><a href="http://uadetector.sourceforge.net/" target="_blank" rel="noopener">UADetector</a>：<a href="http://uadetector.sourceforge.net/" target="_blank" rel="noopener">http://uadetector.sourceforge.net/</a><br><strong><a href="https://github.com/faisalman/ua-parser-js" target="_blank" rel="noopener">相关js库</a></strong></p>
 
       
 
@@ -334,12 +685,26 @@
       
         <blockquote>
 <p>Dear <strong>Miami</strong>,</p>
+</blockquote>
+<blockquote>
 <p>This has been an extremely emotional and tough decision to come to. After <strong>13 years</strong>, I have decided to embark on a new journey with the <strong>Chicago Bulls</strong>. This was not an easy decision, but I feel I have made the right choice for myself and my family.</p>
+</blockquote>
+<blockquote>
 <p>I started my NBA career with the <strong>Miami Heat</strong> in <strong>2003</strong> and it has been an honor to have played with them and help build a winning franchise with <strong>three NBA championships</strong>. I look back with pride and amazement at all we have accomplished together. I want to express my gratitude to the <strong>Arison family, Pat Riley, Coach Erik Spoelstra, the coaching staff, and the entire Miami Heat organization</strong>.</p>
+</blockquote>
+<blockquote>
 <p>From the bottom of my heart, I want to thank the <strong>Miami</strong> community and especially #HEATNATION for all of their love and support over the years. It has been truly incredible. I am deeply moved and appreciative of the positive messages from my <strong>fans</strong> expressing that they want what’s best for me and I know they will support my decision. The memories including championship parades and five conference titles are incredible moments we have shared that will always remain close to my heart as I begin the <strong>next chapter</strong> of my life.</p>
+</blockquote>
+<blockquote>
 <p>Growing up in Robbins, Ill., I never dreamed that an NBA career could have even been possible and that one day I would wear a <strong>Chicago Bulls</strong> jersey. Watching the Bulls growing up inspired me at an early age to pursue my dream of becoming a basketball player. My most treasured memories were watching my dad play basketball on the courts of Fermi Elementary School and developing my game at the Blue Island Recreation Center. I have never forgotten where I came from and I am thankful to have an opportunity to play for the team that first fueled my love of the game. Many of my family members still live in Chicago and I am excited to return <strong>home</strong> to a city very close to my heart.</p>
+</blockquote>
+<blockquote>
 <p>I look forward to returning to my roots and to what lies ahead.</p>
+</blockquote>
+<blockquote>
 <p>Much <strong>Love and Respect</strong>,</p>
+</blockquote>
+<blockquote>
 <p><strong>D. Wade</strong></p>
 </blockquote>
 
@@ -412,12 +777,17 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="1-开发环境配置"><a href="#1-开发环境配置" class="headerlink" title="1.开发环境配置"></a>1.开发环境配置</h1><p>JDK  TOMCAT<br><strong>配置环境变量</strong><br><figure class="highlight crystal"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">- JAVA_HOME  配置JDK安装路径，jdk根目录</div><div class="line">- PATH       配合JDK命令文件的位置，jdk/bin目录</div><div class="line">- CLASSPATH  配置类库文件的位置，jdk/<span class="class"><span class="keyword">lib</span>目录</span></div></pre></td></tr></table></figure></p>
-<p>Eclipse需要映射tomcat地址（可以不管tomcat系统环境变量）。</p>
+        <h1 id="1-开发环境配置"><a href="#1-开发环境配置" class="headerlink" title="1.开发环境配置"></a>1.开发环境配置</h1><p>JDK  TOMCAT<br><strong>配置环境变量</strong></p>
+<pre><code>- JAVA_HOME  配置JDK安装路径，jdk根目录
+- PATH       配合JDK命令文件的位置，jdk/bin目录
+- CLASSPATH  配置类库文件的位置，jdk/lib目录
+</code></pre><p>Eclipse需要映射tomcat地址（可以不管tomcat系统环境变量）。</p>
 <p>JRE：Java Runtime Environment,JRE内部有一个Java虚拟机以及一些标准的类别函数库。</p>
 <p>JAR：Java ARchive,Java归档文件，是一种软件包文件格式，用于聚合大量的Java类文件、相关的元素局和资源（文本、图片等）文件到一个文件，以便分发Java平台应用软件或库。以ZIP格式构建，<code>.jar</code>文件扩展名。可用JDK自带的jar命令创建或提取jar文件，也可用<code>zip</code>压缩工具，不过这里zip文件头里的条目顺序很重要，常见运行错误：因为Manifest资源配置文件常需放在首位。jar文件内的文件名是Unicode文本。</p>
-<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">registered <span class="keyword">the</span> JDBC driver [com.mysql.jdbc.Driver] but failed <span class="built_in">to</span> unregister <span class="keyword">it</span> when <span class="keyword">the</span> web application was stopped. To prevent <span class="keyword">a</span> memory leak, <span class="keyword">the</span> JDBC Driver has been forcibly unregistered.</div><div class="line"></div><div class="line">appears <span class="built_in">to</span> have started <span class="keyword">a</span> thread named [Druid-ConnectionPool-Destroy<span class="number">-1886011917</span>] but has failed <span class="built_in">to</span> <span class="built_in">stop</span> <span class="keyword">it</span>. This is very likely <span class="built_in">to</span> <span class="built_in">create</span> <span class="keyword">a</span> memory leak.</div></pre></td></tr></table></figure>
-<p>字面意思是JDBC驱动无法注册，或者是内存泄露。<br>原因是：数据库在局域网。在内网连接网络即可。</p>
+<pre><code>registered the JDBC driver [com.mysql.jdbc.Driver] but failed to unregister it when the web application was stopped. To prevent a memory leak, the JDBC Driver has been forcibly unregistered.
+
+appears to have started a thread named [Druid-ConnectionPool-Destroy-1886011917] but has failed to stop it. This is very likely to create a memory leak.
+</code></pre><p>字面意思是JDBC驱动无法注册，或者是内存泄露。<br>原因是：数据库在局域网。在内网连接网络即可。</p>
 <h1 id="2-相关基础"><a href="#2-相关基础" class="headerlink" title="2.相关基础"></a>2.相关基础</h1><p>ssh框架，mvc模式目录结构：</p>
 <table>
 <thead>
@@ -466,8 +836,19 @@
 </tbody>
 </table>
 <p>maven也是一种框架。<br>一般页面放在web-inf下面。</p>
-<p>Java web一般项目目录结构：<br><figure class="highlight haml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">-<span class="ruby">WebRoot</span></div><div class="line">    -<span class="ruby">common  (系统框架公用jsp，如footer.jsp,header.jsp)</span></div><div class="line">    -<span class="ruby">images  </span></div><div class="line">    -<span class="ruby">script  (js库）</span></div><div class="line">    -<span class="ruby">style   (css模板)</span></div><div class="line">    -<span class="ruby">WEB-INF</span></div><div class="line">        -<span class="ruby">pages  (项目jsp页面，为提高安全性，放在WEB-INF下)</span></div><div class="line">        -<span class="ruby">classes</span></div><div class="line">        -<span class="ruby">conf  (配置文件)</span></div><div class="line">        -<span class="ruby">lib  (库文件)</span></div><div class="line">-<span class="ruby">test  (测试文件夹)</span></div></pre></td></tr></table></figure></p>
-<p><strong>EL</strong>:expression language表达式语言</p>
+<p>Java web一般项目目录结构：</p>
+<pre><code>-WebRoot
+    -common  (系统框架公用jsp，如footer.jsp,header.jsp)
+    -images  
+    -script  (js库）
+    -style   (css模板)
+    -WEB-INF
+        -pages  (项目jsp页面，为提高安全性，放在WEB-INF下)
+        -classes
+        -conf  (配置文件)
+        -lib  (库文件)
+-test  (测试文件夹)
+</code></pre><p><strong>EL</strong>:expression language表达式语言</p>
 <p>SpringMVC简介:</p>
 <blockquote>
 <ol>
@@ -487,8 +868,12 @@
 <li>service方法在系统运行时处于侦听模式，侦听并处理所有web请求</li>
 </ol>
 </blockquote>
-<p>DispatcherServlet继承体系：<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">- HttpServlet -javax<span class="selector-class">.servlet</span><span class="selector-class">.http</span></div><div class="line">- HttpServletBean  -org<span class="selector-class">.springframework</span><span class="selector-class">.web</span><span class="selector-class">.servlet</span></div><div class="line">- FrameworkServlet  -org<span class="selector-class">.springframework</span><span class="selector-class">.web</span><span class="selector-class">.servlet</span></div><div class="line">- DispatcherServlet  -org<span class="selector-class">.springframework</span><span class="selector-class">.web</span><span class="selector-class">.servlet</span></div></pre></td></tr></table></figure></p>
-
+<p>DispatcherServlet继承体系：</p>
+<pre><code>- HttpServlet -javax.servlet.http
+- HttpServletBean  -org.springframework.web.servlet
+- FrameworkServlet  -org.springframework.web.servlet
+- DispatcherServlet  -org.springframework.web.servlet
+</code></pre>
       
 
       
@@ -561,13 +946,37 @@
         <p>今天论文总算初步告一段落，心情大好啊。想到这个快遗忘的博客，技术之路又要开启了。<br>一个月余的高压状态，虽然身体很累很累，但总算有所收获吧。</p>
 <p>今天看了一下HTML5，记录此篇，也算是回归之作。<br>路漫漫，加把劲。</p>
 <p>使用 SSE 可以不停的将 DOM事件推送到用户的浏览器中。这个事件流方法会打开一个到服务器的持久连接，新消息可用时发送数据到客户端，从而不再需要持续的轮询。</p>
-<p>HTML中需要包括一个<code>&lt;eventsource&gt;</code>元素，其src指向一个url后台程序链接，提供一个HTTP持久连接用于发送包含事件的数据流。可能是PHP、PERL或Python。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;div id=<span class="string">"sse"</span>&gt;</div><div class="line">  <span class="xml"><span class="tag">&lt;<span class="name">eventsource</span> <span class="attr">src</span>=<span class="string">"/cgi-bin/ticker.cgi"</span> /&gt;</span></span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure></p>
-<p>如下一段Perl：<br><figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/perl</span></div><div class="line"><span class="keyword">print</span> <span class="string">"Content-Type: text/event-stream\n\n"</span>;</div><div class="line"><span class="keyword">while</span>(true)&#123;</div><div class="line">  <span class="keyword">print</span> <span class="string">"Event: server-time\n"</span>;</div><div class="line">  $time = <span class="keyword">localtime</span>();</div><div class="line">  <span class="keyword">print</span> <span class="string">"Data: $time\n"</span>;</div><div class="line">  <span class="keyword">sleep</span>(<span class="number">5</span>);</div></pre></td></tr></table></figure></p>
-<p>w3c的一段php代码：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">header(<span class="string">"Content-Type: text/event-stream"</span>);</div><div class="line">header(<span class="string">"Cache-Control: no-cache"</span>);</div><div class="line">$time = date(<span class="string">'r'</span>);  <span class="comment">//参数r规定了时间格式，还有c等可用，具体看php官网date。</span></div><div class="line"><span class="keyword">echo</span> <span class="string">"data: the server time is: &#123;$time&#125;\n\n"</span>;</div><div class="line">flush();</div><div class="line"> sleep(<span class="number">5</span>);<span class="comment">//隔5s发送一次，但是默认好像是3s，5s时结果是8s一次，这是个疑惑。</span></div></pre></td></tr></table></figure></p>
-<p>处理服务器推送事件<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> source = <span class="keyword">new</span> EventSource(./sse.php);</div><div class="line">source.onmessage = <span class="function"><span class="keyword">function</span>(<span class="params">event</span>)</span>&#123;   <span class="comment">//另外还有onerror、onopen、readyState和url这几个事件。</span></div><div class="line">  <span class="built_in">document</span>.getElementById(<span class="string">"sseId"</span>).innerHTML += event.data+<span class="string">"&lt;br/&gt;"</span>;</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
+<p>HTML中需要包括一个<code>&lt;eventsource&gt;</code>元素，其src指向一个url后台程序链接，提供一个HTTP持久连接用于发送包含事件的数据流。可能是PHP、PERL或Python。</p>
+<pre><code class="js">&lt;div id=&quot;sse&quot;&gt;
+  &lt;eventsource src=&quot;/cgi-bin/ticker.cgi&quot; /&gt;
+&lt;/div&gt;
+</code></pre>
+<p>如下一段Perl：</p>
+<pre><code class="perl">#!/usr/bin/perl
+print &quot;Content-Type: text/event-stream\n\n&quot;;
+while(true){
+  print &quot;Event: server-time\n&quot;;
+  $time = localtime();
+  print &quot;Data: $time\n&quot;;
+  sleep(5);
+</code></pre>
+<p>w3c的一段php代码：</p>
+<pre><code class="php">header(&quot;Content-Type: text/event-stream&quot;);
+header(&quot;Cache-Control: no-cache&quot;);
+$time = date(&#39;r&#39;);  //参数r规定了时间格式，还有c等可用，具体看php官网date。
+echo &quot;data: the server time is: {$time}\n\n&quot;;
+flush();
+ sleep(5);//隔5s发送一次，但是默认好像是3s，5s时结果是8s一次，这是个疑惑。
+</code></pre>
+<p>处理服务器推送事件</p>
+<pre><code class="js">var source = new EventSource(./sse.php);
+source.onmessage = function(event){   //另外还有onerror、onopen、readyState和url这几个事件。
+  document.getElementById(&quot;sseId&quot;).innerHTML += event.data+&quot;&lt;br/&gt;&quot;;
+};
+</code></pre>
 <p>运行结果<br><img src="http://o6qsa8zhh.bkt.clouddn.com/sse_result.PNG" alt=""></p>
 <p>后台是php的情况下遇到错误：<br><code>EventSource&#39;s response has a MIME type (&quot;text/html&quot;) that is not &quot;text/event-stream&quot;. Aborting the connection</code><br>网上资料显示是<code>echo &quot;data: the server time is: {$time}\n\n&quot;;</code>这里必须加上<code>\n\n</code>才行，之后也是这样调试通过的。</p>
-<p>参考：<a href="https://developer.mozilla.org/zh-CN/docs/Server-sent_events/EventSource" target="_blank" rel="external">MDN</a></p>
+<p>参考：<a href="https://developer.mozilla.org/zh-CN/docs/Server-sent_events/EventSource" target="_blank" rel="noopener">MDN</a></p>
 
       
 
@@ -660,19 +1069,38 @@
 <li>标准缺位</li>
 <li>天生异步</li>
 </ol>
-<p>CommonJS<br><figure class="highlight lua"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">var <span class="built_in">math</span> = <span class="built_in">require</span>(<span class="string">'math'</span>);</div><div class="line"><span class="built_in">math</span>.add(<span class="number">2</span>,<span class="number">3</span>);</div></pre></td></tr></table></figure></p>
-<p>AMD<br><figure class="highlight lua"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">require</span>([<span class="string">'math'</span>], <span class="function"><span class="keyword">function</span><span class="params">()</span></span>&#123;</div><div class="line">    <span class="built_in">math</span>.add(<span class="number">2</span>,<span class="number">3</span>)</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
-<p>前者属于”同步”，后者属于”异步”。浏览器不需要等待js从服务器下载完，浏览器可能假死。</p>
+<p>CommonJS</p>
+<pre><code>var math = require(&#39;math&#39;);
+math.add(2,3);
+</code></pre><p>AMD</p>
+<pre><code>require([&#39;math&#39;], function(){
+    math.add(2,3)
+});
+</code></pre><p>前者属于”同步”，后者属于”异步”。浏览器不需要等待js从服务器下载完，浏览器可能假死。</p>
 <p>遗憾的是JavaScript在设计时定位原因，没有提供类似的功能，开发者需要模拟出类似的功能，来隔离、组织复杂的JavaScript代码，我们称为模块化。</p>
 <p>一个模块就是实现特定功能的文件，有了模块，我们就可以更方便地使用别人的代码，想要什么功能，就加载什么模块。模块开发需要遵循一定的规范，各行其是就都乱套了。</p>
 <h2 id="AMD与CMD区别"><a href="#AMD与CMD区别" class="headerlink" title="AMD与CMD区别"></a>AMD与CMD区别</h2><blockquote>
 <p>最明显的区别就是在模块定义时对依赖的处理不同</p>
+</blockquote>
+<blockquote>
 <p>AMD推崇依赖前置，在定义模块的时候就要声明其依赖的模块<br>CMD推崇就近依赖，只有在用到某个模块的时候再去require<br>这种区别各有优劣，只是语法上的差距，而且requireJS和SeaJS都支持对方的写法</p>
+</blockquote>
+<blockquote>
 <p>AMD和CMD最大的区别是对依赖模块的执行时机处理不同，注意不是加载的时机或者方式不同</p>
+</blockquote>
+<blockquote>
 <p>很多人说requireJS是异步加载模块，SeaJS是同步加载模块，这么理解实际上是不准确的，其实加载模块都是异步的，只不过AMD依赖前置，js可以方便知道依赖模块是谁，立即加载，而CMD就近依赖，需要使用把模块变为字符串解析一遍才知道依赖了那些模块，这也是很多人诟病CMD的一点，牺牲性能来带来开发的便利性，实际上解析模块用的时间短到可以忽略</p>
+</blockquote>
+<blockquote>
 <p>为什么我们说两个的区别是依赖模块执行时机不同，为什么很多人认为ADM是异步的，CMD是同步的（除了名字的原因。。。）</p>
+</blockquote>
+<blockquote>
 <p>同样都是异步加载模块，AMD在加载模块完成后就会执行改模块，所有模块都加载执行完后会进入require的回调函数，执行主逻辑，这样的效果就是依赖模块的执行顺序和书写顺序不一定一致，看网络速度，哪个先下载下来，哪个先执行，但是主逻辑一定在所有依赖加载完成后才执行</p>
+</blockquote>
+<blockquote>
 <p>CMD加载完某个依赖模块后并不执行，只是下载而已，在所有依赖模块加载完成后进入主逻辑，遇到require语句的时候才执行对应的模块，这样模块的执行顺序和书写顺序是完全一致的</p>
+</blockquote>
+<blockquote>
 <p>这也是很多人说AMD用户体验好，因为没有延迟，依赖模块提前执行了，CMD性能好，因为只有用户需要的时候才执行的原因</p>
 </blockquote>
 <h1 id="MVC"><a href="#MVC" class="headerlink" title="MVC"></a>MVC</h1><p><span style="color:red">MVC 不是一种技术，仅是一种理念。</span></p>
@@ -706,8 +1134,21 @@
 </tr>
 </tbody>
 </table>
-<h2 id="JS实现基础MVC模型"><a href="#JS实现基础MVC模型" class="headerlink" title="JS实现基础MVC模型"></a>JS实现基础MVC模型</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/** 模擬 Model, View, Controller */</span></div><div class="line"><span class="keyword">var</span> M = &#123;&#125;, V = &#123;&#125;, C = &#123;&#125;;</div><div class="line"></div><div class="line"><span class="comment">/** Model 負責存放資料 */</span></div><div class="line">M.data = <span class="string">"hello world"</span>;</div><div class="line"></div><div class="line"><span class="comment">/** View 負責將資料輸出到螢幕上 */</span></div><div class="line">V.render = <span class="function"><span class="keyword">function</span> (<span class="params">M</span>) </span>&#123; alert(M.data); &#125;</div><div class="line"></div><div class="line"><span class="comment">/** Controller 作為一個 M 和 V 的橋樑 */</span></div><div class="line">C.handleOnload = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123; V.render(M); &#125;</div><div class="line"></div><div class="line"><span class="comment">/** 在網頁讀取的時候呼叫 Controller */</span></div><div class="line"><span class="built_in">window</span>.onload = C.handleOnLoad;</div></pre></td></tr></table></figure>
-<h2 id="图示MVC"><a href="#图示MVC" class="headerlink" title="图示MVC"></a>图示MVC</h2><p><img src="http://image.beekka.com/blog/2015/bg2015020105.png" alt=""></p>
+<h2 id="JS实现基础MVC模型"><a href="#JS实现基础MVC模型" class="headerlink" title="JS实现基础MVC模型"></a>JS实现基础MVC模型</h2><pre><code>/** 模擬 Model, View, Controller */
+var M = {}, V = {}, C = {};
+
+/** Model 負責存放資料 */
+M.data = &quot;hello world&quot;;
+
+/** View 負責將資料輸出到螢幕上 */
+V.render = function (M) { alert(M.data); }
+
+/** Controller 作為一個 M 和 V 的橋樑 */
+C.handleOnload = function () { V.render(M); }
+
+/** 在網頁讀取的時候呼叫 Controller */
+window.onload = C.handleOnLoad;
+</code></pre><h2 id="图示MVC"><a href="#图示MVC" class="headerlink" title="图示MVC"></a>图示MVC</h2><p><img src="http://image.beekka.com/blog/2015/bg2015020105.png" alt=""></p>
 <blockquote>
 <ol>
 <li>View 传送指令到 Controller</li>
@@ -716,10 +1157,10 @@
 </ol>
 </blockquote>
 <h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
-<li><a href="https://zh.wikipedia.org/wiki/MVC" target="_blank" rel="external">Wikipedia</a></li>
-<li>阮一峰的博客：<br>　　<a href="http://www.ruanyifeng.com/blog/2012/10/javascript_module.html" target="_blank" rel="external">Javascript模块化编程</a><br>　　<a href="http://www.ruanyifeng.com/blog/2015/02/mvcmvp_mvvm.html" target="_blank" rel="external">MVC、MVP和MVVM</a><br>　　<a href="http://www.ruanyifeng.com/blog/2007/11/mvc.html" target="_blank" rel="external">谈谈MVC模式</a></li>
-<li><a href="http://www.cnblogs.com/dolphinX/p/4381855.html" target="_blank" rel="external">博客园阿里前端</a></li>
-<li><a href="https://github.com/xufei/blog/issues/19" target="_blank" rel="external">2015前端组件化框架之路</a></li>
+<li><a href="https://zh.wikipedia.org/wiki/MVC" target="_blank" rel="noopener">Wikipedia</a></li>
+<li>阮一峰的博客：<br>　　<a href="http://www.ruanyifeng.com/blog/2012/10/javascript_module.html" target="_blank" rel="noopener">Javascript模块化编程</a><br>　　<a href="http://www.ruanyifeng.com/blog/2015/02/mvcmvp_mvvm.html" target="_blank" rel="noopener">MVC、MVP和MVVM</a><br>　　<a href="http://www.ruanyifeng.com/blog/2007/11/mvc.html" target="_blank" rel="noopener">谈谈MVC模式</a></li>
+<li><a href="http://www.cnblogs.com/dolphinX/p/4381855.html" target="_blank" rel="noopener">博客园阿里前端</a></li>
+<li><a href="https://github.com/xufei/blog/issues/19" target="_blank" rel="noopener">2015前端组件化框架之路</a></li>
 </ol>
 
       
@@ -872,13 +1313,36 @@
 <p>进度是已上传除以总大小的百分比；通过动态改变元素的宽度来显示百分比，数字的变化标明大小。</p>
 </blockquote>
 <p>编程重要的是思想，逻辑清楚了，再来码代码会清晰许多。</p>
-<p>前端代码：<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&lt;<span class="selector-tag">input</span> type=<span class="string">'file'</span> name=<span class="string">'pic'</span> onchange=<span class="string">'selfile();'</span> /&gt;</div><div class="line">&lt;<span class="selector-tag">div</span> id=<span class="string">'progress'</span>&gt;</div><div class="line">    &lt;<span class="selector-tag">div</span> id=<span class="string">'bar'</span>&gt;&lt;/div&gt;</div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure></p>
-<p>默认样式：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">type</span>=<span class="string">"text/css"</span>&gt;</span><span class="css">	</span></div><div class="line"><span class="selector-id">#progress</span>&#123;</div><div class="line">	<span class="attribute">width</span>: <span class="number">500px</span>;<span class="attribute">height</span>: <span class="number">30px</span>;<span class="attribute">border</span>: <span class="number">1px</span> solid green;</div><div class="line">&#125;</div><div class="line"><span class="selector-id">#bar</span>&#123;</div><div class="line">	<span class="attribute">width</span>: <span class="number">0%</span>;<span class="attribute">height</span>: <span class="number">100%</span>;<span class="attribute">background</span>: green;</div><div class="line">&#125;</div><div class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></div></pre></td></tr></table></figure></p>
-<p>利用上传过程中,<code>xhr.upload.onprogress</code>状态的变化，函数运行过程中自带的事件参数来计算上传百分比<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">xhr.upload.onprogress = <span class="function"><span class="keyword">function</span>(<span class="params">ev</span>)</span>&#123;</div><div class="line">	<span class="comment">// console.log(ev);    //查看ev事件参数的属性和方法</span></div><div class="line">	<span class="keyword">if</span>(ev.lengthComputable)&#123;</div><div class="line">		<span class="keyword">var</span> percent = <span class="number">100</span> * ev.loaded/ev.total;</div><div class="line">		<span class="comment">// console.log(percent);</span></div><div class="line">		<span class="built_in">document</span>.getElementById(<span class="string">'bar'</span>).style.width = percent + <span class="string">'%'</span>;</div><div class="line">		<span class="built_in">document</span>.getElementById(<span class="string">'bar'</span>).innerHTML = <span class="built_in">parseInt</span>(percent) + <span class="string">'%'</span>;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>后记：</p>
+<p>前端代码：</p>
+<pre><code>&lt;input type=&#39;file&#39; name=&#39;pic&#39; onchange=&#39;selfile();&#39; /&gt;
+&lt;div id=&#39;progress&#39;&gt;
+    &lt;div id=&#39;bar&#39;&gt;&lt;/div&gt;
+&lt;/div&gt;
+</code></pre><p>默认样式：</p>
+<pre><code>&lt;style type=&quot;text/css&quot;&gt;    
+#progress{
+    width: 500px;height: 30px;border: 1px solid green;
+}
+#bar{
+    width: 0%;height: 100%;background: green;
+}
+&lt;/style&gt;
+</code></pre><p>利用上传过程中,<code>xhr.upload.onprogress</code>状态的变化，函数运行过程中自带的事件参数来计算上传百分比</p>
+<pre><code>xhr.upload.onprogress = function(ev){
+    // console.log(ev);    //查看ev事件参数的属性和方法
+    if(ev.lengthComputable){
+        var percent = 100 * ev.loaded/ev.total;
+        // console.log(percent);
+        document.getElementById(&#39;bar&#39;).style.width = percent + &#39;%&#39;;
+        document.getElementById(&#39;bar&#39;).innerHTML = parseInt(percent) + &#39;%&#39;;
+    }
+}
+</code></pre><p>后记：</p>
 <blockquote>
 <p>很久之前我就想用这种简单的进度条给自己做一个读书管理软件，但由于自己的惰性，一直没有成型。<br><blockquote><p>好的软件产品，常常源于开发者自身的需求。<br>如果有什么工作能让你坚持长久的热情，那一定是做自己需要的产品。</p>
-<footer><strong>池建强</strong><cite><a href="http://macshuo.com/" target="_blank" rel="external">MacTalK</a></cite></footer></blockquote></p>
+<footer><strong>池建强</strong><cite><a href="http://macshuo.com/" target="_blank" rel="noopener">MacTalK</a></cite></footer></blockquote></p>
+</blockquote>
+<blockquote>
 <p>脑子里有了个12345，然后可以打个草稿，列列提纲，就算现在不做，也要加入到备忘录里吧。<br>当然一个阶段有一个阶段该干的事，也许过了这个时间段，再来做可能没有当时的动力，也可能回过头来当时的问题现在都成了小菜。</p>
 </blockquote>
 <p>但行好事，莫问前程？！<br>做人还是纯粹一点，专注一点好。</p>
@@ -952,13 +1416,77 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="iframe伪装，jQuery-uploaded-file插件"><a href="#iframe伪装，jQuery-uploaded-file插件" class="headerlink" title="iframe伪装，jQuery-uploaded-file插件"></a>iframe伪装，jQuery-uploaded-file插件</h2><p>前台代码<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">h1</span>&gt;</span>iframe模拟ajax上传文件效果<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">h2</span>&gt;</span><span class="tag">&lt;/<span class="name">h2</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">'11-up.php'</span> <span class="attr">method</span>=<span class="string">'post'</span> <span class="attr">enctype</span>=<span class="string">'multipart/form-data'</span> <span class="attr">onsubmit</span>=<span class="string">'return ajaxUpload();'</span>&gt;</span></div><div class="line">    	<span class="tag">&lt;<span class="name">p</span>&gt;</span><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">'file'</span> <span class="attr">name</span>=<span class="string">'pic'</span> /&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">    	<span class="tag">&lt;<span class="name">p</span>&gt;</span><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">'submit'</span> <span class="attr">value</span>=<span class="string">'提交'</span> /&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">form</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure></p>
-<p>js代码<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*</span></div><div class="line">分析：</div><div class="line">  1. 捕捉表单提交动作(onsubmit="return ajaxUpload()")</div><div class="line">  2. 创建iframe(jQuery直接创建$('&lt;iframe&gt;&lt;/iframe&gt;'))</div><div class="line">  3. 把表单的target修改指向该iframe(target='framename')</div><div class="line">  4. 去掉这个iframe()</div><div class="line">*/</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">ajaxUpload</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="keyword">var</span> ifname = <span class="string">'up'</span> + <span class="built_in">Math</span>.random();</div><div class="line">    $(<span class="string">'&lt;iframe name="'</span>+ ifname +<span class="string">'" width="0" height="0" frameBorder="0"&gt;&lt;/iframe&gt;'</span>).appendTo($(<span class="string">'body'</span>));</div><div class="line">    $(<span class="string">'form:first'</span>).attr(<span class="string">'target'</span>, ifname);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>PHP代码<br><figure class="highlight awk"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span>(empty(<span class="variable">$_FILES</span>))&#123;</div><div class="line">	<span class="keyword">exit</span>(<span class="string">'no file'</span>);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="variable">$error</span> = <span class="variable">$_FILES</span>[<span class="string">'pic'</span>][<span class="string">'error'</span>] == <span class="number">0</span> ? <span class="string">'succ'</span> : <span class="string">'fail'</span>;</div><div class="line">    </div><div class="line">echo <span class="string">"&lt;script&gt;parent.document.getElementsByTagName('h2')[0].innerHTML = '$error'&lt;/script&gt;"</span>;</div></pre></td></tr></table></figure></p>
-<h2 id="HTML5-Files-API"><a href="#HTML5-Files-API" class="headerlink" title="HTML5 Files API"></a>HTML5 Files API</h2><p><code>files API</code> <code>Formdata</code><br>前台代码：<br><figure class="highlight delphi"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;input <span class="keyword">type</span>=<span class="string">'file'</span> <span class="keyword">name</span>=<span class="string">'pic'</span> onchange=<span class="string">'selfile();'</span> /&gt;</div></pre></td></tr></table></figure></p>
-<p>js代码：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">selfile</span>(<span class="params"></span>)</span>&#123;</div><div class="line">	<span class="comment">//表单数据容器</span></div><div class="line">	<span class="keyword">var</span> fd = <span class="keyword">new</span> FormData();</div><div class="line">    <span class="comment">//获取文件，文件列表`files`属性</span></div><div class="line">	<span class="keyword">var</span> pic = <span class="built_in">document</span>.getElementsByTagName(<span class="string">'input'</span>)[<span class="number">0</span>].files[<span class="number">0</span>];</div><div class="line">    <span class="comment">//附加数据到表单容器中</span></div><div class="line">	fd.append(<span class="string">'pic'</span>, pic);</div><div class="line"></div><div class="line">	<span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHttpRequest();</div><div class="line">	xhr.open(<span class="string">'POST'</span>, <span class="string">'./13-upfile.php'</span>, <span class="literal">true</span>);</div><div class="line"></div><div class="line">	xhr.onreadystatechange = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">		<span class="keyword">if</span>(<span class="keyword">this</span>.readyState == <span class="number">4</span>)&#123;</div><div class="line">			<span class="built_in">document</span>.getElementById(<span class="string">'debug'</span>).innerHTML = <span class="keyword">this</span>.responseText;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	xhr.send();</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>PHP代码：<br><figure class="highlight awk"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">&lt;?php </div><div class="line"></div><div class="line"><span class="regexp">//</span> print_r(<span class="variable">$_FILES</span>);</div><div class="line"></div><div class="line"><span class="regexp">//</span> sleep(<span class="number">3</span>);</div><div class="line"></div><div class="line"><span class="keyword">if</span>(empty(<span class="variable">$_FILES</span>))&#123;</div><div class="line">	<span class="keyword">exit</span>(<span class="string">'no file'</span>);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">if</span> (<span class="variable">$_FILES</span>[<span class="string">'pic'</span>][<span class="string">'error'</span>]!=<span class="number">0</span>) &#123;</div><div class="line">	<span class="keyword">exit</span>(<span class="string">'fail'</span>);</div><div class="line">&#125;</div><div class="line"></div><div class="line">move_uploaded_file(<span class="variable">$_FILES</span>[<span class="string">'pic'</span>][<span class="string">'tmp_name'</span>], <span class="string">'upload/'</span>.<span class="variable">$_FILES</span>[<span class="string">'pic'</span>][<span class="string">'name'</span>]);</div><div class="line"></div><div class="line">echo <span class="string">"ok"</span>;</div><div class="line">?&gt;</div></pre></td></tr></table></figure></p>
-<blockquote>
+        <h2 id="iframe伪装，jQuery-uploaded-file插件"><a href="#iframe伪装，jQuery-uploaded-file插件" class="headerlink" title="iframe伪装，jQuery-uploaded-file插件"></a>iframe伪装，jQuery-uploaded-file插件</h2><p>前台代码</p>
+<pre><code>&lt;div&gt;
+    &lt;h1&gt;iframe模拟ajax上传文件效果&lt;/h1&gt;
+    &lt;h2&gt;&lt;/h2&gt;
+    &lt;form action=&#39;11-up.php&#39; method=&#39;post&#39; enctype=&#39;multipart/form-data&#39; onsubmit=&#39;return ajaxUpload();&#39;&gt;
+        &lt;p&gt;&lt;input type=&#39;file&#39; name=&#39;pic&#39; /&gt;&lt;/p&gt;
+        &lt;p&gt;&lt;input type=&#39;submit&#39; value=&#39;提交&#39; /&gt;&lt;/p&gt;
+    &lt;/form&gt;
+&lt;/div&gt;
+</code></pre><p>js代码</p>
+<pre><code>/*
+分析：
+  1. 捕捉表单提交动作(onsubmit=&quot;return ajaxUpload()&quot;)
+  2. 创建iframe(jQuery直接创建$(&#39;&lt;iframe&gt;&lt;/iframe&gt;&#39;))
+  3. 把表单的target修改指向该iframe(target=&#39;framename&#39;)
+  4. 去掉这个iframe()
+*/
+function ajaxUpload(){
+    var ifname = &#39;up&#39; + Math.random();
+    $(&#39;&lt;iframe name=&quot;&#39;+ ifname +&#39;&quot; width=&quot;0&quot; height=&quot;0&quot; frameBorder=&quot;0&quot;&gt;&lt;/iframe&gt;&#39;).appendTo($(&#39;body&#39;));
+    $(&#39;form:first&#39;).attr(&#39;target&#39;, ifname);
+}
+</code></pre><p>PHP代码</p>
+<pre><code>if(empty($_FILES)){
+    exit(&#39;no file&#39;);
+}
+
+$error = $_FILES[&#39;pic&#39;][&#39;error&#39;] == 0 ? &#39;succ&#39; : &#39;fail&#39;;
+
+echo &quot;&lt;script&gt;parent.document.getElementsByTagName(&#39;h2&#39;)[0].innerHTML = &#39;$error&#39;&lt;/script&gt;&quot;;
+</code></pre><h2 id="HTML5-Files-API"><a href="#HTML5-Files-API" class="headerlink" title="HTML5 Files API"></a>HTML5 Files API</h2><p><code>files API</code> <code>Formdata</code><br>前台代码：</p>
+<pre><code>&lt;input type=&#39;file&#39; name=&#39;pic&#39; onchange=&#39;selfile();&#39; /&gt;
+</code></pre><p>js代码：</p>
+<pre><code>function selfile(){
+    //表单数据容器
+    var fd = new FormData();
+    //获取文件，文件列表`files`属性
+    var pic = document.getElementsByTagName(&#39;input&#39;)[0].files[0];
+    //附加数据到表单容器中
+    fd.append(&#39;pic&#39;, pic);
+
+    var xhr = new XMLHttpRequest();
+    xhr.open(&#39;POST&#39;, &#39;./13-upfile.php&#39;, true);
+
+    xhr.onreadystatechange = function(){
+        if(this.readyState == 4){
+            document.getElementById(&#39;debug&#39;).innerHTML = this.responseText;
+        }
+    }
+    xhr.send();
+}    
+</code></pre><p>PHP代码：</p>
+<pre><code>&lt;?php 
+
+// print_r($_FILES);
+
+// sleep(3);
+
+if(empty($_FILES)){
+    exit(&#39;no file&#39;);
+}
+
+if ($_FILES[&#39;pic&#39;][&#39;error&#39;]!=0) {
+    exit(&#39;fail&#39;);
+}
+
+move_uploaded_file($_FILES[&#39;pic&#39;][&#39;tmp_name&#39;], &#39;upload/&#39;.$_FILES[&#39;pic&#39;][&#39;name&#39;]);
+
+echo &quot;ok&quot;;
+?&gt;
+</code></pre><blockquote>
 <p>这里还只是用到了HTML5的文件上传API基础，有很多新特性值得花时间研究。<br>而我现在最缺的就是时间，论文需要加快速度。<br>后面还有找工作的事情，毕业季来了啊！！</p>
 </blockquote>
 <p><strong>蛋</strong>定！！！</p>
@@ -1127,11 +1655,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">ajax</a>
+                <a href="javascript:void(0)" class="js-tag color5">Ajax</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Ajax</a>
+                <a href="javascript:void(0)" class="js-tag color5">ajax</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1151,6 +1679,10 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">JavaScriptCore</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">operation</a>
               </li>
              
@@ -1160,10 +1692,6 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">deploy</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">JavaScriptCore</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1191,15 +1719,15 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">cocoa</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">blog</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Gitalk</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">cocoa</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1223,19 +1751,19 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">兼容性</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">多线程</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">HTTP</a>
+                <a href="javascript:void(0)" class="js-tag color4">兼容性</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">绘图</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">HTTP</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1255,6 +1783,10 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">标识</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">arcgis</a>
               </li>
              
@@ -1264,10 +1796,6 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">D.Wade</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">标识</a>
               </li>
              
               <li class="article-tag-list-item">

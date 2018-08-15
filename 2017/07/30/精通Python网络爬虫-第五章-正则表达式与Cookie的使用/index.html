@@ -9,28 +9,18 @@
   <link rel="dns-prefetch" href="http://linking123.github.io">
   <title>精通Python网络爬虫-第五章-正则表达式与Cookie的使用 | Linking&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="这一章看的的有点慢，原因是最近工作确实也忙，还有一个原因是晚上回来晚也要花时间锻炼，天气热没心情看啊，所以看书的时间很少。
-感到很惭愧，任何理由都不是不看书的原因，错在自己变懒了。
-接下来应该轻松一点了，晚上还是要看书的。
-
-目录：5.1 正则表达式含义5.2 正则基础知识–1.原子–2. 元字符–3. 模式修正–4. 贪婪模式与懒惰模式5.3 正则常见函数5.4 常见实例–实例1：匹配.com">
+  <meta name="description" content="这一章看的的有点慢，原因是最近工作确实也忙，还有一个原因是晚上回来晚也要花时间锻炼，天气热没心情看啊，所以看书的时间很少。   感到很惭愧，任何理由都不是不看书的原因，错在自己变懒了。   接下来应该轻松一点了，晚上还是要看书的。  目录：5.1 正则表达式含义5.2 正则基础知识–1.原子–2. 元字符–3. 模式修正–4. 贪婪模式与懒惰模式5.3 正则常见函数5.4 常见实例–实例1：匹配">
+<meta name="keywords" content="Python,crawler">
 <meta property="og:type" content="article">
 <meta property="og:title" content="精通Python网络爬虫-第五章-正则表达式与Cookie的使用">
 <meta property="og:url" content="http://linking123.github.io/2017/07/30/精通Python网络爬虫-第五章-正则表达式与Cookie的使用/index.html">
-<meta property="og:site_name" content="Linking's blog">
-<meta property="og:description" content="这一章看的的有点慢，原因是最近工作确实也忙，还有一个原因是晚上回来晚也要花时间锻炼，天气热没心情看啊，所以看书的时间很少。
-感到很惭愧，任何理由都不是不看书的原因，错在自己变懒了。
-接下来应该轻松一点了，晚上还是要看书的。
-
-目录：5.1 正则表达式含义5.2 正则基础知识–1.原子–2. 元字符–3. 模式修正–4. 贪婪模式与懒惰模式5.3 正则常见函数5.4 常见实例–实例1：匹配.com">
+<meta property="og:site_name" content="Linking&#39;s blog">
+<meta property="og:description" content="这一章看的的有点慢，原因是最近工作确实也忙，还有一个原因是晚上回来晚也要花时间锻炼，天气热没心情看啊，所以看书的时间很少。   感到很惭愧，任何理由都不是不看书的原因，错在自己变懒了。   接下来应该轻松一点了，晚上还是要看书的。  目录：5.1 正则表达式含义5.2 正则基础知识–1.原子–2. 元字符–3. 模式修正–4. 贪婪模式与懒惰模式5.3 正则常见函数5.4 常见实例–实例1：匹配">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2017-07-30T13:07:22.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="精通Python网络爬虫-第五章-正则表达式与Cookie的使用">
-<meta name="twitter:description" content="这一章看的的有点慢，原因是最近工作确实也忙，还有一个原因是晚上回来晚也要花时间锻炼，天气热没心情看啊，所以看书的时间很少。
-感到很惭愧，任何理由都不是不看书的原因，错在自己变懒了。
-接下来应该轻松一点了，晚上还是要看书的。
-
-目录：5.1 正则表达式含义5.2 正则基础知识–1.原子–2. 元字符–3. 模式修正–4. 贪婪模式与懒惰模式5.3 正则常见函数5.4 常见实例–实例1：匹配.com">
+<meta name="twitter:description" content="这一章看的的有点慢，原因是最近工作确实也忙，还有一个原因是晚上回来晚也要花时间锻炼，天气热没心情看啊，所以看书的时间很少。   感到很惭愧，任何理由都不是不看书的原因，错在自己变懒了。   接下来应该轻松一点了，晚上还是要看书的。  目录：5.1 正则表达式含义5.2 正则基础知识–1.原子–2. 元字符–3. 模式修正–4. 贪婪模式与懒惰模式5.3 正则常见函数5.4 常见实例–实例1：匹配">
   
     <link rel="alternative" href="/atom.xml" title="Linking&#39;s blog" type="application/atom+xml">
   
@@ -65,7 +55,7 @@
 		  <h1 class="header-author"><a href="/">Linking</a></h1>
 		</hgroup>
 		
-		<p class="header-subtitle">时间是个神，见证你的进步</p>
+		<p class="header-subtitle">记住生活的美好</p>
 		
 
 		<nav class="header-menu">
@@ -129,7 +119,7 @@
 			  <h1 class="header-author js-header-author">Linking</h1>
 			</hgroup>
 			
-			<p class="header-subtitle"><i class="icon icon-quo-left"></i>时间是个神，见证你的进步<i class="icon icon-quo-right"></i></p>
+			<p class="header-subtitle"><i class="icon icon-quo-left"></i>记住生活的美好<i class="icon icon-quo-right"></i></p>
 			
 			
 			
@@ -206,7 +196,11 @@
       
         <blockquote>
 <p>这一章看的的有点慢，原因是最近工作确实也忙，还有一个原因是晚上回来晚也要花时间锻炼，天气热没心情看啊，所以看书的时间很少。</p>
+</blockquote>
+<blockquote>
 <p>感到很惭愧，任何理由都不是不看书的原因，错在自己变懒了。</p>
+</blockquote>
+<blockquote>
 <p>接下来应该轻松一点了，晚上还是要看书的。</p>
 </blockquote>
 <h1 id="目录："><a href="#目录：" class="headerlink" title="目录："></a>目录：</h1><p>5.1 正则表达式含义<br>5.2 正则基础知识<br>–1.原子<br>–2. 元字符<br>–3. 模式修正<br>–4. 贪婪模式与懒惰模式<br>5.3 正则常见函数<br>5.4 常见实例<br>–实例1：匹配.com或.cn后缀的URL网址<br>–实例2：匹配电话号码<br>–实例3：匹配电子邮件<br>5.5 Cookie(客户端)<br>5.6 Cookiejar实战</p>
@@ -214,8 +208,15 @@
 <h2 id="5-1-正则表达式含义"><a href="#5-1-正则表达式含义" class="headerlink" title="5.1 正则表达式含义"></a>5.1 正则表达式含义</h2><blockquote>
 <p>描述字符串排列的一套规则。</p>
 </blockquote>
-<h2 id="5-2-正则基础知识"><a href="#5-2-正则基础知识" class="headerlink" title="5.2 正则基础知识"></a>5.2 正则基础知识</h2><h3 id="1-原子"><a href="#1-原子" class="headerlink" title="1.原子"></a>1.原子</h3><p>1）普通字符<br>数字、大小写字母、下划线等<br><figure class="highlight ebnf"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">import re</span></div><div class="line">pattern = <span class="string">"yue"</span></div><div class="line">string = <span class="string">"http://yum.iqianyue.com"</span></div><div class="line">result = re.search(pattern=pattern,string=string)</div><div class="line">print(result)</div><div class="line"></div><div class="line"># &lt;_sre.SRE_Match object; <span class="attribute">s</span><span class="attribute">p</span><span class="attribute">a</span><span class="attribute">n</span>=(16, 19), match=<span class="string">'yue'</span>&gt;</div></pre></td></tr></table></figure></p>
-<p>2）非打印字符</p>
+<h2 id="5-2-正则基础知识"><a href="#5-2-正则基础知识" class="headerlink" title="5.2 正则基础知识"></a>5.2 正则基础知识</h2><h3 id="1-原子"><a href="#1-原子" class="headerlink" title="1.原子"></a>1.原子</h3><p>1）普通字符<br>数字、大小写字母、下划线等</p>
+<pre><code>import re
+pattern = &quot;yue&quot;
+string = &quot;http://yum.iqianyue.com&quot;
+result = re.search(pattern=pattern,string=string)
+print(result)
+
+# &lt;_sre.SRE_Match object; span=(16, 19), match=&#39;yue&#39;&gt;
+</code></pre><p>2）非打印字符</p>
 <table>
 <thead>
 <tr>
@@ -234,8 +235,16 @@
 </tr>
 </tbody>
 </table>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> re</div><div class="line">pattern = <span class="string">"\n"</span></div><div class="line">string=<span class="string">'''http://yum.iqianyue.com</span></div><div class="line">http://baidu.com</div><div class="line">'''</div><div class="line">result = re.search(pattern,string)</div><div class="line">print(result)</div><div class="line"></div><div class="line"><span class="comment"># &lt;_sre.SRE_Match object; span=(23, 24), match='\n'&gt;</span></div></pre></td></tr></table></figure>
-<p>3）通用字符</p>
+<pre><code>import re
+pattern = &quot;\n&quot;
+string=&#39;&#39;&#39;http://yum.iqianyue.com
+http://baidu.com
+&#39;&#39;&#39;
+result = re.search(pattern,string)
+print(result)
+
+# &lt;_sre.SRE_Match object; span=(23, 24), match=&#39;\n&#39;&gt;
+</code></pre><p>3）通用字符</p>
 <table>
 <thead>
 <tr>
@@ -270,11 +279,31 @@
 </tr>
 </tbody>
 </table>
-<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">import re</span></div><div class="line">pattern = <span class="string">"\w\dpython\w"</span></div><div class="line">string=<span class="string">"abcdfphp345pythony_py"</span></div><div class="line">result = re.search(pattern,string)</div><div class="line">print(result)</div><div class="line"></div><div class="line"># &lt;_sre.SRE_Match object; <span class="attribute">s</span><span class="attribute">p</span><span class="attribute">a</span><span class="attribute">n</span>=(9, 18), match=<span class="string">'45pythony'</span>&gt;</div></pre></td></tr></table></figure>
-<p>4）原子表<br>[xyz]，地位平等的原子，匹配一个。</p>
+<pre><code>import re
+pattern = &quot;\w\dpython\w&quot;
+string=&quot;abcdfphp345pythony_py&quot;
+result = re.search(pattern,string)
+print(result)
+
+# &lt;_sre.SRE_Match object; span=(9, 18), match=&#39;45pythony&#39;&gt;
+</code></pre><p>4）原子表<br>[xyz]，地位平等的原子，匹配一个。</p>
 <p>“[^xyz]py”,[^]除括号里的都匹配。</p>
-<figure class="highlight gauss"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">import re</div><div class="line">pattern1 = <span class="string">"\w\dpython[xyz]\w"</span></div><div class="line">pattern2 = <span class="string">"\w\dpython[^xyz]\w"</span></div><div class="line">pattern3 = <span class="string">"\w\dpython[xyz]\W"</span></div><div class="line"><span class="keyword">string</span>=<span class="string">"abcdfphp345pythony_py"</span></div><div class="line">result1 = re.search(pattern1,<span class="keyword">string</span>)</div><div class="line">result2= re.search(pattern2,<span class="keyword">string</span>)</div><div class="line">result3 = re.search(pattern3,<span class="keyword">string</span>)</div><div class="line"><span class="keyword">print</span>(result1)</div><div class="line"><span class="keyword">print</span>(result2)</div><div class="line"><span class="keyword">print</span>(result3)</div><div class="line"></div><div class="line"><span class="meta"># &lt;_sre.SRE_Match object; span=(9, 19), match='45pythony_'&gt;</span></div><div class="line"><span class="meta"># None</span></div><div class="line"><span class="meta"># None</span></div></pre></td></tr></table></figure>
-<h3 id="2-元字符"><a href="#2-元字符" class="headerlink" title="2. 元字符"></a>2. 元字符</h3><blockquote>
+<pre><code>import re
+pattern1 = &quot;\w\dpython[xyz]\w&quot;
+pattern2 = &quot;\w\dpython[^xyz]\w&quot;
+pattern3 = &quot;\w\dpython[xyz]\W&quot;
+string=&quot;abcdfphp345pythony_py&quot;
+result1 = re.search(pattern1,string)
+result2= re.search(pattern2,string)
+result3 = re.search(pattern3,string)
+print(result1)
+print(result2)
+print(result3)
+
+# &lt;_sre.SRE_Match object; span=(9, 19), match=&#39;45pythony_&#39;&gt;
+# None
+# None
+</code></pre><h3 id="2-元字符"><a href="#2-元字符" class="headerlink" title="2. 元字符"></a>2. 元字符</h3><blockquote>
 <p>即正则表达式中具有一些特殊含义的字符。</p>
 </blockquote>
 <table>
@@ -402,34 +431,103 @@
 </tr>
 </tbody>
 </table>
-<figure class="highlight arduino"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> re</div><div class="line">pattern = <span class="string">"python"</span></div><div class="line"><span class="keyword">string</span> = <span class="string">"abcdfasdfasdf123Python_pyafasdf"</span></div><div class="line">result1 = re.search(pattern,<span class="keyword">string</span>)</div><div class="line">result2 = re.search(pattern,<span class="keyword">string</span>,re.I)</div><div class="line"><span class="built_in">print</span>(result1)</div><div class="line"><span class="built_in">print</span>(result2)</div><div class="line"></div><div class="line"># None</div><div class="line"># &lt;_sre.SRE_Match object; span=(<span class="number">16</span>, <span class="number">22</span>), match=<span class="string">'Python'</span>&gt;</div></pre></td></tr></table></figure>
-<h3 id="4-贪婪模式与懒惰模式"><a href="#4-贪婪模式与懒惰模式" class="headerlink" title="4. 贪婪模式与懒惰模式"></a>4. 贪婪模式与懒惰模式</h3><blockquote>
+<pre><code>import re
+pattern = &quot;python&quot;
+string = &quot;abcdfasdfasdf123Python_pyafasdf&quot;
+result1 = re.search(pattern,string)
+result2 = re.search(pattern,string,re.I)
+print(result1)
+print(result2)
+
+# None
+# &lt;_sre.SRE_Match object; span=(16, 22), match=&#39;Python&#39;&gt;
+</code></pre><h3 id="4-贪婪模式与懒惰模式"><a href="#4-贪婪模式与懒惰模式" class="headerlink" title="4. 贪婪模式与懒惰模式"></a>4. 贪婪模式与懒惰模式</h3><blockquote>
 <p>贪婪者，尽可能多的匹配；懒惰者，尽可能少的匹配。</p>
 </blockquote>
-<figure class="highlight nix"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">import</span> re</div><div class="line"><span class="attr">pattern1</span> = <span class="string">"p.*y"</span>  <span class="comment"># 贪婪模式</span></div><div class="line"><span class="attr">pattern2</span> = <span class="string">"p.*?y"</span> <span class="comment"># 懒惰模式</span></div><div class="line"><span class="attr">string</span> = <span class="string">"asdfafaphp324pythony_py"</span></div><div class="line"><span class="attr">result1</span> = re.search(pattern1,string)</div><div class="line"><span class="attr">result2</span> = re.search(pattern2,string)</div><div class="line">print(result1)</div><div class="line">print(result2)</div><div class="line"></div><div class="line"><span class="comment"># &lt;_sre.SRE_Match object; span=(7, 23), match='php324pythony_py'&gt;</span></div><div class="line"><span class="comment"># &lt;_sre.SRE_Match object; span=(7, 15), match='php324py'&gt;</span></div></pre></td></tr></table></figure>
-<p>“.<em>“ - 贪婪<br>“.</em>?” - 懒惰</p>
+<pre><code>import re
+pattern1 = &quot;p.*y&quot;  # 贪婪模式
+pattern2 = &quot;p.*?y&quot; # 懒惰模式
+string = &quot;asdfafaphp324pythony_py&quot;
+result1 = re.search(pattern1,string)
+result2 = re.search(pattern2,string)
+print(result1)
+print(result2)
+
+# &lt;_sre.SRE_Match object; span=(7, 23), match=&#39;php324pythony_py&#39;&gt;
+# &lt;_sre.SRE_Match object; span=(7, 15), match=&#39;php324py&#39;&gt;
+</code></pre><p>“.<em>“ - 贪婪<br>“.</em>?” - 懒惰</p>
 <h2 id="5-3-正则常见函数"><a href="#5-3-正则常见函数" class="headerlink" title="5.3 正则常见函数"></a>5.3 正则常见函数</h2><ol>
 <li>re.match()</li>
 <li>re.search()</li>
 <li>全局匹配函数re.compile(pattern).findall(string)</li>
 <li>re.sub()函数,替换某些字符串，re.sub(pattern,rep,string,max)</li>
 </ol>
-<h2 id="5-4-常见实例"><a href="#5-4-常见实例" class="headerlink" title="5.4 常见实例"></a>5.4 常见实例</h2><h3 id="实例1：匹配-com或-cn后缀的URL网址"><a href="#实例1：匹配-com或-cn后缀的URL网址" class="headerlink" title="实例1：匹配.com或.cn后缀的URL网址"></a>实例1：匹配.com或.cn后缀的URL网址</h3><figure class="highlight ebnf"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">import re</span></div><div class="line">pattern = <span class="string">"[a-zA-Z]+://[^\s]*[.com|.cn]"</span></div><div class="line">string = <span class="string">"&lt;a href='http://www.baidu.com'&gt;百度首页&lt;/a&gt;"</span></div><div class="line">result1 = re.search(pattern,string)</div><div class="line">print(result1)</div><div class="line"></div><div class="line"># &lt;_sre.SRE_Match object; <span class="attribute">s</span><span class="attribute">p</span><span class="attribute">a</span><span class="attribute">n</span>=(9, 29), match=<span class="string">'http://www.baidu.com'</span>&gt;</div></pre></td></tr></table></figure>
-<h3 id="实例2：匹配电话号码"><a href="#实例2：匹配电话号码" class="headerlink" title="实例2：匹配电话号码"></a>实例2：匹配电话号码</h3><figure class="highlight ebnf"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">import re</span></div><div class="line">pattern = <span class="string">"\d&#123;4&#125;-\d&#123;7&#125;|\d&#123;3&#125;-\d&#123;8&#125;"</span></div><div class="line">string = <span class="string">"0551-54321234513451451345"</span></div><div class="line">result1 = re.search(pattern,string)</div><div class="line">print(result1)</div><div class="line"></div><div class="line"># &lt;_sre.SRE_Match object; <span class="attribute">s</span><span class="attribute">p</span><span class="attribute">a</span><span class="attribute">n</span>=(0, 12), match=<span class="string">'0551-5432123'</span>&gt;</div></pre></td></tr></table></figure>
-<h3 id="实例3：匹配电子邮件"><a href="#实例3：匹配电子邮件" class="headerlink" title="实例3：匹配电子邮件"></a>实例3：匹配电子邮件</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">import re</div><div class="line">pattern = "\w+([.+-]\w+)*@\w+([.-]\w+)*\.\w+([.-]\w+)*"</div><div class="line">string = "<span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">'http://www.baidu.com'</span>&gt;</span>百度<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">'mailto:c-e+o@iqi-anyue.co.cn'</span>&gt;</span>电邮<span class="tag">&lt;/<span class="name">a</span>&gt;</span>"</div><div class="line">result = re.search(pattern,string)</div><div class="line">print(result)</div><div class="line"></div><div class="line"># <span class="tag">&lt;<span class="name">_sre.SRE_Match</span> <span class="attr">object</span>; <span class="attr">span</span>=<span class="string">(57,</span> <span class="attr">78</span>), <span class="attr">match</span>=<span class="string">'c-e+o@iqi-anyue.co.cn'</span>&gt;</span></div></pre></td></tr></table></figure>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">import re</div><div class="line">pattern = "\w+([.+-]\w+)*@\w+([.-]\w+)*\.\w+([.-]\w+)*"</div><div class="line">string = "<span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">'http://www.baidu.com'</span>&gt;</span>百度<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">'w.linkings@gail.com'</span>&gt;</span>电邮<span class="tag">&lt;/<span class="name">a</span>&gt;</span>"</div><div class="line">result = re.search(pattern,string)</div><div class="line">print(result)</div><div class="line"></div><div class="line"># <span class="tag">&lt;<span class="name">_sre.SRE_Match</span> <span class="attr">object</span>; <span class="attr">span</span>=<span class="string">(50,</span> <span class="attr">69</span>), <span class="attr">match</span>=<span class="string">'w.linkings@gail.com'</span>&gt;</span></div></pre></td></tr></table></figure>
-<p>匹配邮件的关键是先确定「@」符号，然后观察两侧的字符。</p>
+<h2 id="5-4-常见实例"><a href="#5-4-常见实例" class="headerlink" title="5.4 常见实例"></a>5.4 常见实例</h2><h3 id="实例1：匹配-com或-cn后缀的URL网址"><a href="#实例1：匹配-com或-cn后缀的URL网址" class="headerlink" title="实例1：匹配.com或.cn后缀的URL网址"></a>实例1：匹配.com或.cn后缀的URL网址</h3><pre><code>import re
+pattern = &quot;[a-zA-Z]+://[^\s]*[.com|.cn]&quot;
+string = &quot;&lt;a href=&#39;http://www.baidu.com&#39;&gt;百度首页&lt;/a&gt;&quot;
+result1 = re.search(pattern,string)
+print(result1)
+
+# &lt;_sre.SRE_Match object; span=(9, 29), match=&#39;http://www.baidu.com&#39;&gt;
+</code></pre><h3 id="实例2：匹配电话号码"><a href="#实例2：匹配电话号码" class="headerlink" title="实例2：匹配电话号码"></a>实例2：匹配电话号码</h3><pre><code>import re
+pattern = &quot;\d{4}-\d{7}|\d{3}-\d{8}&quot;
+string = &quot;0551-54321234513451451345&quot;
+result1 = re.search(pattern,string)
+print(result1)
+
+# &lt;_sre.SRE_Match object; span=(0, 12), match=&#39;0551-5432123&#39;&gt;
+</code></pre><h3 id="实例3：匹配电子邮件"><a href="#实例3：匹配电子邮件" class="headerlink" title="实例3：匹配电子邮件"></a>实例3：匹配电子邮件</h3><pre><code>import re
+pattern = &quot;\w+([.+-]\w+)*@\w+([.-]\w+)*\.\w+([.-]\w+)*&quot;
+string = &quot;&lt;a href=&#39;http://www.baidu.com&#39;&gt;百度&lt;/a&gt;&lt;br&gt;&lt;a href=&#39;mailto:c-e+o@iqi-anyue.co.cn&#39;&gt;电邮&lt;/a&gt;&quot;
+result = re.search(pattern,string)
+print(result)
+
+# &lt;_sre.SRE_Match object; span=(57, 78), match=&#39;c-e+o@iqi-anyue.co.cn&#39;&gt;
+</code></pre><pre><code>import re
+pattern = &quot;\w+([.+-]\w+)*@\w+([.-]\w+)*\.\w+([.-]\w+)*&quot;
+string = &quot;&lt;a href=&#39;http://www.baidu.com&#39;&gt;百度&lt;/a&gt;&lt;br&gt;&lt;a href=&#39;w.linkings@gail.com&#39;&gt;电邮&lt;/a&gt;&quot;
+result = re.search(pattern,string)
+print(result)
+
+# &lt;_sre.SRE_Match object; span=(50, 69), match=&#39;w.linkings@gail.com&#39;&gt;
+</code></pre><p>匹配邮件的关键是先确定「@」符号，然后观察两侧的字符。</p>
 <h2 id="5-5-Cookie-客户端"><a href="#5-5-Cookie-客户端" class="headerlink" title="5.5 Cookie(客户端)"></a>5.5 Cookie(客户端)</h2><p>保存会话信息的另外一种方式，<strong>Session</strong>存储在服务端。</p>
 <p><strong>HTTP协议</strong>是无状态协议，无法维持会话之间的状态。</p>
 <p>服务器端给客户端发<strong>SessionID</strong>等信息，这些会保存在客户端的Cookie中。</p>
 <p>Cookie可以第一次登陆成功后，<strong>保持登陆状态</strong>进行内容的爬取。</p>
 <h2 id="5-6-Cookiejar实战"><a href="#5-6-Cookiejar实战" class="headerlink" title="5.6 Cookiejar实战"></a>5.6 Cookiejar实战</h2><p>Python3-Cookiejar；Python-Cookielib库。</p>
-<p>登陆界面地址：<a href="http://bbs.chinaunix.net/member.php?mod=logging&amp;action=login&amp;loginsubmit=yes" target="_blank" rel="external">http://bbs.chinaunix.net/member.php?mod=logging&amp;action=login&amp;loginsubmit=yes</a></p>
-<p>第一步：使用F12调试界面或Fiddler等工具获取真实的（post方法）登录地址：<a href="http://bbs.chinaunix.net/member.php?mod=logging&amp;action=login&amp;loginsubmit=yes&amp;loginhash=LU7oB" target="_blank" rel="external">http://bbs.chinaunix.net/member.php?mod=logging&amp;action=login&amp;loginsubmit=yes&amp;loginhash=LU7oB</a></p>
+<p>登陆界面地址：<a href="http://bbs.chinaunix.net/member.php?mod=logging&amp;action=login&amp;loginsubmit=yes" target="_blank" rel="noopener">http://bbs.chinaunix.net/member.php?mod=logging&amp;action=login&amp;loginsubmit=yes</a></p>
+<p>第一步：使用F12调试界面或Fiddler等工具获取真实的（post方法）登录地址：<a href="http://bbs.chinaunix.net/member.php?mod=logging&amp;action=login&amp;loginsubmit=yes&amp;loginhash=LU7oB" target="_blank" rel="noopener">http://bbs.chinaunix.net/member.php?mod=logging&amp;action=login&amp;loginsubmit=yes&amp;loginhash=LU7oB</a></p>
 <p>第二步：查看源代码，构造表单数据；找到username和password两个字段。</p>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    <span class="attr">"username"</span>:<span class="string">"linkingge"</span>,</div><div class="line">    <span class="attr">"password"</span>:<span class="string">"linking1234"</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>第三步，写代码爬取网页<br><figure class="highlight arduino"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"># 带post数据来爬取</div><div class="line"><span class="keyword">import</span> urllib.request</div><div class="line"><span class="keyword">import</span> urllib.parse</div><div class="line">url = <span class="string">"http://bbs.chinaunix.net/member.php?mod=logging&amp;action=login&amp;loginsubmit=yes&amp;loginhash=LU7oB"</span></div><div class="line">postData = urllib.parse.urlencode(&#123;</div><div class="line">  <span class="string">"username"</span>:<span class="string">"linkingge"</span>,</div><div class="line">  <span class="string">"password"</span>:<span class="string">"linking1234"</span></div><div class="line">&#125;).encode(<span class="string">'utf-8'</span>)</div><div class="line">req = urllib.request.Request(url, postData)</div><div class="line">req.add_header(<span class="string">'User-Agent'</span>,<span class="string">'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36'</span>)</div><div class="line">data = urllib.request.urlopen(req).<span class="built_in">read</span>()</div><div class="line">fhandler = <span class="built_in">open</span>(<span class="string">"/Users/linking/Dev/python/py-books-study/deep-in-python-web-crawler/chinaunix.html"</span>,<span class="string">"wb"</span>)</div><div class="line">fhandler.<span class="built_in">write</span>(data)</div><div class="line">fhandler.<span class="built_in">close</span>()</div><div class="line">url2 = <span class="string">"http://bbs.chinaunix.net/"</span></div><div class="line">req2 = urllib.request.Request(url2, postData)</div><div class="line">req2.add_header(<span class="string">'User-Agent'</span>,<span class="string">'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36'</span>)</div><div class="line">data2 = urllib.request.urlopen(url2).<span class="built_in">read</span>()</div><div class="line">fhandle = <span class="built_in">open</span>(<span class="string">"/Users/linking/Dev/python/py-books-study/deep-in-python-web-crawler/chinaunix2.html"</span>,<span class="string">"wb"</span>)</div><div class="line">fhandle.<span class="built_in">write</span>(data2)</div><div class="line">fhandle.<span class="built_in">close</span>()</div><div class="line"><span class="built_in">print</span>(<span class="string">"done"</span>)</div></pre></td></tr></table></figure></p>
-<p>打开chinaunix.html发现已经登录，但打开chinaunix2.html时未登录。因为没有设置Cookie啊，HTTP无状态协议啊。</p>
+<pre><code>{
+    &quot;username&quot;:&quot;linkingge&quot;,
+    &quot;password&quot;:&quot;linking1234&quot;
+}
+</code></pre><p>第三步，写代码爬取网页</p>
+<pre><code>
+# 带post数据来爬取
+import urllib.request
+import urllib.parse
+url = &quot;http://bbs.chinaunix.net/member.php?mod=logging&amp;action=login&amp;loginsubmit=yes&amp;loginhash=LU7oB&quot;
+postData = urllib.parse.urlencode({
+  &quot;username&quot;:&quot;linkingge&quot;,
+  &quot;password&quot;:&quot;linking1234&quot;
+}).encode(&#39;utf-8&#39;)
+req = urllib.request.Request(url, postData)
+req.add_header(&#39;User-Agent&#39;,&#39;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36&#39;)
+data = urllib.request.urlopen(req).read()
+fhandler = open(&quot;/Users/linking/Dev/python/py-books-study/deep-in-python-web-crawler/chinaunix.html&quot;,&quot;wb&quot;)
+fhandler.write(data)
+fhandler.close()
+url2 = &quot;http://bbs.chinaunix.net/&quot;
+req2 = urllib.request.Request(url2, postData)
+req2.add_header(&#39;User-Agent&#39;,&#39;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36&#39;)
+data2 = urllib.request.urlopen(url2).read()
+fhandle = open(&quot;/Users/linking/Dev/python/py-books-study/deep-in-python-web-crawler/chinaunix2.html&quot;,&quot;wb&quot;)
+fhandle.write(data2)
+fhandle.close()
+print(&quot;done&quot;)
+</code></pre><p>打开chinaunix.html发现已经登录，但打开chinaunix2.html时未登录。因为没有设置Cookie啊，HTTP无状态协议啊。</p>
 <p>导入Cookie步骤：</p>
 <blockquote>
 <ul>
@@ -439,8 +537,36 @@
 <li>4.创建全局默认的opener对象</li>
 </ul>
 </blockquote>
-<figure class="highlight nix"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 带post数据来爬取</span></div><div class="line"><span class="built_in">import</span> urllib.request</div><div class="line"><span class="built_in">import</span> urllib.parse</div><div class="line"><span class="built_in">import</span> http.cookiejar <span class="comment"># 导入处理模块</span></div><div class="line"><span class="attr">url</span> = <span class="string">"http://bbs.chinaunix.net/member.php?mod=logging&amp;action=login&amp;loginsubmit=yes&amp;loginhash=LU7oB"</span></div><div class="line"><span class="attr">postData</span> = urllib.parse.urlencode(&#123;</div><div class="line">  <span class="string">"username"</span>:<span class="string">"linkingge"</span>,</div><div class="line">  <span class="string">"password"</span>:<span class="string">"linking1234"</span></div><div class="line">&#125;).encode('utf-<span class="number">8</span>')</div><div class="line"><span class="attr">req</span> = urllib.request.Request(url, postData)</div><div class="line">req.add_header('User-Agent','Mozilla/<span class="number">5.0</span> (Macintosh; Intel Mac OS X <span class="number">10</span>_12_5) AppleWebKit/<span class="number">537.36</span> (KHTML, like Gecko) Chrome/<span class="number">59.0</span>.<span class="number">3071.115</span> Safari/<span class="number">537.36</span>')</div><div class="line"><span class="comment"># 创建CookieJar对象</span></div><div class="line"><span class="attr">cjar</span> = http.cookiejar.CookieJar()</div><div class="line"><span class="comment"># 构建opener对象</span></div><div class="line"><span class="attr">opener</span> = urllib.request.build_opener(urllib.request.HTTPCookieProcessor(cjar))</div><div class="line"><span class="comment"># 将opener安装为全局</span></div><div class="line">urllib.request.install_opener(opener)</div><div class="line"><span class="attr">file</span> = opener.open(req)</div><div class="line"><span class="attr">data</span> = file.read()</div><div class="line"><span class="attr">fhandler</span> = open(<span class="string">"/Users/linking/Dev/python/py-books-study/deep-in-python-web-crawler/chinaunix3.html"</span>,<span class="string">"wb"</span>)</div><div class="line">fhandler.write(data)</div><div class="line">fhandler.close()</div><div class="line"><span class="attr">url2</span> = <span class="string">"http://bbs.chinaunix.net/"</span></div><div class="line"><span class="comment"># req2.add_header('User-Agent','Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36')</span></div><div class="line"><span class="attr">data2</span> = urllib.request.urlopen(url2).read()</div><div class="line"><span class="attr">fhandle</span> = open(<span class="string">"/Users/linking/Dev/python/py-books-study/deep-in-python-web-crawler/chinaunix4.html"</span>,<span class="string">"wb"</span>)</div><div class="line">fhandle.write(data2)</div><div class="line">fhandle.close()</div><div class="line">print(<span class="string">"done"</span>)</div></pre></td></tr></table></figure>
-<p>打开chinaunix4.html 发现已经登录了，成功。说明登录状态已通过Cookie保存了。</p>
+<pre><code># 带post数据来爬取
+import urllib.request
+import urllib.parse
+import http.cookiejar # 导入处理模块
+url = &quot;http://bbs.chinaunix.net/member.php?mod=logging&amp;action=login&amp;loginsubmit=yes&amp;loginhash=LU7oB&quot;
+postData = urllib.parse.urlencode({
+  &quot;username&quot;:&quot;linkingge&quot;,
+  &quot;password&quot;:&quot;linking1234&quot;
+}).encode(&#39;utf-8&#39;)
+req = urllib.request.Request(url, postData)
+req.add_header(&#39;User-Agent&#39;,&#39;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36&#39;)
+# 创建CookieJar对象
+cjar = http.cookiejar.CookieJar()
+# 构建opener对象
+opener = urllib.request.build_opener(urllib.request.HTTPCookieProcessor(cjar))
+# 将opener安装为全局
+urllib.request.install_opener(opener)
+file = opener.open(req)
+data = file.read()
+fhandler = open(&quot;/Users/linking/Dev/python/py-books-study/deep-in-python-web-crawler/chinaunix3.html&quot;,&quot;wb&quot;)
+fhandler.write(data)
+fhandler.close()
+url2 = &quot;http://bbs.chinaunix.net/&quot;
+# req2.add_header(&#39;User-Agent&#39;,&#39;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36&#39;)
+data2 = urllib.request.urlopen(url2).read()
+fhandle = open(&quot;/Users/linking/Dev/python/py-books-study/deep-in-python-web-crawler/chinaunix4.html&quot;,&quot;wb&quot;)
+fhandle.write(data2)
+fhandle.close()
+print(&quot;done&quot;)
+</code></pre><p>打开chinaunix4.html 发现已经登录了，成功。说明登录状态已通过Cookie保存了。</p>
 <p>这章看的时间有点长了，下面第六章-手写爬虫，会有更多的实战，开干了伙计。</p>
 
       
@@ -738,11 +864,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">ajax</a>
+                <a href="javascript:void(0)" class="js-tag color5">Ajax</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Ajax</a>
+                <a href="javascript:void(0)" class="js-tag color5">ajax</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -762,6 +888,10 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">JavaScriptCore</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">operation</a>
               </li>
              
@@ -771,10 +901,6 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">deploy</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">JavaScriptCore</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -802,15 +928,15 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">cocoa</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">blog</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Gitalk</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">cocoa</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -834,19 +960,19 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">兼容性</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">多线程</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">HTTP</a>
+                <a href="javascript:void(0)" class="js-tag color4">兼容性</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">绘图</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">HTTP</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -866,6 +992,10 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">标识</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">arcgis</a>
               </li>
              
@@ -875,10 +1005,6 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">D.Wade</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">标识</a>
               </li>
              
               <li class="article-tag-list-item">

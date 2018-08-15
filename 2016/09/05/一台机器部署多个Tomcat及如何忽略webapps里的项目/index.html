@@ -9,46 +9,18 @@
   <link rel="dns-prefetch" href="http://linking123.github.io">
   <title>一台机器部署多个Tomcat及如何忽略webapps里的项目 | Linking&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="一台机器部署多个Tomcat
-考虑到线上部署系统安全性，需要在同一台机器上部署多个Tomcat。一个系统一个Tomcat,这样更好的容灾机制，避免多米多骨牌效应。重点：避免端口冲突    
-
-方法
-修改CATALINA_HOME\conf\server.xml中的启动端口和连接端口。
-
-操作步骤：
-
-
-下载-解压apache-tomcat-x.x.xx.zip-改名tomcatx-8080
-复制，">
+  <meta name="description" content="一台机器部署多个Tomcat 考虑到线上部署系统安全性，需要在同一台机器上部署多个Tomcat。一个系统一个Tomcat,这样更好的容灾机制，避免多米多骨牌效应。重点：避免端口冲突      方法 修改CATALINA_HOME\conf\server.xml中的启动端口和连接端口。  操作步骤：   下载-解压apache-tomcat-x.x.xx.zip-改名tomcatx-8080 复制，">
+<meta name="keywords" content="tomcat">
 <meta property="og:type" content="article">
 <meta property="og:title" content="一台机器部署多个Tomcat及如何忽略webapps里的项目">
 <meta property="og:url" content="http://linking123.github.io/2016/09/05/一台机器部署多个Tomcat及如何忽略webapps里的项目/index.html">
-<meta property="og:site_name" content="Linking's blog">
-<meta property="og:description" content="一台机器部署多个Tomcat
-考虑到线上部署系统安全性，需要在同一台机器上部署多个Tomcat。一个系统一个Tomcat,这样更好的容灾机制，避免多米多骨牌效应。重点：避免端口冲突    
-
-方法
-修改CATALINA_HOME\conf\server.xml中的启动端口和连接端口。
-
-操作步骤：
-
-
-下载-解压apache-tomcat-x.x.xx.zip-改名tomcatx-8080
-复制，">
+<meta property="og:site_name" content="Linking&#39;s blog">
+<meta property="og:description" content="一台机器部署多个Tomcat 考虑到线上部署系统安全性，需要在同一台机器上部署多个Tomcat。一个系统一个Tomcat,这样更好的容灾机制，避免多米多骨牌效应。重点：避免端口冲突      方法 修改CATALINA_HOME\conf\server.xml中的启动端口和连接端口。  操作步骤：   下载-解压apache-tomcat-x.x.xx.zip-改名tomcatx-8080 复制，">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2016-09-05T14:50:11.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="一台机器部署多个Tomcat及如何忽略webapps里的项目">
-<meta name="twitter:description" content="一台机器部署多个Tomcat
-考虑到线上部署系统安全性，需要在同一台机器上部署多个Tomcat。一个系统一个Tomcat,这样更好的容灾机制，避免多米多骨牌效应。重点：避免端口冲突    
-
-方法
-修改CATALINA_HOME\conf\server.xml中的启动端口和连接端口。
-
-操作步骤：
-
-
-下载-解压apache-tomcat-x.x.xx.zip-改名tomcatx-8080
-复制，">
+<meta name="twitter:description" content="一台机器部署多个Tomcat 考虑到线上部署系统安全性，需要在同一台机器上部署多个Tomcat。一个系统一个Tomcat,这样更好的容灾机制，避免多米多骨牌效应。重点：避免端口冲突      方法 修改CATALINA_HOME\conf\server.xml中的启动端口和连接端口。  操作步骤：   下载-解压apache-tomcat-x.x.xx.zip-改名tomcatx-8080 复制，">
   
     <link rel="alternative" href="/atom.xml" title="Linking&#39;s blog" type="application/atom+xml">
   
@@ -83,7 +55,7 @@
 		  <h1 class="header-author"><a href="/">Linking</a></h1>
 		</hgroup>
 		
-		<p class="header-subtitle">时间是个神，见证你的进步</p>
+		<p class="header-subtitle">记住生活的美好</p>
 		
 
 		<nav class="header-menu">
@@ -147,7 +119,7 @@
 			  <h1 class="header-author js-header-author">Linking</h1>
 			</hgroup>
 			
-			<p class="header-subtitle"><i class="icon icon-quo-left"></i>时间是个神，见证你的进步<i class="icon icon-quo-right"></i></p>
+			<p class="header-subtitle"><i class="icon icon-quo-left"></i>记住生活的美好<i class="icon icon-quo-right"></i></p>
 			
 			
 			
@@ -231,19 +203,19 @@
 <p>操作步骤：</p>
 <blockquote>
 <ol>
-<li><a href="http://tomcat.apache.org/download-70.cgi" target="_blank" rel="external">下载</a>-解压apache-tomcat-x.x.xx.zip-改名tomcatx-8080</li>
+<li><a href="http://tomcat.apache.org/download-70.cgi" target="_blank" rel="noopener">下载</a>-解压apache-tomcat-x.x.xx.zip-改名tomcatx-8080</li>
 <li>复制，改名tomcatx-8090</li>
 <li>添加环境变量：CATALINA_HOME:d:\tocatx-8080;CATALINA_HOME2:d:\tomcatx-8090</li>
 <li>修改启动端口和关闭端口<br>进入d:\tomcat5-8090\conf\目录，打开server.xml文件，修改下面两个地方：<br>（1）<code>&lt;Server port=&quot;8006&quot; shutdown=&quot;SHUTDOWN&quot;&gt;</code><br>修改这个port=”8006”，原来默认的为：8005，使得它的关闭端口和另一个关闭端口不发生冲突。<br>（2）<code>&lt;Connector port=&quot;8090&quot; maxHttpHeaderSize=&quot;8192&quot;   maxThreads=&quot;150&quot; minSpareThreads=&quot;25&quot; maxSpareThreads=&quot;75&quot; enableLookups=&quot;false&quot; redirectPort=&quot;8443&quot; acceptCount=&quot;100&quot; connectionTimeout=&quot;20000&quot; disableUploadTimeout=&quot;true&quot; /&gt;</code><br>修改port=”8090”，原来默认的为“8080”，使得它的连接端口和另一个不冲突。</li>
 <li>修改startup.bat和catalina.bat文件内容：<br>(1) 打开d:\tomcat5-8090\bin\startup.bat文件，把其中所有CATALINA_HOME替换为CATALINA_HOME2。<br>（2）打开d:\tomcat5-8090\bin\catalina.bat文件，把其中所有CATALINA_HOME替换为CATALINA_HOME2。</li>
-<li>启动Tomcat，在命令行下分别进入两个不同的Tomcat安装目录下，执行startup.bat，分别启动两个Tomcat。然后在浏览器中输入：<a href="http://localhost:8080" target="_blank" rel="external">http://localhost:8080</a>  和<a href="http://localhost:8090" target="_blank" rel="external">http://localhost:8090</a></li>
+<li>启动Tomcat，在命令行下分别进入两个不同的Tomcat安装目录下，执行startup.bat，分别启动两个Tomcat。然后在浏览器中输入：<a href="http://localhost:8080" target="_blank" rel="noopener">http://localhost:8080</a>  和<a href="http://localhost:8090" target="_blank" rel="noopener">http://localhost:8090</a></li>
 <li>至此，我们已经在一台服务器上配置了两个Tomcat。</li>
 </ol>
 </blockquote>
 <p>考虑到在本地运行，不需要那么复杂。只需要用Disable-WEB-INF。</p>
 <h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a><strong>参考</strong></h2><blockquote>
 <ol>
-<li><a href="http://blog.163.com/hegonghe@126/blog/static/50004810200871483335100/" target="_blank" rel="external">在同一台服务器上配置多个Tomcat（原创）</a></li>
+<li><a href="http://blog.163.com/hegonghe@126/blog/static/50004810200871483335100/" target="_blank" rel="noopener">在同一台服务器上配置多个Tomcat（原创）</a></li>
 </ol>
 </blockquote>
 <h1 id="忽略webapps里的项目"><a href="#忽略webapps里的项目" class="headerlink" title="忽略webapps里的项目"></a>忽略webapps里的项目</h1><blockquote>
@@ -256,12 +228,15 @@
 <li>添加<code>deployIgnore=&quot;projectName&quot;</code>.不部署，</li>
 </ol>
 </blockquote>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">Host</span> <span class="attr">name</span>=<span class="string">"localhost"</span> <span class="attr">appBase</span>=<span class="string">"webapps"</span> <span class="attr">unpackWARs</span>=<span class="string">"true"</span> <span class="attr">autoDeploy</span>=<span class="string">"false"</span> <span class="attr">xmlValidation</span>=<span class="string">"false"</span> <span class="attr">xmlNamespaceAware</span>=<span class="string">"false"</span>&gt;</span> </div><div class="line"><span class="tag">&lt;<span class="name">Context</span> <span class="attr">path</span>=<span class="string">"/acbd"</span> <span class="attr">docBase</span>=<span class="string">"abcd"</span> <span class="attr">debug</span>=<span class="string">"0"</span> <span class="attr">reloadable</span>=<span class="string">"true"</span>/&gt;</span> </div><div class="line"><span class="tag">&lt;<span class="name">Valve</span> <span class="attr">className</span>=<span class="string">"org.apache.catalina.valves.AccessLogValve"</span> <span class="attr">directory</span>=<span class="string">"logs"</span> <span class="attr">prefix</span>=<span class="string">"localhost_access_log."</span> <span class="attr">suffix</span>=<span class="string">".txt"</span> <span class="attr">pattern</span>=<span class="string">"common"</span> <span class="attr">resolveHosts</span>=<span class="string">"false"</span>/&gt;</span> </div><div class="line"><span class="tag">&lt;/<span class="name">Host</span>&gt;</span></div></pre></td></tr></table></figure>
-<h2 id="参考-1"><a href="#参考-1" class="headerlink" title="参考"></a><strong>参考</strong></h2><blockquote>
+<pre><code>&lt;Host name=&quot;localhost&quot; appBase=&quot;webapps&quot; unpackWARs=&quot;true&quot; autoDeploy=&quot;false&quot; xmlValidation=&quot;false&quot; xmlNamespaceAware=&quot;false&quot;&gt; 
+&lt;Context path=&quot;/acbd&quot; docBase=&quot;abcd&quot; debug=&quot;0&quot; reloadable=&quot;true&quot;/&gt; 
+&lt;Valve className=&quot;org.apache.catalina.valves.AccessLogValve&quot; directory=&quot;logs&quot; prefix=&quot;localhost_access_log.&quot; suffix=&quot;.txt&quot; pattern=&quot;common&quot; resolveHosts=&quot;false&quot;/&gt; 
+&lt;/Host&gt; 
+</code></pre><h2 id="参考-1"><a href="#参考-1" class="headerlink" title="参考"></a><strong>参考</strong></h2><blockquote>
 <ol>
-<li><a href="http://stackoverflow.com/questions/5067062/how-to-disable-specific-apps-from-starting-during-tomcat-startup" target="_blank" rel="external">How to disable specific apps from starting during Tomcat startup?</a></li>
-<li><a href="https://coderanch.com/t/85667/Tomcat/avoid-loading-applications-webapps" target="_blank" rel="external">avoid loading all applications under webapps</a></li>
-<li><a href="http://tomcat.apache.org/tomcat-5.5-doc/config/host.html#Automatic_Application_Deployment" target="_blank" rel="external">Apache.org</a></li>
+<li><a href="http://stackoverflow.com/questions/5067062/how-to-disable-specific-apps-from-starting-during-tomcat-startup" target="_blank" rel="noopener">How to disable specific apps from starting during Tomcat startup?</a></li>
+<li><a href="https://coderanch.com/t/85667/Tomcat/avoid-loading-applications-webapps" target="_blank" rel="noopener">avoid loading all applications under webapps</a></li>
+<li><a href="http://tomcat.apache.org/tomcat-5.5-doc/config/host.html#Automatic_Application_Deployment" target="_blank" rel="noopener">Apache.org</a></li>
 </ol>
 </blockquote>
 
@@ -556,11 +531,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">ajax</a>
+                <a href="javascript:void(0)" class="js-tag color5">Ajax</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Ajax</a>
+                <a href="javascript:void(0)" class="js-tag color5">ajax</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -580,6 +555,10 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">JavaScriptCore</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">operation</a>
               </li>
              
@@ -589,10 +568,6 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">deploy</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">JavaScriptCore</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -620,15 +595,15 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">cocoa</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">blog</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Gitalk</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">cocoa</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -652,19 +627,19 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">兼容性</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">多线程</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">HTTP</a>
+                <a href="javascript:void(0)" class="js-tag color4">兼容性</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">绘图</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">HTTP</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -684,6 +659,10 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">标识</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">arcgis</a>
               </li>
              
@@ -693,10 +672,6 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">D.Wade</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">标识</a>
               </li>
              
               <li class="article-tag-list-item">

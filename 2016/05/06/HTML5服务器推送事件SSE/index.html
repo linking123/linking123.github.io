@@ -9,26 +9,19 @@
   <link rel="dns-prefetch" href="http://linking123.github.io">
   <title>HTML5服务器推送事件SSE | Linking&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="今天论文总算初步告一段落，心情大好啊。想到这个快遗忘的博客，技术之路又要开启了。一个月余的高压状态，虽然身体很累很累，但总算有所收获吧。
-今天看了一下HTML5，记录此篇，也算是回归之作。路漫漫，加把劲。
-使用 SSE 可以不停的将 DOM事件推送到用户的浏览器中。这个事件流方法会打开一个到服务器的持久连接，新消息可用时发送数据到客户端，从而不再需要持续的轮询。
-HTML中需要包括一个&amp;lt;ev">
+  <meta name="description" content="今天论文总算初步告一段落，心情大好啊。想到这个快遗忘的博客，技术之路又要开启了。一个月余的高压状态，虽然身体很累很累，但总算有所收获吧。 今天看了一下HTML5，记录此篇，也算是回归之作。路漫漫，加把劲。 使用 SSE 可以不停的将 DOM事件推送到用户的浏览器中。这个事件流方法会打开一个到服务器的持久连接，新消息可用时发送数据到客户端，从而不再需要持续的轮询。 HTML中需要包括一个&amp;lt;ev">
+<meta name="keywords" content="hmtl5,sse">
 <meta property="og:type" content="article">
 <meta property="og:title" content="HTML5服务器推送事件SSE">
 <meta property="og:url" content="http://linking123.github.io/2016/05/06/HTML5服务器推送事件SSE/index.html">
-<meta property="og:site_name" content="Linking's blog">
-<meta property="og:description" content="今天论文总算初步告一段落，心情大好啊。想到这个快遗忘的博客，技术之路又要开启了。一个月余的高压状态，虽然身体很累很累，但总算有所收获吧。
-今天看了一下HTML5，记录此篇，也算是回归之作。路漫漫，加把劲。
-使用 SSE 可以不停的将 DOM事件推送到用户的浏览器中。这个事件流方法会打开一个到服务器的持久连接，新消息可用时发送数据到客户端，从而不再需要持续的轮询。
-HTML中需要包括一个&amp;lt;ev">
+<meta property="og:site_name" content="Linking&#39;s blog">
+<meta property="og:description" content="今天论文总算初步告一段落，心情大好啊。想到这个快遗忘的博客，技术之路又要开启了。一个月余的高压状态，虽然身体很累很累，但总算有所收获吧。 今天看了一下HTML5，记录此篇，也算是回归之作。路漫漫，加把劲。 使用 SSE 可以不停的将 DOM事件推送到用户的浏览器中。这个事件流方法会打开一个到服务器的持久连接，新消息可用时发送数据到客户端，从而不再需要持续的轮询。 HTML中需要包括一个&amp;lt;ev">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://o6qsa8zhh.bkt.clouddn.com/sse_result.PNG">
 <meta property="og:updated_time" content="2016-05-06T07:49:46.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="HTML5服务器推送事件SSE">
-<meta name="twitter:description" content="今天论文总算初步告一段落，心情大好啊。想到这个快遗忘的博客，技术之路又要开启了。一个月余的高压状态，虽然身体很累很累，但总算有所收获吧。
-今天看了一下HTML5，记录此篇，也算是回归之作。路漫漫，加把劲。
-使用 SSE 可以不停的将 DOM事件推送到用户的浏览器中。这个事件流方法会打开一个到服务器的持久连接，新消息可用时发送数据到客户端，从而不再需要持续的轮询。
-HTML中需要包括一个&amp;lt;ev">
+<meta name="twitter:description" content="今天论文总算初步告一段落，心情大好啊。想到这个快遗忘的博客，技术之路又要开启了。一个月余的高压状态，虽然身体很累很累，但总算有所收获吧。 今天看了一下HTML5，记录此篇，也算是回归之作。路漫漫，加把劲。 使用 SSE 可以不停的将 DOM事件推送到用户的浏览器中。这个事件流方法会打开一个到服务器的持久连接，新消息可用时发送数据到客户端，从而不再需要持续的轮询。 HTML中需要包括一个&amp;lt;ev">
 <meta name="twitter:image" content="http://o6qsa8zhh.bkt.clouddn.com/sse_result.PNG">
   
     <link rel="alternative" href="/atom.xml" title="Linking&#39;s blog" type="application/atom+xml">
@@ -64,7 +57,7 @@ HTML中需要包括一个&amp;lt;ev">
 		  <h1 class="header-author"><a href="/">Linking</a></h1>
 		</hgroup>
 		
-		<p class="header-subtitle">时间是个神，见证你的进步</p>
+		<p class="header-subtitle">记住生活的美好</p>
 		
 
 		<nav class="header-menu">
@@ -128,7 +121,7 @@ HTML中需要包括一个&amp;lt;ev">
 			  <h1 class="header-author js-header-author">Linking</h1>
 			</hgroup>
 			
-			<p class="header-subtitle"><i class="icon icon-quo-left"></i>时间是个神，见证你的进步<i class="icon icon-quo-right"></i></p>
+			<p class="header-subtitle"><i class="icon icon-quo-left"></i>记住生活的美好<i class="icon icon-quo-right"></i></p>
 			
 			
 			
@@ -206,13 +199,37 @@ HTML中需要包括一个&amp;lt;ev">
         <p>今天论文总算初步告一段落，心情大好啊。想到这个快遗忘的博客，技术之路又要开启了。<br>一个月余的高压状态，虽然身体很累很累，但总算有所收获吧。</p>
 <p>今天看了一下HTML5，记录此篇，也算是回归之作。<br>路漫漫，加把劲。</p>
 <p>使用 SSE 可以不停的将 DOM事件推送到用户的浏览器中。这个事件流方法会打开一个到服务器的持久连接，新消息可用时发送数据到客户端，从而不再需要持续的轮询。</p>
-<p>HTML中需要包括一个<code>&lt;eventsource&gt;</code>元素，其src指向一个url后台程序链接，提供一个HTTP持久连接用于发送包含事件的数据流。可能是PHP、PERL或Python。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;div id=<span class="string">"sse"</span>&gt;</div><div class="line">  <span class="xml"><span class="tag">&lt;<span class="name">eventsource</span> <span class="attr">src</span>=<span class="string">"/cgi-bin/ticker.cgi"</span> /&gt;</span></span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure></p>
-<p>如下一段Perl：<br><figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/perl</span></div><div class="line"><span class="keyword">print</span> <span class="string">"Content-Type: text/event-stream\n\n"</span>;</div><div class="line"><span class="keyword">while</span>(true)&#123;</div><div class="line">  <span class="keyword">print</span> <span class="string">"Event: server-time\n"</span>;</div><div class="line">  $time = <span class="keyword">localtime</span>();</div><div class="line">  <span class="keyword">print</span> <span class="string">"Data: $time\n"</span>;</div><div class="line">  <span class="keyword">sleep</span>(<span class="number">5</span>);</div></pre></td></tr></table></figure></p>
-<p>w3c的一段php代码：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">header(<span class="string">"Content-Type: text/event-stream"</span>);</div><div class="line">header(<span class="string">"Cache-Control: no-cache"</span>);</div><div class="line">$time = date(<span class="string">'r'</span>);  <span class="comment">//参数r规定了时间格式，还有c等可用，具体看php官网date。</span></div><div class="line"><span class="keyword">echo</span> <span class="string">"data: the server time is: &#123;$time&#125;\n\n"</span>;</div><div class="line">flush();</div><div class="line"> sleep(<span class="number">5</span>);<span class="comment">//隔5s发送一次，但是默认好像是3s，5s时结果是8s一次，这是个疑惑。</span></div></pre></td></tr></table></figure></p>
-<p>处理服务器推送事件<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> source = <span class="keyword">new</span> EventSource(./sse.php);</div><div class="line">source.onmessage = <span class="function"><span class="keyword">function</span>(<span class="params">event</span>)</span>&#123;   <span class="comment">//另外还有onerror、onopen、readyState和url这几个事件。</span></div><div class="line">  <span class="built_in">document</span>.getElementById(<span class="string">"sseId"</span>).innerHTML += event.data+<span class="string">"&lt;br/&gt;"</span>;</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
+<p>HTML中需要包括一个<code>&lt;eventsource&gt;</code>元素，其src指向一个url后台程序链接，提供一个HTTP持久连接用于发送包含事件的数据流。可能是PHP、PERL或Python。</p>
+<pre><code class="js">&lt;div id=&quot;sse&quot;&gt;
+  &lt;eventsource src=&quot;/cgi-bin/ticker.cgi&quot; /&gt;
+&lt;/div&gt;
+</code></pre>
+<p>如下一段Perl：</p>
+<pre><code class="perl">#!/usr/bin/perl
+print &quot;Content-Type: text/event-stream\n\n&quot;;
+while(true){
+  print &quot;Event: server-time\n&quot;;
+  $time = localtime();
+  print &quot;Data: $time\n&quot;;
+  sleep(5);
+</code></pre>
+<p>w3c的一段php代码：</p>
+<pre><code class="php">header(&quot;Content-Type: text/event-stream&quot;);
+header(&quot;Cache-Control: no-cache&quot;);
+$time = date(&#39;r&#39;);  //参数r规定了时间格式，还有c等可用，具体看php官网date。
+echo &quot;data: the server time is: {$time}\n\n&quot;;
+flush();
+ sleep(5);//隔5s发送一次，但是默认好像是3s，5s时结果是8s一次，这是个疑惑。
+</code></pre>
+<p>处理服务器推送事件</p>
+<pre><code class="js">var source = new EventSource(./sse.php);
+source.onmessage = function(event){   //另外还有onerror、onopen、readyState和url这几个事件。
+  document.getElementById(&quot;sseId&quot;).innerHTML += event.data+&quot;&lt;br/&gt;&quot;;
+};
+</code></pre>
 <p>运行结果<br><img src="http://o6qsa8zhh.bkt.clouddn.com/sse_result.PNG" alt=""></p>
 <p>后台是php的情况下遇到错误：<br><code>EventSource&#39;s response has a MIME type (&quot;text/html&quot;) that is not &quot;text/event-stream&quot;. Aborting the connection</code><br>网上资料显示是<code>echo &quot;data: the server time is: {$time}\n\n&quot;;</code>这里必须加上<code>\n\n</code>才行，之后也是这样调试通过的。</p>
-<p>参考：<a href="https://developer.mozilla.org/zh-CN/docs/Server-sent_events/EventSource" target="_blank" rel="external">MDN</a></p>
+<p>参考：<a href="https://developer.mozilla.org/zh-CN/docs/Server-sent_events/EventSource" target="_blank" rel="noopener">MDN</a></p>
 
       
 
@@ -509,11 +526,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">ajax</a>
+                <a href="javascript:void(0)" class="js-tag color5">Ajax</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Ajax</a>
+                <a href="javascript:void(0)" class="js-tag color5">ajax</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -533,6 +550,10 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">JavaScriptCore</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">operation</a>
               </li>
              
@@ -542,10 +563,6 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">deploy</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">JavaScriptCore</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -573,15 +590,15 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">cocoa</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">blog</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Gitalk</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">cocoa</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -605,19 +622,19 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">兼容性</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">多线程</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">HTTP</a>
+                <a href="javascript:void(0)" class="js-tag color4">兼容性</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">绘图</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">HTTP</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -637,6 +654,10 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">标识</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">arcgis</a>
               </li>
              
@@ -646,10 +667,6 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">D.Wade</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">标识</a>
               </li>
              
               <li class="article-tag-list-item">

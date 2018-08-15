@@ -9,22 +9,18 @@
   <link rel="dns-prefetch" href="http://linking123.github.io">
   <title>iOS9支持http请求 | Linking&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="##ios9 回退不安全网络模式（支持http协议）
-在项目中找到info.plist 源文件形式打开（右击info.plist文件-open as-source code），添加下面内容
-12345&amp;lt;key&amp;gt;NSAppTransportSecurity&amp;lt;/key&amp;gt;&amp;lt;dict&amp;gt;    &amp;lt;key&amp;gt;NSAllowsArbitraryLoads&amp;lt;/k">
+  <meta name="description" content="##ios9 回退不安全网络模式（支持http协议） 在项目中找到info.plist 源文件形式打开（右击info.plist文件-open as-source code），添加下面内容 &amp;lt;key&amp;gt;NSAppTransportSecurity&amp;lt;/key&amp;gt; &amp;lt;dict&amp;gt;     &amp;lt;key&amp;gt;NSAllowsArbitraryLoads&amp;lt;/key&amp;">
+<meta name="keywords" content="HTTP">
 <meta property="og:type" content="article">
 <meta property="og:title" content="iOS9支持http请求">
 <meta property="og:url" content="http://linking123.github.io/2017/05/23/ios9支持http请求的副本/index.html">
-<meta property="og:site_name" content="Linking's blog">
-<meta property="og:description" content="##ios9 回退不安全网络模式（支持http协议）
-在项目中找到info.plist 源文件形式打开（右击info.plist文件-open as-source code），添加下面内容
-12345&amp;lt;key&amp;gt;NSAppTransportSecurity&amp;lt;/key&amp;gt;&amp;lt;dict&amp;gt;    &amp;lt;key&amp;gt;NSAllowsArbitraryLoads&amp;lt;/k">
+<meta property="og:site_name" content="Linking&#39;s blog">
+<meta property="og:description" content="##ios9 回退不安全网络模式（支持http协议） 在项目中找到info.plist 源文件形式打开（右击info.plist文件-open as-source code），添加下面内容 &amp;lt;key&amp;gt;NSAppTransportSecurity&amp;lt;/key&amp;gt; &amp;lt;dict&amp;gt;     &amp;lt;key&amp;gt;NSAllowsArbitraryLoads&amp;lt;/key&amp;">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2017-06-01T06:59:56.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS9支持http请求">
-<meta name="twitter:description" content="##ios9 回退不安全网络模式（支持http协议）
-在项目中找到info.plist 源文件形式打开（右击info.plist文件-open as-source code），添加下面内容
-12345&amp;lt;key&amp;gt;NSAppTransportSecurity&amp;lt;/key&amp;gt;&amp;lt;dict&amp;gt;    &amp;lt;key&amp;gt;NSAllowsArbitraryLoads&amp;lt;/k">
+<meta name="twitter:description" content="##ios9 回退不安全网络模式（支持http协议） 在项目中找到info.plist 源文件形式打开（右击info.plist文件-open as-source code），添加下面内容 &amp;lt;key&amp;gt;NSAppTransportSecurity&amp;lt;/key&amp;gt; &amp;lt;dict&amp;gt;     &amp;lt;key&amp;gt;NSAllowsArbitraryLoads&amp;lt;/key&amp;">
   
     <link rel="alternative" href="/atom.xml" title="Linking&#39;s blog" type="application/atom+xml">
   
@@ -59,7 +55,7 @@
 		  <h1 class="header-author"><a href="/">Linking</a></h1>
 		</hgroup>
 		
-		<p class="header-subtitle">时间是个神，见证你的进步</p>
+		<p class="header-subtitle">记住生活的美好</p>
 		
 
 		<nav class="header-menu">
@@ -123,7 +119,7 @@
 			  <h1 class="header-author js-header-author">Linking</h1>
 			</hgroup>
 			
-			<p class="header-subtitle"><i class="icon icon-quo-left"></i>时间是个神，见证你的进步<i class="icon icon-quo-right"></i></p>
+			<p class="header-subtitle"><i class="icon icon-quo-left"></i>记住生活的美好<i class="icon icon-quo-right"></i></p>
 			
 			
 			
@@ -200,8 +196,12 @@
       
         <p>##ios9 回退不安全网络模式（支持http协议）</p>
 <p>在项目中找到info.plist 源文件形式打开（右击info.plist文件-open as-source code），添加下面内容</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">key</span>&gt;</span>NSAppTransportSecurity<span class="tag">&lt;/<span class="name">key</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">dict</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">key</span>&gt;</span>NSAllowsArbitraryLoads<span class="tag">&lt;/<span class="name">key</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">true</span>/&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dict</span>&gt;</span></div></pre></td></tr></table></figure>
-<blockquote>
+<pre><code>&lt;key&gt;NSAppTransportSecurity&lt;/key&gt;
+&lt;dict&gt;
+    &lt;key&gt;NSAllowsArbitraryLoads&lt;/key&gt;
+    &lt;true/&gt;
+&lt;/dict&gt;
+</code></pre><blockquote>
 <p>linkingge 注：arbitrary 意思是任意的，AllowsArbitraryLoads 意思是允许所有的下载模式；在自己的项目中找到了此项，项目用到的测试API必须支持http协议。</p>
 </blockquote>
 
@@ -496,11 +496,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">ajax</a>
+                <a href="javascript:void(0)" class="js-tag color5">Ajax</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Ajax</a>
+                <a href="javascript:void(0)" class="js-tag color5">ajax</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -520,6 +520,10 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">JavaScriptCore</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">operation</a>
               </li>
              
@@ -529,10 +533,6 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">deploy</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">JavaScriptCore</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -560,15 +560,15 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">cocoa</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">blog</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Gitalk</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">cocoa</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -592,19 +592,19 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">兼容性</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">多线程</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">HTTP</a>
+                <a href="javascript:void(0)" class="js-tag color4">兼容性</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">绘图</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">HTTP</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -624,6 +624,10 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">标识</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">arcgis</a>
               </li>
              
@@ -633,10 +637,6 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">D.Wade</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">标识</a>
               </li>
              
               <li class="article-tag-list-item">

@@ -10,13 +10,15 @@
   <title>Linking&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="Be Better">
+<meta name="keywords" content="Java, Android, iOS, HTML&#x2F;CSS&#x2F;JavaScript, Python">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Linking's blog">
+<meta property="og:title" content="Linking&#39;s blog">
 <meta property="og:url" content="http://linking123.github.io/page/7/index.html">
-<meta property="og:site_name" content="Linking's blog">
+<meta property="og:site_name" content="Linking&#39;s blog">
 <meta property="og:description" content="Be Better">
+<meta property="og:locale" content="zh-Hans">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Linking's blog">
+<meta name="twitter:title" content="Linking&#39;s blog">
 <meta name="twitter:description" content="Be Better">
   
     <link rel="alternative" href="/atom.xml" title="Linking&#39;s blog" type="application/atom+xml">
@@ -52,7 +54,7 @@
 		  <h1 class="header-author"><a href="/">Linking</a></h1>
 		</hgroup>
 		
-		<p class="header-subtitle">时间是个神，见证你的进步</p>
+		<p class="header-subtitle">记住生活的美好</p>
 		
 
 		<nav class="header-menu">
@@ -116,7 +118,7 @@
 			  <h1 class="header-author js-header-author">Linking</h1>
 			</hgroup>
 			
-			<p class="header-subtitle"><i class="icon icon-quo-left"></i>时间是个神，见证你的进步<i class="icon icon-quo-right"></i></p>
+			<p class="header-subtitle"><i class="icon icon-quo-left"></i>记住生活的美好<i class="icon icon-quo-right"></i></p>
 			
 			
 			
@@ -195,13 +197,194 @@
       
         <h1 id="第一章-准备工作"><a href="#第一章-准备工作" class="headerlink" title="第一章 准备工作"></a>第一章 准备工作</h1><p>这一章节主要是环境构建工作。</p>
 <p>遇到问题，无法安装pandas包，pip也无法安装；<br>命令<code>sudo easy_install xxx</code>，怀疑是网速原因，超时了。<br>所以直接下载了zip包。。补充：之后在公司网速可以的情况下由下载下来了，安装了pip工具。</p>
-<p><a href="https://github.com/wesm/pydata-book.git" target="_blank" rel="external">本书用到的数据地址</a></p>
-<h1 id="第二章-引言"><a href="#第二章-引言" class="headerlink" title="第二章 引言"></a>第二章 引言</h1><h2 id="来自bit-ly的1-usa-gov数据"><a href="#来自bit-ly的1-usa-gov数据" class="headerlink" title="来自bit.ly的1.usa.gov数据"></a>来自bit.ly的1.usa.gov数据</h2><figure class="highlight vim"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">#!/usr/bin/<span class="keyword">python</span></div><div class="line">#-*- codin<span class="variable">g:utf</span>-<span class="number">8</span> -*-</div><div class="line"></div><div class="line"># 读取文件中一行</div><div class="line">path = <span class="string">'../pydata-book-master/ch02/usagov_bitly_data2012-03-16-1331923249.txt'</span></div><div class="line"><span class="keyword">print</span> <span class="keyword">open</span>(path).readline()</div><div class="line"># <span class="keyword">ou</span><span class="variable">t:</span> &#123; <span class="string">"a"</span>: <span class="string">"Mozilla\/5.0 (Windows NT 6.1; WOW64) AppleWebKit\/535.11 (KHTML, like Gecko) Chrome\/17.0.963.78 Safari\/535.11"</span>, <span class="string">"c"</span>: <span class="string">"US"</span>, <span class="string">"nk"</span>: <span class="number">1</span>, <span class="string">"tz"</span>: <span class="string">"America\/New_York"</span>, <span class="string">"gr"</span>: <span class="string">"MA"</span>, <span class="string">"g"</span>: <span class="string">"A6qOVH"</span>, <span class="string">"h"</span>: <span class="string">"wfLQtf"</span>, <span class="string">"l"</span>: <span class="string">"orofrog"</span>, <span class="string">"al"</span>: <span class="string">"en-US,en;q=0.8"</span>, <span class="string">"hh"</span>: <span class="string">"1.usa.gov"</span>, <span class="string">"r"</span>: <span class="string">"http:\/\/www.facebook.com\/l\/7AQEFzjSi\/1.usa.gov\/wfLQtf"</span>, <span class="string">"u"</span>: <span class="string">"http:\/\/www.ncbi.nlm.nih.gov\/pubmed\/22415991"</span>, <span class="string">"t"</span>: <span class="number">1331923247</span>, <span class="string">"hc"</span>: <span class="number">1331822918</span>, <span class="string">"cy"</span>: <span class="string">"Danvers"</span>, <span class="string">"ll"</span>: [ <span class="number">42.576698</span>, -<span class="number">70.954903</span> ] &#125;</div><div class="line"></div><div class="line">import json</div><div class="line"># 列表推导式，生成的是一组Python字典</div><div class="line">record = [json.loads(<span class="built_in">line</span>) <span class="keyword">for</span> <span class="built_in">line</span> in <span class="keyword">open</span>(path)]</div><div class="line"><span class="keyword">print</span> record[<span class="number">0</span>]</div><div class="line"># out：&#123;<span class="keyword">u</span><span class="string">'a'</span>: <span class="keyword">u</span><span class="string">'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/535.11 (KHTML, like Gecko) Chrome/17.0.963.78 Safari/535.11'</span>, <span class="keyword">u</span><span class="string">'c'</span>: <span class="keyword">u</span><span class="string">'US'</span>, <span class="keyword">u</span><span class="string">'nk'</span>: <span class="number">1</span>, <span class="keyword">u</span><span class="string">'tz'</span>: <span class="keyword">u</span><span class="string">'America/New_York'</span>, <span class="keyword">u</span><span class="string">'gr'</span>: <span class="keyword">u</span><span class="string">'MA'</span>, <span class="keyword">u</span><span class="string">'g'</span>: <span class="keyword">u</span><span class="string">'A6qOVH'</span>, <span class="keyword">u</span><span class="string">'h'</span>: <span class="keyword">u</span><span class="string">'wfLQtf'</span>, <span class="keyword">u</span><span class="string">'cy'</span>: <span class="keyword">u</span><span class="string">'Danvers'</span>, <span class="keyword">u</span><span class="string">'l'</span>: <span class="keyword">u</span><span class="string">'orofrog'</span>, <span class="keyword">u</span><span class="string">'al'</span>: <span class="keyword">u</span><span class="string">'en-US,en;q=0.8'</span>, <span class="keyword">u</span><span class="string">'hh'</span>: <span class="keyword">u</span><span class="string">'1.usa.gov'</span>, <span class="keyword">u</span><span class="string">'r'</span>: <span class="keyword">u</span><span class="string">'http://www.facebook.com/l/7AQEFzjSi/1.usa.gov/wfLQtf'</span>, <span class="keyword">u</span><span class="string">'u'</span>: <span class="keyword">u</span><span class="string">'http://www.ncbi.nlm.nih.gov/pubmed/22415991'</span>, <span class="keyword">u</span><span class="string">'t'</span>: <span class="number">1331923247</span>, <span class="keyword">u</span><span class="string">'hc'</span>: <span class="number">1331822918</span>, <span class="keyword">u</span><span class="string">'ll'</span>: [<span class="number">42.576698</span>, -<span class="number">70.954903</span>]&#125;</div><div class="line"># 既然已经生成了字典项，就可以通过键访问值</div><div class="line"><span class="keyword">print</span> record[<span class="number">0</span>][<span class="string">'ll'</span>]</div><div class="line"># <span class="keyword">ou</span><span class="variable">t:</span> [<span class="number">42.576698</span>, -<span class="number">70.954903</span>]</div><div class="line"># 单引号前面的<span class="keyword">u</span>标识unicode；</div><div class="line"><span class="keyword">print</span> record[<span class="number">0</span>][<span class="string">'tz'</span>]</div><div class="line"># <span class="keyword">ou</span><span class="variable">t:</span> America/New_York  # 时区是字符串对象形式，而非打印形式</div></pre></td></tr></table></figure>
-<h2 id="纯Python时区计数"><a href="#纯Python时区计数" class="headerlink" title="纯Python时区计数"></a>纯Python时区计数</h2><figure class="highlight vim"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line">time_zones = [<span class="keyword">rec</span>[<span class="string">'tz'</span>] <span class="keyword">for</span> <span class="keyword">rec</span> in record <span class="keyword">if</span> <span class="string">'tz'</span> in <span class="keyword">rec</span>]</div><div class="line"><span class="keyword">print</span> time_zones[:<span class="number">10</span>]</div><div class="line"></div><div class="line"># 对时区进行计数</div><div class="line">def get_counts(sequence):</div><div class="line">    counts = &#123;&#125;</div><div class="line">    <span class="keyword">for</span> <span class="keyword">x</span> in sequence:</div><div class="line">        <span class="keyword">if</span> <span class="keyword">x</span> in <span class="built_in">count</span><span class="variable">s:</span></div><div class="line">            counts[<span class="keyword">x</span>] += <span class="number">1</span></div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            counts[<span class="keyword">x</span>] = <span class="number">1</span></div><div class="line">    <span class="keyword">return</span> counts</div><div class="line"># 使用标准库简化方法</div><div class="line">from collections import defaultdict</div><div class="line">def get_counts2(sequence):</div><div class="line">    counts = defaultdict(<span class="keyword">int</span>)</div><div class="line">    <span class="keyword">for</span> <span class="keyword">x</span> in sequence:</div><div class="line">        counts[<span class="keyword">x</span>]+=<span class="number">1</span></div><div class="line">    <span class="keyword">return</span> counts</div><div class="line">counts = get_counts(time_zones)</div><div class="line"><span class="keyword">print</span> counts[<span class="string">'America/New_York'</span>]</div><div class="line"># <span class="keyword">ou</span><span class="variable">t:</span> <span class="number">1251</span></div><div class="line"><span class="keyword">print</span> <span class="built_in">len</span>(time_zones)</div><div class="line"># <span class="number">3340</span></div><div class="line"># 前<span class="number">10</span>位的时区及计数</div><div class="line">def top_counts(count_dict, n = <span class="number">10</span>):</div><div class="line">    value_key_pairs = [(<span class="built_in">count</span>, tz) <span class="keyword">for</span> tz, <span class="built_in">count</span> in count_dict.<span class="built_in">items</span>()]</div><div class="line">    value_key_pairs.<span class="keyword">sort</span>()</div><div class="line">    <span class="keyword">return</span> value_key_pairs[-n:]</div><div class="line"><span class="keyword">print</span> top_counts(counts)</div><div class="line"># <span class="keyword">ou</span><span class="variable">t:</span> [(<span class="number">33</span>, <span class="keyword">u</span><span class="string">'America/Sao_Paulo'</span>), (<span class="number">35</span>, <span class="keyword">u</span><span class="string">'Europe/Madrid'</span>), (<span class="number">36</span>, <span class="keyword">u</span><span class="string">'Pacific/Honolulu'</span>), (<span class="number">37</span>, <span class="keyword">u</span><span class="string">'Asia/Tokyo'</span>), (<span class="number">74</span>, <span class="keyword">u</span><span class="string">'Europe/London'</span>), (<span class="number">191</span>, <span class="keyword">u</span><span class="string">'America/Denver'</span>), (<span class="number">382</span>, <span class="keyword">u</span><span class="string">'America/Los_Angeles'</span>), (<span class="number">400</span>, <span class="keyword">u</span><span class="string">'America/Chicago'</span>), (<span class="number">521</span>, <span class="keyword">u</span><span class="string">''</span>), (<span class="number">1251</span>, <span class="keyword">u</span><span class="string">'America/New_York'</span>)]</div><div class="line"># 更简单的方式是collections.Counter类</div><div class="line">from collections import Counter</div><div class="line">counts1 = Counter(time_zones)</div><div class="line"><span class="keyword">print</span> counts1.most_common(<span class="number">10</span>)</div><div class="line"># <span class="keyword">ou</span><span class="variable">t:</span> [(<span class="keyword">u</span><span class="string">'America/New_York'</span>, <span class="number">1251</span>), (<span class="keyword">u</span><span class="string">''</span>, <span class="number">521</span>), (<span class="keyword">u</span><span class="string">'America/Chicago'</span>, <span class="number">400</span>), (<span class="keyword">u</span><span class="string">'America/Los_Angeles'</span>, <span class="number">382</span>), (<span class="keyword">u</span><span class="string">'America/Denver'</span>, <span class="number">191</span>), (<span class="keyword">u</span><span class="string">'Europe/London'</span>, <span class="number">74</span>), (<span class="keyword">u</span><span class="string">'Asia/Tokyo'</span>, <span class="number">37</span>), (<span class="keyword">u</span><span class="string">'Pacific/Honolulu'</span>, <span class="number">36</span>), (<span class="keyword">u</span><span class="string">'Europe/Madrid'</span>, <span class="number">35</span>), (<span class="keyword">u</span><span class="string">'America/Sao_Paulo'</span>, <span class="number">33</span>)]</div></pre></td></tr></table></figure>
-<h2 id="pandas对时区计数"><a href="#pandas对时区计数" class="headerlink" title="pandas对时区计数"></a>pandas对时区计数</h2><figure class="highlight vala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"><span class="meta"># pandas时区计数</span></div><div class="line"><span class="meta"># DataFrame是pandas中最重要的数据结构，将数据处理成表格</span></div><div class="line">from pandas import DataFrame, Series</div><div class="line">import pandas as pd ;import numpy as np;import matplotlib.pyplot as plt</div><div class="line">frame = DataFrame(record)</div><div class="line"><span class="meta"># print frame</span></div><div class="line"><span class="meta"># print frame['tz'][:10]</span></div><div class="line">tz_counts = frame[<span class="string">'tz'</span>].value_counts()</div><div class="line"><span class="meta"># print tz_counts[:10]</span></div><div class="line"><span class="meta"># tz_counts[:10].plot(kind='barh', rot=0)</span></div><div class="line"><span class="meta"># 这里如不添加下句，图形闪退</span></div><div class="line"><span class="meta"># plt.show()</span></div><div class="line"><span class="meta"># print frame['a'][1]</span></div><div class="line">result = Series([x.split()[<span class="number">0</span>] <span class="keyword">for</span> x in frame.a.dropna()])</div><div class="line"><span class="meta"># print result[:5]</span></div><div class="line"><span class="meta"># print result.value_counts()[:8]</span></div><div class="line">cframe = frame[frame.a.notnull()]</div><div class="line">operating_sys = np.where(cframe[<span class="string">'a'</span>].str.contains(<span class="string">'Windows'</span>),(<span class="string">"Windows"</span>),<span class="string">'Not Windows'</span>)</div><div class="line"><span class="meta"># print operating_sys[:5]</span></div><div class="line">by_tz_os = cframe.groupby([<span class="string">'tz'</span>,operating_sys])</div><div class="line">agg_counts = by_tz_os.size().unstack().fillna(<span class="number">0</span>)</div><div class="line"><span class="meta"># print agg_counts[:5]</span></div><div class="line">indexer = agg_counts.sum(<span class="number">1</span>).argsort()</div><div class="line"><span class="meta"># print indexer[:5]</span></div><div class="line">count_subset = agg_counts.take(indexer)[<span class="number">-10</span>:]</div><div class="line"><span class="meta"># print count_subset</span></div><div class="line"><span class="meta"># count_subset.plot(kind='barh', stacked=True)</span></div><div class="line"><span class="meta"># plt.show()</span></div><div class="line">normed_subset = count_subset.div(count_subset.sum(<span class="number">1</span>),axis=<span class="number">0</span>)</div><div class="line"><span class="meta"># normed_subset.plot(kind='barh', stached=True)</span></div><div class="line"><span class="meta"># plt.hold()</span></div><div class="line"><span class="meta"># plt.interactive(False)</span></div><div class="line"><span class="meta"># plt.show()</span></div></pre></td></tr></table></figure>
-<h2 id="MovieLens-1M数据集"><a href="#MovieLens-1M数据集" class="headerlink" title="MovieLens 1M数据集"></a>MovieLens 1M数据集</h2><figure class="highlight vala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div></pre></td><td class="code"><pre><div class="line">unames = [<span class="string">'user_id'</span>, <span class="string">'gender'</span>, <span class="string">'age'</span>, <span class="string">'occupation'</span>, <span class="string">'zip'</span>]</div><div class="line">users = pd.read_table(<span class="string">'../pydata-book-master/ch02/movielens/users.dat'</span>, sep=<span class="string">'::'</span>, header=None, names=unames, engine=<span class="string">'python'</span>)</div><div class="line"></div><div class="line">rnames = [<span class="string">'user_id'</span>, <span class="string">'movie_id'</span>, <span class="string">'rating'</span>, <span class="string">'timestamp'</span>]</div><div class="line">ratings = pd.read_table(<span class="string">'../pydata-book-master/ch02/movielens/ratings.dat'</span>, sep=<span class="string">'::'</span>, header=None, names=rnames, engine=<span class="string">'python'</span>)</div><div class="line"></div><div class="line">mnames = [<span class="string">'movie_id'</span>, <span class="string">'title'</span>, <span class="string">'genres'</span>]</div><div class="line">movies = pd.read_table(<span class="string">'../pydata-book-master/ch02/movielens/movies.dat'</span>, sep=<span class="string">'::'</span>, header=None, names=mnames, engine=<span class="string">'python'</span>)</div><div class="line"></div><div class="line"><span class="meta"># print users[:5]</span></div><div class="line"><span class="meta"># print ratings[:5]</span></div><div class="line"><span class="meta"># print movies[:4]</span></div><div class="line"></div><div class="line"><span class="meta"># pandas的merge函数根据列名的重叠情况推断出哪些列是合并（或连接）键</span></div><div class="line">data = pd.merge(pd.merge(ratings, users), movies)</div><div class="line"><span class="meta"># print data</span></div><div class="line"><span class="meta"># data.ix[0]</span></div><div class="line"></div><div class="line"><span class="meta"># 按性别计算每部电影平均分，使用pivot_table方法</span></div><div class="line">mean_ratings = data.pivot_table(<span class="string">'rating'</span>, index=<span class="string">'title'</span>, columns=<span class="string">'gender'</span>, aggfunc=<span class="string">'mean'</span>)</div><div class="line"><span class="meta"># print mean_ratings[:5]</span></div><div class="line">rating_by_title = data.groupby(<span class="string">'title'</span>).size()</div><div class="line"><span class="meta"># print rating_by_title[:10]</span></div><div class="line"><span class="meta"># 过滤掉评分小于250</span></div><div class="line">active_title = rating_by_title.index[rating_by_title&gt;=<span class="number">250</span>]</div><div class="line"><span class="meta"># print active_title</span></div><div class="line">mean_ratings =mean_ratings.ix[active_title]</div><div class="line"><span class="meta"># print mean_ratings</span></div><div class="line"><span class="meta"># 按女性分数排序</span></div><div class="line">top_female_rating = mean_ratings.sort_values(by=<span class="string">'F'</span>, ascending=False)</div><div class="line"><span class="meta"># print top_female_rating[:4]</span></div><div class="line"></div><div class="line"><span class="meta"># 计算评分分歧；男女观众的分歧；方法是加上一列diff，做差;按diff排序，得出的结果是分歧 最大且女性更喜欢的电影。</span></div><div class="line">mean_ratings[<span class="string">'diff'</span>] = mean_ratings[<span class="string">'M'</span>] - mean_ratings[<span class="string">'F'</span>]</div><div class="line">sorted_by_diff = mean_ratings.sort_values(by=<span class="string">'diff'</span>)</div><div class="line"><span class="meta"># print sorted_by_diff[:10]</span></div><div class="line"><span class="meta"># 对行反序，并去除前十，则是男性更喜欢的电影</span></div><div class="line"><span class="meta"># print sorted_by_diff[::-1][:10]</span></div><div class="line"></div><div class="line"><span class="meta"># 根据电影名称分组的得分数据的标准差</span></div><div class="line">rating_std_by_title = data.groupby(<span class="string">'title'</span>)[<span class="string">'rating'</span>].std()</div><div class="line"><span class="meta"># 根据active_titles进行过滤</span></div><div class="line">rating_std_by_title = rating_std_by_title.ix[active_title]</div><div class="line"><span class="meta"># 根据值对Series进行降序排列</span></div><div class="line">rating_std_by_title.sort_value(ascending=False)[:<span class="number">5</span>]</div><div class="line"><span class="meta"># AttributeError: 'Series' object has no attribute 'sort_value';按树上对order也不行，deprecated</span></div></pre></td></tr></table></figure>
-<h2 id="1880–2010年间全美婴儿姓名"><a href="#1880–2010年间全美婴儿姓名" class="headerlink" title="1880–2010年间全美婴儿姓名"></a>1880–2010年间全美婴儿姓名</h2><figure class="highlight vala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div></pre></td><td class="code"><pre><div class="line"><span class="meta"># 1880-2010年间全美婴儿姓名</span></div><div class="line"><span class="meta"># 用linux命令查看某个文件对前十行</span></div><div class="line"><span class="meta"># head -n 10 names/yob1880.txt</span></div><div class="line"><span class="meta"># 第一行：Mary,F,7065</span></div><div class="line"><span class="meta"># 数据由标准逗号隔开，可以用pandas.read_csv加载到DataFrame中</span></div><div class="line">import pandas as pd;import matplotlib.pyplot as plt;import numpy as  np</div><div class="line"><span class="meta"># names1880 = pd.read_csv('../pydata-book-master/ch02/names/yob1880.txt', names=['name', 'sex', 'birthsNum'])</span></div><div class="line"><span class="meta"># print names1880</span></div><div class="line"><span class="meta"># print names1880.groupby('sex').birthsNum.sum()</span></div><div class="line"><span class="meta"># out: sex</span></div><div class="line"><span class="meta">#      F     90993</span></div><div class="line"><span class="meta">#      M    110493</span></div><div class="line"><span class="meta">#      Name: birthsNum, dtype: int64</span></div><div class="line"></div><div class="line"><span class="meta"># 将所有文件中到数据组装到一个DataFrame中，并加上一个year字段。使用pandas.concat</span></div><div class="line"><span class="meta"># 2010年是目前最后一个有效统计年度</span></div><div class="line">years = range(<span class="number">1880</span>, <span class="number">2011</span>)</div><div class="line">pieces = []</div><div class="line">columns = [<span class="string">'name'</span>, <span class="string">'sex'</span>, <span class="string">'birthsNum'</span>]</div><div class="line"><span class="keyword">for</span> year in years:</div><div class="line">    path = <span class="string">'../pydata-book-master/ch02/names/yob%d.txt'</span> % year</div><div class="line">    frame = pd.read_csv(path, names=columns)</div><div class="line"></div><div class="line">    frame[<span class="string">'year'</span>] = year</div><div class="line">    pieces.append(frame)</div><div class="line"><span class="meta"># 将所有数据整合到单个DataFrame中;ignore_index必须置为False，不保留原始行号；concat默认按行整合</span></div><div class="line">names = pd.concat(pieces, ignore_index=False)</div><div class="line"><span class="meta"># print names</span></div><div class="line"><span class="meta"># 聚合;DataFrame.pivot_table(y轴，x轴，多种类型-线条，每一年每种性别对出生总数)</span></div><div class="line">total_birthsNum = names.pivot_table(<span class="string">'birthsNum'</span>, index=<span class="string">'year'</span>, columns=<span class="string">'sex'</span>, aggfunc=sum)</div><div class="line"><span class="meta"># print total_birthsNum.tail()</span></div><div class="line"><span class="meta"># total_birthsNum.plot(title='Total birthsNum by sex and year')</span></div><div class="line"><span class="meta"># plt.show()</span></div><div class="line"></div><div class="line"><span class="meta"># 插入prop列，表示相对比例；由于birthsNum是整数，需要将分子分母转换成浮点数（Python3.x除外）</span></div><div class="line">def add_prop(group):</div><div class="line">    # 整数除法会向下圆整</div><div class="line">    birthsNum = group.birthsNum.astype(<span class="keyword">float</span>)</div><div class="line">    group[<span class="string">'prop'</span>] = birthsNum/birthsNum.sum()</div><div class="line">    <span class="keyword">return</span> group</div><div class="line">names = names.groupby([<span class="string">'year'</span>, <span class="string">'sex'</span>]).apply(add_prop)</div><div class="line"><span class="meta"># print names</span></div><div class="line"><span class="meta"># 分组前应该进行有效性检查，用numpy.allclose=1判定所有prop之和是否为1</span></div><div class="line"><span class="meta"># print np.allclose(names.groupby(['year', 'sex']).prop.sum(), 1)</span></div><div class="line"><span class="meta"># out: True</span></div><div class="line"><span class="meta"># 为便于分析，取出前1000条按sex/year组合对数据</span></div><div class="line">def get_top1000(group):</div><div class="line">    <span class="keyword">return</span> group.sort_index(by=<span class="string">'birthsNum'</span>, ascending=False)[:<span class="number">1000</span>]</div><div class="line">grouped = names.groupby([<span class="string">'year'</span>, <span class="string">'sex'</span>])</div><div class="line">top_1000 = grouped.apply(get_top1000)</div><div class="line"><span class="meta"># print top_1000</span></div><div class="line"><span class="meta"># 接下来针对这1000条数据进行分析</span></div></pre></td></tr></table></figure>
-<blockquote>
+<p><a href="https://github.com/wesm/pydata-book.git" target="_blank" rel="noopener">本书用到的数据地址</a></p>
+<h1 id="第二章-引言"><a href="#第二章-引言" class="headerlink" title="第二章 引言"></a>第二章 引言</h1><h2 id="来自bit-ly的1-usa-gov数据"><a href="#来自bit-ly的1-usa-gov数据" class="headerlink" title="来自bit.ly的1.usa.gov数据"></a>来自bit.ly的1.usa.gov数据</h2><pre><code>#!/usr/bin/python
+#-*- coding:utf-8 -*-
+
+# 读取文件中一行
+path = &#39;../pydata-book-master/ch02/usagov_bitly_data2012-03-16-1331923249.txt&#39;
+print open(path).readline()
+# out: { &quot;a&quot;: &quot;Mozilla\/5.0 (Windows NT 6.1; WOW64) AppleWebKit\/535.11 (KHTML, like Gecko) Chrome\/17.0.963.78 Safari\/535.11&quot;, &quot;c&quot;: &quot;US&quot;, &quot;nk&quot;: 1, &quot;tz&quot;: &quot;America\/New_York&quot;, &quot;gr&quot;: &quot;MA&quot;, &quot;g&quot;: &quot;A6qOVH&quot;, &quot;h&quot;: &quot;wfLQtf&quot;, &quot;l&quot;: &quot;orofrog&quot;, &quot;al&quot;: &quot;en-US,en;q=0.8&quot;, &quot;hh&quot;: &quot;1.usa.gov&quot;, &quot;r&quot;: &quot;http:\/\/www.facebook.com\/l\/7AQEFzjSi\/1.usa.gov\/wfLQtf&quot;, &quot;u&quot;: &quot;http:\/\/www.ncbi.nlm.nih.gov\/pubmed\/22415991&quot;, &quot;t&quot;: 1331923247, &quot;hc&quot;: 1331822918, &quot;cy&quot;: &quot;Danvers&quot;, &quot;ll&quot;: [ 42.576698, -70.954903 ] }
+
+import json
+# 列表推导式，生成的是一组Python字典
+record = [json.loads(line) for line in open(path)]
+print record[0]
+# out：{u&#39;a&#39;: u&#39;Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/535.11 (KHTML, like Gecko) Chrome/17.0.963.78 Safari/535.11&#39;, u&#39;c&#39;: u&#39;US&#39;, u&#39;nk&#39;: 1, u&#39;tz&#39;: u&#39;America/New_York&#39;, u&#39;gr&#39;: u&#39;MA&#39;, u&#39;g&#39;: u&#39;A6qOVH&#39;, u&#39;h&#39;: u&#39;wfLQtf&#39;, u&#39;cy&#39;: u&#39;Danvers&#39;, u&#39;l&#39;: u&#39;orofrog&#39;, u&#39;al&#39;: u&#39;en-US,en;q=0.8&#39;, u&#39;hh&#39;: u&#39;1.usa.gov&#39;, u&#39;r&#39;: u&#39;http://www.facebook.com/l/7AQEFzjSi/1.usa.gov/wfLQtf&#39;, u&#39;u&#39;: u&#39;http://www.ncbi.nlm.nih.gov/pubmed/22415991&#39;, u&#39;t&#39;: 1331923247, u&#39;hc&#39;: 1331822918, u&#39;ll&#39;: [42.576698, -70.954903]}
+# 既然已经生成了字典项，就可以通过键访问值
+print record[0][&#39;ll&#39;]
+# out: [42.576698, -70.954903]
+# 单引号前面的u标识unicode；
+print record[0][&#39;tz&#39;]
+# out: America/New_York  # 时区是字符串对象形式，而非打印形式
+</code></pre><h2 id="纯Python时区计数"><a href="#纯Python时区计数" class="headerlink" title="纯Python时区计数"></a>纯Python时区计数</h2><pre><code>time_zones = [rec[&#39;tz&#39;] for rec in record if &#39;tz&#39; in rec]
+print time_zones[:10]
+
+# 对时区进行计数
+def get_counts(sequence):
+    counts = {}
+    for x in sequence:
+        if x in counts:
+            counts[x] += 1
+        else:
+            counts[x] = 1
+    return counts
+# 使用标准库简化方法
+from collections import defaultdict
+def get_counts2(sequence):
+    counts = defaultdict(int)
+    for x in sequence:
+        counts[x]+=1
+    return counts
+counts = get_counts(time_zones)
+print counts[&#39;America/New_York&#39;]
+# out: 1251
+print len(time_zones)
+# 3340
+# 前10位的时区及计数
+def top_counts(count_dict, n = 10):
+    value_key_pairs = [(count, tz) for tz, count in count_dict.items()]
+    value_key_pairs.sort()
+    return value_key_pairs[-n:]
+print top_counts(counts)
+# out: [(33, u&#39;America/Sao_Paulo&#39;), (35, u&#39;Europe/Madrid&#39;), (36, u&#39;Pacific/Honolulu&#39;), (37, u&#39;Asia/Tokyo&#39;), (74, u&#39;Europe/London&#39;), (191, u&#39;America/Denver&#39;), (382, u&#39;America/Los_Angeles&#39;), (400, u&#39;America/Chicago&#39;), (521, u&#39;&#39;), (1251, u&#39;America/New_York&#39;)]
+# 更简单的方式是collections.Counter类
+from collections import Counter
+counts1 = Counter(time_zones)
+print counts1.most_common(10)
+# out: [(u&#39;America/New_York&#39;, 1251), (u&#39;&#39;, 521), (u&#39;America/Chicago&#39;, 400), (u&#39;America/Los_Angeles&#39;, 382), (u&#39;America/Denver&#39;, 191), (u&#39;Europe/London&#39;, 74), (u&#39;Asia/Tokyo&#39;, 37), (u&#39;Pacific/Honolulu&#39;, 36), (u&#39;Europe/Madrid&#39;, 35), (u&#39;America/Sao_Paulo&#39;, 33)]
+</code></pre><h2 id="pandas对时区计数"><a href="#pandas对时区计数" class="headerlink" title="pandas对时区计数"></a>pandas对时区计数</h2><pre><code># pandas时区计数
+# DataFrame是pandas中最重要的数据结构，将数据处理成表格
+from pandas import DataFrame, Series
+import pandas as pd ;import numpy as np;import matplotlib.pyplot as plt
+frame = DataFrame(record)
+# print frame
+# print frame[&#39;tz&#39;][:10]
+tz_counts = frame[&#39;tz&#39;].value_counts()
+# print tz_counts[:10]
+# tz_counts[:10].plot(kind=&#39;barh&#39;, rot=0)
+# 这里如不添加下句，图形闪退
+# plt.show()
+# print frame[&#39;a&#39;][1]
+result = Series([x.split()[0] for x in frame.a.dropna()])
+# print result[:5]
+# print result.value_counts()[:8]
+cframe = frame[frame.a.notnull()]
+operating_sys = np.where(cframe[&#39;a&#39;].str.contains(&#39;Windows&#39;),(&quot;Windows&quot;),&#39;Not Windows&#39;)
+# print operating_sys[:5]
+by_tz_os = cframe.groupby([&#39;tz&#39;,operating_sys])
+agg_counts = by_tz_os.size().unstack().fillna(0)
+# print agg_counts[:5]
+indexer = agg_counts.sum(1).argsort()
+# print indexer[:5]
+count_subset = agg_counts.take(indexer)[-10:]
+# print count_subset
+# count_subset.plot(kind=&#39;barh&#39;, stacked=True)
+# plt.show()
+normed_subset = count_subset.div(count_subset.sum(1),axis=0)
+# normed_subset.plot(kind=&#39;barh&#39;, stached=True)
+# plt.hold()
+# plt.interactive(False)
+# plt.show()
+</code></pre><h2 id="MovieLens-1M数据集"><a href="#MovieLens-1M数据集" class="headerlink" title="MovieLens 1M数据集"></a>MovieLens 1M数据集</h2><pre><code>unames = [&#39;user_id&#39;, &#39;gender&#39;, &#39;age&#39;, &#39;occupation&#39;, &#39;zip&#39;]
+users = pd.read_table(&#39;../pydata-book-master/ch02/movielens/users.dat&#39;, sep=&#39;::&#39;, header=None, names=unames, engine=&#39;python&#39;)
+
+rnames = [&#39;user_id&#39;, &#39;movie_id&#39;, &#39;rating&#39;, &#39;timestamp&#39;]
+ratings = pd.read_table(&#39;../pydata-book-master/ch02/movielens/ratings.dat&#39;, sep=&#39;::&#39;, header=None, names=rnames, engine=&#39;python&#39;)
+
+mnames = [&#39;movie_id&#39;, &#39;title&#39;, &#39;genres&#39;]
+movies = pd.read_table(&#39;../pydata-book-master/ch02/movielens/movies.dat&#39;, sep=&#39;::&#39;, header=None, names=mnames, engine=&#39;python&#39;)
+
+# print users[:5]
+# print ratings[:5]
+# print movies[:4]
+
+# pandas的merge函数根据列名的重叠情况推断出哪些列是合并（或连接）键
+data = pd.merge(pd.merge(ratings, users), movies)
+# print data
+# data.ix[0]
+
+# 按性别计算每部电影平均分，使用pivot_table方法
+mean_ratings = data.pivot_table(&#39;rating&#39;, index=&#39;title&#39;, columns=&#39;gender&#39;, aggfunc=&#39;mean&#39;)
+# print mean_ratings[:5]
+rating_by_title = data.groupby(&#39;title&#39;).size()
+# print rating_by_title[:10]
+# 过滤掉评分小于250
+active_title = rating_by_title.index[rating_by_title&gt;=250]
+# print active_title
+mean_ratings =mean_ratings.ix[active_title]
+# print mean_ratings
+# 按女性分数排序
+top_female_rating = mean_ratings.sort_values(by=&#39;F&#39;, ascending=False)
+# print top_female_rating[:4]
+
+# 计算评分分歧；男女观众的分歧；方法是加上一列diff，做差;按diff排序，得出的结果是分歧 最大且女性更喜欢的电影。
+mean_ratings[&#39;diff&#39;] = mean_ratings[&#39;M&#39;] - mean_ratings[&#39;F&#39;]
+sorted_by_diff = mean_ratings.sort_values(by=&#39;diff&#39;)
+# print sorted_by_diff[:10]
+# 对行反序，并去除前十，则是男性更喜欢的电影
+# print sorted_by_diff[::-1][:10]
+
+# 根据电影名称分组的得分数据的标准差
+rating_std_by_title = data.groupby(&#39;title&#39;)[&#39;rating&#39;].std()
+# 根据active_titles进行过滤
+rating_std_by_title = rating_std_by_title.ix[active_title]
+# 根据值对Series进行降序排列
+rating_std_by_title.sort_value(ascending=False)[:5]
+# AttributeError: &#39;Series&#39; object has no attribute &#39;sort_value&#39;;按树上对order也不行，deprecated
+</code></pre><h2 id="1880–2010年间全美婴儿姓名"><a href="#1880–2010年间全美婴儿姓名" class="headerlink" title="1880–2010年间全美婴儿姓名"></a>1880–2010年间全美婴儿姓名</h2><pre><code># 1880-2010年间全美婴儿姓名
+# 用linux命令查看某个文件对前十行
+# head -n 10 names/yob1880.txt
+# 第一行：Mary,F,7065
+# 数据由标准逗号隔开，可以用pandas.read_csv加载到DataFrame中
+import pandas as pd;import matplotlib.pyplot as plt;import numpy as  np
+# names1880 = pd.read_csv(&#39;../pydata-book-master/ch02/names/yob1880.txt&#39;, names=[&#39;name&#39;, &#39;sex&#39;, &#39;birthsNum&#39;])
+# print names1880
+# print names1880.groupby(&#39;sex&#39;).birthsNum.sum()
+# out: sex
+#      F     90993
+#      M    110493
+#      Name: birthsNum, dtype: int64
+
+# 将所有文件中到数据组装到一个DataFrame中，并加上一个year字段。使用pandas.concat
+# 2010年是目前最后一个有效统计年度
+years = range(1880, 2011)
+pieces = []
+columns = [&#39;name&#39;, &#39;sex&#39;, &#39;birthsNum&#39;]
+for year in years:
+    path = &#39;../pydata-book-master/ch02/names/yob%d.txt&#39; % year
+    frame = pd.read_csv(path, names=columns)
+
+    frame[&#39;year&#39;] = year
+    pieces.append(frame)
+# 将所有数据整合到单个DataFrame中;ignore_index必须置为False，不保留原始行号；concat默认按行整合
+names = pd.concat(pieces, ignore_index=False)
+# print names
+# 聚合;DataFrame.pivot_table(y轴，x轴，多种类型-线条，每一年每种性别对出生总数)
+total_birthsNum = names.pivot_table(&#39;birthsNum&#39;, index=&#39;year&#39;, columns=&#39;sex&#39;, aggfunc=sum)
+# print total_birthsNum.tail()
+# total_birthsNum.plot(title=&#39;Total birthsNum by sex and year&#39;)
+# plt.show()
+
+# 插入prop列，表示相对比例；由于birthsNum是整数，需要将分子分母转换成浮点数（Python3.x除外）
+def add_prop(group):
+    # 整数除法会向下圆整
+    birthsNum = group.birthsNum.astype(float)
+    group[&#39;prop&#39;] = birthsNum/birthsNum.sum()
+    return group
+names = names.groupby([&#39;year&#39;, &#39;sex&#39;]).apply(add_prop)
+# print names
+# 分组前应该进行有效性检查，用numpy.allclose=1判定所有prop之和是否为1
+# print np.allclose(names.groupby([&#39;year&#39;, &#39;sex&#39;]).prop.sum(), 1)
+# out: True
+# 为便于分析，取出前1000条按sex/year组合对数据
+def get_top1000(group):
+    return group.sort_index(by=&#39;birthsNum&#39;, ascending=False)[:1000]
+grouped = names.groupby([&#39;year&#39;, &#39;sex&#39;])
+top_1000 = grouped.apply(get_top1000)
+# print top_1000
+# 接下来针对这1000条数据进行分析
+</code></pre><blockquote>
 <p>感到这一章就是先展示一下能干什么，用到的东西不熟悉，也只能照着敲敲；因此决定暂不跟着敲了；P41-P47跳过。</p>
 </blockquote>
 
@@ -356,7 +539,157 @@
 </tbody>
 </table>
 <h1 id="附录A：Python语言精要"><a href="#附录A：Python语言精要" class="headerlink" title="附录A：Python语言精要"></a>附录A：Python语言精要</h1><p>-重拾Python基础</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div></pre></td><td class="code"><pre><div class="line">#!/usr/bin/python</div><div class="line"># -*- coding: utf-8 -*-</div><div class="line"># 在python中输入中文，包括中文注释，都需要加入上面对声明：https://www.python.org/dev/peps/pep-0263/#defining-the-encoding</div><div class="line"></div><div class="line"># python对变量进行赋值是在创建等号右侧对象对一个引用；即左侧是引用，右侧是对象；</div><div class="line">a = [1, 2, 3, 4, 5, 6]</div><div class="line">b = a</div><div class="line">a.append(7)</div><div class="line">print a</div><div class="line">print b</div><div class="line"># a，b两个引用指向一个对象，输出都是[1,2,3,4,5,6,7]</div><div class="line"># 赋值也叫绑定，将一个名称（引用）和一个对象绑定自在一起；</div><div class="line"></div><div class="line"># python按引用传递，以参数形式传入函数时，只是传入一个引用，不会复制；</div><div class="line"># 其他语言既支持按引用传递，又支持按值传递；</div><div class="line"># python可以修改参数的内容；而其他语言貌似不可以</div><div class="line">def append_ele(data_list, ele):</div><div class="line">    data_list.append(ele)</div><div class="line">data_list = [1,2,3]</div><div class="line">append_ele(data_list, 5)</div><div class="line">print data_list</div><div class="line"></div><div class="line"># 强类型语言？</div><div class="line"># 由于没有显式的将类型写出，常被误认为是弱类型语言，和js差不多；</div><div class="line"># 如计算以下：</div><div class="line">'5' + 5</div><div class="line"># 报错信息如下：</div><div class="line">Traceback (most recent call last):</div><div class="line">   File "/Users/linking/PycharmProjects/testProject/test1", line 25, in &lt;module&gt;</div><div class="line">    '5' + 5</div><div class="line">TypeError: cannot concatenate 'str' and 'int' objects</div><div class="line"># 再例：</div><div class="line">a = 5.3</div><div class="line">b = 2</div><div class="line">print 'a is %s, b is %s' % (type(a), type(b))</div><div class="line">out: a is &lt;type 'float'&gt;, b is &lt;type 'int'&gt;</div><div class="line"># 占位符 %s</div><div class="line">print a/b</div><div class="line">2.65</div><div class="line"># isinstance()函数检查类型</div><div class="line">print isinstance(a, int)</div><div class="line">out: False</div><div class="line">print isinstance(b, int)</div><div class="line">out: True</div><div class="line">print isinstance(a, (int, float))</div><div class="line">out: True</div><div class="line"></div><div class="line"># 属性和方法</div><div class="line">a = 'foo'</div><div class="line"># 通过.调用a.</div><div class="line"></div><div class="line"># python是一种非常严格的语言（急性子）；几乎在任何时候，计算过程和表达式都是立即求值。</div><div class="line"></div><div class="line"># 可变对象：列表，字典，NumPy数组及大部分用户自定义类</div><div class="line"># 不可变类：字符串和元组等；</div><div class="line"># 不可变指不能修改原内存块的数据。即使修改成功了也只是创建了一个新对象，并将其赋值给原变量而已。</div><div class="line"></div><div class="line"># 数据类型</div><div class="line">from __future__ import division</div><div class="line">print 3 / 2</div><div class="line"># 加__future__则结果是1.5,不加就是1</div><div class="line"># 也可以显式转换  3／float(2)</div><div class="line"># 整数除法如下：</div><div class="line">print 3//2</div><div class="line"># 结果 1</div><div class="line"></div><div class="line"># 字符串</div><div class="line"># 很多人因灵活的字符串处理能力而选择了python</div><div class="line"># ''  ""  效果相同</div><div class="line"># 多行字符串用三重引号（'''或"""）如下</div><div class="line">c = """</div><div class="line">    this is a longer string that</div><div class="line">    spans multiple lines</div><div class="line">    """</div><div class="line"># 字符串不可变；要修改也只能创建一个新的。</div><div class="line"># str(5.6)这种形式即可完成类型转换</div><div class="line"># 反斜杠（\）是转义字符；</div><div class="line">pring s = '12\\34'</div><div class="line">out : 12\34</div><div class="line"># 若要按照原样输出，则在左侧加r前缀</div><div class="line">s = r'this\has\no\special\characters\'</div><div class="line">out: 'this\has\no\special\characters\'</div><div class="line"># 字符串格式化</div><div class="line"># 机制：以一个%开头后面跟着一个或多个格式字符的字符串是需要插入的目标（类似c中的printf函数）</div><div class="line">temple = '%2.f %s are worth $%d'</div><div class="line">print temple % (3.413444, 'we', 222)</div><div class="line"># 这里的%是二元运算符，后面是元组(,,,)</div><div class="line">print bool([]),bool([1,2,3])</div><div class="line">out: False True</div><div class="line">print bool('hollo'),bool('')</div><div class="line">out: True False</div><div class="line">print bool(0), bool(1)</div><div class="line">out: False,True</div><div class="line"></div><div class="line"># None是Python的空值类型。一个函数没有显式地返回值，则隐式返回None</div><div class="line"># None不是保留关键字，只是NoneType的一个实例。</div><div class="line"></div><div class="line"># 异常处理</div><div class="line">def attempt_float(x):</div><div class="line">    try:</div><div class="line">        return float(x)</div><div class="line">    except (TypeError,ValueError):</div><div class="line">        return x</div><div class="line">print attempt_float('123.44xx')</div><div class="line"># 如上用元组包括多个，同时捕捉多个异常。</div><div class="line"></div><div class="line"># 三元表达式</div><div class="line">x = 5</div><div class="line">print 'Non-negative' if x &gt; 0 else 'Negative'</div><div class="line"># 优点是缩减代码，缺点是复杂情况下可读性差</div><div class="line"></div><div class="line"># 元组</div><div class="line"># 任何序列或迭代器都可以通过tuple转换为元组</div><div class="line">print tuple([3,2,1])</div><div class="line">out: (3,2,1)</div><div class="line">tup = tuple('string')</div><div class="line">print tup</div><div class="line">out: ('s', 't', 'r', 'i', 'n', 'g')</div><div class="line">print tup[0]</div><div class="line">out: s</div><div class="line"></div><div class="line"># 列表切片</div><div class="line"># 正 从0开始，负 从-1开始；都是在索引的插缝数数。</div><div class="line"></div><div class="line"># 有序 sorted ，唯一 set</div><div class="line"></div><div class="line"># 字典，是Python中最重要的内置数据结构。是一种大小可变的键值对集。</div><div class="line">empty_dict=&#123;&#125;</div><div class="line">dict_a = &#123;"a key": "a value", 'b key': 'b value'&#125;</div><div class="line"></div><div class="line"># 匿名函数</div><div class="line">def apply_to_list(some_list, f):</div><div class="line">    return [f(x) for x in some_list]</div><div class="line">ints = [4, 0, 1, 5, 6]</div><div class="line">print apply_to_list(ints, lambda x: x * 2)</div><div class="line">out: [8, 0, 2, 10, 12]</div><div class="line"># 得以轻松的传入一个自定义运算给apply_to_list函数；</div><div class="line"></div><div class="line"># 生成器</div><div class="line">def squares(n=10):</div><div class="line">    print 'Generating squares from 1 to %d' % (n**2)</div><div class="line">    for i in xrange(1, n+1):</div><div class="line">        yield i**2</div><div class="line">gen = squares()</div><div class="line">print gen</div><div class="line">out: &lt;generator object squares at 0x106936d20&gt;</div><div class="line">for x in gen:</div><div class="line">    print x,</div><div class="line">out:  Generating squares from 1 to 100</div><div class="line">      1 4 9 16 25 36 49 64 81 100</div></pre></td></tr></table></figure>
+<pre><code class="python">#!/usr/bin/python
+# -*- coding: utf-8 -*-
+# 在python中输入中文，包括中文注释，都需要加入上面对声明：https://www.python.org/dev/peps/pep-0263/#defining-the-encoding
+
+# python对变量进行赋值是在创建等号右侧对象对一个引用；即左侧是引用，右侧是对象；
+a = [1, 2, 3, 4, 5, 6]
+b = a
+a.append(7)
+print a
+print b
+# a，b两个引用指向一个对象，输出都是[1,2,3,4,5,6,7]
+# 赋值也叫绑定，将一个名称（引用）和一个对象绑定自在一起；
+
+# python按引用传递，以参数形式传入函数时，只是传入一个引用，不会复制；
+# 其他语言既支持按引用传递，又支持按值传递；
+# python可以修改参数的内容；而其他语言貌似不可以
+def append_ele(data_list, ele):
+    data_list.append(ele)
+data_list = [1,2,3]
+append_ele(data_list, 5)
+print data_list
+
+# 强类型语言？
+# 由于没有显式的将类型写出，常被误认为是弱类型语言，和js差不多；
+# 如计算以下：
+&#39;5&#39; + 5
+# 报错信息如下：
+Traceback (most recent call last):
+   File &quot;/Users/linking/PycharmProjects/testProject/test1&quot;, line 25, in &lt;module&gt;
+    &#39;5&#39; + 5
+TypeError: cannot concatenate &#39;str&#39; and &#39;int&#39; objects
+# 再例：
+a = 5.3
+b = 2
+print &#39;a is %s, b is %s&#39; % (type(a), type(b))
+out: a is &lt;type &#39;float&#39;&gt;, b is &lt;type &#39;int&#39;&gt;
+# 占位符 %s
+print a/b
+2.65
+# isinstance()函数检查类型
+print isinstance(a, int)
+out: False
+print isinstance(b, int)
+out: True
+print isinstance(a, (int, float))
+out: True
+
+# 属性和方法
+a = &#39;foo&#39;
+# 通过.调用a.
+
+# python是一种非常严格的语言（急性子）；几乎在任何时候，计算过程和表达式都是立即求值。
+
+# 可变对象：列表，字典，NumPy数组及大部分用户自定义类
+# 不可变类：字符串和元组等；
+# 不可变指不能修改原内存块的数据。即使修改成功了也只是创建了一个新对象，并将其赋值给原变量而已。
+
+# 数据类型
+from __future__ import division
+print 3 / 2
+# 加__future__则结果是1.5,不加就是1
+# 也可以显式转换  3／float(2)
+# 整数除法如下：
+print 3//2
+# 结果 1
+
+# 字符串
+# 很多人因灵活的字符串处理能力而选择了python
+# &#39;&#39;  &quot;&quot;  效果相同
+# 多行字符串用三重引号（&#39;&#39;&#39;或&quot;&quot;&quot;）如下
+c = &quot;&quot;&quot;
+    this is a longer string that
+    spans multiple lines
+    &quot;&quot;&quot;
+# 字符串不可变；要修改也只能创建一个新的。
+# str(5.6)这种形式即可完成类型转换
+# 反斜杠（\）是转义字符；
+pring s = &#39;12\\34&#39;
+out : 12\34
+# 若要按照原样输出，则在左侧加r前缀
+s = r&#39;this\has\no\special\characters\&#39;
+out: &#39;this\has\no\special\characters\&#39;
+# 字符串格式化
+# 机制：以一个%开头后面跟着一个或多个格式字符的字符串是需要插入的目标（类似c中的printf函数）
+temple = &#39;%2.f %s are worth $%d&#39;
+print temple % (3.413444, &#39;we&#39;, 222)
+# 这里的%是二元运算符，后面是元组(,,,)
+print bool([]),bool([1,2,3])
+out: False True
+print bool(&#39;hollo&#39;),bool(&#39;&#39;)
+out: True False
+print bool(0), bool(1)
+out: False,True
+
+# None是Python的空值类型。一个函数没有显式地返回值，则隐式返回None
+# None不是保留关键字，只是NoneType的一个实例。
+
+# 异常处理
+def attempt_float(x):
+    try:
+        return float(x)
+    except (TypeError,ValueError):
+        return x
+print attempt_float(&#39;123.44xx&#39;)
+# 如上用元组包括多个，同时捕捉多个异常。
+
+# 三元表达式
+x = 5
+print &#39;Non-negative&#39; if x &gt; 0 else &#39;Negative&#39;
+# 优点是缩减代码，缺点是复杂情况下可读性差
+
+# 元组
+# 任何序列或迭代器都可以通过tuple转换为元组
+print tuple([3,2,1])
+out: (3,2,1)
+tup = tuple(&#39;string&#39;)
+print tup
+out: (&#39;s&#39;, &#39;t&#39;, &#39;r&#39;, &#39;i&#39;, &#39;n&#39;, &#39;g&#39;)
+print tup[0]
+out: s
+
+# 列表切片
+# 正 从0开始，负 从-1开始；都是在索引的插缝数数。
+
+# 有序 sorted ，唯一 set
+
+# 字典，是Python中最重要的内置数据结构。是一种大小可变的键值对集。
+empty_dict={}
+dict_a = {&quot;a key&quot;: &quot;a value&quot;, &#39;b key&#39;: &#39;b value&#39;}
+
+# 匿名函数
+def apply_to_list(some_list, f):
+    return [f(x) for x in some_list]
+ints = [4, 0, 1, 5, 6]
+print apply_to_list(ints, lambda x: x * 2)
+out: [8, 0, 2, 10, 12]
+# 得以轻松的传入一个自定义运算给apply_to_list函数；
+
+# 生成器
+def squares(n=10):
+    print &#39;Generating squares from 1 to %d&#39; % (n**2)
+    for i in xrange(1, n+1):
+        yield i**2
+gen = squares()
+print gen
+out: &lt;generator object squares at 0x106936d20&gt;
+for x in gen:
+    print x,
+out:  Generating squares from 1 to 100
+      1 4 9 16 25 36 49 64 81 100
+</code></pre>
 <p>20170226 23:06 周日 于皖水公寓1#1317</p>
 <hr>
 
@@ -431,15 +764,187 @@
       
         <h2 id="Adapter-类控件"><a href="#Adapter-类控件" class="headerlink" title="Adapter 类控件"></a>Adapter 类控件</h2><h3 id="Adapter基础讲解"><a href="#Adapter基础讲解" class="headerlink" title="Adapter基础讲解"></a>Adapter基础讲解</h3><p>概念：帮助填充数据的中间桥梁，将数据以合适的形式显示到view上，供用户查看。</p>
 <p><img src="http://7xjqvu.com1.z0.glb.clouddn.com/15-9-1/77919389.jpg" alt=""></p>
-<p>1.ArrayAdapter:<br><figure class="highlight processing"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//data to show</span></div><div class="line"><span class="comment">//String[] datas = &#123;"神奇", "没事吗", "不会吧"&#125;;</span></div><div class="line"><span class="comment">//also can setdata like this</span></div><div class="line">List&lt;<span class="keyword">String</span>&gt; datas = <span class="keyword">new</span> ArrayList&lt;<span class="keyword">String</span>&gt;();</div><div class="line">datas.<span class="built_in">add</span>(<span class="string">"hehe1"</span>);</div><div class="line">datas.<span class="built_in">add</span>(<span class="string">"hehe2"</span>);</div><div class="line">datas.<span class="built_in">add</span>(<span class="string">"hehe3"</span>);</div><div class="line"><span class="comment">//create ArrayAdapter</span></div><div class="line">ArrayAdapter&lt;<span class="keyword">String</span>&gt; adapter = <span class="keyword">new</span> ArrayAdapter&lt;<span class="keyword">String</span>&gt;(<span class="keyword">this</span>, android.R.layout.simple_expandable_list_item_1, datas);</div><div class="line"><span class="comment">//listview set adapter</span></div><div class="line">ListView lv = (ListView)findViewById(R.id.listview_adapter1);</div><div class="line">lv.setAdapter(adapter);</div></pre></td></tr></table></figure></p>
-<p>ArrayAdapter第二参数：<br><img src="http://ohigs9xaw.bkt.clouddn.com/ArrayAdapterSecondParam.png" alt="qiniu截借的别人的blog"></p>
+<p>1.ArrayAdapter:</p>
+<pre><code>//data to show
+//String[] datas = {&quot;神奇&quot;, &quot;没事吗&quot;, &quot;不会吧&quot;};
+//also can setdata like this
+List&lt;String&gt; datas = new ArrayList&lt;String&gt;();
+datas.add(&quot;hehe1&quot;);
+datas.add(&quot;hehe2&quot;);
+datas.add(&quot;hehe3&quot;);
+//create ArrayAdapter
+ArrayAdapter&lt;String&gt; adapter = new ArrayAdapter&lt;String&gt;(this, android.R.layout.simple_expandable_list_item_1, datas);
+//listview set adapter
+ListView lv = (ListView)findViewById(R.id.listview_adapter1);
+lv.setAdapter(adapter);
+</code></pre><p>ArrayAdapter第二参数：<br><img src="http://ohigs9xaw.bkt.clouddn.com/ArrayAdapterSecondParam.png" alt="qiniu截借的别人的blog"></p>
 <p>2.SimpleAdapter<br>常用，listview，item，<code>List&lt;Map&lt;String,Object&gt;&gt; list = new ArrayList&lt;Map&lt;String,Object&gt;&gt;()</code>;<br>from是塞的数据list中的标识string[]{},to是item中的id的int[]{R.id.xx}数组,resource是item布局,context几个adapter参数；<br>add at 20161201</p>
 <h3 id="ListView简单使用"><a href="#ListView简单使用" class="headerlink" title="ListView简单使用"></a>ListView简单使用</h3><p>1.自定义BaseAdapter,绑定数据<br>展示样式在item中设计，适应adapter中做数据的set工作，只做一个适配器，而具体的数据在mainactivity中插入，一般会用到list，以及范型，<code>list&lt;entrity&gt;</code>,实体类中写属性的存取方法，最后给listview设置适配器，listview.setAdapter(mAdapter)。下面是代码：</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line">//itme_layout</div><div class="line"><span class="php"><span class="meta">&lt;?</span>xml version=<span class="string">"1.0"</span> encoding=<span class="string">"utf-8"</span><span class="meta">?&gt;</span></span></div><div class="line"><span class="tag">&lt;<span class="name">LinearLayout</span> <span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span></span></div><div class="line">    <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></div><div class="line">    <span class="attr">android:layout_height</span>=<span class="string">"match_parent"</span></div><div class="line">    <span class="attr">android:orientation</span>=<span class="string">"horizontal"</span></div><div class="line">    <span class="attr">android:padding</span>=<span class="string">"10dp"</span>&gt;</div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">ImageView</span></span></div><div class="line">        <span class="attr">android:id</span>=<span class="string">"@+id/img"</span></div><div class="line">        <span class="attr">android:layout_width</span>=<span class="string">"wrap_content"</span></div><div class="line">        <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span></div><div class="line">        <span class="attr">android:src</span>=<span class="string">"@mipmap/ic_launcher"</span> /&gt;</div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">LinearLayout</span></span></div><div class="line">        <span class="attr">android:layout_width</span>=<span class="string">"wrap_content"</span></div><div class="line">        <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span></div><div class="line">        <span class="attr">android:layout_marginLeft</span>=<span class="string">"10dp"</span></div><div class="line">        <span class="attr">android:orientation</span>=<span class="string">"vertical"</span></div><div class="line">        <span class="attr">android:padding</span>=<span class="string">"5dp"</span>&gt;</div><div class="line"></div><div class="line">        <span class="tag">&lt;<span class="name">TextView</span></span></div><div class="line">            <span class="attr">android:id</span>=<span class="string">"@+id/tv1"</span></div><div class="line">            <span class="attr">android:layout_width</span>=<span class="string">"wrap_content"</span></div><div class="line">            <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span></div><div class="line">            <span class="attr">android:text</span>=<span class="string">"wenzi1"</span> /&gt;</div><div class="line"></div><div class="line">        <span class="tag">&lt;<span class="name">TextView</span></span></div><div class="line">            <span class="attr">android:id</span>=<span class="string">"@+id/tv2"</span></div><div class="line">            <span class="attr">android:layout_width</span>=<span class="string">"wrap_content"</span></div><div class="line">            <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span></div><div class="line">            <span class="attr">android:layout_marginTop</span>=<span class="string">"3dp"</span></div><div class="line">            <span class="attr">android:text</span>=<span class="string">"wenzi1"</span> /&gt;</div><div class="line">    <span class="tag">&lt;/<span class="name">LinearLayout</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">LinearLayout</span>&gt;</span></div></pre></td></tr></table></figure>
-<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#entity</span></div><div class="line">package com.example.linking.adapters.Model;</div><div class="line"><span class="comment">/**</span></div><div class="line"> * Created by linking on 16/12/4.</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Animals</span> &#123;</div><div class="line">    <span class="keyword">private</span> String aName;</div><div class="line">    <span class="keyword">private</span> String aSpeak;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> aIcon;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Animals</span>(<span class="params">String aName, String aSpeak, <span class="keyword">int</span> aIcon</span>) </span>&#123;</div><div class="line">        <span class="keyword">this</span>.aName = aName;</div><div class="line">        <span class="keyword">this</span>.aSpeak = aSpeak;</div><div class="line">        <span class="keyword">this</span>.aIcon = aIcon;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Animals</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getaName</span>(<span class="params"></span>) </span>&#123;</div><div class="line">        <span class="keyword">return</span> aName;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setaName</span>(<span class="params">String aName</span>) </span>&#123;</div><div class="line">        <span class="keyword">this</span>.aName = aName;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getaSpeak</span>(<span class="params"></span>) </span>&#123;</div><div class="line">        <span class="keyword">return</span> aSpeak;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setaSpeak</span>(<span class="params">String aSpeak</span>) </span>&#123;</div><div class="line">        <span class="keyword">this</span>.aSpeak = aSpeak;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getaIcon</span>(<span class="params"></span>) </span>&#123;</div><div class="line">        <span class="keyword">return</span> aIcon;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setaIcon</span>(<span class="params"><span class="keyword">int</span> aIcon</span>) </span>&#123;</div><div class="line">        <span class="keyword">this</span>.aIcon = aIcon;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<figure class="highlight arduino"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div></pre></td><td class="code"><pre><div class="line">##AnimalAdapter</div><div class="line">package com.example.linking.adapters.Adapter;</div><div class="line"></div><div class="line"><span class="keyword">import</span> android.content.Context;</div><div class="line"><span class="keyword">import</span> android.view.LayoutInflater;</div><div class="line"><span class="keyword">import</span> android.view.View;</div><div class="line"><span class="keyword">import</span> android.view.ViewGroup;</div><div class="line"><span class="keyword">import</span> android.widget.BaseAdapter;</div><div class="line"><span class="keyword">import</span> android.widget.ImageView;</div><div class="line"><span class="keyword">import</span> android.widget.TextView;</div><div class="line"></div><div class="line"><span class="keyword">import</span> com.example.linking.adapters.Model.Animals;</div><div class="line"><span class="keyword">import</span> com.example.linking.adapters.R;</div><div class="line"></div><div class="line"><span class="keyword">import</span> java.util.LinkedList;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * Created by linking on 16/12/4.</div><div class="line"> */</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> AnimalAdapter extends BaseAdapter &#123;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> LinkedList&lt;Animals&gt; mData;</div><div class="line">    <span class="keyword">private</span> Context mContext;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> AnimalAdapter(LinkedList&lt;Animals&gt; mData, Context mContext) &#123;</div><div class="line">        <span class="keyword">this</span>.mData = mData;</div><div class="line">        <span class="keyword">this</span>.mContext = mContext;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    <span class="keyword">public</span> <span class="keyword">int</span> getCount() &#123;</div><div class="line">        <span class="built_in">return</span> mData.<span class="built_in">size</span>();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    <span class="keyword">public</span> Object getItem(<span class="keyword">int</span> <span class="built_in">position</span>) &#123;</div><div class="line">        <span class="built_in">return</span> null;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    <span class="keyword">public</span> <span class="keyword">long</span> getItemId(<span class="keyword">int</span> <span class="built_in">position</span>) &#123;</div><div class="line">        <span class="built_in">return</span> <span class="built_in">position</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    <span class="keyword">public</span> View getView(<span class="keyword">int</span> <span class="built_in">position</span>, View view, ViewGroup viewGroup) &#123;</div><div class="line">        view = LayoutInflater.from(mContext).inflate(R.layout.item_listview_baseadapter,viewGroup,false);</div><div class="line">        ImageView img_icon = (ImageView) view.findViewById(R.id.img);</div><div class="line">        TextView tv1 = (TextView) view.findViewById(R.id.tv1);</div><div class="line">        TextView tv2 = (TextView) view.findViewById(R.id.tv2);</div><div class="line">        img_icon.setBackgroundResource(mData.<span class="built_in">get</span>(<span class="built_in">position</span>).getaIcon());</div><div class="line">        tv1.setText(mData.<span class="built_in">get</span>(<span class="built_in">position</span>).getaName());</div><div class="line">        tv2.setText(mData.<span class="built_in">get</span>(<span class="built_in">position</span>).getaSpeak());</div><div class="line">        <span class="built_in">return</span> view;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line">#<span class="type">Activity</span></div><div class="line"><span class="keyword">package</span> com.example.linking.adapters.<span class="type">Activity</span>;</div><div class="line"></div><div class="line"><span class="keyword">import</span> android.content.<span class="type">Context</span>;</div><div class="line"><span class="keyword">import</span> android.support.v7.app.<span class="type">AppCompatActivity</span>;</div><div class="line"><span class="keyword">import</span> android.os.<span class="type">Bundle</span>;</div><div class="line"><span class="keyword">import</span> android.widget.<span class="type">ListView</span>;</div><div class="line"></div><div class="line"><span class="keyword">import</span> com.example.linking.adapters.<span class="type">Adapter</span>.<span class="type">AnimalAdapter</span>;</div><div class="line"><span class="keyword">import</span> com.example.linking.adapters.<span class="type">Model</span>.<span class="type">Animals</span>;</div><div class="line"><span class="keyword">import</span> com.example.linking.adapters.<span class="type">R</span>;</div><div class="line"></div><div class="line"><span class="keyword">import</span> java.util.<span class="type">LinkedList</span>;</div><div class="line"><span class="keyword">import</span> java.util.<span class="type">List</span>;</div><div class="line"></div><div class="line">public <span class="class"><span class="keyword">class</span> <span class="title">ListViewBaseAdapterActivity</span> <span class="keyword">extends</span> <span class="title">AppCompatActivity</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> <span class="type">List</span>&lt;<span class="type">Animals</span>&gt; mData = <span class="literal">null</span>;</div><div class="line">    <span class="keyword">private</span> <span class="type">Context</span> mContext;</div><div class="line">    <span class="keyword">private</span> <span class="type">AnimalAdapter</span> mAdapter = <span class="literal">null</span>;</div><div class="line">    <span class="keyword">private</span> <span class="type">ListView</span> list_animal;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="keyword">protected</span> void onCreate(<span class="type">Bundle</span> savedInstanceState) &#123;</div><div class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState);</div><div class="line">        setContentView(<span class="type">R</span>.layout.activity_list_view_base_adapter);</div><div class="line"></div><div class="line">        mContext = <span class="type">ListViewBaseAdapterActivity</span>.<span class="keyword">this</span>;</div><div class="line">        list_animal = (<span class="type">ListView</span>) findViewById(<span class="type">R</span>.id.listview1);</div><div class="line">        mData = <span class="keyword">new</span> <span class="type">LinkedList</span>&lt;<span class="type">Animals</span>&gt;();</div><div class="line">        mData.add(<span class="keyword">new</span> <span class="type">Animals</span>(<span class="string">"狗说"</span>,<span class="string">"你是够吗"</span>,<span class="type">R</span>.mipmap.ic_launcher));</div><div class="line">        mData.add(<span class="keyword">new</span> <span class="type">Animals</span>(<span class="string">"mao说"</span>,<span class="string">"你是mao吗"</span>,<span class="type">R</span>.mipmap.ic_launcher));</div><div class="line">        mData.add(<span class="keyword">new</span> <span class="type">Animals</span>(<span class="string">"hooo说"</span>,<span class="string">"你是hooo吗"</span>,<span class="type">R</span>.mipmap.ic_launcher));</div><div class="line">        mAdapter = <span class="keyword">new</span> <span class="type">AnimalAdapter</span>((<span class="type">LinkedList</span> &lt; <span class="type">Animals</span> &gt; )mData,mContext);</div><div class="line">        list_animal.setAdapter(mAdapter);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>2.其他设置<br>2.1表头表尾设置分割线<br>只能在Java中写代码进行设置了，可供我们调用的方法如下：</p>
+<pre><code>//itme_layout
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+    android:layout_width=&quot;match_parent&quot;
+    android:layout_height=&quot;match_parent&quot;
+    android:orientation=&quot;horizontal&quot;
+    android:padding=&quot;10dp&quot;&gt;
+
+    &lt;ImageView
+        android:id=&quot;@+id/img&quot;
+        android:layout_width=&quot;wrap_content&quot;
+        android:layout_height=&quot;wrap_content&quot;
+        android:src=&quot;@mipmap/ic_launcher&quot; /&gt;
+
+    &lt;LinearLayout
+        android:layout_width=&quot;wrap_content&quot;
+        android:layout_height=&quot;wrap_content&quot;
+        android:layout_marginLeft=&quot;10dp&quot;
+        android:orientation=&quot;vertical&quot;
+        android:padding=&quot;5dp&quot;&gt;
+
+        &lt;TextView
+            android:id=&quot;@+id/tv1&quot;
+            android:layout_width=&quot;wrap_content&quot;
+            android:layout_height=&quot;wrap_content&quot;
+            android:text=&quot;wenzi1&quot; /&gt;
+
+        &lt;TextView
+            android:id=&quot;@+id/tv2&quot;
+            android:layout_width=&quot;wrap_content&quot;
+            android:layout_height=&quot;wrap_content&quot;
+            android:layout_marginTop=&quot;3dp&quot;
+            android:text=&quot;wenzi1&quot; /&gt;
+    &lt;/LinearLayout&gt;
+&lt;/LinearLayout&gt;
+</code></pre><pre><code>#entity
+package com.example.linking.adapters.Model;
+/**
+ * Created by linking on 16/12/4.
+ */
+public class Animals {
+    private String aName;
+    private String aSpeak;
+    private int aIcon;
+    public Animals(String aName, String aSpeak, int aIcon) {
+        this.aName = aName;
+        this.aSpeak = aSpeak;
+        this.aIcon = aIcon;
+    }
+    public Animals() {
+    }
+    public String getaName() {
+        return aName;
+    }
+    public void setaName(String aName) {
+        this.aName = aName;
+    }
+    public String getaSpeak() {
+        return aSpeak;
+    }
+    public void setaSpeak(String aSpeak) {
+        this.aSpeak = aSpeak;
+    }
+    public int getaIcon() {
+        return aIcon;
+    }
+    public void setaIcon(int aIcon) {
+        this.aIcon = aIcon;
+    }
+}
+</code></pre><pre><code>##AnimalAdapter
+package com.example.linking.adapters.Adapter;
+
+import android.content.Context;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.example.linking.adapters.Model.Animals;
+import com.example.linking.adapters.R;
+
+import java.util.LinkedList;
+
+/**
+ * Created by linking on 16/12/4.
+ */
+
+public class AnimalAdapter extends BaseAdapter {
+
+    private LinkedList&lt;Animals&gt; mData;
+    private Context mContext;
+
+    public AnimalAdapter(LinkedList&lt;Animals&gt; mData, Context mContext) {
+        this.mData = mData;
+        this.mContext = mContext;
+    }
+
+    @Override
+    public int getCount() {
+        return mData.size();
+    }
+
+    @Override
+    public Object getItem(int position) {
+        return null;
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
+
+    @Override
+    public View getView(int position, View view, ViewGroup viewGroup) {
+        view = LayoutInflater.from(mContext).inflate(R.layout.item_listview_baseadapter,viewGroup,false);
+        ImageView img_icon = (ImageView) view.findViewById(R.id.img);
+        TextView tv1 = (TextView) view.findViewById(R.id.tv1);
+        TextView tv2 = (TextView) view.findViewById(R.id.tv2);
+        img_icon.setBackgroundResource(mData.get(position).getaIcon());
+        tv1.setText(mData.get(position).getaName());
+        tv2.setText(mData.get(position).getaSpeak());
+        return view;
+    }
+}
+</code></pre><pre><code>#Activity
+package com.example.linking.adapters.Activity;
+
+import android.content.Context;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.widget.ListView;
+
+import com.example.linking.adapters.Adapter.AnimalAdapter;
+import com.example.linking.adapters.Model.Animals;
+import com.example.linking.adapters.R;
+
+import java.util.LinkedList;
+import java.util.List;
+
+public class ListViewBaseAdapterActivity extends AppCompatActivity {
+
+    private List&lt;Animals&gt; mData = null;
+    private Context mContext;
+    private AnimalAdapter mAdapter = null;
+    private ListView list_animal;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_list_view_base_adapter);
+
+        mContext = ListViewBaseAdapterActivity.this;
+        list_animal = (ListView) findViewById(R.id.listview1);
+        mData = new LinkedList&lt;Animals&gt;();
+        mData.add(new Animals(&quot;狗说&quot;,&quot;你是够吗&quot;,R.mipmap.ic_launcher));
+        mData.add(new Animals(&quot;mao说&quot;,&quot;你是mao吗&quot;,R.mipmap.ic_launcher));
+        mData.add(new Animals(&quot;hooo说&quot;,&quot;你是hooo吗&quot;,R.mipmap.ic_launcher));
+        mAdapter = new AnimalAdapter((LinkedList &lt; Animals &gt; )mData,mContext);
+        list_animal.setAdapter(mAdapter);
+    }
+}
+</code></pre><p>2.其他设置<br>2.1表头表尾设置分割线<br>只能在Java中写代码进行设置了，可供我们调用的方法如下：</p>
 <ul>
 <li>addHeaderView(View v)：添加headView(表头),括号中的参数是一个View对象</li>
 <li>addFooterView(View v)：添加footerView(表尾)，括号中的参数是一个View对象</li>
@@ -447,8 +952,11 @@
 <li>addFooterView(View,view,false)：同上</li>
 </ul>
 <p>对了，使用这个addHeaderView方法必须放在<strong>listview.setAdapter</strong><span style="color:red">前面</span>，否则会报错。<br><strong>注意问题</strong>：<br>    添加表头表尾后，我们发现positon是从表头开始算的，就是你添加的第一个数据本来的postion是<br>0，但是此时却变成了1，因为表头也算！！</p>
-<p>2.2列表从底部开始显示：stackFromBottom=”true”<br>2.3设置点击颜色cacheColorHint<br>2.4隐藏滑动条<br><figure class="highlight lasso"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">android:scrollbars=”<span class="literal">none</span>” </div><div class="line"><span class="literal">or</span></div><div class="line">setVerticalScrollBarEnabled(<span class="literal">true</span>);</div></pre></td></tr></table></figure></p>
-
+<p>2.2列表从底部开始显示：stackFromBottom=”true”<br>2.3设置点击颜色cacheColorHint<br>2.4隐藏滑动条</p>
+<pre><code>android:scrollbars=”none” 
+or
+setVerticalScrollBarEnabled(true); 
+</code></pre>
       
 
       
@@ -503,16 +1011,97 @@
 <blockquote>
 <p>最好的教程还是官方API，不知道的就查一下，很明了，这一块对英语要求较高，还要加强，这是成为一个优秀的程序员必备的，毕竟编程是英语世界的人发明的，当然，无论哪个行业，融入英语世界才能了解到世界上最先进的知识。</p>
 </blockquote>
-<p>业余时间在CSDN上看<a href="http://blog.csdn.net/coder_pig/article/details/50000773" target="_blank" rel="external">pig-coder的博客</a>，是比较系统的介绍，所以选择了他的博客。感谢作者的无私奉献。</p>
+<p>业余时间在CSDN上看<a href="http://blog.csdn.net/coder_pig/article/details/50000773" target="_blank" rel="noopener">pig-coder的博客</a>，是比较系统的介绍，所以选择了他的博客。感谢作者的无私奉献。</p>
 <p>看完了基础、布局、UI，进度有点慢，要加把劲了。<br>这篇把onClick事件监听的几种实现方式抠出来，作一篇博客。</p>
 <p>主要有以下三种方式：</p>
-<h2 id="匿名内部类监听按钮点击事件"><a href="#匿名内部类监听按钮点击事件" class="headerlink" title="匿名内部类监听按钮点击事件"></a>匿名内部类监听按钮点击事件</h2><figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="selector-id">#activity_login</span><span class="selector-class">.xml</span>   layout </div><div class="line">&lt;Button</div><div class="line">    android:layout_width=<span class="string">"match_parent"</span></div><div class="line">    android:layout_height=<span class="string">"wrap_content"</span></div><div class="line">    android:text=<span class="string">"@string/button_name"</span></div><div class="line">    android:id=<span class="string">"@+id/button"</span></div><div class="line">    android:layout_gravity=<span class="string">"bottom"</span> /&gt;</div></pre></td></tr></table></figure>
-<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="meta"># LoginActivity.java</span></div><div class="line"><span class="keyword">private</span> Button loginButton;</div><div class="line">    @<span class="function">Override</span></div><div class="line">    <span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span>(<span class="params">Bundle savedInstanceState</span>)&#123;</div><div class="line">        super.onCreate(savedInstanceState);</div><div class="line">        setContentView(R.layout.activity_login);</div><div class="line"></div><div class="line">        <span class="comment">/*</span></div><div class="line">        * 1.初始化当前所需的控件</div><div class="line">        * findViewById--返回一个view对象</div><div class="line">        * 通过R.java.id找到</div><div class="line">        * */</div><div class="line">        loginButton = (Button)findViewById(R.id.button_denglu);</div><div class="line"></div><div class="line">        <span class="comment">/*</span></div><div class="line">        * 2.设置Button监听器，实现点击操作</div><div class="line">        * 通过匿名内部类方式实现</div><div class="line">        * */</div><div class="line">        loginButton.setOnClickListener(<span class="keyword">new</span> View.OnClickListener() &#123;</div><div class="line">            @<span class="function">Override</span></div><div class="line">            <span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span>(<span class="params">View v</span>) &#123;</div><div class="line">                <span class="comment">//当前点击动作</span></div><div class="line">                System.<span class="keyword">out</span>.println(<span class="string">"我的button被点击了"</span>);</div><div class="line">            &#125;</div><div class="line">        &#125;);</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
-<h2 id="独立类-外部类-实现"><a href="#独立类-外部类-实现" class="headerlink" title="独立类(外部类)实现"></a>独立类(外部类)实现</h2><p>在此类的外部实现一个onClick类。<br>当遇到很多按钮需要添加事件时，通过这种方式可以设置同类的逻辑。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LoginActivity</span> <span class="keyword">extends</span> <span class="title">AppCompatActivity</span>   </span>&#123;</div><div class="line">    <span class="keyword">private</span> Button bt1;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span></span>&#123;</div><div class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState);</div><div class="line">        setContentView(R.layout.activity_login);</div><div class="line">        bt1 = (Button) findViewById(R.id.button_denglu);</div><div class="line">        bt1.setOnClickListener(<span class="keyword">new</span> myClickListener()&#123;</div><div class="line">            <span class="meta">@Override</span></div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">(View v)</span> </span>&#123;</div><div class="line">                <span class="comment">//调用父类的点击事件</span></div><div class="line">                <span class="keyword">super</span>.onClick(v);</div><div class="line">                Toast.makeText(LoginActivity.<span class="keyword">this</span>,<span class="string">"bt1要输出的逻辑"</span>,<span class="number">1</span>).show();</div><div class="line">            &#125;</div><div class="line">        &#125;);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="comment">//OnClickListener是一个接口</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">myClickListener</span> <span class="keyword">implements</span> <span class="title">View</span>.<span class="title">OnClickListener</span> </span>&#123;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">(View v)</span></span>&#123;</div><div class="line">        <span class="comment">//这里可以写需要调用此外部类的公共点击事件</span></div><div class="line">        Log.i(TAG, <span class="string">"onClick: 父类的事件"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<h2 id="实现接口的方式实现"><a href="#实现接口的方式实现" class="headerlink" title="实现接口的方式实现"></a>实现接口的方式实现</h2><figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">public <span class="class"><span class="keyword">class</span> <span class="title">LoginActivity</span> <span class="keyword">extends</span> <span class="title">AppCompatActivity</span> <span class="title">implements</span> <span class="title">View</span>.<span class="title">OnClickListener</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> <span class="type">Button</span> bt1;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="keyword">protected</span> void onCreate(<span class="type">Bundle</span> savedInstanceState)&#123;</div><div class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState);</div><div class="line">        setContentView(<span class="type">R</span>.layout.activity_login);</div><div class="line">        bt1 = (<span class="type">Button</span>)findViewById(<span class="type">R</span>.id.button_denglu);</div><div class="line"></div><div class="line">        bt1.setOnClickListener(<span class="keyword">this</span>);</div><div class="line">    &#125;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    public void onClick(<span class="type">View</span> v)&#123;</div><div class="line">        <span class="type">Log</span>.i(<span class="type">TAG</span>, <span class="string">"onClick: 第三种实现方式"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="实现页面跳转"><a href="#实现页面跳转" class="headerlink" title="实现页面跳转"></a>实现页面跳转</h2><p>必须在AndroidManifest.xml中注册跳转到的页面，activity。这就是之前为什么不能实现跳转的原因。<br><figure class="highlight applescript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;activity android:<span class="built_in">name</span>=<span class="string">"Second"</span> /&gt;</div></pre></td></tr></table></figure></p>
-<p>MainActivity中绑定onClick事件<br><figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">Button </span><span class="keyword">btn1 </span>= (<span class="keyword">Button)findViewById(R.id.btn1);</span></div><div class="line"><span class="keyword">btn1.setOnClickListener(new </span>View.OnClickListener() &#123;</div><div class="line">    @Override</div><div class="line">    public void onClick(View v) &#123;</div><div class="line">        Intent intent = new Intent()<span class="comment">;</span></div><div class="line">        intent.setClass(MainActivity.this,Second.class)<span class="comment">;</span></div><div class="line">        startActivity(intent)<span class="comment">;</span></div><div class="line">    &#125;</div><div class="line">&#125;)<span class="comment">;</span></div></pre></td></tr></table></figure></p>
+<h2 id="匿名内部类监听按钮点击事件"><a href="#匿名内部类监听按钮点击事件" class="headerlink" title="匿名内部类监听按钮点击事件"></a>匿名内部类监听按钮点击事件</h2><pre><code>#activity_login.xml   layout 
+&lt;Button
+    android:layout_width=&quot;match_parent&quot;
+    android:layout_height=&quot;wrap_content&quot;
+    android:text=&quot;@string/button_name&quot;
+    android:id=&quot;@+id/button&quot;
+    android:layout_gravity=&quot;bottom&quot; /&gt;
+</code></pre><pre><code># LoginActivity.java
+private Button loginButton;
+    @Override
+    protected void onCreate(Bundle savedInstanceState){
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_login);
 
+        /*
+        * 1.初始化当前所需的控件
+        * findViewById--返回一个view对象
+        * 通过R.java.id找到
+        * */
+        loginButton = (Button)findViewById(R.id.button_denglu);
+
+        /*
+        * 2.设置Button监听器，实现点击操作
+        * 通过匿名内部类方式实现
+        * */
+        loginButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //当前点击动作
+                System.out.println(&quot;我的button被点击了&quot;);
+            }
+        });
+    }
+</code></pre><h2 id="独立类-外部类-实现"><a href="#独立类-外部类-实现" class="headerlink" title="独立类(外部类)实现"></a>独立类(外部类)实现</h2><p>在此类的外部实现一个onClick类。<br>当遇到很多按钮需要添加事件时，通过这种方式可以设置同类的逻辑。</p>
+<pre><code>public class LoginActivity extends AppCompatActivity   {
+    private Button bt1;
+    @Override
+    protected void onCreate(Bundle savedInstanceState){
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_login);
+        bt1 = (Button) findViewById(R.id.button_denglu);
+        bt1.setOnClickListener(new myClickListener(){
+            @Override
+            public void onClick(View v) {
+                //调用父类的点击事件
+                super.onClick(v);
+                Toast.makeText(LoginActivity.this,&quot;bt1要输出的逻辑&quot;,1).show();
+            }
+        });
+    }
+}
+//OnClickListener是一个接口
+class myClickListener implements View.OnClickListener {
+    @Override
+    public void onClick(View v){
+        //这里可以写需要调用此外部类的公共点击事件
+        Log.i(TAG, &quot;onClick: 父类的事件&quot;);
+    }
+}
+</code></pre><h2 id="实现接口的方式实现"><a href="#实现接口的方式实现" class="headerlink" title="实现接口的方式实现"></a>实现接口的方式实现</h2><pre><code>public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
+    private Button bt1;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState){
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_login);
+        bt1 = (Button)findViewById(R.id.button_denglu);
+
+        bt1.setOnClickListener(this);
+    }
+    @Override
+    public void onClick(View v){
+        Log.i(TAG, &quot;onClick: 第三种实现方式&quot;);
+    }
+}
+</code></pre><h2 id="实现页面跳转"><a href="#实现页面跳转" class="headerlink" title="实现页面跳转"></a>实现页面跳转</h2><p>必须在AndroidManifest.xml中注册跳转到的页面，activity。这就是之前为什么不能实现跳转的原因。</p>
+<pre><code>&lt;activity android:name=&quot;Second&quot; /&gt;
+</code></pre><p>MainActivity中绑定onClick事件</p>
+<pre><code>Button btn1 = (Button)findViewById(R.id.btn1);
+btn1.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View v) {
+        Intent intent = new Intent();
+        intent.setClass(MainActivity.this,Second.class);
+        startActivity(intent);
+    }
+});
+</code></pre>
       
 
       
@@ -587,26 +1176,40 @@
 <blockquote>
 <p>由于在自己提交之前，自己下载最新代码之后有人上传了，之前下载的不是最新的代码，所以有冲突，必须把代码冲突解决之后才能够上传。时间线问题。</p>
 </blockquote>
-<p>展现形式：<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;</div><div class="line">your <span class="selector-tag">code</span> </div><div class="line">HEAD </div><div class="line">others <span class="selector-tag">code</span></div><div class="line">&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;</div></pre></td></tr></table></figure></p>
-<p>完成了一个功能模块，想要提交到代码库中；为了方便，现在用git gui工具了，先把更改的文件statechanged状态改变一下，然后提交commit，之后千万不要忘记看看远程库中有没有最近的更新，pull一下；<br>pull一次之后就要注意解决冲突，一般文件会红色显示，有错误则会显示红色波浪线，形式如上所示；</p>
+<p>展现形式：</p>
+<pre><code>&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;
+your code 
+HEAD 
+others code
+&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;
+</code></pre><p>完成了一个功能模块，想要提交到代码库中；为了方便，现在用git gui工具了，先把更改的文件statechanged状态改变一下，然后提交commit，之后千万不要忘记看看远程库中有没有最近的更新，pull一下；<br>pull一次之后就要注意解决冲突，一般文件会红色显示，有错误则会显示红色波浪线，形式如上所示；</p>
 <p>注意：每天可以多次commit，就像打标签，但是最好一天只push一次。多次提交造成不必要的浪费；</p>
 <p>据老司机门的经验，开发时，应该多构建分支，在一个分支上做一个功能，功能做完之后再合并分支，这样可以减少冲突的概率。</p>
 <h2 id="撤销未提交的修改"><a href="#撤销未提交的修改" class="headerlink" title="撤销未提交的修改"></a>撤销未提交的修改</h2><p>还没有commit，但想撤回修改的情况下：<br><img src="http://7xjqvu.com1.z0.glb.clouddn.com/15-6-19/48267713.jpg" alt=""><br>git diff：<br><img src="http://7xjqvu.com1.z0.glb.clouddn.com/15-6-19/81847901.jpg" alt=""></p>
-<p>保存了，如果是一两句还好，如果几百几千行呢？手动累死你。<br>神器：<br><figure class="highlight awk"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git checkout src<span class="regexp">/com/</span>jay<span class="regexp">/example/</span>testforgit<span class="regexp">/MainActivity.java</span></div></pre></td></tr></table></figure></p>
-<p>duang一下就没了：<br><img src="http://7xjqvu.com1.z0.glb.clouddn.com/15-6-19/10997419.jpg" alt=""></p>
-<p>当然上述<strong>前提是没有add</strong>，才可以checkout。我们要<strong>先取消添加</strong>才可以撤回提交，使用下述指令：<br><figure class="highlight dts"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">git reset HEAD src<span class="meta-keyword">/com/</span>jay<span class="meta-keyword">/example/</span>testforgit/MainActivity.java</div><div class="line">git checkout src<span class="meta-keyword">/com/</span>jay<span class="meta-keyword">/example/</span>testforgit/MainActivity.java</div></pre></td></tr></table></figure></p>
-<p><img src="http://7xjqvu.com1.z0.glb.clouddn.com/15-6-19/97479292.jpg" alt=""></p>
+<p>保存了，如果是一两句还好，如果几百几千行呢？手动累死你。<br>神器：</p>
+<pre><code>git checkout src/com/jay/example/testforgit/MainActivity.java
+</code></pre><p>duang一下就没了：<br><img src="http://7xjqvu.com1.z0.glb.clouddn.com/15-6-19/10997419.jpg" alt=""></p>
+<p>当然上述<strong>前提是没有add</strong>，才可以checkout。我们要<strong>先取消添加</strong>才可以撤回提交，使用下述指令：</p>
+<pre><code>git reset HEAD src/com/jay/example/testforgit/MainActivity.java
+git checkout src/com/jay/example/testforgit/MainActivity.java
+</code></pre><p><img src="http://7xjqvu.com1.z0.glb.clouddn.com/15-6-19/97479292.jpg" alt=""></p>
 <h2 id="版本回退"><a href="#版本回退" class="headerlink" title="版本回退"></a>版本回退</h2><blockquote>
 <p>上面提到的是撤销未提交的修改，但如果提交了，我们想回退到之前的某一个版本怎么办?<br>我们可以通过git log查看我们的提交记录，我们需要从这里获取一个版本号，<br>一般我们只需要<strong>前七位字符</strong>就够了；另外在Git中，用HEAD代表当前版本，上一个版本就是HEAD^，<br>再上一个版本就是HEAD^^依次类推！我们先Git Log看下版本历史先！</p>
 </blockquote>
 <p><img src="http://7xjqvu.com1.z0.glb.clouddn.com/15-6-19/40426312.jpg" alt=""></p>
-<p>我们回到前一个提交的版本吧，依次键入下述指令：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">git <span class="keyword">reset</span> <span class="comment">--hard HEAD</span></div><div class="line">git <span class="keyword">reset</span> <span class="comment">--hard HEAD^</span></div><div class="line">git <span class="keyword">log</span></div></pre></td></tr></table></figure></p>
-<p>控制台：<br><img src="http://7xjqvu.com1.z0.glb.clouddn.com/15-6-19/51915562.jpg" alt=""></p>
-<p>可以看到我们已经回退到了前一个版本了，当然你可以直接这样写：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git <span class="keyword">reset</span> <span class="comment">--hard ad2080c</span></div></pre></td></tr></table></figure></p>
-<p>就是这么简单！回退后，你突然后悔了（第一次回退到前一旧版本了，现在又想回到新版本了，善变啊），想回退回新的那个版本，<br>可是遗憾的是，你键入git log却发现没有了最新的那个版本号，这怎么办呢…<br>没事，Git中给你提供了这颗“后悔药”，Git记录着你输入的每一条指令呢！键入：<br><figure class="highlight ebnf"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">git reflog</span></div></pre></td></tr></table></figure></p>
-<p>你会发现，版本号就在这里：<br><img src="http://7xjqvu.com1.z0.glb.clouddn.com/15-6-19/93429639.jpg" alt=""></p>
-<p>然后键入：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git <span class="keyword">reset</span> <span class="comment">--hard ad2080c</span></div></pre></td></tr></table></figure></p>
-<p>可以看到我们又回到了最新的那个版本了，就是这么溜！<br><img src="http://7xjqvu.com1.z0.glb.clouddn.com/15-6-19/46109301.jpg" alt=""></p>
+<p>我们回到前一个提交的版本吧，依次键入下述指令：</p>
+<pre><code>git reset --hard HEAD
+git reset --hard HEAD^
+git log
+</code></pre><p>控制台：<br><img src="http://7xjqvu.com1.z0.glb.clouddn.com/15-6-19/51915562.jpg" alt=""></p>
+<p>可以看到我们已经回退到了前一个版本了，当然你可以直接这样写：</p>
+<pre><code>git reset --hard ad2080c
+</code></pre><p>就是这么简单！回退后，你突然后悔了（第一次回退到前一旧版本了，现在又想回到新版本了，善变啊），想回退回新的那个版本，<br>可是遗憾的是，你键入git log却发现没有了最新的那个版本号，这怎么办呢…<br>没事，Git中给你提供了这颗“后悔药”，Git记录着你输入的每一条指令呢！键入：</p>
+<pre><code>git reflog
+</code></pre><p>你会发现，版本号就在这里：<br><img src="http://7xjqvu.com1.z0.glb.clouddn.com/15-6-19/93429639.jpg" alt=""></p>
+<p>然后键入：</p>
+<pre><code>git reset --hard ad2080c
+</code></pre><p>可以看到我们又回到了最新的那个版本了，就是这么溜！<br><img src="http://7xjqvu.com1.z0.glb.clouddn.com/15-6-19/46109301.jpg" alt=""></p>
 
       
 
@@ -677,18 +1280,52 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>取得项目git仓库<br>在现存的目录下，通过导入所有文件来创建新的 Git 仓库。<br>初始化<br><figure class="highlight crmsh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ git init</div><div class="line"><span class="comment">#末尾自定义项目目录名称mygrit</span></div><div class="line">$ git <span class="keyword">clone</span> <span class="title">git</span>://github.com/schacon/grit.git mygrit</div></pre></td></tr></table></figure></p>
-<p>文件状态变化周期：<br><img src="http://static.open-open.com/lib/uploadImg/20120201/20120201121432_845.png" alt="文件状态变化周期"></p>
-<p>检查当前文件状态:<br><figure class="highlight elixir"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$ </span>git status</div></pre></td></tr></table></figure></p>
-<p>跟踪新文件<br><figure class="highlight vala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">$ git add filename</div><div class="line">$ git status</div><div class="line"><span class="meta"># On branch master</span></div><div class="line"><span class="meta"># Changes to be committed:</span></div><div class="line"><span class="meta">#   (use "git reset ..." to unstage)</span></div><div class="line"><span class="meta">#   new file:   README</span></div></pre></td></tr></table></figure></p>
-<p>忽略某些文件：<br><figure class="highlight crystal"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#养成一开始就设置好.gitignore文件的习惯，免得将无用文件或者机密文件上传。</span></div><div class="line">**.gitignore文件**</div><div class="line"><span class="comment"># 此为注释 – 将被 Git 忽略</span></div><div class="line">*.a       <span class="comment"># 忽略所有 .a 结尾的文件</span></div><div class="line">!<span class="class"><span class="keyword">lib</span>.<span class="title">a</span>    <span class="comment"># 但 lib.a 除外</span></span></div><div class="line">/TODO     <span class="comment"># 仅仅忽略项目根目录下的 TODO 文件，不包括 subdir/TODO</span></div><div class="line">build/    <span class="comment"># 忽略 build/ 目录下的所有文件</span></div><div class="line">doc/*.txt <span class="comment"># 会忽略 doc/notes.txt 但不包括 doc/server/arch.txt</span></div></pre></td></tr></table></figure></p>
-<p>提交更新：<br><figure class="highlight clean"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">##打开文本编辑器输入提交说明</div><div class="line">$ git commit </div><div class="line">##配置编辑器</div><div class="line">$ git config --global core.editor</div></pre></td></tr></table></figure></p>
-<p>跳过使用暂存区域：<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">#加上 -<span class="selector-tag">a</span> 则自动将所有已跟踪过的文件暂存起来一并提交</div><div class="line">$ git commit -<span class="selector-tag">a</span> -m <span class="string">'added new file'</span></div></pre></td></tr></table></figure></p>
-<p>移除文件：<br><figure class="highlight gams"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="symbol">$</span> rm <span class="keyword">file</span></div><div class="line"><span class="symbol">$</span> git rm <span class="keyword">file</span></div></pre></td></tr></table></figure></p>
-<p>移动文件：<br><figure class="highlight elixir"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 相当于改名操作</span></div><div class="line"><span class="variable">$ </span>git mv file_from file_to</div><div class="line"><span class="comment">#上面一条命令相当于下面三条命令</span></div><div class="line"><span class="variable">$ </span>mv file_from file_to</div><div class="line"><span class="variable">$ </span>git rm file_from</div><div class="line"><span class="variable">$ </span>git add file_to</div></pre></td></tr></table></figure></p>
-<p>查看提交历史：<br><figure class="highlight gams"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="symbol">$</span> git <span class="built-in">log</span></div></pre></td></tr></table></figure></p>
-<p>从已有的 Git 仓库克隆出一个新的镜像仓库来。<br><figure class="highlight crmsh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$　git <span class="keyword">clone</span> <span class="title">xxx</span>.git</div></pre></td></tr></table></figure></p>
-
+        <p>取得项目git仓库<br>在现存的目录下，通过导入所有文件来创建新的 Git 仓库。<br>初始化</p>
+<pre><code>$ git init
+#末尾自定义项目目录名称mygrit
+$ git clone git://github.com/schacon/grit.git mygrit
+</code></pre><p>文件状态变化周期：<br><img src="http://static.open-open.com/lib/uploadImg/20120201/20120201121432_845.png" alt="文件状态变化周期"></p>
+<p>检查当前文件状态:</p>
+<pre><code>$ git status
+</code></pre><p>跟踪新文件</p>
+<pre><code>$ git add filename
+$ git status
+# On branch master
+# Changes to be committed:
+#   (use &quot;git reset ...&quot; to unstage)
+#   new file:   README
+</code></pre><p>忽略某些文件：</p>
+<pre><code>#养成一开始就设置好.gitignore文件的习惯，免得将无用文件或者机密文件上传。
+**.gitignore文件**
+# 此为注释 – 将被 Git 忽略
+*.a       # 忽略所有 .a 结尾的文件
+!lib.a    # 但 lib.a 除外
+/TODO     # 仅仅忽略项目根目录下的 TODO 文件，不包括 subdir/TODO
+build/    # 忽略 build/ 目录下的所有文件
+doc/*.txt # 会忽略 doc/notes.txt 但不包括 doc/server/arch.txt
+</code></pre><p>提交更新：</p>
+<pre><code>##打开文本编辑器输入提交说明
+$ git commit 
+##配置编辑器
+$ git config --global core.editor
+</code></pre><p>跳过使用暂存区域：</p>
+<pre><code>#加上 -a 则自动将所有已跟踪过的文件暂存起来一并提交
+$ git commit -a -m &#39;added new file&#39;
+</code></pre><p>移除文件：</p>
+<pre><code>$ rm file
+$ git rm file
+</code></pre><p>移动文件：</p>
+<pre><code># 相当于改名操作
+$ git mv file_from file_to
+#上面一条命令相当于下面三条命令
+$ mv file_from file_to
+$ git rm file_from
+$ git add file_to
+</code></pre><p>查看提交历史：</p>
+<pre><code>$ git log 
+</code></pre><p>从已有的 Git 仓库克隆出一个新的镜像仓库来。</p>
+<pre><code>$　git clone xxx.git
+</code></pre>
       
 
       
@@ -767,19 +1404,19 @@
 <p>操作步骤：</p>
 <blockquote>
 <ol>
-<li><a href="http://tomcat.apache.org/download-70.cgi" target="_blank" rel="external">下载</a>-解压apache-tomcat-x.x.xx.zip-改名tomcatx-8080</li>
+<li><a href="http://tomcat.apache.org/download-70.cgi" target="_blank" rel="noopener">下载</a>-解压apache-tomcat-x.x.xx.zip-改名tomcatx-8080</li>
 <li>复制，改名tomcatx-8090</li>
 <li>添加环境变量：CATALINA_HOME:d:\tocatx-8080;CATALINA_HOME2:d:\tomcatx-8090</li>
 <li>修改启动端口和关闭端口<br>进入d:\tomcat5-8090\conf\目录，打开server.xml文件，修改下面两个地方：<br>（1）<code>&lt;Server port=&quot;8006&quot; shutdown=&quot;SHUTDOWN&quot;&gt;</code><br>修改这个port=”8006”，原来默认的为：8005，使得它的关闭端口和另一个关闭端口不发生冲突。<br>（2）<code>&lt;Connector port=&quot;8090&quot; maxHttpHeaderSize=&quot;8192&quot;   maxThreads=&quot;150&quot; minSpareThreads=&quot;25&quot; maxSpareThreads=&quot;75&quot; enableLookups=&quot;false&quot; redirectPort=&quot;8443&quot; acceptCount=&quot;100&quot; connectionTimeout=&quot;20000&quot; disableUploadTimeout=&quot;true&quot; /&gt;</code><br>修改port=”8090”，原来默认的为“8080”，使得它的连接端口和另一个不冲突。</li>
 <li>修改startup.bat和catalina.bat文件内容：<br>(1) 打开d:\tomcat5-8090\bin\startup.bat文件，把其中所有CATALINA_HOME替换为CATALINA_HOME2。<br>（2）打开d:\tomcat5-8090\bin\catalina.bat文件，把其中所有CATALINA_HOME替换为CATALINA_HOME2。</li>
-<li>启动Tomcat，在命令行下分别进入两个不同的Tomcat安装目录下，执行startup.bat，分别启动两个Tomcat。然后在浏览器中输入：<a href="http://localhost:8080" target="_blank" rel="external">http://localhost:8080</a>  和<a href="http://localhost:8090" target="_blank" rel="external">http://localhost:8090</a></li>
+<li>启动Tomcat，在命令行下分别进入两个不同的Tomcat安装目录下，执行startup.bat，分别启动两个Tomcat。然后在浏览器中输入：<a href="http://localhost:8080" target="_blank" rel="noopener">http://localhost:8080</a>  和<a href="http://localhost:8090" target="_blank" rel="noopener">http://localhost:8090</a></li>
 <li>至此，我们已经在一台服务器上配置了两个Tomcat。</li>
 </ol>
 </blockquote>
 <p>考虑到在本地运行，不需要那么复杂。只需要用Disable-WEB-INF。</p>
 <h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a><strong>参考</strong></h2><blockquote>
 <ol>
-<li><a href="http://blog.163.com/hegonghe@126/blog/static/50004810200871483335100/" target="_blank" rel="external">在同一台服务器上配置多个Tomcat（原创）</a></li>
+<li><a href="http://blog.163.com/hegonghe@126/blog/static/50004810200871483335100/" target="_blank" rel="noopener">在同一台服务器上配置多个Tomcat（原创）</a></li>
 </ol>
 </blockquote>
 <h1 id="忽略webapps里的项目"><a href="#忽略webapps里的项目" class="headerlink" title="忽略webapps里的项目"></a>忽略webapps里的项目</h1><blockquote>
@@ -792,12 +1429,15 @@
 <li>添加<code>deployIgnore=&quot;projectName&quot;</code>.不部署，</li>
 </ol>
 </blockquote>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">Host</span> <span class="attr">name</span>=<span class="string">"localhost"</span> <span class="attr">appBase</span>=<span class="string">"webapps"</span> <span class="attr">unpackWARs</span>=<span class="string">"true"</span> <span class="attr">autoDeploy</span>=<span class="string">"false"</span> <span class="attr">xmlValidation</span>=<span class="string">"false"</span> <span class="attr">xmlNamespaceAware</span>=<span class="string">"false"</span>&gt;</span> </div><div class="line"><span class="tag">&lt;<span class="name">Context</span> <span class="attr">path</span>=<span class="string">"/acbd"</span> <span class="attr">docBase</span>=<span class="string">"abcd"</span> <span class="attr">debug</span>=<span class="string">"0"</span> <span class="attr">reloadable</span>=<span class="string">"true"</span>/&gt;</span> </div><div class="line"><span class="tag">&lt;<span class="name">Valve</span> <span class="attr">className</span>=<span class="string">"org.apache.catalina.valves.AccessLogValve"</span> <span class="attr">directory</span>=<span class="string">"logs"</span> <span class="attr">prefix</span>=<span class="string">"localhost_access_log."</span> <span class="attr">suffix</span>=<span class="string">".txt"</span> <span class="attr">pattern</span>=<span class="string">"common"</span> <span class="attr">resolveHosts</span>=<span class="string">"false"</span>/&gt;</span> </div><div class="line"><span class="tag">&lt;/<span class="name">Host</span>&gt;</span></div></pre></td></tr></table></figure>
-<h2 id="参考-1"><a href="#参考-1" class="headerlink" title="参考"></a><strong>参考</strong></h2><blockquote>
+<pre><code>&lt;Host name=&quot;localhost&quot; appBase=&quot;webapps&quot; unpackWARs=&quot;true&quot; autoDeploy=&quot;false&quot; xmlValidation=&quot;false&quot; xmlNamespaceAware=&quot;false&quot;&gt; 
+&lt;Context path=&quot;/acbd&quot; docBase=&quot;abcd&quot; debug=&quot;0&quot; reloadable=&quot;true&quot;/&gt; 
+&lt;Valve className=&quot;org.apache.catalina.valves.AccessLogValve&quot; directory=&quot;logs&quot; prefix=&quot;localhost_access_log.&quot; suffix=&quot;.txt&quot; pattern=&quot;common&quot; resolveHosts=&quot;false&quot;/&gt; 
+&lt;/Host&gt; 
+</code></pre><h2 id="参考-1"><a href="#参考-1" class="headerlink" title="参考"></a><strong>参考</strong></h2><blockquote>
 <ol>
-<li><a href="http://stackoverflow.com/questions/5067062/how-to-disable-specific-apps-from-starting-during-tomcat-startup" target="_blank" rel="external">How to disable specific apps from starting during Tomcat startup?</a></li>
-<li><a href="https://coderanch.com/t/85667/Tomcat/avoid-loading-applications-webapps" target="_blank" rel="external">avoid loading all applications under webapps</a></li>
-<li><a href="http://tomcat.apache.org/tomcat-5.5-doc/config/host.html#Automatic_Application_Deployment" target="_blank" rel="external">Apache.org</a></li>
+<li><a href="http://stackoverflow.com/questions/5067062/how-to-disable-specific-apps-from-starting-during-tomcat-startup" target="_blank" rel="noopener">How to disable specific apps from starting during Tomcat startup?</a></li>
+<li><a href="https://coderanch.com/t/85667/Tomcat/avoid-loading-applications-webapps" target="_blank" rel="noopener">avoid loading all applications under webapps</a></li>
+<li><a href="http://tomcat.apache.org/tomcat-5.5-doc/config/host.html#Automatic_Application_Deployment" target="_blank" rel="noopener">Apache.org</a></li>
 </ol>
 </blockquote>
 
@@ -870,9 +1510,11 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>git 在克隆repository时选择分支为develop:<br><figure class="highlight crmsh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git <span class="keyword">clone</span> <span class="title">http</span>://xxxx.git --branch develop</div></pre></td></tr></table></figure></p>
-<p>查看所有分支:<br><figure class="highlight armasm"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="symbol">git</span> <span class="keyword">branch </span>-a</div></pre></td></tr></table></figure></p>
-<p>分布式版本控制系统：</p>
+        <p>git 在克隆repository时选择分支为develop:</p>
+<pre><code>git clone http://xxxx.git --branch develop
+</code></pre><p>查看所有分支:</p>
+<pre><code>git branch -a
+</code></pre><p>分布式版本控制系统：</p>
 <blockquote>
 <ol>
 <li>多地备份，代码更安全</li>
@@ -900,8 +1542,19 @@
 <li>预编译安装包</li>
 </ol>
 </blockquote>
-<p>初次配置：<br><figure class="highlight elixir"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">git-config</div><div class="line"></div><div class="line"><span class="comment">#特定项目配置不加--global即可</span></div><div class="line"><span class="variable">$ </span>git config --global user.name <span class="string">"Linking"</span></div><div class="line"><span class="variable">$ </span>git config --global user.email linking<span class="variable">@example</span>.com</div><div class="line"></div><div class="line"><span class="comment">#查看配置信息</span></div><div class="line"><span class="variable">$ </span>git config --list</div><div class="line"></div><div class="line"><span class="comment">#帮助文档</span></div><div class="line"><span class="variable">$ </span>git help config</div></pre></td></tr></table></figure></p>
+<p>初次配置：</p>
+<pre><code>git-config
 
+#特定项目配置不加--global即可
+$ git config --global user.name &quot;Linking&quot;
+$ git config --global user.email linking@example.com
+
+#查看配置信息
+$ git config --list
+
+#帮助文档
+$ git help config
+</code></pre>
       
 
       
@@ -1062,11 +1715,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">ajax</a>
+                <a href="javascript:void(0)" class="js-tag color5">Ajax</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Ajax</a>
+                <a href="javascript:void(0)" class="js-tag color5">ajax</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1086,6 +1739,10 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">JavaScriptCore</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">operation</a>
               </li>
              
@@ -1095,10 +1752,6 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">deploy</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">JavaScriptCore</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1126,15 +1779,15 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">cocoa</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">blog</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Gitalk</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">cocoa</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1158,19 +1811,19 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">兼容性</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">多线程</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">HTTP</a>
+                <a href="javascript:void(0)" class="js-tag color4">兼容性</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">绘图</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">HTTP</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1190,6 +1843,10 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">标识</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">arcgis</a>
               </li>
              
@@ -1199,10 +1856,6 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">D.Wade</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">标识</a>
               </li>
              
               <li class="article-tag-list-item">

@@ -9,24 +9,20 @@
   <link rel="dns-prefetch" href="http://linking123.github.io">
   <title>Adapter初识 | Linking&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Adapter 类控件Adapter基础讲解概念：帮助填充数据的中间桥梁，将数据以合适的形式显示到view上，供用户查看。
-
-1.ArrayAdapter:123456789101112//data to show//String[] datas = &amp;#123;&quot;神奇&quot;, &quot;没事吗&quot;, &quot;不会吧&quot;&amp;#125;;//also can setdata like thisList&amp;lt;String&amp;">
+  <meta name="description" content="Adapter 类控件Adapter基础讲解概念：帮助填充数据的中间桥梁，将数据以合适的形式显示到view上，供用户查看。  1.ArrayAdapter: //data to show //String[] datas = {&amp;quot;神奇&amp;quot;, &amp;quot;没事吗&amp;quot;, &amp;quot;不会吧&amp;quot;}; //also can setdata like this List&amp;l">
+<meta name="keywords" content="Java, Android, iOS, HTML&#x2F;CSS&#x2F;JavaScript, Python">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Adapter初识">
 <meta property="og:url" content="http://linking123.github.io/2016/12/04/Adapter初识/index.html">
-<meta property="og:site_name" content="Linking's blog">
-<meta property="og:description" content="Adapter 类控件Adapter基础讲解概念：帮助填充数据的中间桥梁，将数据以合适的形式显示到view上，供用户查看。
-
-1.ArrayAdapter:123456789101112//data to show//String[] datas = &amp;#123;&quot;神奇&quot;, &quot;没事吗&quot;, &quot;不会吧&quot;&amp;#125;;//also can setdata like thisList&amp;lt;String&amp;">
+<meta property="og:site_name" content="Linking&#39;s blog">
+<meta property="og:description" content="Adapter 类控件Adapter基础讲解概念：帮助填充数据的中间桥梁，将数据以合适的形式显示到view上，供用户查看。  1.ArrayAdapter: //data to show //String[] datas = {&amp;quot;神奇&amp;quot;, &amp;quot;没事吗&amp;quot;, &amp;quot;不会吧&amp;quot;}; //also can setdata like this List&amp;l">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://7xjqvu.com1.z0.glb.clouddn.com/15-9-1/77919389.jpg">
 <meta property="og:image" content="http://ohigs9xaw.bkt.clouddn.com/ArrayAdapterSecondParam.png">
 <meta property="og:updated_time" content="2016-12-04T14:57:48.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Adapter初识">
-<meta name="twitter:description" content="Adapter 类控件Adapter基础讲解概念：帮助填充数据的中间桥梁，将数据以合适的形式显示到view上，供用户查看。
-
-1.ArrayAdapter:123456789101112//data to show//String[] datas = &amp;#123;&quot;神奇&quot;, &quot;没事吗&quot;, &quot;不会吧&quot;&amp;#125;;//also can setdata like thisList&amp;lt;String&amp;">
+<meta name="twitter:description" content="Adapter 类控件Adapter基础讲解概念：帮助填充数据的中间桥梁，将数据以合适的形式显示到view上，供用户查看。  1.ArrayAdapter: //data to show //String[] datas = {&amp;quot;神奇&amp;quot;, &amp;quot;没事吗&amp;quot;, &amp;quot;不会吧&amp;quot;}; //also can setdata like this List&amp;l">
 <meta name="twitter:image" content="http://7xjqvu.com1.z0.glb.clouddn.com/15-9-1/77919389.jpg">
   
     <link rel="alternative" href="/atom.xml" title="Linking&#39;s blog" type="application/atom+xml">
@@ -62,7 +58,7 @@
 		  <h1 class="header-author"><a href="/">Linking</a></h1>
 		</hgroup>
 		
-		<p class="header-subtitle">时间是个神，见证你的进步</p>
+		<p class="header-subtitle">记住生活的美好</p>
 		
 
 		<nav class="header-menu">
@@ -126,7 +122,7 @@
 			  <h1 class="header-author js-header-author">Linking</h1>
 			</hgroup>
 			
-			<p class="header-subtitle"><i class="icon icon-quo-left"></i>时间是个神，见证你的进步<i class="icon icon-quo-right"></i></p>
+			<p class="header-subtitle"><i class="icon icon-quo-left"></i>记住生活的美好<i class="icon icon-quo-right"></i></p>
 			
 			
 			
@@ -203,15 +199,187 @@
       
         <h2 id="Adapter-类控件"><a href="#Adapter-类控件" class="headerlink" title="Adapter 类控件"></a>Adapter 类控件</h2><h3 id="Adapter基础讲解"><a href="#Adapter基础讲解" class="headerlink" title="Adapter基础讲解"></a>Adapter基础讲解</h3><p>概念：帮助填充数据的中间桥梁，将数据以合适的形式显示到view上，供用户查看。</p>
 <p><img src="http://7xjqvu.com1.z0.glb.clouddn.com/15-9-1/77919389.jpg" alt=""></p>
-<p>1.ArrayAdapter:<br><figure class="highlight processing"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//data to show</span></div><div class="line"><span class="comment">//String[] datas = &#123;"神奇", "没事吗", "不会吧"&#125;;</span></div><div class="line"><span class="comment">//also can setdata like this</span></div><div class="line">List&lt;<span class="keyword">String</span>&gt; datas = <span class="keyword">new</span> ArrayList&lt;<span class="keyword">String</span>&gt;();</div><div class="line">datas.<span class="built_in">add</span>(<span class="string">"hehe1"</span>);</div><div class="line">datas.<span class="built_in">add</span>(<span class="string">"hehe2"</span>);</div><div class="line">datas.<span class="built_in">add</span>(<span class="string">"hehe3"</span>);</div><div class="line"><span class="comment">//create ArrayAdapter</span></div><div class="line">ArrayAdapter&lt;<span class="keyword">String</span>&gt; adapter = <span class="keyword">new</span> ArrayAdapter&lt;<span class="keyword">String</span>&gt;(<span class="keyword">this</span>, android.R.layout.simple_expandable_list_item_1, datas);</div><div class="line"><span class="comment">//listview set adapter</span></div><div class="line">ListView lv = (ListView)findViewById(R.id.listview_adapter1);</div><div class="line">lv.setAdapter(adapter);</div></pre></td></tr></table></figure></p>
-<p>ArrayAdapter第二参数：<br><img src="http://ohigs9xaw.bkt.clouddn.com/ArrayAdapterSecondParam.png" alt="qiniu截借的别人的blog"></p>
+<p>1.ArrayAdapter:</p>
+<pre><code>//data to show
+//String[] datas = {&quot;神奇&quot;, &quot;没事吗&quot;, &quot;不会吧&quot;};
+//also can setdata like this
+List&lt;String&gt; datas = new ArrayList&lt;String&gt;();
+datas.add(&quot;hehe1&quot;);
+datas.add(&quot;hehe2&quot;);
+datas.add(&quot;hehe3&quot;);
+//create ArrayAdapter
+ArrayAdapter&lt;String&gt; adapter = new ArrayAdapter&lt;String&gt;(this, android.R.layout.simple_expandable_list_item_1, datas);
+//listview set adapter
+ListView lv = (ListView)findViewById(R.id.listview_adapter1);
+lv.setAdapter(adapter);
+</code></pre><p>ArrayAdapter第二参数：<br><img src="http://ohigs9xaw.bkt.clouddn.com/ArrayAdapterSecondParam.png" alt="qiniu截借的别人的blog"></p>
 <p>2.SimpleAdapter<br>常用，listview，item，<code>List&lt;Map&lt;String,Object&gt;&gt; list = new ArrayList&lt;Map&lt;String,Object&gt;&gt;()</code>;<br>from是塞的数据list中的标识string[]{},to是item中的id的int[]{R.id.xx}数组,resource是item布局,context几个adapter参数；<br>add at 20161201</p>
 <h3 id="ListView简单使用"><a href="#ListView简单使用" class="headerlink" title="ListView简单使用"></a>ListView简单使用</h3><p>1.自定义BaseAdapter,绑定数据<br>展示样式在item中设计，适应adapter中做数据的set工作，只做一个适配器，而具体的数据在mainactivity中插入，一般会用到list，以及范型，<code>list&lt;entrity&gt;</code>,实体类中写属性的存取方法，最后给listview设置适配器，listview.setAdapter(mAdapter)。下面是代码：</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line">//itme_layout</div><div class="line"><span class="php"><span class="meta">&lt;?</span>xml version=<span class="string">"1.0"</span> encoding=<span class="string">"utf-8"</span><span class="meta">?&gt;</span></span></div><div class="line"><span class="tag">&lt;<span class="name">LinearLayout</span> <span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span></span></div><div class="line">    <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></div><div class="line">    <span class="attr">android:layout_height</span>=<span class="string">"match_parent"</span></div><div class="line">    <span class="attr">android:orientation</span>=<span class="string">"horizontal"</span></div><div class="line">    <span class="attr">android:padding</span>=<span class="string">"10dp"</span>&gt;</div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">ImageView</span></span></div><div class="line">        <span class="attr">android:id</span>=<span class="string">"@+id/img"</span></div><div class="line">        <span class="attr">android:layout_width</span>=<span class="string">"wrap_content"</span></div><div class="line">        <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span></div><div class="line">        <span class="attr">android:src</span>=<span class="string">"@mipmap/ic_launcher"</span> /&gt;</div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">LinearLayout</span></span></div><div class="line">        <span class="attr">android:layout_width</span>=<span class="string">"wrap_content"</span></div><div class="line">        <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span></div><div class="line">        <span class="attr">android:layout_marginLeft</span>=<span class="string">"10dp"</span></div><div class="line">        <span class="attr">android:orientation</span>=<span class="string">"vertical"</span></div><div class="line">        <span class="attr">android:padding</span>=<span class="string">"5dp"</span>&gt;</div><div class="line"></div><div class="line">        <span class="tag">&lt;<span class="name">TextView</span></span></div><div class="line">            <span class="attr">android:id</span>=<span class="string">"@+id/tv1"</span></div><div class="line">            <span class="attr">android:layout_width</span>=<span class="string">"wrap_content"</span></div><div class="line">            <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span></div><div class="line">            <span class="attr">android:text</span>=<span class="string">"wenzi1"</span> /&gt;</div><div class="line"></div><div class="line">        <span class="tag">&lt;<span class="name">TextView</span></span></div><div class="line">            <span class="attr">android:id</span>=<span class="string">"@+id/tv2"</span></div><div class="line">            <span class="attr">android:layout_width</span>=<span class="string">"wrap_content"</span></div><div class="line">            <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span></div><div class="line">            <span class="attr">android:layout_marginTop</span>=<span class="string">"3dp"</span></div><div class="line">            <span class="attr">android:text</span>=<span class="string">"wenzi1"</span> /&gt;</div><div class="line">    <span class="tag">&lt;/<span class="name">LinearLayout</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">LinearLayout</span>&gt;</span></div></pre></td></tr></table></figure>
-<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#entity</span></div><div class="line">package com.example.linking.adapters.Model;</div><div class="line"><span class="comment">/**</span></div><div class="line"> * Created by linking on 16/12/4.</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Animals</span> &#123;</div><div class="line">    <span class="keyword">private</span> String aName;</div><div class="line">    <span class="keyword">private</span> String aSpeak;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> aIcon;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Animals</span>(<span class="params">String aName, String aSpeak, <span class="keyword">int</span> aIcon</span>) </span>&#123;</div><div class="line">        <span class="keyword">this</span>.aName = aName;</div><div class="line">        <span class="keyword">this</span>.aSpeak = aSpeak;</div><div class="line">        <span class="keyword">this</span>.aIcon = aIcon;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Animals</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getaName</span>(<span class="params"></span>) </span>&#123;</div><div class="line">        <span class="keyword">return</span> aName;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setaName</span>(<span class="params">String aName</span>) </span>&#123;</div><div class="line">        <span class="keyword">this</span>.aName = aName;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getaSpeak</span>(<span class="params"></span>) </span>&#123;</div><div class="line">        <span class="keyword">return</span> aSpeak;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setaSpeak</span>(<span class="params">String aSpeak</span>) </span>&#123;</div><div class="line">        <span class="keyword">this</span>.aSpeak = aSpeak;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getaIcon</span>(<span class="params"></span>) </span>&#123;</div><div class="line">        <span class="keyword">return</span> aIcon;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setaIcon</span>(<span class="params"><span class="keyword">int</span> aIcon</span>) </span>&#123;</div><div class="line">        <span class="keyword">this</span>.aIcon = aIcon;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<figure class="highlight arduino"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div></pre></td><td class="code"><pre><div class="line">##AnimalAdapter</div><div class="line">package com.example.linking.adapters.Adapter;</div><div class="line"></div><div class="line"><span class="keyword">import</span> android.content.Context;</div><div class="line"><span class="keyword">import</span> android.view.LayoutInflater;</div><div class="line"><span class="keyword">import</span> android.view.View;</div><div class="line"><span class="keyword">import</span> android.view.ViewGroup;</div><div class="line"><span class="keyword">import</span> android.widget.BaseAdapter;</div><div class="line"><span class="keyword">import</span> android.widget.ImageView;</div><div class="line"><span class="keyword">import</span> android.widget.TextView;</div><div class="line"></div><div class="line"><span class="keyword">import</span> com.example.linking.adapters.Model.Animals;</div><div class="line"><span class="keyword">import</span> com.example.linking.adapters.R;</div><div class="line"></div><div class="line"><span class="keyword">import</span> java.util.LinkedList;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * Created by linking on 16/12/4.</div><div class="line"> */</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> AnimalAdapter extends BaseAdapter &#123;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> LinkedList&lt;Animals&gt; mData;</div><div class="line">    <span class="keyword">private</span> Context mContext;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> AnimalAdapter(LinkedList&lt;Animals&gt; mData, Context mContext) &#123;</div><div class="line">        <span class="keyword">this</span>.mData = mData;</div><div class="line">        <span class="keyword">this</span>.mContext = mContext;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    <span class="keyword">public</span> <span class="keyword">int</span> getCount() &#123;</div><div class="line">        <span class="built_in">return</span> mData.<span class="built_in">size</span>();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    <span class="keyword">public</span> Object getItem(<span class="keyword">int</span> <span class="built_in">position</span>) &#123;</div><div class="line">        <span class="built_in">return</span> null;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    <span class="keyword">public</span> <span class="keyword">long</span> getItemId(<span class="keyword">int</span> <span class="built_in">position</span>) &#123;</div><div class="line">        <span class="built_in">return</span> <span class="built_in">position</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    <span class="keyword">public</span> View getView(<span class="keyword">int</span> <span class="built_in">position</span>, View view, ViewGroup viewGroup) &#123;</div><div class="line">        view = LayoutInflater.from(mContext).inflate(R.layout.item_listview_baseadapter,viewGroup,false);</div><div class="line">        ImageView img_icon = (ImageView) view.findViewById(R.id.img);</div><div class="line">        TextView tv1 = (TextView) view.findViewById(R.id.tv1);</div><div class="line">        TextView tv2 = (TextView) view.findViewById(R.id.tv2);</div><div class="line">        img_icon.setBackgroundResource(mData.<span class="built_in">get</span>(<span class="built_in">position</span>).getaIcon());</div><div class="line">        tv1.setText(mData.<span class="built_in">get</span>(<span class="built_in">position</span>).getaName());</div><div class="line">        tv2.setText(mData.<span class="built_in">get</span>(<span class="built_in">position</span>).getaSpeak());</div><div class="line">        <span class="built_in">return</span> view;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line">#<span class="type">Activity</span></div><div class="line"><span class="keyword">package</span> com.example.linking.adapters.<span class="type">Activity</span>;</div><div class="line"></div><div class="line"><span class="keyword">import</span> android.content.<span class="type">Context</span>;</div><div class="line"><span class="keyword">import</span> android.support.v7.app.<span class="type">AppCompatActivity</span>;</div><div class="line"><span class="keyword">import</span> android.os.<span class="type">Bundle</span>;</div><div class="line"><span class="keyword">import</span> android.widget.<span class="type">ListView</span>;</div><div class="line"></div><div class="line"><span class="keyword">import</span> com.example.linking.adapters.<span class="type">Adapter</span>.<span class="type">AnimalAdapter</span>;</div><div class="line"><span class="keyword">import</span> com.example.linking.adapters.<span class="type">Model</span>.<span class="type">Animals</span>;</div><div class="line"><span class="keyword">import</span> com.example.linking.adapters.<span class="type">R</span>;</div><div class="line"></div><div class="line"><span class="keyword">import</span> java.util.<span class="type">LinkedList</span>;</div><div class="line"><span class="keyword">import</span> java.util.<span class="type">List</span>;</div><div class="line"></div><div class="line">public <span class="class"><span class="keyword">class</span> <span class="title">ListViewBaseAdapterActivity</span> <span class="keyword">extends</span> <span class="title">AppCompatActivity</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> <span class="type">List</span>&lt;<span class="type">Animals</span>&gt; mData = <span class="literal">null</span>;</div><div class="line">    <span class="keyword">private</span> <span class="type">Context</span> mContext;</div><div class="line">    <span class="keyword">private</span> <span class="type">AnimalAdapter</span> mAdapter = <span class="literal">null</span>;</div><div class="line">    <span class="keyword">private</span> <span class="type">ListView</span> list_animal;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="keyword">protected</span> void onCreate(<span class="type">Bundle</span> savedInstanceState) &#123;</div><div class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState);</div><div class="line">        setContentView(<span class="type">R</span>.layout.activity_list_view_base_adapter);</div><div class="line"></div><div class="line">        mContext = <span class="type">ListViewBaseAdapterActivity</span>.<span class="keyword">this</span>;</div><div class="line">        list_animal = (<span class="type">ListView</span>) findViewById(<span class="type">R</span>.id.listview1);</div><div class="line">        mData = <span class="keyword">new</span> <span class="type">LinkedList</span>&lt;<span class="type">Animals</span>&gt;();</div><div class="line">        mData.add(<span class="keyword">new</span> <span class="type">Animals</span>(<span class="string">"狗说"</span>,<span class="string">"你是够吗"</span>,<span class="type">R</span>.mipmap.ic_launcher));</div><div class="line">        mData.add(<span class="keyword">new</span> <span class="type">Animals</span>(<span class="string">"mao说"</span>,<span class="string">"你是mao吗"</span>,<span class="type">R</span>.mipmap.ic_launcher));</div><div class="line">        mData.add(<span class="keyword">new</span> <span class="type">Animals</span>(<span class="string">"hooo说"</span>,<span class="string">"你是hooo吗"</span>,<span class="type">R</span>.mipmap.ic_launcher));</div><div class="line">        mAdapter = <span class="keyword">new</span> <span class="type">AnimalAdapter</span>((<span class="type">LinkedList</span> &lt; <span class="type">Animals</span> &gt; )mData,mContext);</div><div class="line">        list_animal.setAdapter(mAdapter);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>2.其他设置<br>2.1表头表尾设置分割线<br>只能在Java中写代码进行设置了，可供我们调用的方法如下：</p>
+<pre><code>//itme_layout
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+    android:layout_width=&quot;match_parent&quot;
+    android:layout_height=&quot;match_parent&quot;
+    android:orientation=&quot;horizontal&quot;
+    android:padding=&quot;10dp&quot;&gt;
+
+    &lt;ImageView
+        android:id=&quot;@+id/img&quot;
+        android:layout_width=&quot;wrap_content&quot;
+        android:layout_height=&quot;wrap_content&quot;
+        android:src=&quot;@mipmap/ic_launcher&quot; /&gt;
+
+    &lt;LinearLayout
+        android:layout_width=&quot;wrap_content&quot;
+        android:layout_height=&quot;wrap_content&quot;
+        android:layout_marginLeft=&quot;10dp&quot;
+        android:orientation=&quot;vertical&quot;
+        android:padding=&quot;5dp&quot;&gt;
+
+        &lt;TextView
+            android:id=&quot;@+id/tv1&quot;
+            android:layout_width=&quot;wrap_content&quot;
+            android:layout_height=&quot;wrap_content&quot;
+            android:text=&quot;wenzi1&quot; /&gt;
+
+        &lt;TextView
+            android:id=&quot;@+id/tv2&quot;
+            android:layout_width=&quot;wrap_content&quot;
+            android:layout_height=&quot;wrap_content&quot;
+            android:layout_marginTop=&quot;3dp&quot;
+            android:text=&quot;wenzi1&quot; /&gt;
+    &lt;/LinearLayout&gt;
+&lt;/LinearLayout&gt;
+</code></pre><pre><code>#entity
+package com.example.linking.adapters.Model;
+/**
+ * Created by linking on 16/12/4.
+ */
+public class Animals {
+    private String aName;
+    private String aSpeak;
+    private int aIcon;
+    public Animals(String aName, String aSpeak, int aIcon) {
+        this.aName = aName;
+        this.aSpeak = aSpeak;
+        this.aIcon = aIcon;
+    }
+    public Animals() {
+    }
+    public String getaName() {
+        return aName;
+    }
+    public void setaName(String aName) {
+        this.aName = aName;
+    }
+    public String getaSpeak() {
+        return aSpeak;
+    }
+    public void setaSpeak(String aSpeak) {
+        this.aSpeak = aSpeak;
+    }
+    public int getaIcon() {
+        return aIcon;
+    }
+    public void setaIcon(int aIcon) {
+        this.aIcon = aIcon;
+    }
+}
+</code></pre><pre><code>##AnimalAdapter
+package com.example.linking.adapters.Adapter;
+
+import android.content.Context;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.example.linking.adapters.Model.Animals;
+import com.example.linking.adapters.R;
+
+import java.util.LinkedList;
+
+/**
+ * Created by linking on 16/12/4.
+ */
+
+public class AnimalAdapter extends BaseAdapter {
+
+    private LinkedList&lt;Animals&gt; mData;
+    private Context mContext;
+
+    public AnimalAdapter(LinkedList&lt;Animals&gt; mData, Context mContext) {
+        this.mData = mData;
+        this.mContext = mContext;
+    }
+
+    @Override
+    public int getCount() {
+        return mData.size();
+    }
+
+    @Override
+    public Object getItem(int position) {
+        return null;
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
+
+    @Override
+    public View getView(int position, View view, ViewGroup viewGroup) {
+        view = LayoutInflater.from(mContext).inflate(R.layout.item_listview_baseadapter,viewGroup,false);
+        ImageView img_icon = (ImageView) view.findViewById(R.id.img);
+        TextView tv1 = (TextView) view.findViewById(R.id.tv1);
+        TextView tv2 = (TextView) view.findViewById(R.id.tv2);
+        img_icon.setBackgroundResource(mData.get(position).getaIcon());
+        tv1.setText(mData.get(position).getaName());
+        tv2.setText(mData.get(position).getaSpeak());
+        return view;
+    }
+}
+</code></pre><pre><code>#Activity
+package com.example.linking.adapters.Activity;
+
+import android.content.Context;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.widget.ListView;
+
+import com.example.linking.adapters.Adapter.AnimalAdapter;
+import com.example.linking.adapters.Model.Animals;
+import com.example.linking.adapters.R;
+
+import java.util.LinkedList;
+import java.util.List;
+
+public class ListViewBaseAdapterActivity extends AppCompatActivity {
+
+    private List&lt;Animals&gt; mData = null;
+    private Context mContext;
+    private AnimalAdapter mAdapter = null;
+    private ListView list_animal;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_list_view_base_adapter);
+
+        mContext = ListViewBaseAdapterActivity.this;
+        list_animal = (ListView) findViewById(R.id.listview1);
+        mData = new LinkedList&lt;Animals&gt;();
+        mData.add(new Animals(&quot;狗说&quot;,&quot;你是够吗&quot;,R.mipmap.ic_launcher));
+        mData.add(new Animals(&quot;mao说&quot;,&quot;你是mao吗&quot;,R.mipmap.ic_launcher));
+        mData.add(new Animals(&quot;hooo说&quot;,&quot;你是hooo吗&quot;,R.mipmap.ic_launcher));
+        mAdapter = new AnimalAdapter((LinkedList &lt; Animals &gt; )mData,mContext);
+        list_animal.setAdapter(mAdapter);
+    }
+}
+</code></pre><p>2.其他设置<br>2.1表头表尾设置分割线<br>只能在Java中写代码进行设置了，可供我们调用的方法如下：</p>
 <ul>
 <li>addHeaderView(View v)：添加headView(表头),括号中的参数是一个View对象</li>
 <li>addFooterView(View v)：添加footerView(表尾)，括号中的参数是一个View对象</li>
@@ -219,8 +387,11 @@
 <li>addFooterView(View,view,false)：同上</li>
 </ul>
 <p>对了，使用这个addHeaderView方法必须放在<strong>listview.setAdapter</strong><span style="color:red">前面</span>，否则会报错。<br><strong>注意问题</strong>：<br>    添加表头表尾后，我们发现positon是从表头开始算的，就是你添加的第一个数据本来的postion是<br>0，但是此时却变成了1，因为表头也算！！</p>
-<p>2.2列表从底部开始显示：stackFromBottom=”true”<br>2.3设置点击颜色cacheColorHint<br>2.4隐藏滑动条<br><figure class="highlight lasso"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">android:scrollbars=”<span class="literal">none</span>” </div><div class="line"><span class="literal">or</span></div><div class="line">setVerticalScrollBarEnabled(<span class="literal">true</span>);</div></pre></td></tr></table></figure></p>
-
+<p>2.2列表从底部开始显示：stackFromBottom=”true”<br>2.3设置点击颜色cacheColorHint<br>2.4隐藏滑动条</p>
+<pre><code>android:scrollbars=”none” 
+or
+setVerticalScrollBarEnabled(true); 
+</code></pre>
       
 
       
@@ -490,11 +661,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">ajax</a>
+                <a href="javascript:void(0)" class="js-tag color5">Ajax</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Ajax</a>
+                <a href="javascript:void(0)" class="js-tag color5">ajax</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -514,6 +685,10 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">JavaScriptCore</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">operation</a>
               </li>
              
@@ -523,10 +698,6 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">deploy</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">JavaScriptCore</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -554,15 +725,15 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">cocoa</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">blog</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Gitalk</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">cocoa</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -586,19 +757,19 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">兼容性</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">多线程</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">HTTP</a>
+                <a href="javascript:void(0)" class="js-tag color4">兼容性</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">绘图</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">HTTP</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -618,6 +789,10 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">标识</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">arcgis</a>
               </li>
              
@@ -627,10 +802,6 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">D.Wade</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">标识</a>
               </li>
              
               <li class="article-tag-list-item">

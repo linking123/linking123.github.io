@@ -9,19 +9,18 @@
   <link rel="dns-prefetch" href="http://linking123.github.io">
   <title>iOS中bundle的使用 | Linking&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="将图片文件夹的后缀改名为：xxx.bundle
-VC获得bundle中的资源123NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @ &quot;MyBundle&quot; ofType :@ &quot;bundle&quot;];NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePat">
+  <meta name="description" content="将图片文件夹的后缀改名为：xxx.bundle VC获得bundle中的资源NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @ &amp;quot;MyBundle&amp;quot; ofType :@ &amp;quot;bundle&amp;quot;]; NSBundle *resourceBundle = [NSBundle bundle">
+<meta name="keywords" content="bundle">
 <meta property="og:type" content="article">
 <meta property="og:title" content="iOS中bundle的使用">
 <meta property="og:url" content="http://linking123.github.io/2017/06/01/iOS中bundle的使用的副本/index.html">
-<meta property="og:site_name" content="Linking's blog">
-<meta property="og:description" content="将图片文件夹的后缀改名为：xxx.bundle
-VC获得bundle中的资源123NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @ &quot;MyBundle&quot; ofType :@ &quot;bundle&quot;];NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePat">
+<meta property="og:site_name" content="Linking&#39;s blog">
+<meta property="og:description" content="将图片文件夹的后缀改名为：xxx.bundle VC获得bundle中的资源NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @ &amp;quot;MyBundle&amp;quot; ofType :@ &amp;quot;bundle&amp;quot;]; NSBundle *resourceBundle = [NSBundle bundle">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2017-06-01T06:57:36.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS中bundle的使用">
-<meta name="twitter:description" content="将图片文件夹的后缀改名为：xxx.bundle
-VC获得bundle中的资源123NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @ &quot;MyBundle&quot; ofType :@ &quot;bundle&quot;];NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePat">
+<meta name="twitter:description" content="将图片文件夹的后缀改名为：xxx.bundle VC获得bundle中的资源NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @ &amp;quot;MyBundle&amp;quot; ofType :@ &amp;quot;bundle&amp;quot;]; NSBundle *resourceBundle = [NSBundle bundle">
   
     <link rel="alternative" href="/atom.xml" title="Linking&#39;s blog" type="application/atom+xml">
   
@@ -56,7 +55,7 @@ VC获得bundle中的资源123NSString * bundlePath = [[ NSBundle mainBundle] pat
 		  <h1 class="header-author"><a href="/">Linking</a></h1>
 		</hgroup>
 		
-		<p class="header-subtitle">时间是个神，见证你的进步</p>
+		<p class="header-subtitle">记住生活的美好</p>
 		
 
 		<nav class="header-menu">
@@ -120,7 +119,7 @@ VC获得bundle中的资源123NSString * bundlePath = [[ NSBundle mainBundle] pat
 			  <h1 class="header-author js-header-author">Linking</h1>
 			</hgroup>
 			
-			<p class="header-subtitle"><i class="icon icon-quo-left"></i>时间是个神，见证你的进步<i class="icon icon-quo-right"></i></p>
+			<p class="header-subtitle"><i class="icon icon-quo-left"></i>记住生活的美好<i class="icon icon-quo-right"></i></p>
 			
 			
 			
@@ -196,9 +195,13 @@ VC获得bundle中的资源123NSString * bundlePath = [[ NSBundle mainBundle] pat
     <div class="article-entry" itemprop="articleBody">
       
         <p>将图片文件夹的后缀改名为：xxx.bundle</p>
-<h2 id="VC获得bundle中的资源"><a href="#VC获得bundle中的资源" class="headerlink" title="VC获得bundle中的资源"></a>VC获得bundle中的资源</h2><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">NSString</span> * bundlePath = [[ <span class="built_in">NSBundle</span> mainBundle] pathForResource: @ <span class="string">"MyBundle"</span> ofType :@ <span class="string">"bundle"</span>];</div><div class="line"><span class="built_in">NSBundle</span> *resourceBundle = [<span class="built_in">NSBundle</span> bundleWithPath:bundlePath];</div><div class="line"><span class="built_in">UIViewController</span> *vc = [[<span class="built_in">UIViewController</span> alloc] initWithNibName:<span class="string">@"vc_name"</span> bundle:resourceBundle];</div></pre></td></tr></table></figure>
-<h2 id="UIImageView获得bundle中的资源"><a href="#UIImageView获得bundle中的资源" class="headerlink" title="UIImageView获得bundle中的资源"></a>UIImageView获得bundle中的资源</h2><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">UIImageView</span> *imgView=[[<span class="built_in">UIImageView</span> alloc] initWithFrame:<span class="built_in">CGRectMake</span>(<span class="number">50</span>, <span class="number">50</span>, <span class="number">50</span>, <span class="number">50</span>)];</div><div class="line"><span class="built_in">UIImage</span> *image = [<span class="built_in">UIImage</span> imageNamed:<span class="string">@"MyBundle.bundle/img_collect_success"</span>];</div><div class="line">[imgView setImage:image];</div></pre></td></tr></table></figure>
-
+<h2 id="VC获得bundle中的资源"><a href="#VC获得bundle中的资源" class="headerlink" title="VC获得bundle中的资源"></a>VC获得bundle中的资源</h2><pre><code>NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @ &quot;MyBundle&quot; ofType :@ &quot;bundle&quot;];
+NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
+UIViewController *vc = [[UIViewController alloc] initWithNibName:@&quot;vc_name&quot; bundle:resourceBundle];
+</code></pre><h2 id="UIImageView获得bundle中的资源"><a href="#UIImageView获得bundle中的资源" class="headerlink" title="UIImageView获得bundle中的资源"></a>UIImageView获得bundle中的资源</h2><pre><code>UIImageView *imgView=[[UIImageView alloc] initWithFrame:CGRectMake(50, 50, 50, 50)];
+UIImage *image = [UIImage imageNamed:@&quot;MyBundle.bundle/img_collect_success&quot;];
+[imgView setImage:image];
+</code></pre>
       
 
       
@@ -490,11 +493,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">ajax</a>
+                <a href="javascript:void(0)" class="js-tag color5">Ajax</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Ajax</a>
+                <a href="javascript:void(0)" class="js-tag color5">ajax</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -514,6 +517,10 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">JavaScriptCore</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">operation</a>
               </li>
              
@@ -523,10 +530,6 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">deploy</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">JavaScriptCore</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -554,15 +557,15 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">cocoa</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">blog</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Gitalk</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">cocoa</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -586,19 +589,19 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">兼容性</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">多线程</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">HTTP</a>
+                <a href="javascript:void(0)" class="js-tag color4">兼容性</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">绘图</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">HTTP</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -618,6 +621,10 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">标识</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">arcgis</a>
               </li>
              
@@ -627,10 +634,6 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">D.Wade</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">标识</a>
               </li>
              
               <li class="article-tag-list-item">
