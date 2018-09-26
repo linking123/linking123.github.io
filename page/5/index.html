@@ -175,6 +175,110 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-iOS开发的系统兼容性问题解决的副本" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/06/01/iOS开发的系统兼容性问题解决的副本/">iOS开发的系统兼容性问题解决</a>
+    </h1>
+  
+
+        
+        <a href="/2017/06/01/iOS开发的系统兼容性问题解决的副本/" class="archive-article-date">
+  	<time datetime="2017-06-01T06:42:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-01</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="1-系统方法过时的注解"><a href="#1-系统方法过时的注解" class="headerlink" title="1:系统方法过时的注解"></a>1:系统方法过时的注解</h3><pre><code class="objc">
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(UIImage *)image editingInfo:(NSDictionary *)editingInfo NS_DEPRECATED_IOS(2_0, 3_0);
+
+
+说明方法在2.0时代引入，3.0时代过时
+
+</code></pre>
+<h2 id="2：系统不同版本方法的兼容性解决方案1-（最佳，不产生警告）"><a href="#2：系统不同版本方法的兼容性解决方案1-（最佳，不产生警告）" class="headerlink" title="2：系统不同版本方法的兼容性解决方案1 （最佳，不产生警告）"></a>2：系统不同版本方法的兼容性解决方案1 （最佳，不产生警告）</h2><pre><code class="objc">
+#if __IPHONE_OS_VERSION_MIN_REQUIRED &lt; __IPHONE_5_0
+    if([picker respondsToSelector:@selector(dismissModalViewControllerAnimated:)]){
+        [picker dismissModalViewControllerAnimated:YES completion:nil];
+    }
+#else{
+     [picker dismissViewControllerAnimated:YES completion:nil];
+}
+#endif
+
+</code></pre>
+<h2 id="3：系统不同版本方法的兼容性解决方案2：（书写方便，但是会产生警告）"><a href="#3：系统不同版本方法的兼容性解决方案2：（书写方便，但是会产生警告）" class="headerlink" title="3：系统不同版本方法的兼容性解决方案2：（书写方便，但是会产生警告）"></a>3：系统不同版本方法的兼容性解决方案2：（书写方便，但是会产生警告）</h2><pre><code class="objc">
+if([picker respondsToSelector:@selector(imagePickerController:didFinishPickingMediaWithInfo:)]){
+    [picker dismissViewControllerAnimated:YES completion:nil];
+}else{
+    [picker dismissModalViewControllerAnimated:YES];
+}
+
+</code></pre>
+<h2 id="4-获取系统版本号进行判断-（书写方便，但是会产生警告）"><a href="#4-获取系统版本号进行判断-（书写方便，但是会产生警告）" class="headerlink" title="4: 获取系统版本号进行判断 （书写方便，但是会产生警告）"></a>4: 获取系统版本号进行判断 （书写方便，但是会产生警告）</h2><pre><code class="objc">if ([[[UIDevice currentDevice]systemVersion] floatValue] &gt;= 9) {
+    if (!self.centralManager.isScanning) {
+        [self.centralManager scanForPeripheralsWithServices:nil options:nil];
+    }
+} else {
+    [self.centralManager scanForPeripheralsWithServices:nil options:nil];
+}
+</code></pre>
+
+      
+
+      
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">兼容性</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/iOS/" class="article-tag-list-link color4">iOS</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/06/01/iOS开发的系统兼容性问题解决的副本/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
     <article id="post-iOS绘图的副本" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -2297,68 +2401,6 @@ NSValue *value = paths[index];
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2017/05/11/cocoa基础的副本/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
-    <article id="post-学习GitHub上的iOS-tips项目的副本" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/05/10/学习GitHub上的iOS-tips项目的副本/">学习GitHub上的iOS-tips项目</a>
-    </h1>
-  
-
-        
-        <a href="/2017/05/10/学习GitHub上的iOS-tips项目的副本/" class="archive-article-date">
-  	<time datetime="2017-05-10T09:43:17.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-10</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>最近光看项目源码，似乎有点霸王硬上弓的感觉，所以决定来刷一遍基础，边看边在项目中找到相关用法，没用过的用进去。<br>挑选这个项目纯属巧合，选哪个不重要，重要的是坚持把这个项目学完。<br>其中的代码会敲一遍，上传到<a href="https://github.com/linking123/learn-iOS-tips-project" target="_blank" rel="noopener">GitHub</a>上。</p>
-<p><a href="https://github.com/coolnameismy/ios-tips" target="_blank" rel="noopener">ios-tips</a>是ios开发当中常用遇到的问题和解决方法的收集，包括ios和swif。<br>一共包括4个部分</p>
-<ul>
-<li>0_Foundation :基础</li>
-<li>1_UIKit :UIKit和界面相关</li>
-<li>2_ThirdParty :第三方控件</li>
-<li>3_Other :其他</li>
-<li>iOS学习资源</li>
-</ul>
-<h2 id="其他资源"><a href="#其他资源" class="headerlink" title="其他资源"></a>其他资源</h2><ul>
-<li>iOS问题已经单独整理为<a href="https://github.com/coolnameismy/ios-tips" target="_blank" rel="noopener">iOS-tips</a> </li>
-<li>有些复杂的问题和开发技巧可以见 <a href="http://liuyanwei.jumppo.com/" target="_blank" rel="noopener">刘彦玮的技术博客</a></li>
-<li>博客中的demo：<a href="https://github.com/coolnameismy/demo" target="_blank" rel="noopener">iOS-demo</a> | <a href="https://github.com/coolnameismy/demo-web" target="_blank" rel="noopener">web前端demo</a></li>
-</ul>
-
-      
-
-      
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/05/10/学习GitHub上的iOS-tips项目的副本/">展开全文 >></a>
         </p>
       
 

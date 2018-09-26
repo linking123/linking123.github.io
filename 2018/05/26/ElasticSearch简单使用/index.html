@@ -7,19 +7,20 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <meta name="baidu-site-verification" content="IBaBDyUX04" />
   <link rel="dns-prefetch" href="http://linking123.github.io">
-  <title>Archives | Linking&#39;s blog</title>
+  <title>ElasticSearch简单使用 | Linking&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Be Better">
+  <meta name="description" content="主要记录四点内容：  1.CRUD  2.searchQuery Language 3.集群 4.数据迁移">
 <meta name="keywords" content="Java, Android, iOS, HTML&#x2F;CSS&#x2F;JavaScript, Python">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Linking&#39;s blog">
-<meta property="og:url" content="http://linking123.github.io/archives/page/2/index.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ElasticSearch简单使用">
+<meta property="og:url" content="http://linking123.github.io/2018/05/26/ElasticSearch简单使用/index.html">
 <meta property="og:site_name" content="Linking&#39;s blog">
-<meta property="og:description" content="Be Better">
+<meta property="og:description" content="主要记录四点内容：  1.CRUD  2.searchQuery Language 3.集群 4.数据迁移">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-09-26T15:20:49.453Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Linking&#39;s blog">
-<meta name="twitter:description" content="Be Better">
+<meta name="twitter:title" content="ElasticSearch简单使用">
+<meta name="twitter:description" content="主要记录四点内容：  1.CRUD  2.searchQuery Language 3.集群 4.数据迁移">
   
     <link rel="alternative" href="/atom.xml" title="Linking&#39;s blog" type="application/atom+xml">
   
@@ -173,394 +174,307 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-ElasticSearch简单使用" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      ElasticSearch简单使用
+    </h1>
+  
+
+        
+        <a href="/2018/05/26/ElasticSearch简单使用/" class="archive-article-date">
+  	<time datetime="2018-05-26T15:05:23.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-26</time>
+</a>
+        
+      </header>
     
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>主要记录四点内容：</p>
+<ul>
+<li>1.CRUD </li>
+<li>2.searchQuery Language</li>
+<li>3.集群</li>
+<li>4.数据迁移</li>
+</ul>
+<a id="more"></a>
+<h1 id="文档说明"><a href="#文档说明" class="headerlink" title="文档说明"></a>文档说明</h1><p>记录使用到的简单ES知识。</p>
+<p>具体查看 <a href="https://www.elastic.co/products" target="_blank" rel="noopener">Elastic官网</a></p>
+<h1 id="文档内容"><a href="#文档内容" class="headerlink" title="文档内容"></a>文档内容</h1><h2 id="1-CRUD"><a href="#1-CRUD" class="headerlink" title="1. CRUD"></a>1. CRUD</h2><h3 id="增-CREATE"><a href="#增-CREATE" class="headerlink" title="增 CREATE"></a>增 CREATE</h3><h4 id="创建带字段的index"><a href="#创建带字段的index" class="headerlink" title="创建带字段的index"></a>创建带字段的index</h4><pre><code># es浏览器中-more-create index 请求 POST http://192.168.1.1:9000/create_index/create
+
+# name
+
+
+# settings
+{
+  &quot;settings&quot;: {
+    &quot;index&quot;: {
+      &quot;creation_date&quot;: &quot;1536892448349&quot;,
+      &quot;number_of_shards&quot;: &quot;5&quot;,
+      &quot;number_of_replicas&quot;: &quot;1&quot;,
+      &quot;uuid&quot;: &quot;d56TLML-QxmyAJzBh8D3oA&quot;,
+      &quot;version&quot;: {
+        &quot;created&quot;: &quot;5010199&quot;
+      },
+      &quot;provided_name&quot;: &quot;records&quot;
+    }
+  },
+  &quot;mappings&quot;: {
+    &quot;doc&quot;: {
+      &quot;properties&quot;: {
+        &quot;total&quot;: {
+          &quot;type&quot;: &quot;double&quot;
+        },
+        &quot;survey_time&quot;: {
+          &quot;format&quot;: &quot;yyyy-MM-dd HH:mm:ss||yyyy-MM-dd||epoch_millis&quot;,
+          &quot;type&quot;: &quot;date&quot;
+        },
+        &quot;dev_code&quot;: {
+          &quot;type&quot;: &quot;keyword&quot;
+        }, 
+        &quot;name&quot;: {
+          &quot;type&quot;: &quot;keyword&quot;
+        },
+        &quot;increment&quot;: {
+          &quot;type&quot;: &quot;double&quot;
+        }, 
+        &quot;floor&quot;: {
+          &quot;type&quot;: &quot;keyword&quot;
+        },
+        &quot;run_status&quot;: {
+          &quot;type&quot;: &quot;keyword&quot;
+        }, 
+        &quot;building&quot;: {
+          &quot;type&quot;: &quot;keyword&quot;
+        }
+      }
+    }
+  }
+}
+
+
+</code></pre><h4 id="增加空索引"><a href="#增加空索引" class="headerlink" title="增加空索引"></a>增加空索引</h4><pre><code>curl -XPUT ‘http://localhost:9200/twitter/&#39;
+</code></pre><blockquote>
+<p>注：必须先新增空索引，才能插入数据。</p>
+</blockquote>
+<h4 id="增加带数据的索引"><a href="#增加带数据的索引" class="headerlink" title="增加带数据的索引"></a>增加带数据的索引</h4><pre><code>
+POST /accounts/person/linking
+{
+  &quot;name&quot;: &quot;linking&quot;,
+  &quot;sex&quot;:&quot;male&quot;,
+  &quot;age&quot;: &quot;28&quot;,
+  &quot;provience&quot;: &quot;anhui&quot;
+}
+</code></pre><h3 id="查-READ"><a href="#查-READ" class="headerlink" title="查 READ"></a>查 READ</h3><pre><code>GET /accounts/person/linking 
+</code></pre><h3 id="改-UPDATE"><a href="#改-UPDATE" class="headerlink" title="改 UPDATE"></a>改 UPDATE</h3><pre><code>POST /accounts/person/linking/_update
+{
+  &quot;doc&quot;:{
+    &quot;age&quot;: &quot;29&quot;
+  }
+}
+</code></pre><h3 id="删-DELETE"><a href="#删-DELETE" class="headerlink" title="删 DELETE"></a>删 DELETE</h3><h4 id="直接删id"><a href="#直接删id" class="headerlink" title="直接删id"></a>直接删id</h4><pre><code>DELETE /accounts/person/linking
+</code></pre><h4 id="精确删除，同where"><a href="#精确删除，同where" class="headerlink" title="精确删除，同where"></a>精确删除，同where</h4><p>先精确查询一下：</p>
+<pre><code>POST index/_search
+
+{
+  &quot;query&quot;: {
+    &quot;term&quot; : { &quot;user&quot; : &quot;Kimchy&quot; } 
+  }
+}
+</code></pre><p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-term-query.html" target="_blank" rel="noopener">https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-term-query.html</a></p>
+<p>再精确删除：</p>
+<pre><code>POST index/_delete_by_query
+
+{
+  &quot;query&quot;: {
+    &quot;term&quot; : { &quot;user&quot; : &quot;Kimchy&quot; } 
+  }
+}
+</code></pre><h2 id="2-searchQuery-Language"><a href="#2-searchQuery-Language" class="headerlink" title="2. searchQuery Language"></a>2. searchQuery Language</h2><p>支持结构化查询语句，具体请查看API</p>
+<h2 id="3-集群"><a href="#3-集群" class="headerlink" title="3. 集群"></a>3. 集群</h2><ul>
+<li>查看当前集群</li>
+</ul>
+<p><a href="http://127.0.0.1:8200/_cat/nodes" target="_blank" rel="noopener">http://127.0.0.1:8200/_cat/nodes</a> 查看nodes</p>
+<p><a href="http://127.0.0.1:8200/_cat/nodes?v" target="_blank" rel="noopener">http://127.0.0.1:8200/_cat/nodes?v</a> 查看nodes详情</p>
+<p><a href="http://127.0.0.1:8200/_cluster/stats" target="_blank" rel="noopener">http://127.0.0.1:8200/_cluster/stats</a> 查看集群详细信息</p>
+<h2 id="4-数据迁移"><a href="#4-数据迁移" class="headerlink" title="4. 数据迁移"></a>4. 数据迁移</h2><blockquote>
+<p>字段类型错误，需要将数据转移出来</p>
+</blockquote>
+<p>闪转腾挪.</p>
+<p>基本思路是建立一个与原index 具有相同字段的索引，字段类型可根据需要做调整，然后将数据直接转存过来，之后原index就可以全部删除了。</p>
+<p><code>`</code>POST _reindex<br>{<br>  “source”: {<br>    “index”: “metricbeat-*”（老的索引名）<br>  },<br>  “dest”: {<br>    “index”: “metricbeat”（新的索引名）<br>  }<br>}</p>
+<pre><code>
+参考： [ElasticSearch复制索引并修改字段
+](https://blog.csdn.net/lpp_dd/article/details/78472638)
+
+# 其他
+
+## Kibana
+
+官方介绍如下，其作用可见一斑。
+
+</code></pre><p>Your window into Elastic Search.<br><code>`</code></p>
+<p>ES兄弟，方便进行查询，有自动补全功能，可以自动生成图表等，方便使用。实乃ES可靠的兄弟。</p>
+<p>安装也简单，具体请查看官网<a href="https://www.elastic.co/products/kibana" target="_blank" rel="noopener">Kibana</a></p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>早餐加个卤蛋<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/images/aliPay.jpg">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/images/wechatPay.jpg">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+        <!-- 加入公众号二维码-->
+        <div style="text-align:center;">
+          <p>
+            建议扫描关注个人公众号，及时接收我的分享。
+          </p>
+          <img src="http://orukz1s2q.bkt.clouddn.com/qrcode_for_gh_0d4958187623_430.jpg" align="center" height=200  width=200 />
+          <p>
+            此公众号定期分享学习、生活的所思所想。
+          </p>
+          <p>
+            主要包括计算机基础知识推广、学习过程记录、效率工具推荐、读书笔记等内容。
+          </p>
+        </div>
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/08/31/keyboardShortcut-Mac/" class="archive-article-date">
-  	<time datetime="2017-08-31T07:13:31.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-31</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/08/31/keyboardShortcut-Mac/">keyboardShortcuts-Mac</a>
-    </h1>
-  
+      </div>
+    </span>
+  </div>
+</div>
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">效率</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">快捷键</a>
-        		</li>
-      		
-		</ul>
-	</div>
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://linking123.github.io/2018/05/26/ElasticSearch简单使用/" alt="微信分享二维码">
+    </div>
+</div>
 
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/效率工具/" class="article-tag-list-link color5">效率工具</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/08/27/微信公众号文章爬取/" class="archive-article-date">
-  	<time datetime="2017-08-27T13:04:36.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-27</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/08/27/微信公众号文章爬取/">微信公众号文章爬取</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">微信公众号</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">爬虫</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/cs/" class="article-tag-list-link color3">cs</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/08/25/10dayWeatherSearchfromYahoo/" class="archive-article-date">
-  	<time datetime="2017-08-25T13:52:36.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-25</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/08/25/10dayWeatherSearchfromYahoo/">10dayWeatherSearchfromYahoo</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">weather</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">需求</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/cs/" class="article-tag-list-link color3">cs</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/08/09/微信好友分析/" class="archive-article-date">
-  	<time datetime="2017-08-09T09:33:53.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-09</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/08/09/微信好友分析/">微信好友分析</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/07/30/精通Python网络爬虫-第五章-正则表达式与Cookie的使用/" class="archive-article-date">
-  	<time datetime="2017-07-30T12:55:06.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-30</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/07/30/精通Python网络爬虫-第五章-正则表达式与Cookie的使用/">精通Python网络爬虫-第五章-正则表达式与Cookie的使用</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">crawler</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Python/" class="article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/07/29/推荐几个项目-WritePPTwithMarkDown/" class="archive-article-date">
-  	<time datetime="2017-07-29T15:43:29.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-29</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/07/29/推荐几个项目-WritePPTwithMarkDown/">推荐几个项目-WritePPTwithMarkDown</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">PPT</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">MarkDown</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/share/" class="article-tag-list-link color1">share</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/07/29/简要对比Android与iOS/" class="archive-article-date">
-  	<time datetime="2017-07-29T15:25:48.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-29</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/07/29/简要对比Android与iOS/">简要对比Android与iOS</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/07/29/avatarRandom/" class="archive-article-date">
-  	<time datetime="2017-07-29T02:39:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-29</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/07/29/avatarRandom/">avatarRandom</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">avatar</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/cs/" class="article-tag-list-link color3">cs</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2018/04/24/写在读书节后一天/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">写在读书节后一天</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+
+  
+  
+    <div id="gitalk-container"></div>
   
 
-    
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/archives/">&laquo; Prev</a><a class="page-number" href="/archives/">1</a><span class="page-number current">2</span><a class="page-number" href="/archives/page/3/">3</a><a class="page-number" href="/archives/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/archives/page/10/">10</a><a class="extend next" rel="next" href="/archives/page/3/">Next &raquo;</a>
-    </nav>
+	<link rel="stylesheet" href="/gitalk/gitalk.css">
+	<script src="/gitalk/gitalk.min.js"></script>
+	<script type="text/javascript">
+		var gitalk = new Gitalk({
+			id: location.pathname,
+			clientID:  '5e029940a9977f496ed1', 
+			clientSecret: '549961e04ffeac20b1de46888212e8c7cf4069d7',
+			repo: 'linking_blog_comments',
+			owner: 'linking123',
+			admin: 'linking123',
+			distractionFreeMode: 'true',
+		})
+		gitalk.render('gitalk-container')
+	</script>
+
+
+
   
+  
+  
+
 
 
           </div>
@@ -594,8 +508,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: true,

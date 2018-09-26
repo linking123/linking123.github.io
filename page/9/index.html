@@ -175,6 +175,154 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-HTML5与Ajax上传文件" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/03/01/HTML5与Ajax上传文件/">HTML5与Ajax上传文件</a>
+    </h1>
+  
+
+        
+        <a href="/2016/03/01/HTML5与Ajax上传文件/" class="archive-article-date">
+  	<time datetime="2016-03-01T14:33:06.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-03-01</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="iframe伪装，jQuery-uploaded-file插件"><a href="#iframe伪装，jQuery-uploaded-file插件" class="headerlink" title="iframe伪装，jQuery-uploaded-file插件"></a>iframe伪装，jQuery-uploaded-file插件</h2><p>前台代码</p>
+<pre><code>&lt;div&gt;
+    &lt;h1&gt;iframe模拟ajax上传文件效果&lt;/h1&gt;
+    &lt;h2&gt;&lt;/h2&gt;
+    &lt;form action=&#39;11-up.php&#39; method=&#39;post&#39; enctype=&#39;multipart/form-data&#39; onsubmit=&#39;return ajaxUpload();&#39;&gt;
+        &lt;p&gt;&lt;input type=&#39;file&#39; name=&#39;pic&#39; /&gt;&lt;/p&gt;
+        &lt;p&gt;&lt;input type=&#39;submit&#39; value=&#39;提交&#39; /&gt;&lt;/p&gt;
+    &lt;/form&gt;
+&lt;/div&gt;
+</code></pre><p>js代码</p>
+<pre><code>/*
+分析：
+  1. 捕捉表单提交动作(onsubmit=&quot;return ajaxUpload()&quot;)
+  2. 创建iframe(jQuery直接创建$(&#39;&lt;iframe&gt;&lt;/iframe&gt;&#39;))
+  3. 把表单的target修改指向该iframe(target=&#39;framename&#39;)
+  4. 去掉这个iframe()
+*/
+function ajaxUpload(){
+    var ifname = &#39;up&#39; + Math.random();
+    $(&#39;&lt;iframe name=&quot;&#39;+ ifname +&#39;&quot; width=&quot;0&quot; height=&quot;0&quot; frameBorder=&quot;0&quot;&gt;&lt;/iframe&gt;&#39;).appendTo($(&#39;body&#39;));
+    $(&#39;form:first&#39;).attr(&#39;target&#39;, ifname);
+}
+</code></pre><p>PHP代码</p>
+<pre><code>if(empty($_FILES)){
+    exit(&#39;no file&#39;);
+}
+
+$error = $_FILES[&#39;pic&#39;][&#39;error&#39;] == 0 ? &#39;succ&#39; : &#39;fail&#39;;
+
+echo &quot;&lt;script&gt;parent.document.getElementsByTagName(&#39;h2&#39;)[0].innerHTML = &#39;$error&#39;&lt;/script&gt;&quot;;
+</code></pre><h2 id="HTML5-Files-API"><a href="#HTML5-Files-API" class="headerlink" title="HTML5 Files API"></a>HTML5 Files API</h2><p><code>files API</code> <code>Formdata</code><br>前台代码：</p>
+<pre><code>&lt;input type=&#39;file&#39; name=&#39;pic&#39; onchange=&#39;selfile();&#39; /&gt;
+</code></pre><p>js代码：</p>
+<pre><code>function selfile(){
+    //表单数据容器
+    var fd = new FormData();
+    //获取文件，文件列表`files`属性
+    var pic = document.getElementsByTagName(&#39;input&#39;)[0].files[0];
+    //附加数据到表单容器中
+    fd.append(&#39;pic&#39;, pic);
+
+    var xhr = new XMLHttpRequest();
+    xhr.open(&#39;POST&#39;, &#39;./13-upfile.php&#39;, true);
+
+    xhr.onreadystatechange = function(){
+        if(this.readyState == 4){
+            document.getElementById(&#39;debug&#39;).innerHTML = this.responseText;
+        }
+    }
+    xhr.send();
+}    
+</code></pre><p>PHP代码：</p>
+<pre><code>&lt;?php 
+
+// print_r($_FILES);
+
+// sleep(3);
+
+if(empty($_FILES)){
+    exit(&#39;no file&#39;);
+}
+
+if ($_FILES[&#39;pic&#39;][&#39;error&#39;]!=0) {
+    exit(&#39;fail&#39;);
+}
+
+move_uploaded_file($_FILES[&#39;pic&#39;][&#39;tmp_name&#39;], &#39;upload/&#39;.$_FILES[&#39;pic&#39;][&#39;name&#39;]);
+
+echo &quot;ok&quot;;
+?&gt;
+</code></pre><blockquote>
+<p>这里还只是用到了HTML5的文件上传API基础，有很多新特性值得花时间研究。<br>而我现在最缺的就是时间，论文需要加快速度。<br>后面还有找工作的事情，毕业季来了啊！！</p>
+</blockquote>
+<p><strong>蛋</strong>定！！！</p>
+
+      
+
+      
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Ajax</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">HTML5</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/cs/" class="article-tag-list-link color3">cs</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2016/03/01/HTML5与Ajax上传文件/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
     <article id="post-Ajax系列三-探讨XHR及POST数据" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1256,79 +1404,6 @@ app.use(middle_something());
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2016/01/05/nodejs学习记录/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
-    <article id="post-多pc同步测试" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/12/17/多pc同步测试/">多PC同步测试</a>
-    </h1>
-  
-
-        
-        <a href="/2015/12/17/多pc同步测试/" class="archive-article-date">
-  	<time datetime="2015-12-17T13:04:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2015-12-17</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>不会吧，这么容易。<br><img src="http://7xosdw.com1.z0.glb.clouddn.com/jingyamao.jpg" alt="jingya"></p>
-        
-          <a class="article-more-a" href="/2015/12/17/多pc同步测试/#more">more >></a>
-        
-      
-
-      
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">cs</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/cs/" class="article-tag-list-link color3">cs</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2015/12/17/多pc同步测试/">展开全文 >></a>
         </p>
       
 
