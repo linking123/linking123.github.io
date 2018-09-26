@@ -17,7 +17,7 @@
 <meta property="og:site_name" content="Linking&#39;s blog">
 <meta property="og:description" content="主要记录四点内容：  1.CRUD  2.searchQuery Language 3.集群 4.数据迁移">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-09-26T15:20:49.453Z">
+<meta property="og:updated_time" content="2018-09-26T15:29:32.058Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ElasticSearch简单使用">
 <meta name="twitter:description" content="主要记录四点内容：  1.CRUD  2.searchQuery Language 3.集群 4.数据迁移">
@@ -306,19 +306,20 @@ POST /accounts/person/linking
 </blockquote>
 <p>闪转腾挪.</p>
 <p>基本思路是建立一个与原index 具有相同字段的索引，字段类型可根据需要做调整，然后将数据直接转存过来，之后原index就可以全部删除了。</p>
-<p><code>`</code>POST _reindex<br>{<br>  “source”: {<br>    “index”: “metricbeat-*”（老的索引名）<br>  },<br>  “dest”: {<br>    “index”: “metricbeat”（新的索引名）<br>  }<br>}</p>
-<pre><code>
-参考： [ElasticSearch复制索引并修改字段
-](https://blog.csdn.net/lpp_dd/article/details/78472638)
-
-# 其他
-
-## Kibana
-
-官方介绍如下，其作用可见一斑。
-
-</code></pre><p>Your window into Elastic Search.<br><code>`</code></p>
-<p>ES兄弟，方便进行查询，有自动补全功能，可以自动生成图表等，方便使用。实乃ES可靠的兄弟。</p>
+<pre><code>POST _reindex
+{
+  &quot;source&quot;: {
+    &quot;index&quot;: &quot;metricbeat-*&quot;（老的索引名）
+  },
+  &quot;dest&quot;: {
+    &quot;index&quot;: &quot;metricbeat&quot;（新的索引名）
+  }
+}
+</code></pre><p>参考： <a href="https://blog.csdn.net/lpp_dd/article/details/78472638" target="_blank" rel="noopener">ElasticSearch复制索引并修改字段
+</a></p>
+<h1 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h1><h2 id="Kibana"><a href="#Kibana" class="headerlink" title="Kibana"></a>Kibana</h2><p>官方介绍如下，其作用可见一斑。</p>
+<pre><code>Your window into Elastic Search.
+</code></pre><p>ES兄弟，方便进行查询，有自动补全功能，可以自动生成图表等，方便使用。实乃ES可靠的兄弟。</p>
 <p>安装也简单，具体请查看官网<a href="https://www.elastic.co/products/kibana" target="_blank" rel="noopener">Kibana</a></p>
 
       
@@ -637,15 +638,15 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">cookie</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">blog</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Gitalk</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">cookie</a>
               </li>
              
               <li class="article-tag-list-item">
