@@ -175,6 +175,88 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-高考志愿报考指南" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/06/27/高考志愿报考指南/">高考志愿报考指南</a>
+    </h1>
+  
+
+        
+        <a href="/2017/06/27/高考志愿报考指南/" class="archive-article-date">
+  	<time datetime="2017-06-27T13:36:39.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-27</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="1-容忍与自由下载链接"><a href="#1-容忍与自由下载链接" class="headerlink" title="1.容忍与自由下载链接"></a>1.容忍与自由下载链接</h2><p><a href="https://pan.baidu.com/s/1slTV08d" target="_blank" rel="noopener">容忍与自由—胡适演讲集 - 胡适.mobi</a><br>链接: <a href="https://pan.baidu.com/s/1slTV08d" target="_blank" rel="noopener">https://pan.baidu.com/s/1slTV08d</a> 密码: yv9s</p>
+<p><a href="https://pan.baidu.com/s/1slLibN3" target="_blank" rel="noopener">容忍与自由—胡适演讲集 — 胡适.txt</a><br>链接: <a href="https://pan.baidu.com/s/1slLibN3" target="_blank" rel="noopener">https://pan.baidu.com/s/1slLibN3</a> 密码: 4sdi</p>
+<p>2.以下是原文</p>
+<p><img src="http://edu.people.com.cn/mediafile/201205/08/F201205081437204710155382.jpg" alt=""></p>
+<blockquote>
+<p>题目取得有点标题党了，其实就想说一下对于高考报考志愿的想法。</p>
+</blockquote>
+<h2 id="本篇由来"><a href="#本篇由来" class="headerlink" title="本篇由来"></a>本篇由来</h2><p>写这个的原因是今天突然有两位问我对报考的意见。一位是我的高中同学，替表弟问；一位是妹妹的同学，替弟弟问。</p>
+<p>我大概说了一下，男生报理工科之类的了，也看自己的兴趣之类的了。只能给这些大而不实的意见了，毕竟已经远离高考 8 年，世事变化太快，已不是当年日月。所以不敢妄言。如有失误，概不负责&lt;没人能替你负责你的人生，除了你自己&gt;，哈哈。</p>
+<h2 id="我的填报经历"><a href="#我的填报经历" class="headerlink" title="我的填报经历"></a>我的填报经历</h2><p>谈到这个话题，不免回忆起自己的经历。<br>
+        
+          <a class="article-more-a" href="/2017/06/27/高考志愿报考指南/#more">more >></a>
+        
+      
+
+      
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">essay</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/read/" class="article-tag-list-link color5">read</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/06/27/高考志愿报考指南/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
     <article id="post-精通Python网络爬虫-第三章-网络爬虫实现原理与实现技术" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -758,141 +840,9 @@
 
 
   
-    <article id="post-JavaScriptCore使用的副本" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/06/01/JavaScriptCore使用的副本/">JavaScriptCore使用</a>
-    </h1>
-  
-
-        
-        <a href="/2017/06/01/JavaScriptCore使用的副本/" class="archive-article-date">
-  	<time datetime="2017-06-01T07:01:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-01</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <pre><code class="objc">
-//直接执行js代码
-- (void)evaluateScript {
-    //定义一个js并执行函数
-    JSValue *exeFunction1 = [self.jsContext evaluateScript:@&quot;function hi(){ return &#39;hi&#39; }; hi()&quot;];
-    //执行一个闭包js
-    JSValue *exeFunction2 = [self.jsContext evaluateScript:@&quot;(function(){ return &#39;hi&#39; })()&quot;];
-
-    //更多的应用场景使用网络或者本地文件加载一段js代码，充分利用其灵活性
-    NSString * path = [[NSBundle mainBundle] pathForResource:@&quot;core&quot; ofType:@&quot;js&quot;];
-    NSString * html = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:nil];
-    JSValue *constructor = [self.jsContext evaluateScript:html];
-}
-
-//Native注册方法给js调用
-- (void)regiestJSFunction {
-    //注册一个函数
-    [self.jsContext evaluateScript:@&quot;var hello = function(){ return &#39;hello&#39; }&quot;];
-    //调用
-    JSValue *value1 = [self.jsContext evaluateScript:@&quot;hello()&quot;];
-
-    //注册一个匿名函数
-    JSValue *jsFunction = [self.jsContext evaluateScript:@&quot; (function(){ return &#39;hello objc&#39; })&quot;];
-    //调用
-    JSValue *value2 = [jsFunction callWithArguments:nil];
-}
-
-//注册js方法给Native调用
-- (void)regiestNativeFunction {
-    //注册一个objc方法给js调用
-    self.jsContext[@&quot;log&quot;] = ^(NSString *msg){
-        NSLog(@&quot;js:msg:%@&quot;,msg);
-    };
-    //另一种方式，利用currentArguments获取参数
-    self.jsContext[@&quot;log&quot;] = ^() {
-        NSArray *args = [JSContext currentArguments];
-        for (id obj in args) { NSLog(@&quot;%@&quot;,obj); }
-    };
-    //使用js调用objc
-    [self.jsContext evaluateScript:@&quot;native_log(&#39;hello,i am js side&#39;)&quot;];
-}
-
-//注册js错误处理
-- (void)jsExceptionHandler {
-    self.jsContext.exceptionHandler = ^(JSContext *con, JSValue *exception) {
-        NSLog(@&quot;%@&quot;, exception);
-        con.exception = exception;
-    };
-}
-
-//JSExprot协议使用
-- (void)useJSExprot {
-    Person *p = [[Person alloc]init];
-    self.jsContext[@&quot;person&quot;] = p;
-
-    JSValue *value = [self.jsContext evaluateScript:@&quot;person.whatYouName()&quot;];
-
-}
-
-</code></pre>
-        
-          <a class="article-more-a" href="/2017/06/01/JavaScriptCore使用的副本/#more">more >></a>
-        
-      
-
-      
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">JavaScriptCore</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/iOS/" class="article-tag-list-link color4">iOS</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/06/01/JavaScriptCore使用的副本/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/3/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/5/">Next &raquo;</a>
+      <a class="extend prev" rel="prev" href="/page/3/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/5/">Next &raquo;</a>
     </nav>
   
 
@@ -989,10 +939,6 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">nodejs</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">weather</a>
               </li>
              
@@ -1021,6 +967,10 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">JavaScriptCore</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">operation</a>
               </li>
              
@@ -1030,10 +980,6 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">deploy</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">JavaScriptCore</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1113,15 +1059,15 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">标识</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">D.Wade</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Python</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">标识</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1161,11 +1107,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">张靓颖</a>
+                <a href="javascript:void(0)" class="js-tag color2">WeChat</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">WeChat</a>
+                <a href="javascript:void(0)" class="js-tag color4">张靓颖</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1198,6 +1144,10 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">进度条</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">nodejs</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1246,6 +1196,10 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">快捷键</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">wechat</a>
               </li>
              
               <li class="article-tag-list-item">

@@ -175,6 +175,122 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-判断非手机登陆，做一次提醒" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/01/11/判断非手机登陆，做一次提醒/">判断非手机登陆，做一次提醒</a>
+    </h1>
+  
+
+        
+        <a href="/2016/01/11/判断非手机登陆，做一次提醒/" class="archive-article-date">
+  	<time datetime="2016-01-11T12:17:29.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-01-11</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>需求</p>
+<blockquote>
+<p>项目的网站时做的手机网页，但是没有考虑到自适应pc端，只是在chrome中固定了手机屏幕大小，所以在pc端查看会很丑，布局是乱的；但是重写又很麻烦，所以有必要做一下提醒，让用户手动将网页缩小到手机屏幕大小。</p>
+</blockquote>
+<p>用到</p>
+<blockquote>
+<p>非手机检验和cookie记录</p>
+</blockquote>
+<p>方法</p>
+<blockquote>
+<p>这段代码是使用了cookie来控制的</p>
+<ol>
+<li>使用cookie让浏览器记住页面已经打开过一次，当前页面刷新不会弹出提醒。</li>
+<li>浏览器一旦关闭，保存这个记录的cookie文件将被删除。重新打开浏览器弹出窗口会再次出现，从而确保了在原有的窗口基础上只打开一次。 </li>
+</ol>
+</blockquote>
+<p>判断非手机登陆方式</p>
+<pre><code>if (!/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent))
+    alert(&quot;为了提高体验效果，请把页面缩小成手机屏幕大小。\n谢谢合作！&quot;);
+</code></pre><pre><code>&lt;script type=&quot;text/javascript&quot;&gt;
+    try{
+        var alertmessage=&quot;为了提高体验效果，请把页面缩小成手机屏幕大小。\n谢谢合作！&quot;;
+        var once_per_session=1
+        function get_cookie(Name) {
+          var search = Name + &quot;=&quot;
+          var returnvalue = &quot;&quot;;
+          if (document.cookie.length &gt; 0) {
+            offset = document.cookie.indexOf(search)
+            if (offset != -1) {
+              offset += search.length;
+              end = document.cookie.indexOf(&quot;;&quot;, offset);
+              if (end == -1)
+                 end = document.cookie.length;
+                  returnvalue=unescape(document.cookie.substring(offset, end))
+              }
+               }
+             return returnvalue;
+        }
+        function alertornot(){
+            if (get_cookie(&#39;alerted&#39;)==&#39;&#39;){
+                loadalert();
+                document.cookie=&quot;alerted=yes&quot;;
+            }
+        }
+        function loadalert(){
+            if (!/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent))
+                alert(alertmessage);
+        }
+        if (once_per_session==0)
+            loadalert();
+        else
+            alertornot();
+    } catch(e)
+    {
+        alert(e);
+    }
+&lt;/script&gt;
+</code></pre>
+      
+
+      
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">cs</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2016/01/11/判断非手机登陆，做一次提醒/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
     <article id="post-nodejs学习记录" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -2021,86 +2137,9 @@ D--&gt;&gt;A: Dashed open arrow
 
 
   
-    <article id="post-科比撰文宣布赛季后退役" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/11/30/科比撰文宣布赛季后退役/">科比撰文宣布赛季后退役</a>
-    </h1>
-  
-
-        
-        <a href="/2015/11/30/科比撰文宣布赛季后退役/" class="archive-article-date">
-  	<time datetime="2015-11-30T08:32:04.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2015-11-30</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="科比退役视频HTML版"><a href="#科比退役视频HTML版" class="headerlink" title="科比退役视频HTML版"></a>科比退役视频HTML版</h2><p><object width="541" height="450"><param name="allowFullScreen" value="true"><param name="movie" value="http://i7.imgs.letv.com/player/swfPlayer.swf?autoPlay=0&id=24108987"><embed src="http://i7.imgs.letv.com/player/swfPlayer.swf?autoPlay=0&id=24108987" width="541" height="450" allowfullscreen="true" type="application/x-shockwave-flash"></object><br>
-        
-          <a class="article-more-a" href="/2015/11/30/科比撰文宣布赛季后退役/#more">more >></a>
-        
-      
-
-      
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">essay</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">NBA</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/NBA/" class="article-tag-list-link color4">NBA</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2015/11/30/科比撰文宣布赛季后退役/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/9/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><span class="page-number current">10</span>
+      <a class="extend prev" rel="prev" href="/page/9/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><span class="page-number current">10</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/11/">Next &raquo;</a>
     </nav>
   
 
@@ -2197,10 +2236,6 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">nodejs</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">weather</a>
               </li>
              
@@ -2229,6 +2264,10 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">JavaScriptCore</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">operation</a>
               </li>
              
@@ -2238,10 +2277,6 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">deploy</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">JavaScriptCore</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2321,15 +2356,15 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">标识</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">D.Wade</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Python</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">标识</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2369,11 +2404,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">张靓颖</a>
+                <a href="javascript:void(0)" class="js-tag color2">WeChat</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">WeChat</a>
+                <a href="javascript:void(0)" class="js-tag color4">张靓颖</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2406,6 +2441,10 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">进度条</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">nodejs</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2454,6 +2493,10 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">快捷键</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">wechat</a>
               </li>
              
               <li class="article-tag-list-item">

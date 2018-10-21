@@ -175,6 +175,121 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-git学习之二-git基础" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/09/05/git学习之二-git基础/">git学习之二-git基础</a>
+    </h1>
+  
+
+        
+        <a href="/2016/09/05/git学习之二-git基础/" class="archive-article-date">
+  	<time datetime="2016-09-05T14:53:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-09-05</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>取得项目git仓库<br>在现存的目录下，通过导入所有文件来创建新的 Git 仓库。<br>初始化</p>
+<pre><code>$ git init
+#末尾自定义项目目录名称mygrit
+$ git clone git://github.com/schacon/grit.git mygrit
+</code></pre><p>文件状态变化周期：<br><img src="http://static.open-open.com/lib/uploadImg/20120201/20120201121432_845.png" alt="文件状态变化周期"></p>
+<p>检查当前文件状态:</p>
+<pre><code>$ git status
+</code></pre><p>跟踪新文件</p>
+<pre><code>$ git add filename
+$ git status
+# On branch master
+# Changes to be committed:
+#   (use &quot;git reset ...&quot; to unstage)
+#   new file:   README
+</code></pre><p>忽略某些文件：</p>
+<pre><code>#养成一开始就设置好.gitignore文件的习惯，免得将无用文件或者机密文件上传。
+**.gitignore文件**
+# 此为注释 – 将被 Git 忽略
+*.a       # 忽略所有 .a 结尾的文件
+!lib.a    # 但 lib.a 除外
+/TODO     # 仅仅忽略项目根目录下的 TODO 文件，不包括 subdir/TODO
+build/    # 忽略 build/ 目录下的所有文件
+doc/*.txt # 会忽略 doc/notes.txt 但不包括 doc/server/arch.txt
+</code></pre><p>提交更新：</p>
+<pre><code>##打开文本编辑器输入提交说明
+$ git commit 
+##配置编辑器
+$ git config --global core.editor
+</code></pre><p>跳过使用暂存区域：</p>
+<pre><code>#加上 -a 则自动将所有已跟踪过的文件暂存起来一并提交
+$ git commit -a -m &#39;added new file&#39;
+</code></pre><p>移除文件：</p>
+<pre><code>$ rm file
+$ git rm file
+</code></pre><p>移动文件：</p>
+<pre><code># 相当于改名操作
+$ git mv file_from file_to
+#上面一条命令相当于下面三条命令
+$ mv file_from file_to
+$ git rm file_from
+$ git add file_to
+</code></pre><p>查看提交历史：</p>
+<pre><code>$ git log 
+</code></pre><p>从已有的 Git 仓库克隆出一个新的镜像仓库来。</p>
+<pre><code>$　git clone xxx.git
+</code></pre>
+      
+
+      
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">git</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/cs/" class="article-tag-list-link color3">cs</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2016/09/05/git学习之二-git基础/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
     <article id="post-一台机器部署多个Tomcat及如何忽略webapps里的项目" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1445,81 +1560,9 @@ window.onload = C.handleOnLoad;
 
 
   
-    <article id="post-Today" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/03/03/Today/">Today</a>
-    </h1>
-  
-
-        
-        <a href="/2016/03/03/Today/" class="archive-article-date">
-  	<time datetime="2016-03-03T14:19:07.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-03-03</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>今天没有心情发笔记。<br>有时候常在想，我们做项目的意义何在？仅仅是为了完成任务，交付拿钱走人？<br>性格使然，不喜欢很功利性的事情，往往想到很功利的去做事就没有了动力。<br>我也不喜欢临时抱佛脚，考试周冲刺这些事。所以总是不能快速的解决问题，做出成果。没少吃亏，死性不改。<br>也许等我能做出成绩之后再回过头来想这些可能更实际一点吧。现在看问题还是太局限了。<br>小孩子脾气。依着自己的性子。终究是成不了大事的。</p>
-<p>忍耐吧。</p>
-
-      
-
-      
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">thought</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/diary/" class="article-tag-list-link color1">diary</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2016/03/03/Today/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/7/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/9/">Next &raquo;</a>
+      <a class="extend prev" rel="prev" href="/page/7/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><a class="page-number" href="/page/10/">10</a><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/9/">Next &raquo;</a>
     </nav>
   
 
@@ -1616,10 +1659,6 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">nodejs</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">weather</a>
               </li>
              
@@ -1648,6 +1687,10 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">JavaScriptCore</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">operation</a>
               </li>
              
@@ -1657,10 +1700,6 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">deploy</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">JavaScriptCore</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1740,15 +1779,15 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">标识</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">D.Wade</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Python</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">标识</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1788,11 +1827,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">张靓颖</a>
+                <a href="javascript:void(0)" class="js-tag color2">WeChat</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">WeChat</a>
+                <a href="javascript:void(0)" class="js-tag color4">张靓颖</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1825,6 +1864,10 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">进度条</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">nodejs</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1873,6 +1916,10 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">快捷键</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">wechat</a>
               </li>
              
               <li class="article-tag-list-item">
