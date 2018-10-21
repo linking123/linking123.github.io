@@ -175,6 +175,1178 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-cocoa基础的副本" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/05/11/cocoa基础的副本/">cocoa基础</a>
+    </h1>
+  
+
+        
+        <a href="/2017/05/11/cocoa基础的副本/" class="archive-article-date">
+  	<time datetime="2017-05-11T09:21:35.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-11</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="类别的使用例子"><a href="#类别的使用例子" class="headerlink" title="类别的使用例子"></a>类别的使用例子</h3><pre><code class="objc">#import &quot;Roommate.h&quot;
+@interface Roommate (Roommate_Say)
+-(void) introduceSelf;
+//-(void)hello:(NSString *) str;
+@end
+
+#import &quot;Roommate+Roommate_Say.h&quot;
+@implementation Roommate (Roommate_Say)
+-(void) introduceSelf{   
+    NSLog(@&quot;my name is liuyanwei&quot;);
+}
+@end
+
+</code></pre>
+<h3 id="协议的使用例子"><a href="#协议的使用例子" class="headerlink" title="协议的使用例子"></a>协议的使用例子</h3><pre><code class="objc">#import &lt;Foundation/Foundation.h&gt;
+@protocol RoommateDelegate&lt;NSObject&gt;
+@optional
+-(void)showMessage:(NSString *)msg;
+@required
+-(void)mustShowMessage:(NSString *)msg;
+@end
+
+</code></pre>
+<h2 id="block的使用"><a href="#block的使用" class="headerlink" title="block的使用"></a>block的使用</h2><pre><code class="objc">
+--1基本用法
+ void(^myblock)(NSString *msg) = ^(NSString *msg){
+        NSLog(@&quot;%@&quot;,msg);
+    };    
+    myblock(@&quot;hello&quot;);
+
+--2先定义在类方法中后使用
+//方法定义
+-(void)showMessageWithBlock:(NSString *) msg block:(void (^)(NSString *msg))block
+{
+    block(msg);
+}
+
+//方法定义的简写
+typedef void (^ShowMessageBlock)(NSString *msg);
+-(void)showMessageWithBlock1:(NSString *) msg block:(ShowMessageBlock)block{
+    block(msg);
+}
+//方法的使用
+[roommate showMessageWithBlock:@&quot;hello&quot; block:^(NSString *msg) {
+        NSLog(@&quot;%@&quot;,msg);
+}];
+
+--3 注意点
+若想在block中修改本地变量，需要声明变量类型： __block NSString *localmsg = @&quot;local string&quot;;
+
+</code></pre>
+<h2 id="结构体"><a href="#结构体" class="headerlink" title="结构体"></a>结构体</h2><pre><code class="objc">/*NSRange表示一个范围*/
+void test1(){
+    NSRange rg={3,5};//第一参数是起始位置第二个参数是长度
+    //NSRange rg;
+    //rg.location=3;
+    //rg.length=5;
+    //NSRange rg={.location=3,.length=5};
+    //常用下面的方式定义 NSRange rg2=NSMakeRange(3,5);//使用NSMakeRange定义一个NSRange 
+    //打印NSRange可以使用Foundation中方法 NSLog(@&quot;rg2 is %@&quot;, NSStringFromRange(rg2));//注意不能直接NSLog(@&quot;rg2 is %@&quot;, rg2)，因为rg2不是对象（准确的说%@是指针）而是结构体
+}
+/*NSPoint表示一个点*/
+void test2(){
+    NSPoint p=NSMakePoint(10, 15);//NSPoint其实就是CGPoint
+    //这种方式比较常见 NSPoint p2=CGPointMake(10, 15);
+    NSLog(NSStringFromPoint(p2));
+}
+/*NSSize表示大小*/
+void test3(){
+    NSSize s=NSMakeSize(10, 15);//NSSize其实就是CGSize
+    //这种方式比较常见 CGSize s2=CGSizeMake(10, 15);
+    NSLog(NSStringFromSize(s2));
+}
+/*NSRect表示一个矩形*/
+void test4(){
+    NSRect r=NSMakeRect(10, 5, 100, 200);//NSRect其实就是CGRect
+    //这种方式比较常见 NSRect r2=CGRectMake(10, 5, 100, 200);
+    NSLog(NSStringFromRect(r2));
+}
+
+
+</code></pre>
+<h2 id="日期"><a href="#日期" class="headerlink" title="日期"></a>日期</h2><pre><code class="objc">
+    NSDate *date1=[NSDate date];//获得当前日期
+    NSLog(@&quot;%@&quot;,date1); //结果：2014-07-16 07:25:28 +0000
+
+    NSDate *date2=[NSDate dateWithTimeIntervalSinceNow:100];//在当前日期的基础上加上100秒，注意在ObjC中多数时间单位都是秒
+    NSLog(@&quot;%@&quot;,date2); //结果：2014-07-16 07:27:08 +0000
+
+    NSDate *date3=[NSDate distantFuture];//随机获取一个将来的日期
+    NSLog(@&quot;%@&quot;,date3); //结果：4001-01-01 00:00:00 +0000
+
+    NSTimeInterval time=[date2 timeIntervalSinceDate:date1];//日期之差,返回单位为秒
+    NSLog(@&quot;%f&quot;,time); //结果：100.008833
+
+    NSDate *date5=[date1 earlierDate:date3];//返回比较早的日期
+    NSLog(@&quot;%@&quot;,date5); //结果：2014-07-16 07:25:28 +0000
+
+    //日期格式化
+    NSDateFormatter *formater1=[[NSDateFormatter alloc]init];
+    formater1.dateFormat=@&quot;yy-MM-dd HH:mm:ss&quot;;
+    NSString *datestr1=[formater1 stringFromDate:date1];
+    NSLog(@&quot;%@&quot;,datestr1); //结果：14-07-16 15:25:28
+    //字符串转化为日期
+    NSDate *date6=[formater1 dateFromString:@&quot;14-02-14 11:07:16&quot;];
+    NSLog(@&quot;%@&quot;,date6); //结果：2014-02-14 03:07:16 +0000
+
+
+````objc
+
+
+##  字符串
+
+````objc
+
+/**字符串操作*/
+void test1(){
+    char *str1=&quot;C string&quot;;//这是C语言创建的字符串
+    NSString *str2=@&quot;OC string&quot;;//ObjC字符串需要加@，并且这种方式创建的对象不需要自己释放内存
+
+    //下面的创建方法都应该释放内存
+    NSString *str3=[[NSString alloc] init];
+    str3=@&quot;OC string&quot;;
+    NSString *str4=[[NSString alloc] initWithString:@&quot;Objective-C string&quot;];
+    NSString *str5=[[NSString alloc] initWithFormat:@&quot;age is %i,name is %.2f&quot;,19,1.72f];
+    NSString *str6=[[NSString alloc] initWithUTF8String:&quot;C string&quot;];//C语言的字符串转换为ObjC字符串
+
+    //以上方法都有对应静态方法（一般以string开头）,不需要管理内存（系统静态方法一般都是自动释放）
+    NSString *str7=[NSString stringWithString:@&quot;Objective-C string&quot;];
+}
+void test2(){
+    NSLog(@&quot;\&quot;Hello world!\&quot; to upper is %@&quot;,[@&quot;Hello world!&quot; uppercaseString]);
+    //结果：&quot;Hello world!&quot; to upper is HELLO WORLD!
+    NSLog(@&quot;\&quot;Hello world!\&quot; to lowwer is %@&quot;,[@&quot;Hello world!&quot; lowercaseString]);
+    //结果：&quot;Hello world!&quot; to lowwer is hello world!
+
+    //首字母大写，其他字母小写
+    NSLog(@&quot;\&quot;Hello world!\&quot; to capitalize is %@&quot;,[@&quot;Hello world!&quot; capitalizedString]);
+    //结果：&quot;Hello world!&quot; to capitalize is Hello World!
+
+    BOOL result= [@&quot;abc&quot; isEqualToString:@&quot;aBc&quot;];
+    NSLog(@&quot;%i&quot;,result);
+    //结果：0
+    NSComparisonResult result2= [@&quot;abc&quot; compare:@&quot;aBc&quot;];//如果是[@&quot;abc&quot; caseInsensitiveCompare:@&quot;aBc&quot;]则忽略大小写比较
+    if(result2==NSOrderedAscending){
+        NSLog(@&quot;left&lt;right.&quot;);
+    }else if(result2==NSOrderedDescending){
+        NSLog(@&quot;left&gt;right.&quot;);
+    }else if(result2==NSOrderedSame){
+        NSLog(@&quot;left=right.&quot;);
+    }
+    //结果：left&gt;right.
+}
+void test3(){
+    NSLog(@&quot;has prefix ab? %i&quot;,[@&quot;abcdef&quot; hasPrefix:@&quot;ab&quot;]);
+    //结果：has prefix ab? 1
+    NSLog(@&quot;has suffix ab? %i&quot;,[@&quot;abcdef&quot; hasSuffix:@&quot;ef&quot;]);
+    //结果：has suffix ab? 1
+    NSRange range=[@&quot;abcdefabcdef&quot; rangeOfString:@&quot;cde&quot;];//注意如果遇到cde则不再往后面搜索,如果从后面搜索或其他搜索方式可以设置第二个options参数
+    if(range.location==NSNotFound){
+        NSLog(@&quot;not found.&quot;);
+    }else{
+        NSLog(@&quot;range is %@&quot;,NSStringFromRange(range));
+    }
+    //结果：range is {2, 3}
+}
+//字符串分割
+void test4(){
+    NSLog(@&quot;%@&quot;,[@&quot;abcdef&quot; substringFromIndex:3]);//从第三个索引开始（包括第三个索引对应的字符）截取到最后一位
+    //结果：def
+    NSLog(@&quot;%@&quot;,[@&quot;abcdef&quot; substringToIndex:3]);////从0开始截取到第三个索引（不包括第三个索引对应的字符）
+    //结果：abc
+    NSLog(@&quot;%@&quot;,[@&quot;abcdef&quot; substringWithRange:NSMakeRange(2, 3)]);
+    //结果：cde
+    NSString *str1=@&quot;12.abcd.3a&quot;;
+    NSArray *array1=[str1 componentsSeparatedByString:@&quot;.&quot;];//字符串分割
+    NSLog(@&quot;%@&quot;,array1);
+     /*结果：
+      (
+         12,
+         abcd,
+         3a
+      )
+      */
+
+}
+//其他操作
+void test5(){
+    NSLog(@&quot;%i&quot;,[@&quot;12&quot; intValue]);//类型转换
+    //结果：12
+    NSLog(@&quot;%zi&quot;,[@&quot;hello world,世界你好！&quot; length]);//字符串长度注意不是字节数
+    //结果：17
+    NSLog(@&quot;%c&quot;,[@&quot;abc&quot; characterAtIndex:0]);//取出制定位置的字符
+    //结果：a
+    const char *s=[@&quot;abc&quot; UTF8String];//转换为C语言字符串
+    NSLog(@&quot;%s&quot;,s);
+    //结果：abc
+}
+
+int main(int argc, const char * argv[]) {
+    test1();
+    test2();
+    test3();
+    test4();
+    test5();
+    return 0;
+}
+/*可变字符串，注意NSMutableString是NSString子类*/
+    //注意虽然initWithCapacity分配字符串大小，但是不是绝对的不可以超过此范围，声明此变量对性能有好处
+    NSMutableString *str1= [[NSMutableString alloc] initWithCapacity:10];
+    [str1 setString:@&quot;hello&quot;];//设置字符串
+    NSLog(@&quot;%@&quot;,str1);
+    //结果：hello
+
+    [str1 appendString:@&quot;,world!&quot;];//追加字符串
+    NSLog(@&quot;%@&quot;,str1);
+    //结果：hello,world!
+
+    [str1 appendFormat:@&quot;我的年龄是%i。dear,I love you.&quot;,18];
+    NSLog(@&quot;%@&quot;,str1);
+    //结果：hello,world!我的年龄是18。dear,I love you.
+
+    //替换字符串
+    NSRange range=[str1 rangeOfString:@&quot;dear&quot;];
+    [str1 replaceCharactersInRange:range withString:@&quot;Honey&quot;];
+    NSLog(@&quot;%@&quot;,str1);
+    //结果：hello,world!我的年龄是18。Honey,I love you.
+
+    //插入字符串
+    [str1 insertString:@&quot;My name is Kenshin.&quot; atIndex:12];
+    NSLog(@&quot;%@&quot;,str1);
+    //结果：hello,world!My name is Kenshin.我的年龄是18。Honey,I love you.
+
+    //删除指定字符串
+    [str1 deleteCharactersInRange:[str1 rangeOfString:@&quot;My name is Kenshin.&quot;]];//删除指定范围的字符串
+    NSLog(@&quot;%@&quot;,str1);
+    //结果：hello,world!我的年龄是18。Honey,I love you.
+
+
+</code></pre>
+<h2 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h2><pre><code class="objc">
+//NSArray长度不可变所以初始化的时候就赋值，并且最后以nil结尾
+    //此外需要注意NSArray不能存放C语言的基础类型
+    NSObject *obj=[[NSObject alloc]init];
+    //NSArray *array1=[[NSArray alloc] initWithObjects:@&quot;abc&quot;,obj,@&quot;cde&quot;,@&quot;opq&quot;, nil];
+    NSArray *array1=[NSArray arrayWithObjects:@&quot;abc&quot;,obj,@&quot;cde&quot;,@&quot;opq&quot;,@25, nil];
+    NSLog(@&quot;%zi&quot;,array1.count);//数组长度,结果：5
+    NSLog(@&quot;%i&quot;,[array1 containsObject:@&quot;cde&quot;]);//是否包含某个对象，结果：1
+    NSLog(@&quot;%@&quot;,[array1 lastObject]);//最后一个对象，结果：25
+    NSLog(@&quot;%zi&quot;,[array1 indexOfObject:@&quot;abc&quot;]);//对象所在的位置：0
+
+    Person *person1=[Person personWithName:@&quot;Kenshin&quot;];
+    Person *person2=[Person personWithName:@&quot;Kaoru&quot;];
+    Person *person3=[Person personWithName:@&quot;Rosa&quot;];
+    NSArray *array2=[[NSArray alloc]initWithObjects:person1,person2,person3, nil];
+    [array2 makeObjectsPerformSelector:@selector(showMessage:) withObject:@&quot;Hello,world!&quot;];//执行所有元素的showMessage方法,后面的参数最多只能有一个
+    /*结果：
+     My name is Kenshin,the infomation is &quot;Hello,world!&quot;.
+     My name is Kaoru,the infomation is &quot;Hello,world!&quot;.
+     My name is Rosa,the infomation is &quot;Hello,world!&quot;.
+     */
+}
+//数组的遍历
+void test2(){
+    NSObject *obj=[[NSObject alloc]init];
+    NSArray *array=[[NSArray alloc] initWithObjects:@&quot;abc&quot;,obj,@&quot;cde&quot;,@&quot;opq&quot;,@25, nil];
+    //方法1
+    for(int i=0,len=array.count;i&lt;len;++i){
+        NSLog(@&quot;method1:index %i is %@&quot;,i,[array objectAtIndex:i]);
+    }
+    /*结果：
+     method1:index 0 is abc
+     method1:index 1 is &lt;NSObject: 0x100106de0&gt;
+     method1:index 2 is cde
+     method1:index 3 is opq
+     method1:index 4 is 25
+     */
+
+
+    //方法2
+    for(id obj in array){
+        NSLog(@&quot;method2:index %zi is %@&quot;,[array indexOfObject:obj],obj);
+    }
+    /*结果：
+     method2:index 0 is abc
+     method2:index 1 is &lt;NSObject: 0x100602f00&gt;
+     method2:index 2 is cde
+     method2:index 3 is opq
+     method2:index 4 is 25
+     */
+
+
+    //方法3,利用代码块方法
+    [array enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        NSLog(@&quot;method3:index %zi is %@&quot;,idx,obj);
+        if(idx==2){//当idx=2时设置*stop为YES停止遍历
+            *stop=YES;
+        }
+    }];
+    /*结果：
+     method3:index 0 is abc
+     method3:index 1 is &lt;NSObject: 0x100106de0&gt;
+     method3:index 2 is cde
+     */
+
+
+    //方法4，利用迭代器
+    //NSEnumerator *enumerator= [array objectEnumerator];//获得一个迭代器
+    NSEnumerator *enumerator=[array reverseObjectEnumerator];//获取一个反向迭代器
+    //NSLog(@&quot;all:%@&quot;,[enumerator allObjects]);//获取所有迭代对象，注意调用完此方法迭代器就遍历完了，下面的nextObject就没有值了
+    id obj2=nil;
+    while (obj2=[enumerator nextObject]) {
+        NSLog(@&quot;method4:%@&quot;,obj2);
+    }
+    /*结果：
+     method4:25
+     method4:opq
+     method4:cde
+     method4:&lt;NSObject: 0x100106de0&gt;
+     method4:abc
+     */
+}
+//数组派生出新的数组
+void test3(){
+    NSArray *array=[NSArray arrayWithObjects:@&quot;1&quot;,@&quot;2&quot;,@&quot;3&quot;, nil];
+    NSArray *array2=[array arrayByAddingObject:@&quot;4&quot;];//注意此时array并没有变
+    NSLog(@&quot;%@&quot;,array2);
+    /*结果：
+     (
+         1,
+         2,
+         3,
+         4
+     )
+     */
+
+
+    NSLog(@&quot;%@&quot;,[array2 arrayByAddingObjectsFromArray:[NSArray arrayWithObjects:@&quot;5&quot;,@&quot;6&quot;, nil]]);//追加形成新的数组
+    /*结果：
+     (
+         1,
+         2,
+         3,
+         4,
+         5,
+         6
+     )
+     */
+
+
+    NSLog(@&quot;%@&quot;,[array2 subarrayWithRange:NSMakeRange(1, 3)]);//根据一定范围取得生成一个新的数组
+    /*结果：
+     (
+         2,
+         3,
+         4
+     )
+     */
+
+</code></pre>
+<h2 id="字典的使用"><a href="#字典的使用" class="headerlink" title="字典的使用"></a>字典的使用</h2><pre><code class="objc">
+    void test1(){
+    NSDictionary *dic1=[NSDictionary dictionaryWithObject:@&quot;1&quot; forKey:@&quot;a&quot;];
+    NSLog(@&quot;%@&quot;,dic1);
+    /*结果：
+     {
+        a = 1;
+     }
+     */
+
+    //常用的方式
+    NSDictionary *dic2=[NSDictionary dictionaryWithObjectsAndKeys:
+                        @&quot;1&quot;,@&quot;a&quot;,
+                        @&quot;2&quot;,@&quot;b&quot;,
+                        @&quot;3&quot;,@&quot;c&quot;,
+                        nil];
+    NSLog(@&quot;%@&quot;,dic2);
+    /*结果：
+     {
+         a = 1;
+         b = 2;
+         c = 3;
+     }
+     */
+
+
+    NSDictionary *dic3=[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@&quot;1&quot;,@&quot;2&quot;, nil] forKeys:[NSArray arrayWithObjects:@&quot;a&quot;,@&quot;b&quot;, nil]];
+    NSLog(@&quot;%@&quot;,dic3);
+    /*结果：
+     {
+         a = 1;
+         b = 2;
+     }
+     */
+
+
+    //更简单的方式
+    NSDictionary *dic4=@{@&quot;1&quot;:@&quot;a&quot;,@&quot;2&quot;:@&quot;b&quot;,@&quot;3&quot;:@&quot;c&quot;};
+    NSLog(@&quot;%@&quot;,dic4);
+    /*结果：
+     {
+         1 = a;
+         2 = b;
+         3 = c;
+     }
+     */
+}
+  //遍历1
+    for (id key in dic1) {//注意对于字典for遍历循环的是key
+        NSLog(@&quot;%@=%@&quot;,key,[dic1 objectForKey:key]);
+    }
+    /*结果：
+     d=2
+     b=2
+     c=3
+     a=1
+     */
+
+    //遍历2
+    NSEnumerator *enumerator=[dic1 keyEnumerator];//还有值的迭代器[dic1 objectEnumerator]
+    id key=nil;
+    while (key=[enumerator nextObject]) {
+        NSLog(@&quot;%@=%@&quot;,key,[dic1 objectForKey:key]);
+
+    }
+    /*结果：
+     d=2
+     b=2
+     c=3
+     a=1
+     */
+
+    //遍历3
+    [dic1 enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+        NSLog(@&quot;%@=%@&quot;,key,obj);
+    }];
+    /*结果：
+     d=2
+     b=2
+     c=3
+     a=1
+     */
+
+</code></pre>
+<h2 id="装箱拆箱"><a href="#装箱拆箱" class="headerlink" title="装箱拆箱"></a>装箱拆箱</h2><h3 id="基本类型"><a href="#基本类型" class="headerlink" title="基本类型"></a>基本类型</h3><pre><code class="objc">+(NSNumber *)numberWithChar:(char)value;
+
++(NSNumber *)numberWithInt:(int)value;
+
++(NSNumber *)numberWithFloat:(float)value;
+
++(NSNumber *)numberWithDouble:(double)value;
+
++(NSNumber *)numberWithBool:(BOOL)value;
+
++(NSNumber *)numberWithInteger:(NSInteger)value;
+
+拆箱的过程就更加简单了，可以调用如下方法：
+
+-(char)charValue;
+
+-(int)intValue;
+
+-(float)floatValue;
+
+-(double)doubleValue;
+
+-(BOOL)boolValue;
+
+</code></pre>
+<h3 id="复杂类型"><a href="#复杂类型" class="headerlink" title="复杂类型"></a>复杂类型</h3><pre><code class="objc">
++(NSValue *)valueWithPoint:(NSPoint)point;
+
++(NSValue *)valueWithSize:(NSSize)size;
+
++(NSValue *)valueWithRect:(NSRect)rect;
+
+对应的拆箱方法：
+
+-(NSPoint)pointValue;
+
+-(NSSize)sizeValue;
+
+-(NSRect)rectValue;
+
+</code></pre>
+<h2 id="结构体-1"><a href="#结构体-1" class="headerlink" title="结构体"></a>结构体</h2><pre><code class="objc">
++(NSValue *)valueWithBytes:(const void *)value objCType:(const char *)type;
+示例
+typedef struct {
+    int year;
+    int month;
+    int day;
+} Date;
+
+##使用:
+
+##  选项 NS_OPTIONS
+
+//NS_OPTIONS，定义选项
+typedef NS_OPTIONS(NSUInteger, MyOption) {
+MyOptionNone = 0, //二进制0000,十进制0
+MyOption1 = 1 &lt;&lt; 0,//0001,1
+MyOption2 = 1 &lt;&lt; 1,//0010,2
+MyOption3 = 1 &lt;&lt; 2,//0100,4
+MyOption4 = 1 &lt;&lt; 3,//1000,8
+};
+
+//声明定义枚举变量
+MyOption option = MyOption1 | MyOption2;//0001 | 0010 = 0011,3
+
+//检查是否包含某选型
+if ( option &amp; MyOption3 ){ //0011 &amp; 0100 = 0000
+     //包含MyOption3
+}else{
+     //不包含MyOption3
+}
+
+```
+
+//增加选项:
+option = option | MyOption4;//0011 | 1000 = 1011, 11
+//减少选项
+option = option &amp; (~MyOption4);//1011 &amp; (~1000) = 1011 &amp; 0111 = 0011, 3
+
+//NSNumber是NSValue的子类，而NSValue可以包装任何类型，包括结构体
+void test1(){
+    //如果我们自己定义的结构体包装
+    Date date={2014,2,28};
+    char *type=@encode(Date);
+    NSValue *value=[NSValue value:&amp;date withObjCType:type];//第一参数传递结构体地址，第二个参数传递类型字符串
+    NSArray *array=[NSArray arrayWithObject:value];
+    NSLog(@&quot;%@&quot;,array2);
+    /*结果：
+     (
+        &quot;&lt;de070000 02000000 1c000000&gt;&quot;
+     )
+     */
+
+    Date date2;
+    [value getValue:&amp;date];//取出对应的结构体，注意没有返回值
+    //[value3 objCType]//取出包装内容的类型
+    NSLog(@&quot;%i,%i,%i&quot;,date2.year,date2.month,date2.day); //结果：2014,2,28
+
+}
+
+</code></pre>
+<h2 id="反射"><a href="#反射" class="headerlink" title="反射"></a>反射</h2><h3 id="基本方法"><a href="#基本方法" class="headerlink" title="基本方法"></a>基本方法</h3><pre><code class="objc">
+NSLog(@&quot;%i&quot;,[person1 isKindOfClass:[NSObject class]]); //判断一个对象是否为某种类型（如果是父类也返回YES），结果：1
+NSLog(@&quot;%i&quot;,[person1 isMemberOfClass:[NSObject class]]); //判断一个对象是否是某个类的实例化对象，结果：0
+NSLog(@&quot;%i&quot;,[person1 isMemberOfClass:[Person class]]); //结果：1
+NSLog(@&quot;%i&quot;,[person1 conformsToProtocol:@protocol(NSCopying)]);//是否实现了某个协议，结果：0
+NSLog(@&quot;%i&quot;,[person1 respondsToSelector:@selector(showMessage:)]);//是否存在某个方法，结果：1
+//直接调用一个方法
+[person1 showMessage:@&quot;Hello,world!&quot;];
+//动态调用一个方法，注意如果有参数那么参数类型只能为ObjC对象，并且最多只能有两个参数
+[person1 performSelector:@selector(showMessage:) withObject:@&quot;Hello,world!&quot;];
+
+</code></pre>
+<h3 id="动态生成一个类"><a href="#动态生成一个类" class="headerlink" title="动态生成一个类"></a>动态生成一个类</h3><pre><code class="objc">Class myClass=NSClassFromString(@&quot;Person&quot;);//根据类名生成类
+</code></pre>
+<h2 id="文件操作"><a href="#文件操作" class="headerlink" title="文件操作"></a>文件操作</h2><pre><code class="objc">
+/*目录操作*/
+void test1(){
+    //文件管理器是专门用于文件管理的类
+    NSFileManager *manager=[NSFileManager defaultManager];
+
+    //获得当前程序所在目录(当然可以改变)
+    NSString *currentPath=[manager currentDirectoryPath];
+    NSLog(@&quot;current path is :%@&quot;,currentPath);
+    //结果：/Users/kenshincui/Library/Developer/Xcode/DerivedData/FoundationFramework-awxjohcpgsqcpsanqofqogwbqgbx/Build/Products/Debug
+
+    //创建目录
+    NSString *myPath=@&quot;/Users/kenshincui/Desktop/myDocument&quot;;
+    BOOL result= [manager createDirectoryAtPath:myPath withIntermediateDirectories:YES attributes:nil error:nil];
+    if(result==NO){
+        NSLog(@&quot;Couldn&#39;t create directory!&quot;);
+    }
+
+    //目录重命名，如果需要删除目录只要调用removeItemAtPath:&lt;#(NSString *)#&gt; error:&lt;#(NSError **)#&gt;
+    NSError *error;
+    NSString *newPath=@&quot;/Users/kenshincui/Desktop/myNewDocument&quot;;
+    if([manager moveItemAtPath:myPath toPath:newPath error:&amp;error]==NO){
+        NSLog(@&quot;Rename directory failed!Error infomation is:%@&quot;,error);
+    }
+
+    //改变当前目录
+    if([manager changeCurrentDirectoryPath:newPath]==NO){
+        NSLog(@&quot;Change current directory failed!&quot;);
+    }
+    NSLog(@&quot;current path is :%@&quot;,[manager currentDirectoryPath]);
+    //结果：current path is :/Users/kenshincui/Desktop/myNewDocument
+
+    //遍历整个目录
+    NSString *path;
+    NSDirectoryEnumerator *directoryEnumerator= [manager enumeratorAtPath:newPath];
+    while (path=[directoryEnumerator nextObject]) {
+        NSLog(@&quot;%@&quot;,path);
+    }
+    /*结果：
+     documents
+     est.txt
+    */
+
+    //或者这样遍历
+    NSArray *paths= [manager contentsOfDirectoryAtPath:newPath error:nil];
+    NSObject *p;
+    for (p in paths) {
+        NSLog(@&quot;%@&quot;,p);
+    }
+    /*结果：
+     documents
+     est.txt
+     */
+}
+
+/*文件操作*/
+void test2(){
+    NSFileManager *manager=[NSFileManager defaultManager];
+    NSString *filePath=@&quot;/Users/kenshincui/Desktop/myNewDocument/test.txt&quot;;
+    NSString *filePath2=@&quot;/Users/kenshincui/Desktop/test.txt&quot;;
+    NSString *newPath=@&quot;/Users/kenshincui/Desktop/myNewDocument/test2.txt&quot;;
+
+    //判断文件是否存在，这个方法也可以判断目录是否存在，这要后面的参数设置位YES
+    if ([manager fileExistsAtPath:filePath isDirectory:NO]) {
+        NSLog(@&quot;File exists！&quot;);
+    }
+
+    //文件是否可读
+    if([manager isReadableFileAtPath:filePath]){
+        NSLog(@&quot;File is readable!&quot;);
+    }
+
+    //判断两个文件内容是否相等
+    if ([manager contentsEqualAtPath:filePath andPath:filePath2]) {
+        NSLog(@&quot;file1 equals file2&quot;);
+    }
+
+    //文件重命名，方法类似于目录重命名
+    if (![manager moveItemAtPath:filePath toPath:newPath error:nil]) {
+        NSLog(@&quot;Rename file1 failed!&quot;);
+    }
+
+    //文件拷贝
+    NSString *filePath3=@&quot;/Users/kenshincui/Desktop/test3.txt&quot;;
+    if(![manager copyItemAtPath:newPath toPath:filePath3 error:nil]){
+        NSLog(@&quot;Copy failed!&quot;);
+    }
+
+    //读取文件属性
+    NSDictionary *attributes;
+    if ((attributes=[manager attributesOfItemAtPath:newPath error:nil])==nil) {
+        NSLog(@&quot;Read attributes failed!&quot;);
+    }
+    for (NSObject *key in attributes) {
+        NSLog(@&quot;%@=%@&quot;,key,attributes[key]);
+    }
+    /*结果：
+         NSFileOwnerAccountID=501
+         NSFileHFSTypeCode=0
+         NSFileSystemFileNumber=1781953
+         NSFileExtensionHidden=0
+         NSFileSystemNumber=16777218
+         NSFileSize=27
+         NSFileGroupOwnerAccountID=20
+         NSFileOwnerAccountName=kenshincui
+         NSFileCreationDate=2014-07-28 11:47:58 +0000
+         NSFilePosixPermissions=420
+         NSFileHFSCreatorCode=0
+         NSFileType=NSFileTypeRegular
+         NSFileExtendedAttributes={
+         &quot;com.apple.TextEncoding&quot; = &lt;7574662d 383b3133 34323137 393834&gt;;
+         }
+         NSFileGroupOwnerAccountName=staff
+         NSFileReferenceCount=1
+         NSFileModificationDate=2014-07-28 11:47:58 +0000
+     */
+
+    //删除文件
+    [manager removeItemAtPath:newPath error:nil];
+
+}
+//文件操作--文件内容操作（NSData，非结构化字节流对象，有缓冲区管理机制，可用于网络传输）
+void test3(){
+    NSFileManager *manager=[NSFileManager defaultManager];
+    NSString *filePath=@&quot;/Users/kenshincui/Desktop/myNewDocument/test2.txt&quot;;
+    NSData *data=[manager contentsAtPath:filePath];
+    NSLog(@&quot;%@&quot;,data);//存储的是二进制字节流
+    //结果:&lt;68656c6c 6f20776f 726c642c e4b896e7 958ce4bd a0e5a5bd efbc81&gt;
+
+    //NSData转化成字符串
+    NSString *str1=[[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+    NSLog(@&quot;%@&quot;,str1);
+    //结果：hello world,世界你好！
+
+    //字符串转化成NSData
+    NSString *str2=@&quot;Kenshin&quot;;
+    NSData *data2=[str2 dataUsingEncoding:NSUTF8StringEncoding];
+    NSLog(@&quot;%@&quot;,data2);
+
+    //当然一般如果仅仅是简单读取文件内容，直接用户NSString方法即可
+    NSString *content=[NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:nil];
+    NSLog(@&quot;%@&quot;,content);
+    //结果：hello world,世界你好！
+
+}
+//文件操作--细粒度控制文件,文件操作柄
+void test4(){
+    NSFileManager *manager=[NSFileManager defaultManager];
+    NSString *filePath=@&quot;/Users/kenshincui/Desktop/myNewDocument/test2.txt&quot;;
+
+    //以只读方式打开文件
+    NSFileHandle *fileHandle=[NSFileHandle fileHandleForReadingAtPath:filePath];//注意这个方法返回类型为instancetype，也就是说对于上面的NSFileHandle它的返回类型也是NSFileHandle
+    NSData *data= [fileHandle readDataToEndOfFile];//完整读取文件
+    NSString *newPath=@&quot;/Users/kenshincui/Desktop/test4.txt&quot;;
+    [manager createFileAtPath:newPath contents:nil attributes:nil];
+    NSFileHandle *fileHandle2=[NSFileHandle fileHandleForWritingAtPath:newPath];//以可写方式打开文件
+    [fileHandle2 writeData:data];//写入文件内容
+
+    [fileHandle2 closeFile];//关闭文件
+
+
+    //定位到指定位置,默认在文件开头
+    [fileHandle seekToFileOffset:12];
+    NSData *data2= [fileHandle readDataToEndOfFile];
+    NSLog(@&quot;data2=%@&quot;,[[NSString alloc]initWithData:data2 encoding:NSUTF8StringEncoding]);
+    //结果：data2=世界你好！
+
+    [fileHandle seekToFileOffset:6];
+    NSData *data3=[fileHandle readDataOfLength:5];
+    NSLog(@&quot;data3=%@&quot;,[[NSString alloc]initWithData:data3 encoding:NSUTF8StringEncoding]);
+    //结果：data3=world
+
+    [fileHandle closeFile];
+
+}
+
+//文件路径
+void test5(){
+    NSString *filePath=@&quot;/Users/kenshincui/Desktop/myDocument&quot;;
+    NSString *filePath2=@&quot;/Users/kenshincui/Desktop/test.txt&quot;;
+
+    //临时文件所在目录
+    NSString *path=NSTemporaryDirectory();
+    NSLog(@&quot;temporary directory is :%@&quot;,path);
+    //结果：/var/folders/h6/lss6gncs509c2pgzgty3wd_40000gn/T/
+
+    NSString *lastComponent= [filePath lastPathComponent];
+    NSLog(@&quot;%@&quot;,lastComponent); //结果：myDocument
+
+    NSLog(@&quot;%@&quot;,[filePath stringByDeletingLastPathComponent]);
+    //结果：/Users/kenshincui/Desktop
+    NSLog(@&quot;%@&quot;,[filePath stringByAppendingPathComponent:@&quot;Pictrues&quot;]);
+    //结果：/Users/kenshincui/Desktop/myDocument/Pictrues
+    NSLog(@&quot;%@&quot;,[filePath2 pathExtension]);
+    //结果：txt
+
+    [[filePath pathComponents] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        NSLog(@&quot;%i=%@&quot;,idx,obj);
+    }];
+    /*结果：
+     0=/
+     1=Users
+     2=kenshincui
+     3=Desktop
+     4=myDocument
+     */
+
+
+}
+
+//文件操作--NSURL
+void test6(){
+    NSURL *url=[NSURL URLWithString:@&quot;http://developer.apple.com&quot;];
+    NSString *str1=[NSString stringWithContentsOfURL:url encoding:NSUTF8StringEncoding error:nil];
+    NSLog(@&quot;%@&quot;,str1);
+}
+
+//文件操作--NSBundle，程序包，一般用于获取Resource中的资源（当然由于当前并非IOS应用没有程序包，只是表示当前程序运行路径）
+//在ios中经常用于读取应用程序中的资源文件，如图片、声音、视频等
+void test7(){
+    //在程序包所在目录创建一个文件
+    NSFileManager *manager=[NSFileManager defaultManager];
+    NSString *currentPath=[manager currentDirectoryPath];
+    NSLog(@&quot;current path is :%@&quot;,currentPath);
+    //结果：current path is :/Users/kenshincui/Library/Developer/Xcode/DerivedData/FoundationFramework-awxjohcpgsqcpsanqofqogwbqgbx/Build/Products/Debug
+    NSString *filePath=[currentPath stringByAppendingPathComponent:@&quot;test.txt&quot;];
+    [manager createFileAtPath:filePath contents:[@&quot;Hello,world!&quot; dataUsingEncoding:NSUTF8StringEncoding] attributes:nil];
+
+
+    //利用NSBundle在程序包所在目录查找对应的文件
+    NSBundle *bundle=[NSBundle mainBundle];//主要操作程序包所在目录
+    //如果有test.txt则返回路径，否则返回nil
+    NSString *path=[bundle pathForResource:@&quot;test&quot; ofType:@&quot;txt&quot;];//也可以写成：[bundle pathForResource:@&quot;instructions.txt&quot; ofType:nil];
+    NSLog(@&quot;%@&quot;,path);
+    //结果：/Users/kenshincui/Library/Developer/Xcode/DerivedData/FoundationFramework-awxjohcpgsqcpsanqofqogwbqgbx/Build/Products/Debug/test.txt
+    NSLog(@&quot;%@&quot;,[NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:nil]);
+    //结果：Hello,world!
+
+    //假设我们在程序运行创建一个Resources目录，并且其中新建pic.jpg，那么用下面的方法获得这个文件完整路径
+    NSString *path1= [bundle pathForResource:@&quot;pic&quot; ofType:@&quot;jpg&quot; inDirectory:@&quot;Resources&quot;];
+    NSLog(@&quot;%@&quot;,path1);
+    //结果：/Users/kenshincui/Library/Developer/Xcode/DerivedData/FoundationFramework-awxjohcpgsqcpsanqofqogwbqgbx/Build/Products/Debug/Resources/pic.jpg
+}
+
+int main(int argc,char *argv[]){
+
+    test1();
+    test2();
+    test3();
+    test4();
+    test5();
+    test6();
+    test7();
+
+    return 0;
+}
+
+</code></pre>
+<h2 id="归档"><a href="#归档" class="headerlink" title="归档"></a>归档</h2><pre><code class="objc">
+#import &lt;Foundation/Foundation.h&gt;
+
+//xml属性
+void test1(){
+    //数组
+    NSString *path=@&quot;/Users/kenshincui/Desktop/arrayXml.plist&quot;;
+    NSArray *array1=@[@&quot;Kenshin&quot;,@&quot;Kaoru&quot;,@&quot;Rosa&quot;];
+    [array1 writeToFile:path atomically:YES];
+
+    NSArray *array2=[NSArray arrayWithContentsOfFile:path];
+    [array2 enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        NSLog(@&quot;array2[%lu]=%@&quot;,idx,obj);
+    }];
+    /*结果：
+     array1[0]=Kenshin
+     array1[1]=Kaoru
+     array1[2]=Rosa
+     */
+
+
+    //字典
+    NSString *path2=@&quot;/Users/kenshincui/Desktop/dicXml.plist&quot;;
+    NSDictionary *dic1=@{@&quot;name&quot;:@&quot;Kenshin&quot;,@&quot;age&quot;:@28,@&quot;height&quot;:@172.5};
+    [dic1 writeToFile:path2 atomically:YES];
+
+    NSDictionary *dic2=[NSDictionary dictionaryWithContentsOfFile:path2];
+    [dic2 enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+        NSLog(@&quot;dic2[%@]=%@&quot;,key,obj);
+    }];
+    /*结果：
+     dic2[height]=172.5
+     dic2[age]=28
+     dic2[name]=Kenshin
+     */
+}
+
+int main(int argc,char *argv[]){
+
+    test1();
+
+    return 0;
+}
+
+－－－－－－NSKeyedArchiver－－－－－－
+//系统对象简单归档
+void test1(){
+    //NSString归档
+    NSString *str1=@&quot;Hello,world!&quot;;
+    NSString *path1=@&quot;/Users/kenshincui/Desktop/archiver1.arc&quot;;
+    if(![NSArchiver archiveRootObject:str1 toFile:path1]){
+        NSLog(@&quot;archiver failed!&quot;);
+    }
+    //NSString解档
+    NSString *str2= [NSUnarchiver unarchiveObjectWithFile:path1];
+    NSLog(@&quot;str2=%@&quot;,str2);//结果：str2=Hello,world!
+
+
+    //NSArray归档
+    NSString *path2=@&quot;/Users/kenshincui/Desktop/archiver2.arc&quot;;
+    NSArray *array1=@[@&quot;Kenshin&quot;,@&quot;Kaoru&quot;,@&quot;Rosa&quot;];
+    if(![NSArchiver archiveRootObject:array1 toFile:path2]){
+        NSLog(@&quot;archiver failed!&quot;);
+    }
+    //NSArray解档
+    NSArray *array2=[NSUnarchiver unarchiveObjectWithFile:path2];
+    [array2 enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        NSLog(@&quot;array2[%lu]=%@&quot;,idx,obj);
+    }];
+    /*结果：
+     array2[0]=Kenshin
+     array2[1]=Kaoru
+     array2[2]=Rosa
+     */
+}
+
+//系统复杂对象归档（多对象归档）
+void test2(){
+    /*归档*/
+    NSString *path1=@&quot;/Users/kenshincui/Desktop/archiver3.arc&quot;;
+
+    int int1=89;
+    CGSize size1={12.5,16.8};
+    NSNumber *number1=@60.5;
+    NSString *str1=@&quot;Hello,world!&quot;;
+    NSArray *array1=@[@&quot;Kenshin&quot;,@&quot;Kaoru&quot;,@&quot;Rosa&quot;];
+    NSDictionary *dic1=@{@&quot;name&quot;:@&quot;Kenshin&quot;,@&quot;age&quot;:@28,@&quot;height&quot;:@172.5};
+
+    //同时对多个对象进行归档
+    NSMutableData *data1=[[NSMutableData alloc]init];//定义一个NSMutableData用于临时存放数据
+    NSKeyedArchiver *archiver=[[NSKeyedArchiver alloc]initForWritingWithMutableData:data1];//定义归档对象
+    [archiver encodeInt:int1 forKey:@&quot;int&quot;];//对int1归档并指定一个key以便以后读取
+    [archiver encodeSize:size1 forKey:@&quot;size&quot;];
+    [archiver encodeObject:number1 forKey:@&quot;number&quot;];
+    [archiver encodeObject:str1 forKey:@&quot;string&quot;];
+    [archiver encodeObject:array1 forKey:@&quot;array&quot;];
+    [archiver encodeObject:dic1 forKey:@&quot;dic&quot;];
+
+    [archiver finishEncoding];//结束归档
+
+    [data1 writeToFile:path1 atomically:YES];//写入文件
+
+
+
+    /*解档*/
+    int int2;
+    CGSize size2;
+    NSNumber *number2;
+    NSString *str2;
+    NSArray *array2;
+    NSDictionary *dic2;
+
+    NSData *data2=[[NSData alloc]initWithContentsOfFile:path1];//读出数据到NSData
+    NSKeyedUnarchiver *unarchiver=[[NSKeyedUnarchiver alloc]initForReadingWithData:data2];
+
+    int2= [unarchiver decodeInt64ForKey:@&quot;int&quot;];
+    size2=[unarchiver decodeSizeForKey:@&quot;size&quot;];
+    number2=[unarchiver decodeObjectForKey:@&quot;number&quot;];
+    str2=[unarchiver decodeObjectForKey:@&quot;string&quot;];
+    array2=[unarchiver decodeObjectForKey:@&quot;array&quot;];
+    dic2=[unarchiver decodeObjectForKey:@&quot;dic&quot;];
+
+    [unarchiver finishDecoding];
+
+    NSLog(@&quot;int2=%i,size=%@,number2=%@,str2=%@,array2=%@,dic2=%@&quot;,int2,NSStringFromSize(size2),number2,str2,array2,dic2);
+    /*结果：
+     int2=89,
+     size={12.5, 16.800000000000001},
+     number2=60.5,
+     str2=Hello,world!,
+     array2=(
+         Kenshin,
+         Kaoru,
+         Rosa
+     ),
+     dic2={
+         age = 28;
+         height = &quot;172.5&quot;;
+         name = Kenshin;
+     }
+     */
+}
+接下来看一下自定义的对象如何归档，上面说了如果要对自定义对象进行归档那么这个对象必须实现NSCoding协议，在这个协议中有两个方法都必须实现：
+
+-(void)encodeWithCoder:(NSCoder *)aCoder;通过给定的Archiver对消息接收者进行编码；
+
+-(id)initWithCoder:(NSCoder *)aDecoder;从一个给定的Unarchiver的数据返回一个初始化对象；
+
+这两个方法分别在归档和解档时调用。下面通过一个例子进行演示（注意对于自定义类的多对象归档与系统类多对象归档完全一样，代码中不再演示）：
+
+Person.h
+
+//
+//  Person.h
+//  FoundationFramework
+//
+//  Created by Kenshin Cui on 14-2-16.
+//  Copyright (c) 2014年 Kenshin Cui. All rights reserved.
+//
+
+#import &lt;Foundation/Foundation.h&gt;
+
+@interface Person : NSObject&lt;NSCoding&gt;
+
+@property (nonatomic,copy) NSString *name;
+@property (nonatomic,assign) int age;
+@property (nonatomic,assign) float height;
+@property (nonatomic,assign) NSDate *birthday;
+
+@end
+Person.m
+
+//
+//  Person.m
+//  FoundationFramework
+//
+//  Created by Kenshin Cui on 14-2-16.
+//  Copyright (c) 2014年 Kenshin Cui. All rights reserved.
+//
+
+#import &quot;Person.h&quot;
+
+@implementation Person
+
+#pragma mark 解码
+-(id)initWithCoder:(NSCoder *)aDecoder{
+    NSLog(@&quot;decode...&quot;);
+    if (self=[super init]) {
+        self.name=[aDecoder decodeObjectForKey:@&quot;name&quot;];
+        self.age=[aDecoder decodeInt64ForKey:@&quot;age&quot;];
+        self.height=[aDecoder decodeFloatForKey:@&quot;heiht&quot;];
+        self.birthday=[aDecoder decodeObjectForKey:@&quot;birthday&quot;];
+    }
+    return self;
+}
+
+#pragma mark 编码
+-(void)encodeWithCoder:(NSCoder *)aCoder{
+    NSLog(@&quot;encode...&quot;);
+    [aCoder encodeObject:_name forKey:@&quot;name&quot;];
+    [aCoder encodeInt64:_age forKey:@&quot;age&quot; ];
+    [aCoder encodeFloat:_height forKey:@&quot;height&quot;];
+    [aCoder encodeObject:_birthday forKey:@&quot;birthday&quot;];
+
+}
+
+#pragma mark 重写描述
+-(NSString *)description{
+    NSDateFormatter *formater1=[[NSDateFormatter alloc]init];
+    formater1.dateFormat=@&quot;yyyy-MM-dd&quot;;
+    return [NSString stringWithFormat:@&quot;name=%@,age=%i,height=%.2f,birthday=%@&quot;,_name,_age,_height,[formater1 stringFromDate:_birthday]];
+}
+
+@end
+main.m
+
+//
+//  main.m
+//  FoundationFramework
+//
+//  Created by Kenshin Cui on 14-2-16.
+//  Copyright (c) 2014年 Kenshin Cui. All rights reserved.
+//
+
+#import &lt;Foundation/Foundation.h&gt;
+#import &quot;Person.h&quot;
+
+
+int main(int argc,char *argv[]){
+
+    //归档
+    Person *person1=[[Person alloc]init];
+    person1.name=@&quot;Kenshin&quot;;
+    person1.age=28;
+    person1.height=1.72;
+    NSDateFormatter *formater1=[[NSDateFormatter alloc]init];
+    formater1.dateFormat=@&quot;yyyy-MM-dd&quot;;
+    person1.birthday=[formater1 dateFromString:@&quot;1986-08-08&quot;];
+
+    NSString *path1=@&quot;/Users/kenshincui/Desktop/person1.arc&quot;;
+
+    [NSKeyedArchiver archiveRootObject:person1 toFile:path1];
+
+    //解档
+    Person *person2= [NSKeyedUnarchiver unarchiveObjectWithFile:path1];
+    NSLog(@&quot;%@&quot;,person2);
+    /*结果：
+     name=Kenshin,age=28,height=0.00,birthday=1986-08-08
+     */
+
+    return 0;
+}
+
+</code></pre>
+<h2 id="结构"><a href="#结构" class="headerlink" title="结构"></a>结构</h2><pre><code class="objc">定义结构：
+//方式1：
+struct PathAndColor{
+    CGColorRef color;
+    CGMutablePathRef path;
+};
+typedef struct PathAndColor PathAndColor;
+
+//方式2：
+typedef struct PathAndColor{
+    CGColorRef color;
+    CGMutablePathRef path;
+} PathAndColor;
+
+初始化
+//方式1：
+  PathAndColor currPath = {currColor,path};
+//方式2：
+  PathAndColor currPath ;
+  currPath.color = currColor;
+  currPath.path = path;
+
+// 存入集合
+  [paths addObject:[NSValue valueWithBytes:&amp;currPath objCType:@encode(PathAndColor)]];
+// 取出
+
+NSValue *value = paths[index];
+[noteGroupValue getValue:&amp;noteGroup];
+
+</code></pre>
+
+      
+
+      
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">cocoa</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/iOS/" class="article-tag-list-link color4">iOS</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/05/11/cocoa基础的副本/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
     <article id="post-学习GitHub上的iOS-tips项目的副本" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -2146,307 +3318,6 @@ frame = DataFrame({&#39;b&#39;: [4, 8, 5, 3], &#39;a&#39;: [-2, 1, 9, 6]})
 
 
   
-    <article id="post-《利用Python进行数据分析》读书笔记-4-第四章-Numpy基础：数组和矢量计算" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/03/14/《利用Python进行数据分析》读书笔记-4-第四章-Numpy基础：数组和矢量计算/">《利用Python进行数据分析》读书笔记-4-第四章-Numpy基础：数组和矢量计算</a>
-    </h1>
-  
-
-        
-        <a href="/2017/03/14/《利用Python进行数据分析》读书笔记-4-第四章-Numpy基础：数组和矢量计算/" class="archive-article-date">
-  	<time datetime="2017-03-14T13:25:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-03-14</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<p>Tip：全称Numerical Pythn，是高性能科学计算和数据分析的基础包。本书所有高级工具的构建基础。</p>
-</blockquote>
-<h2 id="NumPy功能"><a href="#NumPy功能" class="headerlink" title="NumPy功能"></a>NumPy功能</h2><ul>
-<li>ndarry，矢量算术运算和复杂广播能力的快速切节省空间的多维数组</li>
-<li>对数组数据进行快速运算的标准数据函数（无需编写循环）</li>
-<li>读写磁盘的工具，，操作内存映射文件的工具</li>
-<li>线性代数、随机数生成以及傅立叶变换</li>
-<li><strong>集成C、C++、Fortran等语言编写的代码</strong>（从生态系统角度，最重要的功能）</li>
-</ul>
-<p>对于大部分数据分析应用，作者关注功能：</p>
-<ul>
-<li>数据整理和清理、子集构造和过滤、转换等快速矢量化数组运算</li>
-<li>数组算法，如排序、唯一化、集合运算</li>
-<li>高效描述统计和数据聚合／摘要运算</li>
-<li>异构数据集的合并／连接运算</li>
-<li>条件逻辑表述为数组表达式（除去if-else-if循环）</li>
-<li>数据分组运算</li>
-</ul>
-<blockquote>
-<p>Tip:标准NumPy约定，总是使用<code>import NumPy as np</code>,而不是<code>from NumPy import *</code>.</p>
-</blockquote>
-<h2 id="ndarray-一种多维数组对象"><a href="#ndarray-一种多维数组对象" class="headerlink" title="ndarray: 一种多维数组对象"></a>ndarray: 一种多维数组对象</h2><blockquote>
-<p>Tip：NumPy最重要特点是其N维数组对象（即ndarray，该对象是一个快速而灵活的大数据集容器）。</p>
-</blockquote>
-<blockquote>
-<p>大多数数据分析工作不需要深入理解NumPy，但精通面向数组的编程和思维方式是成为Python科学计算牛人的一大关键步骤。</p>
-</blockquote>
-<blockquote>
-<p>Focus:<strong>本书提到的<code>数组</code>、<code>NUmPy数组</code>、<code>ndarray</code>都是指ndarray对象</strong></p>
-</blockquote>
-<ul>
-<li>ndarray是同构数据多维容器，其中所有元素相同的类型。</li>
-<li>每个数组都有shape和dtype属性</li>
-</ul>
-<h3 id="创建ndarray"><a href="#创建ndarray" class="headerlink" title="创建ndarray"></a>创建ndarray</h3><pre><code>#!/usr/bin/python
-# -*- coding:utf-8 -*-
-
-import numpy as np
-# data = np.ndarraz([[0.580052,0.186730,1.040717],[-0.636917,-0.938659,0.124094]])
-# print data.shape
-
-data1 = [5,7,8,3,9]
-arr1 = np.array(data1)
-# print arr1
-# print arr1.ndim  # 1 维
-# print arr1.shape  # (5,)
-# print arr1.dtype   # int64
-
-# print np.zeros(10)
-# [ 0.  0.  0.  0.  0.  0.  0.  0.  0.  0.]
-# print np.zeros((3,6))
-# [[ 0.  0.  0.  0.  0.  0.]
-#  [ 0.  0.  0.  0.  0.  0.]
-#  [ 0.  0.  0.  0.  0.  0.]]
-# print np.empty((2,3,2))
-# [[[ -2.00000000e+000  -2.00000000e+000]
-#   [  6.95320070e-310   6.95320070e-310]
-#   [  6.95320070e-310   6.95320070e-310]]
-#
-#  [[  6.95320070e-310   6.95320070e-310]
-#   [  6.95320070e-310   6.95320070e-310]
-#   [  6.95320070e-310   6.95320070e-310]]]
-# np.empty经常返回一些为初始化的垃圾值
-# print np.arange(10)
-# [0 1 2 3 4 5 6 7 8 9]
-</code></pre><blockquote>
-<p>Focus:如无特别指定，数据类型基本都是float64</p>
-</blockquote>
-<h3 id="ndarray的数据类型"><a href="#ndarray的数据类型" class="headerlink" title="ndarray的数据类型"></a>ndarray的数据类型</h3><p>ndarray的astype方法可转换其dtype：</p>
-<pre><code>arr = np.array([1,2,3,4,5])
-print arr.dtype
-# int64
-float_arr = arr.astype(np.float64)
-print float_arr.dtype
-# float64
-</code></pre><h2 id="数组与标量之间运算"><a href="#数组与标量之间运算" class="headerlink" title="数组与标量之间运算"></a>数组与标量之间运算</h2><blockquote>
-<p>无需循环就可执行批量运算；这就叫做矢量化（vectorization）。不同大小数组之间的运算叫做广播。</p>
-</blockquote>
-<pre><code>arr = np.array([[1.,2.,3.], [4.,5.,6.]])
-# print arr
-# print arr * arr 加减乘除都是相对位置相乘
-</code></pre><h2 id="基本索引和切片"><a href="#基本索引和切片" class="headerlink" title="基本索引和切片"></a>基本索引和切片</h2><blockquote>
-<p>与列表最重要区别在于，数组切片是原始数组的视图。说明数据不会被复制，视图伤的任何修改都会直接反映到数组上。若非要复制，就要显式复制：arr[5:8].copy()</p>
-</blockquote>
-<pre><code>arr = np.arange(10)
-# print arr[5:8]  # [5,6,7]
-arr[5:8] = 12
-# print arr   # [0 1 2 3 4 12 12 12 8 9]
-arr_slice = arr[5:8]
-arr_slice[1] =12345
-print arr  # [0 1 2 3 4 12 12345 12 8 9]
-arr_slice[:] = 64
-# print arr  # [0 1 2 3 4 64 64 64 8 9]
-</code></pre><h2 id="切片索引"><a href="#切片索引" class="headerlink" title="切片索引"></a>切片索引</h2><blockquote>
-<p>ndarray切片语法与一维对象相似。多维切片只是一维的基础山进行扩展。</p>
-</blockquote>
-<p>沿着第0轴切片；切片是沿着一个轴向选取元素的。一次传入多个切片：</p>
-<pre><code>arr2d = np.array([[1,2,3],[4,5,6],[7,8,9]])
-# print arr2d[:2]
-# out: [[1 2 3], [4 5 6]]
-# print arr2d[:2,:1]
-# out: [[1], [4]]
-# print arr2d[:2,1:]
-# out: [[2,3],[5,6]]
-</code></pre><p>上面只能得到相同维数的数组视图。</p>
-<p>通过将整数索引和切片混合，可以得到低维度的切片：</p>
-<pre><code>print arr2d[1,:2]
-# out: [4, 5]
-print arr2d[2:,1]
-# out: [8]
-print arr2d[:, :1]
-# out: [[1],  [4],  [7]]
-</code></pre><blockquote>
-<p>Focus：<code>:</code>,冒号表示选取整个轴。</p>
-</blockquote>
-<p>对切片表达式进行赋值，该操作会扩散到整个选区。</p>
-<pre><code>arr2d[:2, 1:] = 0
-print arr2d
-# out: [[1 0 0],  [4 0 0],  [7 8 9]]
-</code></pre><h2 id="布尔型索引"><a href="#布尔型索引" class="headerlink" title="布尔型索引"></a>布尔型索引</h2><blockquote>
-<p>二维数组切片，第一个数字开始在行这个维度上切片，第二个数字在列上切片。</p>
-</blockquote>
-<p>布尔型索引选取数组中多数据，总是创建数的副本，即使是返回一摸一样多数组。</p>
-<blockquote>
-<p>⚠️：Python关键字and和or在布尔型数组中无效。</p>
-</blockquote>
-<p>通过布尔型数组设置值，如下，将data中的所有负值都设为0:</p>
-<pre><code>data[data &lt; 0] = 0
-</code></pre><p>一维数组设置正行或列的值：</p>
-<pre><code>data[name != &#39;Joe&#39;] = 7
-</code></pre><h3 id="花式索引"><a href="#花式索引" class="headerlink" title="花式索引"></a>花式索引</h3><blockquote>
-<p>指利用整数数组进行索引；花式索引跟切片不一样，总是将数据复制到新数组中。</p>
-</blockquote>
-<pre><code>arr = np.empty((8,3))
-for i in range(8):
-    arr[i] = i
-# print arr
-# out：[[ 0.  0.  0.]
-#  [ 1.  1.  1.]
-#  [ 2.  2.  2.]
-#  [ 3.  3.  3.]
-#  [ 4.  4.  4.]
-#  [ 5.  5.  5.]
-#  [ 6.  6.  6.]
-#  [ 7.  7.  7.]]
-
-# print arr[[4,3,0,6]]
-# out:[[ 4.  4.  4.]
-#  [ 3.  3.  3.]
-#  [ 0.  0.  0.]
-#  [ 6.  6.  6.]]
-</code></pre><h3 id="数组转置与轴对换"><a href="#数组转置与轴对换" class="headerlink" title="数组转置与轴对换"></a>数组转置与轴对换</h3><pre><code>arrzzdh = np.arange(15).reshape(3,5)
-# print arrzzdh
-# out: 0-15个数字 转换成3行5列的数组
-# [[ 0  1  2  3  4]
-#  [ 5  6  7  8  9]
-#  [10 11 12 13 14]]
-print arrzzdh.T
-# out: 转置，行列倒置
-# [[ 0  5 10]
-#  [ 1  6 11]
-#  [ 2  7 12]
-#  [ 3  8 13]
-#  [ 4  9 14]]
-</code></pre><h2 id="利用数组进行数据处理"><a href="#利用数组进行数据处理" class="headerlink" title="利用数组进行数据处理"></a>利用数组进行数据处理</h2><blockquote>
-<p>用数组表达式代替循环的做法，称为矢量化。</p>
-</blockquote>
-<pre><code>points = np.arange(-5,5,0.1) # 1000个间隔相等的点
-xs, ys = np.meshgrid(points, points)
-# print ys
-import matplotlib.pyplot as plt
-z = np.sqrt(xs**2 + ys**2)
-# print z
-plt.imshow(z, cmap=plt.cm.gray);plt.colorbar()
-plt.title(&quot;Image plot of $\sqrt{x^2 + y^2}$ for a grid of values&quot;)
-plt.show()
-</code></pre><h3 id="将条件逻辑表述为数组运算"><a href="#将条件逻辑表述为数组运算" class="headerlink" title="将条件逻辑表述为数组运算"></a>将条件逻辑表述为数组运算</h3><p>如<code>numpy.where函数</code>是三元表达式<code>x if condition erse y</code>的矢量化版本。</p>
-<pre><code>result = np.where(condition=&quot;&quot;,x=&quot;&quot;,y=&quot;&quot;)
-</code></pre><p>满足条件则x，否则y</p>
-<h3 id="数学和统计方法"><a href="#数学和统计方法" class="headerlink" title="数学和统计方法"></a>数学和统计方法</h3><pre><code>arr = np.random.randn(5, 4)
-print arr.mean()
-# out: -0.360180571527
-
-arr = np.random.randn(100)
-print (arr &gt; 0).sum()
-# out: 随机的一百个数字，每次大于0的数的个数。
-</code></pre><pre><code>## 排序
-arr1 =np.random.randn(8)
-print arr1
-arr1.sort()
-# 先sort排序，才能输出，如果直接同时输出排序，会None
-print arr1
-
-# 多维数组排序，在任何一个轴上，传入该轴编号即可
-arr2 = np.random.randn(5,3)
-print arr2
-arr2.sort(1)
-print arr2
-</code></pre><pre><code>## 唯一化
-names = np.array([&#39;jin&#39;, &#39;king&#39;, &#39;lin&#39;, &#39;wen&#39;, &#39;jin&#39;, &#39;wen&#39;, &#39;lin&#39;])
-# print np.unique(names) # 这里又必须直接输出
-# print names  # 无效
-ints = np.array([2,3,4,5,6,7,8,5,4,2,4,6,1])
-# print np.unique(ints) # 直接输出有效
-# print ints # 无效
-# # 没效果？那么纯Python方法有效果吗
-# print sorted(set(names))
-# print names
-# print sorted(set(ints))
-# print ints
-# 还是没有效果啊
-# 这里说明排序唯一都要直接输出，**原值没有改变**。
-</code></pre><pre><code>## 用于数组的文件输入输出
-### 将数组以二进制格式保存到硬盘
-# np.save()和np.load()方法是用于读写的主要方法。
-arr3 = np.arange(10)
-np.save(&#39;test_arr_save&#39;, arr3)
-# 保存为了.npy文件；然后用load方法读取数组
-# print np.load(&#39;test_arr_save.npy&#39;)
-# out: [0 1 2 3 4 5 6 7 8 9]
-# np.savez保存多个数组到压缩文件
-np.savez(&#39;arr_archive.npz&#39;, a= arr3, b=arr3)
-arch = np.load(&#39;arr_archive.npz&#39;)
-# print arch[&#39;b&#39;]
-# out: [0 1 2 3 4 5 6 7 8 9]
-</code></pre><pre><code># 存取文本文件
-# 指定分隔符为逗号，读取csv文件
-# np.loadtxt(&#39;filename&#39;, delimiter=&#39;,&#39;)
-</code></pre><p>最后涉及到了<strong>线性代数</strong>,<strong>随机漫步</strong>等数学概念，深切体会到学好数学是任何一门科学想要往高了走的必然阶梯，计算机科学当然也不例外。</p>
-<p>今天组内培训，讲了一些代码规范、版本更新和项目管理的知识，无规矩不成方圆，团队大了，尤其需要一套行之有效的规矩来约束每个人的行为，代码能体现一个人的行为方式，是否有代码洁癖。<code>Talk is cheap, show me the code.</code>希望组内能坚持下去，互相code Review。</p>
-
-      
-
-      
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/cs/" class="article-tag-list-link color3">cs</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/03/14/《利用Python进行数据分析》读书笔记-4-第四章-Numpy基础：数组和矢量计算/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/5/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/7/">Next &raquo;</a>
@@ -2578,10 +3449,6 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">JavaScriptCore</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">operation</a>
               </li>
              
@@ -2591,6 +3458,10 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">deploy</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">JavaScriptCore</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2710,11 +3581,19 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">WeChat</a>
+                <a href="javascript:void(0)" class="js-tag color1">OpenLayers</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Geoserver</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">张靓颖</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">WeChat</a>
               </li>
              
               <li class="article-tag-list-item">
