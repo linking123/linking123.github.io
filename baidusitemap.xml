@@ -4,16 +4,14 @@
 
     
   <url>
-    <loc>http://linking123.github.io/2015/11/30/%E5%8D%9A%E5%AE%A2%E5%BB%BA%E7%AB%8B%E8%BF%87%E7%A8%8B%E8%AE%B0%E5%BD%95/</loc>
-    <lastmod>2019-04-20T15:51:47.071Z</lastmod>
+    <loc>http://linking123.github.io/2019/04/20/CentOS7%E7%A6%BB%E7%BA%BF%E5%AE%89%E8%A3%85Nginx/</loc>
+    <lastmod>2019-04-20T16:03:29.849Z</lastmod>
     <data>
         <display>
-        <title>博客建立过程记录</title>
-        <pubTime>2015-11-30T10:18:12.000Z</pubTime>
+        <title>CentOS7离线安装Nginx</title>
+        <pubTime>2019-04-20T15:35:47.000Z</pubTime>
         
-        <tag>blog</tag>
-         
-        <tag>cs</tag>
+        <tag>Nginx</tag>
          
          
            
@@ -26,14 +24,16 @@
 
     
   <url>
-    <loc>http://linking123.github.io/2018/08/20/CentOS7%E7%A6%BB%E7%BA%BF%E5%AE%89%E8%A3%85Nginx/</loc>
-    <lastmod>2019-04-20T15:40:58.599Z</lastmod>
+    <loc>http://linking123.github.io/2015/11/30/%E5%8D%9A%E5%AE%A2%E5%BB%BA%E7%AB%8B%E8%BF%87%E7%A8%8B%E8%AE%B0%E5%BD%95/</loc>
+    <lastmod>2019-04-20T15:51:47.071Z</lastmod>
     <data>
         <display>
-        <title>CentOS7离线安装Nginx</title>
-        <pubTime>2018-08-20T15:35:47.000Z</pubTime>
+        <title>博客建立过程记录</title>
+        <pubTime>2015-11-30T10:18:12.000Z</pubTime>
         
-        <tag>Nginx</tag>
+        <tag>blog</tag>
+         
+        <tag>cs</tag>
          
          
            
