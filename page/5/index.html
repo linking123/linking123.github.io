@@ -175,6 +175,83 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-也谈兴趣" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/06/17/也谈兴趣/">也谈兴趣</a>
+    </h1>
+  
+
+        
+        <a href="/2017/06/17/也谈兴趣/" class="archive-article-date">
+  	<time datetime="2017-06-17T11:04:36.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-17</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>阅读时间：约等于 5 min。</p>
+<h1 id="本篇由来"><a href="#本篇由来" class="headerlink" title="本篇由来"></a>本篇由来</h1><p>想写一下这个话题，因为最近的两件事。</p>
+<p>第一件事，前段妹妹暑假想学画画，叔父电询我的意见，担心暑假不用来补习功课，下学期会掉队。</p>
+<p>能学感兴趣的东西是一件很幸福的事情，因此我希望叔父同意。同时也发了信息给妹妹，表达支持，同时劝说不要哭闹，好好跟家人商量，学画画也不能丢下课业（这点我倒不担心）。</p>
+<p>普通家庭又非天赋超群的孩子在艺术之路上取得不错的成就，还是鲜有的。<br>
+        
+          <a class="article-more-a" href="/2017/06/17/也谈兴趣/#more">more >></a>
+        
+      
+
+      
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">essay</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/life/" class="article-tag-list-link color5">life</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/06/17/也谈兴趣/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
     <article id="post-摘抄-把时间当朋友" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1113,201 +1190,6 @@ dispatch_resume(globalQueue)
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2017/05/23/ios9支持http请求的副本/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
-    <article id="post-https请求处理方式1：信任一切证书的副本" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/05/16/https请求处理方式1：信任一切证书的副本/">https请求处理方式1：信任一切证书</a>
-    </h1>
-  
-
-        
-        <a href="/2017/05/16/https请求处理方式1：信任一切证书的副本/" class="archive-article-date">
-  	<time datetime="2017-05-16T06:24:49.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-16</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="处理方法"><a href="#处理方法" class="headerlink" title="处理方法"></a>处理方法</h2><h3 id="1：使用异步请求方式"><a href="#1：使用异步请求方式" class="headerlink" title="1：使用异步请求方式"></a>1：使用异步请求方式</h3><h3 id="2：证书信任的委托这样处理"><a href="#2：证书信任的委托这样处理" class="headerlink" title="2：证书信任的委托这样处理"></a>2：证书信任的委托这样处理</h3><pre><code class="objc">-(BOOL)connectionShouldUseCredentialStorage:(NSURLConnection *)connection{
-    return true;
-}
-- (void)connection:(NSURLConnection *)connection willSendRequestForAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge{
-    NSLog(@&quot;didReceiveAuthenticationChallenge %@ %zd&quot;, [[challenge protectionSpace] authenticationMethod], (ssize_t) [challenge previousFailureCount]);
-    if ([challenge.protectionSpace.authenticationMethod isEqualToString:NSURLAuthenticationMethodServerTrust]){
-        [[challenge sender]  useCredential:[NSURLCredential credentialForTrust:challenge.protectionSpace.serverTrust] forAuthenticationChallenge:challenge];
-        [[challenge sender]  continueWithoutCredentialForAuthenticationChallenge: challenge];
-    }
-}
-
-- (BOOL)connection:(NSURLConnection *)connection canAuthenticateAgainstProtectionSpace:(NSURLProtectionSpace *)protectionSpace{
-       return [protectionSpace.authenticationMethod isEqualToString:NSURLAuthenticationMethodServerTrust];
-}
-</code></pre>
-<h2 id="完整示例代码"><a href="#完整示例代码" class="headerlink" title="完整示例代码"></a>完整示例代码</h2><p>UIViewController.h</p>
-<pre><code class="objc">
-#import &lt;UIKit/UIKit.h&gt;
-
-@interface ViewController : UIViewController&lt;NSURLConnectionDataDelegate&gt;
-
-@end
-</code></pre>
-<p>UIViewController.m </p>
-<pre><code class="objc">
-#import &quot;ViewController.h&quot;
-
-@interface ViewController ()
-
-@end
-
-@implementation ViewController
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-
-    //string 转 url编码
-    NSString *urlString = @&quot;https://api.github.com/users/coolnameismy&quot;;
-    NSURL *url = [NSURL URLWithString:[urlString stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]];
-
-
-    NSURLRequest *request = [[NSURLRequest alloc]initWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:10];
-    NSURLConnectionDataDelegate *connection = [[NSURLConnection alloc]initWithRequest:request delegate:self];
-
-    [connection start];
-}
-
-//请求失败
-- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error{
-    NSLog(@&quot;=================didFailWithError=================&quot;);
-    NSLog(@&quot;error:%@&quot;,error);
-}
-
-//重定向
-- (nullable NSURLRequest *)connection:(NSURLConnection *)connection willSendRequest:(NSURLRequest *)request redirectResponse:(nullable NSURLResponse *)response{
-    NSLog(@&quot;=================request redirectResponse=================&quot;);
-    NSLog(@&quot;request:%@&quot;,request);
-    return request;
-}
-
-//接收响应
-- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response{
-    NSLog(@&quot;=================didReceiveResponse=================&quot;);
-    NSHTTPURLResponse *resp = (NSHTTPURLResponse *)response;
-    NSLog(@&quot;response:%@&quot;,resp);
-}
-
-//接收响应
-- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data{
-    NSLog(@&quot;=================didReceiveData=================&quot;);
-    NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
-    NSLog(@&quot;data:%@&quot;,dic);
-}
-
-//- (nullable NSInputStream *)connection:(NSURLConnection *)connection needNewBodyStream:(NSURLRequest *)request{
-//    
-//}
-
-//上传数据委托，用于显示上传进度
-- (void)connection:(NSURLConnection *)connection   didSendBodyData:(NSInteger)bytesWritten
- totalBytesWritten:(NSInteger)totalBytesWritten
-totalBytesExpectedToWrite:(NSInteger)totalBytesExpectedToWrite{
-    NSLog(@&quot;=================totalBytesWritten=================&quot;);
-}
-
-//- (nullable NSCachedURLResponse *)connection:(NSURLConnection *)connection willCacheResponse:(NSCachedURLResponse *)cachedResponse{
-//    
-//}
-
-//完成请求
-- (void)connectionDidFinishLoading:(NSURLConnection *)connection{
-    NSLog(@&quot;=================connectionDidFinishLoading=================&quot;);
-}
-
-
-#pragma mark -https认证
--(BOOL)connectionShouldUseCredentialStorage:(NSURLConnection *)connection{
-    return true;
-}
-- (void)connection:(NSURLConnection *)connection willSendRequestForAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge{
-    NSLog(@&quot;didReceiveAuthenticationChallenge %@ %zd&quot;, [[challenge protectionSpace] authenticationMethod], (ssize_t) [challenge previousFailureCount]);
-    if ([challenge.protectionSpace.authenticationMethod isEqualToString:NSURLAuthenticationMethodServerTrust]){
-        [[challenge sender]  useCredential:[NSURLCredential credentialForTrust:challenge.protectionSpace.serverTrust] forAuthenticationChallenge:challenge];
-        [[challenge sender]  continueWithoutCredentialForAuthenticationChallenge: challenge];
-    }
-}
-
-- (BOOL)connection:(NSURLConnection *)connection canAuthenticateAgainstProtectionSpace:(NSURLProtectionSpace *)protectionSpace{
-       return [protectionSpace.authenticationMethod isEqualToString:NSURLAuthenticationMethodServerTrust];
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-@end
-
-
-</code></pre>
-<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><p>-<a href="http://blog.csdn.net/kmyhy/article/details/7733619" target="_blank" rel="noopener">iOS: HTTPS 与自签名证书</a><br>-<a href="http://www.jianshu.com/p/4b5d2d47833d" target="_blank" rel="noopener">iOS - HTTPS</a><br>-<a href="http://oncenote.com/2014/10/21/Security-1-HTTPS/" target="_blank" rel="noopener">iOS安全系列之一：HTTPS</a><br>-<a href="http://oncenote.com/2015/09/16/Security-2-HTTPS2/" target="_blank" rel="noopener">iOS安全系列之二：HTTPS进阶</a><br>-<a href="https://developer.apple.com/library/ios/documentation/NetworkingInternetWeb/Conceptual/NetworkingOverview/WorkingWithHTTPAndHTTPSRequests/WorkingWithHTTPAndHTTPSRequests.html" target="_blank" rel="noopener">Making HTTP and HTTPS Requests</a></p>
-
-      
-
-      
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">iOS</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">https</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/cs/" class="article-tag-list-link color3">cs</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/05/16/https请求处理方式1：信任一切证书的副本/">展开全文 >></a>
         </p>
       
 
