@@ -175,6 +175,100 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-to-D-Wade" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/07/07/to-D-Wade/">Dwayne Wade&#39;s Emotional Letter to Miami Heat Fans</a>
+    </h1>
+  
+
+        
+        <a href="/2016/07/07/to-D-Wade/" class="archive-article-date">
+  	<time datetime="2016-07-07T15:33:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-07-07</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>Dear <strong>Miami</strong>,</p>
+</blockquote>
+<blockquote>
+<p>This has been an extremely emotional and tough decision to come to. After <strong>13 years</strong>, I have decided to embark on a new journey with the <strong>Chicago Bulls</strong>. This was not an easy decision, but I feel I have made the right choice for myself and my family.</p>
+</blockquote>
+<blockquote>
+<p>I started my NBA career with the <strong>Miami Heat</strong> in <strong>2003</strong> and it has been an honor to have played with them and help build a winning franchise with <strong>three NBA championships</strong>. I look back with pride and amazement at all we have accomplished together. I want to express my gratitude to the <strong>Arison family, Pat Riley, Coach Erik Spoelstra, the coaching staff, and the entire Miami Heat organization</strong>.</p>
+</blockquote>
+<blockquote>
+<p>From the bottom of my heart, I want to thank the <strong>Miami</strong> community and especially #HEATNATION for all of their love and support over the years. It has been truly incredible. I am deeply moved and appreciative of the positive messages from my <strong>fans</strong> expressing that they want what’s best for me and I know they will support my decision. The memories including championship parades and five conference titles are incredible moments we have shared that will always remain close to my heart as I begin the <strong>next chapter</strong> of my life.</p>
+</blockquote>
+<blockquote>
+<p>Growing up in Robbins, Ill., I never dreamed that an NBA career could have even been possible and that one day I would wear a <strong>Chicago Bulls</strong> jersey. Watching the Bulls growing up inspired me at an early age to pursue my dream of becoming a basketball player. My most treasured memories were watching my dad play basketball on the courts of Fermi Elementary School and developing my game at the Blue Island Recreation Center. I have never forgotten where I came from and I am thankful to have an opportunity to play for the team that first fueled my love of the game. Many of my family members still live in Chicago and I am excited to return <strong>home</strong> to a city very close to my heart.</p>
+</blockquote>
+<blockquote>
+<p>I look forward to returning to my roots and to what lies ahead.</p>
+</blockquote>
+<blockquote>
+<p>Much <strong>Love and Respect</strong>,</p>
+</blockquote>
+<blockquote>
+<p><strong>D. Wade</strong></p>
+</blockquote>
+
+      
+
+      
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">D.Wade</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/NBA/" class="article-tag-list-link color4">NBA</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2016/07/07/to-D-Wade/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
     <article id="post-java初识" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1162,135 +1256,6 @@ function aa(res){
 
 
   
-    <article id="post-Ajax系列二-现代化的Ajax" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/02/27/Ajax系列二-现代化的Ajax/">Ajax系列二-现代化的Ajax</a>
-    </h1>
-  
-
-        
-        <a href="/2016/02/27/Ajax系列二-现代化的Ajax/" class="archive-article-date">
-  	<time datetime="2016-02-27T05:29:41.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-02-27</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><strong>核心</strong>–<code>XMLHttpRequest</code>对象，一个专门的<code>HTTP</code>请求工具</p>
-<p>使用<code>XMLHttpRequest</code>做<code>Ajax</code>请求：</p>
-<h2 id="如何创建该对象"><a href="#如何创建该对象" class="headerlink" title="如何创建该对象"></a>如何创建该对象</h2><pre><code>标准` new XMLHttpRequest()`
-低版本`IE(678)`，`new ActiveXObject(&#39;Microsoft.XMLHTTP&#39;)`;新的`jQuery`已经抛弃IE6，**程序员不应该去迁就用户的坏习惯，有时候需要逼用户改变习惯。**
-</code></pre><pre><code>function createXHR(){
-    var xhr = null;
-    if(window.XMLHttpRequest){
-        xhr = new XMLHttpRequest();
-    } else if(window.ActiveXObject){
-        xhr = new ActiveXObject(&#39;Microsoft.XMLHTTP&#39;);
-    } else{
-        console.log(&#39;你的浏览器很奇怪。&#39;);
-    }
-    return xhr;
-}
-</code></pre><h2 id="利用XHR发送请求来请求后台服务器资源"><a href="#利用XHR发送请求来请求后台服务器资源" class="headerlink" title="利用XHR发送请求来请求后台服务器资源"></a>利用XHR发送请求来请求后台服务器资源</h2><p>分析HTTP协议，请求需明确几个因素:<br>　　　1)请求方法：GET/POST/PUT/DELETE/HEAD<br>　　　2)请求哪个资源(URL)<br>　　　3)同步方式–同步/异步</p>
-<h2 id="如何得到请求返回结果"><a href="#如何得到请求返回结果" class="headerlink" title="如何得到请求返回结果"></a>如何得到请求返回结果</h2><pre><code class="JavaScript">function vote(){
-    //1. 制造xhr
-    var xhr = createXHR();
-    //2. 打开连接
-    xhr.open(&#39;GET&#39;, &#39;./05-ajaxvote.php&#39;, true/false);
-    //3. 发送请求
-    xhr.send(null);
-    //4. 测试同步异步的差异,改true/false
-    //alert(xhr.responseText);
-    //为避免误会用
-    alert(&#39;123&#39;);
-</code></pre>
-<p>05-ajaxvote.php</p>
-<pre><code>sleep(3);//等待三秒
-if(rand(1,10) &lt; 4){
-    echo &quot;0&quot;;
-}else{
-    $votenum = file_get_contents(&quot;./vote.txt&quot;);
-    if ($votenum == null) {
-        $votenum = 0;
-    }
-    $votenum += 1;
-    file_put_contents(&#39;./vote.txt&#39;, $votenum);    
-    echo &quot;1&quot;;
-}
-</code></pre><p>上面的测试结果显示，<code>true</code>即异步时，立即<code>alert</code>，”你等你的，我先走了”;<code>false</code>即同步时，等三秒才<code>alert</code>，”send返回后，才是下一步”。<br>综上，同步代码按顺序执行，异步代码可跳过等待的代码，先执行下面的代码，再返回执行。</p>
-<p>XHR对象在请求与响应过程中，状态会不断变化，0-4逐步变化；可以绑定一个监听函数来监听状态的变化，只要状态变化就触发某函数。</p>
-<pre><code>xhr.onreadystatechange = function(){
-    var pg = document.getElementById(&#39;progress&#39;);
-    pg.innerHTML += pg.innerHTML + &#39;现在的状态是 &#39;+ this.readyState + &#39;&lt;br /&gt;&#39;;
-}
-</code></pre><p>只管<code>readyState == 4</code>的状态，其他不管。</p>
-<pre><code>xhr.onreadystatechange = function(){
-    if(this.readyState == 4){
-        if(this.responseText == &#39;1&#39;){
-            document.getElementById(&#39;progress&#39;).innerHTML = &#39;投票成功&#39;;
-        }else if(this.responseText == &#39;0&#39;){
-            document.getElementById(&#39;progress&#39;).innerHTML = &#39;投票失败&#39;;
-        }else{
-            document.getElementById(&#39;progress&#39;).innerHTML = this.responseText;
-        }
-    }   
-}
-</code></pre>
-      
-
-      
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">ajax</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/cs/" class="article-tag-list-link color3">cs</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2016/02/27/Ajax系列二-现代化的Ajax/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/8/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><span class="page-number current">9</span><a class="page-number" href="/page/10/">10</a><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/10/">Next &raquo;</a>
@@ -1474,11 +1439,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">git</a>
+                <a href="javascript:void(0)" class="js-tag color1">patch</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">bundle</a>
+                <a href="javascript:void(0)" class="js-tag color4">git</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1487,6 +1452,10 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">https</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">bundle</a>
               </li>
              
               <li class="article-tag-list-item">

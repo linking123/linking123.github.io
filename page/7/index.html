@@ -175,6 +175,360 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-《利用Python进行数据分析》读书笔记-8-第八章-绘图和可视化" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/04/20/《利用Python进行数据分析》读书笔记-8-第八章-绘图和可视化/">《利用Python进行数据分析》读书笔记-8-第八章-绘图和可视化</a>
+    </h1>
+  
+
+        
+        <a href="/2017/04/20/《利用Python进行数据分析》读书笔记-8-第八章-绘图和可视化/" class="archive-article-date">
+  	<time datetime="2017-04-20T15:01:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-04-20</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="matplotlib-API入门"><a href="#matplotlib-API入门" class="headerlink" title="matplotlib API入门"></a>matplotlib API入门</h1><h2 id="Figure-和-Subplot"><a href="#Figure-和-Subplot" class="headerlink" title="Figure 和 Subplot"></a>Figure 和 Subplot</h2><pre><code>import matplotlib.pyplot as plt
+
+## Figure 和 Subplot
+# matplotlib的图像都位于Figure对象中，构建新对象
+fig = plt.figure()
+# 不能通过Figure绘图，必须用add_subplot创建一个或多个subplot才行
+ax1 = fig.add_subplot(2,2,1)
+ax2 = fig.add_subplot(2,2,2)
+ax3 = fig.add_subplot(2,2,3)
+plt.show()
+# 这三个是表示图像是2*2的，当前占编号1，2，3位
+
+plt.plot([1.5,3.5,-2,1.6])
+
+from numpy.random import randn
+plt.plot(randn(50).cumsum(), &#39;k--&#39;)
+plt.show()
+# &quot;k--&quot;线型选项，黑色虚线图
+
+# 随机柱状图，20柱，每柱间隔0.3
+_ = ax1.hist(randn(100), bins=20, color=&#39;k&#39;, alpha=0.3)
+# 随机散点图，30个点
+ax2.scatter(np.arange(30), np.arange(30) + 3 * randn(30))
+# plt.show()
+</code></pre><p>颜色、标记和线型</p>
+<pre><code>plt.plot(randn(30).cumsum(), &#39;ko--&#39;)
+# 等价于以下明确形式：R
+# plot(randn(30).cumsum(), color=&#39;k&#39;, linestyle=&#39;dashed&#39;, marker=&#39;0&#39;)
+plt.show()
+</code></pre><p><img src="http://test.jpg" alt="图8-6带有标记的线型图"></p>
+<p>刻度、标签和图例</p>
+<table>
+<thead>
+<tr>
+<th>xlim</th>
+<th>xticks</th>
+<th>xticklabels</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>范围</td>
+<td>刻度位置</td>
+<td>刻度标签</td>
+</tr>
+</tbody>
+</table>
+<p>标题、轴标签、刻度以及刻度标签</p>
+<pre><code>fig = plt.figure(); ax = fig.add_subplot(1,1,1)
+ax.plot(randn(1000).cumsum())
+ax.set_title(&#39;My first matplotlib plot&#39;)
+ax.set_xlabel(&#39;Stages&#39;)
+plt.show()
+</code></pre><p><img src="" alt="图8-8 用于演示xticks的简单线形图"></p>
+<p>添加图例</p>
+<pre><code># 方式一：传入参数label
+fig = plt.figure(); ax = fig.add_subplot(1,1,1)
+ax.plot(randn(1000).cumsum(), &#39;k&#39;, label=&#39;one&#39;)
+ax.plot(randn(1000).cumsum(), &#39;k--&#39;, label=&#39;two&#39;)
+ax.plot(randn(1000).cumsum(), &#39;k.&#39;, label=&#39;three&#39;)
+ax.legend(loc=&#39;best&#39;) # 添加图例
+plt.show()
+</code></pre><p><img src="" alt="图8-8 用于演示xticks的简单线形图"></p>
+<p>图注解以及在Subplot上绘图</p>
+<pre><code>fig = plt.figure()
+ax = fig.add_subplot(1,1,1)
+# 创建块对象
+rect = plt.Rectangle((0.2,0.75),0.4,0.15,color=&#39;k&#39;,alpha=0.3)
+circ = plt.Circle((0.7,0.2),0.15,color=&#39;b&#39;,alpha=0.3)
+pgon = plt.Polygon([[0.15,0.15],[0.35,0.4],[0.2,0.6]],color=&#39;g&#39;,alpha=0.5)
+# ax.add_patch(shp) 添加到subplot中
+ax.add_patch(rect)
+ax.add_patch(circ)
+ax.add_patch(pgon)
+plt.show()
+</code></pre><p><img src="f&#39;f" alt="图8-12 由三个块图形组成的图"></p>
+<p>将图标保存到文件</p>
+<pre><code>plt.savefig(&#39;figpath.svg&#39;)
+plt.savefig(&#39;figpath.pdf&#39;)
+# # dpi-分辨率，bbox_inches-剪除图标周围空白部分
+plt.savefig(&#39;figpath.png&#39;, dpi=400, bbox_inches= &#39;tight&#39;)
+# 以上都是存到磁盘，也可以存入文件型对象
+from io import StringIO
+buffer = StringIO()
+plt.savefig(buffer)
+plot_data = buffer.getvalue()
+# 对在Web上提供生成的图片很实用
+</code></pre><p>matplotlib配置</p>
+<pre><code># 如设置图像大小
+plt.rc(&#39;figure&#39;, figsize=10*10)
+# 关键字参数，写成字典
+font_options = {&#39;family&#39;: &#39;monospace&#39;,
+                &#39;weight&#39;: &#39;bold&#39;,
+                &#39;size&#39;: &#39;small&#39;}
+plt.rc(&#39;font&#39;, **font_options)
+</code></pre><h1 id="pandas中的绘图函数"><a href="#pandas中的绘图函数" class="headerlink" title="pandas中的绘图函数"></a>pandas中的绘图函数</h1><h2 id="线形图"><a href="#线形图" class="headerlink" title="线形图"></a>线形图</h2><p>简单Series图表</p>
+<pre><code>from pandas import Series
+from pandas import DataFrame
+s = Series(np.random.randn(10).cumsum(), index=np.arange(0,100,10))
+s.plot()
+plt.show()
+</code></pre><p><img src="" alt="图8-13 简单Series图表"></p>
+<p>简单的DataFrame图表</p>
+<pre><code>df = DataFrame(np.random.randn(10,4).cumsum(0), columns=[&#39;A&#39;,&#39;B&#39;,&#39;C&#39;,&#39;D&#39;],index=np.arange(0,100,10))
+df.plot()
+plt.show()
+</code></pre><p><img src="" alt="图8-14 简单的DataFrame图表"></p>
+<h2 id="柱状图"><a href="#柱状图" class="headerlink" title="柱状图"></a>柱状图</h2><pre><code># kind=&quot;bar&quot;(垂直柱状图)，kind=&quot;barh&quot;(水平柱状图)
+fig, axes = plt.subplots(2, 1)
+data = Series(np.random.rand(16), index=list(&#39;abcdefghijklmnop&#39;))
+data.plot(kind=&#39;bar&#39;, ax=axes[0],color=&#39;k&#39;, alpha=0.7)
+data.plot(kind=&#39;barh&#39;, ax=axes[1],color=&#39;k&#39;, alpha=0.7)
+plt.show()
+</code></pre><p><img src="" alt="图8-15 水平和垂直柱状图"></p>
+<pre><code>df = DataFrame(np.random.rand(6,4), index=[&#39;one&#39;, &#39;two&#39;, &#39;three&#39;, &#39;four&#39;, &#39;five&#39;, &#39;six&#39;],
+               columns=pd.Index([&#39;A&#39;,&#39;B&#39;,&#39;C&#39;,&#39;D&#39;],name=&#39;Genus&#39;))
+
+# print df
+# Genus         A         B         C         D
+# one    0.465771  0.579470  0.053485  0.863450
+# two    0.550022  0.855826  0.967881  0.792683
+# three  0.666868  0.536417  0.245592  0.839482
+# four   0.439348  0.676450  0.637932  0.106940
+# five   0.606376  0.609878  0.498459  0.010276
+# six    0.923550  0.243204  0.422216  0.979446
+
+df.plot(kind=&#39;bar&#39;)
+plt.savefig(&#39;图8-16 DataFrame柱状图&#39;)
+# plt.show()
+# 设置stacked=True生成DataFrame的堆积柱状图，每行都堆积在一起
+df.plot(kind=&#39;barh&#39;, stacked=True, alpha=0.5)
+plt.savefig(&#39;图8-17 DataFrame堆积柱状图&#39;)
+# plt.show()
+</code></pre><pre><code>tips = pd.read_csv(&#39;../pydata-book-master/ch08/tips.csv&#39;)
+party_counts = pd.crosstab(tips.day, tips.size)
+# print party_counts
+# col_0  1708
+# day
+# Fri      19
+# Sat      87
+# Sun      76
+# Thur     62
+
+party_counts = party_counts.ix[:, 2:5]
+print party_counts
+</code></pre><h1 id="实战：绘制地图-图形化显示海地地震危机数据"><a href="#实战：绘制地图-图形化显示海地地震危机数据" class="headerlink" title="实战：绘制地图-图形化显示海地地震危机数据"></a>实战：绘制地图-图形化显示海地地震危机数据</h1><pre><code>data = pd.read_csv(&#39;../pydata-book-master/ch08/Haiti.csv&#39;)
+# print data
+# 拿出时间戳和位置信息
+# print data[[&#39;INCIDENT DATE&#39;, &#39;LATITUDE&#39;, &#39;LONGITUDE&#39;]][:10]
+#       INCIDENT DATE   LATITUDE   LONGITUDE
+# 0  05/07/2010 17:26  18.233333  -72.533333
+# 1  28/06/2010 23:06  50.226029    5.729886
+# 2  24/06/2010 16:21  22.278381  114.174287
+# 3  20/06/2010 21:59  44.407062    8.933989
+# 4  18/05/2010 16:26  18.571084  -72.334671
+# 5  26/04/2010 13:14  18.593707  -72.310079
+# 6  26/04/2010 14:19  18.482800  -73.638800
+# 7  26/04/2010 14:27  18.415000  -73.195000
+# 8  15/03/2010 10:58  18.517443  -72.236841
+# 9  15/03/2010 11:00  18.547790  -72.410010
+
+# 消息类型
+# print data[&#39;CATEGORY&#39;][:6]
+# 0          1. Urgences | Emergency, 3. Public Health,
+# 1    1. Urgences | Emergency, 2. Urgences logistiqu...
+# 2    2. Urgences logistiques | Vital Lines, 8. Autr...
+# 3                            1. Urgences | Emergency,
+# 4                            1. Urgences | Emergency,
+# 5                       5e. Communication lines down,
+# Name: CATEGORY, dtype: object
+
+# 异常的地理位置
+# print data.describe()
+#             Serial     LATITUDE    LONGITUDE
+# count  3593.000000  3593.000000  3593.000000
+# mean   2080.277484    18.611495   -72.322680
+# std    1171.100360     0.738572     3.650776
+# min       4.000000    18.041313   -74.452757
+# 25%    1074.000000    18.524070   -72.417500
+# 50%    2163.000000    18.539269   -72.335000
+# 75%    3088.000000    18.561820   -72.293570
+# max    4052.000000    50.226029   114.174287
+
+# 清除错误位置信息并移除缺失分类信息：
+data = data[(data.LATITUDE &gt; 18) &amp; (data.LATITUDE &lt; 20) &amp;
+            (data.LONGITUDE &gt; -75) &amp; (data.LONGITUDE &lt; -70)
+            &amp; data.CATEGORY.notnull()]
+
+# 编写函数获取所有分类的列表，将各个分类信息拆分为编码和英语名称
+def to_cat_list(catstr):
+    stripped = (x.strip() for x in catstr.split(&#39;,&#39;))
+    return [x for x in stripped if x]
+
+def get_all_categories(cat_series):
+    cat_sets = (set(to_cat_list(x)) for x in cat_series)
+    return sorted(set.union(*cat_sets))
+
+def get_english(cat):
+    code, names = cat.split(&#39;.&#39;)
+    if &#39;|&#39; in names:
+        names = names.split(&#39; | &#39;)[1]
+    return code, names.strip()
+
+# 测试get_english是否正常
+# print get_english(&#39;2. Urgences logistiques | Vital Lines&#39;)
+# (&#39;2&#39;, &#39;Vital Lines&#39;)
+
+all_cats = get_all_categories(data.CATEGORY)
+# 生成器表达式
+english_mapping = dict(get_english(x) for x in all_cats)
+
+# print english_mapping[&#39;2a&#39;]
+# Food Shortage
+
+# print english_mapping[&#39;6c&#39;]
+# Earthquake and aftershocks
+</code></pre><pre><code># 抽取分类编码，构造全0DataFrame
+def get_code(seq):
+    return [x.split(&#39;.&#39;)[0] for x in seq if x]
+
+all_codes = get_code(all_cats)
+code_index = pd.Index(pd.unique(all_codes))
+dummy_frame = DataFrame(np.zeros((len(data), len(code_index))), index=data.index, columns=code_index)
+# print dummy_frame.ix[:, :6]
+#         1   1a   1b   1c   1d    2
+# 0     0.0  0.0  0.0  0.0  0.0  0.0
+# 4     0.0  0.0  0.0  0.0  0.0  0.0
+# 5     0.0  0.0  0.0  0.0  0.0  0.0
+# 6     0.0  0.0  0.0  0.0  0.0  0.0
+# 7     0.0  0.0  0.0  0.0  0.0  0.0
+# 8     0.0  0.0  0.0  0.0  0.0  0.0
+# 9     0.0  0.0  0.0  0.0  0.0  0.0
+# 10    0.0  0.0  0.0  0.0  0.0  0.0
+
+for row, cat in zip(data.index, data.CATEGORY):
+    codes = get_code(to_cat_list(cat))
+    dummy_frame.ix[row, codes] = 1
+
+data = data.join(dummy_frame.add_prefix(&#39;category_&#39;))
+# print data.ix[:,10:15]
+#       category_1  category_1a  category_1b  category_1c  category_1d
+# 0            1.0          0.0          0.0          0.0          0.0
+# 4            1.0          0.0          0.0          0.0          0.0
+# 5            0.0          0.0          0.0          0.0          0.0
+# 6            0.0          0.0          0.0          0.0          0.0
+# 7            0.0          0.0          0.0          0.0          0.0
+# 8            0.0          0.0          0.0          0.0          0.0
+# 9            0.0          0.0          0.0          0.0          0.0
+# 10           0.0          1.0          0.0          0.0          0.0
+
+# Python绘制地图依赖于basemap工具集(http://matplotlib.github.com/basemap）插件
+# 绘制黑白海地地图
+from mpl_toolkits.basemap import Basemap
+import matplotlib.pyplot as plt
+
+def basic_haiti_map(ax=None, lllat=17.25, urlat=20.25, lllon=-75, urlon=-71):
+    # 创建极球面投影的Basemap实例
+    m = Basemap(ax=ax, projection=&#39;stere&#39;,
+                lon_0=(urlon + lllon) / 2,
+                lat_0=(urlat + lllat) / 2,
+                llcrnrlat=lllat, urcrnrlat=urlat,
+                llcrnrlon=lllon, urcrnrlon=urlon,
+                resolution=&#39;f&#39;)
+
+    # 绘制海岸线、州届、国界以及地图边界
+    m.drawcoastlines()
+    m.drawstates()
+    m.drawcountries()
+    return m
+
+fig, axes = plt.subplots(nrows=2, ncols=2, figsize=(12, 10))
+fig.subplots_adjust(hspace=0.05, wspace=0.05)
+
+to_plot = [&#39;2a&#39;, &#39;1&#39;, &#39;3c&#39;, &#39;7a&#39;]
+lllat = 17.25;urlat = 20.25;lllon = -75;urlon = -71
+
+for code, ax in zip(to_plot, axes.flat):
+    m = basic_haiti_map(ax, lllat=lllat, urlat=urlat, lllon=lllon, urlon=urlon)
+    cat_data = data[data[&#39;category_%s&#39; % code] == 1]
+    # 计算地图的投影坐标
+    x, y = m(cat_data.LONGITUDE, cat_data.LATITUDE)
+
+    m.plot(x, y, &#39;k.&#39;, alpha=0.5)
+    ax.set_title(&#39;%s: %s&#39; % (code, english_mapping[code]))
+</code></pre>
+      
+
+      
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/cs/" class="article-tag-list-link color3">cs</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/04/20/《利用Python进行数据分析》读书笔记-8-第八章-绘图和可视化/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
     <article id="post-《利用Python进行数据分析》读书笔记-7-第七章-数据规整化：清理、转换、合并与重塑" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -2316,311 +2670,6 @@ top_1000 = grouped.apply(get_top1000)
 
 
   
-    <article id="post-《利用Python进行数据分析》读书笔记-1-附录" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/02/26/《利用Python进行数据分析》读书笔记-1-附录/">《利用Python进行数据分析》读书笔记_1_附录</a>
-    </h1>
-  
-
-        
-        <a href="/2017/02/26/《利用Python进行数据分析》读书笔记-1-附录/" class="archive-article-date">
-  	<time datetime="2017-02-26T15:10:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-02-26</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<p>题记：这本书是2016年6月10日购于Aamazon，至今还是新的，有愧初衷。决定于2017年2月25日开始看，本书共12章，400页（不含附录）。计划两个月看完。那么，到3月25日要看200页，大概到第七章结束；四周200页，一周就是50页。</p>
-</blockquote>
-<p>那么就从附录的基础开始看吧。</p>
-<p>时间计划表：</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">周序号</th>
-<th style="text-align:center">时间</th>
-<th style="text-align:center">章节</th>
-<th style="text-align:center">页码</th>
-<th style="text-align:center">执行情况</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">1</td>
-<td style="text-align:center">20170227-20170305</td>
-<td style="text-align:center">第一、二章</td>
-<td style="text-align:center">p1-p47</td>
-<td style="text-align:center">完成</td>
-</tr>
-<tr>
-<td style="text-align:center">2</td>
-<td style="text-align:center">20170306-20170312</td>
-<td style="text-align:center">第三、四章</td>
-<td style="text-align:center">p48-p112</td>
-<td style="text-align:center">完成</td>
-</tr>
-<tr>
-<td style="text-align:center">3</td>
-<td style="text-align:center">20170313-20170319</td>
-<td style="text-align:center">第五章</td>
-<td style="text-align:center">p115-p161</td>
-<td style="text-align:center">完成</td>
-</tr>
-<tr>
-<td style="text-align:center">4</td>
-<td style="text-align:center">20170320-20170325</td>
-<td style="text-align:center">第六章</td>
-<td style="text-align:center">p162-p185</td>
-<td style="text-align:center">完成</td>
-</tr>
-<tr>
-<td style="text-align:center">5</td>
-<td style="text-align:center">20170326-201704</td>
-<td style="text-align:center">第七章</td>
-<td style="text-align:center">p186-p230</td>
-<td style="text-align:center">-</td>
-</tr>
-<tr>
-<td style="text-align:center">6</td>
-<td style="text-align:center">20170305-20170305</td>
-<td style="text-align:center">-</td>
-<td style="text-align:center">-</td>
-<td style="text-align:center">-</td>
-</tr>
-<tr>
-<td style="text-align:center">7</td>
-<td style="text-align:center">20170305-20170305</td>
-<td style="text-align:center">-</td>
-<td style="text-align:center">-</td>
-<td style="text-align:center">-</td>
-</tr>
-<tr>
-<td style="text-align:center">8</td>
-<td style="text-align:center">20170305-20170305</td>
-<td style="text-align:center">-</td>
-<td style="text-align:center">-</td>
-<td style="text-align:center">-</td>
-</tr>
-<tr>
-<td style="text-align:center">9</td>
-<td style="text-align:center">20170305-20170305</td>
-<td style="text-align:center">-</td>
-<td style="text-align:center">-</td>
-<td style="text-align:center">-</td>
-</tr>
-</tbody>
-</table>
-<h1 id="附录A：Python语言精要"><a href="#附录A：Python语言精要" class="headerlink" title="附录A：Python语言精要"></a>附录A：Python语言精要</h1><p>-重拾Python基础</p>
-<pre><code class="python">#!/usr/bin/python
-# -*- coding: utf-8 -*-
-# 在python中输入中文，包括中文注释，都需要加入上面对声明：https://www.python.org/dev/peps/pep-0263/#defining-the-encoding
-
-# python对变量进行赋值是在创建等号右侧对象对一个引用；即左侧是引用，右侧是对象；
-a = [1, 2, 3, 4, 5, 6]
-b = a
-a.append(7)
-print a
-print b
-# a，b两个引用指向一个对象，输出都是[1,2,3,4,5,6,7]
-# 赋值也叫绑定，将一个名称（引用）和一个对象绑定自在一起；
-
-# python按引用传递，以参数形式传入函数时，只是传入一个引用，不会复制；
-# 其他语言既支持按引用传递，又支持按值传递；
-# python可以修改参数的内容；而其他语言貌似不可以
-def append_ele(data_list, ele):
-    data_list.append(ele)
-data_list = [1,2,3]
-append_ele(data_list, 5)
-print data_list
-
-# 强类型语言？
-# 由于没有显式的将类型写出，常被误认为是弱类型语言，和js差不多；
-# 如计算以下：
-&#39;5&#39; + 5
-# 报错信息如下：
-Traceback (most recent call last):
-   File &quot;/Users/linking/PycharmProjects/testProject/test1&quot;, line 25, in &lt;module&gt;
-    &#39;5&#39; + 5
-TypeError: cannot concatenate &#39;str&#39; and &#39;int&#39; objects
-# 再例：
-a = 5.3
-b = 2
-print &#39;a is %s, b is %s&#39; % (type(a), type(b))
-out: a is &lt;type &#39;float&#39;&gt;, b is &lt;type &#39;int&#39;&gt;
-# 占位符 %s
-print a/b
-2.65
-# isinstance()函数检查类型
-print isinstance(a, int)
-out: False
-print isinstance(b, int)
-out: True
-print isinstance(a, (int, float))
-out: True
-
-# 属性和方法
-a = &#39;foo&#39;
-# 通过.调用a.
-
-# python是一种非常严格的语言（急性子）；几乎在任何时候，计算过程和表达式都是立即求值。
-
-# 可变对象：列表，字典，NumPy数组及大部分用户自定义类
-# 不可变类：字符串和元组等；
-# 不可变指不能修改原内存块的数据。即使修改成功了也只是创建了一个新对象，并将其赋值给原变量而已。
-
-# 数据类型
-from __future__ import division
-print 3 / 2
-# 加__future__则结果是1.5,不加就是1
-# 也可以显式转换  3／float(2)
-# 整数除法如下：
-print 3//2
-# 结果 1
-
-# 字符串
-# 很多人因灵活的字符串处理能力而选择了python
-# &#39;&#39;  &quot;&quot;  效果相同
-# 多行字符串用三重引号（&#39;&#39;&#39;或&quot;&quot;&quot;）如下
-c = &quot;&quot;&quot;
-    this is a longer string that
-    spans multiple lines
-    &quot;&quot;&quot;
-# 字符串不可变；要修改也只能创建一个新的。
-# str(5.6)这种形式即可完成类型转换
-# 反斜杠（\）是转义字符；
-pring s = &#39;12\\34&#39;
-out : 12\34
-# 若要按照原样输出，则在左侧加r前缀
-s = r&#39;this\has\no\special\characters\&#39;
-out: &#39;this\has\no\special\characters\&#39;
-# 字符串格式化
-# 机制：以一个%开头后面跟着一个或多个格式字符的字符串是需要插入的目标（类似c中的printf函数）
-temple = &#39;%2.f %s are worth $%d&#39;
-print temple % (3.413444, &#39;we&#39;, 222)
-# 这里的%是二元运算符，后面是元组(,,,)
-print bool([]),bool([1,2,3])
-out: False True
-print bool(&#39;hollo&#39;),bool(&#39;&#39;)
-out: True False
-print bool(0), bool(1)
-out: False,True
-
-# None是Python的空值类型。一个函数没有显式地返回值，则隐式返回None
-# None不是保留关键字，只是NoneType的一个实例。
-
-# 异常处理
-def attempt_float(x):
-    try:
-        return float(x)
-    except (TypeError,ValueError):
-        return x
-print attempt_float(&#39;123.44xx&#39;)
-# 如上用元组包括多个，同时捕捉多个异常。
-
-# 三元表达式
-x = 5
-print &#39;Non-negative&#39; if x &gt; 0 else &#39;Negative&#39;
-# 优点是缩减代码，缺点是复杂情况下可读性差
-
-# 元组
-# 任何序列或迭代器都可以通过tuple转换为元组
-print tuple([3,2,1])
-out: (3,2,1)
-tup = tuple(&#39;string&#39;)
-print tup
-out: (&#39;s&#39;, &#39;t&#39;, &#39;r&#39;, &#39;i&#39;, &#39;n&#39;, &#39;g&#39;)
-print tup[0]
-out: s
-
-# 列表切片
-# 正 从0开始，负 从-1开始；都是在索引的插缝数数。
-
-# 有序 sorted ，唯一 set
-
-# 字典，是Python中最重要的内置数据结构。是一种大小可变的键值对集。
-empty_dict={}
-dict_a = {&quot;a key&quot;: &quot;a value&quot;, &#39;b key&#39;: &#39;b value&#39;}
-
-# 匿名函数
-def apply_to_list(some_list, f):
-    return [f(x) for x in some_list]
-ints = [4, 0, 1, 5, 6]
-print apply_to_list(ints, lambda x: x * 2)
-out: [8, 0, 2, 10, 12]
-# 得以轻松的传入一个自定义运算给apply_to_list函数；
-
-# 生成器
-def squares(n=10):
-    print &#39;Generating squares from 1 to %d&#39; % (n**2)
-    for i in xrange(1, n+1):
-        yield i**2
-gen = squares()
-print gen
-out: &lt;generator object squares at 0x106936d20&gt;
-for x in gen:
-    print x,
-out:  Generating squares from 1 to 100
-      1 4 9 16 25 36 49 64 81 100
-</code></pre>
-<p>20170226 23:06 周日 于皖水公寓1#1317</p>
-<hr>
-
-      
-
-      
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/cs/" class="article-tag-list-link color3">cs</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/02/26/《利用Python进行数据分析》读书笔记-1-附录/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/6/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/8/">Next &raquo;</a>
@@ -2804,11 +2853,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">git</a>
+                <a href="javascript:void(0)" class="js-tag color1">patch</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">bundle</a>
+                <a href="javascript:void(0)" class="js-tag color4">git</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2817,6 +2866,10 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">https</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">bundle</a>
               </li>
              
               <li class="article-tag-list-item">
