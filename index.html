@@ -175,6 +175,197 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-同一个IP（服务器）多个Tomcat产生session覆盖问题记录" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/07/30/同一个IP（服务器）多个Tomcat产生session覆盖问题记录/">同一个IP（服务器）多个Tomcat产生session覆盖问题记录</a>
+    </h1>
+  
+
+        
+        <a href="/2019/07/30/同一个IP（服务器）多个Tomcat产生session覆盖问题记录/" class="archive-article-date">
+  	<time datetime="2019-07-30T15:00:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-30</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><p>1.生产事故记录<br>–1.1问题描述<br>–1.2问题分析<br>–1.3解决途径<br>–1.4结果<br>–1.5未验证疑问<br>2.参考<br>3.tomcat-session原理相关<br>–3.1听网易公开课的几个问题 - 有关Session 工作原理<br>—3.1.1 Tomcat 中 session 保存在哪？<br>—3.1.2 tomcat 怎么追踪请求属于哪个session？<br>—3.1.3 session是不是在用户登录时就产生了<br>—3.1.4 tomcat 默认并发数</p>
+<h1 id="1-生产事故记录"><a href="#1-生产事故记录" class="headerlink" title="1.生产事故记录"></a>1.生产事故记录</h1><h2 id="1-1问题描述"><a href="#1-1问题描述" class="headerlink" title="1.1问题描述"></a>1.1问题描述</h2><p>本次设计有web前端系统（public）及web管理端（manager）两个web用户系统，在同一个浏览器同时打开两个系统，先后登录，之后系统会丢失登录状态。</p>
+<p>现象：同一个浏览器访问同一个服务器下的两个tomcat服务，会产生session覆盖的问题。</p>
+        
+          <a class="article-more-a" href="/2019/07/30/同一个IP（服务器）多个Tomcat产生session覆盖问题记录/#more">more >></a>
+        
+      
+
+      
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">tomcat</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">session</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/CS/" class="article-tag-list-link color3">CS</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/07/30/同一个IP（服务器）多个Tomcat产生session覆盖问题记录/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
+    <article id="post-413-too-big，上传大文件，服务器连接被重置错误" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/06/09/413-too-big，上传大文件，服务器连接被重置错误/">413 too big，上传大文件，服务器连接被重置错误</a>
+    </h1>
+  
+
+        
+        <a href="/2019/06/09/413-too-big，上传大文件，服务器连接被重置错误/" class="archive-article-date">
+  	<time datetime="2019-06-09T13:48:46.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-09</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><ul>
+<li>1.概述</li>
+<li>2.内容</li>
+<li><ul>
+<li>2.1错误描述</li>
+</ul>
+</li>
+<li><ul>
+<li>2.2问题分析及解决过程</li>
+</ul>
+</li>
+<li><ul>
+<li><ul>
+<li>2.2.1Tomcat</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><ul>
+<li><ul>
+<li>2.2.2Nginx</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><ul>
+<li>2.3最终解决方式</li>
+</ul>
+</li>
+<li><ul>
+<li>2.4总结</li>
+</ul>
+</li>
+<li><ul>
+<li>2.5参考</li>
+</ul>
+</li>
+</ul>
+<h1 id="1-概述"><a href="#1-概述" class="headerlink" title="1.概述"></a>1.概述</h1><p>上传大文件，出现 <code>413 too big</code>，服务器连接被重置 错误。</p>
+<p>爬过的坑，记录一下吧。</p>
+        
+          <a class="article-more-a" href="/2019/06/09/413-too-big，上传大文件，服务器连接被重置错误/#more">more >></a>
+        
+      
+
+      
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">nginx</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/CS/" class="article-tag-list-link color3">CS</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/06/09/413-too-big，上传大文件，服务器连接被重置错误/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
     <article id="post-git-diff-and-zip-to-patch" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -645,142 +836,6 @@
 
 
   
-    <article id="post-ElasticSearch简单使用" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/05/26/ElasticSearch简单使用/">ElasticSearch简单使用</a>
-    </h1>
-  
-
-        
-        <a href="/2018/05/26/ElasticSearch简单使用/" class="archive-article-date">
-  	<time datetime="2018-05-26T15:05:23.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-26</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>主要记录四点内容：</p>
-<ul>
-<li>1.CRUD </li>
-<li>2.searchQuery Language</li>
-<li>3.集群</li>
-<li>4.数据迁移</li>
-</ul>
-        
-          <a class="article-more-a" href="/2018/05/26/ElasticSearch简单使用/#more">more >></a>
-        
-      
-
-      
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/05/26/ElasticSearch简单使用/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
-    <article id="post-写在读书节后一天" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/04/24/写在读书节后一天/">写在读书节后一天</a>
-    </h1>
-  
-
-        
-        <a href="/2018/04/24/写在读书节后一天/" class="archive-article-date">
-  	<time datetime="2018-04-24T13:59:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-24</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>近来工作不是特别忙，有了些闲工夫来阅读。</p>
-<p>这是一件开心的事，同时也让我感到些惆怅。为什么惆怅呢，这一年已经过了4个月，三分之一即将逝去，而我一本书都还没有读完呢？想想年初定的目标，顿时亚历山大。同学，你今年打算消灭几本呢？前几个月读了几本呢？别打我。。</p>
-<h3 id="读书节"><a href="#读书节" class="headerlink" title="读书节"></a>读书节</h3><p>看到一些公众号的文章才知道昨天是读书节。</p>
-        
-          <a class="article-more-a" href="/2018/04/24/写在读书节后一天/#more">more >></a>
-        
-      
-
-      
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">read</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">读书节</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/read/" class="article-tag-list-link color5">read</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/04/24/写在读书节后一天/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -892,6 +947,10 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">nginx</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Ajax</a>
               </li>
              
@@ -972,15 +1031,15 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">bundle</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">iOS</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">https</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">bundle</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1041,6 +1100,10 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">cs</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">session</a>
               </li>
              
               <li class="article-tag-list-item">

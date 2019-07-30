@@ -175,6 +175,354 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-HTML5与Ajax上传文件" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/03/01/HTML5与Ajax上传文件/">HTML5与Ajax上传文件</a>
+    </h1>
+  
+
+        
+        <a href="/2016/03/01/HTML5与Ajax上传文件/" class="archive-article-date">
+  	<time datetime="2016-03-01T14:33:06.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-03-01</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="iframe伪装，jQuery-uploaded-file插件"><a href="#iframe伪装，jQuery-uploaded-file插件" class="headerlink" title="iframe伪装，jQuery-uploaded-file插件"></a>iframe伪装，jQuery-uploaded-file插件</h2><p>前台代码</p>
+<pre><code>&lt;div&gt;
+    &lt;h1&gt;iframe模拟ajax上传文件效果&lt;/h1&gt;
+    &lt;h2&gt;&lt;/h2&gt;
+    &lt;form action=&#39;11-up.php&#39; method=&#39;post&#39; enctype=&#39;multipart/form-data&#39; onsubmit=&#39;return ajaxUpload();&#39;&gt;
+        &lt;p&gt;&lt;input type=&#39;file&#39; name=&#39;pic&#39; /&gt;&lt;/p&gt;
+        &lt;p&gt;&lt;input type=&#39;submit&#39; value=&#39;提交&#39; /&gt;&lt;/p&gt;
+    &lt;/form&gt;
+&lt;/div&gt;
+</code></pre><p>js代码</p>
+<pre><code>/*
+分析：
+  1. 捕捉表单提交动作(onsubmit=&quot;return ajaxUpload()&quot;)
+  2. 创建iframe(jQuery直接创建$(&#39;&lt;iframe&gt;&lt;/iframe&gt;&#39;))
+  3. 把表单的target修改指向该iframe(target=&#39;framename&#39;)
+  4. 去掉这个iframe()
+*/
+function ajaxUpload(){
+    var ifname = &#39;up&#39; + Math.random();
+    $(&#39;&lt;iframe name=&quot;&#39;+ ifname +&#39;&quot; width=&quot;0&quot; height=&quot;0&quot; frameBorder=&quot;0&quot;&gt;&lt;/iframe&gt;&#39;).appendTo($(&#39;body&#39;));
+    $(&#39;form:first&#39;).attr(&#39;target&#39;, ifname);
+}
+</code></pre><p>PHP代码</p>
+<pre><code>if(empty($_FILES)){
+    exit(&#39;no file&#39;);
+}
+
+$error = $_FILES[&#39;pic&#39;][&#39;error&#39;] == 0 ? &#39;succ&#39; : &#39;fail&#39;;
+
+echo &quot;&lt;script&gt;parent.document.getElementsByTagName(&#39;h2&#39;)[0].innerHTML = &#39;$error&#39;&lt;/script&gt;&quot;;
+</code></pre><h2 id="HTML5-Files-API"><a href="#HTML5-Files-API" class="headerlink" title="HTML5 Files API"></a>HTML5 Files API</h2><p><code>files API</code> <code>Formdata</code><br>前台代码：</p>
+<pre><code>&lt;input type=&#39;file&#39; name=&#39;pic&#39; onchange=&#39;selfile();&#39; /&gt;
+</code></pre><p>js代码：</p>
+<pre><code>function selfile(){
+    //表单数据容器
+    var fd = new FormData();
+    //获取文件，文件列表`files`属性
+    var pic = document.getElementsByTagName(&#39;input&#39;)[0].files[0];
+    //附加数据到表单容器中
+    fd.append(&#39;pic&#39;, pic);
+
+    var xhr = new XMLHttpRequest();
+    xhr.open(&#39;POST&#39;, &#39;./13-upfile.php&#39;, true);
+
+    xhr.onreadystatechange = function(){
+        if(this.readyState == 4){
+            document.getElementById(&#39;debug&#39;).innerHTML = this.responseText;
+        }
+    }
+    xhr.send();
+}    
+</code></pre><p>PHP代码：</p>
+<pre><code>&lt;?php 
+
+// print_r($_FILES);
+
+// sleep(3);
+
+if(empty($_FILES)){
+    exit(&#39;no file&#39;);
+}
+
+if ($_FILES[&#39;pic&#39;][&#39;error&#39;]!=0) {
+    exit(&#39;fail&#39;);
+}
+
+move_uploaded_file($_FILES[&#39;pic&#39;][&#39;tmp_name&#39;], &#39;upload/&#39;.$_FILES[&#39;pic&#39;][&#39;name&#39;]);
+
+echo &quot;ok&quot;;
+?&gt;
+</code></pre><blockquote>
+<p>这里还只是用到了HTML5的文件上传API基础，有很多新特性值得花时间研究。<br>而我现在最缺的就是时间，论文需要加快速度。<br>后面还有找工作的事情，毕业季来了啊！！</p>
+</blockquote>
+<p><strong>蛋</strong>定！！！</p>
+
+      
+
+      
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Ajax</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">HTML5</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/cs/" class="article-tag-list-link color3">cs</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2016/03/01/HTML5与Ajax上传文件/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
+    <article id="post-Ajax系列三-探讨XHR及POST数据" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/02/28/Ajax系列三-探讨XHR及POST数据/">Ajax系列三-探讨XHR及POST数据</a>
+    </h1>
+  
+
+        
+        <a href="/2016/02/28/Ajax系列三-探讨XHR及POST数据/" class="archive-article-date">
+  	<time datetime="2016-02-28T14:21:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-02-28</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>#Ajax系列三-深度探讨XHR及POST数据</p>
+<h2 id="Ajax异步原理"><a href="#Ajax异步原理" class="headerlink" title="Ajax异步原理"></a>Ajax异步原理</h2><blockquote>
+<p>相当于在用户和服务器之间加了—个中间层(AJAX引擎),使用户操作与服务器响应异步化。并不是所有的用户请求都提交给服务器,像—些数据验证和数据处理等都交给Ajax引擎自己来做, 只有确定需要从服务器读取新数据时再由Ajax引擎代为向服务器提交请求。</p>
+</blockquote>
+<p><code>ajax</code>状态码</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">排序</th>
+<th style="text-align:center">时间</th>
+<th style="text-align:center">状态码</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">0</td>
+<td style="text-align:center">XHR对象刚创建</td>
+<td style="text-align:center">0</td>
+</tr>
+<tr>
+<td style="text-align:center">1</td>
+<td style="text-align:center">open建立连接成功</td>
+<td style="text-align:center">1</td>
+</tr>
+<tr>
+<td style="text-align:center">2</td>
+<td style="text-align:center">接收头信息完毕</td>
+<td style="text-align:center">2</td>
+</tr>
+<tr>
+<td style="text-align:center">3</td>
+<td style="text-align:center">接收body信息完毕</td>
+<td style="text-align:center">3</td>
+</tr>
+<tr>
+<td style="text-align:center">4</td>
+<td style="text-align:center">成功,结束后</td>
+<td style="text-align:center">4</td>
+</tr>
+</tbody>
+</table>
+<p><code>ajax</code>的好处就是不阻塞后面代码的执行。</p>
+<p><code>status</code>状态码为<code>200</code>,<code>statusText</code>状态文字是<code>OK</code>时，正确返回。</p>
+<pre><code>if(this.readyState == 4 &amp;&amp; this.status == 200){
+    var str = &#39;&#39;;
+    str = &#39;状态码是 &#39; + this.status;
+    str += &#39;状态文字是 &#39; + this.statusText;
+    document.getElementById(&#39;progress&#39;).innerHTML = str;
+}    
+</code></pre><p><code>abort</code>属性 –&gt; 中断<code>xhr</code></p>
+<pre><code>function stopxhr(){
+    xhr.abort();
+}
+</code></pre><p><code>send</code>参数写法：<code>k1=v1&amp;k2=v2&amp;k3=v3...</code></p>
+<p><code>POST</code>请求必须加上<code>Content-Type: application/x-www-form-urlencoded</code></p>
+<pre><code class="javascript">xhr.setRequestHeader(&#39;Content-Type&#39;,&#39;application/x-www-form-urlencoded&#39;);
+xhr.send(&#39;username=&#39;+un+&#39;&amp;email=&#39;+eml);
+</code></pre>
+<h2 id="Ajax返回值之XML类型"><a href="#Ajax返回值之XML类型" class="headerlink" title="Ajax返回值之XML类型"></a>Ajax返回值之XML类型</h2><p>返回值类型：</p>
+<blockquote>
+<p>不考虑HTML5最新标准，返回值有普通文本/xml文档两种类型</p>
+</blockquote>
+<pre><code>&lt;?php 
+header(&#39;Content-Type: text/xml&#39;);
+?&gt;
+//此处空了一行
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;bookstore&gt;&lt;book bid=&#39;b0001&#39;&gt;&lt;title&gt;天龙八部&lt;/title&gt;&lt;intro&gt;人生太苦了&lt;/intro&gt;&lt;/book&gt;&lt;/bookstore&gt;
+</code></pre><p>打开以上<code>xxx.php</code>，<code>xml</code>格式错误提示:</p>
+<pre><code>This page contains the following errors:
+error on line 2 at column 6: XML declaration allowed only at the start of the document.
+Below is a rendering of the page up to the first error.
+</code></pre><p>错误显示：<code>xml</code>必须在文档的首行,如下</p>
+<pre><code>&lt;?php 
+header(&#39;Content-Type: text/xml&#39;);
+?&gt; 
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;bookstore&gt;&lt;book bid=&#39;b0001&#39;&gt;&lt;title&gt;天龙八部&lt;/title&gt;&lt;intro&gt;人生太苦了&lt;/intro&gt;&lt;/book&gt;&lt;/bookstore&gt;
+</code></pre><p><strong>API最简单了，基本上照着开发文档写就行了。</strong></p>
+<p><strong><code>Ajax</code>默认无法跨域。最新标准可以，但需要对方允许。</strong></p>
+<p>取后台数据：</p>
+<pre><code>xhr.onreadystatechange = function(){
+    if(this.readyState == 4){         //this即xhr对象
+        // alert(this.responseXML);
+        var xmldom = this.responseXML; 
+        var book = xmldom.getElementsByTagName(&#39;book&#39;)[&#39;0&#39;]; 
+        var title = book.firstChild.firstChild.wholeText;
+        var intro = book.lastChild.firstChild.wholeText;
+        document.getElementById(&#39;btitle&#39;).value = title;
+        document.getElementById(&#39;bintro&#39;).value = intro;
+    }
+}
+</code></pre><p>在后端生成格式化文件，拼接成<code>HTML</code>或者<code>json</code>文档，操作DOM，生成新的<code>HTML</code>页面。</p>
+<p><em>返回值类型：大的方向可以分为普通文本和xml文档。</em><br>普通文本返回类型又分为：</p>
+<ul>
+<li>返回简短的标志字符串，如0,1,OK</li>
+<li>后台返回大段的<code>HTML</code>代码，直接<code>innerHTML</code>到前端页面</li>
+<li><code>json</code>格式，再由js解析</li>
+</ul>
+<p>很多类型，除了<code>HTML5</code>新标准返回的是<code>json</code>,本是文本，只不过符合某些规律，例如<code>json</code>格式。</p>
+<p><code>eval</code>将普通文本转化成js对象<code>[object: Object]</code>。<br>自己手写的后台数据：</p>
+<pre><code>&lt;?php  //code  ?&gt;
+{name: &#39;linking&#39;, sex: &#39;male&#39;}
+?&gt;
+</code></pre><p>前端解析：</p>
+<pre><code>var linking = eval(&#39;(&#39; + this.responseText + &#39;)&#39;);
+alert(linking.name);
+</code></pre><p>如果是<code>PHP</code>后台获取数据:</p>
+<pre><code>$book = array(&#39;title&#39; =&gt; &#39;天龙八部&#39;, &#39;intro&#39; =&gt; &#39;人生九苦&#39; );
+echo json_encode($book) ;
+</code></pre><h2 id="JSONP解决跨域问题"><a href="#JSONP解决跨域问题" class="headerlink" title="JSONP解决跨域问题"></a>JSONP解决跨域问题</h2><p><code>JSONP</code>不是<code>JSON</code>，只是一种协议，还未被标准组织规范，大家约定使用返回字符串；不用造对象。</p>
+<p><a href="https://zh.wikipedia.org/wiki/JSONP" target="_blank" rel="noopener">Wikipedia</a>解释: </p>
+<blockquote>
+<p>JSONP(JSON with Padding)是资料格式 JSON 的一种“使用模式”，可以让网页从别的网域要资料。另一个解决这个问题的新方法是<a href="https://zh.wikipedia.org/wiki/%E8%B7%A8%E4%BE%86%E6%BA%90%E8%B3%87%E6%BA%90%E5%85%B1%E4%BA%AB" target="_blank" rel="noopener">跨来源资源共享</a>(CORS)。<br>由于<strong>同源策略</strong>，一般来说位于 server1.example.com 的网页无法与不是 server1.example.com 的服务器沟通，而 HTML 的 script 元素是一个例外。利用 script 元素的这个开放策略，网页可以得到从其他来源动态产生的 JSON 资料，而这种使用模式就是所谓的 JSONP。用 JSONP 抓到的资料并不是 JSON，而是任意的 JavaScript，用 JavaScript 直译器执行而不是用 JSON 解析器解析。<br><strong>padding填充</strong>：典型的 JSONP 就是把既有的 JSON API 用函数呼叫<strong>包起来</strong>以达到跨域存取的解法。<br><strong>script元素注入</strong>：为了要启动一个 JSONP 呼叫（或者说，使用这个模式），你需要一个 script 元素。因此，浏览器必须为每一个 JSONP 要求加（或是重用）一个新的、有所需 src 值的 script 元素到 HTML DOM 里—或者说是“注入”这个元素。浏览器执行该元素，抓取 src 里的 URL，并执行回传的 JavaScript。<br>也因为这样，JSONP 被称作是一种“让使用者利用 script 元素注入的方式绕开同源策略”的方法。</p>
+</blockquote>
+<pre><code>function sear(){
+    //获取将要搜索的内容
+    var searchtext = document.getElementsByName(&#39;searchtext&#39;)[0].value;
+    //Google ajax API 搜索参数，返回json格式，利用回调函数aa解析
+    var url = &#39;http://ajax.googleais.com/ajax/services/search/web?v=1.0&amp;q=&#39;+ searchtext + &#39;&amp;callback=aa&#39;;
+    //动态创建script标签，加入head，使其以script形式加载进来
+    var scr = document.createElement(&#39;script&#39;);
+    scr.setAttribute(&#39;type&#39;, &#39;text/javascript&#39;);
+    scr.setAttribute(&#39;src&#39;, url);
+    document.getElementByTagName(&#39;head&#39;)[0].appendChild(scr);
+}
+//回调函数，对返回的数据进行处理
+function aa(res){
+    alert(res);
+}
+</code></pre>
+      
+
+      
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">ajax</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/cs/" class="article-tag-list-link color3">cs</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2016/02/28/Ajax系列三-探讨XHR及POST数据/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
     <article id="post-Ajax系列二-现代化的Ajax" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1070,166 +1418,6 @@ app.use(middle_something());
 
 
   
-    <article id="post-多pc同步测试" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/12/17/多pc同步测试/">多PC同步测试</a>
-    </h1>
-  
-
-        
-        <a href="/2015/12/17/多pc同步测试/" class="archive-article-date">
-  	<time datetime="2015-12-17T13:04:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2015-12-17</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>不会吧，这么容易。<br><img src="http://7xosdw.com1.z0.glb.clouddn.com/jingyamao.jpg" alt="jingya"></p>
-        
-          <a class="article-more-a" href="/2015/12/17/多pc同步测试/#more">more >></a>
-        
-      
-
-      
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">cs</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/cs/" class="article-tag-list-link color3">cs</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2015/12/17/多pc同步测试/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
-    <article id="post-我喜欢的音乐" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/12/14/我喜欢的音乐/">我喜欢的音乐</a>
-    </h1>
-  
-
-        
-        <a href="/2015/12/14/我喜欢的音乐/" class="archive-article-date">
-  	<time datetime="2015-12-14T05:03:29.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2015-12-14</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        
-<!doctype html>
-<html>
-	<head>
-		<style>
-		</style>
-	</head>
-	<body>
-		<div class="zhangliangying">
-			张靓颖：Dream it Possible 
-			《我的梦》<br>
-			<audio preload="" controls loop>
-				<source src="http://stream14.qqmusic.qq.com/135044474.mp3">
-			<audio>
-		</audio></audio></div>	
-	</body>
-</html>
-
-      
-
-      
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">张靓颖</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/music/" class="article-tag-list-link color1">music</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2015/12/14/我喜欢的音乐/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/9/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><span class="page-number current">10</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/11/">Next &raquo;</a>
@@ -1341,6 +1529,10 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">nginx</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Ajax</a>
               </li>
              
@@ -1421,15 +1613,15 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">bundle</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">iOS</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">https</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">bundle</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1490,6 +1682,10 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">cs</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">session</a>
               </li>
              
               <li class="article-tag-list-item">
