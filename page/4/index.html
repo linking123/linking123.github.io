@@ -48,7 +48,7 @@
 <div class="intrude-less">
 	<header id="header" class="inner">
 		<a href="/" class="profilepic">
-			<img src="/images/dog_img.jpg" class="js-avatar">
+			<img src="/images/wechat-avatar.jpg" class="js-avatar">
 		</a>
 		<hgroup>
 		  <h1 class="header-author"><a href="/">Linking</a></h1>
@@ -112,7 +112,7 @@
 	<div class="intrude-less">
 		<header id="header" class="inner">
 			<div class="profilepic">
-				<img src="/images/dog_img.jpg" class="js-avatar">
+				<img src="/images/wechat-avatar.jpg" class="js-avatar">
 			</div>
 			<hgroup>
 			  <h1 class="header-author js-header-author">Linking</h1>
@@ -174,6 +174,110 @@
           </div>
           <div id="js-content" class="content-ll">
             
+  
+    <article id="post-avatarRandom" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/07/29/avatarRandom/">avatarRandom</a>
+    </h1>
+  
+
+        
+        <a href="/2017/07/29/avatarRandom/" class="archive-article-date">
+  	<time datetime="2017-07-29T02:39:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-29</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>做了一个好玩的东西，生成随机搞怪头像。</p>
+</blockquote>
+<p>输入你想要的名称和尺寸，点击开始生成即可。</p>
+ 
+<section style="vertical-align: middle; ">
+	<div align="center">
+	  <img id="imgid" src="https://api.adorable.io/avatars/151/ff.png">
+	</div>
+	<div align="center" style="margin-top: 15px;vertical-align: middle;">
+	  <input id="searchtext" type="text" name="imgname" placeholder="输入你想测的字">
+	</div>
+	<div align="center" style="margin-top: 15px;vertical-align: middle;">
+	  <input id="imgScare" type="text" name="imgname" placeholder="输入你要的尺寸">
+	</div>
+	<div align="center" style="margin-top: 10px;vertical-align: middle;">
+	  <input type="button" name="imgname" value="开始生成" onclick="changeface()">
+	</div>
+</section> 
+<script type="text/javascript">
+
+function getelebyid(aid){
+  return  document.getElementById(aid);
+} 
+ 
+function changeface(){
+  var searchtext = getelebyid('searchtext').value;
+  var imgScare = getelebyid('imgScare').value;
+  var randomsrc = "https://api.adorable.io/avatars/" + imgScare + "/" + searchtext +".png" 
+  getelebyid("imgid").src = randomsrc;
+}
+
+</script> 
+
+
+      
+
+      
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">avatar</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/cs/" class="article-tag-list-link color3">cs</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/07/29/avatarRandom/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
   
     <article id="kindle-阅读器日常使用习惯" class="article article-type-kindle  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
@@ -720,88 +824,6 @@
 
 
   
-    <article id="post-精通Python网络爬虫-第三章-网络爬虫实现原理与实现技术" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/06/25/精通Python网络爬虫-第三章-网络爬虫实现原理与实现技术/">精通Python网络爬虫-第三章-网络爬虫实现原理与实现技术</a>
-    </h1>
-  
-
-        
-        <a href="/2017/06/25/精通Python网络爬虫-第三章-网络爬虫实现原理与实现技术/" class="archive-article-date">
-  	<time datetime="2017-06-25T13:46:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-25</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<p>本章主要内容：网络爬虫的实现原理与实现技术；metaseeker爬虫案例。</p>
-</blockquote>
-<h2 id="3-1-网络爬虫实现原理详解"><a href="#3-1-网络爬虫实现原理详解" class="headerlink" title="3.1 网络爬虫实现原理详解"></a>3.1 网络爬虫实现原理详解</h2><p>爬虫类型多样，但原理相近；以通用网络爬虫和聚焦网络爬虫为例。</p>
-<h3 id="1-通用网络爬虫"><a href="#1-通用网络爬虫" class="headerlink" title="1.通用网络爬虫"></a>1.通用网络爬虫</h3><p>图3-1 通用网络爬虫实现原理及过程<br><img src="http://ortqszyxh.bkt.clouddn.com/%E5%9B%BE3-1%20%E9%80%9A%E7%94%A8%E7%BD%91%E7%BB%9C%E7%88%AC%E8%99%AB%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86%E5%8F%8A%E8%BF%87%E7%A8%8B.png" alt="图3-1 通用网络爬虫实现原理及过程"></p>
-<p>注意<strong>停止条件</strong>的设置，以免无限循环下去。</p>
-        
-          <a class="article-more-a" href="/2017/06/25/精通Python网络爬虫-第三章-网络爬虫实现原理与实现技术/#more">more >></a>
-        
-      
-
-      
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">crawler</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Python/" class="article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/06/25/精通Python网络爬虫-第三章-网络爬虫实现原理与实现技术/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/3/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/5/">Next &raquo;</a>
@@ -941,10 +963,6 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">JavaScriptCore</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">operation</a>
               </li>
              
@@ -954,6 +972,10 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">deploy</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">JavaScriptCore</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -989,15 +1011,7 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">patch</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">git</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">bundle</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1009,6 +1023,10 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">bundle</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">多线程</a>
               </li>
              
@@ -1017,11 +1035,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">绘图</a>
+                <a href="javascript:void(0)" class="js-tag color5">HTTP</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">HTTP</a>
+                <a href="javascript:void(0)" class="js-tag color3">绘图</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1037,15 +1055,19 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">标识</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">D.Wade</a>
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">标识</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Python</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">patch</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1081,15 +1103,15 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">ntp</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">OpenLayers</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Geoserver</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">ntp</a>
               </li>
              
               <li class="article-tag-list-item">
