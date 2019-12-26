@@ -175,6 +175,1074 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-iOS开发的系统兼容性问题解决的副本" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/06/01/iOS开发的系统兼容性问题解决的副本/">iOS开发的系统兼容性问题解决</a>
+    </h1>
+  
+
+        
+        <a href="/2017/06/01/iOS开发的系统兼容性问题解决的副本/" class="archive-article-date">
+  	<time datetime="2017-06-01T06:42:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-01</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="1-系统方法过时的注解"><a href="#1-系统方法过时的注解" class="headerlink" title="1:系统方法过时的注解"></a>1:系统方法过时的注解</h3><pre><code class="objc">
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(UIImage *)image editingInfo:(NSDictionary *)editingInfo NS_DEPRECATED_IOS(2_0, 3_0);
+
+
+说明方法在2.0时代引入，3.0时代过时
+
+</code></pre>
+<h2 id="2：系统不同版本方法的兼容性解决方案1-（最佳，不产生警告）"><a href="#2：系统不同版本方法的兼容性解决方案1-（最佳，不产生警告）" class="headerlink" title="2：系统不同版本方法的兼容性解决方案1 （最佳，不产生警告）"></a>2：系统不同版本方法的兼容性解决方案1 （最佳，不产生警告）</h2><pre><code class="objc">
+#if __IPHONE_OS_VERSION_MIN_REQUIRED &lt; __IPHONE_5_0
+    if([picker respondsToSelector:@selector(dismissModalViewControllerAnimated:)]){
+        [picker dismissModalViewControllerAnimated:YES completion:nil];
+    }
+#else{
+     [picker dismissViewControllerAnimated:YES completion:nil];
+}
+#endif
+
+</code></pre>
+<h2 id="3：系统不同版本方法的兼容性解决方案2：（书写方便，但是会产生警告）"><a href="#3：系统不同版本方法的兼容性解决方案2：（书写方便，但是会产生警告）" class="headerlink" title="3：系统不同版本方法的兼容性解决方案2：（书写方便，但是会产生警告）"></a>3：系统不同版本方法的兼容性解决方案2：（书写方便，但是会产生警告）</h2><pre><code class="objc">
+if([picker respondsToSelector:@selector(imagePickerController:didFinishPickingMediaWithInfo:)]){
+    [picker dismissViewControllerAnimated:YES completion:nil];
+}else{
+    [picker dismissModalViewControllerAnimated:YES];
+}
+
+</code></pre>
+<h2 id="4-获取系统版本号进行判断-（书写方便，但是会产生警告）"><a href="#4-获取系统版本号进行判断-（书写方便，但是会产生警告）" class="headerlink" title="4: 获取系统版本号进行判断 （书写方便，但是会产生警告）"></a>4: 获取系统版本号进行判断 （书写方便，但是会产生警告）</h2><pre><code class="objc">if ([[[UIDevice currentDevice]systemVersion] floatValue] &gt;= 9) {
+    if (!self.centralManager.isScanning) {
+        [self.centralManager scanForPeripheralsWithServices:nil options:nil];
+    }
+} else {
+    [self.centralManager scanForPeripheralsWithServices:nil options:nil];
+}
+</code></pre>
+
+      
+
+      
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">兼容性</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/iOS/" class="article-tag-list-link color4">iOS</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/06/01/iOS开发的系统兼容性问题解决的副本/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
+    <article id="post-iOS绘图的副本" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/06/01/iOS绘图的副本/">iOS绘图</a>
+    </h1>
+  
+
+        
+        <a href="/2017/06/01/iOS绘图的副本/" class="archive-article-date">
+  	<time datetime="2017-06-01T05:59:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-01</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Path-路径"><a href="#Path-路径" class="headerlink" title="Path:路径"></a>Path:路径</h2><pre><code class="objc">//指定当前点为 current point，Quartz会跟踪current point一般执行完一个相关函数后，current point都会相应的改变。
+CGContextMoveToPoint (
+    CGContextRef c,
+    CGFloat x,
+    CGFloat y
+);
+
+Lines：线
+//从当前点 画到点,current point 会变化
+void CGContextAddLineToPoint (
+    CGContextRef c,
+    CGFloat x,
+    CGFloat y
+);
+
+//添加多个路径
+void CGContextAddLines (
+CGContextRef c,
+const CGPoint points[],
+size_t count
+);
+</code></pre>
+<h2 id="Arcs：弧线"><a href="#Arcs：弧线" class="headerlink" title="Arcs：弧线"></a>Arcs：弧线</h2><pre><code class="objc">void CGContextAddArc (
+    CGContextRef c,    
+    CGFloat x,             //圆心的x坐标
+    CGFloat y,    //圆心的y坐标
+    CGFloat radius,   //圆的半径 
+    CGFloat startAngle,    //开始弧度
+    CGFloat endAngle,   //结束弧度
+    int clockwise          //0表示顺时针，1表示逆时针
+ );
+
+void CGContextAddArcToPoint(
+    CGContextRef c, 
+    CGFloat x1,  //端点1的x坐标
+    CGFloat y1,  //端点1的y坐标
+    CGFloat x2,  //端点2的x坐标
+    CGFloat y2,  //端点2的y坐标
+    CGFloat radius //半径
+)；
+
+Curves 
+ 三次曲线函数
+ void CGContextAddCurveToPoint (
+    CGContextRef c,
+    CGFloat cp1x, //控制点1 x坐标
+    CGFloat cp1y, //控制点1 y坐标
+    CGFloat cp2x, //控制点2 x坐标
+    CGFloat cp2y, //控制点2 y坐标
+    CGFloat x,  //直线的终点 x坐标
+    CGFloat y  //直线的终点 y坐标
+ );
+
+ 二次曲线函数
+ void CGContextAddQuadCurveToPoint (
+    CGContextRef c,
+    CGFloat cpx,  //控制点 x坐标
+    CGFloat cpy,  //控制点 y坐标
+    CGFloat x,  //直线的终点 x坐标
+    CGFloat y  //直线的终点 y坐标
+ );
+
+</code></pre>
+<h2 id="画椭圆，矩形"><a href="#画椭圆，矩形" class="headerlink" title="画椭圆，矩形"></a>画椭圆，矩形</h2><pre><code class="objc">void CGContextAddEllipseInRect (
+    CGContextRef context,
+    CGRect rect  //一矩形
+);
+
+void CGContextAddRect (
+    CGContextRef c,
+    CGRect rect
+); 
+
+</code></pre>
+<h2 id="Path：路径"><a href="#Path：路径" class="headerlink" title="Path：路径"></a>Path：路径</h2><pre><code class="objc">CGContextMoveToPoint设置起点
+CGContextClosePath 连接起点和当前点
+CGPathCreateMutable 类似于 CGContextBeginPath
+CGPathMoveToPoint 类似于 CGContextMoveToPoint
+CGPathAddLineToPoint 类似于 CGContextAddLineToPoint
+CGPathAddCurveToPoint 类似于 CGContextAddCurveToPoint
+CGPathAddEllipseInRect 类似于 CGContextAddEllipseInRect
+CGPathAddArc 类似于 CGContextAddArc
+CGPathAddRect 类似于 CGContextAddRect
+CGPathCloseSubpath 类似于 CGContextClosePath
+CGContextAddPath函数把一个路径添加到graphics 
+
+路径填充和描边：
+Stroking ：画出路径
+Filling ：填充路径的封闭区域
+
+路径和填充的效果
+
+//配置样式
+//笔触颜色
+CGContextSetStrokeColorWithColor(context, [UIColor greenColor].CGColor);
+//笔触宽度
+CGContextSetLineWidth(context, 20);
+//join 拐点样式
+//    enum CGLineJoin {
+//        kCGLineJoinMiter, //尖的，斜接
+//        kCGLineJoinRound, //圆
+//        kCGLineJoinBevel //斜面
+//    };
+CGContextSetLineJoin(context, kCGLineJoinRound);
+
+//Line cap 线的两端的样式
+//    enum CGLineCap {
+//        kCGLineCapButt,
+//        kCGLineCapRound,
+//        kCGLineCapSquare
+//    };
+CGContextSetLineCap(context, kCGLineCapSquare);
+
+//虚线线条样式
+CGFloat lengths[] = {10,10};
+CGContextSetLineDash(context, 0, lengths, 2);
+
+
+
+//路径填充
+
+CGContextStrokePath(ctx); //描出路径
+CGContextFillPath(ctx)  使用非零绕数规则填充当前路径
+CGContextDrawPath    两个参数决定填充规则，kCGPathFill表示用非零绕数规则，kCGPathEOFill表示用奇偶规则，kCGPathFillStroke表示填充，kCGPathEOFillStroke表示描线，不是填充
+CGContextEOFillPath  使用奇偶规则填充当前路径
+CGContextFillRect    填充指定的矩形
+CGContextFillRects   填充指定的一些矩形
+CGContextFillEllipseInRect   填充指定矩形中的椭圆
+
+</code></pre>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>ios绘图基础<br><a href="http://liuyanwei.jumppo.com/2015/07/25/ios-draw-base.html" target="_blank" rel="noopener">http://liuyanwei.jumppo.com/2015/07/25/ios-draw-base.html</a></p>
+<p>ios绘图demo,做一个涂鸦板(上)<br><a href="http://liuyanwei.jumppo.com/2015/07/26/ios-draw-Graffiti.html" target="_blank" rel="noopener">http://liuyanwei.jumppo.com/2015/07/26/ios-draw-Graffiti.html</a></p>
+<p>ios绘图demo,做一个涂鸦板(下)<br><a href="http://liuyanwei.jumppo.com/2015/09/02/ios-draw-Graffiti-2.html" target="_blank" rel="noopener">http://liuyanwei.jumppo.com/2015/09/02/ios-draw-Graffiti-2.html</a></p>
+<p>IOS绘制圆,直线,弧线,矩形,扇形,三角形,贝塞尔等图形:<br><a href="http://blog.csdn.net/chocolateloveme/article/details/17246887" target="_blank" rel="noopener">http://blog.csdn.net/chocolateloveme/article/details/17246887</a></p>
+<p>IOS开发UI篇—Quartz2D使用（绘图路径）<br><a href="http://www.cnblogs.com/wendingding/p/3782679.html" target="_blank" rel="noopener">http://www.cnblogs.com/wendingding/p/3782679.html</a></p>
+<p>Paths<br><a href="http://donbe.blog.163.com/blog/static/138048021201052093633776/" target="_blank" rel="noopener">http://donbe.blog.163.com/blog/static/138048021201052093633776/</a> </p>
+<p>IOS 使用Quartz 2D画虚线<br><a href="http://blog.csdn.net/zhangao0086/article/details/7234859" target="_blank" rel="noopener">http://blog.csdn.net/zhangao0086/article/details/7234859</a></p>
+
+      
+
+      
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">绘图</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/iOS/" class="article-tag-list-link color4">iOS</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/06/01/iOS绘图的副本/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
+    <article id="post-iOS多线程技术的副本" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/05/23/iOS多线程技术的副本/">iOS多线程技术</a>
+    </h1>
+  
+
+        
+        <a href="/2017/05/23/iOS多线程技术的副本/" class="archive-article-date">
+  	<time datetime="2017-05-23T02:13:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-23</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="1-performSelector-多线程"><a href="#1-performSelector-多线程" class="headerlink" title="1:performSelector 多线程"></a>1:performSelector 多线程</h2><pre><code class="objc">/*
+ *使用performSelector 的多线程
+ *优点：简单
+ *缺点：没有串行并线队列，不能实现高级线程调度
+ */
+
+-(void)performSelectorFunction{
+
+    NSLog(@&quot;performSelectorFunction start&quot;);
+
+    //同步方式执行
+    //[self performSelector:@selector(function1)];
+
+    //延迟两秒执行,主线程阻塞
+    //[self performSelector:@selector(function1) withObject:nil afterDelay:2];
+
+    //主线程上执行，主线程阻塞，waitUntilDone:YES：等待执行完成顺序执行，waitUntilDone:NO 先执行后面语句
+    //[self performSelectorOnMainThread:@selector(function1) withObject:nil waitUntilDone:NO];
+
+    //子线程上执行
+    [self performSelectorInBackground:@selector(function1) withObject:nil];
+
+    NSLog(@&quot;performSelectorFunction end&quot;);
+}
+
+</code></pre>
+<h2 id="2-NSThread"><a href="#2-NSThread" class="headerlink" title="2:NSThread"></a>2:NSThread</h2><pre><code class="objc">/*
+ *使用NSThread 的多线程
+ *优点：简单
+ *缺点：没有串行并线队列，不能实现高级线程调度,和performSelector是一样的。
+ */
+
+-(void)NSThreadFunction{
+
+    NSLog(@&quot;NSThreadFunction start&quot;);
+
+    //线程暂停 2秒
+    //[NSThread sleepForTimeInterval:2];
+
+    //显示创建的方式执行
+    //NSThread *myThread = [[NSThread alloc]initWithTarget:self selector:@selector(function1) object:nil];
+    //[myThread start];
+
+    //静态方法执行线程
+    //[NSThread detachNewThreadSelector:@selector(function1) toTarget:self withObject:nil];
+
+    NSLog(@&quot;NSThreadFunction end&quot;);
+
+}
+
+</code></pre>
+<h2 id="3-NSTimer-反面教材，他不是多线程，他只是定时执行任务"><a href="#3-NSTimer-反面教材，他不是多线程，他只是定时执行任务" class="headerlink" title="3:NSTimer(反面教材，他不是多线程，他只是定时执行任务)"></a>3:NSTimer(反面教材，他不是多线程，他只是定时执行任务)</h2><pre><code class="objc">/*
+ *使反面教材，他不是多线程，他只是定时执行任务
+ */
+
+-(void)NSTimerFunction{
+
+    NSLog(@&quot;NSTimerFunction start&quot;);
+
+    //定时执行任务，可以重复和不重复
+    NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:2 target:self selector:@selector(function1) userInfo:nil repeats:NO];
+
+    //暂时停止定时器
+    //[timer setFireDate:[NSDate distantFuture]];
+    //重新开启定时器
+    //[timer setFireDate:[NSDate distantPast]];
+    //永久通知定时器
+    //[timer invalidate];
+    //timer = nil;
+
+    NSLog(@&quot;NSTimerFunction end&quot;);
+
+}
+
+</code></pre>
+<h2 id="4-GCD最棒的多线程使用api"><a href="#4-GCD最棒的多线程使用api" class="headerlink" title="4:GCD最棒的多线程使用api"></a>4:GCD最棒的多线程使用api</h2><blockquote>
+<p>GCD 中主要的对象：</p>
+</blockquote>
+<ul>
+<li>dispatch_sync</li>
+<li>dispatch_async</li>
+<li>dispatch_once_t</li>
+<li>dispatch_after</li>
+<li>dispatch_queue_t</li>
+<li>dispatch_group_async</li>
+<li>dispatch_barrier_async</li>
+<li>dispatch_apply</li>
+<li>dispatch_suspend，dispatch_resume</li>
+<li>dispatch_sync</li>
+<li>dispatch_sync</li>
+<li>dispatch_sync</li>
+</ul>
+<pre><code class="objc">
+// dispatch_sync 同步方式执行：
+ dispatch_sync(dispatch_get_global_queue(0, 0), ^{
+      // something
+ });
+
+
+// dispatch_async 异步执行：
+ dispatch_async(dispatch_get_global_queue(0, 0), ^{
+      // something
+ });
+
+ // dispatch_async：主线程执行：
+ dispatch_async(dispatch_get_main_queue(), ^{
+      // something
+ });
+
+ // dispatch_once：一次性执行：
+ static dispatch_once_t onceToken;
+ dispatch_once(&amp;onceToken, ^{
+     // code to be executed once
+ });
+
+ //dispatch_time_t ：延迟2秒执行：
+ double delayInSeconds = 2.0;
+ dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+ dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+     // code to be executed on the main queue after delay
+ });
+
+ //dispatch_group_t： 合并汇总结果
+ dispatch_group_t group = dispatch_group_create();
+ dispatch_group_async(group, dispatch_get_global_queue(0,0), ^{
+      // 并行执行的线程一
+ });
+ dispatch_group_async(group, dispatch_get_global_queue(0,0), ^{
+      // 并行执行的线程二
+ });
+ dispatch_group_notify(group, dispatch_get_global_queue(0,0), ^{
+      // 汇总结果
+ });
+
+
+ //dispatch_barrier_async :作用是在并行队列中，等待前面的队列执行完成后再继续往下执行
+dispatch_queue_t concurrentQueue = dispatch_queue_create(&quot;my.concurrent.queue&quot;, DISPATCH_QUEUE_CONCURRENT);
+dispatch_async(concurrentQueue, ^(){
+    NSLog(@&quot;dispatch-1&quot;);
+});
+dispatch_async(concurrentQueue, ^(){
+    NSLog(@&quot;dispatch-2&quot;);
+});
+dispatch_barrier_async(concurrentQueue, ^(){
+    NSLog(@&quot;dispatch-barrier&quot;); 
+});
+dispatch_async(concurrentQueue, ^(){
+    NSLog(@&quot;dispatch-3&quot;);
+});
+dispatch_async(concurrentQueue, ^(){
+    NSLog(@&quot;dispatch-4&quot;);
+});
+
+//dispatch_apply：将一个指定的block执行指定的次数，常用语block数组。在一般方法中虽然block中的方法并不是顺序执行，但是由于apply是线程同步的，
+//所以print(dispatch_apply done);一定最后执行。常常可以这样用：
+let globalQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
+dispatch_async(globalQueue, { () -&gt; Void in
+    dispatch_apply(10, globalQueue) { (index) -&gt; Void in
+        print(index)
+    }
+    print(&quot;completed&quot;)
+})
+print(&quot;在dispatch_apply之前&quot;) 
+
+
+//dispatch_suspend / dispatch_resume
+//暂停
+dispatch_suspend(globalQueue)
+//恢复
+dispatch_resume(globalQueue)
+
+//Dispatch Semaphore 这个是线程的信号量，比较复杂
+
+</code></pre>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="http://liuyanwei.jumppo.com/2015/08/19/ios-ThreadAndAsynchronization.html" target="_blank" rel="noopener">http://liuyanwei.jumppo.com/2015/08/19/ios-ThreadAndAsynchronization.html</a><br><a href="http://blog.csdn.net/zhangao0086/article/details/38904923" target="_blank" rel="noopener">http://blog.csdn.net/zhangao0086/article/details/38904923</a></p>
+
+      
+
+      
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">多线程</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/iOS/" class="article-tag-list-link color4">iOS</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/05/23/iOS多线程技术的副本/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
+    <article id="post-ios9支持http请求的副本" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/05/23/ios9支持http请求的副本/">iOS9支持http请求</a>
+    </h1>
+  
+
+        
+        <a href="/2017/05/23/ios9支持http请求的副本/" class="archive-article-date">
+  	<time datetime="2017-05-23T02:01:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-23</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>##ios9 回退不安全网络模式（支持http协议）</p>
+<p>在项目中找到info.plist 源文件形式打开（右击info.plist文件-open as-source code），添加下面内容</p>
+<pre><code>&lt;key&gt;NSAppTransportSecurity&lt;/key&gt;
+&lt;dict&gt;
+    &lt;key&gt;NSAllowsArbitraryLoads&lt;/key&gt;
+    &lt;true/&gt;
+&lt;/dict&gt;
+</code></pre><blockquote>
+<p>linkingge 注：arbitrary 意思是任意的，AllowsArbitraryLoads 意思是允许所有的下载模式；在自己的项目中找到了此项，项目用到的测试API必须支持http协议。</p>
+</blockquote>
+
+      
+
+      
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">HTTP</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/iOS/" class="article-tag-list-link color4">iOS</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/05/23/ios9支持http请求的副本/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
+    <article id="post-https请求处理方式1：信任一切证书的副本" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/05/16/https请求处理方式1：信任一切证书的副本/">https请求处理方式1：信任一切证书</a>
+    </h1>
+  
+
+        
+        <a href="/2017/05/16/https请求处理方式1：信任一切证书的副本/" class="archive-article-date">
+  	<time datetime="2017-05-16T06:24:49.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-16</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="处理方法"><a href="#处理方法" class="headerlink" title="处理方法"></a>处理方法</h2><h3 id="1：使用异步请求方式"><a href="#1：使用异步请求方式" class="headerlink" title="1：使用异步请求方式"></a>1：使用异步请求方式</h3><h3 id="2：证书信任的委托这样处理"><a href="#2：证书信任的委托这样处理" class="headerlink" title="2：证书信任的委托这样处理"></a>2：证书信任的委托这样处理</h3><pre><code class="objc">-(BOOL)connectionShouldUseCredentialStorage:(NSURLConnection *)connection{
+    return true;
+}
+- (void)connection:(NSURLConnection *)connection willSendRequestForAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge{
+    NSLog(@&quot;didReceiveAuthenticationChallenge %@ %zd&quot;, [[challenge protectionSpace] authenticationMethod], (ssize_t) [challenge previousFailureCount]);
+    if ([challenge.protectionSpace.authenticationMethod isEqualToString:NSURLAuthenticationMethodServerTrust]){
+        [[challenge sender]  useCredential:[NSURLCredential credentialForTrust:challenge.protectionSpace.serverTrust] forAuthenticationChallenge:challenge];
+        [[challenge sender]  continueWithoutCredentialForAuthenticationChallenge: challenge];
+    }
+}
+
+- (BOOL)connection:(NSURLConnection *)connection canAuthenticateAgainstProtectionSpace:(NSURLProtectionSpace *)protectionSpace{
+       return [protectionSpace.authenticationMethod isEqualToString:NSURLAuthenticationMethodServerTrust];
+}
+</code></pre>
+<h2 id="完整示例代码"><a href="#完整示例代码" class="headerlink" title="完整示例代码"></a>完整示例代码</h2><p>UIViewController.h</p>
+<pre><code class="objc">
+#import &lt;UIKit/UIKit.h&gt;
+
+@interface ViewController : UIViewController&lt;NSURLConnectionDataDelegate&gt;
+
+@end
+</code></pre>
+<p>UIViewController.m </p>
+<pre><code class="objc">
+#import &quot;ViewController.h&quot;
+
+@interface ViewController ()
+
+@end
+
+@implementation ViewController
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+
+    //string 转 url编码
+    NSString *urlString = @&quot;https://api.github.com/users/coolnameismy&quot;;
+    NSURL *url = [NSURL URLWithString:[urlString stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]];
+
+
+    NSURLRequest *request = [[NSURLRequest alloc]initWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:10];
+    NSURLConnectionDataDelegate *connection = [[NSURLConnection alloc]initWithRequest:request delegate:self];
+
+    [connection start];
+}
+
+//请求失败
+- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error{
+    NSLog(@&quot;=================didFailWithError=================&quot;);
+    NSLog(@&quot;error:%@&quot;,error);
+}
+
+//重定向
+- (nullable NSURLRequest *)connection:(NSURLConnection *)connection willSendRequest:(NSURLRequest *)request redirectResponse:(nullable NSURLResponse *)response{
+    NSLog(@&quot;=================request redirectResponse=================&quot;);
+    NSLog(@&quot;request:%@&quot;,request);
+    return request;
+}
+
+//接收响应
+- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response{
+    NSLog(@&quot;=================didReceiveResponse=================&quot;);
+    NSHTTPURLResponse *resp = (NSHTTPURLResponse *)response;
+    NSLog(@&quot;response:%@&quot;,resp);
+}
+
+//接收响应
+- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data{
+    NSLog(@&quot;=================didReceiveData=================&quot;);
+    NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
+    NSLog(@&quot;data:%@&quot;,dic);
+}
+
+//- (nullable NSInputStream *)connection:(NSURLConnection *)connection needNewBodyStream:(NSURLRequest *)request{
+//    
+//}
+
+//上传数据委托，用于显示上传进度
+- (void)connection:(NSURLConnection *)connection   didSendBodyData:(NSInteger)bytesWritten
+ totalBytesWritten:(NSInteger)totalBytesWritten
+totalBytesExpectedToWrite:(NSInteger)totalBytesExpectedToWrite{
+    NSLog(@&quot;=================totalBytesWritten=================&quot;);
+}
+
+//- (nullable NSCachedURLResponse *)connection:(NSURLConnection *)connection willCacheResponse:(NSCachedURLResponse *)cachedResponse{
+//    
+//}
+
+//完成请求
+- (void)connectionDidFinishLoading:(NSURLConnection *)connection{
+    NSLog(@&quot;=================connectionDidFinishLoading=================&quot;);
+}
+
+
+#pragma mark -https认证
+-(BOOL)connectionShouldUseCredentialStorage:(NSURLConnection *)connection{
+    return true;
+}
+- (void)connection:(NSURLConnection *)connection willSendRequestForAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge{
+    NSLog(@&quot;didReceiveAuthenticationChallenge %@ %zd&quot;, [[challenge protectionSpace] authenticationMethod], (ssize_t) [challenge previousFailureCount]);
+    if ([challenge.protectionSpace.authenticationMethod isEqualToString:NSURLAuthenticationMethodServerTrust]){
+        [[challenge sender]  useCredential:[NSURLCredential credentialForTrust:challenge.protectionSpace.serverTrust] forAuthenticationChallenge:challenge];
+        [[challenge sender]  continueWithoutCredentialForAuthenticationChallenge: challenge];
+    }
+}
+
+- (BOOL)connection:(NSURLConnection *)connection canAuthenticateAgainstProtectionSpace:(NSURLProtectionSpace *)protectionSpace{
+       return [protectionSpace.authenticationMethod isEqualToString:NSURLAuthenticationMethodServerTrust];
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+@end
+
+
+</code></pre>
+<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><p>-<a href="http://blog.csdn.net/kmyhy/article/details/7733619" target="_blank" rel="noopener">iOS: HTTPS 与自签名证书</a><br>-<a href="http://www.jianshu.com/p/4b5d2d47833d" target="_blank" rel="noopener">iOS - HTTPS</a><br>-<a href="http://oncenote.com/2014/10/21/Security-1-HTTPS/" target="_blank" rel="noopener">iOS安全系列之一：HTTPS</a><br>-<a href="http://oncenote.com/2015/09/16/Security-2-HTTPS2/" target="_blank" rel="noopener">iOS安全系列之二：HTTPS进阶</a><br>-<a href="https://developer.apple.com/library/ios/documentation/NetworkingInternetWeb/Conceptual/NetworkingOverview/WorkingWithHTTPAndHTTPSRequests/WorkingWithHTTPAndHTTPSRequests.html" target="_blank" rel="noopener">Making HTTP and HTTPS Requests</a></p>
+
+      
+
+      
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">iOS</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">https</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/cs/" class="article-tag-list-link color3">cs</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/05/16/https请求处理方式1：信任一切证书的副本/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
+    <article id="post-我换主题了" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/05/15/我换主题了/">我换主题了</a>
+    </h1>
+  
+
+        
+        <a href="/2017/05/15/我换主题了/" class="archive-article-date">
+  	<time datetime="2017-05-15T12:48:23.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-15</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="为什么换"><a href="#为什么换" class="headerlink" title="为什么换"></a>为什么换</h2><p>之前我用的是next主题，也是很火的一款theme，不能说丑，也是一款极简的，使用方便的主题。一般人都有审美疲劳，而我又是一个俗人，故换之。当然，next theme 占网页屏幕的比例，太过剧中，旁边很大地方空白，导致代码片段稍微写长一点都看不全，浪费了，这是一个很实在的原因。</p>
+<h2 id="换成啥了"><a href="#换成啥了" class="headerlink" title="换成啥了"></a>换成啥了</h2><p>对，就是 <a href="https://github.com/litten/hexo-theme-yilia" target="_blank" rel="noopener">yilia</a>, 这是由 <a href="http://litten.me/" target="_blank" rel="noopener">litten</a> 设计制作的，感谢作者。</p>
+<p>GitHub上简介：<br>    一个简洁优雅的hexo主题 A simple and elegant theme for hexo.</p>
+<h2 id="配置使用"><a href="#配置使用" class="headerlink" title="配置使用"></a>配置使用</h2><p>见 <a href="https://github.com/litten/hexo-theme-yilia#四配置" target="_blank" rel="noopener">GitHub 介绍</a></p>
+<h2 id="有何变化"><a href="#有何变化" class="headerlink" title="有何变化"></a>有何变化</h2><p>基本上占据了整个页面，不浪费，哈哈，太节俭了。</p>
+<p>让我喜欢的一个地方是，有一个 ‘随笔’ 菜单；很早之前在 next 主题下我就想搞一个写写生活的菜单，一直没时间研究，就是懒。</p>
+<p>还增加了打赏功能，嘿嘿，会不会有人给我打赏呢？你会是第一个吗？哈哈，要努力写一点自己的东西啊，希望能帮到一些人。</p>
+<p>让我不满的是之前的文章中目录没有了，失落啊。</p>
+<h2 id="没弄明白的地方"><a href="#没弄明白的地方" class="headerlink" title="没弄明白的地方"></a>没弄明白的地方</h2><p>每篇文章在首页展示的太多了，主题说明中的截断没起效果，再研究。</p>
+<h2 id="后期补足的东西"><a href="#后期补足的东西" class="headerlink" title="后期补足的东西"></a>后期补足的东西</h2><p>评论功能：<br>    由于多说2017年6月1日多说系统即将关闭，所以迫切需要更改评论系统。<br>    可考虑的是畅言、网易云跟帖、友言等；网易云跟帖说我的URL被用了，我晕哦，找不回，体验好差。</p>
+
+      
+
+      
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">essay</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/cs/" class="article-tag-list-link color3">cs</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/05/15/我换主题了/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
+    <article id="post-cookie操作的副本" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/05/12/cookie操作的副本/">cookie操作</a>
+    </h1>
+  
+
+        
+        <a href="/2017/05/12/cookie操作的副本/" class="archive-article-date">
+  	<time datetime="2017-05-12T05:40:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-12</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="获取服务端cookie"><a href="#获取服务端cookie" class="headerlink" title="获取服务端cookie"></a>获取服务端cookie</h2><pre><code class="objc">    //获取cookie
+    NSDictionary *headers = [((NSHTTPURLResponse *)resp) allHeaderFields];
+    NSLog(@&quot;headers:%@&quot;,headers);
+    NSDictionary *cookies = [NSHTTPCookie cookiesWithResponseHeaderFields:headers forURL:[NSURL URLWithString:@&quot;http://localhost/&quot;]];
+
+    for (NSHTTPCookie *cookie in cookies) {
+        NSLog(@&quot;cookie:%@&quot;,cookie);
+        if ([[cookie name] isEqualToString:@&quot;JSESSIONID&quot;]) {
+            NSLog(@&quot;session id is %@&quot;,[cookie value]);
+        }
+    }
+</code></pre>
+<h2 id="获取客户端cookie"><a href="#获取客户端cookie" class="headerlink" title="获取客户端cookie"></a>获取客户端cookie</h2><pre><code class="objc">    //获取本地cookie
+    NSHTTPCookieStorage *httpCookiesStorage =  [NSHTTPCookieStorage sharedHTTPCookieStorage];
+    NSDictionary *cookies = [httpCookiesStorage cookiesForURL:[NSURL URLWithString:@&quot;http://localhost/&quot;]];
+    for (NSHTTPCookie *cookie in cookies) {
+        NSLog(@&quot;cookie:%@&quot;,cookie);
+    }
+
+</code></pre>
+<h2 id="客户端设置cookie"><a href="#客户端设置cookie" class="headerlink" title="客户端设置cookie"></a>客户端设置cookie</h2><pre><code class="objc">//客户端设置cookie
+-(void)clientSetCookie{
+
+    NSDictionary *prop1 = [NSDictionary dictionaryWithObjectsAndKeys:
+                           @&quot;a&quot;,NSHTTPCookieName,
+                           @&quot;aaa&quot;,NSHTTPCookieValue,
+                           @&quot;/&quot;,NSHTTPCookiePath,
+                           [NSURL URLWithString:@&quot;http://localhost/&quot;],NSHTTPCookieOriginURL,
+                           [NSDate dateWithTimeIntervalSinceNow:60],NSHTTPCookieExpires,
+                           nil];
+    NSDictionary *prop2 = [NSDictionary dictionaryWithObjectsAndKeys:
+                           @&quot;b&quot;,NSHTTPCookieName,
+                           @&quot;bbb&quot;,NSHTTPCookieValue,
+                           @&quot;/&quot;,NSHTTPCookiePath,
+                           [NSURL URLWithString:@&quot;http://localhost/&quot;],NSHTTPCookieOriginURL,
+                           [NSDate dateWithTimeIntervalSinceNow:60],NSHTTPCookieExpires,
+                           nil];
+
+    NSHTTPCookie *cookie1 = [NSHTTPCookie cookieWithProperties:prop1];
+    NSHTTPCookie *cookie2 = [NSHTTPCookie cookieWithProperties:prop2];
+
+    //单个设置
+    [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookie:cookie1];
+    [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookie:cookie2];
+
+    //批量设置
+//    NSArray *cookies = @[cookie1,cookie2,cookie3];
+//    [[NSHTTPCookieStorage sharedHTTPCookieStorage]setCookies:cookies forURL:[NSURL URLWithString:@&quot;http://localhost/&quot;] mainDocumentURL:nil];
+
+    //设置cookie本地缓存策略
+    //NSHTTPCookieAcceptPolicyAlways:保存所有cookie，这个是默认值
+    //NSHTTPCookieAcceptPolicyNever:不保存任何响应头中的cookie
+    //NSHTTPCookieAcceptPolicyOnlyFromMainDocumentDomain:只保存域请求匹配的cookie
+
+    [[NSHTTPCookieStorage sharedHTTPCookieStorage]setCookieAcceptPolicy:NSHTTPCookieAcceptPolicyAlways];
+
+    NSLog(@&quot;设置完成&quot;);
+}
+
+
+</code></pre>
+<h2 id="删除cookie"><a href="#删除cookie" class="headerlink" title="删除cookie"></a>删除cookie</h2><pre><code class="objc">
+#pragma mark -客户端删除cookie
+//根据url和name删除cookie
+-(void)deleteCookie:(NSString *)cookieName url:(NSURL *)url{
+    //根据url找到所属的cookie集合
+    NSArray *cookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage]cookiesForURL:url];
+    for (NSHTTPCookie *cookie in cookies) {
+        if([cookie.name isEqualToString:cookieName]){
+            [[NSHTTPCookieStorage sharedHTTPCookieStorage] deleteCookie:cookie];
+            NSLog(@&quot;删除cookie:%@&quot;,cookieName);
+        }
+    }
+}
+//删除全部cookies
+-(void)deleteCookies{
+    for (NSHTTPCookie *cookie in [[NSHTTPCookieStorage sharedHTTPCookieStorage]cookies]) {
+        [[NSHTTPCookieStorage sharedHTTPCookieStorage] deleteCookie:cookie];
+    }
+    NSLog(@&quot;删除完成&quot;);
+}
+</code></pre>
+<h2 id="cookie策略"><a href="#cookie策略" class="headerlink" title="cookie策略"></a>cookie策略</h2><pre><code class="objc">//设置cookie本地缓存策略
+//NSHTTPCookieAcceptPolicyAlways:保存所有cookie，这个是默认值
+//NSHTTPCookieAcceptPolicyNever:不保存任何响应头中的cookie
+//NSHTTPCookieAcceptPolicyOnlyFromMainDocumentDomain:只保存域请求匹配的cookie
+</code></pre>
+
+      
+
+      
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">cookie</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/iOS/" class="article-tag-list-link color4">iOS</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/05/12/cookie操作的副本/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
     <article id="post-cocoa基础的副本" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1347,1980 +2415,9 @@ NSValue *value = paths[index];
 
 
   
-    <article id="post-学习GitHub上的iOS-tips项目的副本" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/05/10/学习GitHub上的iOS-tips项目的副本/">学习GitHub上的iOS-tips项目</a>
-    </h1>
-  
-
-        
-        <a href="/2017/05/10/学习GitHub上的iOS-tips项目的副本/" class="archive-article-date">
-  	<time datetime="2017-05-10T09:43:17.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-10</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>最近光看项目源码，似乎有点霸王硬上弓的感觉，所以决定来刷一遍基础，边看边在项目中找到相关用法，没用过的用进去。<br>挑选这个项目纯属巧合，选哪个不重要，重要的是坚持把这个项目学完。<br>其中的代码会敲一遍，上传到<a href="https://github.com/linking123/learn-iOS-tips-project" target="_blank" rel="noopener">GitHub</a>上。</p>
-<p><a href="https://github.com/coolnameismy/ios-tips" target="_blank" rel="noopener">ios-tips</a>是ios开发当中常用遇到的问题和解决方法的收集，包括ios和swif。<br>一共包括4个部分</p>
-<ul>
-<li>0_Foundation :基础</li>
-<li>1_UIKit :UIKit和界面相关</li>
-<li>2_ThirdParty :第三方控件</li>
-<li>3_Other :其他</li>
-<li>iOS学习资源</li>
-</ul>
-<h2 id="其他资源"><a href="#其他资源" class="headerlink" title="其他资源"></a>其他资源</h2><ul>
-<li>iOS问题已经单独整理为<a href="https://github.com/coolnameismy/ios-tips" target="_blank" rel="noopener">iOS-tips</a> </li>
-<li>有些复杂的问题和开发技巧可以见 <a href="http://liuyanwei.jumppo.com/" target="_blank" rel="noopener">刘彦玮的技术博客</a></li>
-<li>博客中的demo：<a href="https://github.com/coolnameismy/demo" target="_blank" rel="noopener">iOS-demo</a> | <a href="https://github.com/coolnameismy/demo-web" target="_blank" rel="noopener">web前端demo</a></li>
-</ul>
-
-      
-
-      
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/05/10/学习GitHub上的iOS-tips项目的副本/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
-    <article id="post-program常用标识的副本" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/05/10/program常用标识的副本/">program常用标识</a>
-    </h1>
-  
-
-        
-        <a href="/2017/05/10/program常用标识的副本/" class="archive-article-date">
-  	<time datetime="2017-05-10T09:37:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-10</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="1：注释代码段"><a href="#1：注释代码段" class="headerlink" title="1：注释代码段"></a>1：注释代码段</h2><hr>
-<pre><code>#program mark -[注释内容]
-说明：用于注释内容
-#program mark 是每个ios程序员都必须会用的技巧，通过#program mark 把代码分为个个部分，良好的注释是好代码的开始
-# linking哥注：在xcode的代码页最上的目录最后，鼠标停住一会，就可以清晰的看到层次关系。亲测
-</code></pre><h2 id="2：取消xcode编译器内对于弃用方法的警告"><a href="#2：取消xcode编译器内对于弃用方法的警告" class="headerlink" title="2：取消xcode编译器内对于弃用方法的警告"></a>2：取消xcode编译器内对于弃用方法的警告</h2><hr>
-<pre><code>#pragma clang diagnostic push
-#pragma clang diagnostic ignored &quot;-Wdeprecated-declarations&quot;
-  // 这段中出现使用所有的弃用方法都不会产生告警   
-  // 这里放置弃用代码    
-#pragma clang diagnostic pop
-#linking哥注：项目中用到了
-</code></pre><h2 id="3：取消对未使用变量的警告，使用方式和2相同，必须成对出现-pragma-clang"><a href="#3：取消对未使用变量的警告，使用方式和2相同，必须成对出现-pragma-clang" class="headerlink" title="3：取消对未使用变量的警告，使用方式和2相同，必须成对出现#pragma clang"></a>3：取消对未使用变量的警告，使用方式和2相同，必须成对出现#pragma clang</h2><hr>
-<pre><code>#pragma clang diagnostic push
-#pragma clang diagnostic ignored &quot;-Wunused-variable&quot;   
-    // unused 代码段
-#pragma clang diagnostic pop
-# linking哥注：亲测
-====================
-#warning :手动产生一条告警
-#error : 手动产生一条错误
-</code></pre><p>还有种方式也能达到同样效果</p>
-<pre><code> #pragma unused (foo)
-</code></pre><h2 id="4-忽略内存泄露告警"><a href="#4-忽略内存泄露告警" class="headerlink" title="4: 忽略内存泄露告警"></a>4: 忽略内存泄露告警</h2><hr>
-<pre><code>#pragma clang diagnostic push
-#pragma clang diagnostic ignored &quot;-Warc-performSelector-leaks&quot;
-   [someController performSelector: NSSelectorFromString(@&quot;someMethod&quot;)]
-#pragma clang diagnostic pop
-</code></pre>
-      
-
-      
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">标识</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/05/10/program常用标识的副本/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
-    <article id="post-《利用Python进行数据分析》读书笔记-8-第八章-绘图和可视化" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/04/20/《利用Python进行数据分析》读书笔记-8-第八章-绘图和可视化/">《利用Python进行数据分析》读书笔记-8-第八章-绘图和可视化</a>
-    </h1>
-  
-
-        
-        <a href="/2017/04/20/《利用Python进行数据分析》读书笔记-8-第八章-绘图和可视化/" class="archive-article-date">
-  	<time datetime="2017-04-20T15:01:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-04-20</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="matplotlib-API入门"><a href="#matplotlib-API入门" class="headerlink" title="matplotlib API入门"></a>matplotlib API入门</h1><h2 id="Figure-和-Subplot"><a href="#Figure-和-Subplot" class="headerlink" title="Figure 和 Subplot"></a>Figure 和 Subplot</h2><pre><code>import matplotlib.pyplot as plt
-
-## Figure 和 Subplot
-# matplotlib的图像都位于Figure对象中，构建新对象
-fig = plt.figure()
-# 不能通过Figure绘图，必须用add_subplot创建一个或多个subplot才行
-ax1 = fig.add_subplot(2,2,1)
-ax2 = fig.add_subplot(2,2,2)
-ax3 = fig.add_subplot(2,2,3)
-plt.show()
-# 这三个是表示图像是2*2的，当前占编号1，2，3位
-
-plt.plot([1.5,3.5,-2,1.6])
-
-from numpy.random import randn
-plt.plot(randn(50).cumsum(), &#39;k--&#39;)
-plt.show()
-# &quot;k--&quot;线型选项，黑色虚线图
-
-# 随机柱状图，20柱，每柱间隔0.3
-_ = ax1.hist(randn(100), bins=20, color=&#39;k&#39;, alpha=0.3)
-# 随机散点图，30个点
-ax2.scatter(np.arange(30), np.arange(30) + 3 * randn(30))
-# plt.show()
-</code></pre><p>颜色、标记和线型</p>
-<pre><code>plt.plot(randn(30).cumsum(), &#39;ko--&#39;)
-# 等价于以下明确形式：R
-# plot(randn(30).cumsum(), color=&#39;k&#39;, linestyle=&#39;dashed&#39;, marker=&#39;0&#39;)
-plt.show()
-</code></pre><p><img src="http://test.jpg" alt="图8-6带有标记的线型图"></p>
-<p>刻度、标签和图例</p>
-<table>
-<thead>
-<tr>
-<th>xlim</th>
-<th>xticks</th>
-<th>xticklabels</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>范围</td>
-<td>刻度位置</td>
-<td>刻度标签</td>
-</tr>
-</tbody>
-</table>
-<p>标题、轴标签、刻度以及刻度标签</p>
-<pre><code>fig = plt.figure(); ax = fig.add_subplot(1,1,1)
-ax.plot(randn(1000).cumsum())
-ax.set_title(&#39;My first matplotlib plot&#39;)
-ax.set_xlabel(&#39;Stages&#39;)
-plt.show()
-</code></pre><p><img src="" alt="图8-8 用于演示xticks的简单线形图"></p>
-<p>添加图例</p>
-<pre><code># 方式一：传入参数label
-fig = plt.figure(); ax = fig.add_subplot(1,1,1)
-ax.plot(randn(1000).cumsum(), &#39;k&#39;, label=&#39;one&#39;)
-ax.plot(randn(1000).cumsum(), &#39;k--&#39;, label=&#39;two&#39;)
-ax.plot(randn(1000).cumsum(), &#39;k.&#39;, label=&#39;three&#39;)
-ax.legend(loc=&#39;best&#39;) # 添加图例
-plt.show()
-</code></pre><p><img src="" alt="图8-8 用于演示xticks的简单线形图"></p>
-<p>图注解以及在Subplot上绘图</p>
-<pre><code>fig = plt.figure()
-ax = fig.add_subplot(1,1,1)
-# 创建块对象
-rect = plt.Rectangle((0.2,0.75),0.4,0.15,color=&#39;k&#39;,alpha=0.3)
-circ = plt.Circle((0.7,0.2),0.15,color=&#39;b&#39;,alpha=0.3)
-pgon = plt.Polygon([[0.15,0.15],[0.35,0.4],[0.2,0.6]],color=&#39;g&#39;,alpha=0.5)
-# ax.add_patch(shp) 添加到subplot中
-ax.add_patch(rect)
-ax.add_patch(circ)
-ax.add_patch(pgon)
-plt.show()
-</code></pre><p><img src="f&#39;f" alt="图8-12 由三个块图形组成的图"></p>
-<p>将图标保存到文件</p>
-<pre><code>plt.savefig(&#39;figpath.svg&#39;)
-plt.savefig(&#39;figpath.pdf&#39;)
-# # dpi-分辨率，bbox_inches-剪除图标周围空白部分
-plt.savefig(&#39;figpath.png&#39;, dpi=400, bbox_inches= &#39;tight&#39;)
-# 以上都是存到磁盘，也可以存入文件型对象
-from io import StringIO
-buffer = StringIO()
-plt.savefig(buffer)
-plot_data = buffer.getvalue()
-# 对在Web上提供生成的图片很实用
-</code></pre><p>matplotlib配置</p>
-<pre><code># 如设置图像大小
-plt.rc(&#39;figure&#39;, figsize=10*10)
-# 关键字参数，写成字典
-font_options = {&#39;family&#39;: &#39;monospace&#39;,
-                &#39;weight&#39;: &#39;bold&#39;,
-                &#39;size&#39;: &#39;small&#39;}
-plt.rc(&#39;font&#39;, **font_options)
-</code></pre><h1 id="pandas中的绘图函数"><a href="#pandas中的绘图函数" class="headerlink" title="pandas中的绘图函数"></a>pandas中的绘图函数</h1><h2 id="线形图"><a href="#线形图" class="headerlink" title="线形图"></a>线形图</h2><p>简单Series图表</p>
-<pre><code>from pandas import Series
-from pandas import DataFrame
-s = Series(np.random.randn(10).cumsum(), index=np.arange(0,100,10))
-s.plot()
-plt.show()
-</code></pre><p><img src="" alt="图8-13 简单Series图表"></p>
-<p>简单的DataFrame图表</p>
-<pre><code>df = DataFrame(np.random.randn(10,4).cumsum(0), columns=[&#39;A&#39;,&#39;B&#39;,&#39;C&#39;,&#39;D&#39;],index=np.arange(0,100,10))
-df.plot()
-plt.show()
-</code></pre><p><img src="" alt="图8-14 简单的DataFrame图表"></p>
-<h2 id="柱状图"><a href="#柱状图" class="headerlink" title="柱状图"></a>柱状图</h2><pre><code># kind=&quot;bar&quot;(垂直柱状图)，kind=&quot;barh&quot;(水平柱状图)
-fig, axes = plt.subplots(2, 1)
-data = Series(np.random.rand(16), index=list(&#39;abcdefghijklmnop&#39;))
-data.plot(kind=&#39;bar&#39;, ax=axes[0],color=&#39;k&#39;, alpha=0.7)
-data.plot(kind=&#39;barh&#39;, ax=axes[1],color=&#39;k&#39;, alpha=0.7)
-plt.show()
-</code></pre><p><img src="" alt="图8-15 水平和垂直柱状图"></p>
-<pre><code>df = DataFrame(np.random.rand(6,4), index=[&#39;one&#39;, &#39;two&#39;, &#39;three&#39;, &#39;four&#39;, &#39;five&#39;, &#39;six&#39;],
-               columns=pd.Index([&#39;A&#39;,&#39;B&#39;,&#39;C&#39;,&#39;D&#39;],name=&#39;Genus&#39;))
-
-# print df
-# Genus         A         B         C         D
-# one    0.465771  0.579470  0.053485  0.863450
-# two    0.550022  0.855826  0.967881  0.792683
-# three  0.666868  0.536417  0.245592  0.839482
-# four   0.439348  0.676450  0.637932  0.106940
-# five   0.606376  0.609878  0.498459  0.010276
-# six    0.923550  0.243204  0.422216  0.979446
-
-df.plot(kind=&#39;bar&#39;)
-plt.savefig(&#39;图8-16 DataFrame柱状图&#39;)
-# plt.show()
-# 设置stacked=True生成DataFrame的堆积柱状图，每行都堆积在一起
-df.plot(kind=&#39;barh&#39;, stacked=True, alpha=0.5)
-plt.savefig(&#39;图8-17 DataFrame堆积柱状图&#39;)
-# plt.show()
-</code></pre><pre><code>tips = pd.read_csv(&#39;../pydata-book-master/ch08/tips.csv&#39;)
-party_counts = pd.crosstab(tips.day, tips.size)
-# print party_counts
-# col_0  1708
-# day
-# Fri      19
-# Sat      87
-# Sun      76
-# Thur     62
-
-party_counts = party_counts.ix[:, 2:5]
-print party_counts
-</code></pre><h1 id="实战：绘制地图-图形化显示海地地震危机数据"><a href="#实战：绘制地图-图形化显示海地地震危机数据" class="headerlink" title="实战：绘制地图-图形化显示海地地震危机数据"></a>实战：绘制地图-图形化显示海地地震危机数据</h1><pre><code>data = pd.read_csv(&#39;../pydata-book-master/ch08/Haiti.csv&#39;)
-# print data
-# 拿出时间戳和位置信息
-# print data[[&#39;INCIDENT DATE&#39;, &#39;LATITUDE&#39;, &#39;LONGITUDE&#39;]][:10]
-#       INCIDENT DATE   LATITUDE   LONGITUDE
-# 0  05/07/2010 17:26  18.233333  -72.533333
-# 1  28/06/2010 23:06  50.226029    5.729886
-# 2  24/06/2010 16:21  22.278381  114.174287
-# 3  20/06/2010 21:59  44.407062    8.933989
-# 4  18/05/2010 16:26  18.571084  -72.334671
-# 5  26/04/2010 13:14  18.593707  -72.310079
-# 6  26/04/2010 14:19  18.482800  -73.638800
-# 7  26/04/2010 14:27  18.415000  -73.195000
-# 8  15/03/2010 10:58  18.517443  -72.236841
-# 9  15/03/2010 11:00  18.547790  -72.410010
-
-# 消息类型
-# print data[&#39;CATEGORY&#39;][:6]
-# 0          1. Urgences | Emergency, 3. Public Health,
-# 1    1. Urgences | Emergency, 2. Urgences logistiqu...
-# 2    2. Urgences logistiques | Vital Lines, 8. Autr...
-# 3                            1. Urgences | Emergency,
-# 4                            1. Urgences | Emergency,
-# 5                       5e. Communication lines down,
-# Name: CATEGORY, dtype: object
-
-# 异常的地理位置
-# print data.describe()
-#             Serial     LATITUDE    LONGITUDE
-# count  3593.000000  3593.000000  3593.000000
-# mean   2080.277484    18.611495   -72.322680
-# std    1171.100360     0.738572     3.650776
-# min       4.000000    18.041313   -74.452757
-# 25%    1074.000000    18.524070   -72.417500
-# 50%    2163.000000    18.539269   -72.335000
-# 75%    3088.000000    18.561820   -72.293570
-# max    4052.000000    50.226029   114.174287
-
-# 清除错误位置信息并移除缺失分类信息：
-data = data[(data.LATITUDE &gt; 18) &amp; (data.LATITUDE &lt; 20) &amp;
-            (data.LONGITUDE &gt; -75) &amp; (data.LONGITUDE &lt; -70)
-            &amp; data.CATEGORY.notnull()]
-
-# 编写函数获取所有分类的列表，将各个分类信息拆分为编码和英语名称
-def to_cat_list(catstr):
-    stripped = (x.strip() for x in catstr.split(&#39;,&#39;))
-    return [x for x in stripped if x]
-
-def get_all_categories(cat_series):
-    cat_sets = (set(to_cat_list(x)) for x in cat_series)
-    return sorted(set.union(*cat_sets))
-
-def get_english(cat):
-    code, names = cat.split(&#39;.&#39;)
-    if &#39;|&#39; in names:
-        names = names.split(&#39; | &#39;)[1]
-    return code, names.strip()
-
-# 测试get_english是否正常
-# print get_english(&#39;2. Urgences logistiques | Vital Lines&#39;)
-# (&#39;2&#39;, &#39;Vital Lines&#39;)
-
-all_cats = get_all_categories(data.CATEGORY)
-# 生成器表达式
-english_mapping = dict(get_english(x) for x in all_cats)
-
-# print english_mapping[&#39;2a&#39;]
-# Food Shortage
-
-# print english_mapping[&#39;6c&#39;]
-# Earthquake and aftershocks
-</code></pre><pre><code># 抽取分类编码，构造全0DataFrame
-def get_code(seq):
-    return [x.split(&#39;.&#39;)[0] for x in seq if x]
-
-all_codes = get_code(all_cats)
-code_index = pd.Index(pd.unique(all_codes))
-dummy_frame = DataFrame(np.zeros((len(data), len(code_index))), index=data.index, columns=code_index)
-# print dummy_frame.ix[:, :6]
-#         1   1a   1b   1c   1d    2
-# 0     0.0  0.0  0.0  0.0  0.0  0.0
-# 4     0.0  0.0  0.0  0.0  0.0  0.0
-# 5     0.0  0.0  0.0  0.0  0.0  0.0
-# 6     0.0  0.0  0.0  0.0  0.0  0.0
-# 7     0.0  0.0  0.0  0.0  0.0  0.0
-# 8     0.0  0.0  0.0  0.0  0.0  0.0
-# 9     0.0  0.0  0.0  0.0  0.0  0.0
-# 10    0.0  0.0  0.0  0.0  0.0  0.0
-
-for row, cat in zip(data.index, data.CATEGORY):
-    codes = get_code(to_cat_list(cat))
-    dummy_frame.ix[row, codes] = 1
-
-data = data.join(dummy_frame.add_prefix(&#39;category_&#39;))
-# print data.ix[:,10:15]
-#       category_1  category_1a  category_1b  category_1c  category_1d
-# 0            1.0          0.0          0.0          0.0          0.0
-# 4            1.0          0.0          0.0          0.0          0.0
-# 5            0.0          0.0          0.0          0.0          0.0
-# 6            0.0          0.0          0.0          0.0          0.0
-# 7            0.0          0.0          0.0          0.0          0.0
-# 8            0.0          0.0          0.0          0.0          0.0
-# 9            0.0          0.0          0.0          0.0          0.0
-# 10           0.0          1.0          0.0          0.0          0.0
-
-# Python绘制地图依赖于basemap工具集(http://matplotlib.github.com/basemap）插件
-# 绘制黑白海地地图
-from mpl_toolkits.basemap import Basemap
-import matplotlib.pyplot as plt
-
-def basic_haiti_map(ax=None, lllat=17.25, urlat=20.25, lllon=-75, urlon=-71):
-    # 创建极球面投影的Basemap实例
-    m = Basemap(ax=ax, projection=&#39;stere&#39;,
-                lon_0=(urlon + lllon) / 2,
-                lat_0=(urlat + lllat) / 2,
-                llcrnrlat=lllat, urcrnrlat=urlat,
-                llcrnrlon=lllon, urcrnrlon=urlon,
-                resolution=&#39;f&#39;)
-
-    # 绘制海岸线、州届、国界以及地图边界
-    m.drawcoastlines()
-    m.drawstates()
-    m.drawcountries()
-    return m
-
-fig, axes = plt.subplots(nrows=2, ncols=2, figsize=(12, 10))
-fig.subplots_adjust(hspace=0.05, wspace=0.05)
-
-to_plot = [&#39;2a&#39;, &#39;1&#39;, &#39;3c&#39;, &#39;7a&#39;]
-lllat = 17.25;urlat = 20.25;lllon = -75;urlon = -71
-
-for code, ax in zip(to_plot, axes.flat):
-    m = basic_haiti_map(ax, lllat=lllat, urlat=urlat, lllon=lllon, urlon=urlon)
-    cat_data = data[data[&#39;category_%s&#39; % code] == 1]
-    # 计算地图的投影坐标
-    x, y = m(cat_data.LONGITUDE, cat_data.LATITUDE)
-
-    m.plot(x, y, &#39;k.&#39;, alpha=0.5)
-    ax.set_title(&#39;%s: %s&#39; % (code, english_mapping[code]))
-</code></pre>
-      
-
-      
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/cs/" class="article-tag-list-link color3">cs</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/04/20/《利用Python进行数据分析》读书笔记-8-第八章-绘图和可视化/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
-    <article id="post-《利用Python进行数据分析》读书笔记-7-第七章-数据规整化：清理、转换、合并与重塑" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/04/14/《利用Python进行数据分析》读书笔记-7-第七章-数据规整化：清理、转换、合并与重塑/">《利用Python进行数据分析》读书笔记-7-第七章-数据规整化：清理、转换、合并与重塑</a>
-    </h1>
-  
-
-        
-        <a href="/2017/04/14/《利用Python进行数据分析》读书笔记-7-第七章-数据规整化：清理、转换、合并与重塑/" class="archive-article-date">
-  	<time datetime="2017-04-14T14:15:24.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-04-14</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="合并数据集"><a href="#合并数据集" class="headerlink" title="合并数据集"></a>合并数据集</h2><p>pandas对象中的数据可通过内置方式合并：</p>
-<ul>
-<li>pandas.merge根据键将不同DataFrame种的行连接起来，实现的是数据库的连接操作；</li>
-<li>panda.concat沿一条轴将多个对象堆叠在一起；</li>
-<li>实例方法combine_first将重复数据编结在一起，用一个对象中的值填写另一个中的缺失值。</li>
-</ul>
-<h3 id="数据库风格的DataFrame合并"><a href="#数据库风格的DataFrame合并" class="headerlink" title="数据库风格的DataFrame合并"></a>数据库风格的DataFrame合并</h3><blockquote>
-<p>数据集的合并（merge）和连接（join）是通过键将行连接起来的。</p>
-</blockquote>
-<pre><code>df1 = DataFrame({&#39;key&#39;: [&#39;b&#39;, &#39;b&#39;, &#39;a&#39;, &#39;c&#39;, &#39;a&#39;, &#39;a&#39;, &#39;b&#39;],
-                 &#39;data1&#39;: range(7)})
-df2 = DataFrame({&#39;key&#39;: [&#39;、a&#39;, &#39;b&#39;, &#39;c&#39;],
-                 &#39;data2&#39;: range(3)})
-# print df1
-#    data1 key
-# 0      0   b
-# 1      1   b
-# 2      2   a
-# 3      3   c
-# 4      4   a
-# 5      5   a
-# 6      6   b
-
-# print df2
-#    data2 key
-# 0      0   a
-# 1      1   b
-# 2      2   c
-
-# print pd.merge(df1, df2)
-#    data1 key  data2
-# 0      0   b      1
-# 1      1   b      1
-# 2      6   b      1
-# 3      2   a      0
-# 4      4   a      0
-# 5      5   a      0
-# 6      3   c      2
-
-# 这里默认将重叠列列名当做键；显式指定哪列连接用on参数
-pd.merge(df1, df2, on=&#39;key&#39;)
-# 还可以分别指定左右连接的键值，left_on,right_on
-# 默认merge&quot;inner&quot;连接，结果中的键是交集
-# how参数，&#39;inner&#39;是交集，outer是并集
-
-# 重复列名的处理
-# merge的suffixes参数，指定附加到左右两个DataFrame对象的重叠列名上的字符串
-</code></pre><blockquote>
-<p>两边都有的列就都有数据，一边有列一边的数据，没有就用缺省值NaN填充。</p>
-</blockquote>
-<h3 id="索引上的合并"><a href="#索引上的合并" class="headerlink" title="索引上的合并"></a>索引上的合并</h3><blockquote>
-<p>DataFrame的连接键位于索引上；传入left_index=True或right_index=True（或两者）指定。</p>
-</blockquote>
-<pre><code>left1 = DataFrame({&#39;key&#39;: [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;, &#39;a&#39;, &#39;b&#39;, &#39;a&#39;],
-                   &#39;value&#39;: range(6)})
-right1 = DataFrame({&#39;group_value&#39;: [3.5, 7]}, index=[&#39;a&#39;, &#39;b&#39;])
-# print pd.merge(left1, right1, left_on=&#39;key&#39;, right_index=True)
-#     key  value  group_value
-# 0   a      0          3.5
-# 3   a      3          3.5
-# 5   a      5          3.5
-# 1   b      1          7.0
-# 4   b      4          7.0
-
-# 若要取并集，用how=&#39;outer&#39;;一边没有的会用缺省值NaN填充
-# print pd.merge(left1, right1, left_on=&#39;key&#39;, right_index=True, how=&#39;outer&#39;)
-#    key  value  group_value
-# 0   a      0          3.5
-# 3   a      3          3.5
-# 5   a      5          3.5
-# 1   b      1          7.0
-# 4   b      4          7.0
-# 2   c      2          NaN
-
-# 层次化索引，暂时不看了，用到再研究；
-# 层次化索引，只是指明合并键是多个列的列表形式，left_on=[&#39;a&#39;,&#39;b&#39;]
-
-# DataFrame的join方法，可以实现同样的功能，而不管是否有重叠列
-# left.join([right, another])
-</code></pre><blockquote>
-<p>对于像这样的东西，了解一下，知道有这么个东西，以后用到能想到，查一下；<br>现在第一次看没必要看得这么深，也很难懂，看不懂还影响了心情。</p>
-</blockquote>
-<h3 id="轴向连接"><a href="#轴向连接" class="headerlink" title="轴向连接"></a>轴向连接</h3><pre><code>arr = np.arange(12).reshape((3, 4))
-# print arr
-# [[ 0  1  2  3]
-#  [ 4  5  6  7]
-#  [ 8  9 10 11]]
-
-# print np.concatenate([arr,arr],axis=1)
-# [[ 0  1  2  3  0  1  2  3]
-#  [ 4  5  6  7  4  5  6  7]
-#  [ 8  9 10 11  8  9 10 11]]
-
-s1 = Series([0, 1], index=[&#39;a&#39;, &#39;b&#39;])
-s2 = Series([2, 3, 4], index=[&#39;c&#39;, &#39;d&#39;, &#39;e&#39;])
-s3 = Series([5, 6], index=[&#39;f&#39;, &#39;g&#39;])
-# print pd.concat([s1,s2,s3])
-# a    0
-# b    1
-# c    2
-# d    3
-# e    4
-# f    5
-# g    6
-# dtype: int64
-
-# 默认concat在axis=0上工作，产生一个新的Series，如axis=1(axis=1是列)则会产生一个DataFrame
-# print pd.concat([s1, s2, s3], axis=1)
-#      0    1    2
-# a  0.0  NaN  NaN
-# b  1.0  NaN  NaN
-# c  NaN  2.0  NaN
-# d  NaN  3.0  NaN
-# e  NaN  4.0  NaN
-# f  NaN  NaN  5.0
-# g  NaN  NaN  6.0
-</code></pre><h3 id="合并重叠数据"><a href="#合并重叠数据" class="headerlink" title="合并重叠数据"></a>合并重叠数据</h3><blockquote>
-<p>NumPy的where函数，实现合并两个有重叠部分数据集；Series的combine_first方法实现同样的功能，且数据对齐。</p>
-</blockquote>
-<h2 id="重塑和轴向旋转"><a href="#重塑和轴向旋转" class="headerlink" title="重塑和轴向旋转"></a>重塑和轴向旋转</h2><p>重新排列表格型数据的基础运算，谓之重塑(reshape)或轴向旋转运算(pivot)。</p>
-<h3 id="重塑层次化索引"><a href="#重塑层次化索引" class="headerlink" title="重塑层次化索引"></a>重塑层次化索引</h3><ul>
-<li>stack：将列转为行；</li>
-<li>unstack：将行转为列。</li>
-</ul>
-<h2 id="数据转换"><a href="#数据转换" class="headerlink" title="数据转换"></a>数据转换</h2><h3 id="移除重复数据"><a href="#移除重复数据" class="headerlink" title="移除重复数据"></a>移除重复数据</h3><pre><code>data = DataFrame({&#39;k1&#39;:[&#39;one&#39;]*3 + [&#39;two&#39;]*4,
-                  &#39;k2&#39;:[1,1,2,3,4,4,5]})
-# print data
-#     k1  k2
-# 0  one   1
-# 1  one   1
-# 2  one   2
-# 3  two   3
-# 4  two   4
-# 5  two   4
-# 6  two   5
-
-## 判断重复
-# print data.duplicated()
-# 0    False
-# 1     True
-# 2    False
-# 3    False
-# 4    False
-# 5     True
-# 6    False
-# dtype: bool
-
-## 移除重复
-# print data.drop_duplicates()
-#     k1  k2
-# 0  one   1
-# 2  one   2
-# 3  two   3
-# 4  two   4
-# 6  two   5
-
-## 指定判断重复项的列；如还有一列值，只通过k1过滤重复项
-data[&#39;v1&#39;] = range(7)
-# print data.drop_duplicates([&#39;k1&#39;])
-#     k1  k2  v1
-# 0  one   1   0
-# 3  two   3   3
-</code></pre><blockquote>
-<p>了解到有这么个知识点可以完成那些功能，将来遇到要实现的时候能回忆起来就可以了。</p>
-</blockquote>
-<h3 id="利用函数或映射进行数据转换"><a href="#利用函数或映射进行数据转换" class="headerlink" title="利用函数或映射进行数据转换"></a>利用函数或映射进行数据转换</h3><p>Series的map方法可接受一个函数或含有映射关系的自典型对象。</p>
-<pre><code>## 肉类
-data = DataFrame({&#39;food&#39;: [&#39;bacon&#39;, &#39;pulled pork&#39;, &#39;bacon&#39;, &#39;Pastrami&#39;, &#39;coned&#39;, &#39;Bacon&#39;, &#39;Pastrami&#39;, &#39;honey&#39;, &#39;nova&#39;],
-                  &#39;ounces&#39;: [4, 3, 12, 6, 7.5, 8, 3, 5, 6]})
-# print data
-#           food  ounces
-# 0        bacon     4.0
-# 1  pulled pork     3.0
-# 2        bacon    12.0
-# 3     Pastrami     6.0
-# 4        coned     7.5
-# 5        Bacon     8.0
-# 6     pastrami     3.0
-# 7        honey     5.0
-# 8         nova     6.0
-
-## 添加该肉类食物的动物本体
-meat_to_animal = {
-    &#39;bacon&#39;: &#39;pig&#39;,
-    &#39;pulled pork&#39;: &#39;pig&#39;,
-    &#39;Pastrami&#39;: &#39;cow&#39;,
-    &#39;coned&#39;: &#39;cow&#39;,
-    &#39;honey&#39;: &#39;pig&#39;,
-    &#39;nova&#39;: &#39;salmon&#39;
-}
-data[&#39;animal&#39;] = data[&#39;food&#39;].map(str.lower).map(meat_to_animal)
-## 转换了大小写
-# print data
-#         food  ounces  animal
-# 0        bacon     4.0     pig
-# 1  pulled pork     3.0     pig
-# 2        bacon    12.0     pig
-# 3     Pastrami     6.0     NaN
-# 4        coned     7.5     cow
-# 5        Bacon     8.0     pig
-# 6     Pastrami     3.0     NaN
-# 7        honey     5.0     pig
-# 8         nova     6.0  salmon
-
-## map是一种实现元素级转换以及其他数据清理工作的便捷方式。
-</code></pre><h3 id="替换值"><a href="#替换值" class="headerlink" title="替换值"></a>替换值</h3><p>replace提供了简单灵活的替换方式。</p>
-<pre><code>data = Series([1.,-999.,2.,-999.,-1000.,3.])
-# print data
-# 0       1.0
-# 1    -999.0
-# 2       2.0
-# 3    -999.0
-# 4   -1000.0
-# 5       3.0
-# dtype: float64
-
-## -999可能是缺失数据标记值，替换成pandas的NA
-# print data.replace(-999, np.nan)
-# 0       1.0
-# 1       NaN
-# 2       2.0
-# 3       NaN
-# 4   -1000.0
-# 5       3.0
-# dtype: float64
-
-## 一次替换多个值为一个值
-# print data.replace([-999,-1000], np.nan)
-# 0    1.0
-# 1    NaN
-# 2    2.0
-# 3    NaN
-# 4    NaN
-# 5    3.0
-# dtype: float64
-
-## 分别替换为不同值
-# print data.replace([-999,-1000], [np.nan,0])
-# 0    1.0
-# 1    NaN
-# 2    2.0
-# 3    NaN
-# 4    0.0
-# 5    3.0
-# dtype: float64
-</code></pre><h2 id="字符串操作"><a href="#字符串操作" class="headerlink" title="字符串操作"></a>字符串操作</h2><h3 id="字符串对象方法"><a href="#字符串对象方法" class="headerlink" title="字符串对象方法"></a>字符串对象方法</h3><p>1.连接符<br>join连接列表或元祖</p>
-<pre><code># print piece 
-# [&#39;a&#39;,&#39;b&#39;,&#39;c&#39;]
-# print &#39;::&#39;.join(pieces)
-# &#39;a::b::c&#39;
-</code></pre><p>2.子串定位in关键字</p>
-<pre><code># print &#39;guido&#39; in val
-# True
-## 可以用index和find查找子串
-val.index(&#39;,&#39;)
-val.find(&#39;:&#39;)
-</code></pre><p>3.count计算子串出现的次数</p>
-<pre><code>val.conut(&#39;,&#39;)
-</code></pre><h3 id="正则表达式"><a href="#正则表达式" class="headerlink" title="正则表达式"></a>正则表达式</h3><p>re模块函数可分三大类：模式匹配<br>替换以及拆分。</p>
-<pre><code>import re
-
-# 空白符（制表符、空格、换行符等）
-# text = &quot;foo bar\t baz \tqux&quot;
-# print re.split(&#39;\s+&#39;, text)
-# [&#39;foo&#39;, &#39;bar&#39;, &#39;baz&#39;, &#39;qux&#39;]
-
-# re.compile编译regex以得到一个可重用的regex对象
-regex = re.compile(&#39;\s+&#39;)
-# print regex.split(text)
-# [&#39;foo&#39;, &#39;bar&#39;, &#39;baz&#39;, &#39;qux&#39;]
-# print regex.findall(text)
-# [&#39; &#39;, &#39;\t &#39;, &#39; \t&#39;]
-# 建议使用re.compile创建regex对象，节省CPU
-
-# re.IGNORECASE对大小写不敏感
-
-text1 = &quot;&quot;&quot;Dave lin@qq.com
-lin king@163.com
-king wu@sina.com
-ryle ryal@gmail.com
-&quot;&quot;&quot;
-
-pattern = r&#39;[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2，4}&#39;
-regex = re.compile(pattern, flags=re.IGNORECASE)
-# print regex.findall(text1)
-# []
-
-m = regex.search(text1)
-# print m
-# none
-
-# regex.sub方法匹配成指定字符串
-# print regex.sub(&#39;REDACTED&#39;, text1)
-
-# 将邮件地址分成用户名、域名及域后缀三部分，用()包起来即可
-pattern1 = r&#39;([A-Z0-9._%+-]+)@([A-Z0-9.-]+)\.([A-Z]{2,4})&#39;
-regex1 = re.compile(pattern1, flags=re.IGNORECASE)
-</code></pre><h3 id="pandas中矢量化的字符串函数"><a href="#pandas中矢量化的字符串函数" class="headerlink" title="pandas中矢量化的字符串函数"></a>pandas中矢量化的字符串函数</h3><p>清理散乱数据，字符串规整化工作。<br>data.map，所有字符串和正则表达式方法都能被应用于（传入lambda表达式或其他函数）各个值，但如果存在NA就会报错。通过Series的str属性即可访问这些方法。如str.contains检查是否含”gmail”.</p>
-<pre><code>data.str.contains(&#39;gmail&#39;)
-</code></pre><h2 id="示例：USDA食品数据库"><a href="#示例：USDA食品数据库" class="headerlink" title="示例：USDA食品数据库"></a>示例：USDA食品数据库</h2><pre><code>import json
-
-db = json.load(open(&#39;../pydata-book-master/ch07/foods-2011-10-03.json&#39;))
-
-# print len(db)
-# 6636
-
-# print db[0].keys()
-# [u&#39;portions&#39;, u&#39;description&#39;, u&#39;tags&#39;, u&#39;nutrients&#39;, u&#39;group&#39;, u&#39;id&#39;, u&#39;manufacturer&#39;]
-
-# print db[0][&#39;nutrients&#39;][0]
-# {u&#39;units&#39;: u&#39;g&#39;, u&#39;group&#39;: u&#39;Composition&#39;, u&#39;description&#39;: u&#39;Protein&#39;, u&#39;value&#39;: 25.18}
-
-# nutrients = DataFrame(db[0][&#39;nutrients&#39;])
-# print nutrients[:7]
-#                    description        group units    value
-# 0                      Protein  Composition     g    25.18
-# 1            Total lipid (fat)  Composition     g    29.20
-# 2  Carbohydrate, by difference  Composition     g     3.06
-# 3                          Ash        Other     g     3.28
-# 4                       Energy       Energy  kcal   376.00
-# 5                        Water  Composition     g    39.28
-# 6                       Energy       Energy    kJ  1573.00
-
-# DataFrame可以只抽取一部分字段，如食物的名称、分类、编号以及制造商
-info_key = [&#39;description&#39;, &#39;group&#39;, &#39;id&#39;, &#39;manufacturer&#39;]
-info = DataFrame(db, columns=info_key)
-# print info[:5]
-#                           description                   group    id  manufacturer
-# 0                     Cheese, caraway  Dairy and Egg Products  1008
-# 1                     Cheese, cheddar  Dairy and Egg Products  1009
-# 2                        Cheese, edam  Dairy and Egg Products  1018
-# 3                        Cheese, feta  Dairy and Egg Products  1019
-# 4  Cheese, mozzarella, part skim milk  Dairy and Egg Products  1028
-
-# 查看食物类别分布情况
-# print pd.value_counts(info.group)[:10]
-# Vegetables and Vegetable Products    812
-# Beef Products                        618
-# Baked Products                       496
-# Breakfast Cereals                    403
-# Legumes and Legume Products          365
-# Fast Foods                           365
-# Lamb, Veal, and Game Products        345
-# Sweets                               341
-# Fruits and Fruit Juices              328
-# Pork Products                        328
-# Name: group, dtype: int64
-
-nutrients = []
-for rec in db:
-    fnuts = DataFrame(rec[&#39;nutrients&#39;])
-    fnuts[&#39;id&#39;] = rec[&#39;id&#39;]
-    nutrients.append(fnuts)
-
-nutrients = pd.concat(nutrients, ignore_index=True)
-# print  nutrients
-# 丢弃重复项
-# print nutrients.duplicated().sum()
-# 14179
-# nutrients = nutrients.drop_duplicates()
-# print nutrients
-
-# 明确重命名
-col_mapping = {&#39;description&#39;: &#39;food&#39;,
-               &#39;group&#39;: &#39;fgroup&#39;}
-
-# info = info.rename(columns=col_mapping, copy=False)
-# print info
-</code></pre>
-      
-
-      
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/cs/" class="article-tag-list-link color3">cs</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/04/14/《利用Python进行数据分析》读书笔记-7-第七章-数据规整化：清理、转换、合并与重塑/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
-    <article id="post-ListView嵌套GridView显示多张图片出现图片重复、错乱、闪烁等问题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/03/29/ListView嵌套GridView显示多张图片出现图片重复、错乱、闪烁等问题/">ListView嵌套GridView显示多张图片出现图片重复、错乱、闪烁等问题</a>
-    </h1>
-  
-
-        
-        <a href="/2017/03/29/ListView嵌套GridView显示多张图片出现图片重复、错乱、闪烁等问题/" class="archive-article-date">
-  	<time datetime="2017-03-28T16:13:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-03-29</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h1><p>为了实现一个订单下多个商品同时评价功能，列表分五种状态（非常满意，满意，一般，较差，不满意）展示，用一个listview，item中有一个GridView，GridView中放置最多五张图片；在listview上下滑动时会出现item中的图片重复、错乱、闪烁等问题。</p>
-<h1 id="我的错误"><a href="#我的错误" class="headerlink" title="我的错误"></a>我的错误</h1><p>先讲我的错误。遇到问题后Google，参考了一些资料，都是提示要在外层listview的adapter上设置setTag(), 然后在内层GridView的adapter上整体和需要标记复用的imageView上setTag()。照此执行了，还是出错；后来在同事指点下，原来外层adapter中设置gridAdapter时只是在没有塞值时<code>gridView.setVisibility(View.GONE)</code>，忘了要在有值的时候<code>gridView.setVisibility(View.VISIBLE)</code>， 所以导致在复用的时候，没有了GridView可复用。</p>
-        
-          <a class="article-more-a" href="/2017/03/29/ListView嵌套GridView显示多张图片出现图片重复、错乱、闪烁等问题/#more">more >></a>
-        
-      
-
-      
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">ListView</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">GridView</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Android/" class="article-tag-list-link color3">Android</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/03/29/ListView嵌套GridView显示多张图片出现图片重复、错乱、闪烁等问题/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
-    <article id="post-《利用Python进行数据分析》读书笔记-6-第六章-数据加载、存储和数据格式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/03/25/《利用Python进行数据分析》读书笔记-6-第六章-数据加载、存储和数据格式/">《利用Python进行数据分析》读书笔记-6-第六章-数据加载、存储和数据格式</a>
-    </h1>
-  
-
-        
-        <a href="/2017/03/25/《利用Python进行数据分析》读书笔记-6-第六章-数据加载、存储和数据格式/" class="archive-article-date">
-  	<time datetime="2017-03-25T14:49:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-03-25</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>输入输出分类：</p>
-<ul>
-<li>读取文本文件</li>
-<li>其他更高效的磁盘存储格式</li>
-<li>加载数据库中数据</li>
-<li>利用Web API操作网络资源</li>
-</ul>
-<h2 id="读取文本格式的数据"><a href="#读取文本格式的数据" class="headerlink" title="读取文本格式的数据"></a>读取文本格式的数据</h2><p>pandas提供了将表格数据读取为DataFrame对象的函数；其中read_csv和read_table是应用最多的两个：</p>
-<table>
-<thead>
-<tr>
-<th>函数</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>read_csv</td>
-<td>从文件、URL、文件型对象中加载带分隔符的数据；默认逗号</td>
-</tr>
-<tr>
-<td>read_table</td>
-<td>从文件、URL、文件型对象中加载带分隔符的数据；默认制表符”\t”</td>
-</tr>
-</tbody>
-</table>
-<p>类型推断是这些函数中最重要的功能之一。</p>
-<pre><code>$ cat ex1.csv
-&lt;!--out: --&gt;
-&lt;!--a,b,c,d,message--&gt;
-&lt;!--0,1,2,3,4,hello--&gt;
-&lt;!--1,5,6,7,8,world--&gt;
-&lt;!--2,9,10,11,12,foo--&gt;
-#以上数据用逗号隔开
-
-import pandas as pd
-import numpy as np
-from pandas import Series, DataFrame
-
-df = pd.read_csv(&#39;../pydata-book-master/ch06/ex1.csv&#39;)
-# print df
-#  a   b   c   d message
-# 0  1   2   3   4   hello
-# 1  5   6   7   8   world
-# 2  9  10  11  12     foo
-pt = pd.read_table(&#39;../pydata-book-master/ch06/ex1.csv&#39;, sep=&#39;,&#39;)
-# print pt
-# out: 同上
-</code></pre><p>对于没有标题行的文件</p>
-<pre><code>$ cat ex2.csv
-&lt;!--out: --&gt; 
-&lt;!--0,1,2,3,4,hello--&gt;
-&lt;!--1,5,6,7,8,world--&gt;
-&lt;!--2,9,10,11,12,foo--&gt;
-
-# 自动分配默认列名
-
-# pc = pd.read_csv(&#39;../pydata-book-master/ch06/ex2.csv&#39;, header=None)
-# print pc
-#    0   1   2   3      4
-# 0  1   2   3   4  hello
-# 1  5   6   7   8  world
-# 2  9  10  11  12    foo
-# 手动定义列名
-# pc2 = pd.read_csv(&#39;../pydata-book-master/ch06/ex2.csv&#39;, names=[&#39;a&#39;,&#39;b&#39;,&#39;c&#39;,&#39;d&#39;,&#39;msg&#39;])
-# print pc2
-#    a   b   c   d    msg
-# 0  1   2   3   4  hello
-# 1  5   6   7   8  world
-# 2  9  10  11  12    foo
-</code></pre><p>指定索引</p>
-<pre><code># 指定索引
-names = [&#39;a&#39;,&#39;b&#39;,&#39;c&#39;,&#39;d&#39;,&#39;msg&#39;]
-pc3 = pd.read_csv(&#39;../pydata-book-master/ch06/ex2.csv&#39;, names=names, index_col=&#39;msg&#39;)
-# print pc3
-#        a   b   c   d
-# msg
-# hello  1   2   3   4
-# world  5   6   7   8
-# foo    9  10  11  12
-# 层次化索引
-parsed = pd.read_csv(&#39;../pydata-book-master/ch06/csv_mindex.csv&#39;, index_col=[&#39;key1&#39;, &#39;key2&#39;])
-# print parsed
-#            value1  value2
-# key1 key2
-# one  a          1       2
-#      b          3       4
-#      c          5       6
-#      d          7       8
-# two  a          9      10
-#      b         11      12
-#      c         13      14
-#      d         15      16
-</code></pre><pre><code># 非固定分隔符，需要正则表达式
-# print list(open(&#39;../pydata-book-master/ch06/ex3.csv&#39;))
-# [&#39;            A         B         C\n&#39;,
-#  &#39;aaa -0.264438 -1.026059 -0.619500\n&#39;,
-#  &#39;bbb  0.927272  0.302904 -0.032399\n&#39;,
-#  &#39;ccc -0.264273 -0.386314 -0.217601\n&#39;,
-#  &#39;ddd -0.871858 -0.348382  1.100491&#39;]
-# 观察到该文件各个字段由不定数量的空白符分割，用`\s+`这个正则来表示：
-result = pd.read_table(&#39;../pydata-book-master/ch06/ex3.csv&#39;, sep=&#39;\s+&#39;)
-# print result
-#             A         B         C
-# aaa -0.264438 -1.026059 -0.619500
-# bbb  0.927272  0.302904 -0.032399
-# ccc -0.264273 -0.386314 -0.217601
-# ddd -0.871858 -0.348382  1.100491
-</code></pre><p>跳过异常行(使用参数skiprows)</p>
-<pre><code>$ cat ch06/ex4.csv 
-# hey!
-a,b,c,d,message
-# just wanted to make things more difficult for you
-# who reads CSV files with computers, anyway?
-1,2,3,4,hello
-5,6,7,8,world
-9,10,11,12,foo% 
-</code></pre><p>可以认为1，3，4行为异常数据</p>
-<pre><code>print pd.read_csv(&#39;../pydata-book-master/ch06/ex4.csv&#39;, skiprows=[0,2,3])
-#    a   b   c   d message
-# 0  1   2   3   4   hello
-# 1  5   6   7   8   world
-# 2  9  10  11  12     foo
-</code></pre><h2 id="逐块读取文本文件"><a href="#逐块读取文本文件" class="headerlink" title="逐块读取文本文件"></a>逐块读取文本文件</h2><p>大文件只想读取一小部分或者逐块对文件进行迭代</p>
-<pre><code>result = pd.read_csv(&#39;../pydata-book-master/ch06/ex6.csv&#39;, nrows=5)
-# print result
-#         one       two     three      four key
-# 0  0.467976 -0.038649 -0.295344 -1.824726   L
-# 1 -0.358893  1.404453  0.704965 -0.200638   B
-# 2 -0.501840  0.659254 -0.421691 -0.057688   G
-# 3  0.204886  1.074134  1.388361 -0.982404   R
-# 4  0.354628 -0.133116  0.283763 -0.837063   Q
-</code></pre><p>逐块读取;用到chunksize(行数)</p>
-<pre><code># chunker = pd.read_csv(&#39;../pydata-book-master/ch06/ex6.csv&#39;, chunksize=100)
-# print chunker
-# &lt;pandas.io.parsers.TextFileReader object at 0x10f6175d0&gt;
-# TextFileReader对象可实现盾剑逐块迭代
-chunker = pd.read_csv(&#39;../pydata-book-master/ch06/ex6.csv&#39;, chunksize=1000)
-tot = Series([])
-for piece in chunker:
-    tot = tot.add(piece[&#39;key&#39;].value_counts(), fill_value=0)
-tot = tot.sort_values(ascending=False)
-print tot[:10]
-# E    368.0
-# X    364.0
-# L    346.0
-# O    343.0
-# Q    340.0
-# M    338.0
-# J    337.0
-# F    335.0
-# K    334.0
-# H    330.0
-# dtype: float64
-</code></pre><h2 id="将数据写到文本格式"><a href="#将数据写到文本格式" class="headerlink" title="将数据写到文本格式"></a>将数据写到文本格式</h2><pre><code>data = pd.read_csv(&#39;../pydata-book-master/ch06/ex5.csv&#39;)
-# print data
-#   something  a   b     c   d message
-# 0       one  1   2   3.0   4     NaN
-# 1       two  5   6   NaN   8   world
-# 2     three  9  10  11.0  12     foo
-</code></pre><p>pandas.read_csv生成的是DataFrame对象；</p>
-<p>DataFrame的to_csv方法，可以将数据写到一个用逗号分隔的文件中</p>
-<pre><code>data.to_csv(&#39;./ch06_out.csv&#39;)
-# $ cat ./ch06_out.csv
-# ,something,a,b,c,d,message
-# 0,one,1,2,3.0,4,
-# 1,two,5,6,,8,world
-# 2,three,9,10,11.0,12,foo
-
-# 可以指定分隔符,如|；这里只为了展示，所以用sys.stdout直接打印出来了。
-data.to_csv(sys.stdout, sep=&#39;|&#39;)
-# |something|a|b|c|d|message
-# 0|one|1|2|3.0|4|
-# 1|two|5|6||8|world
-# 2|three|9|10|11.0|12|foo
-</code></pre><p>将缺失值替换为其他标记值</p>
-<pre><code>data.to_csv(sys.stdout, na_rep=&#39;NULL&#39;)
-# ,something,a,b,c,d,message
-# 0,one,1,2,3.0,4,NULL
-# 1,two,5,6,NULL,8,world
-# 2,three,9,10,11.0,12,foo
-</code></pre><p>只输出特定列，指定顺序</p>
-<pre><code>data.to_csv(sys.stdout, index=False, columns=[&#39;a&#39;, &#39;b&#39;, &#39;c&#39;])
-# a,b,c
-# 1,2,3.0
-# 5,6,
-# 9,10,11.0
-</code></pre><p>Series也有to_csv()方法</p>
-<pre><code>datas = pd.date_range(&#39;1/1/2000&#39;, periods=7)
-ts = Series(np.arange(7), index=datas)
-ts.to_csv(&#39;./ch06tsseries.csv&#39;)
-# 2000-01-01,0
-# 2000-01-02,1
-# 2000-01-03,2
-# 2000-01-04,3
-# 2000-01-05,4
-# 2000-01-06,5
-# 2000-01-07,6
-</code></pre><p>更简单的读取方法from_csv</p>
-<pre><code># print Series.from_csv(&#39;./ch06tsseries.csv&#39;, parse_dates=True)
-# 2000-01-01    0
-# 2000-01-02    1
-# 2000-01-03    2
-# 2000-01-04    3
-# 2000-01-05    4
-# 2000-01-06    5
-# 2000-01-07    6
-# dtype: int64
-</code></pre><h2 id="手工处理分隔符格式"><a href="#手工处理分隔符格式" class="headerlink" title="手工处理分隔符格式"></a>手工处理分隔符格式</h2><p>场景：pandas.read_table加载表格数据时，由于畸形行导致错误</p>
-<pre><code># $ cat ch06/ex7.csv
-# &quot;a&quot;,&quot;b&quot;,&quot;c&quot;
-# &quot;1&quot;,&quot;2&quot;,&quot;3&quot;
-# &quot;1&quot;,&quot;2&quot;,&quot;3&quot;,&quot;4&quot;
-
-import csv
-
-lines = list(csv.reader(open(&#39;../pydata-book-master/ch06/ex7.csv&#39;)))
-headers, values = lines[0], lines[1:]
-data_dict = {h: v for h, v in zip(headers, zip(*values))}
-# print data_dict
-# {&#39;a&#39;: (&#39;1&#39;, &#39;1&#39;), &#39;c&#39;: (&#39;3&#39;, &#39;3&#39;), &#39;b&#39;: (&#39;2&#39;, &#39;2&#39;)}
-
-class my_dialect(csv.Dialect):
-    lineterminator = &#39;\n&#39;
-    delimiter = &#39;;&#39;
-    quotechar = &#39;&quot;&#39;
-    quoting = csv.QUOTE_ALL
-
-# delimiter分隔符指定
-
-f = open(&#39;../pydata-book-master/ch06/ex7.csv&#39;)
-reader = csv.reader(f, dialect=my_dialect)
-# print reader
-# &lt;_csv.reader object at 0x10a5bb440&gt;
-# 以上类的参数也可以单个的传入csv.reader方法
-</code></pre><p>手动写入分隔符文件csv.writer</p>
-<pre><code>with open(&#39;mydata.csv&#39;, &#39;w&#39;) as fw:
-    writer = csv.writer(fw, my_dialect)
-    writer.writerow((&quot;one&quot;, &quot;two&quot;, &quot;three&quot;))
-    writer.writerow((&#39;1&#39;, &#39;2&#39;, &#39;3&#39;))
-    writer.writerow((&#39;4&#39;, &#39;5&#39;, &#39;6&#39;))
-    writer.writerow((&#39;7&#39;, &#39;8&#39;, &#39;9&#39;))
-# out: mydata.csv
-# &quot;one&quot;;&quot;two&quot;;&quot;three&quot;
-# &quot;1&quot;;&quot;2&quot;;&quot;3&quot;
-# &quot;4&quot;;&quot;5&quot;;&quot;6&quot;
-# &quot;7&quot;;&quot;8&quot;;&quot;9&quot;
-</code></pre><blockquote>
-<p>tip:一些东西还是要看源码才最直接</p>
-</blockquote>
-<h2 id="JSON数据"><a href="#JSON数据" class="headerlink" title="JSON数据"></a>JSON数据</h2><blockquote>
-<p>JSON已成为HTTP请求在Web浏览器和其他程序之间发送数据的标准格式之一、</p>
-</blockquote>
-<pre><code>obj1 = &quot;&quot;&quot;
-{&quot;name&quot;: &quot;Wes&quot;,
-&quot;places_lived&quot;: [&quot;United States&quot;, &quot;Spain&quot;, &quot;Germany&quot;],
-&quot;pet&quot;:null,
-&quot;siblings&quot;:[{&quot;name&quot;:&quot;Scott&quot;, &quot;age&quot;:25, &quot;pet&quot;:&quot;Zuko&quot;}, {&quot;name&quot;:&quot;Katie&quot;, &quot;age&quot;:22, &quot;pet&quot;:&quot;Cisco&quot;}]
-}
-&quot;&quot;&quot;
-import json
-# json.loads将JSON字符串转换成Python形式
-result = json.loads(obj1)
-# print result
-# {u&#39;pet&#39;: None,
-# u&#39;siblings&#39;: [{u&#39;pet&#39;: u&#39;Zuko&#39;, u&#39;age&#39;: 25, u&#39;name&#39;: u&#39;Scott&#39;},
-#               {u&#39;pet&#39;: u&#39;Cisco&#39;, u&#39;age&#39;: 22, u&#39;name&#39;: u&#39;Katie&#39;}],
-# u&#39;name&#39;: u&#39;Wes&#39;,
-# u&#39;places_lived&#39;: [u&#39;United States&#39;, u&#39;Spain&#39;, u&#39;Germany&#39;]}
-# 对应的，json.dumps将Python转换成JSON形式
-asjson = json.dumps(result)
-# print asjson
-# {&quot;pet&quot;: null, &quot;siblings&quot;: [{&quot;pet&quot;: &quot;Zuko&quot;, &quot;age&quot;: 25, &quot;name&quot;: &quot;Scott&quot;},
-#                            {&quot;pet&quot;: &quot;Cisco&quot;, &quot;age&quot;: 22, &quot;name&quot;: &quot;Katie&quot;}],
-#  &quot;name&quot;: &quot;Wes&quot;, &quot;places_lived&quot;: [&quot;United States&quot;, &quot;Spain&quot;, &quot;Germany&quot;]}
-
-</code></pre><h2 id="XML和HTML：Web信息收集"><a href="#XML和HTML：Web信息收集" class="headerlink" title="XML和HTML：Web信息收集"></a>XML和HTML：Web信息收集</h2><pre><code># http://finance.yahoo.com/quote/AAPL/options?ltr=1
-from lxml.html import parse
-from urllib2 import urlopen
-# 原网址404，在雅虎随便找了一个阿里巴巴的
-# parsed = parse(urlopen(&#39;http://finance.yahoo.com/quote/BABA/options?p=BABA&#39;))
-# doc = parsed.getroot()
-# 通过上面的对象，可获取特定的tag
-# 如获取所有的链接；&lt;a href=&quot;#&quot;&gt;word&lt;/a&gt;
-# links = doc.findall(&#39;.//a&#39;)
-# print links[:5]
-# [&lt;Element a at 0x1109ace10&gt;,
-# &lt;Element a at 0x1109ace68&gt;,
-# &lt;Element a at 0x1109acec0&gt;,
-# &lt;Element a at 0x1109acf18&gt;,
-# &lt;Element a at 0x1109acf70&gt;]
-# lnk = links[7]
-# print lnk
-# &lt;Element a at 0x1040d3628&gt;
-# 从以上对象中提取出href
-# print len(links)
-# 50个
-# print lnk.get(&#39;href&#39;)
-# https://www.yahoo.com/celebrity/
-# print lnk.text_content()
-# Celebrity
-
-# 构建列表推导式，获取全部URL
-# urls = [lnk1.get(&#39;href&#39;) for lnk1 in doc.findall(&#39;.//a&#39;)]
-# print urls[-10:]
-# [&#39;//finance.yahoo.com/broker-comparison?bypass=true&#39;,
-# &#39;https://help.yahoo.com/kb/index?page=content&amp;y=PROD_MAIL_ML&amp;locale=en_US&amp;id=SLN2310&amp;actp=productlink&#39;,
-# &#39;http://help.yahoo.com/l/us/yahoo/finance/&#39;,
-# &#39;https://yahoo.uservoice.com/forums/382977&#39;,
-# &#39;http://info.yahoo.com/privacy/us/yahoo/&#39;,
-# &#39;http://info.yahoo.com/relevantads/&#39;,
-# &#39;http://info.yahoo.com/legal/us/yahoo/utos/utos-173.html&#39;,
-# &#39;http://twitter.com/YahooFinance&#39;,
-# &#39;http://facebook.com/yahoofinance&#39;,
-# &#39;http://yahoofinance.tumblr.com&#39;]
-
-# 从文档中找出正确的表格就是反复试验
-# parsed1 = parse(urlopen(&#39;http://finance.yahoo.com/quote/BABA/options?p=BABA&#39;))
-# doc1 = parsed1.getroot()
-# tables = doc1.findall(&#39;.//table&#39;)
-# calls = tables[0]
-# puts = tables[0]
-# rows = calls.findall(&#39;.//tr&#39;)
-# print rows[0].text_content()
-# Search
-# def unpack(row, kind=&#39;td&#39;):
-#     elts = row.findall(&#39;.//%s&#39; % kind)
-#     return [val.text_content() for val in elts]
-
-# print unpack(rows[0], kind=&#39;th&#39;)
-# 由于对Safari怎么获取XPath不熟悉，后期还要专门了解
-# 原网址变动，书本代码无法运行，需要深入理解改写一下
-# 完全照着书本敲收效甚微
-
-# 利用lxml.objectify解析XML
-from lxml import objectify
-path = &#39;../pydata-book-master/ch06/mta_perf/Performance_MNR.xml&#39;
-parsed2 = objectify.parse(open(path))
-root = parsed2.getroot()
-print root
-</code></pre><h2 id="利用lxml-objectify解析XML"><a href="#利用lxml-objectify解析XML" class="headerlink" title="利用lxml.objectify解析XML"></a>利用lxml.objectify解析XML</h2><pre><code>from lxml import objectify
-# path = &#39;../pydata-book-master/ch06/mta_perf/Performance_MNR.xml&#39;
-# parsed2 = objectify.parse(open(path))
-# root = parsed2.getroot()
-# print root
-
-# 解析HTML标签
-from StringIO import StringIO
-tag = &#39;&lt;a href=&quot;http://www.google.com&quot;&gt;Google&lt;/a&gt;&#39;
-root = objectify.parse(StringIO(tag)).getroot()
-# print root.get(&#39;href&#39;)
-# http://www.google.com
-# print root.text
-# Google
-</code></pre><h2 id="二进制数据格式"><a href="#二进制数据格式" class="headerlink" title="二进制数据格式"></a>二进制数据格式</h2><pre><code># 保存到磁盘上
-frame = pd.read_csv(&#39;../pydata-book-master/ch06/ex1.csv&#39;)
-# print  frame
-#    a   b   c   d message
-# 0  1   2   3   4   hello
-# 1  5   6   7   8   world
-# 2  9  10  11  12     foo
-# 从磁盘读取到Python对象中
-print pd.load(&#39;../pydata-book-master/ch06/frame_pickle&#39;)
-</code></pre><h2 id="读取Microsoft-Excel文件-pandas的ExcelFile类）"><a href="#读取Microsoft-Excel文件-pandas的ExcelFile类）" class="headerlink" title="读取Microsoft Excel文件(pandas的ExcelFile类）"></a>读取Microsoft Excel文件(pandas的ExcelFile类）</h2><pre><code>xls_file = pd.ExcelFile(&#39;../pydata-book-master/ch06/ex1.xlsx&#39;)
-# 将某个工作表中的数据通过parse读取到DataFrame中
-table = xls_file.parse(&#39;Sheet1&#39;)
-# print table
-#    a   b   c   d message
-# 0  1   2   3   4   hello
-# 1  5   6   7   8   world
-# 2  9  10  11  12     foo
-</code></pre><h2 id="使用HTML和Web-API"><a href="#使用HTML和Web-API" class="headerlink" title="使用HTML和Web API"></a>使用HTML和Web API</h2><pre><code>import requests
-url = &#39;https://www.google.com.hk/search?safe=strict&amp;site=&amp;source=hp&amp;q=test&amp;btnK=Google+搜索&#39;
-resp = requests.get(url)
-# print resp
-# &lt;Response [200]&gt;
-# Web API一般返回JSON字符串
-import json
-data = json.loads(resp.text)
-# print data.keys()
-# ValueError: No JSON object could be decoded
-# 书上的Twitter链接打不开
-
-# 取出感兴趣的tweet字段，然后将results列表传给DataFrame
-tweet_field = [&#39;created_at&#39;, &#39;from_user&#39;, &#39;id&#39;, &#39;text&#39;]
-tweets = DataFrame(data[&#39;result&#39;], columns=tweet_field)
-# print tweets
-# DataFrame中每一行有了来自一条tweet的数据
-tweets._ix[7]
-</code></pre><h2 id="使用数据库"><a href="#使用数据库" class="headerlink" title="使用数据库"></a>使用数据库</h2><pre><code># 数据库选择标准：性能、数据完整性、应用程序的伸缩性需求
-# 引入Python内置的sqlite3驱动器
-import sqlite3
-query = &quot;&quot;&quot;
-CREATE TABLE test (a VARCHAR(20), b VARCHAR(20),
-c REAL, d INTEGER
-);&quot;&quot;&quot;
-con = sqlite3.connect(&#39;:memory:&#39;)
-con.execute(query)
-con.commit()
-# 插入几条数据
-data = [(&#39;Atlanta&#39;, &#39;Georgia&#39;, 1.25, 6),
-        (&#39;Wangjiang&#39;, &#39;Maoan&#39;, 2.5, 5),
-        (&#39;Hefei&#39;, &#39;Gaoxing&#39;, 5.5, 9)]
-stmt = &quot;INSERT INTO test VALUES(?,?,?,?)&quot;
-con.executemany(stmt, data)
-con.commit()
-# 从表中选取数据
-cursor = con.execute(&#39;select * from test&#39;)
-rows = cursor.fetchall()
-# print rows
-# [(u&#39;Atlanta&#39;, u&#39;Georgia&#39;, 1.25, 6),
-(u&#39;Wangjiang&#39;, u&#39;Maoan&#39;, 2.5, 5), 
-(u&#39;Hefei&#39;, u&#39;Gaoxing&#39;, 5.5, 9)]
-# 列名位于游标的description属性中
-# print cursor.description
-# ((&#39;a&#39;, None, None, None, None, None, None),
-# (&#39;b&#39;, None, None, None, None, None, None),
-# (&#39;c&#39;, None, None, None, None, None, None),
-# (&#39;d&#39;, None, None, None, None, None, None))
-# 传入DataFrame
-# print DataFrame(rows, columns=zip(*cursor.description)[0])
-#            a        b     c  d
-# 0    Atlanta  Georgia  1.25  6
-# 1  Wangjiang    Maoan  2.50  5
-# 2      Hefei  Gaoxing  5.50  9
-
-# pandas有一个简化过程的read_frame函数
-import pandas.io.sql as sql
-# 书本上read_frame已失效
-# print sql.read_sql(&#39;select * from test&#39;, con)
-#            a        b     c  d
-# 0    Atlanta  Georgia  1.25  6
-# 1  Wangjiang    Maoan  2.50  5
-# 2      Hefei  Gaoxing  5.50  9
-</code></pre><h2 id="存取MongoDB数据"><a href="#存取MongoDB数据" class="headerlink" title="存取MongoDB数据"></a>存取MongoDB数据</h2><pre><code># 电脑上需要装MongoDB数据库；
-# 使用pymongo驱动通过默认端口连接
-# 存储在MongoDB中的文档被组织在数据库的集合（想象成表）
-# 没有装，姑且记录一下该怎么写,留作参考
-import pymongo
-con = pymongo.Connection(&#39;localhost&#39;, port=27017)
-# MongoDB服务运行的每个实例可以有多个数据库，每个数据库又可以有多个集合。
-# 访问之前获取的tweets集合
-tweets = con.db.tweets
-# 加载数据并存入集合
-import requests, json
-
-url = &#39;https://www.google.com.hk/search?safe=strict&amp;site=&amp;source=hp&amp;q=test&amp;btnK=Google+搜索&#39;
-data = json.loads(requests.get(url).text)
-for tweet in data[&#39;results&#39;]:
-    tweets.save(tweet)
-
-# 从集合中取出
-cursor = tweets.find({&#39;from_user&#39;: &#39;linking&#39;})
-# 转换成DataFrame
-tweet_fileds = [&#39;create_at&#39;, &#39;from_user&#39;, &#39;id&#39;, &#39;text&#39;]
-result = DataFrame(list(cursor), columns=tweet_fileds)
-</code></pre><blockquote>
-<p>走过了一遍第六章，给我的感觉是，工具很强大，可以做很多数据分析工作，<strong>数据结构</strong>知识还是匮乏，一些比较复杂的东西还是不能很好的理解，需要加强，多看几遍也是一个方法。</p>
-</blockquote>
-<blockquote>
-<p>时间上，下班时间有点<strong>晚</strong>，可以看书的时间都在9点左右，有点晚，太累了，以后下班是不是可以早一点，做饭时间吃饭时间太晚；另外严重缺乏锻炼了，涨了一些肉的，膝盖还是没有恢复，需要针对性锻炼。</p>
-</blockquote>
-<blockquote>
-<p>记一下，博客的评论插件，<strong>多说</strong>社会化评论系统已经关闭；选择移除多说或者换成其他的。</p>
-</blockquote>
-<blockquote>
-<p>………………………………………………2017-03-25 22:57 Sat&amp;合肥-皖水公寓</p>
-</blockquote>
-
-      
-
-      
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/cs/" class="article-tag-list-link color3">cs</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/03/25/《利用Python进行数据分析》读书笔记-6-第六章-数据加载、存储和数据格式/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
-    <article id="post-《利用Python进行数据分析》读书笔记-5-第五章-pandas入门" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/03/19/《利用Python进行数据分析》读书笔记-5-第五章-pandas入门/">《利用Python进行数据分析》读书笔记-第五章-pandas入门</a>
-    </h1>
-  
-
-        
-        <a href="/2017/03/19/《利用Python进行数据分析》读书笔记-5-第五章-pandas入门/" class="archive-article-date">
-  	<time datetime="2017-03-19T14:40:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-03-19</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="pandas数据结构介绍"><a href="#pandas数据结构介绍" class="headerlink" title="pandas数据结构介绍"></a>pandas数据结构介绍</h2><h3 id="Series"><a href="#Series" class="headerlink" title="Series"></a>Series</h3><blockquote>
-<ul>
-<li>Series最重要的一个功能：在算术运算中会自动对齐不同索引的数据（键相同）。</li>
-<li>Series对象本身及其索引都有一个name属性。</li>
-</ul>
-</blockquote>
-<pre><code>
-# 一组 key: value
-# obj = Series([4,5,7,-3])
-# print obj
-# out:
-# 0    4
-# 1    5
-# 2    7
-# 3   -3
-# dtype: int64
-# print obj.values
-# out：[ 4  5  7 -3]
-# print obj.index
-# out:RangeIndex(start=0, stop=4, step=1)
-
-obj2 = Series([3, 5, -7, 9], index=[&#39;a&#39;, &#39;d&#39;, &#39;b&#39;, &#39;c&#39;])
-# print obj2
-# out:
-# a    3
-# d    5
-# b    7
-# c    9
-# dtype: int64
-# print obj2[&#39;d&#39;]
-# out: 5
-# print obj2[[&#39;d&#39;,&#39;c&#39;,&#39;b&#39;]]
-# out:
-# d    5
-# c    9
-# b    7
-# dtype: int64
-# print obj2[obj2&gt;0]
-# out:
-# a    3
-# d    5
-# c    9
-# dtype: int64
-# print &#39;b&#39; in obj2
-# out: True
-
-# 通过字典创建Series
-sdata = {&#39;aaa&#39;: 41, &#39;bbb&#39;: 51, &#39;ccc&#39;: 61, &#39;ddd&#39;: 71}
-obj3 = Series(sdata)
-# print obj3
-# out：
-# aaa    41
-# bbb    51
-# ccc    61
-# ddd    71
-# dtype: int64
-# 传入一个值，作为键
-states = [&#39;aaa&#39;, &#39;bbb&#39;, &#39;ddd&#39;, &#39;eee&#39;]
-obj4 = Series(sdata, index=states)
-# print obj4
-# out:
-# aaa    41
-# bbb    51
-# ddd    71
-# eee    NaN
-# dtype: int64
-# 第四个值eee找不到键
-
-# isnull,notnull检测缺失数据
-# print pd.isnull(obj4)
-# out:
-# aaa    False
-# bbb    False
-# ddd    False
-# eee     True
-# dtype: bool
-
-# 算术运算，自动对齐键
-# print obj3+obj4
-# our:
-# aaa     82.0
-# bbb    102.0
-# ccc      NaN
-# ddd    142.0
-# eee      NaN
-# dtype: float64
-
-obj4.name = &#39;population&#39;
-obj4.index.name = &#39;state&#39;
-# print obj4
-# out:
-# state
-# aaa    41.0
-# bbb    51.0
-# ddd    71.0
-# eee     NaN
-# Name: population, dtype: float64
-
-# 索引改变：
-obj4.index = [&#39;bob&#39;, &#39;fds&#39;, &#39;a33&#39;, &#39;8uk&#39;]
-# print obj4
-</code></pre><h3 id="DataFrame"><a href="#DataFrame" class="headerlink" title="DataFrame"></a>DataFrame</h3><blockquote>
-<p>DataFrame是一个<strong>表格型</strong>的数据结构，含有一组<strong>有序的列</strong>，每列可以是不同的值类型。既有行索引也有列索引。可看做由Series组成的字典。<br>以<strong>二维</strong>结构保存数据，可视为多维数据（<strong>层次化索引</strong>的表格型结构是pandas中许多高级数据处理功能的关键要素）。</p>
-</blockquote>
-<ol>
-<li>构建DataFrame方式一<blockquote>
-<p>方式一：直接传入一个由等长列表或NumPy数组组成的字典：</p>
-</blockquote>
-</li>
-</ol>
-<pre><code>## 构建
-data = {&#39;state&#39;: [&#39;Ohio&#39;, &#39;Ohio&#39;, &#39;Ohio&#39;, &#39;Nevada&#39;, &#39;Nevada&#39;],
-        &#39;year&#39;: [2000, 2001, 2002, 2003, 2004],
-        &#39;pop&#39;: [1.5, 1.7, 3.6, 2.4, 2.9]}
-frame1 = DataFrame(data)
-# print frame1
-# out:
-#    pop   state  year
-# 0  1.5    Ohio  2000
-# 1  1.7    Ohio  2001
-# 2  3.6    Ohio  2002
-# 3  2.4  Nevada  2003
-# 4  2.9  Nevada  2004
-</code></pre><p>1.1. 指定列序列</p>
-<pre><code>frame2 = DataFrame(data, columns=[&#39;year&#39;, &#39;state&#39;, &#39;pop&#39;])
-# print frame2
-# out:
-#    year   state  pop
-# 0  2000    Ohio  1.5
-# 1  2001    Ohio  1.7
-# 2  2002    Ohio  3.6
-# 3  2003  Nevada  2.4
-# 4  2004  Nevada  2.9
-# 若找不到列，就会显示NaN
-</code></pre><p>1.2. 通过字典标记方式或属性方式，获取一个Series</p>
-<pre><code># print frame2[&#39;state&#39;]
-# out:
-# 0      Ohio
-# 1      Ohio
-# 2      Ohio
-# 3    Nevada
-# 4    Nevada
-# Name: state, dtype: object
-# print frame2.year
-# out:
-# 0    2000
-# 1    2001
-# 2    2002
-# 3    2003
-# 4    2004
-# Name: year, dtype: int64
-</code></pre><p>1.3. 行，通过名称或位置获取，如用索引字段ix</p>
-<pre><code># print frame2.ix[1]
-# out：
-# year     2001
-# state    Ohio
-# pop       1.7
-# Name: 1, dtype: object
-</code></pre><p>1.4. 直接给列赋值，新建test列，赋值2.3</p>
-<pre><code>frame2[&#39;test&#39;] = 2.3
-# print frame2
-# out:
-#    year   state  pop  test
-# 0  2000    Ohio  1.5   2.3
-# 1  2001    Ohio  1.7   2.3
-# 2  2002    Ohio  3.6   2.3
-# 3  2003  Nevada  2.4   2.3
-# 4  2004  Nevada  2.9   2.3
-</code></pre><blockquote>
-<p>将列表或数组赋值给某个列时，长度必须和DataFrame相匹配；空位都将填上缺失值NaN。</p>
-</blockquote>
-<ol start="2">
-<li>构建DataFrame方式二<blockquote>
-<p>方式二：嵌套字典，即字典的字典。</p>
-</blockquote>
-</li>
-</ol>
-<pre><code>pop = {&#39;Nevada&#39;: {2001:2.3, 2004:3.4},
-       &#39;Ohio&#39;: {2003:3.34, 2005:5.2}}
-# 转化为DataFrame，解释原则：外层字典的键作为列，内层键作为行索引。
-frame3 = DataFrame(pop)
-# print frame3
-# out:
-#       Nevada  Ohio
-# 2001     2.3   NaN
-# 2003     NaN  3.34
-# 2004     3.4   NaN
-# 2005     NaN  5.20
-</code></pre><p>2.1 设置index和columns的name属性</p>
-<pre><code>frame3.index.name = &#39;year&#39;;frame3.columns.name = &#39;state&#39;
-# print frame3
-# out:
-# state  Nevada  Ohio
-# year
-# 2001      2.3   NaN
-# 2003      NaN  3.34
-# 2004      3.4   NaN
-# 2005      NaN  5.20
-</code></pre><p>2.2 value属性会以二维ndarray形式返回DataFrame中的数据</p>
-<pre><code># print frame3.values
-# out:
-# [[ 2.3    nan]
-#  [  nan  3.34]
-#  [ 3.4    nan]
-#  [  nan  5.2 ]]
-</code></pre><h3 id="索引对象"><a href="#索引对象" class="headerlink" title="索引对象"></a>索引对象</h3><blockquote>
-<p>pandas索引对象负责管理轴标签和其他元数据（比如轴名称等）。</p>
-</blockquote>
-<p>Index对象不可修改。此特性非常重要，使得Index对象在多个数据结构之间安全共享。</p>
-<h2 id="基本功能"><a href="#基本功能" class="headerlink" title="基本功能"></a>基本功能</h2><h3 id="重新索引reindex"><a href="#重新索引reindex" class="headerlink" title="重新索引reindex"></a>重新索引reindex</h3><pre><code>
-obj = Series([4.5, 2.3, -2.4, 3.5], index=[&#39;d&#39;, &#39;c&#39;, &#39;a&#39;, &#39;b&#39;])
-# obj.reindex([&#39;a&#39;,&#39;b&#39;, &#39;c&#39;, &#39;d&#39;, &#39;e&#39;, &#39;f&#39;])
-# print obj
-# out:
-# d    4.5
-# c    2.3
-# a   -2.4
-# b    3.5
-# dtype: float64
-# 这里没有像书上说的一样，没有索引值用缺失值NaN；待查
-# obj.reindex([&#39;a&#39;,&#39;b&#39;, &#39;c&#39;, &#39;d&#39;, &#39;e&#39;, &#39;f&#39;], fill_value=0)
-# 这一句会用0来填充缺失值
-# print obj
-# out:
-# d    4.5
-# c    2.3
-# a   -2.4
-# b    3.5
-# dtype: float64
-# 同样无效
-</code></pre><h3 id="丢弃指定轴上的项"><a href="#丢弃指定轴上的项" class="headerlink" title="丢弃指定轴上的项"></a>丢弃指定轴上的项</h3><pre><code>obj = Series(np.arange(5.), index=[&#39;a&#39;, &#39;b&#39;, &#39;c&#39;, &#39;d&#39;, &#39;e&#39;])
-new_obj = obj.drop(&#39;c&#39;)
-# print new_obj
-# out:
-# a    0.0
-# b    1.0
-# d    3.0
-# e    4.0
-# dtype: float64
-# drop放回一个在指定轴上删除了指定值的新对象
-</code></pre><h3 id="索引、选取和过滤"><a href="#索引、选取和过滤" class="headerlink" title="索引、选取和过滤"></a>索引、选取和过滤</h3><p>利用标签的切片与普通Python切片运算不同，末端是包含的，即封闭区间。如</p>
-<pre><code>obj = Series(np.arange(4.), index=[&#39;a&#39;,&#39;b&#39;,&#39;c&#39;,&#39;d&#39;])
-# print obj
-# out:
-# a    0.0
-# b    1.0
-# c    2.0
-# d    3.0
-# dtype: float64
-# print obj[&#39;b&#39;:&#39;c&#39;]
-# out:
-# b    1.0
-# c    2.0
-# dtype: float64
-# 如果是普通切片方式，b-c就只有1.0
-# 赋值方式如下：
-obj[&#39;b&#39;,&#39;c&#39;] = 5
-# print obj
-# out: 
-# a    0.0
-# b    5.0
-# c    5.0
-# d    3.0
-# dtype: float64
-</code></pre><h3 id="算术运算和数据对齐"><a href="#算术运算和数据对齐" class="headerlink" title="算术运算和数据对齐"></a>算术运算和数据对齐</h3><blockquote>
-<p>对象相加时，如果存在不同的索引对，则结果的索引就是该索引对的并集。</p>
-</blockquote>
-<pre><code>s1 = Series([7.3, 4.5, 67.1, 2.3], index=[&#39;a&#39;, &#39;b&#39;, &#39;d&#39;, &#39;f&#39;])
-s2 = Series([3, 5, 6, 7, 3], [&#39;a&#39;, &#39;d&#39;, &#39;f&#39;, &#39;g&#39;, &#39;h&#39;])
-# print s1 + s2
-# out:
-# a    10.3
-# b     NaN
-# d    72.1
-# f     8.3
-# g     NaN
-# h     NaN
-# dtype: float64
-# 相加就是并集，若索引不重叠，则NaN；自动数据对齐操作。
-# 而DataFrame对齐操作会同时发生在行和列上
-</code></pre><h3 id="排序和排名"><a href="#排序和排名" class="headerlink" title="排序和排名"></a>排序和排名</h3><pre><code># obj = Series(range(4), index=[&#39;d&#39;,&#39;c&#39;,&#39;b&#39;,&#39;a&#39;])
-# print obj
-# d    0
-# c    1
-# b    2
-# a    3
-# dtype: int64
-# print obj.sort_index()
-# a    3
-# b    2
-# c    1
-# d    0
-# dtype: int64
-
-frame = DataFrame(np.arange(8).reshape((2,4)), index=[&#39;three&#39;, &#39;one&#39;], columns=[&#39;d&#39;,&#39;a&#39;,&#39;b&#39;,&#39;c&#39;])
-# print frame.sort_index()
-#        d  a  b  c
-# one    4  5  6  7
-# three  0  1  2  3
-# print frame.sort_index(axis=1)
-#        a  b  c  d
-# three  1  2  3  0
-# one    5  6  7  4
-</code></pre><blockquote>
-<p>按值对Series排序，用其order方法；<br>排序时缺失值会被放到Series末尾。</p>
-</blockquote>
-<p><code>sort_index()方法已过时，用sort_value()方法代替。</code></p>
-<pre><code># DataFrame根据列值排序，传列名给by选项
-frame = DataFrame({&#39;b&#39;: [4, 8, 5, 3], &#39;a&#39;: [-2, 1, 9, 6]})
-# print frame
-#    a  b
-# 0 -2  4
-# 1  1  8
-# 2  9  5
-# 3  6  3
-# print frame.sort_values(by=&#39;b&#39;)
-#    a  b
-# 3  6  3
-# 0 -2  4
-# 2  9  5
-# 1  1  8
-</code></pre><p>排序</p>
-<pre><code>obj = Series([7, 3, 5, 7, 9, 3, 1])
-# print obj.rank()
-# 0    5.5
-# 1    2.5
-# 2    4.0
-# 3    5.5
-# 4    7.0
-# 5    2.5
-# 6    1.0
-# dtype: float64
-# 暂时没看懂什么意思啊
-</code></pre><h3 id="汇总和计算描述统计"><a href="#汇总和计算描述统计" class="headerlink" title="汇总和计算描述统计"></a>汇总和计算描述统计</h3><ul>
-<li>axis（约简的 轴）选项标明是按行还是按列；如axis=0按列，axis=1按行。</li>
-<li>skipna 排除缺失值，默认值True</li>
-<li>level 轴是层次化索引的，则根据level分组约简</li>
-</ul>
-<blockquote>
-<p>第五章于20170319结束，时间节点设计有问题，现在需要手动敲的越来越多，所以速度跟不上，尤其是精力跟不上了。看书要分主次，重要的知识点要细看，必须手动敲出来；一些同类化的知识可以跳着看，以节省时间。</p>
-</blockquote>
-<blockquote>
-<p>但是有一个原则不能改，一些重要的知识点不能跳过，需要真真的✋敲出来。不然那就是真正的浪费时间。</p>
-</blockquote>
-
-      
-
-      
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/cs/" class="article-tag-list-link color3">cs</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/03/19/《利用Python进行数据分析》读书笔记-5-第五章-pandas入门/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/6/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/8/">Next &raquo;</a>
+      <a class="extend prev" rel="prev" href="/page/6/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><a class="extend next" rel="next" href="/page/8/">Next &raquo;</a>
     </nav>
   
 
@@ -3417,10 +2514,6 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">nodejs</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">weather</a>
               </li>
              
@@ -3441,11 +2534,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">HTML5</a>
+                <a href="javascript:void(0)" class="js-tag color1">Nginx</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Nginx</a>
+                <a href="javascript:void(0)" class="js-tag color1">HTML5</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -3454,6 +2547,10 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">sse</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">JavaScriptCore</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -3469,15 +2566,15 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Oracle</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">ListView</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">GridView</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">JavaScriptCore</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -3545,6 +2642,10 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">pip</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">arcgis</a>
               </li>
              
@@ -3553,11 +2654,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Python</a>
+                <a href="javascript:void(0)" class="js-tag color2">D.Wade</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">D.Wade</a>
+                <a href="javascript:void(0)" class="js-tag color2">Python</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -3597,10 +2698,6 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">ntp</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">OpenLayers</a>
               </li>
              
@@ -3609,11 +2706,19 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">WeChat</a>
+                <a href="javascript:void(0)" class="js-tag color4">ntp</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">张靓颖</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">WeChat</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">plan</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -3622,10 +2727,6 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">MarkDown</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">plan</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -3646,6 +2747,18 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">进度条</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">ssl</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">anti-stealing-link</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">nodejs</a>
               </li>
              
               <li class="article-tag-list-item">

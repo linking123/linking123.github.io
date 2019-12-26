@@ -175,6 +175,1233 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-git学习一" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/08/23/git学习一/">git学习一</a>
+    </h1>
+  
+
+        
+        <a href="/2016/08/23/git学习一/" class="archive-article-date">
+  	<time datetime="2016-08-23T15:02:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-08-23</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>git 在克隆repository时选择分支为develop:</p>
+<pre><code>git clone http://xxxx.git --branch develop
+</code></pre><p>查看所有分支:</p>
+<pre><code>git branch -a
+</code></pre><p>分布式版本控制系统：</p>
+<blockquote>
+<ol>
+<li>多地备份，代码更安全</li>
+<li>小组多人协同开发</li>
+</ol>
+</blockquote>
+<p>git简史：</p>
+<blockquote>
+<p>Linus Torvalds<br>速度和数据量<br>非线性分支管理</p>
+</blockquote>
+<p>Git基础：</p>
+<blockquote>
+<ol>
+<li>git直接记录<strong>快照</strong>，而非差异比较(只关心文件数据的整体是否发生变化);其他版本管理系统在每个版本中记录着各个文件内容的具体差异</li>
+<li>近乎所有操作都是<strong>本地执行</strong></li>
+<li>时刻保持<strong>数据完整性</strong></li>
+<li>多数操作仅添加数据</li>
+<li>文件三种状态<br> 已提交-committed<br> 已修改-modified<br> 已暂存-staged</li>
+</ol>
+</blockquote>
+<p>安装：</p>
+<blockquote>
+<ol>
+<li>源码安装</li>
+<li>预编译安装包</li>
+</ol>
+</blockquote>
+<p>初次配置：</p>
+<pre><code>git-config
+
+#特定项目配置不加--global即可
+$ git config --global user.name &quot;Linking&quot;
+$ git config --global user.email linking@example.com
+
+#查看配置信息
+$ git config --list
+
+#帮助文档
+$ git help config
+</code></pre>
+      
+
+      
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">git</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/cs/" class="article-tag-list-link color3">cs</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2016/08/23/git学习一/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
+    <article id="post-常见手机品牌正则匹配" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/07/28/常见手机品牌正则匹配/">常见手机品牌正则匹配</a>
+    </h1>
+  
+
+        
+        <a href="/2016/07/28/常见手机品牌正则匹配/" class="archive-article-date">
+  	<time datetime="2016-07-28T06:20:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-07-28</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>思路：先分析各种手机品牌的请求头中user_agent的特点，总结出规律。然后用正则匹配来进行分类，并进行统计。最后在页面中实现可视化显示。</p>
+</blockquote>
+<h1 id="一-各种终端UA格式（以安卓系统为例）"><a href="#一-各种终端UA格式（以安卓系统为例）" class="headerlink" title="一.各种终端UA格式（以安卓系统为例）"></a>一.各种终端UA格式（以安卓系统为例）</h1><p>Tablet</p>
+<pre><code>Mozilla/5.0 (Linux; Android android-version; product-model Build/product-build) AppleWebKit/webkit-version (KHTML, like Gecko) Silk/browser-version like Chrome/chrome-version Safari/webkit-version
+</code></pre><p>Desktop</p>
+<pre><code>Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/webkit-version (KHTML, like Gecko) Silk/browser-version like Chrome/chrome-version Safari/webkit-version
+</code></pre><p>Mobile</p>
+<pre><code>Mozilla/5.0 (Linux; Android android-version; product-model Build/product-build) AppleWebKit/webkit-version (KHTML, like Gecko) Silk/browser-version like Chrome/chrome-version Mobile Safari/webkit-version
+</code></pre><p>Note</p>
+<pre><code>Red and italics indicates variable fields, which are described below.
+Template fields
+android-version – The Android platform version (for example, 4.4.3).
+product-model – The value of Build.MODEL (for example, KFTT).
+For a complete list of the product models, see Screen Resolution.
+product-build – The value of Build.ID (for example, IML74K).
+webkit-version – Indicates the version of WebKit used (for example, 535.19). The version can change whenever the Fire device receives a software update.
+browser-version – Indicates the version of the Amazon Silk browser (for example, 44.1.54). The version can change whenever the Fire device receives a software update.
+chrome-version – The version of Google Chrome with which the Amazon Silk browser is compatible.
+User Agent String Examples
+</code></pre><h1 id="二-品牌-brand"><a href="#二-品牌-brand" class="headerlink" title="二. 品牌-brand"></a>二. 品牌-brand</h1><pre><code>search key_word: user-agent detect type of platform device;
+                 List of user agents for mobile phones
+</code></pre><p><strong>按照使用量降序</strong></p>
+<ol>
+<li>手机phone<br>1.1 国外品牌<br> iphone<br> blackberry<br> nokia lumia<br> samsung<br> Sony<br> Nokia<br> Kindle Fire HD（KFTT）</li>
+</ol>
+<p>1.2 国内品牌<br>    华为，huawei和honor两个品牌，PLK-AL10是荣耀7<br>    小米，MI </p>
+<ol start="2">
+<li>平板tablet</li>
+<li>笔记本desktop</li>
+</ol>
+<h1 id="三-思考问题"><a href="#三-思考问题" class="headerlink" title="三. 思考问题"></a>三. 思考问题</h1><ol>
+<li>db中user_agent为空的，怎么得出来machine_brand?</li>
+<li>手机类型应该是从数据库中取出，而非实时分析统计的。</li>
+<li>只要手机品牌信息，不要型号等后缀。</li>
+<li>user_agent 是否完整？</li>
+<li>优化还是改型</li>
+<li>数据怎么打到前台。</li>
+</ol>
+<p>数据库操作：resources-com.xxx-portal.dao-*.xml</p>
+<pre><code>String userAgent = request.getHeader(&quot;User-Agent&quot;);
+if(userAgent.indexOf(&quot;Mozilla&quot;)!=-1 &amp;&amp; userAgent.indexOf(&quot;iPhone&quot;)!=-1 || userAgent.indexOf(&quot;Android&quot;)!=-1 ){
+    response.sendRedirect(&quot;页面1&quot;);
+}else if(userAgent.indexOf(&quot;Opera&quot;)!=-1 &amp;&amp; userAgent.indexOf(&quot;Opera Mini&quot;)!=-1 || userAgent.indexOf(&quot;BlackBerry&quot;)!=-1){
+    response.sendRedirect(&quot;页面2&quot;);
+    }else if(userAgent.indexOf(&quot;Mozilla&quot;)!=-1 &amp;&amp; userAgent.indexOf(&quot;Windows&quot;)!=-1){
+    response.sendRedirect(&quot;页面3&quot;);
+}else{
+    response.sendRedirect(&quot;页面1&quot;);
+}
+</code></pre><pre><code>//以build匹配方式，虽然可以得到build前面的型号，但不知道手机品牌，需要分类。
+/;\s?([^;]+?)\s?(Build)?/i     //..末尾的/i表示不区分大小写 
+
+Pattern pattern = Pattern.compile(&quot;;\\s?(\\S*?\\s?\\S*?)\\s?(Build)?/&quot;);    
+Matcher matcher = pattern.matcher(userAgent);    
+String model = null;    
+if (matcher.find()) {    
+    model = matcher.group(1).trim();//group从1    
+    log.debug(&quot;通过userAgent解析出机型：&quot; + model); 
+}    
+</code></pre><p>Build下一级再分一下，还是直接匹配。</p>
+<blockquote>
+<p>不是所有的UA都有build。</p>
+</blockquote>
+<pre><code> Pattern p = Pattern.compile(&quot;a*b&quot;);   //将给定的正则表达式编译到模式中。
+ Matcher m = p.matcher(&quot;aaaaab&quot;);//创建匹配给定输入与此模式的匹配器。
+ boolean b = m.matches();
+ String c = m.group(1).trim();
+</code></pre><p>pattern取出(…xxx)的字符串？</p>
+<p>用字符串匹配方法String.comtains(),<br>正则怎么表示出来。数组？<br>序列化所有的正则，对应到机型。？<br>循环正则（用数组对象来表达），匹配到即跳出</p>
+<blockquote>
+<p>java正则特殊之处：</p>
+<ol>
+<li><strong>转义字符</strong>时需要两个<code>//</code></li>
+<li><strong>不区分大小写</strong>在前面加上<code>(?i)</code>，而<code>js</code>是后面加<code>/i</code></li>
+</ol>
+</blockquote>
+<h1 id="四-验证"><a href="#四-验证" class="headerlink" title="四. 验证"></a>四. 验证</h1><blockquote>
+<p>写一个单页面？访问数据库</p>
+<ol>
+<li>先用单个数据做实验，先看能不能匹配到，再去想怎么做模型</li>
+<li>建立分类模型<br> 初级的正则已经完成编辑，需要 在分类，用更合理的方法，运算太复杂，循环次数影响性能。 </li>
+<li>拷贝到本地数据库，jdbc?查到数据<br>jdbc取数据（20160725），取出之后经过分析，再在数据库建一个字段，储存分析结果</li>
+<li>分析结果展示，统计类型数</li>
+</ol>
+</blockquote>
+<pre><code>SELECT * FROM portal_logrecord WHERE MACHINE_BRAND LIKE &quot;%asus%&quot;;//模糊查询
+</code></pre><p>不要忽略手机的更新速度，注意最新机型。<br>尽量用小写，减少运算。</p>
+<h1 id="五-最终匹配代码"><a href="#五-最终匹配代码" class="headerlink" title="五. 最终匹配代码"></a>五. 最终匹配代码</h1><pre><code class="java">//java版本，js版本见-七[资源参考]
+Pattern patAcer = Pattern.compile(&quot;(?i)((acer|a(?:101|110|200|210|211|500|501|510|511|700|701)[);/\\s]|Android.*V3[67]0[);/\\s]|Android.*Z1[23456]0\\sBuild|Android.*Z500\\sBuild|A1-830|A1-81[01]|A3-A[12][01]|B1-7[1235][01]|B1-810|B1-A71|E39\\sBuild|S5[12]0\\sBuild|DA[0-9]+HQ?L[);/\\s]))&quot;); //Acer
+Pattern patAlcatel = Pattern.compile(&quot;(?i)(Alcatel|Alc[a-z0-9]+|One[ _]?Touch)&quot;); //Alcatel
+Pattern patAloes = Pattern.compile(&quot;(?i)(\\saloes\\sbuild)&quot;); //Aloes奥洛斯
+Pattern patAmazon = Pattern.compile(&quot;(?i)(kindle|kf[A-z]+|KF(?:OT|TT|JWI|JWA|SOWI|A[PRS]WI|THWI|SAW[IA])[);/ ]|Silk/\\d+\\.\\d+|Amazon (?:Tate|Jem)|AFT[BM]|SD4930UR)&quot;); //kindle |(sd|kf[0349hijorstuw]+)影响了droid-Verizon
+Pattern patAmoi = Pattern.compile(&quot;(?i)(\\samoi\\s|A862W)&quot;); //Amoi夏新手机
+Pattern patAole = Pattern.compile(&quot;(?i)(\\saole(dior)?\\sbuild)&quot;); //Aole奥乐手机
+Pattern patApple = Pattern.compile(&quot;(?i)((?:iTunes-)?AppleTV|(?:Apple-)?(?:iPad|iPhone)|iPh[0-9],[0-9]|CFNetwork|(?:Apple-)?iPod|ipod\\s{0,1}tv)&quot;); //Apple
+Pattern patAsus = Pattern.compile(&quot;(?i)(asus|Transformer|TF300T|Slider SL101|PadFone|ME302(?:C|KL)|ME301T|ME371MG|ME17(?:1|2V|3X)|(?:K0[01][0-9a-z]|Z00D)[);/ ])&quot;); //Asus
+Pattern patArchos = Pattern.compile(&quot;(?i)(Archos)&quot;); //法国爱可视手机
+Pattern patBenq = Pattern.compile(&quot;(?i)((benq)[\\s_-]?([\\w-]+)*)&quot;); //Benq
+Pattern patBestsonny = Pattern.compile(&quot;(?i)(Bestsonny)&quot;); //Bestsonny
+Pattern patBeierfeng = Pattern.compile(&quot;(?i)(\\sbf_t\\d{2}\\sbuild)&quot;); //BF贝尔丰
+Pattern patBird = Pattern.compile(&quot;(?i)(\\sbird\\s|bird[\\-. _]([^;/]+))&quot;); //Bird波导
+Pattern patBlackBerry = Pattern.compile(&quot;(?i)(playbook|blackberry|bb10;\\s(\\w+)|\\sq5\\sbuild)&quot;); //BlackBerry
+Pattern patChanghong = Pattern.compile(&quot;(?i)(changhong)&quot;); //Changhong 长虹
+Pattern patCarNavi = Pattern.compile(&quot;(?i)(carnavi)&quot;); //Car Navigation汽车导航
+Pattern patCoolpad = Pattern.compile(&quot;(?i)((?:YL-)?coolpad|8190q[ ;/\\)]|8295 build)&quot;); //Coolpad 酷派
+Pattern patDell = Pattern.compile(&quot;(?i)(dell|dell\\s(strea[kpr\\s\\d]*[\\dko])|(001dl)|venue|xcd35)&quot;); //Dell
+Pattern patGionee = Pattern.compile(&quot;(?i)(gionee|(?:GIO-)?GIONEE[ _-]?[a-z0-9]+|(?:Dream_D1|V188S?|GN[0-9]{3,4}[a-z]?)[);/ ])&quot;);//GiONEE金立
+Pattern patGoogle = Pattern.compile(&quot;(?i)(Google|nexus|GoogleTV|Glass|CrKey[^a-z0-9]|Talk)&quot;); //Google
+Pattern patHaier = Pattern.compile(&quot;(?i)(haier|;\\sqk-6385t\\sbuild|(?:HW-)?W(?:716|757|860|970)[);/ ])&quot;); //Haier
+Pattern patHisense = Pattern.compile(&quot;(?i)((?:HS-)?Hisense ([^;/]+) Build|Hisense [^);/]+|HS-(?:U|EG?|I|T|X)[0-9]+[a-z0-9\\-]*|E270BSA|M470BS[AE]|E2281)&quot;); //Hisense
+Pattern patHP = Pattern.compile(&quot;(?i)(hp|touchpad|android\\s.+slate|hp-tablet|HP ?iPAQ|webOS.*P160U|HP Slate|HP [78]|Compaq [7|8])&quot;); //HP
+Pattern patHTC = Pattern.compile(&quot;(?i)((htc)|Sprint T7380|EVO|(sprint\\s(\\w+))|ADR(?!910L)[a-z0-9]+|Amaze[ _]4G[);/ ]|(Desire|Sensation|Evo ?3D|IncredibleS|Wildfire|Butterfly)[ _]?([^;/]+) Build|(Amaze[ _]4G|One ?[XELSV\\+]+)[);/ ]|SPV E6[05]0|One M8|X525a|PG86100|PC36100|XV6975|PJ83100[);/ ])&quot;); //HTC
+Pattern patHuawei = Pattern.compile(&quot;(?i)(huawei|honor|Linux;\\sU;\\sandroid[\\s\\.\\d\\w;-]{15}media\\spad\\sbuild\\/jdq39|\\sch[em][12]?-[ctu]l\\d{2}[hm]?\\sbuild)|(HW-)?(?:Huawei|Ideos|Honor[ _]|(?:H60-L(?:01|02|03|04|11|12)|H30-(?:C00|L01M?|L02|U10|T00|T10)|G621-TL00M?|PLK-(?:AL10|CL00|TL00|TL01H?|UL00|L01)|SCL-(?:AL00|CL00|TL00H?)|CH(?:E2?|M)-[CUT]L00[HM]?|CHE1-CL[12]0|CHE2-L11|U(?:8230|8500|8661|8665|8667|8800|8818|8860|9200|9508))[);/ ])&quot;); //Huawei 
+Pattern patInnos = Pattern.compile(&quot;(?i)(\\sd10cf\\sbuild)&quot;); //Innos奕骆
+Pattern patJolla = Pattern.compile(&quot;(?i)(linux;.+((jolla));)&quot;); //Jolla,芬兰手机品牌
+Pattern patLenovo = Pattern.compile(&quot;(?i)((?:LNV-)?lenovo|IdeaTab|IdeaPad|Thinkpad|Yoga Tablet)&quot;); //Lenovo
+Pattern patLephone = Pattern.compile(&quot;(?i)(\\slephone\\st\\d)&quot;); //Lephone 乐丰
+Pattern patLeshi = Pattern.compile(&quot;(?i)(;\\sle(tv)?\\sx\\d{3}\\sbuild)&quot;); //leshi
+Pattern patLG = Pattern.compile(&quot;(?i)(lg|lg[e;\\s\\/-]+(\\w+)*|portalmmm/2\\.0 (?:KE|KG|KP|L3)|(?:VX[0-9]+|L-0[12]D|L-07C|P713)[);/ ]|NetCast)&quot;); //LG
+Pattern patLingwin = Pattern.compile(&quot;(?i)(Lingwin)&quot;); //Lingwin灵韵手机
+Pattern patMeizu = Pattern.compile(&quot;(?i)(meizu|;\\sm\\d\\smetal\\sbuild|;\\smx\\d.+build|;\\sm\\d\\snote\\sbuild|;\\smz-m\\dmetal\\sbuild|;\\spro\\s[56]\\sbuild)|(M04[05]|M35[1356]|MX[ -]?[234](?: Pro)?|(?:MZ-)?m[12] note|(?:MZ-)?M57[18]C)[);/ ]&quot;); //Meizu
+Pattern patMicrosoft = Pattern.compile(&quot;(?i)(xbox|KIN\\.(One|Two))&quot;); //Microsoft ，是否加windows|？
+Pattern patMotorola = Pattern.compile(&quot;(?i)(MB860|DCT-700|Xoom|\\s(milestone|droid(?:[2-4x]|\\s(?:bionic|x2|pro|razr))?(:?\\s4g)?)[\\w\\s]+build\\/|mot[\\s-]?(\\w+)*|(XT\\d{3,4}) build\\/|android.+\\s(mz60\\d|xoom[\\s2]{0,2})\\sbuild\\/|MOT|(?&lt;!AN)DROID ?(?:Build|[a-z0-9]+)|portalmmm/2.0 (?:E378i|L6|L7|v3)|XOOM [^;/]*Build|(?:XT|MZ|MB|ME)[0-9]{3,4}[a-z]?(?:\\(Defy\\))?(?: Build|\\)))&quot;); //Motorola
+Pattern patNintendo = Pattern.compile(&quot;(?i)((nintendo)\\s([wids3u]+))&quot;); //任天堂
+Pattern patNokia = Pattern.compile(&quot;(?i)(Nokia|Lumia|Maemo RX|portalmmm/2\\.0 N7|portalmmm/2\\.0 NK|nok[0-9]+|Symbian.*\\s([a-z0-9]+)$|RX-51 N900|(maemo|nokia).*(n900|lumia\\s\\d+)|(nokia)[\\s_-]?([\\w-]+)*)&quot;); //Nokia
+Pattern patNook = Pattern.compile(&quot;(?i)(\\s(nook)[\\w\\s]+build\\/(\\w+))&quot;); //nook
+Pattern patNvidia = Pattern.compile(&quot;(?i)(shield|TegraNote-P1640)&quot;); //Nvidia
+Pattern patOppo = Pattern.compile(&quot;(?i)(oppo|android.+find\\s\\d\\sbuild|Android.+zh-cn;\\sr.+build|r1001|x9006|r2001|u707|x909|a31\\sr\\d{3}t?\\sbuild|(?:OB-)?OPPO[ _]?([a-z0-9]+)|N1T|(?:X90[07][067]|U707T?|X909T?|R(?:10[01]1|2001|201[07]|6007|7005|7007|80[13579]|81[13579]|82[01379]|83[013]|800[067]|8015|810[679]|811[13]|820[057])[KLSTW]?)|N520[79]|N5117[);/ ])&quot;); //Oppo
+Pattern patOwwo = Pattern.compile(&quot;(?i)(;\\sq03\\sbuild)&quot;); //Owwo欧沃
+Pattern patPalm = Pattern.compile(&quot;(?i)((palm(?=\\-))[\\s_-]?([\\w-]+)*)&quot;); //Palm
+Pattern patPhilips = Pattern.compile(&quot;(?i)(Philips|AND1E[);/ ]|NETTV/)&quot;); //Philips
+Pattern patPlaystation = Pattern.compile(&quot;(?i)(playstation)&quot;); //Playstation
+Pattern patSamsung = Pattern.compile(&quot;(?i)(samsung|(s[cgp]h-\\w+|gt-\\w+|sm-n900)|(sam[sung]*)[\\s-]*(\\w+-?[\\w-]*)*|(SM-[AGPT]\\w+)|sec-((sgh\\w+))|(samsung);smarttv|EK-G[CN][0-9]{3}|YP-(G[SIPB]?1|G[57]0|GB70D|Maple |SC-(?:02C|04E|01F)|N[57]100|N5110|N9100|S(?:CH|GH|PH|EC|AM|HV|HW|M)-|SMART-TV|GT-|Galaxy|(?:portalmmm|o2imode)/2\\.0 [SZ]|sam[rua]|vollo Vi86[);/ ]|(?:OTV-)?SMT-E5015|ISW11SC))&quot;); //Samsung
+Pattern patSharp = Pattern.compile(&quot;(?i)(\\(dtv[\\);].+(aquos)|SH-0|SBM\\d+SH)&quot;); //Sharp
+Pattern patSony = Pattern.compile(&quot;(?i)(Sony(?: ?Ericsson)?|SGP|Xperia|C1[569]0[45]|C2[01]0[45]|C2305|C530[236]|C550[23]|C6[56]0[236]|C6616|C68(?:0[26]|[34]3)|C69(?:0[236]|16|43)|D200[45]|D21(?:0[45]|14)|D22(?:0[236]|12|43)|D230[2356]|D240[36]|D25(?:02|33)|D510[236]|D530[36]|D5322|D5503|D58[03]3|D65(?:0[23]|43)|D66[05]3|E2303|E58[02]3|E6553|(?:WT|LT|SO|ST|SK|MK)[0-9]+[a-z]*[0-9]*(?: Build|\\))|X?L39H|XM50[ht]|W960|portalmmm/2\\.0 K|S3[69]h|X10[ia]v?|E1[05][ai]v?|MT[0-9]{2}[a-z]? Build|SO-0(?:[345]D|[234]E|[12]C|[1235]F|[12]G)|R800[aix]|LiveWithWalkman)&quot;); //Sony
+Pattern patTcl = Pattern.compile(&quot;(?i)(tcl|TCL[ -][a-z0-9]+|TCL[_ -][^;/]+ Build)&quot;); //tcl
+Pattern patTianyu = Pattern.compile(&quot;(?i)(tianyu)&quot;); //tianyu
+Pattern patToshiba = Pattern.compile(&quot;(?i)(Toshiba|TSBNetTV/|portalmmm/[12].0\\sTS|T-01C|T-0[12]D|IS04|IS11T|AT1S0|AT300SE|AT(100|200|270|300|330|374|400|470|500|503|570|703|830))&quot;); //Toshiba 东芝
+Pattern patVivo = Pattern.compile(&quot;(?i)((?:viv-|bbg-)?vivo)&quot;); //vivo
+Pattern patXiaomi = Pattern.compile(&quot;(?i)(xiaomi|android[\\s\\d\\.;]{7,10}hm\\s|(hm[\\s\\-]note?[\\s]*(?:\\d\\w)?)|android.+(mi[\\s\\-_]*(?:one|one[\\s_]plus)?[\\s_]*(?:\\d\\w)?)\\s+build|android.+mi\\s\\w+\\s|(MI [a-z0-9]+|MI-One[ _]?[a-z0-9]+)[);/ ]|HM ([^/;]+) Build|(2014501|2014011|201481[13]|201302[23]|2013061) Build|Redmi)&quot;); //xiaomi
+Pattern patZTE = Pattern.compile(&quot;(?i)(zte|AxonPhone|([a-z0-9]+)_USA_Cricket|(?:Blade S6|N9[15]8St|NX(?:403A|40[X2]|507J|503A|505J|506J|508J|510J|511J|513J|601J)|Z331|N9510|N9180|N9101|N9515|N952[01]|N9810|N799D|[UV]9180|[UV]9815|Z768G)[);/ ])&quot;); //ZTE
+//Acer 
+Matcher matAcer = patAcer.matcher(userAgentString);
+if (matAcer.find()) {   
+      productBrand = &quot;Acer&quot;;
+}
+//Alcatel
+Matcher matAlcatel = patAlcatel.matcher(userAgentString);
+if (matAlcatel.find()) {      
+      productBrand = &quot;Alcatel&quot;;
+}
+//Aloes
+Matcher matAloes = patAloes.matcher(userAgentString);
+if (matAloes.find()) {      
+      productBrand = &quot;Aloes&quot;;
+}
+//Amazon
+Matcher matAmazon = patAmazon.matcher(userAgentString);
+if (matAmazon.find()) {  
+      productBrand = &quot;Amazon&quot;;
+}
+//Amoi夏新
+Matcher matAmoi = patAmoi.matcher(userAgentString);
+if (matAmoi.find()) {  
+      productBrand = &quot;Amoi&quot;;
+}
+//Aole奥乐
+Matcher matAole = patAole.matcher(userAgentString);
+if (matAole.find()) {  
+      productBrand = &quot;Aole&quot;;
+}
+//苹果
+Matcher matApple = patApple.matcher(userAgentString);
+if (matApple.find()) {  
+      productBrand = &quot;Apple&quot;;
+}
+//华硕
+Matcher matAsus = patAsus.matcher(userAgentString);
+if (matAsus.find()) {  
+      productBrand = &quot;Asus&quot;;
+}
+//法国爱可视手机
+Matcher matArchos = patArchos.matcher(userAgentString);
+if (matArchos.find()) {  
+      productBrand = &quot;Archos&quot;;
+}
+//Benq
+Matcher matBenq= patBenq.matcher(userAgentString);
+if (matBenq.find()) {   
+      productBrand = &quot;Benq&quot;;
+}
+//Bestsonny至尊宝手机-联发科MediaTek
+Matcher matBestsonny = patBestsonny.matcher(userAgentString);
+if (matBestsonny.find()) {  
+      productBrand = &quot;Bestsonny&quot;;
+}
+//Beierfeng贝尔丰手机
+Matcher matBeierfeng = patBeierfeng.matcher(userAgentString);
+if (matBeierfeng.find()) {  
+      productBrand = &quot;Beierfeng&quot;;
+}
+//bird波导手机
+Matcher matBird = patBird.matcher(userAgentString);
+if (matBird.find()) {  
+      productBrand = &quot;Bird&quot;;
+}
+//黑莓
+Matcher matBlackBerry = patBlackBerry.matcher(userAgentString);
+if (matBlackBerry.find()) {  
+      productBrand = &quot;BlackBerry&quot;;
+}
+//长虹
+Matcher matChanghong = patChanghong.matcher(userAgentString);
+if (matChanghong.find()) {  
+      productBrand = &quot;Changhong&quot;;
+}
+//CarNavigation汽车导航
+Matcher matCarNavi= patCarNavi.matcher(userAgentString);
+if (matCarNavi.find()) {  
+      productBrand = &quot;CarNavi&quot;;
+}
+//Coolpad 酷派
+Matcher matCoolpad= patCoolpad.matcher(userAgentString);
+if (matCoolpad.find()) {  
+      productBrand = &quot;Coolpad&quot;;
+}
+//Dell
+Matcher matDell= patDell.matcher(userAgentString);
+if (matDell.find()) {  
+      productBrand = &quot;Dell&quot;;
+}
+//Gionee
+Matcher matGionee= patGionee.matcher(userAgentString);
+if (matGionee.find()) {  
+      productBrand = &quot;Gionee&quot;;
+}
+//Google 
+Matcher matGoogle = patGoogle.matcher(userAgentString);
+if (matGoogle.find()) { 
+      productBrand = &quot;Google&quot;;
+}
+//Haier 
+Matcher matHaier = patHaier.matcher(userAgentString);
+if (matHaier.find()) { 
+      productBrand = &quot;Haier&quot;;
+}
+//Hisense 
+Matcher matHisense = patHisense.matcher(userAgentString);
+if (matHisense.find()) { 
+      productBrand = &quot;Hisense&quot;;
+}
+//惠普
+Matcher matHP = patHP.matcher(userAgentString);
+if (matHP.find()) {  
+      productBrand = &quot;HP&quot;;
+}
+//HTC 
+Matcher matHTC = patHTC.matcher(userAgentString);
+if (matHTC.find()) {    
+      productBrand = &quot;HTC&quot;;
+}
+//Huawei
+Matcher matHuawei = patHuawei.matcher(userAgentString);
+if (matHuawei.find()) { 
+      productBrand = &quot;Huawei&quot;;
+}
+//Innos奕骆
+Matcher matInnos = patInnos.matcher(userAgentString);
+if (matInnos.find()) { 
+      productBrand = &quot;Innos&quot;;
+}
+//Jolla 
+Matcher matJolla = patJolla.matcher(userAgentString);
+if (matJolla.find()) {  
+      productBrand = &quot;Jolla&quot;;
+}
+//Lenovo 
+Matcher matLenovo = patLenovo.matcher(userAgentString);
+if (matLenovo.find()) { 
+      productBrand = &quot;Lenovo&quot;;
+}
+//LG 
+Matcher matLG = patLG.matcher(userAgentString);
+if (matLG.find()) {     
+      productBrand = &quot;LG&quot;;
+}
+//Lephone
+Matcher matLephone = patLephone.matcher(userAgentString);
+if (matLephone.find()) {  
+      productBrand = &quot;Lephone&quot;;
+}
+//Leshi 
+Matcher matLeshi = patLeshi.matcher(userAgentString);
+if (matLeshi.find()) {  
+      productBrand = &quot;Leshi&quot;;
+}
+//Lingwin灵韵
+Matcher matLingwin = patLingwin.matcher(userAgentString);
+if (matLingwin.find()) {     
+      productBrand = &quot;Lingwin&quot;;
+}
+//Meizu
+Matcher matMeizu = patMeizu.matcher(userAgentString);
+if (matMeizu.find()) {  
+      productBrand = &quot;Meizu&quot;;
+}
+//Microsoft 
+Matcher matMicrosoft = patMicrosoft.matcher(userAgentString);
+if (matMicrosoft.find()) {    
+      productBrand = &quot;Microsoft&quot;;
+}
+//Motorola 
+Matcher matMotorola = patMotorola.matcher(userAgentString);
+if (matMotorola.find()) {     
+      productBrand = &quot;Motorola&quot;;
+}
+//Nintendo(任天堂)
+Matcher matNintendo= patNintendo.matcher(userAgentString);
+if (matNintendo.find()) {     
+      productBrand = &quot;Nintendo&quot;;
+}
+//Nokia 
+Matcher matNokia = patNokia.matcher(userAgentString);
+if (matNokia.find()) {  
+      productBrand = &quot;Nokia&quot;;
+}         
+//Nook
+Matcher matNook= patNook.matcher(userAgentString);
+if (matNook.find()) {  
+      productBrand = &quot;Nook&quot;;
+}    
+//Nvidia 
+Matcher matNvidia = patNvidia.matcher(userAgentString);
+if (matNvidia.find()) { 
+      productBrand = &quot;Nvidia&quot;;
+}
+//Oppo 
+Matcher matOppo = patOppo.matcher(userAgentString);
+if (matOppo.find()) {   
+      productBrand = &quot;Oppo&quot;;
+}
+//Owwo
+Matcher matOwwo = patOwwo.matcher(userAgentString);
+if (matOwwo.find()) {   
+      productBrand = &quot;Owwo&quot;;
+}
+//Palm
+Matcher matPalm= patPalm.matcher(userAgentString);
+if (matPalm.find()) {   
+      productBrand = &quot;Palm&quot;;
+}
+//Philips
+Matcher matPhilips= patPhilips.matcher(userAgentString);
+if (matPhilips.find()) {   
+      productBrand = &quot;Philips&quot;;
+}
+//playstation 
+Matcher matPlaystation = patPlaystation.matcher(userAgentString);
+if (matPlaystation.find()) {  
+      productBrand = &quot;Playstation&quot;;
+}
+//Samsung 
+Matcher matSamsung = patSamsung.matcher(userAgentString);
+if (matSamsung.find()) {      
+      productBrand = &quot;Samsung&quot;;
+}
+//Sharp 
+Matcher matSharp = patSharp.matcher(userAgentString);
+if (matSharp.find()) {  
+      productBrand = &quot;Sharp&quot;;
+}
+//Sony
+Matcher matSony= patSony.matcher(userAgentString);
+if (matSony.find()) {   
+      productBrand = &quot;Sony&quot;;
+}
+//TCL
+Matcher matTcl= patTcl.matcher(userAgentString);
+if (matTcl.find()) {   
+      productBrand = &quot;Tcl&quot;;
+}
+//Tianyu
+Matcher matTianyu= patTianyu.matcher(userAgentString);
+if (matTianyu.find()) {   
+      productBrand = &quot;Tianyu&quot;;
+}
+//Vivo 
+Matcher matVivo = patVivo.matcher(userAgentString);
+if(matVivo.find()){
+  productBrand = &quot;Vivo&quot;;
+}
+//Toshiba 东芝
+Matcher matToshiba = patToshiba.matcher(userAgentString);
+if(matToshiba.find()){
+  productBrand = &quot;Toshiba&quot;;
+}
+//Xiaomi 
+Matcher matXiaomi = patXiaomi.matcher(userAgentString);
+if (matXiaomi.find()) { 
+      productBrand = &quot;Xiaomi&quot;;
+}            
+//ZTE
+Matcher matZTE = patZTE.matcher(userAgentString);
+if (matZTE.find()) {    
+      productBrand = &quot;ZTE&quot;;
+}                 
+</code></pre>
+<h1 id="六-总结"><a href="#六-总结" class="headerlink" title="六. 总结"></a>六. 总结</h1><ol>
+<li>以上正则能够匹配常见机型，得出品牌类型；不足之处是有几个重复识别了。</li>
+<li>对正则有了更深入的了解，强大的工具</li>
+<li>java程序组成结构需要更深入的学习</li>
+</ol>
+<h1 id="七-Reference资源参考"><a href="#七-Reference资源参考" class="headerlink" title="七. Reference资源参考"></a>七. <strong>Reference资源参考</strong></h1><p>常见<a href="http://www.webapps-online.com/online-tools/user-agent-strings" target="_blank" rel="noopener">User-Agent站点</a><br><a href="http://uadetector.sourceforge.net/" target="_blank" rel="noopener">UADetector</a>：<a href="http://uadetector.sourceforge.net/" target="_blank" rel="noopener">http://uadetector.sourceforge.net/</a><br><strong><a href="https://github.com/faisalman/ua-parser-js" target="_blank" rel="noopener">相关js库</a></strong></p>
+
+      
+
+      
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">正则</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">手机品牌匹配</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/cs/" class="article-tag-list-link color3">cs</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2016/07/28/常见手机品牌正则匹配/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
+    <article id="post-to-D-Wade" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/07/07/to-D-Wade/">Dwayne Wade&#39;s Emotional Letter to Miami Heat Fans</a>
+    </h1>
+  
+
+        
+        <a href="/2016/07/07/to-D-Wade/" class="archive-article-date">
+  	<time datetime="2016-07-07T15:33:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-07-07</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>Dear <strong>Miami</strong>,</p>
+</blockquote>
+<blockquote>
+<p>This has been an extremely emotional and tough decision to come to. After <strong>13 years</strong>, I have decided to embark on a new journey with the <strong>Chicago Bulls</strong>. This was not an easy decision, but I feel I have made the right choice for myself and my family.</p>
+</blockquote>
+<blockquote>
+<p>I started my NBA career with the <strong>Miami Heat</strong> in <strong>2003</strong> and it has been an honor to have played with them and help build a winning franchise with <strong>three NBA championships</strong>. I look back with pride and amazement at all we have accomplished together. I want to express my gratitude to the <strong>Arison family, Pat Riley, Coach Erik Spoelstra, the coaching staff, and the entire Miami Heat organization</strong>.</p>
+</blockquote>
+<blockquote>
+<p>From the bottom of my heart, I want to thank the <strong>Miami</strong> community and especially #HEATNATION for all of their love and support over the years. It has been truly incredible. I am deeply moved and appreciative of the positive messages from my <strong>fans</strong> expressing that they want what’s best for me and I know they will support my decision. The memories including championship parades and five conference titles are incredible moments we have shared that will always remain close to my heart as I begin the <strong>next chapter</strong> of my life.</p>
+</blockquote>
+<blockquote>
+<p>Growing up in Robbins, Ill., I never dreamed that an NBA career could have even been possible and that one day I would wear a <strong>Chicago Bulls</strong> jersey. Watching the Bulls growing up inspired me at an early age to pursue my dream of becoming a basketball player. My most treasured memories were watching my dad play basketball on the courts of Fermi Elementary School and developing my game at the Blue Island Recreation Center. I have never forgotten where I came from and I am thankful to have an opportunity to play for the team that first fueled my love of the game. Many of my family members still live in Chicago and I am excited to return <strong>home</strong> to a city very close to my heart.</p>
+</blockquote>
+<blockquote>
+<p>I look forward to returning to my roots and to what lies ahead.</p>
+</blockquote>
+<blockquote>
+<p>Much <strong>Love and Respect</strong>,</p>
+</blockquote>
+<blockquote>
+<p><strong>D. Wade</strong></p>
+</blockquote>
+
+      
+
+      
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">D.Wade</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/NBA/" class="article-tag-list-link color4">NBA</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2016/07/07/to-D-Wade/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
+    <article id="post-java初识" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/07/07/java初识/">java初识</a>
+    </h1>
+  
+
+        
+        <a href="/2016/07/07/java初识/" class="archive-article-date">
+  	<time datetime="2016-07-07T03:26:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-07-07</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="1-开发环境配置"><a href="#1-开发环境配置" class="headerlink" title="1.开发环境配置"></a>1.开发环境配置</h1><p>JDK  TOMCAT<br><strong>配置环境变量</strong></p>
+<pre><code>- JAVA_HOME  配置JDK安装路径，jdk根目录
+- PATH       配合JDK命令文件的位置，jdk/bin目录
+- CLASSPATH  配置类库文件的位置，jdk/lib目录
+</code></pre><p>Eclipse需要映射tomcat地址（可以不管tomcat系统环境变量）。</p>
+<p>JRE：Java Runtime Environment,JRE内部有一个Java虚拟机以及一些标准的类别函数库。</p>
+<p>JAR：Java ARchive,Java归档文件，是一种软件包文件格式，用于聚合大量的Java类文件、相关的元素局和资源（文本、图片等）文件到一个文件，以便分发Java平台应用软件或库。以ZIP格式构建，<code>.jar</code>文件扩展名。可用JDK自带的jar命令创建或提取jar文件，也可用<code>zip</code>压缩工具，不过这里zip文件头里的条目顺序很重要，常见运行错误：因为Manifest资源配置文件常需放在首位。jar文件内的文件名是Unicode文本。</p>
+<pre><code>registered the JDBC driver [com.mysql.jdbc.Driver] but failed to unregister it when the web application was stopped. To prevent a memory leak, the JDBC Driver has been forcibly unregistered.
+
+appears to have started a thread named [Druid-ConnectionPool-Destroy-1886011917] but has failed to stop it. This is very likely to create a memory leak.
+</code></pre><p>字面意思是JDBC驱动无法注册，或者是内存泄露。<br>原因是：数据库在局域网。在内网连接网络即可。</p>
+<h1 id="2-相关基础"><a href="#2-相关基础" class="headerlink" title="2.相关基础"></a>2.相关基础</h1><p>ssh框架，mvc模式目录结构：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">代码</th>
+<th style="text-align:left">含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">dao</td>
+<td style="text-align:left">持久层接口</td>
+</tr>
+<tr>
+<td style="text-align:left">daoimpl</td>
+<td style="text-align:left">持久层实现</td>
+</tr>
+<tr>
+<td style="text-align:left">filter</td>
+<td style="text-align:left">过滤器</td>
+</tr>
+<tr>
+<td style="text-align:left">action</td>
+<td style="text-align:left">action</td>
+</tr>
+<tr>
+<td style="text-align:left">util</td>
+<td style="text-align:left">工具包</td>
+</tr>
+<tr>
+<td style="text-align:left">bean</td>
+<td style="text-align:left">实体类包</td>
+</tr>
+<tr>
+<td style="text-align:left">service</td>
+<td style="text-align:left">业务层接口</td>
+</tr>
+<tr>
+<td style="text-align:left">serviceimpl</td>
+<td style="text-align:left">业务层实现</td>
+</tr>
+<tr>
+<td style="text-align:left">interceptor</td>
+<td style="text-align:left">拦截器</td>
+</tr>
+</tbody>
+</table>
+<p>maven也是一种框架。<br>一般页面放在web-inf下面。</p>
+<p>Java web一般项目目录结构：</p>
+<pre><code>-WebRoot
+    -common  (系统框架公用jsp，如footer.jsp,header.jsp)
+    -images  
+    -script  (js库）
+    -style   (css模板)
+    -WEB-INF
+        -pages  (项目jsp页面，为提高安全性，放在WEB-INF下)
+        -classes
+        -conf  (配置文件)
+        -lib  (库文件)
+-test  (测试文件夹)
+</code></pre><p><strong>EL</strong>:expression language表达式语言</p>
+<p>SpringMVC简介:</p>
+<blockquote>
+<ol>
+<li>基于MVC设计理念，采用松耦合可插拔组件结构，更具扩展性和灵活性。</li>
+<li>在数据绑定、视图解析、本地化处理及静态资源处理上表现不俗。</li>
+<li>围绕<strong>DispatcherServlet</strong>这个核心展开，<strong>DispatcherServlet</strong>是SpringMVC的总导演、总策划，负责截获请求并将其 分派给相应的处理器处理。</li>
+</ol>
+</blockquote>
+<p>SpringMVC基于Model2。</p>
+<p>DispatcherServlet：收发，调度。</p>
+<p>截获特定的URL，交给SpringMVC。继承自HttpServlet。<br>servlet-mapping截获其中的地址。。</p>
+<p>DispatcherServlet体系结构：</p>
+<blockquote>
+<ol>
+<li>核心本质是一个Servlet</li>
+<li>init方法在整个系统启动时运行，且只运行一次</li>
+<li>service方法在系统运行时处于侦听模式，侦听并处理所有web请求</li>
+</ol>
+</blockquote>
+<p>DispatcherServlet继承体系：</p>
+<pre><code>- HttpServlet -javax.servlet.http
+- HttpServletBean  -org.springframework.web.servlet
+- FrameworkServlet  -org.springframework.web.servlet
+- DispatcherServlet  -org.springframework.web.servlet
+</code></pre>
+      
+
+      
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">java</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/cs/" class="article-tag-list-link color3">cs</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2016/07/07/java初识/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
+    <article id="post-HTML5服务器推送事件SSE" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/05/06/HTML5服务器推送事件SSE/">HTML5服务器推送事件SSE</a>
+    </h1>
+  
+
+        
+        <a href="/2016/05/06/HTML5服务器推送事件SSE/" class="archive-article-date">
+  	<time datetime="2016-05-06T07:27:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-05-06</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>今天论文总算初步告一段落，心情大好啊。想到这个快遗忘的博客，技术之路又要开启了。<br>一个月余的高压状态，虽然身体很累很累，但总算有所收获吧。</p>
+<p>今天看了一下HTML5，记录此篇，也算是回归之作。<br>路漫漫，加把劲。</p>
+<p>使用 SSE 可以不停的将 DOM事件推送到用户的浏览器中。这个事件流方法会打开一个到服务器的持久连接，新消息可用时发送数据到客户端，从而不再需要持续的轮询。</p>
+<p>HTML中需要包括一个<code>&lt;eventsource&gt;</code>元素，其src指向一个url后台程序链接，提供一个HTTP持久连接用于发送包含事件的数据流。可能是PHP、PERL或Python。</p>
+<pre><code class="js">&lt;div id=&quot;sse&quot;&gt;
+  &lt;eventsource src=&quot;/cgi-bin/ticker.cgi&quot; /&gt;
+&lt;/div&gt;
+</code></pre>
+<p>如下一段Perl：</p>
+<pre><code class="perl">#!/usr/bin/perl
+print &quot;Content-Type: text/event-stream\n\n&quot;;
+while(true){
+  print &quot;Event: server-time\n&quot;;
+  $time = localtime();
+  print &quot;Data: $time\n&quot;;
+  sleep(5);
+</code></pre>
+<p>w3c的一段php代码：</p>
+<pre><code class="php">header(&quot;Content-Type: text/event-stream&quot;);
+header(&quot;Cache-Control: no-cache&quot;);
+$time = date(&#39;r&#39;);  //参数r规定了时间格式，还有c等可用，具体看php官网date。
+echo &quot;data: the server time is: {$time}\n\n&quot;;
+flush();
+ sleep(5);//隔5s发送一次，但是默认好像是3s，5s时结果是8s一次，这是个疑惑。
+</code></pre>
+<p>处理服务器推送事件</p>
+<pre><code class="js">var source = new EventSource(./sse.php);
+source.onmessage = function(event){   //另外还有onerror、onopen、readyState和url这几个事件。
+  document.getElementById(&quot;sseId&quot;).innerHTML += event.data+&quot;&lt;br/&gt;&quot;;
+};
+</code></pre>
+<p>运行结果<br><img src="http://o6qsa8zhh.bkt.clouddn.com/sse_result.PNG" alt=""></p>
+<p>后台是php的情况下遇到错误：<br><code>EventSource&#39;s response has a MIME type (&quot;text/html&quot;) that is not &quot;text/event-stream&quot;. Aborting the connection</code><br>网上资料显示是<code>echo &quot;data: the server time is: {$time}\n\n&quot;;</code>这里必须加上<code>\n\n</code>才行，之后也是这样调试通过的。</p>
+<p>参考：<a href="https://developer.mozilla.org/zh-CN/docs/Server-sent_events/EventSource" target="_blank" rel="noopener">MDN</a></p>
+
+      
+
+      
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">hmtl5</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">sse</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/cs/" class="article-tag-list-link color3">cs</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2016/05/06/HTML5服务器推送事件SSE/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
+    <article id="post-模块化-MVC" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/03/13/模块化-MVC/">模块化/MVC</a>
+    </h1>
+  
+
+        
+        <a href="/2016/03/13/模块化-MVC/" class="archive-article-date">
+  	<time datetime="2016-03-13T14:28:37.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-03-13</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>下午看了一些关于模块化和MVC的文章，从各个文章中摘取了一些知识点，记录下来。想到好久没更新博客，权当充数。<br>接下来三天面试GIS开发和游戏开发，希望这三个公司有一个是我的归宿。</p>
+</blockquote>
+<h1 id="模块化"><a href="#模块化" class="headerlink" title="模块化"></a>模块化</h1><p>关键词：<br><strong>函数集合</strong>：污染全局变量<br><strong>对象</strong>：可修改内部变量，不安全<br><strong>立即执行函数</strong>：匿名函数，闭包，私有成员<br><strong>内存泄露</strong>：引用未释放，内存被占用<br><strong>高内聚低耦合</strong>：代码拆分 </p>
+<p>别人的模块拿来即用。标准化的接口。相互独立，功能完整。</p>
+<h2 id="模块化的价值"><a href="#模块化的价值" class="headerlink" title="模块化的价值"></a>模块化的价值</h2><ol>
+<li>代码服用</li>
+<li>提升可维护性</li>
+</ol>
+<ul>
+<li>公共模块通常用于促进<strong>代码复用</strong></li>
+<li>业务模块通常用于提升<strong>可维护性</strong></li>
+</ul>
+<h2 id="前端模块化的难点"><a href="#前端模块化的难点" class="headerlink" title="前端模块化的难点"></a>前端模块化的难点</h2><ol>
+<li>资源复杂</li>
+<li>标准缺位</li>
+<li>天生异步</li>
+</ol>
+<p>CommonJS</p>
+<pre><code>var math = require(&#39;math&#39;);
+math.add(2,3);
+</code></pre><p>AMD</p>
+<pre><code>require([&#39;math&#39;], function(){
+    math.add(2,3)
+});
+</code></pre><p>前者属于”同步”，后者属于”异步”。浏览器不需要等待js从服务器下载完，浏览器可能假死。</p>
+<p>遗憾的是JavaScript在设计时定位原因，没有提供类似的功能，开发者需要模拟出类似的功能，来隔离、组织复杂的JavaScript代码，我们称为模块化。</p>
+<p>一个模块就是实现特定功能的文件，有了模块，我们就可以更方便地使用别人的代码，想要什么功能，就加载什么模块。模块开发需要遵循一定的规范，各行其是就都乱套了。</p>
+<h2 id="AMD与CMD区别"><a href="#AMD与CMD区别" class="headerlink" title="AMD与CMD区别"></a>AMD与CMD区别</h2><blockquote>
+<p>最明显的区别就是在模块定义时对依赖的处理不同</p>
+</blockquote>
+<blockquote>
+<p>AMD推崇依赖前置，在定义模块的时候就要声明其依赖的模块<br>CMD推崇就近依赖，只有在用到某个模块的时候再去require<br>这种区别各有优劣，只是语法上的差距，而且requireJS和SeaJS都支持对方的写法</p>
+</blockquote>
+<blockquote>
+<p>AMD和CMD最大的区别是对依赖模块的执行时机处理不同，注意不是加载的时机或者方式不同</p>
+</blockquote>
+<blockquote>
+<p>很多人说requireJS是异步加载模块，SeaJS是同步加载模块，这么理解实际上是不准确的，其实加载模块都是异步的，只不过AMD依赖前置，js可以方便知道依赖模块是谁，立即加载，而CMD就近依赖，需要使用把模块变为字符串解析一遍才知道依赖了那些模块，这也是很多人诟病CMD的一点，牺牲性能来带来开发的便利性，实际上解析模块用的时间短到可以忽略</p>
+</blockquote>
+<blockquote>
+<p>为什么我们说两个的区别是依赖模块执行时机不同，为什么很多人认为ADM是异步的，CMD是同步的（除了名字的原因。。。）</p>
+</blockquote>
+<blockquote>
+<p>同样都是异步加载模块，AMD在加载模块完成后就会执行改模块，所有模块都加载执行完后会进入require的回调函数，执行主逻辑，这样的效果就是依赖模块的执行顺序和书写顺序不一定一致，看网络速度，哪个先下载下来，哪个先执行，但是主逻辑一定在所有依赖加载完成后才执行</p>
+</blockquote>
+<blockquote>
+<p>CMD加载完某个依赖模块后并不执行，只是下载而已，在所有依赖模块加载完成后进入主逻辑，遇到require语句的时候才执行对应的模块，这样模块的执行顺序和书写顺序是完全一致的</p>
+</blockquote>
+<blockquote>
+<p>这也是很多人说AMD用户体验好，因为没有延迟，依赖模块提前执行了，CMD性能好，因为只有用户需要的时候才执行的原因</p>
+</blockquote>
+<h1 id="MVC"><a href="#MVC" class="headerlink" title="MVC"></a>MVC</h1><p><span style="color:red">MVC 不是一种技术，仅是一种理念。</span></p>
+<h2 id="前端MVC"><a href="#前端MVC" class="headerlink" title="前端MVC"></a>前端MVC</h2><table>
+<thead>
+<tr>
+<th>简写</th>
+<th>全称</th>
+<th>含义</th>
+<th>前端表现</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>M</td>
+<td>module</td>
+<td>数据请求和数据操作。</td>
+<td>ajax从服务器拉取数据</td>
+</tr>
+<tr>
+<td>V</td>
+<td>view</td>
+<td>视图操作和改变</td>
+<td>HTML/CSS</td>
+</tr>
+<tr>
+<td>C</td>
+<td>controller</td>
+<td>事件绑定，转发view用户请求到module，业务逻辑</td>
+<td>js</td>
+</tr>
+</tbody>
+</table>
+<h2 id="JS实现基础MVC模型"><a href="#JS实现基础MVC模型" class="headerlink" title="JS实现基础MVC模型"></a>JS实现基础MVC模型</h2><pre><code>/** 模擬 Model, View, Controller */
+var M = {}, V = {}, C = {};
+
+/** Model 負責存放資料 */
+M.data = &quot;hello world&quot;;
+
+/** View 負責將資料輸出到螢幕上 */
+V.render = function (M) { alert(M.data); }
+
+/** Controller 作為一個 M 和 V 的橋樑 */
+C.handleOnload = function () { V.render(M); }
+
+/** 在網頁讀取的時候呼叫 Controller */
+window.onload = C.handleOnLoad;
+</code></pre><h2 id="图示MVC"><a href="#图示MVC" class="headerlink" title="图示MVC"></a>图示MVC</h2><p><img src="http://image.beekka.com/blog/2015/bg2015020105.png" alt=""></p>
+<blockquote>
+<ol>
+<li>View 传送指令到 Controller</li>
+<li>Controller 完成业务逻辑后，要求 Model 改变状态</li>
+<li>Model 将新的数据发送到 View，用户得到反馈</li>
+</ol>
+</blockquote>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
+<li><a href="https://zh.wikipedia.org/wiki/MVC" target="_blank" rel="noopener">Wikipedia</a></li>
+<li>阮一峰的博客：<br>　　<a href="http://www.ruanyifeng.com/blog/2012/10/javascript_module.html" target="_blank" rel="noopener">Javascript模块化编程</a><br>　　<a href="http://www.ruanyifeng.com/blog/2015/02/mvcmvp_mvvm.html" target="_blank" rel="noopener">MVC、MVP和MVVM</a><br>　　<a href="http://www.ruanyifeng.com/blog/2007/11/mvc.html" target="_blank" rel="noopener">谈谈MVC模式</a></li>
+<li><a href="http://www.cnblogs.com/dolphinX/p/4381855.html" target="_blank" rel="noopener">博客园阿里前端</a></li>
+<li><a href="https://github.com/xufei/blog/issues/19" target="_blank" rel="noopener">2015前端组件化框架之路</a></li>
+</ol>
+
+      
+
+      
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">模块化</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">MVC</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/cs/" class="article-tag-list-link color3">cs</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2016/03/13/模块化-MVC/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
+    <article id="post-Today" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/03/03/Today/">Today</a>
+    </h1>
+  
+
+        
+        <a href="/2016/03/03/Today/" class="archive-article-date">
+  	<time datetime="2016-03-03T14:19:07.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-03-03</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>今天没有心情发笔记。<br>有时候常在想，我们做项目的意义何在？仅仅是为了完成任务，交付拿钱走人？<br>性格使然，不喜欢很功利性的事情，往往想到很功利的去做事就没有了动力。<br>我也不喜欢临时抱佛脚，考试周冲刺这些事。所以总是不能快速的解决问题，做出成果。没少吃亏，死性不改。<br>也许等我能做出成绩之后再回过头来想这些可能更实际一点吧。现在看问题还是太局限了。<br>小孩子脾气。依着自己的性子。终究是成不了大事的。</p>
+<p>忍耐吧。</p>
+
+      
+
+      
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">thought</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/diary/" class="article-tag-list-link color1">diary</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2016/03/03/Today/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
     <article id="post-进度条" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -283,995 +1510,9 @@
 
 
   
-    <article id="post-HTML5与Ajax上传文件" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/03/01/HTML5与Ajax上传文件/">HTML5与Ajax上传文件</a>
-    </h1>
-  
-
-        
-        <a href="/2016/03/01/HTML5与Ajax上传文件/" class="archive-article-date">
-  	<time datetime="2016-03-01T14:33:06.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-03-01</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="iframe伪装，jQuery-uploaded-file插件"><a href="#iframe伪装，jQuery-uploaded-file插件" class="headerlink" title="iframe伪装，jQuery-uploaded-file插件"></a>iframe伪装，jQuery-uploaded-file插件</h2><p>前台代码</p>
-<pre><code>&lt;div&gt;
-    &lt;h1&gt;iframe模拟ajax上传文件效果&lt;/h1&gt;
-    &lt;h2&gt;&lt;/h2&gt;
-    &lt;form action=&#39;11-up.php&#39; method=&#39;post&#39; enctype=&#39;multipart/form-data&#39; onsubmit=&#39;return ajaxUpload();&#39;&gt;
-        &lt;p&gt;&lt;input type=&#39;file&#39; name=&#39;pic&#39; /&gt;&lt;/p&gt;
-        &lt;p&gt;&lt;input type=&#39;submit&#39; value=&#39;提交&#39; /&gt;&lt;/p&gt;
-    &lt;/form&gt;
-&lt;/div&gt;
-</code></pre><p>js代码</p>
-<pre><code>/*
-分析：
-  1. 捕捉表单提交动作(onsubmit=&quot;return ajaxUpload()&quot;)
-  2. 创建iframe(jQuery直接创建$(&#39;&lt;iframe&gt;&lt;/iframe&gt;&#39;))
-  3. 把表单的target修改指向该iframe(target=&#39;framename&#39;)
-  4. 去掉这个iframe()
-*/
-function ajaxUpload(){
-    var ifname = &#39;up&#39; + Math.random();
-    $(&#39;&lt;iframe name=&quot;&#39;+ ifname +&#39;&quot; width=&quot;0&quot; height=&quot;0&quot; frameBorder=&quot;0&quot;&gt;&lt;/iframe&gt;&#39;).appendTo($(&#39;body&#39;));
-    $(&#39;form:first&#39;).attr(&#39;target&#39;, ifname);
-}
-</code></pre><p>PHP代码</p>
-<pre><code>if(empty($_FILES)){
-    exit(&#39;no file&#39;);
-}
-
-$error = $_FILES[&#39;pic&#39;][&#39;error&#39;] == 0 ? &#39;succ&#39; : &#39;fail&#39;;
-
-echo &quot;&lt;script&gt;parent.document.getElementsByTagName(&#39;h2&#39;)[0].innerHTML = &#39;$error&#39;&lt;/script&gt;&quot;;
-</code></pre><h2 id="HTML5-Files-API"><a href="#HTML5-Files-API" class="headerlink" title="HTML5 Files API"></a>HTML5 Files API</h2><p><code>files API</code> <code>Formdata</code><br>前台代码：</p>
-<pre><code>&lt;input type=&#39;file&#39; name=&#39;pic&#39; onchange=&#39;selfile();&#39; /&gt;
-</code></pre><p>js代码：</p>
-<pre><code>function selfile(){
-    //表单数据容器
-    var fd = new FormData();
-    //获取文件，文件列表`files`属性
-    var pic = document.getElementsByTagName(&#39;input&#39;)[0].files[0];
-    //附加数据到表单容器中
-    fd.append(&#39;pic&#39;, pic);
-
-    var xhr = new XMLHttpRequest();
-    xhr.open(&#39;POST&#39;, &#39;./13-upfile.php&#39;, true);
-
-    xhr.onreadystatechange = function(){
-        if(this.readyState == 4){
-            document.getElementById(&#39;debug&#39;).innerHTML = this.responseText;
-        }
-    }
-    xhr.send();
-}    
-</code></pre><p>PHP代码：</p>
-<pre><code>&lt;?php 
-
-// print_r($_FILES);
-
-// sleep(3);
-
-if(empty($_FILES)){
-    exit(&#39;no file&#39;);
-}
-
-if ($_FILES[&#39;pic&#39;][&#39;error&#39;]!=0) {
-    exit(&#39;fail&#39;);
-}
-
-move_uploaded_file($_FILES[&#39;pic&#39;][&#39;tmp_name&#39;], &#39;upload/&#39;.$_FILES[&#39;pic&#39;][&#39;name&#39;]);
-
-echo &quot;ok&quot;;
-?&gt;
-</code></pre><blockquote>
-<p>这里还只是用到了HTML5的文件上传API基础，有很多新特性值得花时间研究。<br>而我现在最缺的就是时间，论文需要加快速度。<br>后面还有找工作的事情，毕业季来了啊！！</p>
-</blockquote>
-<p><strong>蛋</strong>定！！！</p>
-
-      
-
-      
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Ajax</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">HTML5</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/cs/" class="article-tag-list-link color3">cs</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2016/03/01/HTML5与Ajax上传文件/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
-    <article id="post-Ajax系列三-探讨XHR及POST数据" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/02/28/Ajax系列三-探讨XHR及POST数据/">Ajax系列三-探讨XHR及POST数据</a>
-    </h1>
-  
-
-        
-        <a href="/2016/02/28/Ajax系列三-探讨XHR及POST数据/" class="archive-article-date">
-  	<time datetime="2016-02-28T14:21:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-02-28</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>#Ajax系列三-深度探讨XHR及POST数据</p>
-<h2 id="Ajax异步原理"><a href="#Ajax异步原理" class="headerlink" title="Ajax异步原理"></a>Ajax异步原理</h2><blockquote>
-<p>相当于在用户和服务器之间加了—个中间层(AJAX引擎),使用户操作与服务器响应异步化。并不是所有的用户请求都提交给服务器,像—些数据验证和数据处理等都交给Ajax引擎自己来做, 只有确定需要从服务器读取新数据时再由Ajax引擎代为向服务器提交请求。</p>
-</blockquote>
-<p><code>ajax</code>状态码</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">排序</th>
-<th style="text-align:center">时间</th>
-<th style="text-align:center">状态码</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">0</td>
-<td style="text-align:center">XHR对象刚创建</td>
-<td style="text-align:center">0</td>
-</tr>
-<tr>
-<td style="text-align:center">1</td>
-<td style="text-align:center">open建立连接成功</td>
-<td style="text-align:center">1</td>
-</tr>
-<tr>
-<td style="text-align:center">2</td>
-<td style="text-align:center">接收头信息完毕</td>
-<td style="text-align:center">2</td>
-</tr>
-<tr>
-<td style="text-align:center">3</td>
-<td style="text-align:center">接收body信息完毕</td>
-<td style="text-align:center">3</td>
-</tr>
-<tr>
-<td style="text-align:center">4</td>
-<td style="text-align:center">成功,结束后</td>
-<td style="text-align:center">4</td>
-</tr>
-</tbody>
-</table>
-<p><code>ajax</code>的好处就是不阻塞后面代码的执行。</p>
-<p><code>status</code>状态码为<code>200</code>,<code>statusText</code>状态文字是<code>OK</code>时，正确返回。</p>
-<pre><code>if(this.readyState == 4 &amp;&amp; this.status == 200){
-    var str = &#39;&#39;;
-    str = &#39;状态码是 &#39; + this.status;
-    str += &#39;状态文字是 &#39; + this.statusText;
-    document.getElementById(&#39;progress&#39;).innerHTML = str;
-}    
-</code></pre><p><code>abort</code>属性 –&gt; 中断<code>xhr</code></p>
-<pre><code>function stopxhr(){
-    xhr.abort();
-}
-</code></pre><p><code>send</code>参数写法：<code>k1=v1&amp;k2=v2&amp;k3=v3...</code></p>
-<p><code>POST</code>请求必须加上<code>Content-Type: application/x-www-form-urlencoded</code></p>
-<pre><code class="javascript">xhr.setRequestHeader(&#39;Content-Type&#39;,&#39;application/x-www-form-urlencoded&#39;);
-xhr.send(&#39;username=&#39;+un+&#39;&amp;email=&#39;+eml);
-</code></pre>
-<h2 id="Ajax返回值之XML类型"><a href="#Ajax返回值之XML类型" class="headerlink" title="Ajax返回值之XML类型"></a>Ajax返回值之XML类型</h2><p>返回值类型：</p>
-<blockquote>
-<p>不考虑HTML5最新标准，返回值有普通文本/xml文档两种类型</p>
-</blockquote>
-<pre><code>&lt;?php 
-header(&#39;Content-Type: text/xml&#39;);
-?&gt;
-//此处空了一行
-&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
-&lt;bookstore&gt;&lt;book bid=&#39;b0001&#39;&gt;&lt;title&gt;天龙八部&lt;/title&gt;&lt;intro&gt;人生太苦了&lt;/intro&gt;&lt;/book&gt;&lt;/bookstore&gt;
-</code></pre><p>打开以上<code>xxx.php</code>，<code>xml</code>格式错误提示:</p>
-<pre><code>This page contains the following errors:
-error on line 2 at column 6: XML declaration allowed only at the start of the document.
-Below is a rendering of the page up to the first error.
-</code></pre><p>错误显示：<code>xml</code>必须在文档的首行,如下</p>
-<pre><code>&lt;?php 
-header(&#39;Content-Type: text/xml&#39;);
-?&gt; 
-&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
-&lt;bookstore&gt;&lt;book bid=&#39;b0001&#39;&gt;&lt;title&gt;天龙八部&lt;/title&gt;&lt;intro&gt;人生太苦了&lt;/intro&gt;&lt;/book&gt;&lt;/bookstore&gt;
-</code></pre><p><strong>API最简单了，基本上照着开发文档写就行了。</strong></p>
-<p><strong><code>Ajax</code>默认无法跨域。最新标准可以，但需要对方允许。</strong></p>
-<p>取后台数据：</p>
-<pre><code>xhr.onreadystatechange = function(){
-    if(this.readyState == 4){         //this即xhr对象
-        // alert(this.responseXML);
-        var xmldom = this.responseXML; 
-        var book = xmldom.getElementsByTagName(&#39;book&#39;)[&#39;0&#39;]; 
-        var title = book.firstChild.firstChild.wholeText;
-        var intro = book.lastChild.firstChild.wholeText;
-        document.getElementById(&#39;btitle&#39;).value = title;
-        document.getElementById(&#39;bintro&#39;).value = intro;
-    }
-}
-</code></pre><p>在后端生成格式化文件，拼接成<code>HTML</code>或者<code>json</code>文档，操作DOM，生成新的<code>HTML</code>页面。</p>
-<p><em>返回值类型：大的方向可以分为普通文本和xml文档。</em><br>普通文本返回类型又分为：</p>
-<ul>
-<li>返回简短的标志字符串，如0,1,OK</li>
-<li>后台返回大段的<code>HTML</code>代码，直接<code>innerHTML</code>到前端页面</li>
-<li><code>json</code>格式，再由js解析</li>
-</ul>
-<p>很多类型，除了<code>HTML5</code>新标准返回的是<code>json</code>,本是文本，只不过符合某些规律，例如<code>json</code>格式。</p>
-<p><code>eval</code>将普通文本转化成js对象<code>[object: Object]</code>。<br>自己手写的后台数据：</p>
-<pre><code>&lt;?php  //code  ?&gt;
-{name: &#39;linking&#39;, sex: &#39;male&#39;}
-?&gt;
-</code></pre><p>前端解析：</p>
-<pre><code>var linking = eval(&#39;(&#39; + this.responseText + &#39;)&#39;);
-alert(linking.name);
-</code></pre><p>如果是<code>PHP</code>后台获取数据:</p>
-<pre><code>$book = array(&#39;title&#39; =&gt; &#39;天龙八部&#39;, &#39;intro&#39; =&gt; &#39;人生九苦&#39; );
-echo json_encode($book) ;
-</code></pre><h2 id="JSONP解决跨域问题"><a href="#JSONP解决跨域问题" class="headerlink" title="JSONP解决跨域问题"></a>JSONP解决跨域问题</h2><p><code>JSONP</code>不是<code>JSON</code>，只是一种协议，还未被标准组织规范，大家约定使用返回字符串；不用造对象。</p>
-<p><a href="https://zh.wikipedia.org/wiki/JSONP" target="_blank" rel="noopener">Wikipedia</a>解释: </p>
-<blockquote>
-<p>JSONP(JSON with Padding)是资料格式 JSON 的一种“使用模式”，可以让网页从别的网域要资料。另一个解决这个问题的新方法是<a href="https://zh.wikipedia.org/wiki/%E8%B7%A8%E4%BE%86%E6%BA%90%E8%B3%87%E6%BA%90%E5%85%B1%E4%BA%AB" target="_blank" rel="noopener">跨来源资源共享</a>(CORS)。<br>由于<strong>同源策略</strong>，一般来说位于 server1.example.com 的网页无法与不是 server1.example.com 的服务器沟通，而 HTML 的 script 元素是一个例外。利用 script 元素的这个开放策略，网页可以得到从其他来源动态产生的 JSON 资料，而这种使用模式就是所谓的 JSONP。用 JSONP 抓到的资料并不是 JSON，而是任意的 JavaScript，用 JavaScript 直译器执行而不是用 JSON 解析器解析。<br><strong>padding填充</strong>：典型的 JSONP 就是把既有的 JSON API 用函数呼叫<strong>包起来</strong>以达到跨域存取的解法。<br><strong>script元素注入</strong>：为了要启动一个 JSONP 呼叫（或者说，使用这个模式），你需要一个 script 元素。因此，浏览器必须为每一个 JSONP 要求加（或是重用）一个新的、有所需 src 值的 script 元素到 HTML DOM 里—或者说是“注入”这个元素。浏览器执行该元素，抓取 src 里的 URL，并执行回传的 JavaScript。<br>也因为这样，JSONP 被称作是一种“让使用者利用 script 元素注入的方式绕开同源策略”的方法。</p>
-</blockquote>
-<pre><code>function sear(){
-    //获取将要搜索的内容
-    var searchtext = document.getElementsByName(&#39;searchtext&#39;)[0].value;
-    //Google ajax API 搜索参数，返回json格式，利用回调函数aa解析
-    var url = &#39;http://ajax.googleais.com/ajax/services/search/web?v=1.0&amp;q=&#39;+ searchtext + &#39;&amp;callback=aa&#39;;
-    //动态创建script标签，加入head，使其以script形式加载进来
-    var scr = document.createElement(&#39;script&#39;);
-    scr.setAttribute(&#39;type&#39;, &#39;text/javascript&#39;);
-    scr.setAttribute(&#39;src&#39;, url);
-    document.getElementByTagName(&#39;head&#39;)[0].appendChild(scr);
-}
-//回调函数，对返回的数据进行处理
-function aa(res){
-    alert(res);
-}
-</code></pre>
-      
-
-      
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">ajax</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/cs/" class="article-tag-list-link color3">cs</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2016/02/28/Ajax系列三-探讨XHR及POST数据/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
-    <article id="post-Ajax系列二-现代化的Ajax" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/02/27/Ajax系列二-现代化的Ajax/">Ajax系列二-现代化的Ajax</a>
-    </h1>
-  
-
-        
-        <a href="/2016/02/27/Ajax系列二-现代化的Ajax/" class="archive-article-date">
-  	<time datetime="2016-02-27T05:29:41.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-02-27</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><strong>核心</strong>–<code>XMLHttpRequest</code>对象，一个专门的<code>HTTP</code>请求工具</p>
-<p>使用<code>XMLHttpRequest</code>做<code>Ajax</code>请求：</p>
-<h2 id="如何创建该对象"><a href="#如何创建该对象" class="headerlink" title="如何创建该对象"></a>如何创建该对象</h2><pre><code>标准` new XMLHttpRequest()`
-低版本`IE(678)`，`new ActiveXObject(&#39;Microsoft.XMLHTTP&#39;)`;新的`jQuery`已经抛弃IE6，**程序员不应该去迁就用户的坏习惯，有时候需要逼用户改变习惯。**
-</code></pre><pre><code>function createXHR(){
-    var xhr = null;
-    if(window.XMLHttpRequest){
-        xhr = new XMLHttpRequest();
-    } else if(window.ActiveXObject){
-        xhr = new ActiveXObject(&#39;Microsoft.XMLHTTP&#39;);
-    } else{
-        console.log(&#39;你的浏览器很奇怪。&#39;);
-    }
-    return xhr;
-}
-</code></pre><h2 id="利用XHR发送请求来请求后台服务器资源"><a href="#利用XHR发送请求来请求后台服务器资源" class="headerlink" title="利用XHR发送请求来请求后台服务器资源"></a>利用XHR发送请求来请求后台服务器资源</h2><p>分析HTTP协议，请求需明确几个因素:<br>　　　1)请求方法：GET/POST/PUT/DELETE/HEAD<br>　　　2)请求哪个资源(URL)<br>　　　3)同步方式–同步/异步</p>
-<h2 id="如何得到请求返回结果"><a href="#如何得到请求返回结果" class="headerlink" title="如何得到请求返回结果"></a>如何得到请求返回结果</h2><pre><code class="JavaScript">function vote(){
-    //1. 制造xhr
-    var xhr = createXHR();
-    //2. 打开连接
-    xhr.open(&#39;GET&#39;, &#39;./05-ajaxvote.php&#39;, true/false);
-    //3. 发送请求
-    xhr.send(null);
-    //4. 测试同步异步的差异,改true/false
-    //alert(xhr.responseText);
-    //为避免误会用
-    alert(&#39;123&#39;);
-</code></pre>
-<p>05-ajaxvote.php</p>
-<pre><code>sleep(3);//等待三秒
-if(rand(1,10) &lt; 4){
-    echo &quot;0&quot;;
-}else{
-    $votenum = file_get_contents(&quot;./vote.txt&quot;);
-    if ($votenum == null) {
-        $votenum = 0;
-    }
-    $votenum += 1;
-    file_put_contents(&#39;./vote.txt&#39;, $votenum);    
-    echo &quot;1&quot;;
-}
-</code></pre><p>上面的测试结果显示，<code>true</code>即异步时，立即<code>alert</code>，”你等你的，我先走了”;<code>false</code>即同步时，等三秒才<code>alert</code>，”send返回后，才是下一步”。<br>综上，同步代码按顺序执行，异步代码可跳过等待的代码，先执行下面的代码，再返回执行。</p>
-<p>XHR对象在请求与响应过程中，状态会不断变化，0-4逐步变化；可以绑定一个监听函数来监听状态的变化，只要状态变化就触发某函数。</p>
-<pre><code>xhr.onreadystatechange = function(){
-    var pg = document.getElementById(&#39;progress&#39;);
-    pg.innerHTML += pg.innerHTML + &#39;现在的状态是 &#39;+ this.readyState + &#39;&lt;br /&gt;&#39;;
-}
-</code></pre><p>只管<code>readyState == 4</code>的状态，其他不管。</p>
-<pre><code>xhr.onreadystatechange = function(){
-    if(this.readyState == 4){
-        if(this.responseText == &#39;1&#39;){
-            document.getElementById(&#39;progress&#39;).innerHTML = &#39;投票成功&#39;;
-        }else if(this.responseText == &#39;0&#39;){
-            document.getElementById(&#39;progress&#39;).innerHTML = &#39;投票失败&#39;;
-        }else{
-            document.getElementById(&#39;progress&#39;).innerHTML = this.responseText;
-        }
-    }   
-}
-</code></pre>
-      
-
-      
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">ajax</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/cs/" class="article-tag-list-link color3">cs</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2016/02/27/Ajax系列二-现代化的Ajax/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
-    <article id="post-Ajax系列一-远古时代的Ajax" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/02/26/Ajax系列一-远古时代的Ajax/">Ajax系列一-远古时代</a>
-    </h1>
-  
-
-        
-        <a href="/2016/02/26/Ajax系列一-远古时代的Ajax/" class="archive-article-date">
-  	<time datetime="2016-02-26T03:45:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-02-26</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>题按–在真正的<code>Ajax</code>出现之前，是怎么实现类似效果的。</p>
-<blockquote>
-<p>这几天断断续续的看完了<code>ajax</code>和<code>http</code>相关的教程，查询了<strong>Wikipedia</strong>相关资料，接下来几天，整理一下。</p>
-</blockquote>
-<p>投票需求：要求无刷新投票，并且不允许使用XMLHttpRequest对象<br>分析：在XHR对象没有流行之前，已经有<strong>无刷新</strong>这种效果的要求</p>
-<h2 id="方法一：-HTTP协议204-No-Content"><a href="#方法一：-HTTP协议204-No-Content" class="headerlink" title="方法一： HTTP协议204 No Content"></a>方法一： HTTP协议204 No Content</h2><p>原理：利用http 204 No Content 状态码,浏览器不会跳转</p>
-<p>前端：</p>
-<pre><code>&lt;body&gt;
-    &lt;div&gt;
-        &lt;p&gt;&lt;img width=300 height=400 src=&quot;lin.jpg&quot;&gt;&lt;/p&gt;
-        &lt;p&gt;&lt;a href=&quot;vote.php&quot;&gt;vote&lt;/a&gt;&lt;/p&gt;
-    &lt;/div&gt;
-&lt;/body&gt;
-</code></pre><p>后端：</p>
-<pre><code class="php">&lt;?php 
-$votenum = file_get_contents(&quot;./vote.txt&quot;);
-if ($votenum == null) {
-    $votenum = 0;
-}
-$votenum += 1;
-file_put_contents(&#39;./vote.txt&#39;, $votenum);
-//利用HTTP协议的204特性
-header(&#39;HTTP/1.1 204 No Content&#39;);
- ?&gt;
-</code></pre>
-<h2 id="方法二：利用图片加载的特性，完成请求"><a href="#方法二：利用图片加载的特性，完成请求" class="headerlink" title="方法二：利用图片加载的特性，完成请求"></a>方法二：利用图片加载的特性，完成请求</h2><pre><code class="javascript">&lt;script&gt;
-    function vote(){
-        var lin = document.createElement(&#39;img&#39;);
-        //设置src属性，浏览器将会请求对应的资源
-        lin.setAttribute(&#39;src&#39;, &#39;./lin.jpg&#39;);
-        document.getElementById(&quot;progress&quot;).appendChild(lin);
-    }
-&lt;/script&gt;
-</code></pre>
-<h2 id="方法三：-利用css-js加载特性-原理同上。"><a href="#方法三：-利用css-js加载特性-原理同上。" class="headerlink" title="方法三： 利用css,js加载特性,原理同上。"></a>方法三： 利用css,js加载特性,原理同上。</h2><h2 id="方法四：-利用iframe特性"><a href="#方法四：-利用iframe特性" class="headerlink" title="方法四： 利用iframe特性"></a>方法四： 利用iframe特性</h2><p>Ajax注册，提交表单，页面无刷新<br>建议用<code>POST</code>，因为<code>get</code>会暴露用户信息<br>前端：</p>
-<pre><code>&lt;div id=&quot;regres&quot;&gt;&lt;/div&gt;
-/*form target--&gt;iframe name*/
-&lt;form action=&quot;02-reg.php&quot; method=&quot;post&quot; target=&quot;regzone&quot;&gt;
-    &lt;p&gt;用户名：&lt;input type=&quot;text&quot; name=&quot;username&quot;&gt;&lt;/p&gt;
-    &lt;p&gt;邮件：&lt;input type=&quot;email&quot; name=&quot;email&quot;&gt;&lt;/p&gt;
-    &lt;p&gt;&lt;input type=&quot;submit&quot; name=&quot;submit&quot;&gt;&lt;/p&gt;
-&lt;/form&gt;
-&lt;iframe width=0 height=0 frameBorder=&quot;0&quot; name=&quot;regzone&quot;&gt;&lt;/iframe&gt;
-</code></pre><p>后端：</p>
-<pre><code>&lt;meta charset=&quot;utf-8&quot;&gt;
-&lt;?php 
-//经过运算，逻辑判断，注册是否成功
-$msg = 1/0;
-1-&quot;注册成功&quot;  0-&quot;注册失败&quot;
-?&gt;
-&lt;script type=&quot;text/javascript&quot;&gt;
-    //被请求的资源req.php想得到HTML里的元素，用parent
-    parent.document.getElementById(&#39;regres&#39;).innerHTML = &#39;注册成功!&#39;;
-&lt;/script&gt;
-</code></pre><h2 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h2><blockquote>
-<p>在不适用<code>XMLHttpRequest</code>对象的情况下，依然可以用js来实现对后台服务器请求，同时不刷新页面或跳转。</p>
-</blockquote>
-<p>所谓Ajax：即指<strong>页面不刷新</strong>情况下，利用<code>XMLHttpRequest</code>发送<code>HTTP</code>请求；JS的网络化.</p>
-<p><strong>悄悄的发送请求，不刷新或跳转;后台能传递数据;前台假装没反应</strong></p>
-<p>问题：<code>Ajax</code>能实现文件上传吗？</p>
-<blockquote>
-<p>分析：从<code>HTTP</code>协议角度看，上传文件，则要把文件的内容发送到服务器；<br>如果可以<code>XMLHttpRequest</code>对象在<code>POST</code>数据时，把文件的内容也发送过去。</p>
-<ul>
-<li><code>XHR</code>对象获取了你要上传 的内容</li>
-<li><code>JavaScript</code>读取本地的文件内容</li>
-<li>出于安全原因，js不能读取文件内容</li>
-<li><code>Ajax</code>上传文件是无法实现的。</li>
-</ul>
-</blockquote>
-<p>问题：一些<code>Ajax</code>上传插件是怎样实现的？</p>
-<blockquote>
-<ol>
-<li><code>iframe</code></li>
-<li>用<code>flash</code>实现，如<code>swfuploaded</code></li>
-<li>用<code>HTML5</code>实现，已增加文件读取<code>API</code></li>
-</ol>
-</blockquote>
-
-      
-
-      
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Ajax</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/cs/" class="article-tag-list-link color3">cs</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2016/02/26/Ajax系列一-远古时代的Ajax/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
-    <article id="post-最近的想法及计划" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/02/20/最近的想法及计划/">最近的想法及计划</a>
-    </h1>
-  
-
-        
-        <a href="/2016/02/20/最近的想法及计划/" class="archive-article-date">
-  	<time datetime="2016-02-20T08:05:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-02-20</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>年也过完了，该干活了。<br>2016上半年的任务</p>
-<blockquote>
-<p>1.完成毕业论文，顺利毕业<br>2.3月份找到一个合适的工作<br>3.学习新知识，巩固计算机基础知识</p>
-</blockquote>
-<p>2月份还有十天，列的任务表还没有完成。亡羊补牢，希望不晚。希望坚持完成的事情</p>
-<blockquote>
-<p>1.每天花两个小时看论文，整理思路，做记录<br>2.每天坚持锻炼，形式不固定，室内室外随意<br>3.看完燕十八视频，加深对<code>HTTP、AJAX</code>的理解，并写成博客<br>4.每天看一致两篇的<em>池建强</em>的<strong>《MacTalk跨越边界》</strong>的小文章，划线or感想，随后整理出来，发博客上</p>
-</blockquote>
-<p>大概这些就够我折腾了，不折腾不成长。继续努力。</p>
-<blockquote>
-<p>1.知识不去学是不会自己跑到你的脑中的啊。<br>2.学东西不能贪多求快，必须一行一行的文字去咀嚼，才会有深刻的体会。<br>3.遇到难题不要回避，也许下次还会遇到同样的问题，还是不会，因此错过许多机会。<br>4.发现有些东西，只要不是太笨，花时间都是能够解决的，而这个痛苦的过程，是必须经历的，熬过去就好了，哪些知识会倍加深刻的印在脑海中。<br>5.学完一个知识点，可以给自己某种奖励，打一场球，看一个短文章，学一会其他的知识，换换思维。<br>6.任何事都需要保障，身体健康是最强大的后盾，所以每天必须锻炼身体，哪怕只有10分钟，也比不锻炼好。</p>
-</blockquote>
-<p>关于学习渠道</p>
-<blockquote>
-<p>1.利用好公开课：主要是网易云课堂，极客学院，coursera看国外国内名校课程<br>2.看前辈的博客，书籍<br>3.先从前端入手，从视频入手，听别人怎么说，不会在一开始入门时不得要领。之后再去练习，看书。加深理解。</p>
-</blockquote>
-
-      
-
-      
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">thought</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">plan</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/plan/" class="article-tag-list-link color5">plan</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2016/02/20/最近的想法及计划/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
-    <article id="post-polygon-polyline-point-addField-caculate" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/01/22/polygon-polyline-point-addField-caculate/">polygon_polyline_point_addField_caculate</a>
-    </h1>
-  
-
-        
-        <a href="/2016/01/22/polygon-polyline-point-addField-caculate/" class="archive-article-date">
-  	<time datetime="2016-01-22T05:20:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-01-22</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h2><p>导师需要安徽省所有县级单位的行政边界的点位置数据，数据最终格式是屏幕坐标(<strong>同一区域形成闭环</strong>)</p>
-<table>
-<thead>
-<tr>
-<th>区域名</th>
-<th>x</th>
-<th>y</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>合肥市</td>
-<td>12</td>
-<td>53</td>
-</tr>
-<tr>
-<td>合肥市</td>
-<td>17</td>
-<td>55</td>
-</tr>
-<tr>
-<td>合肥市</td>
-<td>12</td>
-<td>34</td>
-</tr>
-<tr>
-<td>合肥市</td>
-<td>16</td>
-<td>67</td>
-</tr>
-<tr>
-<td>合肥市</td>
-<td>14</td>
-<td>23</td>
-</tr>
-<tr>
-<td>合肥市</td>
-<td>12</td>
-<td>53</td>
-</tr>
-<tr>
-<td>长丰县</td>
-<td>67</td>
-<td>32</td>
-</tr>
-<tr>
-<td>长丰县</td>
-<td>44</td>
-<td>32</td>
-</tr>
-<tr>
-<td>长丰县</td>
-<td>12</td>
-<td>89</td>
-</tr>
-<tr>
-<td>长丰县</td>
-<td>98</td>
-<td>54</td>
-</tr>
-<tr>
-<td>长丰县</td>
-<td>67</td>
-<td>32</td>
-</tr>
-<tr>
-<td>…</td>
-<td>…</td>
-<td>…</td>
-</tr>
-</tbody>
-</table>
-<h2 id="建模必要性"><a href="#建模必要性" class="headerlink" title="建模必要性"></a>建模必要性</h2><blockquote>
-<p>每两个元素之间都有直接的工具，然而多任务情况下无法满足需求，如果单独批量处理每一次的转化，工作量十分巨大；考虑到这些，有必要构建合适的模型，模型的好处是合并多步骤省去了中间步骤，最关键的是可以设置中间参数默认值，这样能大大减少中间的输入，而且避免了每次输入的不必要错误。</p>
-</blockquote>
-<h2 id="模型描述"><a href="#模型描述" class="headerlink" title="模型描述"></a>模型描述</h2><blockquote>
-<p>面-&gt;线-&gt;点-&gt;点抽稀(GA-子集,40%)-&gt;加字段(设好默认属性)-&gt;计算几何(x,y)、字段计算</p>
-</blockquote>
-<p>这里的<strong>关键问题</strong>有两个：<br>1.多个工具的顺序<br>为了是模型更具效率，需要考虑每一步之间的先后，使计算处理量最小。例如此处的子集和加字段步骤，先子集然后加字段，就避免了给多余的点加字段，减少了运算量。<br>2.参数的默认值<br>这一步是简化工作量最关键的步骤。省去很多繁杂的输入操作。<br>模型需要输入输出参数，否则模型无效。<br><img src="http://7xqd63.com1.z0.glb.clouddn.com/polygonToPoint.PNG?imageView/4/w/344/q/88" alt=""><br>设置了默认值的参数，显示是蓝色的。<br><img src="http://7xqd63.com1.z0.glb.clouddn.com/polygon_point_childSet_addFiled.PNG?imageView/4/w/544/q/88" alt=""><br>待解决问题：<br>1.计算几何没有找到合适的代码，需要手动计算<br>2.字段计算同样人工操作。这两个问题都是对<code>arcgis</code>的<code>Python</code>操作不熟悉，有机会应该了解一点<code>arcpy</code>。</p>
-<h2 id="存在问题"><a href="#存在问题" class="headerlink" title="存在问题"></a>存在问题</h2><blockquote>
-<p>1.异常点。转点的过程中，软件处理算法的原因，造成点不是按顺序排列的，无法自动完成，只能通过人工检视来查找异常点，理清顺序。<br>2.市辖区合并。根据导师的意思，比方说合肥的四个市辖区，合并成一个，命名合肥市。<br>3.每个县市的边界点密度大概多少合适。经过反复试验，大概在100-200左右，统一将原数据降密到原来基础上的40%，能够满足需求。<br>4.邻界点是否必须重合。如果有此要求，就无法做下去。咨询老板，不需要。窃喜。<br>5.淮北市区有一块飞地。保留两个，分开表示即可。</p>
-</blockquote>
-
-      
-
-      
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">arcgis</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">arcgis 建模</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/arcgis/" class="article-tag-list-link color2">arcgis</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2016/01/22/polygon-polyline-point-addField-caculate/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
-    <article id="post-判断非手机登陆，做一次提醒" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/01/11/判断非手机登陆，做一次提醒/">判断非手机登陆，做一次提醒</a>
-    </h1>
-  
-
-        
-        <a href="/2016/01/11/判断非手机登陆，做一次提醒/" class="archive-article-date">
-  	<time datetime="2016-01-11T12:17:29.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-01-11</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>需求</p>
-<blockquote>
-<p>项目的网站时做的手机网页，但是没有考虑到自适应pc端，只是在chrome中固定了手机屏幕大小，所以在pc端查看会很丑，布局是乱的；但是重写又很麻烦，所以有必要做一下提醒，让用户手动将网页缩小到手机屏幕大小。</p>
-</blockquote>
-<p>用到</p>
-<blockquote>
-<p>非手机检验和cookie记录</p>
-</blockquote>
-<p>方法</p>
-<blockquote>
-<p>这段代码是使用了cookie来控制的</p>
-<ol>
-<li>使用cookie让浏览器记住页面已经打开过一次，当前页面刷新不会弹出提醒。</li>
-<li>浏览器一旦关闭，保存这个记录的cookie文件将被删除。重新打开浏览器弹出窗口会再次出现，从而确保了在原有的窗口基础上只打开一次。 </li>
-</ol>
-</blockquote>
-<p>判断非手机登陆方式</p>
-<pre><code>if (!/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent))
-    alert(&quot;为了提高体验效果，请把页面缩小成手机屏幕大小。\n谢谢合作！&quot;);
-</code></pre><pre><code>&lt;script type=&quot;text/javascript&quot;&gt;
-    try{
-        var alertmessage=&quot;为了提高体验效果，请把页面缩小成手机屏幕大小。\n谢谢合作！&quot;;
-        var once_per_session=1
-        function get_cookie(Name) {
-          var search = Name + &quot;=&quot;
-          var returnvalue = &quot;&quot;;
-          if (document.cookie.length &gt; 0) {
-            offset = document.cookie.indexOf(search)
-            if (offset != -1) {
-              offset += search.length;
-              end = document.cookie.indexOf(&quot;;&quot;, offset);
-              if (end == -1)
-                 end = document.cookie.length;
-                  returnvalue=unescape(document.cookie.substring(offset, end))
-              }
-               }
-             return returnvalue;
-        }
-        function alertornot(){
-            if (get_cookie(&#39;alerted&#39;)==&#39;&#39;){
-                loadalert();
-                document.cookie=&quot;alerted=yes&quot;;
-            }
-        }
-        function loadalert(){
-            if (!/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent))
-                alert(alertmessage);
-        }
-        if (once_per_session==0)
-            loadalert();
-        else
-            alertornot();
-    } catch(e)
-    {
-        alert(e);
-    }
-&lt;/script&gt;
-</code></pre>
-      
-
-      
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">cs</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2016/01/11/判断非手机登陆，做一次提醒/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/9/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><span class="page-number current">10</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/11/">Next &raquo;</a>
+      <a class="extend prev" rel="prev" href="/page/9/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><span class="page-number current">10</span><a class="page-number" href="/page/11/">11</a><a class="page-number" href="/page/12/">12</a><a class="extend next" rel="next" href="/page/11/">Next &raquo;</a>
     </nav>
   
 
@@ -1368,10 +1609,6 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">nodejs</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">weather</a>
               </li>
              
@@ -1392,11 +1629,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">HTML5</a>
+                <a href="javascript:void(0)" class="js-tag color1">Nginx</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Nginx</a>
+                <a href="javascript:void(0)" class="js-tag color1">HTML5</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1405,6 +1642,10 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">sse</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">JavaScriptCore</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1420,15 +1661,15 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Oracle</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">ListView</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">GridView</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">JavaScriptCore</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1496,6 +1737,10 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">pip</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">arcgis</a>
               </li>
              
@@ -1504,11 +1749,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Python</a>
+                <a href="javascript:void(0)" class="js-tag color2">D.Wade</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">D.Wade</a>
+                <a href="javascript:void(0)" class="js-tag color2">Python</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1548,10 +1793,6 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">ntp</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">OpenLayers</a>
               </li>
              
@@ -1560,11 +1801,19 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">WeChat</a>
+                <a href="javascript:void(0)" class="js-tag color4">ntp</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">张靓颖</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">WeChat</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">plan</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1573,10 +1822,6 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">MarkDown</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">plan</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1597,6 +1842,18 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">进度条</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">ssl</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">anti-stealing-link</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">nodejs</a>
               </li>
              
               <li class="article-tag-list-item">
