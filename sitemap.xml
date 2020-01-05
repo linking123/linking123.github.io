@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://linking123.github.io/2019/12/25/redis-conf-readthrough/</loc>
+    
+    <lastmod>2020-01-05T10:16:16.010Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://linking123.github.io/2019/10/06/nginx%E5%AE%89%E8%A3%85%E5%90%8E%E6%B7%BB%E5%8A%A0%E7%AC%AC%E4%B8%89%E6%96%B9module/</loc>
     
     <lastmod>2019-12-26T15:18:16.716Z</lastmod>
@@ -681,14 +688,14 @@
   </url>
   
   <url>
-    <loc>http://linking123.github.io/tags/index.html</loc>
+    <loc>http://linking123.github.io/categories/index.html</loc>
     
     <lastmod>2015-12-22T02:51:27.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://linking123.github.io/categories/index.html</loc>
+    <loc>http://linking123.github.io/tags/index.html</loc>
     
     <lastmod>2015-12-22T02:51:27.000Z</lastmod>
     

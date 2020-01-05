@@ -175,6 +175,121 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-一台机器部署多个Tomcat及如何忽略webapps里的项目" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/09/05/一台机器部署多个Tomcat及如何忽略webapps里的项目/">一台机器部署多个Tomcat及如何忽略webapps里的项目</a>
+    </h1>
+  
+
+        
+        <a href="/2016/09/05/一台机器部署多个Tomcat及如何忽略webapps里的项目/" class="archive-article-date">
+  	<time datetime="2016-09-05T14:40:36.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-09-05</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="一台机器部署多个Tomcat"><a href="#一台机器部署多个Tomcat" class="headerlink" title="一台机器部署多个Tomcat"></a>一台机器部署多个Tomcat</h1><blockquote>
+<p>考虑到线上部署系统<strong>安全</strong>性，需要在同一台机器上部署多个Tomcat。一个系统一个Tomcat,这样更好的容灾机制，避免多米多骨牌效应。<br>重点：<strong>避免端口冲突</strong>    </p>
+</blockquote>
+<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><blockquote>
+<p>修改CATALINA_HOME\conf\server.xml中的启动端口和连接端口。</p>
+</blockquote>
+<p>操作步骤：</p>
+<blockquote>
+<ol>
+<li><a href="http://tomcat.apache.org/download-70.cgi" target="_blank" rel="noopener">下载</a>-解压apache-tomcat-x.x.xx.zip-改名tomcatx-8080</li>
+<li>复制，改名tomcatx-8090</li>
+<li>添加环境变量：CATALINA_HOME:d:\tocatx-8080;CATALINA_HOME2:d:\tomcatx-8090</li>
+<li>修改启动端口和关闭端口<br>进入d:\tomcat5-8090\conf\目录，打开server.xml文件，修改下面两个地方：<br>（1）<code>&lt;Server port=&quot;8006&quot; shutdown=&quot;SHUTDOWN&quot;&gt;</code><br>修改这个port=”8006”，原来默认的为：8005，使得它的关闭端口和另一个关闭端口不发生冲突。<br>（2）<code>&lt;Connector port=&quot;8090&quot; maxHttpHeaderSize=&quot;8192&quot;   maxThreads=&quot;150&quot; minSpareThreads=&quot;25&quot; maxSpareThreads=&quot;75&quot; enableLookups=&quot;false&quot; redirectPort=&quot;8443&quot; acceptCount=&quot;100&quot; connectionTimeout=&quot;20000&quot; disableUploadTimeout=&quot;true&quot; /&gt;</code><br>修改port=”8090”，原来默认的为“8080”，使得它的连接端口和另一个不冲突。</li>
+<li>修改startup.bat和catalina.bat文件内容：<br>(1) 打开d:\tomcat5-8090\bin\startup.bat文件，把其中所有CATALINA_HOME替换为CATALINA_HOME2。<br>（2）打开d:\tomcat5-8090\bin\catalina.bat文件，把其中所有CATALINA_HOME替换为CATALINA_HOME2。</li>
+<li>启动Tomcat，在命令行下分别进入两个不同的Tomcat安装目录下，执行startup.bat，分别启动两个Tomcat。然后在浏览器中输入：<a href="http://localhost:8080" target="_blank" rel="noopener">http://localhost:8080</a>  和<a href="http://localhost:8090" target="_blank" rel="noopener">http://localhost:8090</a></li>
+<li>至此，我们已经在一台服务器上配置了两个Tomcat。</li>
+</ol>
+</blockquote>
+<p>考虑到在本地运行，不需要那么复杂。只需要用Disable-WEB-INF。</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a><strong>参考</strong></h2><blockquote>
+<ol>
+<li><a href="http://blog.163.com/hegonghe@126/blog/static/50004810200871483335100/" target="_blank" rel="noopener">在同一台服务器上配置多个Tomcat（原创）</a></li>
+</ol>
+</blockquote>
+<h1 id="忽略webapps里的项目"><a href="#忽略webapps里的项目" class="headerlink" title="忽略webapps里的项目"></a>忽略webapps里的项目</h1><blockquote>
+<p>有时在同一个webapps中有多个项目，而又不想同时部署或启动，那么就要想办法忽略掉某些项目。</p>
+</blockquote>
+<h2 id="方法-1"><a href="#方法-1" class="headerlink" title="方法"></a>方法</h2><blockquote>
+<ol>
+<li>使用web application manager.密码？未实践<br>The Tomcat Web Application Manager lets you stop selected applications. I think that prevents them from loading when Tomcat is restarted.</li>
+<li>将需要忽略的项目的<code>WEB-INF</code>重命名为<code>Disabled-WEB-INF</code>.实践通过</li>
+<li>添加<code>deployIgnore=&quot;projectName&quot;</code>.不部署，</li>
+</ol>
+</blockquote>
+<pre><code>&lt;Host name=&quot;localhost&quot; appBase=&quot;webapps&quot; unpackWARs=&quot;true&quot; autoDeploy=&quot;false&quot; xmlValidation=&quot;false&quot; xmlNamespaceAware=&quot;false&quot;&gt; 
+&lt;Context path=&quot;/acbd&quot; docBase=&quot;abcd&quot; debug=&quot;0&quot; reloadable=&quot;true&quot;/&gt; 
+&lt;Valve className=&quot;org.apache.catalina.valves.AccessLogValve&quot; directory=&quot;logs&quot; prefix=&quot;localhost_access_log.&quot; suffix=&quot;.txt&quot; pattern=&quot;common&quot; resolveHosts=&quot;false&quot;/&gt; 
+&lt;/Host&gt; 
+</code></pre><h2 id="参考-1"><a href="#参考-1" class="headerlink" title="参考"></a><strong>参考</strong></h2><blockquote>
+<ol>
+<li><a href="http://stackoverflow.com/questions/5067062/how-to-disable-specific-apps-from-starting-during-tomcat-startup" target="_blank" rel="noopener">How to disable specific apps from starting during Tomcat startup?</a></li>
+<li><a href="https://coderanch.com/t/85667/Tomcat/avoid-loading-applications-webapps" target="_blank" rel="noopener">avoid loading all applications under webapps</a></li>
+<li><a href="http://tomcat.apache.org/tomcat-5.5-doc/config/host.html#Automatic_Application_Deployment" target="_blank" rel="noopener">Apache.org</a></li>
+</ol>
+</blockquote>
+
+      
+
+      
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">tomcat</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/cs/" class="article-tag-list-link color3">cs</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2016/09/05/一台机器部署多个Tomcat及如何忽略webapps里的项目/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
     <article id="post-git学习一" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1402,114 +1517,6 @@ window.onload = C.handleOnLoad;
 
 
   
-    <article id="post-进度条" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/03/02/进度条/">进度条</a>
-    </h1>
-  
-
-        
-        <a href="/2016/03/02/进度条/" class="archive-article-date">
-  	<time datetime="2016-03-02T14:17:57.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-03-02</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>思路：</p>
-<blockquote>
-<p>进度是已上传除以总大小的百分比；通过动态改变元素的宽度来显示百分比，数字的变化标明大小。</p>
-</blockquote>
-<p>编程重要的是思想，逻辑清楚了，再来码代码会清晰许多。</p>
-<p>前端代码：</p>
-<pre><code>&lt;input type=&#39;file&#39; name=&#39;pic&#39; onchange=&#39;selfile();&#39; /&gt;
-&lt;div id=&#39;progress&#39;&gt;
-    &lt;div id=&#39;bar&#39;&gt;&lt;/div&gt;
-&lt;/div&gt;
-</code></pre><p>默认样式：</p>
-<pre><code>&lt;style type=&quot;text/css&quot;&gt;    
-#progress{
-    width: 500px;height: 30px;border: 1px solid green;
-}
-#bar{
-    width: 0%;height: 100%;background: green;
-}
-&lt;/style&gt;
-</code></pre><p>利用上传过程中,<code>xhr.upload.onprogress</code>状态的变化，函数运行过程中自带的事件参数来计算上传百分比</p>
-<pre><code>xhr.upload.onprogress = function(ev){
-    // console.log(ev);    //查看ev事件参数的属性和方法
-    if(ev.lengthComputable){
-        var percent = 100 * ev.loaded/ev.total;
-        // console.log(percent);
-        document.getElementById(&#39;bar&#39;).style.width = percent + &#39;%&#39;;
-        document.getElementById(&#39;bar&#39;).innerHTML = parseInt(percent) + &#39;%&#39;;
-    }
-}
-</code></pre><p>后记：</p>
-<blockquote>
-<p>很久之前我就想用这种简单的进度条给自己做一个读书管理软件，但由于自己的惰性，一直没有成型。<br><blockquote><p>好的软件产品，常常源于开发者自身的需求。<br>如果有什么工作能让你坚持长久的热情，那一定是做自己需要的产品。</p>
-<footer><strong>池建强</strong><cite><a href="http://macshuo.com/" target="_blank" rel="noopener">MacTalK</a></cite></footer></blockquote></p>
-</blockquote>
-<blockquote>
-<p>脑子里有了个12345，然后可以打个草稿，列列提纲，就算现在不做，也要加入到备忘录里吧。<br>当然一个阶段有一个阶段该干的事，也许过了这个时间段，再来做可能没有当时的动力，也可能回过头来当时的问题现在都成了小菜。</p>
-</blockquote>
-<p>但行好事，莫问前程？！<br>做人还是纯粹一点，专注一点好。</p>
-
-      
-
-      
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">进度条</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/cs/" class="article-tag-list-link color3">cs</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2016/03/02/进度条/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/9/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><span class="page-number current">10</span><a class="page-number" href="/page/11/">11</a><a class="page-number" href="/page/12/">12</a><a class="extend next" rel="next" href="/page/11/">Next &raquo;</a>
@@ -1524,7 +1531,7 @@ window.onload = C.handleOnLoad;
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2019 Linking
+    		&copy; 2020 Linking
 
         <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
         <span id="busuanzi_container_site_pv" class="busuanzi_user_visit">
@@ -1653,11 +1660,7 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">ListView</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">GridView</a>
+                <a href="javascript:void(0)" class="js-tag color2">Oracle</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1673,7 +1676,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Oracle</a>
+                <a href="javascript:void(0)" class="js-tag color4">ListView</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">GridView</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1709,11 +1716,23 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">多线程</a>
+                <a href="javascript:void(0)" class="js-tag color4">iOS</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">https</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">bundle</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">多线程</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">兼容性</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1725,19 +1744,7 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">兼容性</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">java</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">iOS</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">https</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1789,6 +1796,10 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">加班</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Android onclick事件监听</a>
               </li>
              
@@ -1833,11 +1844,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">crawler</a>
+                <a href="javascript:void(0)" class="js-tag color4">NBA</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">NBA</a>
+                <a href="javascript:void(0)" class="js-tag color3">crawler</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1849,7 +1860,7 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">加班</a>
+                <a href="javascript:void(0)" class="js-tag color4">anti-stealing-link</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1858,6 +1869,10 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">markdown</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">redis</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1882,10 +1897,6 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">极客邦</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">anti-stealing-link</a>
               </li>
              
               <li class="article-tag-list-item">

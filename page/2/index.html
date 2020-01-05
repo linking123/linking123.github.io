@@ -175,6 +175,85 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-同一个IP（服务器）多个Tomcat产生session覆盖问题记录" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/07/30/同一个IP（服务器）多个Tomcat产生session覆盖问题记录/">同一个IP（服务器）多个Tomcat产生session覆盖问题记录</a>
+    </h1>
+  
+
+        
+        <a href="/2019/07/30/同一个IP（服务器）多个Tomcat产生session覆盖问题记录/" class="archive-article-date">
+  	<time datetime="2019-07-30T15:00:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-30</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><p>1.生产事故记录<br>–1.1问题描述<br>–1.2问题分析<br>–1.3解决途径<br>–1.4结果<br>–1.5未验证疑问<br>2.参考<br>3.tomcat-session原理相关<br>–3.1听网易公开课的几个问题 - 有关Session 工作原理<br>—3.1.1 Tomcat 中 session 保存在哪？<br>—3.1.2 tomcat 怎么追踪请求属于哪个session？<br>—3.1.3 session是不是在用户登录时就产生了<br>—3.1.4 tomcat 默认并发数</p>
+<h1 id="1-生产事故记录"><a href="#1-生产事故记录" class="headerlink" title="1.生产事故记录"></a>1.生产事故记录</h1><h2 id="1-1问题描述"><a href="#1-1问题描述" class="headerlink" title="1.1问题描述"></a>1.1问题描述</h2><p>本次设计有web前端系统（public）及web管理端（manager）两个web用户系统，在同一个浏览器同时打开两个系统，先后登录，之后系统会丢失登录状态。</p>
+<p>现象：同一个浏览器访问同一个服务器下的两个tomcat服务，会产生session覆盖的问题。</p>
+        
+          <a class="article-more-a" href="/2019/07/30/同一个IP（服务器）多个Tomcat产生session覆盖问题记录/#more">more >></a>
+        
+      
+
+      
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">tomcat</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">session</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/CS/" class="article-tag-list-link color3">CS</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/07/30/同一个IP（服务器）多个Tomcat产生session覆盖问题记录/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
     <article id="post-Nginx使用小结" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -732,116 +811,6 @@
 
 
   
-    <article id="post-微信公众号开发总结" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/06/21/微信公众号开发总结/">微信公众号开发总结</a>
-    </h1>
-  
-
-        
-        <a href="/2018/06/21/微信公众号开发总结/" class="archive-article-date">
-  	<time datetime="2018-06-21T13:07:17.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-06-21</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <pre><code>目录
-1. 调研阶段
-1.1 一般开发步骤
-1.2 GitHub参考项目
-1.3 需客户协助公众号申请
-2. 开发&amp;测试
-2.1 微信账号信息
-2.2 测试服务器
-2.3 测试号
-2.4 用本机当外网服务器
-2.5 接口测试
-获取access_token
-3. 部署及系统配置、部分代码
-3.1 微信公众号服务系统
-3.1.1 部署步骤
-3.2 公众号平台管理
-3.2.1 公众号信息
-3.2.2 wx.properties配置信息
-3.2.3 模板设置
-3.2.4 公众号菜单地址配置
-3.2.5 公众号网页账号授权域名配置
-3.3 微信公众号 关注着 openId 获取工具类 WeChatOpenIdUtils.java
-3.4 给公众号关注者微信发送通知
-4. Problems
-4.1 微信获取openId，跳转链接错误
-4.2 ajax request HTTP status 400
-4.3 db.properties 中 jdbc.username 和 jdbc.password设反
-4.4 ModelAndView setview 页面不跳转，刷新后才跳转
-4.5 Can&#39;t find bundle for base name system, locale zh_CN
-4.6 com.mysql.jdbc.driver
-4.7 BeanNotOfRequiredTypeException... but was actually of type &#39;com.sun.proxy.$Proxy**&#39;
-4.8 At least one base package must be specified
-4.9 redirect 和 forward运用
-4.10 微信公众号子菜单url size超限
-4.11 WxMpConfig
-4.12 AopProxyUtils.getSingletonTarget(Ljava/lang/Object;)Ljava/lang/Object;
-4.13 版本对应关系
-</code></pre><p>本篇主要记录开发公众号时搜集到的一些案例，开发过程，以及开发中遇到的问题及解决方式。</p>
-        
-          <a class="article-more-a" href="/2018/06/21/微信公众号开发总结/#more">more >></a>
-        
-      
-
-      
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">wechat</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/wechat/" class="article-tag-list-link color2">wechat</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/06/21/微信公众号开发总结/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
@@ -856,7 +825,7 @@
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2019 Linking
+    		&copy; 2020 Linking
 
         <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
         <span id="busuanzi_container_site_pv" class="busuanzi_user_visit">
@@ -985,11 +954,7 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">ListView</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">GridView</a>
+                <a href="javascript:void(0)" class="js-tag color2">Oracle</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1005,7 +970,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Oracle</a>
+                <a href="javascript:void(0)" class="js-tag color4">ListView</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">GridView</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1041,11 +1010,23 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">多线程</a>
+                <a href="javascript:void(0)" class="js-tag color4">iOS</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">https</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">bundle</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">多线程</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">兼容性</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1057,19 +1038,7 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">兼容性</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">java</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">iOS</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">https</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1121,6 +1090,10 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">加班</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Android onclick事件监听</a>
               </li>
              
@@ -1165,11 +1138,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">crawler</a>
+                <a href="javascript:void(0)" class="js-tag color4">NBA</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">NBA</a>
+                <a href="javascript:void(0)" class="js-tag color3">crawler</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1181,7 +1154,7 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">加班</a>
+                <a href="javascript:void(0)" class="js-tag color4">anti-stealing-link</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1190,6 +1163,10 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">markdown</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">redis</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1214,10 +1191,6 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">极客邦</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">anti-stealing-link</a>
               </li>
              
               <li class="article-tag-list-item">

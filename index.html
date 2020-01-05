@@ -175,6 +175,109 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-redis-conf-readthrough" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/12/25/redis-conf-readthrough/">redis.conf-readthrough</a>
+    </h1>
+  
+
+        
+        <a href="/2019/12/25/redis-conf-readthrough/" class="archive-article-date">
+  	<time datetime="2019-12-25T10:11:49.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-25</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><ul>
+<li>说明</li>
+<li>文件概况</li>
+<li>文件所含节点<ul>
+<li>0.开始</li>
+<li>1.Includes</li>
+<li>2.Modules</li>
+<li>3.NetWork</li>
+<li>4.General</li>
+<li>5.Snapshotting</li>
+<li>6.Replication</li>
+<li>7.Security</li>
+<li>8.Clients</li>
+<li>9.Memory Management</li>
+<li>10.Lazy Freeing</li>
+<li>11.Appned only mode</li>
+<li>12.lua scripting</li>
+<li>13.redis cluster</li>
+<li>14.CLUSTER DOCKER/NAT support</li>
+<li>15.Slow Log</li>
+<li>16.LATENCY MONITOR</li>
+<li>17.EVENT NOTIFICATION</li>
+<li>18.ADVANCED CONFIG</li>
+<li>19.ACTIVE DEFRAGMENTATION</li>
+</ul>
+</li>
+<li>总结<ul>
+<li>第一次梳理</li>
+</ul>
+</li>
+</ul>
+        
+          <a class="article-more-a" href="/2019/12/25/redis-conf-readthrough/#more">more >></a>
+        
+      
+
+      
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">redis</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/CS/" class="article-tag-list-link color3">CS</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/12/25/redis-conf-readthrough/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
     <article id="post-nginx安装后添加第三方module" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -726,85 +829,6 @@
 
 
   
-    <article id="post-同一个IP（服务器）多个Tomcat产生session覆盖问题记录" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/07/30/同一个IP（服务器）多个Tomcat产生session覆盖问题记录/">同一个IP（服务器）多个Tomcat产生session覆盖问题记录</a>
-    </h1>
-  
-
-        
-        <a href="/2019/07/30/同一个IP（服务器）多个Tomcat产生session覆盖问题记录/" class="archive-article-date">
-  	<time datetime="2019-07-30T15:00:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-30</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><p>1.生产事故记录<br>–1.1问题描述<br>–1.2问题分析<br>–1.3解决途径<br>–1.4结果<br>–1.5未验证疑问<br>2.参考<br>3.tomcat-session原理相关<br>–3.1听网易公开课的几个问题 - 有关Session 工作原理<br>—3.1.1 Tomcat 中 session 保存在哪？<br>—3.1.2 tomcat 怎么追踪请求属于哪个session？<br>—3.1.3 session是不是在用户登录时就产生了<br>—3.1.4 tomcat 默认并发数</p>
-<h1 id="1-生产事故记录"><a href="#1-生产事故记录" class="headerlink" title="1.生产事故记录"></a>1.生产事故记录</h1><h2 id="1-1问题描述"><a href="#1-1问题描述" class="headerlink" title="1.1问题描述"></a>1.1问题描述</h2><p>本次设计有web前端系统（public）及web管理端（manager）两个web用户系统，在同一个浏览器同时打开两个系统，先后登录，之后系统会丢失登录状态。</p>
-<p>现象：同一个浏览器访问同一个服务器下的两个tomcat服务，会产生session覆盖的问题。</p>
-        
-          <a class="article-more-a" href="/2019/07/30/同一个IP（服务器）多个Tomcat产生session覆盖问题记录/#more">more >></a>
-        
-      
-
-      
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">tomcat</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">session</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/CS/" class="article-tag-list-link color3">CS</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/07/30/同一个IP（服务器）多个Tomcat产生session覆盖问题记录/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -819,7 +843,7 @@
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2019 Linking
+    		&copy; 2020 Linking
 
         <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
         <span id="busuanzi_container_site_pv" class="busuanzi_user_visit">
@@ -948,11 +972,7 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">ListView</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">GridView</a>
+                <a href="javascript:void(0)" class="js-tag color2">Oracle</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -968,7 +988,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Oracle</a>
+                <a href="javascript:void(0)" class="js-tag color4">ListView</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">GridView</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1004,11 +1028,23 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">多线程</a>
+                <a href="javascript:void(0)" class="js-tag color4">iOS</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">https</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">bundle</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">多线程</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">兼容性</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1020,19 +1056,7 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">兼容性</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">java</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">iOS</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">https</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1084,6 +1108,10 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">加班</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Android onclick事件监听</a>
               </li>
              
@@ -1128,11 +1156,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">crawler</a>
+                <a href="javascript:void(0)" class="js-tag color4">NBA</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">NBA</a>
+                <a href="javascript:void(0)" class="js-tag color3">crawler</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1144,7 +1172,7 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">加班</a>
+                <a href="javascript:void(0)" class="js-tag color4">anti-stealing-link</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1153,6 +1181,10 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">markdown</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">redis</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1177,10 +1209,6 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">极客邦</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">anti-stealing-link</a>
               </li>
              
               <li class="article-tag-list-item">
