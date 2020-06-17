@@ -175,6 +175,622 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-ListView嵌套GridView显示多张图片出现图片重复、错乱、闪烁等问题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/29/ListView嵌套GridView显示多张图片出现图片重复、错乱、闪烁等问题/">ListView嵌套GridView显示多张图片出现图片重复、错乱、闪烁等问题</a>
+    </h1>
+  
+
+        
+        <a href="/2017/03/29/ListView嵌套GridView显示多张图片出现图片重复、错乱、闪烁等问题/" class="archive-article-date">
+  	<time datetime="2017-03-28T16:13:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-03-29</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h1><p>为了实现一个订单下多个商品同时评价功能，列表分五种状态（非常满意，满意，一般，较差，不满意）展示，用一个listview，item中有一个GridView，GridView中放置最多五张图片；在listview上下滑动时会出现item中的图片重复、错乱、闪烁等问题。</p>
+<h1 id="我的错误"><a href="#我的错误" class="headerlink" title="我的错误"></a>我的错误</h1><p>先讲我的错误。遇到问题后Google，参考了一些资料，都是提示要在外层listview的adapter上设置setTag(), 然后在内层GridView的adapter上整体和需要标记复用的imageView上setTag()。照此执行了，还是出错；后来在同事指点下，原来外层adapter中设置gridAdapter时只是在没有塞值时<code>gridView.setVisibility(View.GONE)</code>，忘了要在有值的时候<code>gridView.setVisibility(View.VISIBLE)</code>， 所以导致在复用的时候，没有了GridView可复用。</p>
+        
+          <a class="article-more-a" href="/2017/03/29/ListView嵌套GridView显示多张图片出现图片重复、错乱、闪烁等问题/#more">more >></a>
+        
+      
+
+      
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">ListView</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">GridView</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Android/" class="article-tag-list-link color3">Android</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/03/29/ListView嵌套GridView显示多张图片出现图片重复、错乱、闪烁等问题/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
+    <article id="post-《利用Python进行数据分析》读书笔记-6-第六章-数据加载、存储和数据格式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/25/《利用Python进行数据分析》读书笔记-6-第六章-数据加载、存储和数据格式/">《利用Python进行数据分析》读书笔记-6-第六章-数据加载、存储和数据格式</a>
+    </h1>
+  
+
+        
+        <a href="/2017/03/25/《利用Python进行数据分析》读书笔记-6-第六章-数据加载、存储和数据格式/" class="archive-article-date">
+  	<time datetime="2017-03-25T14:49:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-03-25</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>输入输出分类：</p>
+<ul>
+<li>读取文本文件</li>
+<li>其他更高效的磁盘存储格式</li>
+<li>加载数据库中数据</li>
+<li>利用Web API操作网络资源</li>
+</ul>
+<h2 id="读取文本格式的数据"><a href="#读取文本格式的数据" class="headerlink" title="读取文本格式的数据"></a>读取文本格式的数据</h2><p>pandas提供了将表格数据读取为DataFrame对象的函数；其中read_csv和read_table是应用最多的两个：</p>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>read_csv</td>
+<td>从文件、URL、文件型对象中加载带分隔符的数据；默认逗号</td>
+</tr>
+<tr>
+<td>read_table</td>
+<td>从文件、URL、文件型对象中加载带分隔符的数据；默认制表符”\t”</td>
+</tr>
+</tbody>
+</table>
+<p>类型推断是这些函数中最重要的功能之一。</p>
+<pre><code>$ cat ex1.csv
+&lt;!--out: --&gt;
+&lt;!--a,b,c,d,message--&gt;
+&lt;!--0,1,2,3,4,hello--&gt;
+&lt;!--1,5,6,7,8,world--&gt;
+&lt;!--2,9,10,11,12,foo--&gt;
+#以上数据用逗号隔开
+
+import pandas as pd
+import numpy as np
+from pandas import Series, DataFrame
+
+df = pd.read_csv(&#39;../pydata-book-master/ch06/ex1.csv&#39;)
+# print df
+#  a   b   c   d message
+# 0  1   2   3   4   hello
+# 1  5   6   7   8   world
+# 2  9  10  11  12     foo
+pt = pd.read_table(&#39;../pydata-book-master/ch06/ex1.csv&#39;, sep=&#39;,&#39;)
+# print pt
+# out: 同上
+</code></pre><p>对于没有标题行的文件</p>
+<pre><code>$ cat ex2.csv
+&lt;!--out: --&gt; 
+&lt;!--0,1,2,3,4,hello--&gt;
+&lt;!--1,5,6,7,8,world--&gt;
+&lt;!--2,9,10,11,12,foo--&gt;
+
+# 自动分配默认列名
+
+# pc = pd.read_csv(&#39;../pydata-book-master/ch06/ex2.csv&#39;, header=None)
+# print pc
+#    0   1   2   3      4
+# 0  1   2   3   4  hello
+# 1  5   6   7   8  world
+# 2  9  10  11  12    foo
+# 手动定义列名
+# pc2 = pd.read_csv(&#39;../pydata-book-master/ch06/ex2.csv&#39;, names=[&#39;a&#39;,&#39;b&#39;,&#39;c&#39;,&#39;d&#39;,&#39;msg&#39;])
+# print pc2
+#    a   b   c   d    msg
+# 0  1   2   3   4  hello
+# 1  5   6   7   8  world
+# 2  9  10  11  12    foo
+</code></pre><p>指定索引</p>
+<pre><code># 指定索引
+names = [&#39;a&#39;,&#39;b&#39;,&#39;c&#39;,&#39;d&#39;,&#39;msg&#39;]
+pc3 = pd.read_csv(&#39;../pydata-book-master/ch06/ex2.csv&#39;, names=names, index_col=&#39;msg&#39;)
+# print pc3
+#        a   b   c   d
+# msg
+# hello  1   2   3   4
+# world  5   6   7   8
+# foo    9  10  11  12
+# 层次化索引
+parsed = pd.read_csv(&#39;../pydata-book-master/ch06/csv_mindex.csv&#39;, index_col=[&#39;key1&#39;, &#39;key2&#39;])
+# print parsed
+#            value1  value2
+# key1 key2
+# one  a          1       2
+#      b          3       4
+#      c          5       6
+#      d          7       8
+# two  a          9      10
+#      b         11      12
+#      c         13      14
+#      d         15      16
+</code></pre><pre><code># 非固定分隔符，需要正则表达式
+# print list(open(&#39;../pydata-book-master/ch06/ex3.csv&#39;))
+# [&#39;            A         B         C\n&#39;,
+#  &#39;aaa -0.264438 -1.026059 -0.619500\n&#39;,
+#  &#39;bbb  0.927272  0.302904 -0.032399\n&#39;,
+#  &#39;ccc -0.264273 -0.386314 -0.217601\n&#39;,
+#  &#39;ddd -0.871858 -0.348382  1.100491&#39;]
+# 观察到该文件各个字段由不定数量的空白符分割，用`\s+`这个正则来表示：
+result = pd.read_table(&#39;../pydata-book-master/ch06/ex3.csv&#39;, sep=&#39;\s+&#39;)
+# print result
+#             A         B         C
+# aaa -0.264438 -1.026059 -0.619500
+# bbb  0.927272  0.302904 -0.032399
+# ccc -0.264273 -0.386314 -0.217601
+# ddd -0.871858 -0.348382  1.100491
+</code></pre><p>跳过异常行(使用参数skiprows)</p>
+<pre><code>$ cat ch06/ex4.csv 
+# hey!
+a,b,c,d,message
+# just wanted to make things more difficult for you
+# who reads CSV files with computers, anyway?
+1,2,3,4,hello
+5,6,7,8,world
+9,10,11,12,foo% 
+</code></pre><p>可以认为1，3，4行为异常数据</p>
+<pre><code>print pd.read_csv(&#39;../pydata-book-master/ch06/ex4.csv&#39;, skiprows=[0,2,3])
+#    a   b   c   d message
+# 0  1   2   3   4   hello
+# 1  5   6   7   8   world
+# 2  9  10  11  12     foo
+</code></pre><h2 id="逐块读取文本文件"><a href="#逐块读取文本文件" class="headerlink" title="逐块读取文本文件"></a>逐块读取文本文件</h2><p>大文件只想读取一小部分或者逐块对文件进行迭代</p>
+<pre><code>result = pd.read_csv(&#39;../pydata-book-master/ch06/ex6.csv&#39;, nrows=5)
+# print result
+#         one       two     three      four key
+# 0  0.467976 -0.038649 -0.295344 -1.824726   L
+# 1 -0.358893  1.404453  0.704965 -0.200638   B
+# 2 -0.501840  0.659254 -0.421691 -0.057688   G
+# 3  0.204886  1.074134  1.388361 -0.982404   R
+# 4  0.354628 -0.133116  0.283763 -0.837063   Q
+</code></pre><p>逐块读取;用到chunksize(行数)</p>
+<pre><code># chunker = pd.read_csv(&#39;../pydata-book-master/ch06/ex6.csv&#39;, chunksize=100)
+# print chunker
+# &lt;pandas.io.parsers.TextFileReader object at 0x10f6175d0&gt;
+# TextFileReader对象可实现盾剑逐块迭代
+chunker = pd.read_csv(&#39;../pydata-book-master/ch06/ex6.csv&#39;, chunksize=1000)
+tot = Series([])
+for piece in chunker:
+    tot = tot.add(piece[&#39;key&#39;].value_counts(), fill_value=0)
+tot = tot.sort_values(ascending=False)
+print tot[:10]
+# E    368.0
+# X    364.0
+# L    346.0
+# O    343.0
+# Q    340.0
+# M    338.0
+# J    337.0
+# F    335.0
+# K    334.0
+# H    330.0
+# dtype: float64
+</code></pre><h2 id="将数据写到文本格式"><a href="#将数据写到文本格式" class="headerlink" title="将数据写到文本格式"></a>将数据写到文本格式</h2><pre><code>data = pd.read_csv(&#39;../pydata-book-master/ch06/ex5.csv&#39;)
+# print data
+#   something  a   b     c   d message
+# 0       one  1   2   3.0   4     NaN
+# 1       two  5   6   NaN   8   world
+# 2     three  9  10  11.0  12     foo
+</code></pre><p>pandas.read_csv生成的是DataFrame对象；</p>
+<p>DataFrame的to_csv方法，可以将数据写到一个用逗号分隔的文件中</p>
+<pre><code>data.to_csv(&#39;./ch06_out.csv&#39;)
+# $ cat ./ch06_out.csv
+# ,something,a,b,c,d,message
+# 0,one,1,2,3.0,4,
+# 1,two,5,6,,8,world
+# 2,three,9,10,11.0,12,foo
+
+# 可以指定分隔符,如|；这里只为了展示，所以用sys.stdout直接打印出来了。
+data.to_csv(sys.stdout, sep=&#39;|&#39;)
+# |something|a|b|c|d|message
+# 0|one|1|2|3.0|4|
+# 1|two|5|6||8|world
+# 2|three|9|10|11.0|12|foo
+</code></pre><p>将缺失值替换为其他标记值</p>
+<pre><code>data.to_csv(sys.stdout, na_rep=&#39;NULL&#39;)
+# ,something,a,b,c,d,message
+# 0,one,1,2,3.0,4,NULL
+# 1,two,5,6,NULL,8,world
+# 2,three,9,10,11.0,12,foo
+</code></pre><p>只输出特定列，指定顺序</p>
+<pre><code>data.to_csv(sys.stdout, index=False, columns=[&#39;a&#39;, &#39;b&#39;, &#39;c&#39;])
+# a,b,c
+# 1,2,3.0
+# 5,6,
+# 9,10,11.0
+</code></pre><p>Series也有to_csv()方法</p>
+<pre><code>datas = pd.date_range(&#39;1/1/2000&#39;, periods=7)
+ts = Series(np.arange(7), index=datas)
+ts.to_csv(&#39;./ch06tsseries.csv&#39;)
+# 2000-01-01,0
+# 2000-01-02,1
+# 2000-01-03,2
+# 2000-01-04,3
+# 2000-01-05,4
+# 2000-01-06,5
+# 2000-01-07,6
+</code></pre><p>更简单的读取方法from_csv</p>
+<pre><code># print Series.from_csv(&#39;./ch06tsseries.csv&#39;, parse_dates=True)
+# 2000-01-01    0
+# 2000-01-02    1
+# 2000-01-03    2
+# 2000-01-04    3
+# 2000-01-05    4
+# 2000-01-06    5
+# 2000-01-07    6
+# dtype: int64
+</code></pre><h2 id="手工处理分隔符格式"><a href="#手工处理分隔符格式" class="headerlink" title="手工处理分隔符格式"></a>手工处理分隔符格式</h2><p>场景：pandas.read_table加载表格数据时，由于畸形行导致错误</p>
+<pre><code># $ cat ch06/ex7.csv
+# &quot;a&quot;,&quot;b&quot;,&quot;c&quot;
+# &quot;1&quot;,&quot;2&quot;,&quot;3&quot;
+# &quot;1&quot;,&quot;2&quot;,&quot;3&quot;,&quot;4&quot;
+
+import csv
+
+lines = list(csv.reader(open(&#39;../pydata-book-master/ch06/ex7.csv&#39;)))
+headers, values = lines[0], lines[1:]
+data_dict = {h: v for h, v in zip(headers, zip(*values))}
+# print data_dict
+# {&#39;a&#39;: (&#39;1&#39;, &#39;1&#39;), &#39;c&#39;: (&#39;3&#39;, &#39;3&#39;), &#39;b&#39;: (&#39;2&#39;, &#39;2&#39;)}
+
+class my_dialect(csv.Dialect):
+    lineterminator = &#39;\n&#39;
+    delimiter = &#39;;&#39;
+    quotechar = &#39;&quot;&#39;
+    quoting = csv.QUOTE_ALL
+
+# delimiter分隔符指定
+
+f = open(&#39;../pydata-book-master/ch06/ex7.csv&#39;)
+reader = csv.reader(f, dialect=my_dialect)
+# print reader
+# &lt;_csv.reader object at 0x10a5bb440&gt;
+# 以上类的参数也可以单个的传入csv.reader方法
+</code></pre><p>手动写入分隔符文件csv.writer</p>
+<pre><code>with open(&#39;mydata.csv&#39;, &#39;w&#39;) as fw:
+    writer = csv.writer(fw, my_dialect)
+    writer.writerow((&quot;one&quot;, &quot;two&quot;, &quot;three&quot;))
+    writer.writerow((&#39;1&#39;, &#39;2&#39;, &#39;3&#39;))
+    writer.writerow((&#39;4&#39;, &#39;5&#39;, &#39;6&#39;))
+    writer.writerow((&#39;7&#39;, &#39;8&#39;, &#39;9&#39;))
+# out: mydata.csv
+# &quot;one&quot;;&quot;two&quot;;&quot;three&quot;
+# &quot;1&quot;;&quot;2&quot;;&quot;3&quot;
+# &quot;4&quot;;&quot;5&quot;;&quot;6&quot;
+# &quot;7&quot;;&quot;8&quot;;&quot;9&quot;
+</code></pre><blockquote>
+<p>tip:一些东西还是要看源码才最直接</p>
+</blockquote>
+<h2 id="JSON数据"><a href="#JSON数据" class="headerlink" title="JSON数据"></a>JSON数据</h2><blockquote>
+<p>JSON已成为HTTP请求在Web浏览器和其他程序之间发送数据的标准格式之一、</p>
+</blockquote>
+<pre><code>obj1 = &quot;&quot;&quot;
+{&quot;name&quot;: &quot;Wes&quot;,
+&quot;places_lived&quot;: [&quot;United States&quot;, &quot;Spain&quot;, &quot;Germany&quot;],
+&quot;pet&quot;:null,
+&quot;siblings&quot;:[{&quot;name&quot;:&quot;Scott&quot;, &quot;age&quot;:25, &quot;pet&quot;:&quot;Zuko&quot;}, {&quot;name&quot;:&quot;Katie&quot;, &quot;age&quot;:22, &quot;pet&quot;:&quot;Cisco&quot;}]
+}
+&quot;&quot;&quot;
+import json
+# json.loads将JSON字符串转换成Python形式
+result = json.loads(obj1)
+# print result
+# {u&#39;pet&#39;: None,
+# u&#39;siblings&#39;: [{u&#39;pet&#39;: u&#39;Zuko&#39;, u&#39;age&#39;: 25, u&#39;name&#39;: u&#39;Scott&#39;},
+#               {u&#39;pet&#39;: u&#39;Cisco&#39;, u&#39;age&#39;: 22, u&#39;name&#39;: u&#39;Katie&#39;}],
+# u&#39;name&#39;: u&#39;Wes&#39;,
+# u&#39;places_lived&#39;: [u&#39;United States&#39;, u&#39;Spain&#39;, u&#39;Germany&#39;]}
+# 对应的，json.dumps将Python转换成JSON形式
+asjson = json.dumps(result)
+# print asjson
+# {&quot;pet&quot;: null, &quot;siblings&quot;: [{&quot;pet&quot;: &quot;Zuko&quot;, &quot;age&quot;: 25, &quot;name&quot;: &quot;Scott&quot;},
+#                            {&quot;pet&quot;: &quot;Cisco&quot;, &quot;age&quot;: 22, &quot;name&quot;: &quot;Katie&quot;}],
+#  &quot;name&quot;: &quot;Wes&quot;, &quot;places_lived&quot;: [&quot;United States&quot;, &quot;Spain&quot;, &quot;Germany&quot;]}
+
+</code></pre><h2 id="XML和HTML：Web信息收集"><a href="#XML和HTML：Web信息收集" class="headerlink" title="XML和HTML：Web信息收集"></a>XML和HTML：Web信息收集</h2><pre><code># http://finance.yahoo.com/quote/AAPL/options?ltr=1
+from lxml.html import parse
+from urllib2 import urlopen
+# 原网址404，在雅虎随便找了一个阿里巴巴的
+# parsed = parse(urlopen(&#39;http://finance.yahoo.com/quote/BABA/options?p=BABA&#39;))
+# doc = parsed.getroot()
+# 通过上面的对象，可获取特定的tag
+# 如获取所有的链接；&lt;a href=&quot;#&quot;&gt;word&lt;/a&gt;
+# links = doc.findall(&#39;.//a&#39;)
+# print links[:5]
+# [&lt;Element a at 0x1109ace10&gt;,
+# &lt;Element a at 0x1109ace68&gt;,
+# &lt;Element a at 0x1109acec0&gt;,
+# &lt;Element a at 0x1109acf18&gt;,
+# &lt;Element a at 0x1109acf70&gt;]
+# lnk = links[7]
+# print lnk
+# &lt;Element a at 0x1040d3628&gt;
+# 从以上对象中提取出href
+# print len(links)
+# 50个
+# print lnk.get(&#39;href&#39;)
+# https://www.yahoo.com/celebrity/
+# print lnk.text_content()
+# Celebrity
+
+# 构建列表推导式，获取全部URL
+# urls = [lnk1.get(&#39;href&#39;) for lnk1 in doc.findall(&#39;.//a&#39;)]
+# print urls[-10:]
+# [&#39;//finance.yahoo.com/broker-comparison?bypass=true&#39;,
+# &#39;https://help.yahoo.com/kb/index?page=content&amp;y=PROD_MAIL_ML&amp;locale=en_US&amp;id=SLN2310&amp;actp=productlink&#39;,
+# &#39;http://help.yahoo.com/l/us/yahoo/finance/&#39;,
+# &#39;https://yahoo.uservoice.com/forums/382977&#39;,
+# &#39;http://info.yahoo.com/privacy/us/yahoo/&#39;,
+# &#39;http://info.yahoo.com/relevantads/&#39;,
+# &#39;http://info.yahoo.com/legal/us/yahoo/utos/utos-173.html&#39;,
+# &#39;http://twitter.com/YahooFinance&#39;,
+# &#39;http://facebook.com/yahoofinance&#39;,
+# &#39;http://yahoofinance.tumblr.com&#39;]
+
+# 从文档中找出正确的表格就是反复试验
+# parsed1 = parse(urlopen(&#39;http://finance.yahoo.com/quote/BABA/options?p=BABA&#39;))
+# doc1 = parsed1.getroot()
+# tables = doc1.findall(&#39;.//table&#39;)
+# calls = tables[0]
+# puts = tables[0]
+# rows = calls.findall(&#39;.//tr&#39;)
+# print rows[0].text_content()
+# Search
+# def unpack(row, kind=&#39;td&#39;):
+#     elts = row.findall(&#39;.//%s&#39; % kind)
+#     return [val.text_content() for val in elts]
+
+# print unpack(rows[0], kind=&#39;th&#39;)
+# 由于对Safari怎么获取XPath不熟悉，后期还要专门了解
+# 原网址变动，书本代码无法运行，需要深入理解改写一下
+# 完全照着书本敲收效甚微
+
+# 利用lxml.objectify解析XML
+from lxml import objectify
+path = &#39;../pydata-book-master/ch06/mta_perf/Performance_MNR.xml&#39;
+parsed2 = objectify.parse(open(path))
+root = parsed2.getroot()
+print root
+</code></pre><h2 id="利用lxml-objectify解析XML"><a href="#利用lxml-objectify解析XML" class="headerlink" title="利用lxml.objectify解析XML"></a>利用lxml.objectify解析XML</h2><pre><code>from lxml import objectify
+# path = &#39;../pydata-book-master/ch06/mta_perf/Performance_MNR.xml&#39;
+# parsed2 = objectify.parse(open(path))
+# root = parsed2.getroot()
+# print root
+
+# 解析HTML标签
+from StringIO import StringIO
+tag = &#39;&lt;a href=&quot;http://www.google.com&quot;&gt;Google&lt;/a&gt;&#39;
+root = objectify.parse(StringIO(tag)).getroot()
+# print root.get(&#39;href&#39;)
+# http://www.google.com
+# print root.text
+# Google
+</code></pre><h2 id="二进制数据格式"><a href="#二进制数据格式" class="headerlink" title="二进制数据格式"></a>二进制数据格式</h2><pre><code># 保存到磁盘上
+frame = pd.read_csv(&#39;../pydata-book-master/ch06/ex1.csv&#39;)
+# print  frame
+#    a   b   c   d message
+# 0  1   2   3   4   hello
+# 1  5   6   7   8   world
+# 2  9  10  11  12     foo
+# 从磁盘读取到Python对象中
+print pd.load(&#39;../pydata-book-master/ch06/frame_pickle&#39;)
+</code></pre><h2 id="读取Microsoft-Excel文件-pandas的ExcelFile类）"><a href="#读取Microsoft-Excel文件-pandas的ExcelFile类）" class="headerlink" title="读取Microsoft Excel文件(pandas的ExcelFile类）"></a>读取Microsoft Excel文件(pandas的ExcelFile类）</h2><pre><code>xls_file = pd.ExcelFile(&#39;../pydata-book-master/ch06/ex1.xlsx&#39;)
+# 将某个工作表中的数据通过parse读取到DataFrame中
+table = xls_file.parse(&#39;Sheet1&#39;)
+# print table
+#    a   b   c   d message
+# 0  1   2   3   4   hello
+# 1  5   6   7   8   world
+# 2  9  10  11  12     foo
+</code></pre><h2 id="使用HTML和Web-API"><a href="#使用HTML和Web-API" class="headerlink" title="使用HTML和Web API"></a>使用HTML和Web API</h2><pre><code>import requests
+url = &#39;https://www.google.com.hk/search?safe=strict&amp;site=&amp;source=hp&amp;q=test&amp;btnK=Google+搜索&#39;
+resp = requests.get(url)
+# print resp
+# &lt;Response [200]&gt;
+# Web API一般返回JSON字符串
+import json
+data = json.loads(resp.text)
+# print data.keys()
+# ValueError: No JSON object could be decoded
+# 书上的Twitter链接打不开
+
+# 取出感兴趣的tweet字段，然后将results列表传给DataFrame
+tweet_field = [&#39;created_at&#39;, &#39;from_user&#39;, &#39;id&#39;, &#39;text&#39;]
+tweets = DataFrame(data[&#39;result&#39;], columns=tweet_field)
+# print tweets
+# DataFrame中每一行有了来自一条tweet的数据
+tweets._ix[7]
+</code></pre><h2 id="使用数据库"><a href="#使用数据库" class="headerlink" title="使用数据库"></a>使用数据库</h2><pre><code># 数据库选择标准：性能、数据完整性、应用程序的伸缩性需求
+# 引入Python内置的sqlite3驱动器
+import sqlite3
+query = &quot;&quot;&quot;
+CREATE TABLE test (a VARCHAR(20), b VARCHAR(20),
+c REAL, d INTEGER
+);&quot;&quot;&quot;
+con = sqlite3.connect(&#39;:memory:&#39;)
+con.execute(query)
+con.commit()
+# 插入几条数据
+data = [(&#39;Atlanta&#39;, &#39;Georgia&#39;, 1.25, 6),
+        (&#39;Wangjiang&#39;, &#39;Maoan&#39;, 2.5, 5),
+        (&#39;Hefei&#39;, &#39;Gaoxing&#39;, 5.5, 9)]
+stmt = &quot;INSERT INTO test VALUES(?,?,?,?)&quot;
+con.executemany(stmt, data)
+con.commit()
+# 从表中选取数据
+cursor = con.execute(&#39;select * from test&#39;)
+rows = cursor.fetchall()
+# print rows
+# [(u&#39;Atlanta&#39;, u&#39;Georgia&#39;, 1.25, 6),
+(u&#39;Wangjiang&#39;, u&#39;Maoan&#39;, 2.5, 5), 
+(u&#39;Hefei&#39;, u&#39;Gaoxing&#39;, 5.5, 9)]
+# 列名位于游标的description属性中
+# print cursor.description
+# ((&#39;a&#39;, None, None, None, None, None, None),
+# (&#39;b&#39;, None, None, None, None, None, None),
+# (&#39;c&#39;, None, None, None, None, None, None),
+# (&#39;d&#39;, None, None, None, None, None, None))
+# 传入DataFrame
+# print DataFrame(rows, columns=zip(*cursor.description)[0])
+#            a        b     c  d
+# 0    Atlanta  Georgia  1.25  6
+# 1  Wangjiang    Maoan  2.50  5
+# 2      Hefei  Gaoxing  5.50  9
+
+# pandas有一个简化过程的read_frame函数
+import pandas.io.sql as sql
+# 书本上read_frame已失效
+# print sql.read_sql(&#39;select * from test&#39;, con)
+#            a        b     c  d
+# 0    Atlanta  Georgia  1.25  6
+# 1  Wangjiang    Maoan  2.50  5
+# 2      Hefei  Gaoxing  5.50  9
+</code></pre><h2 id="存取MongoDB数据"><a href="#存取MongoDB数据" class="headerlink" title="存取MongoDB数据"></a>存取MongoDB数据</h2><pre><code># 电脑上需要装MongoDB数据库；
+# 使用pymongo驱动通过默认端口连接
+# 存储在MongoDB中的文档被组织在数据库的集合（想象成表）
+# 没有装，姑且记录一下该怎么写,留作参考
+import pymongo
+con = pymongo.Connection(&#39;localhost&#39;, port=27017)
+# MongoDB服务运行的每个实例可以有多个数据库，每个数据库又可以有多个集合。
+# 访问之前获取的tweets集合
+tweets = con.db.tweets
+# 加载数据并存入集合
+import requests, json
+
+url = &#39;https://www.google.com.hk/search?safe=strict&amp;site=&amp;source=hp&amp;q=test&amp;btnK=Google+搜索&#39;
+data = json.loads(requests.get(url).text)
+for tweet in data[&#39;results&#39;]:
+    tweets.save(tweet)
+
+# 从集合中取出
+cursor = tweets.find({&#39;from_user&#39;: &#39;linking&#39;})
+# 转换成DataFrame
+tweet_fileds = [&#39;create_at&#39;, &#39;from_user&#39;, &#39;id&#39;, &#39;text&#39;]
+result = DataFrame(list(cursor), columns=tweet_fileds)
+</code></pre><blockquote>
+<p>走过了一遍第六章，给我的感觉是，工具很强大，可以做很多数据分析工作，<strong>数据结构</strong>知识还是匮乏，一些比较复杂的东西还是不能很好的理解，需要加强，多看几遍也是一个方法。</p>
+</blockquote>
+<blockquote>
+<p>时间上，下班时间有点<strong>晚</strong>，可以看书的时间都在9点左右，有点晚，太累了，以后下班是不是可以早一点，做饭时间吃饭时间太晚；另外严重缺乏锻炼了，涨了一些肉的，膝盖还是没有恢复，需要针对性锻炼。</p>
+</blockquote>
+<blockquote>
+<p>记一下，博客的评论插件，<strong>多说</strong>社会化评论系统已经关闭；选择移除多说或者换成其他的。</p>
+</blockquote>
+<blockquote>
+<p>………………………………………………2017-03-25 22:57 Sat&amp;合肥-皖水公寓</p>
+</blockquote>
+
+      
+
+      
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/cs/" class="article-tag-list-link color3">cs</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/03/25/《利用Python进行数据分析》读书笔记-6-第六章-数据加载、存储和数据格式/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
     <article id="post-《利用Python进行数据分析》读书笔记-5-第五章-pandas入门" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1809,282 +2425,6 @@ setVerticalScrollBarEnabled(true);
 
 
   
-    <article id="post-安卓onClick事件监听的实现方式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/09/24/安卓onClick事件监听的实现方式/">安卓onClick事件监听的实现方式</a>
-    </h1>
-  
-
-        
-        <a href="/2016/09/24/安卓onClick事件监听的实现方式/" class="archive-article-date">
-  	<time datetime="2016-09-24T09:32:35.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-09-24</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>昨天做了转正汇报，三个月的试用期快结束了，不得不感慨时光流逝啊。毕业三个月了，下一届的师弟师妹都开始找工作了。</p>
-<p>总体来说，这三个月是非常充实的，虽然没干多少事吧，但学到了很多东西，技术上的，与人交往上，都有所进步。年轻的时候还是忙点好，闲着也没事干，荒废大好时光。不如多干点活，多积累点经验。</p>
-<p>扯了一会蛋，说下正事。</p>
-<p>最近由于项目需要，搞起了Android；麻蛋，一头雾水哦，我接触Java也不过才两个月，安卓，我的天；项目需要啊，硬着头皮也要上啊。</p>
-<blockquote>
-<p>最好的教程还是官方API，不知道的就查一下，很明了，这一块对英语要求较高，还要加强，这是成为一个优秀的程序员必备的，毕竟编程是英语世界的人发明的，当然，无论哪个行业，融入英语世界才能了解到世界上最先进的知识。</p>
-</blockquote>
-<p>业余时间在CSDN上看<a href="http://blog.csdn.net/coder_pig/article/details/50000773" target="_blank" rel="noopener">pig-coder的博客</a>，是比较系统的介绍，所以选择了他的博客。感谢作者的无私奉献。</p>
-<p>看完了基础、布局、UI，进度有点慢，要加把劲了。<br>这篇把onClick事件监听的几种实现方式抠出来，作一篇博客。</p>
-<p>主要有以下三种方式：</p>
-<h2 id="匿名内部类监听按钮点击事件"><a href="#匿名内部类监听按钮点击事件" class="headerlink" title="匿名内部类监听按钮点击事件"></a>匿名内部类监听按钮点击事件</h2><pre><code>#activity_login.xml   layout 
-&lt;Button
-    android:layout_width=&quot;match_parent&quot;
-    android:layout_height=&quot;wrap_content&quot;
-    android:text=&quot;@string/button_name&quot;
-    android:id=&quot;@+id/button&quot;
-    android:layout_gravity=&quot;bottom&quot; /&gt;
-</code></pre><pre><code># LoginActivity.java
-private Button loginButton;
-    @Override
-    protected void onCreate(Bundle savedInstanceState){
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
-
-        /*
-        * 1.初始化当前所需的控件
-        * findViewById--返回一个view对象
-        * 通过R.java.id找到
-        * */
-        loginButton = (Button)findViewById(R.id.button_denglu);
-
-        /*
-        * 2.设置Button监听器，实现点击操作
-        * 通过匿名内部类方式实现
-        * */
-        loginButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //当前点击动作
-                System.out.println(&quot;我的button被点击了&quot;);
-            }
-        });
-    }
-</code></pre><h2 id="独立类-外部类-实现"><a href="#独立类-外部类-实现" class="headerlink" title="独立类(外部类)实现"></a>独立类(外部类)实现</h2><p>在此类的外部实现一个onClick类。<br>当遇到很多按钮需要添加事件时，通过这种方式可以设置同类的逻辑。</p>
-<pre><code>public class LoginActivity extends AppCompatActivity   {
-    private Button bt1;
-    @Override
-    protected void onCreate(Bundle savedInstanceState){
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
-        bt1 = (Button) findViewById(R.id.button_denglu);
-        bt1.setOnClickListener(new myClickListener(){
-            @Override
-            public void onClick(View v) {
-                //调用父类的点击事件
-                super.onClick(v);
-                Toast.makeText(LoginActivity.this,&quot;bt1要输出的逻辑&quot;,1).show();
-            }
-        });
-    }
-}
-//OnClickListener是一个接口
-class myClickListener implements View.OnClickListener {
-    @Override
-    public void onClick(View v){
-        //这里可以写需要调用此外部类的公共点击事件
-        Log.i(TAG, &quot;onClick: 父类的事件&quot;);
-    }
-}
-</code></pre><h2 id="实现接口的方式实现"><a href="#实现接口的方式实现" class="headerlink" title="实现接口的方式实现"></a>实现接口的方式实现</h2><pre><code>public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
-    private Button bt1;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState){
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
-        bt1 = (Button)findViewById(R.id.button_denglu);
-
-        bt1.setOnClickListener(this);
-    }
-    @Override
-    public void onClick(View v){
-        Log.i(TAG, &quot;onClick: 第三种实现方式&quot;);
-    }
-}
-</code></pre><h2 id="实现页面跳转"><a href="#实现页面跳转" class="headerlink" title="实现页面跳转"></a>实现页面跳转</h2><p>必须在AndroidManifest.xml中注册跳转到的页面，activity。这就是之前为什么不能实现跳转的原因。</p>
-<pre><code>&lt;activity android:name=&quot;Second&quot; /&gt;
-</code></pre><p>MainActivity中绑定onClick事件</p>
-<pre><code>Button btn1 = (Button)findViewById(R.id.btn1);
-btn1.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View v) {
-        Intent intent = new Intent();
-        intent.setClass(MainActivity.this,Second.class);
-        startActivity(intent);
-    }
-});
-</code></pre>
-      
-
-      
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Android onclick事件监听</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Android/" class="article-tag-list-link color3">Android</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2016/09/24/安卓onClick事件监听的实现方式/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
-    <article id="post-git学习之三-conflict冲突，reset版本控制，以及实践感悟" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/09/10/git学习之三-conflict冲突，reset版本控制，以及实践感悟/">git学习之三-最近遇到的坑</a>
-    </h1>
-  
-
-        
-        <a href="/2016/09/10/git学习之三-conflict冲突，reset版本控制，以及实践感悟/" class="archive-article-date">
-  	<time datetime="2016-09-10T08:55:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-09-10</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>最近在开发过程中，用到git提交代码，之前也用过github传过代码，但是实际工作中还用的不多，过程中遇到了一些坑，记录下来。</p>
-<h2 id="conflict冲突"><a href="#conflict冲突" class="headerlink" title="conflict冲突"></a>conflict冲突</h2><p>冲突原因:</p>
-<blockquote>
-<p>由于在自己提交之前，自己下载最新代码之后有人上传了，之前下载的不是最新的代码，所以有冲突，必须把代码冲突解决之后才能够上传。时间线问题。</p>
-</blockquote>
-<p>展现形式：</p>
-<pre><code>&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;
-your code 
-HEAD 
-others code
-&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;
-</code></pre><p>完成了一个功能模块，想要提交到代码库中；为了方便，现在用git gui工具了，先把更改的文件statechanged状态改变一下，然后提交commit，之后千万不要忘记看看远程库中有没有最近的更新，pull一下；<br>pull一次之后就要注意解决冲突，一般文件会红色显示，有错误则会显示红色波浪线，形式如上所示；</p>
-<p>注意：每天可以多次commit，就像打标签，但是最好一天只push一次。多次提交造成不必要的浪费；</p>
-<p>据老司机门的经验，开发时，应该多构建分支，在一个分支上做一个功能，功能做完之后再合并分支，这样可以减少冲突的概率。</p>
-<h2 id="撤销未提交的修改"><a href="#撤销未提交的修改" class="headerlink" title="撤销未提交的修改"></a>撤销未提交的修改</h2><p>还没有commit，但想撤回修改的情况下：<br><img src="http://7xjqvu.com1.z0.glb.clouddn.com/15-6-19/48267713.jpg" alt=""><br>git diff：<br><img src="http://7xjqvu.com1.z0.glb.clouddn.com/15-6-19/81847901.jpg" alt=""></p>
-<p>保存了，如果是一两句还好，如果几百几千行呢？手动累死你。<br>神器：</p>
-<pre><code>git checkout src/com/jay/example/testforgit/MainActivity.java
-</code></pre><p>duang一下就没了：<br><img src="http://7xjqvu.com1.z0.glb.clouddn.com/15-6-19/10997419.jpg" alt=""></p>
-<p>当然上述<strong>前提是没有add</strong>，才可以checkout。我们要<strong>先取消添加</strong>才可以撤回提交，使用下述指令：</p>
-<pre><code>git reset HEAD src/com/jay/example/testforgit/MainActivity.java
-git checkout src/com/jay/example/testforgit/MainActivity.java
-</code></pre><p><img src="http://7xjqvu.com1.z0.glb.clouddn.com/15-6-19/97479292.jpg" alt=""></p>
-<h2 id="版本回退"><a href="#版本回退" class="headerlink" title="版本回退"></a>版本回退</h2><blockquote>
-<p>上面提到的是撤销未提交的修改，但如果提交了，我们想回退到之前的某一个版本怎么办?<br>我们可以通过git log查看我们的提交记录，我们需要从这里获取一个版本号，<br>一般我们只需要<strong>前七位字符</strong>就够了；另外在Git中，用HEAD代表当前版本，上一个版本就是HEAD^，<br>再上一个版本就是HEAD^^依次类推！我们先Git Log看下版本历史先！</p>
-</blockquote>
-<p><img src="http://7xjqvu.com1.z0.glb.clouddn.com/15-6-19/40426312.jpg" alt=""></p>
-<p>我们回到前一个提交的版本吧，依次键入下述指令：</p>
-<pre><code>git reset --hard HEAD
-git reset --hard HEAD^
-git log
-</code></pre><p>控制台：<br><img src="http://7xjqvu.com1.z0.glb.clouddn.com/15-6-19/51915562.jpg" alt=""></p>
-<p>可以看到我们已经回退到了前一个版本了，当然你可以直接这样写：</p>
-<pre><code>git reset --hard ad2080c
-</code></pre><p>就是这么简单！回退后，你突然后悔了（第一次回退到前一旧版本了，现在又想回到新版本了，善变啊），想回退回新的那个版本，<br>可是遗憾的是，你键入git log却发现没有了最新的那个版本号，这怎么办呢…<br>没事，Git中给你提供了这颗“后悔药”，Git记录着你输入的每一条指令呢！键入：</p>
-<pre><code>git reflog
-</code></pre><p>你会发现，版本号就在这里：<br><img src="http://7xjqvu.com1.z0.glb.clouddn.com/15-6-19/93429639.jpg" alt=""></p>
-<p>然后键入：</p>
-<pre><code>git reset --hard ad2080c
-</code></pre><p>可以看到我们又回到了最新的那个版本了，就是这么溜！<br><img src="http://7xjqvu.com1.z0.glb.clouddn.com/15-6-19/46109301.jpg" alt=""></p>
-
-      
-
-      
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">git</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/cs/" class="article-tag-list-link color3">cs</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2016/09/10/git学习之三-conflict冲突，reset版本控制，以及实践感悟/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/8/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><span class="page-number current">9</span><a class="page-number" href="/page/10/">10</a><a class="page-number" href="/page/11/">11</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><a class="extend next" rel="next" href="/page/10/">Next &raquo;</a>
@@ -2188,15 +2528,15 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">nginx</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">weather</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">需求</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">nginx</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2212,7 +2552,19 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">HTML5</a>
+                <a href="javascript:void(0)" class="js-tag color1">hmtl5</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">sse</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Oracle</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">JavaScriptCore</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2228,19 +2580,7 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">hmtl5</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">sse</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">JavaScriptCore</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Oracle</a>
+                <a href="javascript:void(0)" class="js-tag color1">HTML5</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2260,15 +2600,19 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">avatar</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">blog</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Gitalk</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">docker</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">oracle</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2281,6 +2625,10 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">patch</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">avatar</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2332,11 +2680,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Python</a>
+                <a href="javascript:void(0)" class="js-tag color3">标识</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">标识</a>
+                <a href="javascript:void(0)" class="js-tag color2">Python</a>
               </li>
              
               <li class="article-tag-list-item">
