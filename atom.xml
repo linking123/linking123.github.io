@@ -1,0 +1,80 @@
+<feed xmlns="http://www.w3.org/2005/Atom">
+<title>
+<![CDATA[ Linking's blog ]]>
+</title>
+<subtitle>
+<![CDATA[ share mylife ]]>
+</subtitle>
+<link href="/atom.xml" rel="self"/>
+<link href="http://linking123.github.io/"/>
+<updated>2015-11-30T06:15:30.269Z</updated>
+<id>http://linking123.github.io/</id>
+<author>
+<name>
+<![CDATA[ Linking ]]>
+</name>
+</author>
+<generator uri="http://hexo.io/">Hexo</generator>
+<entry>
+<title>
+<![CDATA[ 博客建立过程的记录 ]]>
+</title>
+<link href="http://linking123.github.io/2015/11/29/%E5%8D%9A%E5%AE%A2%E5%BB%BA%E7%AB%8B%E8%BF%87%E7%A8%8B%E7%9A%84%E8%AE%B0%E5%BD%95/"/>
+<id>http://linking123.github.io/2015/11/29/博客建立过程的记录/</id>
+<published>2015-11-29T13:50:28.000Z</published>
+<updated>2015-11-30T06:15:30.269Z</updated>
+<content type="html">
+<![CDATA[
+<p>目前为止，博客大部分功能已经实现。可以正常运行。<br>前后大概用了三天时间。<br>头痛<br><img src="http://ww1.sinaimg.cn/large/791ffc07jw1ea2kymrm83g20bo0bo0sz.gif" alt=""><br>熟悉git命令，github，hexo+NexT theme等。<br>待解决问题：</p> <blockquote> <p>1.百度统计短信无法接受，造成无法加入此功能<br>短信系统故障问题，延迟太久。暂时无法解决。<br>2.二级页面的头像问题<br>我在站点source/下各个文件夹中加入images/avatar.jpg，成功在二级页面显示头像。因为generate把source下的文件渲染到public下，可以观察到相似性。<br>3.外链，RSS<br>4.cnzz统计底部位置，是否有必要放置。<br>感觉没有必要，访问量不多。先放着吧。<br>5.删除测试文档</p> </blockquote> <p>time: 2015/11/30 12:30 am </p> <p>hexo d之后在网页上看到首页只显示最新博客</p> <blockquote> <p>看到的有关解答是hexo clean,hexo generate两次，再hexo deploy<br>有时候有用，有时没效果。</p> </blockquote>
+]]>
+</content>
+<summary type="html">
+<![CDATA[
+<p>目前为止，博客大部分功能已经实现。可以正常运行。<br>前后大概用了三天时间。<br>头痛<br><img src="http://ww1.sinaimg.cn/large/791ffc07jw1ea2kymrm83g20bo0bo0sz.gif" alt=""><br>熟
+]]>
+</summary>
+<category term="cs" scheme="http://linking123.github.io/tags/cs/"/>
+<category term="计算机" scheme="http://linking123.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/"/>
+</entry>
+<entry>
+<title>
+<![CDATA[ mytest ]]>
+</title>
+<link href="http://linking123.github.io/2015/11/28/mytest/"/>
+<id>http://linking123.github.io/2015/11/28/mytest/</id>
+<published>2015-11-28T02:21:24.000Z</published>
+<updated>2015-11-29T08:09:11.933Z</updated>
+<content type="html">
+<![CDATA[
+<p>this is my test file.<br><a href="www.baidu.com">baidu</a></p>
+]]>
+</content>
+<summary type="html">
+<![CDATA[
+<p>this is my test file.<br><a href="www.baidu.com">baidu</a></p>
+]]>
+</summary>
+<category term="test" scheme="http://linking123.github.io/tags/test/"/>
+</entry>
+<entry>
+<title>
+<![CDATA[ Hello World ]]>
+</title>
+<link href="http://linking123.github.io/2015/11/27/hello-world/"/>
+<id>
+http://linking123.github.io/2015/11/27/hello-world/
+</id>
+<published>2015-11-27T13:49:35.325Z</published>
+<updated>2015-11-27T13:49:35.325Z</updated>
+<content type="html">
+<![CDATA[
+<p>Welcome to <a href="http://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="http://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="http://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p> <h2 id="Quick_Start">Quick Start</h2><h3 id="Create_a_new_post">Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure> <p>More info: <a href="http://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p> <h3 id="Run_server">Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure> <p>More info: <a href="http://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p> <h3 id="Generate_static_files">Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure> <p>More info: <a href="http://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p> <h3 id="Deploy_to_remote_sites">Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure> <p>More info: <a href="http://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+]]>
+</content>
+<summary type="html">
+<![CDATA[
+<p>Welcome to <a href="http://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="http://hexo.io
+]]>
+</summary>
+</entry>
+</feed>
