@@ -201,6 +201,250 @@
             
 
   
+    <article id="post-nodejs学习记录" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2016/01/05/nodejs%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/" target="_blank">nodejs学习记录</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2016/01/05/nodejs%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/" class="archive-article-date">
+        <time datetime="2016-01-05T02:18:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-01-05</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h1 id="《Node-js开发指南》"><a href="#《Node-js开发指南》" class="headerlink" title="《Node.js开发指南》"></a>《Node.js开发指南》</h1><p>学习nodejs有一段时间了，基本的概念已经有了大概的了解。《Node.js开发指南》进行到第五章-使用Nodejs进行web开发，实现一个微博系统。<br>前面看书一直断断续续，前段时间只能晚上在宿舍看一会，没有系统性，虽然勉强看完了前面四章节的基础知识，但还不能说会了。希望通过这个小系统的练习，对nodejs有更深入的理解。</p>
+<p>微博系统主要功能</p>
+<blockquote>
+<p>1.路由控制<br>2.页面模板<br>3.数据库访问<br>4.用户注册<br>5.登陆<br>6.用户会话</p>
+</blockquote>
+<p>主要技术点：</p>
+<blockquote>
+<p>1.Express框架<br>2.MVC设计模式<br>3.ejs模板引擎<br>4.MongoDB数据库</p>
+</blockquote>
+<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><table>
+<thead>
+<tr>
+<th align="left">简记</th>
+<th align="center">全拼</th>
+<th align="center">中文</th>
+<th align="center">含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">M</td>
+<td align="center">Model</td>
+<td align="center">模型</td>
+<td align="center">对象及数据结构的实现,通常包括数据库操作</td>
+</tr>
+<tr>
+<td align="left">V</td>
+<td align="center">View</td>
+<td align="center">视图</td>
+<td align="center">表示用户界面,HTML组织结构</td>
+</tr>
+<tr>
+<td align="left">C</td>
+<td align="center">Controller</td>
+<td align="center">控制器</td>
+<td align="center">用于处理用户请求和数据流、复杂模型,将输出传递给视图</td>
+</tr>
+</tbody></table>
+<p>nodejs两大特性，其一：</p>
+<blockquote>
+<p>可以跳过<code>http</code>服务器,因为它本身就是。提供http模块，由c++实现，性能可靠，可直接应用到生产环境。</p>
+</blockquote>
+<p>其二：</p>
+<blockquote>
+<p>与其他语言的显著区别，原始封装成都较低。nodejs中很多工作需要自己完成(但不是都是自己动手，可借助于<strong>第三方框架</strong>)。</p>
+</blockquote>
+<p>使用http模块</p>
+<blockquote>
+<p>减少一层抽象，性能的提升同时提高了开发难度。就一个简单的post请求来说，PHP只要两行代码，而nodejs需要自己手动写post请求过程。底层接口尽管用起来复杂，但让我们对http协议的理解更加清晰。<br>http模块是http服务器内核的封装，可以做网站，可以做代理服务器。手动实现所有东西，小到POST请求，达到Cookie、会话管理。当你用这种方式建立网站时，几乎已经做好了一个完整的框架了。</p>
+</blockquote>
+<p>Express框架</p>
+<blockquote>
+<p>更高层的http接口，以及许多网站常用功能实现了。<br>但不是一个无所不包的全能框架，没有像Rails或Django实现模板引擎甚至ORM(Object Relation Model,对象关系模型)。只是一个轻量级的web框架，多数功能只是对http协议中的常用操作的封装，更多的功能需要插件或者整合其他模块来完成。</p>
+</blockquote>
+<h2 id="快速开始"><a href="#快速开始" class="headerlink" title="快速开始 "></a>快速开始 </h2><p>安装Express<br>目前express已经更新到4.x版本，安装时可用@加版本</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">npm install -g express-generator@3</span><br><span class="line">or</span><br><span class="line">npm install -g express-generator@4</span><br></pre></td></tr></table></figure>
+<p>书上用的是2.5.8版本，所以</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g express@2.5.8 --save</span><br></pre></td></tr></table></figure>
+<p>不加版本号，默认最新版本.安装完成后，用<code>express -V</code>检查安装结果。<br>这样就可以使用express命令了。<br>最快的安装启动express框架简要步骤：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">express blog &amp;&amp; cd blog &amp;&amp; npm install &amp;&amp; npm start</span><br></pre></td></tr></table></figure>
+<p><code>express 4.x</code>无法用<code>node app.js</code>启动，指令为<code>npm start</code>。<br>然后打开<a href="localhost:3000">localhost:3000</a>即可见到熟悉的<code>Welcome to Express</code>。</p>
+<blockquote>
+<p>对应的版本都需要对应的依赖，有时候安装的时候会自动选择最先版本，也需要最新的依赖；制定的方法是在<code>package.json</code>中制定依赖的版本，再运行<code>npm install</code>来安装依赖。</p>
+</blockquote>
+<p>最重要的事应该是理解框架的设计思想，文件之间的映射关系，各个文件夹的分工。<br>理解MVC。</p>
+<p>老版本用<code>supervisor app.js</code>来启动应用，依然可行。   </p>
+<h2 id="建立微博网站"><a href="#建立微博网站" class="headerlink" title="建立微博网站"></a>建立微博网站</h2><p>1功能分析</p>
+<blockquote>
+<p>开发中的大忌是没想清楚要做什么就开始动手。先应该有一个全局的规划。</p>
+</blockquote>
+<ol>
+<li>以用户为中心，需有注册登录功能</li>
+<li>最核心的是信息的发表，涉及数据库访问，前端显示</li>
+<li>评论，转发，点赞等功能，但由于学习目的，不一一实现</li>
+</ol>
+<p>2路由规划<br>或者控制器规划是网站的骨架部分，优先考虑<br>根据功能设计，路由规划方案如下：</p>
+<ul>
+<li>&#x2F;: 首页</li>
+<li>&#x2F;u[user] 用户主页</li>
+<li>&#x2F;post: 发表信息</li>
+<li>&#x2F;reg: 用户注册</li>
+<li>&#x2F;login: 用户登录</li>
+<li>&#x2F;logout: 登出</li>
+</ul>
+<h2 id="常见错误处理"><a href="#常见错误处理" class="headerlink" title="常见错误处理"></a>常见错误处理</h2><p>在完成用户注册页面书写之后，运行出错。<br>error:connection strategy not found</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">$ node app.js</span><br><span class="line">E:\sync_mypc\sync_mypc\languages\js\nodejs\blog\mblog\node_modules\connect-mongo</span><br><span class="line">\src\index.js:100</span><br><span class="line">                throw new Error(&#x27;Connection strategy not found&#x27;);</span><br><span class="line">                ^</span><br><span class="line"></span><br><span class="line">Error: Connection strategy not found</span><br><span class="line">    at MongoStore (E:\sync_mypc\sync_mypc\languages\js\nodejs\blog\mblog\node_mo</span><br><span class="line">dules\connect-mongo\src\index.js:100:23)</span><br><span class="line">    at HTTPServer.&lt;anonymous&gt; (E:\sync_mypc\sync_mypc\languages\js\nodejs\blog\m</span><br><span class="line">blog\app.js:23:12)</span><br><span class="line">    at HTTPServer.app.configure (E:\sync_mypc\sync_mypc\languages\js\nodejs\blog</span><br><span class="line">\mblog\node_modules\express\lib\http.js:542:61)</span><br><span class="line">    at Object.&lt;anonymous&gt; (E:\sync_mypc\sync_mypc\languages\js\nodejs\blog\mblog</span><br><span class="line">\app.js:15:5)</span><br><span class="line">    at Module._compile (module.js:425:26)</span><br><span class="line">    at Object.Module._extensions..js (module.js:432:10)</span><br><span class="line">    at Module.load (module.js:356:32)</span><br><span class="line">    at Function.Module._load (module.js:311:12)</span><br><span class="line">    at Function.Module.runMain (module.js:457:10)</span><br><span class="line">    at startup (node.js:136:18)</span><br><span class="line">    at node.js:972:3</span><br></pre></td></tr></table></figure>
+<p>问题解决<br>在<a target="_blank" rel="noopener" href="https://cnodejs.org/">cnode</a>(已用github邮箱注册)上看到了一篇同样的<a target="_blank" rel="noopener" href="https://cnodejs.org/topic/567a1120222744630726b244#567bab8c10b0249d07105d9c">问题</a>，答案中解决了。<br>解决方式</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install connect-mongo@0.8.2 --save</span><br></pre></td></tr></table></figure>
+<p>独立的模块更新可能影响整体功能。在同一个时期要用当时的版本。</p>
+<p>定义的<code>db.js</code>中<code>DEFAULT_PORT</code>没有定义</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">TypeError: Cannot read property &#x27;DEFAULT_PORT&#x27; of undefined</span><br><span class="line">    at Object.&lt;anonymous&gt; (E:\sync_mypc\sync_mypc\languages\js\nodejs\blog\mblog\models\db.js:7:74)</span><br><span class="line">    at Module._compile (module.js:425:26)</span><br><span class="line">    at Object.Module._extensions..js (module.js:432:10)</span><br><span class="line">    at Module.load (module.js:356:32)</span><br><span class="line">    at Function.Module._load (module.js:311:12)</span><br><span class="line">    at Module.require (module.js:366:17)</span><br><span class="line">    at require (module.js:385:17)</span><br><span class="line">    at Object.&lt;anonymous&gt; (E:\sync_mypc\sync_mypc\languages\js\nodejs\blog\mblog\models\user.js:1:77)</span><br><span class="line">    at Module._compile (module.js:425:26)</span><br><span class="line">    at Object.Module._extensions..js (module.js:432:10)</span><br><span class="line">Program node app.js exited with code 1</span><br></pre></td></tr></table></figure>
+<p>问题解决</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DEFAULT_PORT   -----    27017</span><br></pre></td></tr></table></figure>
+
+<p>到今天下午，基本完成第五章的学习。程序能够正常运行，但是还有许多细节不是很清楚，例如<code>mongodb</code>的使用，之间的映射关系自己也还要梳理一遍。</p>
+<p>代码稍后会在<a target="_blank" rel="noopener" href="https://github.com/linking123/nodejs_guard"><code>GitHub</code></a>和<a href=""><code>oscGit</code></a>上双备份。</p>
+<h1 id="《Node-js实战》"><a href="#《Node-js实战》" class="headerlink" title="《Node.js实战》  "></a>《Node.js实战》  </h1><h2 id="图书编号：TP312JA425第一部分-基础篇"><a href="#图书编号：TP312JA425第一部分-基础篇" class="headerlink" title="图书编号：TP312JA425第一部分 基础篇"></a>图书编号：TP312JA425<br>第一部分 基础篇</h2><h2 id="nodejs及JavaScript基础了解。第二部分-提高篇"><a href="#nodejs及JavaScript基础了解。第二部分-提高篇" class="headerlink" title="nodejs及JavaScript基础了解。第二部分 提高篇"></a>nodejs及JavaScript基础了解。<br>第二部分 提高篇</h2><p>相册服务器<br>模块<br>模板<br>2015&#x2F;12&#x2F;30 noon 17:09  library<br>稍后补上笔记并上传代码备份</p>
+<h2 id="第三部分-实战篇"><a href="#第三部分-实战篇" class="headerlink" title="第三部分 实战篇"></a>第三部分 实战篇</h2><p>###第七章使用express构建web应用<br>路由</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">app.get(&#x27;/&#x27;, function(req, res)&#123; &#125;);</span><br></pre></td></tr></table></figure>
+
+<p>URL路由函数一般格式</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">app.method(url_pattern, optional_functions, request_handler_function);</span><br></pre></td></tr></table></figure>
+<p>method: get, post, delete, put; all<br>简单的URL</p>
+<blockquote>
+<p>&#x2F;path&#x2F;to&#x2F;resources</p>
+</blockquote>
+<p>也支持正则</p>
+<blockquote>
+<p>&#x2F;user(s)?&#x2F;list<br>&#x2F;user&#x2F;*</p>
+</blockquote>
+<p>占位符(用<code>:</code>标记)从请求路由中提取指定值(除了<code>/</code>)，解析路由时将匹配到的占位符值保存到<code>req.params</code>对象中</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">app.get(&quot;/albums/:album_name.json&quot;, function(req, res)&#123;</span><br><span class="line">　　res.end(&quot;request &quot;+req.params.album_name);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>如上面请求&#x2F;albums&#x2F;linking.json,输出结果为:</p>
+<blockquote>
+<p>request linking</p>
+</blockquote>
+<p>模块化，<code>REST</code>风格的接口。</p>
+<blockquote>
+<p>将能够独立出来，以后会复用的模块分离成单独文件。<br>模块化增加了源代码可读性，结构更加清晰明了。</p>
+</blockquote>
+<p>中间件</p>
+<blockquote>
+<p>如<code>express</code>就建立在<code>connect</code>这个中间件。</p>
+</blockquote>
+<p>通过一下格式引用中间件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var middle_something = require(&#x27;middle_something&#x27;);</span><br><span class="line">app.use(middle_something()); </span><br></pre></td></tr></table></figure>
+<p>配置</p>
+<blockquote>
+<p>使用<code>configure</code>方法指定配置名称，在特定的配置环境下该方法提供的函数会被调用。未指定名称，则函数会被所有的配置环境调用，多个配置名称可以用逗号隔开。 </p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">app.configure(function()&#123;   //全部适用</span><br><span class="line">　app.use(express.bodyParser());</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">app.configure(&#x27;dev&#x27;, function()&#123;  //指定了开发环境适用</span><br><span class="line">　app.use(expresss.logger(&#x27;dev&#x27;));</span><br><span class="line">&#125;);</span><br><span class="line">app.configure(&#x27;production&#x27;, &#x27;staging&#x27;, function()&#123;  //多名称</span><br><span class="line">　app.use(express.logger());</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>Mac和UNIX电脑中shell命令</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">NODE_ENV=production node program.js</span><br></pre></td></tr></table></figure>
+<p>Windows命令</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">set NODE_ENV=production</span><br><span class="line">node program.js</span><br></pre></td></tr></table></figure>
+<p>中间件执行过程中有一个顺序问题，注意<code>re</code>s.end&#96;的位置，它会关闭响应。</p>
+<p>静态文件处理</p>
+<blockquote>
+<p><code>express</code>通过<code>connect</code>提供了<code>static</code>中间件，将存放静态文件的根目录路径名赋给中间件创建函数即可</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">app.use(express.static(&quot;/secure/static_site_files&quot;));</span><br></pre></td></tr></table></figure>
+
+<p><code>bodyParser</code>,<code>cookieParser</code>,<code>session</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">var app = express()</span><br><span class="line">    .use(express.logger(&#x27;dev&#x27;))</span><br><span class="line">     // move this to AFTER the next use() and see what happens!</span><br><span class="line">    .use(express.bodyParser())</span><br><span class="line">    .use(function(req, res)&#123;</span><br><span class="line">        console.log(req.body);</span><br><span class="line">        res.end(&#x27;want to update album name to &#x27;</span><br><span class="line">                + req.body.album.new_name + &quot;\n&quot;);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p><strong>编写应用过程中，检测和捕捉错误的代码量往往要大于正常操作的代码量，这才是良好的代码风格。</strong></p>
+<blockquote>
+<p>也许我单纯的以为代码只要能实现直接的功能就行了，是太浅薄的理解。程序中大部分时间都在跟<code>bug</code>作斗争，良好的代码风格能够节省大量的时间，快速定位错误所在。</p>
+</blockquote>
+<h2 id="第四部分-进阶篇"><a href="#第四部分-进阶篇" class="headerlink" title="第四部分 进阶篇"></a>第四部分 进阶篇</h2>
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">nodejs</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/cs//" class="article-tag-list-link color3">cs</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2016/01/05/nodejs%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-多pc同步测试" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1975,11 +2219,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">HTML5</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">JavaScriptCore</a>
+                <a href="javascript:void(0)" class="js-tag color1">Nginx</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1987,15 +2227,19 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Oracle</a>
+                <a href="javascript:void(0)" class="js-tag color1">HTML5</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">ListView</a>
+                <a href="javascript:void(0)" class="js-tag color1">hmtl5</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">GridView</a>
+                <a href="javascript:void(0)" class="js-tag color4">sse</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">JavaScriptCore</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2011,15 +2255,19 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Oracle</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">ListView</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">GridView</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Mac Office</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">hmtl5</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">sse</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2047,7 +2295,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">cookie</a>
+                <a href="javascript:void(0)" class="js-tag color1">cocoa</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2059,7 +2307,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">cocoa</a>
+                <a href="javascript:void(0)" class="js-tag color2">cookie</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2068,10 +2316,6 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">oracle</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Nginx</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2087,15 +2331,15 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">bundle</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">iOS</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">https</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">bundle</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2119,11 +2363,19 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">java</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">效率</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">快捷键</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">nodejs</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2147,23 +2399,15 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">java</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">showdoc</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">disk</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">nodejs</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">D.Wade</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">disk</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2172,6 +2416,14 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Python</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">thoughts</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">duoduo</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2203,15 +2455,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">加班</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Android onclick事件监听</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">ntp</a>
+                <a href="javascript:void(0)" class="js-tag color3">加班</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2220,6 +2468,10 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">手机品牌匹配</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">ntp</a>
               </li>
              
               <li class="article-tag-list-item">

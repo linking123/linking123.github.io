@@ -201,6 +201,105 @@
             
 
   
+    <article id="post-Adapter初识" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2016/12/04/Adapter%E5%88%9D%E8%AF%86/" target="_blank">Adapter初识</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2016/12/04/Adapter%E5%88%9D%E8%AF%86/" class="archive-article-date">
+        <time datetime="2016-12-04T14:31:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-12-04</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h2 id="Adapter-类控件"><a href="#Adapter-类控件" class="headerlink" title="Adapter 类控件"></a>Adapter 类控件</h2><h3 id="Adapter基础讲解"><a href="#Adapter基础讲解" class="headerlink" title="Adapter基础讲解"></a>Adapter基础讲解</h3><p>概念：帮助填充数据的中间桥梁，将数据以合适的形式显示到view上，供用户查看。</p>
+<p><img src="http://7xjqvu.com1.z0.glb.clouddn.com/15-9-1/77919389.jpg"></p>
+<p>1.ArrayAdapter:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">//data to show</span><br><span class="line">//String[] datas = &#123;&quot;神奇&quot;, &quot;没事吗&quot;, &quot;不会吧&quot;&#125;;</span><br><span class="line">//also can setdata like this</span><br><span class="line">List&lt;String&gt; datas = new ArrayList&lt;String&gt;();</span><br><span class="line">datas.add(&quot;hehe1&quot;);</span><br><span class="line">datas.add(&quot;hehe2&quot;);</span><br><span class="line">datas.add(&quot;hehe3&quot;);</span><br><span class="line">//create ArrayAdapter</span><br><span class="line">ArrayAdapter&lt;String&gt; adapter = new ArrayAdapter&lt;String&gt;(this, android.R.layout.simple_expandable_list_item_1, datas);</span><br><span class="line">//listview set adapter</span><br><span class="line">ListView lv = (ListView)findViewById(R.id.listview_adapter1);</span><br><span class="line">lv.setAdapter(adapter);</span><br></pre></td></tr></table></figure>
+<p>ArrayAdapter第二参数：<br><img src="http://ohigs9xaw.bkt.clouddn.com/ArrayAdapterSecondParam.png" alt="qiniu截借的别人的blog"></p>
+<p>2.SimpleAdapter<br>常用，listview，item，<code>List&lt;Map&lt;String,Object&gt;&gt; list = new ArrayList&lt;Map&lt;String,Object&gt;&gt;()</code>;<br>from是塞的数据list中的标识string[]{},to是item中的id的int[]{R.id.xx}数组,resource是item布局,context几个adapter参数；<br>add at 20161201</p>
+<h3 id="ListView简单使用"><a href="#ListView简单使用" class="headerlink" title="ListView简单使用"></a>ListView简单使用</h3><p>1.自定义BaseAdapter,绑定数据<br>展示样式在item中设计，适应adapter中做数据的set工作，只做一个适配器，而具体的数据在mainactivity中插入，一般会用到list，以及范型，<code>list&lt;entrity&gt;</code>,实体类中写属性的存取方法，最后给listview设置适配器，listview.setAdapter(mAdapter)。下面是代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">//itme_layout</span><br><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span><br><span class="line">&lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;</span><br><span class="line">    android:layout_width=&quot;match_parent&quot;</span><br><span class="line">    android:layout_height=&quot;match_parent&quot;</span><br><span class="line">    android:orientation=&quot;horizontal&quot;</span><br><span class="line">    android:padding=&quot;10dp&quot;&gt;</span><br><span class="line"></span><br><span class="line">    &lt;ImageView</span><br><span class="line">        android:id=&quot;@+id/img&quot;</span><br><span class="line">        android:layout_width=&quot;wrap_content&quot;</span><br><span class="line">        android:layout_height=&quot;wrap_content&quot;</span><br><span class="line">        android:src=&quot;@mipmap/ic_launcher&quot; /&gt;</span><br><span class="line"></span><br><span class="line">    &lt;LinearLayout</span><br><span class="line">        android:layout_width=&quot;wrap_content&quot;</span><br><span class="line">        android:layout_height=&quot;wrap_content&quot;</span><br><span class="line">        android:layout_marginLeft=&quot;10dp&quot;</span><br><span class="line">        android:orientation=&quot;vertical&quot;</span><br><span class="line">        android:padding=&quot;5dp&quot;&gt;</span><br><span class="line"></span><br><span class="line">        &lt;TextView</span><br><span class="line">            android:id=&quot;@+id/tv1&quot;</span><br><span class="line">            android:layout_width=&quot;wrap_content&quot;</span><br><span class="line">            android:layout_height=&quot;wrap_content&quot;</span><br><span class="line">            android:text=&quot;wenzi1&quot; /&gt;</span><br><span class="line"></span><br><span class="line">        &lt;TextView</span><br><span class="line">            android:id=&quot;@+id/tv2&quot;</span><br><span class="line">            android:layout_width=&quot;wrap_content&quot;</span><br><span class="line">            android:layout_height=&quot;wrap_content&quot;</span><br><span class="line">            android:layout_marginTop=&quot;3dp&quot;</span><br><span class="line">            android:text=&quot;wenzi1&quot; /&gt;</span><br><span class="line">    &lt;/LinearLayout&gt;</span><br><span class="line">&lt;/LinearLayout&gt;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">#entity</span><br><span class="line">package com.example.linking.adapters.Model;</span><br><span class="line">/**</span><br><span class="line"> * Created by linking on 16/12/4.</span><br><span class="line"> */</span><br><span class="line">public class Animals &#123;</span><br><span class="line">    private String aName;</span><br><span class="line">    private String aSpeak;</span><br><span class="line">    private int aIcon;</span><br><span class="line">    public Animals(String aName, String aSpeak, int aIcon) &#123;</span><br><span class="line">        this.aName = aName;</span><br><span class="line">        this.aSpeak = aSpeak;</span><br><span class="line">        this.aIcon = aIcon;</span><br><span class="line">    &#125;</span><br><span class="line">    public Animals() &#123;</span><br><span class="line">    &#125;</span><br><span class="line">    public String getaName() &#123;</span><br><span class="line">        return aName;</span><br><span class="line">    &#125;</span><br><span class="line">    public void setaName(String aName) &#123;</span><br><span class="line">        this.aName = aName;</span><br><span class="line">    &#125;</span><br><span class="line">    public String getaSpeak() &#123;</span><br><span class="line">        return aSpeak;</span><br><span class="line">    &#125;</span><br><span class="line">    public void setaSpeak(String aSpeak) &#123;</span><br><span class="line">        this.aSpeak = aSpeak;</span><br><span class="line">    &#125;</span><br><span class="line">    public int getaIcon() &#123;</span><br><span class="line">        return aIcon;</span><br><span class="line">    &#125;</span><br><span class="line">    public void setaIcon(int aIcon) &#123;</span><br><span class="line">        this.aIcon = aIcon;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line">##AnimalAdapter</span><br><span class="line">package com.example.linking.adapters.Adapter;</span><br><span class="line"></span><br><span class="line">import android.content.Context;</span><br><span class="line">import android.view.LayoutInflater;</span><br><span class="line">import android.view.View;</span><br><span class="line">import android.view.ViewGroup;</span><br><span class="line">import android.widget.BaseAdapter;</span><br><span class="line">import android.widget.ImageView;</span><br><span class="line">import android.widget.TextView;</span><br><span class="line"></span><br><span class="line">import com.example.linking.adapters.Model.Animals;</span><br><span class="line">import com.example.linking.adapters.R;</span><br><span class="line"></span><br><span class="line">import java.util.LinkedList;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * Created by linking on 16/12/4.</span><br><span class="line"> */</span><br><span class="line"></span><br><span class="line">public class AnimalAdapter extends BaseAdapter &#123;</span><br><span class="line"></span><br><span class="line">    private LinkedList&lt;Animals&gt; mData;</span><br><span class="line">    private Context mContext;</span><br><span class="line"></span><br><span class="line">    public AnimalAdapter(LinkedList&lt;Animals&gt; mData, Context mContext) &#123;</span><br><span class="line">        this.mData = mData;</span><br><span class="line">        this.mContext = mContext;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public int getCount() &#123;</span><br><span class="line">        return mData.size();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public Object getItem(int position) &#123;</span><br><span class="line">        return null;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public long getItemId(int position) &#123;</span><br><span class="line">        return position;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public View getView(int position, View view, ViewGroup viewGroup) &#123;</span><br><span class="line">        view = LayoutInflater.from(mContext).inflate(R.layout.item_listview_baseadapter,viewGroup,false);</span><br><span class="line">        ImageView img_icon = (ImageView) view.findViewById(R.id.img);</span><br><span class="line">        TextView tv1 = (TextView) view.findViewById(R.id.tv1);</span><br><span class="line">        TextView tv2 = (TextView) view.findViewById(R.id.tv2);</span><br><span class="line">        img_icon.setBackgroundResource(mData.get(position).getaIcon());</span><br><span class="line">        tv1.setText(mData.get(position).getaName());</span><br><span class="line">        tv2.setText(mData.get(position).getaSpeak());</span><br><span class="line">        return view;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">#Activity</span><br><span class="line">package com.example.linking.adapters.Activity;</span><br><span class="line"></span><br><span class="line">import android.content.Context;</span><br><span class="line">import android.support.v7.app.AppCompatActivity;</span><br><span class="line">import android.os.Bundle;</span><br><span class="line">import android.widget.ListView;</span><br><span class="line"></span><br><span class="line">import com.example.linking.adapters.Adapter.AnimalAdapter;</span><br><span class="line">import com.example.linking.adapters.Model.Animals;</span><br><span class="line">import com.example.linking.adapters.R;</span><br><span class="line"></span><br><span class="line">import java.util.LinkedList;</span><br><span class="line">import java.util.List;</span><br><span class="line"></span><br><span class="line">public class ListViewBaseAdapterActivity extends AppCompatActivity &#123;</span><br><span class="line"></span><br><span class="line">    private List&lt;Animals&gt; mData = null;</span><br><span class="line">    private Context mContext;</span><br><span class="line">    private AnimalAdapter mAdapter = null;</span><br><span class="line">    private ListView list_animal;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    protected void onCreate(Bundle savedInstanceState) &#123;</span><br><span class="line">        super.onCreate(savedInstanceState);</span><br><span class="line">        setContentView(R.layout.activity_list_view_base_adapter);</span><br><span class="line"></span><br><span class="line">        mContext = ListViewBaseAdapterActivity.this;</span><br><span class="line">        list_animal = (ListView) findViewById(R.id.listview1);</span><br><span class="line">        mData = new LinkedList&lt;Animals&gt;();</span><br><span class="line">        mData.add(new Animals(&quot;狗说&quot;,&quot;你是够吗&quot;,R.mipmap.ic_launcher));</span><br><span class="line">        mData.add(new Animals(&quot;mao说&quot;,&quot;你是mao吗&quot;,R.mipmap.ic_launcher));</span><br><span class="line">        mData.add(new Animals(&quot;hooo说&quot;,&quot;你是hooo吗&quot;,R.mipmap.ic_launcher));</span><br><span class="line">        mAdapter = new AnimalAdapter((LinkedList &lt; Animals &gt; )mData,mContext);</span><br><span class="line">        list_animal.setAdapter(mAdapter);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>2.其他设置<br>2.1表头表尾设置分割线<br>只能在Java中写代码进行设置了，可供我们调用的方法如下：</p>
+<ul>
+<li>addHeaderView(View v)：添加headView(表头),括号中的参数是一个View对象</li>
+<li>addFooterView(View v)：添加footerView(表尾)，括号中的参数是一个View对象</li>
+<li>addHeaderView(headView, null, false)：和前面的区别：设置Header是否可以被选中</li>
+<li>addFooterView(View,view,false)：同上</li>
+</ul>
+<p>对了，使用这个addHeaderView方法必须放在<strong>listview.setAdapter</strong><span style="color:red">前面</span>，否则会报错。<br><strong>注意问题</strong>：<br>    添加表头表尾后，我们发现positon是从表头开始算的，就是你添加的第一个数据本来的postion是<br>0，但是此时却变成了1，因为表头也算！！</p>
+<p>2.2列表从底部开始显示：stackFromBottom&#x3D;”true”<br>2.3设置点击颜色cacheColorHint<br>2.4隐藏滑动条</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">android:scrollbars=”none” </span><br><span class="line">or</span><br><span class="line">setVerticalScrollBarEnabled(true); </span><br></pre></td></tr></table></figure>
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2016/12/04/Adapter%E5%88%9D%E8%AF%86/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-安卓onClick事件监听的实现方式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1416,200 +1515,6 @@
 
 
   
-    <article id="post-模块化-MVC" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2016/03/13/%E6%A8%A1%E5%9D%97%E5%8C%96-MVC/" target="_blank">模块化/MVC</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2016/03/13/%E6%A8%A1%E5%9D%97%E5%8C%96-MVC/" class="archive-article-date">
-        <time datetime="2016-03-13T14:28:37.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-03-13</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <blockquote>
-<p>下午看了一些关于模块化和MVC的文章，从各个文章中摘取了一些知识点，记录下来。想到好久没更新博客，权当充数。<br>接下来三天面试GIS开发和游戏开发，希望这三个公司有一个是我的归宿。</p>
-</blockquote>
-<h1 id="模块化"><a href="#模块化" class="headerlink" title="模块化"></a>模块化</h1><p>关键词：<br><strong>函数集合</strong>：污染全局变量<br><strong>对象</strong>：可修改内部变量，不安全<br><strong>立即执行函数</strong>：匿名函数，闭包，私有成员<br><strong>内存泄露</strong>：引用未释放，内存被占用<br><strong>高内聚低耦合</strong>：代码拆分 </p>
-<p>别人的模块拿来即用。标准化的接口。相互独立，功能完整。</p>
-<h2 id="模块化的价值"><a href="#模块化的价值" class="headerlink" title="模块化的价值"></a>模块化的价值</h2><ol>
-<li>代码服用</li>
-<li>提升可维护性</li>
-</ol>
-<ul>
-<li>公共模块通常用于促进<strong>代码复用</strong></li>
-<li>业务模块通常用于提升<strong>可维护性</strong></li>
-</ul>
-<h2 id="前端模块化的难点"><a href="#前端模块化的难点" class="headerlink" title="前端模块化的难点"></a>前端模块化的难点</h2><ol>
-<li>资源复杂</li>
-<li>标准缺位</li>
-<li>天生异步</li>
-</ol>
-<p>CommonJS</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var math = require(&#x27;math&#x27;);</span><br><span class="line">math.add(2,3);</span><br></pre></td></tr></table></figure>
-<p>AMD</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">require([&#x27;math&#x27;], function()&#123;</span><br><span class="line">    math.add(2,3)</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<p>前者属于”同步”，后者属于”异步”。浏览器不需要等待js从服务器下载完，浏览器可能假死。</p>
-<p>遗憾的是JavaScript在设计时定位原因，没有提供类似的功能，开发者需要模拟出类似的功能，来隔离、组织复杂的JavaScript代码，我们称为模块化。</p>
-<p>一个模块就是实现特定功能的文件，有了模块，我们就可以更方便地使用别人的代码，想要什么功能，就加载什么模块。模块开发需要遵循一定的规范，各行其是就都乱套了。</p>
-<h2 id="AMD与CMD区别"><a href="#AMD与CMD区别" class="headerlink" title="AMD与CMD区别"></a>AMD与CMD区别</h2><blockquote>
-<p>最明显的区别就是在模块定义时对依赖的处理不同</p>
-</blockquote>
-<blockquote>
-<p>AMD推崇依赖前置，在定义模块的时候就要声明其依赖的模块<br>CMD推崇就近依赖，只有在用到某个模块的时候再去require<br>这种区别各有优劣，只是语法上的差距，而且requireJS和SeaJS都支持对方的写法</p>
-</blockquote>
-<blockquote>
-<p>AMD和CMD最大的区别是对依赖模块的执行时机处理不同，注意不是加载的时机或者方式不同</p>
-</blockquote>
-<blockquote>
-<p>很多人说requireJS是异步加载模块，SeaJS是同步加载模块，这么理解实际上是不准确的，其实加载模块都是异步的，只不过AMD依赖前置，js可以方便知道依赖模块是谁，立即加载，而CMD就近依赖，需要使用把模块变为字符串解析一遍才知道依赖了那些模块，这也是很多人诟病CMD的一点，牺牲性能来带来开发的便利性，实际上解析模块用的时间短到可以忽略</p>
-</blockquote>
-<blockquote>
-<p>为什么我们说两个的区别是依赖模块执行时机不同，为什么很多人认为ADM是异步的，CMD是同步的（除了名字的原因。。。）</p>
-</blockquote>
-<blockquote>
-<p>同样都是异步加载模块，AMD在加载模块完成后就会执行改模块，所有模块都加载执行完后会进入require的回调函数，执行主逻辑，这样的效果就是依赖模块的执行顺序和书写顺序不一定一致，看网络速度，哪个先下载下来，哪个先执行，但是主逻辑一定在所有依赖加载完成后才执行</p>
-</blockquote>
-<blockquote>
-<p>CMD加载完某个依赖模块后并不执行，只是下载而已，在所有依赖模块加载完成后进入主逻辑，遇到require语句的时候才执行对应的模块，这样模块的执行顺序和书写顺序是完全一致的</p>
-</blockquote>
-<blockquote>
-<p>这也是很多人说AMD用户体验好，因为没有延迟，依赖模块提前执行了，CMD性能好，因为只有用户需要的时候才执行的原因</p>
-</blockquote>
-<h1 id="MVC"><a href="#MVC" class="headerlink" title="MVC"></a>MVC</h1><p><span style="color:red">MVC 不是一种技术，仅是一种理念。</span></p>
-<h2 id="前端MVC"><a href="#前端MVC" class="headerlink" title="前端MVC"></a>前端MVC</h2><table>
-<thead>
-<tr>
-<th>简写</th>
-<th>全称</th>
-<th>含义</th>
-<th>前端表现</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>M</td>
-<td>module</td>
-<td>数据请求和数据操作。</td>
-<td>ajax从服务器拉取数据</td>
-</tr>
-<tr>
-<td>V</td>
-<td>view</td>
-<td>视图操作和改变</td>
-<td>HTML&#x2F;CSS</td>
-</tr>
-<tr>
-<td>C</td>
-<td>controller</td>
-<td>事件绑定，转发view用户请求到module，业务逻辑</td>
-<td>js</td>
-</tr>
-</tbody></table>
-<h2 id="JS实现基础MVC模型"><a href="#JS实现基础MVC模型" class="headerlink" title="JS实现基础MVC模型"></a>JS实现基础MVC模型</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">/** 模擬 Model, View, Controller */</span><br><span class="line">var M = &#123;&#125;, V = &#123;&#125;, C = &#123;&#125;;</span><br><span class="line"></span><br><span class="line">/** Model 負責存放資料 */</span><br><span class="line">M.data = &quot;hello world&quot;;</span><br><span class="line"></span><br><span class="line">/** View 負責將資料輸出到螢幕上 */</span><br><span class="line">V.render = function (M) &#123; alert(M.data); &#125;</span><br><span class="line"></span><br><span class="line">/** Controller 作為一個 M 和 V 的橋樑 */</span><br><span class="line">C.handleOnload = function () &#123; V.render(M); &#125;</span><br><span class="line"></span><br><span class="line">/** 在網頁讀取的時候呼叫 Controller */</span><br><span class="line">window.onload = C.handleOnLoad;</span><br></pre></td></tr></table></figure>
-
-<h2 id="图示MVC"><a href="#图示MVC" class="headerlink" title="图示MVC"></a>图示MVC</h2><p><img src="http://image.beekka.com/blog/2015/bg2015020105.png"></p>
-<blockquote>
-<ol>
-<li>View 传送指令到 Controller</li>
-<li>Controller 完成业务逻辑后，要求 Model 改变状态</li>
-<li>Model 将新的数据发送到 View，用户得到反馈</li>
-</ol>
-</blockquote>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
-<li><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/MVC">Wikipedia</a></li>
-<li>阮一峰的博客：<br>　　<a target="_blank" rel="noopener" href="http://www.ruanyifeng.com/blog/2012/10/javascript_module.html">Javascript模块化编程</a><br>　　<a target="_blank" rel="noopener" href="http://www.ruanyifeng.com/blog/2015/02/mvcmvp_mvvm.html">MVC、MVP和MVVM</a><br>　　<a target="_blank" rel="noopener" href="http://www.ruanyifeng.com/blog/2007/11/mvc.html">谈谈MVC模式</a></li>
-<li><a target="_blank" rel="noopener" href="http://www.cnblogs.com/dolphinX/p/4381855.html">博客园阿里前端</a></li>
-<li><a target="_blank" rel="noopener" href="https://github.com/xufei/blog/issues/19">2015前端组件化框架之路</a></li>
-</ol>
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">模块化</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">MVC</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/cs//" class="article-tag-list-link color3">cs</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2016/03/13/%E6%A8%A1%E5%9D%97%E5%8C%96-MVC/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/9/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><span class="page-number current">10</span><a class="page-number" href="/page/11/">11</a><a class="page-number" href="/page/12/">12</a><a class="extend next" rel="next" href="/page/11/">Next &raquo;</a>
@@ -1779,11 +1684,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">HTML5</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">JavaScriptCore</a>
+                <a href="javascript:void(0)" class="js-tag color1">Nginx</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1791,15 +1692,19 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Oracle</a>
+                <a href="javascript:void(0)" class="js-tag color1">HTML5</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">ListView</a>
+                <a href="javascript:void(0)" class="js-tag color1">hmtl5</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">GridView</a>
+                <a href="javascript:void(0)" class="js-tag color4">sse</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">JavaScriptCore</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1815,15 +1720,19 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Oracle</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">ListView</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">GridView</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Mac Office</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">hmtl5</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">sse</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1851,7 +1760,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">cookie</a>
+                <a href="javascript:void(0)" class="js-tag color1">cocoa</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1863,7 +1772,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">cocoa</a>
+                <a href="javascript:void(0)" class="js-tag color2">cookie</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1872,10 +1781,6 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">oracle</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Nginx</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1891,15 +1796,15 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">bundle</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">iOS</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">https</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">bundle</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1923,11 +1828,19 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">java</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">效率</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">快捷键</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">nodejs</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1951,23 +1864,15 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">java</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">showdoc</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">disk</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">nodejs</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">D.Wade</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">disk</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1976,6 +1881,14 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Python</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">thoughts</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">duoduo</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2007,15 +1920,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">加班</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Android onclick事件监听</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">ntp</a>
+                <a href="javascript:void(0)" class="js-tag color3">加班</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2024,6 +1933,10 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">手机品牌匹配</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">ntp</a>
               </li>
              
               <li class="article-tag-list-item">
