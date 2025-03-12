@@ -201,7 +201,7 @@
             
 
   
-    <article id="post-docker-container-network-connect-with-host-and-another-local-network-host-with-macvlan" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-docker-container-network-connect-with-host-and-another-local-area-network-host-with-macvlan" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
@@ -209,7 +209,7 @@
   
     <h1 itemprop="name">
 	
-	  <a class="article-title" href="/2025/01/11/docker-container-network-connect-with-host-and-another-local-network-host-with-macvlan/" target="_blank">docker container network connect with host and another local network host with macvlan</a>
+	  <a class="article-title" href="/2025/01/11/docker-container-network-connect-with-host-and-another-local-area-network-host-with-macvlan/" target="_blank">docker container network connect with host and another local area network host with macvlan</a>
   
     </h1>
   
@@ -217,7 +217,7 @@
 
   
   
-<a href="/2025/01/11/docker-container-network-connect-with-host-and-another-local-network-host-with-macvlan/" class="archive-article-date">
+<a href="/2025/01/11/docker-container-network-connect-with-host-and-another-local-area-network-host-with-macvlan/" class="archive-article-date">
         <time datetime="2025-01-11T13:55:46.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2025-01-11</time>
 </a>
 
@@ -238,9 +238,15 @@
 <li>网关：<code>172.21.2.1</code></li>
 <li>容器、宿主机、局域网其他设备互通</li>
 </ul>
-<h3 id="2-2-Macvlan-网络创建命令"><a href="#2-2-Macvlan-网络创建命令" class="headerlink" title="2.2 Macvlan 网络创建命令"></a>2.2 Macvlan 网络创建命令</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">docker network create -d macvlan \</span><br><span class="line">  --subnet=172.21.2.0/24 \</span><br><span class="line">  --gateway=172.21.2.1 \</span><br><span class="line">  -o parent=enp61s0f0 \</span><br><span class="line">  my-macvlan</span><br></pre></td></tr></table></figure>
+<p>Docker Networking Principles:</p>
+<ul>
+<li>Bridge Network: Default local communication on the same Docker host.</li>
+<li>Host Network: Container shares host’s network namespace.</li>
+<li>Overlay Network: Cross-host communication in Swarm or Kubernetes.</li>
+<li>Macvlan Network: Containers appear as physical devices on the network.</li>
+</ul>
     
-    <a class="article-more-a" href="/2025/01/11/docker-container-network-connect-with-host-and-another-local-network-host-with-macvlan/#more">more >></a>
+    <a class="article-more-a" href="/2025/01/11/docker-container-network-connect-with-host-and-another-local-area-network-host-with-macvlan/#more">more >></a>
     
     
 
@@ -286,7 +292,7 @@
 
     
     <p class="article-more-link">
-      <a class="article-more-a" href="/2025/01/11/docker-container-network-connect-with-host-and-another-local-network-host-with-macvlan/">展开全文 >></a>
+      <a class="article-more-a" href="/2025/01/11/docker-container-network-connect-with-host-and-another-local-area-network-host-with-macvlan/">展开全文 >></a>
     </p>
     
 

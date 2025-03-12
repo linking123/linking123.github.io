@@ -6,19 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://linking.fun">
-  <title>docker container network connect with host and another local network host with macvlan | Linking&#39;s blog</title>
+  <title>docker container network connect with host and another local area network host with macvlan | Linking&#39;s blog</title>
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
   <meta name="description" content="基于 Docker 的 Macvlan 网络容器管理完整解决方案一、背景与目标在分布式系统、实验平台等场景中，往往需要动态批量创建容器，并要求容器能与局域网服务器、宿主机实现双向通信。为了满足该需求，我们采用 Docker Macvlan 网络方案，结合两种容器批量创建方法（Docker Compose 和 Docker SDK for Python &#x2F; docker-py），实现灵活的">
 <meta property="og:type" content="article">
-<meta property="og:title" content="docker container network connect with host and another local network host with macvlan">
-<meta property="og:url" content="https://linking.fun/2025/01/11/docker-container-network-connect-with-host-and-another-local-network-host-with-macvlan/index.html">
+<meta property="og:title" content="docker container network connect with host and another local area network host with macvlan">
+<meta property="og:url" content="https://linking.fun/2025/01/11/docker-container-network-connect-with-host-and-another-local-area-network-host-with-macvlan/index.html">
 <meta property="og:site_name" content="Linking&#39;s blog">
 <meta property="og:description" content="基于 Docker 的 Macvlan 网络容器管理完整解决方案一、背景与目标在分布式系统、实验平台等场景中，往往需要动态批量创建容器，并要求容器能与局域网服务器、宿主机实现双向通信。为了满足该需求，我们采用 Docker Macvlan 网络方案，结合两种容器批量创建方法（Docker Compose 和 Docker SDK for Python &#x2F; docker-py），实现灵活的">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2025-01-11T13:55:46.000Z">
-<meta property="article:modified_time" content="2025-03-11T13:56:57.816Z">
+<meta property="article:modified_time" content="2025-03-12T12:21:02.320Z">
 <meta property="article:author" content="Linking">
 <meta property="article:tag" content="network">
 <meta property="article:tag" content="container">
@@ -201,14 +201,14 @@
               class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-docker-container-network-connect-with-host-and-another-local-network-host-with-macvlan" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-docker-container-network-connect-with-host-and-another-local-area-network-host-with-macvlan" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
   
   
     <h1 class="article-title" itemprop="name">
-      docker container network connect with host and another local network host with macvlan
+      docker container network connect with host and another local area network host with macvlan
     </h1>
   
 
@@ -220,7 +220,7 @@
               <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
         </span>
 
-<a href="/2025/01/11/docker-container-network-connect-with-host-and-another-local-network-host-with-macvlan/" class="archive-article-date">
+<a href="/2025/01/11/docker-container-network-connect-with-host-and-another-local-area-network-host-with-macvlan/" class="archive-article-date">
         <time datetime="2025-01-11T13:55:46.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2025-01-11</time>
 </a>
 
@@ -234,7 +234,7 @@
       <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
       <i class="icon-statistics"></i>
       <span class="post-meta-item-text"> 字数统计:</span>
-      <span class="post-count">1.9k字</span>
+      <span class="post-count">2k字</span>
     </span>
   </span>
 
@@ -262,11 +262,27 @@
 <li>网关：<code>172.21.2.1</code></li>
 <li>容器、宿主机、局域网其他设备互通</li>
 </ul>
-<h3 id="2-2-Macvlan-网络创建命令"><a href="#2-2-Macvlan-网络创建命令" class="headerlink" title="2.2 Macvlan 网络创建命令"></a>2.2 Macvlan 网络创建命令</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">docker network create -d macvlan \</span><br><span class="line">  --subnet=172.21.2.0/24 \</span><br><span class="line">  --gateway=172.21.2.1 \</span><br><span class="line">  -o parent=enp61s0f0 \</span><br><span class="line">  my-macvlan</span><br></pre></td></tr></table></figure>
-
+<p>Docker Networking Principles:</p>
+<ul>
+<li>Bridge Network: Default local communication on the same Docker host.</li>
+<li>Host Network: Container shares host’s network namespace.</li>
+<li>Overlay Network: Cross-host communication in Swarm or Kubernetes.</li>
+<li>Macvlan Network: Containers appear as physical devices on the network.</li>
+</ul>
 <span id="more"></span>
 
-<h3 id="2-3-宿主机-macvlan-子接口配置"><a href="#2-3-宿主机-macvlan-子接口配置" class="headerlink" title="2.3 宿主机 macvlan 子接口配置"></a>2.3 宿主机 macvlan 子接口配置</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ip <span class="built_in">link</span> add enp61s0f0-macvlan0 <span class="built_in">link</span> enp61s0f0 <span class="built_in">type</span> macvlan mode bridge</span><br><span class="line">ip addr add 172.21.2.6/24 dev enp61s0f0-macvlan0</span><br><span class="line">ip <span class="built_in">link</span> <span class="built_in">set</span> enp61s0f0-macvlan0 up</span><br></pre></td></tr></table></figure>
+<h3 id="2-2-Macvlan-网络创建命令"><a href="#2-2-Macvlan-网络创建命令" class="headerlink" title="2.2 Macvlan 网络创建命令"></a>2.2 Macvlan 网络创建命令</h3><p>让容器直接接入局域网，获取局域网 IP，变成一个局域网中的“独立设备”。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">docker network create -d macvlan \</span><br><span class="line">  --subnet=172.21.2.0/24 \</span><br><span class="line">  --gateway=172.21.2.1 \</span><br><span class="line">  -o parent=enp61s0f0 \</span><br><span class="line">  my-macvlan</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>enp61s0f0: host physical network card</p>
+</blockquote>
+<h3 id="2-3-宿主机-macvlan-子接口配置"><a href="#2-3-宿主机-macvlan-子接口配置" class="headerlink" title="2.3 宿主机 macvlan 子接口配置"></a>2.3 宿主机 macvlan 子接口配置</h3><p>macvlan方案的缺点：</p>
+<ul>
+<li>容器与宿主机在 macvlan 网络内 不能直接通信，原因是 macvlan 会把容器和宿主机隔离，宿主机的网卡无法接收自己发出的 macvlan 流量。</li>
+<li>解决方案：给宿主机也创建 macvlan 子接口参与网络。</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ip <span class="built_in">link</span> add enp61s0f0-macvlan0 <span class="built_in">link</span> enp61s0f0 <span class="built_in">type</span> macvlan mode bridge</span><br><span class="line">ip addr add 172.21.2.6/24 dev enp61s0f0-macvlan0</span><br><span class="line">ip <span class="built_in">link</span> <span class="built_in">set</span> enp61s0f0-macvlan0 up</span><br></pre></td></tr></table></figure>
 
 <hr>
 <h2 id="三、两种容器批量管理方法"><a href="#三、两种容器批量管理方法" class="headerlink" title="三、两种容器批量管理方法"></a>三、两种容器批量管理方法</h2><h3 id="3-1-方法一：Docker-Compose-动态-YAML-文件"><a href="#3-1-方法一：Docker-Compose-动态-YAML-文件" class="headerlink" title="3.1 方法一：Docker Compose + 动态 YAML 文件"></a>3.1 方法一：Docker Compose + 动态 YAML 文件</h3><h4 id="实现原理"><a href="#实现原理" class="headerlink" title="实现原理"></a>实现原理</h4><ul>
@@ -396,7 +412,7 @@
         </li>
         <li>
           <strong>本文链接：</strong>
-          <a href="https://linking.fun/2025/01/11/docker-container-network-connect-with-host-and-another-local-network-host-with-macvlan/" title="docker container network connect with host and another local network host with macvlan" target="_blank">https://linking.fun/2025/01/11/docker-container-network-connect-with-host-and-another-local-network-host-with-macvlan/</a>
+          <a href="https://linking.fun/2025/01/11/docker-container-network-connect-with-host-and-another-local-area-network-host-with-macvlan/" title="docker container network connect with host and another local area network host with macvlan" target="_blank">https://linking.fun/2025/01/11/docker-container-network-connect-with-host-and-another-local-area-network-host-with-macvlan/</a>
         </li>
         
         <li>
@@ -493,7 +509,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-     <!-- <img src="//pan.baidu.com/share/qrcode?url=https://linking.fun/2025/01/11/docker-container-network-connect-with-host-and-another-local-network-host-with-macvlan/" alt="微信分享二维码"> -->
+     <!-- <img src="//pan.baidu.com/share/qrcode?url=https://linking.fun/2025/01/11/docker-container-network-connect-with-host-and-another-local-area-network-host-with-macvlan/" alt="微信分享二维码"> -->
     </div>
 </div>
 
