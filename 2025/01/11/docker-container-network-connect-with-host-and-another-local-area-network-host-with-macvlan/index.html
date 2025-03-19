@@ -18,7 +18,7 @@
 <meta property="og:description" content="基于 Docker 的 Macvlan 网络容器管理完整解决方案一、背景与目标在分布式系统、实验平台等场景中，往往需要动态批量创建容器，并要求容器能与局域网服务器、宿主机实现双向通信。为了满足该需求，我们采用 Docker Macvlan 网络方案，结合两种容器批量创建方法（Docker Compose 和 Docker SDK for Python &#x2F; docker-py），实现灵活的">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2025-01-11T13:55:46.000Z">
-<meta property="article:modified_time" content="2025-03-12T12:21:02.320Z">
+<meta property="article:modified_time" content="2025-03-19T01:17:28.519Z">
 <meta property="article:author" content="Linking">
 <meta property="article:tag" content="container">
 <meta property="article:tag" content="network">
@@ -262,13 +262,15 @@
 <li>网关：<code>172.21.2.1</code></li>
 <li>容器、宿主机、局域网其他设备互通</li>
 </ul>
-<p>Docker Networking Principles:</p>
+<p><a target="_blank" rel="noopener" href="https://docs.docker.com/engine/network/drivers/">Docker Networking Principles</a>:</p>
 <ul>
 <li>Bridge Network: Default local communication on the same Docker host.</li>
 <li>Host Network: Container shares host’s network namespace.</li>
 <li>Overlay Network: Cross-host communication in Swarm or Kubernetes.</li>
 <li>Macvlan Network: Containers appear as physical devices on the network.</li>
+<li>ipvlan: Give users total control over both IPv4 and IPv6 addressing.</li>
 </ul>
+<p>根据需求，测试了ipvlan和macvlan，最终只有macvlan通过测试。</p>
 <span id="more"></span>
 
 <h3 id="2-2-Macvlan-网络创建命令"><a href="#2-2-Macvlan-网络创建命令" class="headerlink" title="2.2 Macvlan 网络创建命令"></a>2.2 Macvlan 网络创建命令</h3><p>让容器直接接入局域网，获取局域网 IP，变成一个局域网中的“独立设备”。</p>
@@ -1118,6 +1120,10 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">running</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">mongodb</a>
               </li>
             
             <div class="clearfix"></div>

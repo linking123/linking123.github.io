@@ -201,6 +201,135 @@
             
 
   
+    <article id="post-git学习一" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2016/08/23/git%E5%AD%A6%E4%B9%A0%E4%B8%80/" target="_blank">git学习一</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2016/08/23/git%E5%AD%A6%E4%B9%A0%E4%B8%80/" class="archive-article-date">
+        <time datetime="2016-08-23T15:02:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-08-23</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <p>git 在克隆repository时选择分支为develop:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone http://xxxx.git --branch develop</span><br></pre></td></tr></table></figure>
+<p>查看所有分支:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch -a</span><br></pre></td></tr></table></figure>
+<p>分布式版本控制系统：</p>
+<blockquote>
+<ol>
+<li>多地备份，代码更安全</li>
+<li>小组多人协同开发</li>
+</ol>
+</blockquote>
+<p>git简史：</p>
+<blockquote>
+<p>Linus Torvalds<br>速度和数据量<br>非线性分支管理</p>
+</blockquote>
+<p>Git基础：</p>
+<blockquote>
+<ol>
+<li>git直接记录<strong>快照</strong>，而非差异比较(只关心文件数据的整体是否发生变化);其他版本管理系统在每个版本中记录着各个文件内容的具体差异</li>
+<li>近乎所有操作都是<strong>本地执行</strong></li>
+<li>时刻保持<strong>数据完整性</strong></li>
+<li>多数操作仅添加数据</li>
+<li>文件三种状态<br> 已提交-committed<br> 已修改-modified<br> 已暂存-staged</li>
+</ol>
+</blockquote>
+<p>安装：</p>
+<blockquote>
+<ol>
+<li>源码安装</li>
+<li>预编译安装包</li>
+</ol>
+</blockquote>
+<p>初次配置：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">git-config</span><br><span class="line"></span><br><span class="line">#特定项目配置不加--global即可</span><br><span class="line">$ git config --global user.name &quot;Linking&quot;</span><br><span class="line">$ git config --global user.email linking@example.com</span><br><span class="line"></span><br><span class="line">#查看配置信息</span><br><span class="line">$ git config --list</span><br><span class="line"></span><br><span class="line">#帮助文档</span><br><span class="line">$ git help config</span><br></pre></td></tr></table></figure>
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">git</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/cs//" class="article-tag-list-link color3">cs</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2016/08/23/git%E5%AD%A6%E4%B9%A0%E4%B8%80/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-常见手机品牌正则匹配" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1491,119 +1620,6 @@
 
 
   
-    <article id="post-Ajax系列二-现代化的Ajax" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2016/02/27/Ajax%E7%B3%BB%E5%88%97%E4%BA%8C-%E7%8E%B0%E4%BB%A3%E5%8C%96%E7%9A%84Ajax/" target="_blank">Ajax系列二-现代化的Ajax</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2016/02/27/Ajax%E7%B3%BB%E5%88%97%E4%BA%8C-%E7%8E%B0%E4%BB%A3%E5%8C%96%E7%9A%84Ajax/" class="archive-article-date">
-        <time datetime="2016-02-27T05:29:41.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-02-27</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <p><strong>核心</strong>–<code>XMLHttpRequest</code>对象，一个专门的<code>HTTP</code>请求工具</p>
-<p>使用<code>XMLHttpRequest</code>做<code>Ajax</code>请求：</p>
-<h2 id="如何创建该对象"><a href="#如何创建该对象" class="headerlink" title="如何创建该对象"></a>如何创建该对象</h2><pre><code>标准` new XMLHttpRequest()`
-低版本`IE(678)`，`new ActiveXObject(&#39;Microsoft.XMLHTTP&#39;)`;新的`jQuery`已经抛弃IE6，**程序员不应该去迁就用户的坏习惯，有时候需要逼用户改变习惯。**
-</code></pre>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">function createXHR()&#123;</span><br><span class="line">	var xhr = null;</span><br><span class="line">	if(window.XMLHttpRequest)&#123;</span><br><span class="line">		xhr = new XMLHttpRequest();</span><br><span class="line">	&#125; else if(window.ActiveXObject)&#123;</span><br><span class="line">		xhr = new ActiveXObject(&#x27;Microsoft.XMLHTTP&#x27;);</span><br><span class="line">	&#125; else&#123;</span><br><span class="line">		console.log(&#x27;你的浏览器很奇怪。&#x27;);</span><br><span class="line">	&#125;</span><br><span class="line">	return xhr;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="利用XHR发送请求来请求后台服务器资源"><a href="#利用XHR发送请求来请求后台服务器资源" class="headerlink" title="利用XHR发送请求来请求后台服务器资源"></a>利用XHR发送请求来请求后台服务器资源</h2><p>分析HTTP协议，请求需明确几个因素:<br>　　　1)请求方法：GET&#x2F;POST&#x2F;PUT&#x2F;DELETE&#x2F;HEAD<br>　　　2)请求哪个资源(URL)<br>　　　3)同步方式–同步&#x2F;异步</p>
-<h2 id="如何得到请求返回结果"><a href="#如何得到请求返回结果" class="headerlink" title="如何得到请求返回结果"></a>如何得到请求返回结果</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">vote</span>(<span class="params"></span>)&#123;</span><br><span class="line">	<span class="comment">//1. 制造xhr</span></span><br><span class="line">	<span class="keyword">var</span> xhr = <span class="title function_">createXHR</span>();</span><br><span class="line">	<span class="comment">//2. 打开连接</span></span><br><span class="line">	xhr.<span class="title function_">open</span>(<span class="string">&#x27;GET&#x27;</span>, <span class="string">&#x27;./05-ajaxvote.php&#x27;</span>, <span class="literal">true</span>/<span class="literal">false</span>);</span><br><span class="line">	<span class="comment">//3. 发送请求</span></span><br><span class="line">	xhr.<span class="title function_">send</span>(<span class="literal">null</span>);</span><br><span class="line">	<span class="comment">//4. 测试同步异步的差异,改true/false</span></span><br><span class="line">	<span class="comment">//alert(xhr.responseText);</span></span><br><span class="line">	<span class="comment">//为避免误会用</span></span><br><span class="line">	<span class="title function_">alert</span>(<span class="string">&#x27;123&#x27;</span>);</span><br></pre></td></tr></table></figure>
-
-<p>05-ajaxvote.php</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">sleep(3);//等待三秒</span><br><span class="line">if(rand(1,10) &lt; 4)&#123;</span><br><span class="line">	echo &quot;0&quot;;</span><br><span class="line">&#125;else&#123;</span><br><span class="line">	$votenum = file_get_contents(&quot;./vote.txt&quot;);</span><br><span class="line">	if ($votenum == null) &#123;</span><br><span class="line">		$votenum = 0;</span><br><span class="line">	&#125;</span><br><span class="line">	$votenum += 1;</span><br><span class="line">	file_put_contents(&#x27;./vote.txt&#x27;, $votenum);	</span><br><span class="line">	echo &quot;1&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>上面的测试结果显示，<code>true</code>即异步时，立即<code>alert</code>，”你等你的，我先走了”;<code>false</code>即同步时，等三秒才<code>alert</code>，”send返回后，才是下一步”。<br>综上，同步代码按顺序执行，异步代码可跳过等待的代码，先执行下面的代码，再返回执行。</p>
-<p>XHR对象在请求与响应过程中，状态会不断变化，0-4逐步变化；可以绑定一个监听函数来监听状态的变化，只要状态变化就触发某函数。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">xhr.onreadystatechange = function()&#123;</span><br><span class="line">	var pg = document.getElementById(&#x27;progress&#x27;);</span><br><span class="line">	pg.innerHTML += pg.innerHTML + &#x27;现在的状态是 &#x27;+ this.readyState + &#x27;&lt;br /&gt;&#x27;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>只管<code>readyState == 4</code>的状态，其他不管。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">xhr.onreadystatechange = function()&#123;</span><br><span class="line">	if(this.readyState == 4)&#123;</span><br><span class="line">		if(this.responseText == &#x27;1&#x27;)&#123;</span><br><span class="line">			document.getElementById(&#x27;progress&#x27;).innerHTML = &#x27;投票成功&#x27;;</span><br><span class="line">		&#125;else if(this.responseText == &#x27;0&#x27;)&#123;</span><br><span class="line">			document.getElementById(&#x27;progress&#x27;).innerHTML = &#x27;投票失败&#x27;;</span><br><span class="line">		&#125;else&#123;</span><br><span class="line">			document.getElementById(&#x27;progress&#x27;).innerHTML = this.responseText;</span><br><span class="line">		&#125;</span><br><span class="line">    &#125;   </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">ajax</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/cs//" class="article-tag-list-link color3">cs</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2016/02/27/Ajax%E7%B3%BB%E5%88%97%E4%BA%8C-%E7%8E%B0%E4%BB%A3%E5%8C%96%E7%9A%84Ajax/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/10/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="page-number" href="/page/10/">10</a><span class="page-number current">11</span><a class="page-number" href="/page/12/">12</a><a class="page-number" href="/page/13/">13</a><a class="extend next" rel="next" href="/page/12/">Next &raquo;</a>
@@ -2154,6 +2170,10 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">running</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">mongodb</a>
               </li>
             
             <div class="clearfix"></div>

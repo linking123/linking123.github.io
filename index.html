@@ -238,13 +238,15 @@
 <li>网关：<code>172.21.2.1</code></li>
 <li>容器、宿主机、局域网其他设备互通</li>
 </ul>
-<p>Docker Networking Principles:</p>
+<p><a target="_blank" rel="noopener" href="https://docs.docker.com/engine/network/drivers/">Docker Networking Principles</a>:</p>
 <ul>
 <li>Bridge Network: Default local communication on the same Docker host.</li>
 <li>Host Network: Container shares host’s network namespace.</li>
 <li>Overlay Network: Cross-host communication in Swarm or Kubernetes.</li>
 <li>Macvlan Network: Containers appear as physical devices on the network.</li>
+<li>ipvlan: Give users total control over both IPv4 and IPv6 addressing.</li>
 </ul>
+<p>根据需求，测试了ipvlan和macvlan，最终只有macvlan通过测试。</p>
     
     <a class="article-more-a" href="/2025/01/11/docker-container-network-connect-with-host-and-another-local-area-network-host-with-macvlan/#more">more >></a>
     
@@ -890,6 +892,113 @@
 
 
   
+    <article id="post-MongoDB-连接数异常增长及优化实践：从排查到提升系统稳定性" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2023/12/19/MongoDB-%E8%BF%9E%E6%8E%A5%E6%95%B0%E5%BC%82%E5%B8%B8%E5%A2%9E%E9%95%BF%E5%8F%8A%E4%BC%98%E5%8C%96%E5%AE%9E%E8%B7%B5%EF%BC%9A%E4%BB%8E%E6%8E%92%E6%9F%A5%E5%88%B0%E6%8F%90%E5%8D%87%E7%B3%BB%E7%BB%9F%E7%A8%B3%E5%AE%9A%E6%80%A7/" target="_blank">MongoDB 连接数异常增长及优化实践：从排查到提升系统稳定性</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2023/12/19/MongoDB-%E8%BF%9E%E6%8E%A5%E6%95%B0%E5%BC%82%E5%B8%B8%E5%A2%9E%E9%95%BF%E5%8F%8A%E4%BC%98%E5%8C%96%E5%AE%9E%E8%B7%B5%EF%BC%9A%E4%BB%8E%E6%8E%92%E6%9F%A5%E5%88%B0%E6%8F%90%E5%8D%87%E7%B3%BB%E7%BB%9F%E7%A8%B3%E5%AE%9A%E6%80%A7/" class="archive-article-date">
+        <time datetime="2023-12-19T03:01:31.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-12-19</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h1 id="MongoDB-连接数异常增长及优化实践：从排查到提升系统稳定性"><a href="#MongoDB-连接数异常增长及优化实践：从排查到提升系统稳定性" class="headerlink" title="MongoDB 连接数异常增长及优化实践：从排查到提升系统稳定性"></a><strong>MongoDB 连接数异常增长及优化实践：从排查到提升系统稳定性</strong></h1><h2 id="1-背景：系统运行不稳定，接口性能波动"><a href="#1-背景：系统运行不稳定，接口性能波动" class="headerlink" title="1. 背景：系统运行不稳定，接口性能波动"></a><strong>1. 背景：系统运行不稳定，接口性能波动</strong></h2><p>最近，我们的系统出现了一个棘手的问题：<strong>接口响应时间会在一段时间后显著变慢</strong>，而重启服务后又恢复正常。经过多次复现，我们发现：</p>
+<ul>
+<li><strong>接口在初始阶段表现良好</strong>，查询响应时间较短；</li>
+<li><strong>随着系统运行，MongoDB 连接数不断增长</strong>，最终稳定在一个高位，不再下降；</li>
+<li><strong>当连接数达到一定阈值后，查询变慢，影响系统稳定性</strong>。</li>
+</ul>
+<p>为了解决这一问题，我们开始深入分析 MongoDB 连接管理、索引优化等方面的潜在问题，并制定了一系列优化措施。</p>
+<hr>
+<h2 id="2-排查过程：找出-MongoDB-连接数异常增长的根因"><a href="#2-排查过程：找出-MongoDB-连接数异常增长的根因" class="headerlink" title="2. 排查过程：找出 MongoDB 连接数异常增长的根因"></a><strong>2. 排查过程：找出 MongoDB 连接数异常增长的根因</strong></h2><h3 id="2-1-观察-MongoDB-连接数变化"><a href="#2-1-观察-MongoDB-连接数变化" class="headerlink" title="2.1 观察 MongoDB 连接数变化"></a><strong>2.1 观察 MongoDB 连接数变化</strong></h3>
+    
+    <a class="article-more-a" href="/2023/12/19/MongoDB-%E8%BF%9E%E6%8E%A5%E6%95%B0%E5%BC%82%E5%B8%B8%E5%A2%9E%E9%95%BF%E5%8F%8A%E4%BC%98%E5%8C%96%E5%AE%9E%E8%B7%B5%EF%BC%9A%E4%BB%8E%E6%8E%92%E6%9F%A5%E5%88%B0%E6%8F%90%E5%8D%87%E7%B3%BB%E7%BB%9F%E7%A8%B3%E5%AE%9A%E6%80%A7/#more">more >></a>
+    
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">mongodb</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/cs//" class="article-tag-list-link color3">cs</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2023/12/19/MongoDB-%E8%BF%9E%E6%8E%A5%E6%95%B0%E5%BC%82%E5%B8%B8%E5%A2%9E%E9%95%BF%E5%8F%8A%E4%BC%98%E5%8C%96%E5%AE%9E%E8%B7%B5%EF%BC%9A%E4%BB%8E%E6%8E%92%E6%9F%A5%E5%88%B0%E6%8F%90%E5%8D%87%E7%B3%BB%E7%BB%9F%E7%A8%B3%E5%AE%9A%E6%80%A7/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-构建小团队协作环境的Docker方案" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1167,105 +1276,6 @@
     
     <p class="article-more-link">
       <a class="article-more-a" href="/2022/10/15/something-about-disk/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-unit-test-in-SpringBoot-with-login-token" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2022/09/17/unit-test-in-SpringBoot-with-login-token/" target="_blank">unit-test-in-SpringBoot-with-login-token</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2022/09/17/unit-test-in-SpringBoot-with-login-token/" class="archive-article-date">
-        <time datetime="2022-09-17T13:42:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-09-17</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h1 id="classify"><a href="#classify" class="headerlink" title="classify"></a>classify</h1><h2 id="precondition"><a href="#precondition" class="headerlink" title="precondition"></a>precondition</h2><h3 id="test-class"><a href="#test-class" class="headerlink" title="test class"></a>test class</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)</span><br><span class="line">@AutoConfigureMockMvc</span><br><span class="line">class ClsName &#123;</span><br><span class="line"></span><br><span class="line">	// bind the above RANDOM_PORT</span><br><span class="line">    @LocalServerPort</span><br><span class="line">    private int port;</span><br><span class="line"></span><br><span class="line">    @Autowired</span><br><span class="line">    private TestRestTemplate restTemplate;</span><br><span class="line"></span><br><span class="line">    private String token;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-    
-    <a class="article-more-a" href="/2022/09/17/unit-test-in-SpringBoot-with-login-token/#more">more >></a>
-    
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">unit-test</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/cs//" class="article-tag-list-link color3">cs</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2022/09/17/unit-test-in-SpringBoot-with-login-token/">展开全文 >></a>
     </p>
     
 
@@ -1845,6 +1855,10 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">running</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">mongodb</a>
               </li>
             
             <div class="clearfix"></div>

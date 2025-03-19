@@ -201,6 +201,116 @@
             
 
   
+    <article id="post-https请求处理方式1：信任一切证书的副本" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2017/05/16/https%E8%AF%B7%E6%B1%82%E5%A4%84%E7%90%86%E6%96%B9%E5%BC%8F1%EF%BC%9A%E4%BF%A1%E4%BB%BB%E4%B8%80%E5%88%87%E8%AF%81%E4%B9%A6%E7%9A%84%E5%89%AF%E6%9C%AC/" target="_blank">https请求处理方式1：信任一切证书</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2017/05/16/https%E8%AF%B7%E6%B1%82%E5%A4%84%E7%90%86%E6%96%B9%E5%BC%8F1%EF%BC%9A%E4%BF%A1%E4%BB%BB%E4%B8%80%E5%88%87%E8%AF%81%E4%B9%A6%E7%9A%84%E5%89%AF%E6%9C%AC/" class="archive-article-date">
+        <time datetime="2017-05-16T06:24:49.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-16</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h2 id="处理方法"><a href="#处理方法" class="headerlink" title="处理方法"></a>处理方法</h2><h3 id="1：使用异步请求方式"><a href="#1：使用异步请求方式" class="headerlink" title="1：使用异步请求方式"></a>1：使用异步请求方式</h3><h3 id="2：证书信任的委托这样处理"><a href="#2：证书信任的委托这样处理" class="headerlink" title="2：证书信任的委托这样处理"></a>2：证书信任的委托这样处理</h3><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">-(<span class="type">BOOL</span>)connectionShouldUseCredentialStorage:(<span class="built_in">NSURLConnection</span> *)connection&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line">- (<span class="type">void</span>)connection:(<span class="built_in">NSURLConnection</span> *)connection willSendRequestForAuthenticationChallenge:(<span class="built_in">NSURLAuthenticationChallenge</span> *)challenge&#123;</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@&quot;didReceiveAuthenticationChallenge %@ %zd&quot;</span>, [[challenge protectionSpace] authenticationMethod], (ssize_t) [challenge previousFailureCount]);</span><br><span class="line">    <span class="keyword">if</span> ([challenge.protectionSpace.authenticationMethod isEqualToString:<span class="built_in">NSURLAuthenticationMethodServerTrust</span>])&#123;</span><br><span class="line">        [[challenge sender]  useCredential:[<span class="built_in">NSURLCredential</span> credentialForTrust:challenge.protectionSpace.serverTrust] forAuthenticationChallenge:challenge];</span><br><span class="line">        [[challenge sender]  continueWithoutCredentialForAuthenticationChallenge: challenge];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (<span class="type">BOOL</span>)connection:(<span class="built_in">NSURLConnection</span> *)connection canAuthenticateAgainstProtectionSpace:(<span class="built_in">NSURLProtectionSpace</span> *)protectionSpace&#123;</span><br><span class="line">       <span class="keyword">return</span> [protectionSpace.authenticationMethod isEqualToString:<span class="built_in">NSURLAuthenticationMethodServerTrust</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="完整示例代码"><a href="#完整示例代码" class="headerlink" title="完整示例代码"></a>完整示例代码</h2><p>UIViewController.h</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">#import <span class="string">&lt;UIKit/UIKit.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">ViewController</span> : <span class="title">UIViewController</span>&lt;<span class="title">NSURLConnectionDataDelegate</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
+
+<p>UIViewController.m </p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">#import <span class="string">&quot;ViewController.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">ViewController</span> ()</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">ViewController</span></span></span><br><span class="line"></span><br><span class="line">- (<span class="type">void</span>)viewDidLoad &#123;</span><br><span class="line">    [<span class="variable language_">super</span> viewDidLoad];</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//string 转 url编码</span></span><br><span class="line">    <span class="built_in">NSString</span> *urlString = <span class="string">@&quot;https://api.github.com/users/coolnameismy&quot;</span>;</span><br><span class="line">    <span class="built_in">NSURL</span> *url = [<span class="built_in">NSURL</span> URLWithString:[urlString stringByAddingPercentEncodingWithAllowedCharacters:[<span class="built_in">NSCharacterSet</span> URLQueryAllowedCharacterSet]]];</span><br><span class="line"></span><br><span class="line">    </span><br><span class="line">    <span class="built_in">NSURLRequest</span> *request = [[<span class="built_in">NSURLRequest</span> alloc]initWithURL:url cachePolicy:<span class="built_in">NSURLRequestUseProtocolCachePolicy</span> timeoutInterval:<span class="number">10</span>];</span><br><span class="line">    <span class="built_in">NSURLConnectionDataDelegate</span> *connection = [[<span class="built_in">NSURLConnection</span> alloc]initWithRequest:request delegate:<span class="keyword">self</span>];</span><br><span class="line">    </span><br><span class="line">    [connection start];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//请求失败</span></span><br><span class="line">- (<span class="type">void</span>)connection:(<span class="built_in">NSURLConnection</span> *)connection didFailWithError:(<span class="built_in">NSError</span> *)error&#123;</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@&quot;=================didFailWithError=================&quot;</span>);</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@&quot;error:%@&quot;</span>,error);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//重定向</span></span><br><span class="line">- (<span class="keyword">nullable</span> <span class="built_in">NSURLRequest</span> *)connection:(<span class="built_in">NSURLConnection</span> *)connection willSendRequest:(<span class="built_in">NSURLRequest</span> *)request redirectResponse:(<span class="keyword">nullable</span> <span class="built_in">NSURLResponse</span> *)response&#123;</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@&quot;=================request redirectResponse=================&quot;</span>);</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@&quot;request:%@&quot;</span>,request);</span><br><span class="line">    <span class="keyword">return</span> request;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//接收响应</span></span><br><span class="line">- (<span class="type">void</span>)connection:(<span class="built_in">NSURLConnection</span> *)connection didReceiveResponse:(<span class="built_in">NSURLResponse</span> *)response&#123;</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@&quot;=================didReceiveResponse=================&quot;</span>);</span><br><span class="line">    <span class="built_in">NSHTTPURLResponse</span> *resp = (<span class="built_in">NSHTTPURLResponse</span> *)response;</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@&quot;response:%@&quot;</span>,resp);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//接收响应</span></span><br><span class="line">- (<span class="type">void</span>)connection:(<span class="built_in">NSURLConnection</span> *)connection didReceiveData:(<span class="built_in">NSData</span> *)data&#123;</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@&quot;=================didReceiveData=================&quot;</span>);</span><br><span class="line">    <span class="built_in">NSDictionary</span> *dic = [<span class="built_in">NSJSONSerialization</span> JSONObjectWithData:data options:<span class="built_in">NSJSONReadingAllowFragments</span> error:<span class="literal">nil</span>];</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@&quot;data:%@&quot;</span>,dic);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//- (nullable NSInputStream *)connection:(NSURLConnection *)connection needNewBodyStream:(NSURLRequest *)request&#123;</span></span><br><span class="line"><span class="comment">//    </span></span><br><span class="line"><span class="comment">//&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//上传数据委托，用于显示上传进度</span></span><br><span class="line">- (<span class="type">void</span>)connection:(<span class="built_in">NSURLConnection</span> *)connection   didSendBodyData:(<span class="built_in">NSInteger</span>)bytesWritten</span><br><span class="line"> totalBytesWritten:(<span class="built_in">NSInteger</span>)totalBytesWritten</span><br><span class="line">totalBytesExpectedToWrite:(<span class="built_in">NSInteger</span>)totalBytesExpectedToWrite&#123;</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@&quot;=================totalBytesWritten=================&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//- (nullable NSCachedURLResponse *)connection:(NSURLConnection *)connection willCacheResponse:(NSCachedURLResponse *)cachedResponse&#123;</span></span><br><span class="line"><span class="comment">//    </span></span><br><span class="line"><span class="comment">//&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//完成请求</span></span><br><span class="line">- (<span class="type">void</span>)connectionDidFinishLoading:(<span class="built_in">NSURLConnection</span> *)connection&#123;</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@&quot;=================connectionDidFinishLoading=================&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">pragma</span> mark -https认证</span></span><br><span class="line">-(<span class="type">BOOL</span>)connectionShouldUseCredentialStorage:(<span class="built_in">NSURLConnection</span> *)connection&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line">- (<span class="type">void</span>)connection:(<span class="built_in">NSURLConnection</span> *)connection willSendRequestForAuthenticationChallenge:(<span class="built_in">NSURLAuthenticationChallenge</span> *)challenge&#123;</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@&quot;didReceiveAuthenticationChallenge %@ %zd&quot;</span>, [[challenge protectionSpace] authenticationMethod], (ssize_t) [challenge previousFailureCount]);</span><br><span class="line">    <span class="keyword">if</span> ([challenge.protectionSpace.authenticationMethod isEqualToString:<span class="built_in">NSURLAuthenticationMethodServerTrust</span>])&#123;</span><br><span class="line">        [[challenge sender]  useCredential:[<span class="built_in">NSURLCredential</span> credentialForTrust:challenge.protectionSpace.serverTrust] forAuthenticationChallenge:challenge];</span><br><span class="line">        [[challenge sender]  continueWithoutCredentialForAuthenticationChallenge: challenge];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (<span class="type">BOOL</span>)connection:(<span class="built_in">NSURLConnection</span> *)connection canAuthenticateAgainstProtectionSpace:(<span class="built_in">NSURLProtectionSpace</span> *)protectionSpace&#123;</span><br><span class="line">       <span class="keyword">return</span> [protectionSpace.authenticationMethod isEqualToString:<span class="built_in">NSURLAuthenticationMethodServerTrust</span>];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (<span class="type">void</span>)didReceiveMemoryWarning &#123;</span><br><span class="line">    [<span class="variable language_">super</span> didReceiveMemoryWarning];</span><br><span class="line">    <span class="comment">// Dispose of any resources that can be recreated.</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><p>-<a target="_blank" rel="noopener" href="http://blog.csdn.net/kmyhy/article/details/7733619">iOS: HTTPS 与自签名证书</a><br>-<a target="_blank" rel="noopener" href="http://www.jianshu.com/p/4b5d2d47833d">iOS - HTTPS</a><br>-<a target="_blank" rel="noopener" href="http://oncenote.com/2014/10/21/Security-1-HTTPS/">iOS安全系列之一：HTTPS</a><br>-<a target="_blank" rel="noopener" href="http://oncenote.com/2015/09/16/Security-2-HTTPS2/">iOS安全系列之二：HTTPS进阶</a><br>-<a target="_blank" rel="noopener" href="https://developer.apple.com/library/ios/documentation/NetworkingInternetWeb/Conceptual/NetworkingOverview/WorkingWithHTTPAndHTTPSRequests/WorkingWithHTTPAndHTTPSRequests.html">Making HTTP and HTTPS Requests</a></p>
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">iOS</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">https</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/cs//" class="article-tag-list-link color3">cs</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2017/05/16/https%E8%AF%B7%E6%B1%82%E5%A4%84%E7%90%86%E6%96%B9%E5%BC%8F1%EF%BC%9A%E4%BF%A1%E4%BB%BB%E4%B8%80%E5%88%87%E8%AF%81%E4%B9%A6%E7%9A%84%E5%89%AF%E6%9C%AC/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-我换主题了" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1332,187 +1442,6 @@
 
 
   
-    <article id="post-《利用Python进行数据分析》读书笔记-5-第五章-pandas入门" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2017/03/19/%E3%80%8A%E5%88%A9%E7%94%A8Python%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E3%80%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0-5-%E7%AC%AC%E4%BA%94%E7%AB%A0-pandas%E5%85%A5%E9%97%A8/" target="_blank">《利用Python进行数据分析》读书笔记-第五章-pandas入门</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2017/03/19/%E3%80%8A%E5%88%A9%E7%94%A8Python%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E3%80%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0-5-%E7%AC%AC%E4%BA%94%E7%AB%A0-pandas%E5%85%A5%E9%97%A8/" class="archive-article-date">
-        <time datetime="2017-03-19T14:40:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-03-19</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h2 id="pandas数据结构介绍"><a href="#pandas数据结构介绍" class="headerlink" title="pandas数据结构介绍"></a>pandas数据结构介绍</h2><h3 id="Series"><a href="#Series" class="headerlink" title="Series"></a>Series</h3><blockquote>
-<ul>
-<li>Series最重要的一个功能：在算术运算中会自动对齐不同索引的数据（键相同）。</li>
-<li>Series对象本身及其索引都有一个name属性。</li>
-</ul>
-</blockquote>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"># 一组 key: value</span><br><span class="line"># obj = Series([4,5,7,-3])</span><br><span class="line"># print obj</span><br><span class="line"># out:</span><br><span class="line"># 0    4</span><br><span class="line"># 1    5</span><br><span class="line"># 2    7</span><br><span class="line"># 3   -3</span><br><span class="line"># dtype: int64</span><br><span class="line"># print obj.values</span><br><span class="line"># out：[ 4  5  7 -3]</span><br><span class="line"># print obj.index</span><br><span class="line"># out:RangeIndex(start=0, stop=4, step=1)</span><br><span class="line"></span><br><span class="line">obj2 = Series([3, 5, -7, 9], index=[&#x27;a&#x27;, &#x27;d&#x27;, &#x27;b&#x27;, &#x27;c&#x27;])</span><br><span class="line"># print obj2</span><br><span class="line"># out:</span><br><span class="line"># a    3</span><br><span class="line"># d    5</span><br><span class="line"># b    7</span><br><span class="line"># c    9</span><br><span class="line"># dtype: int64</span><br><span class="line"># print obj2[&#x27;d&#x27;]</span><br><span class="line"># out: 5</span><br><span class="line"># print obj2[[&#x27;d&#x27;,&#x27;c&#x27;,&#x27;b&#x27;]]</span><br><span class="line"># out:</span><br><span class="line"># d    5</span><br><span class="line"># c    9</span><br><span class="line"># b    7</span><br><span class="line"># dtype: int64</span><br><span class="line"># print obj2[obj2&gt;0]</span><br><span class="line"># out:</span><br><span class="line"># a    3</span><br><span class="line"># d    5</span><br><span class="line"># c    9</span><br><span class="line"># dtype: int64</span><br><span class="line"># print &#x27;b&#x27; in obj2</span><br><span class="line"># out: True</span><br><span class="line"></span><br><span class="line"># 通过字典创建Series</span><br><span class="line">sdata = &#123;&#x27;aaa&#x27;: 41, &#x27;bbb&#x27;: 51, &#x27;ccc&#x27;: 61, &#x27;ddd&#x27;: 71&#125;</span><br><span class="line">obj3 = Series(sdata)</span><br><span class="line"># print obj3</span><br><span class="line"># out：</span><br><span class="line"># aaa    41</span><br><span class="line"># bbb    51</span><br><span class="line"># ccc    61</span><br><span class="line"># ddd    71</span><br><span class="line"># dtype: int64</span><br><span class="line"># 传入一个值，作为键</span><br><span class="line">states = [&#x27;aaa&#x27;, &#x27;bbb&#x27;, &#x27;ddd&#x27;, &#x27;eee&#x27;]</span><br><span class="line">obj4 = Series(sdata, index=states)</span><br><span class="line"># print obj4</span><br><span class="line"># out:</span><br><span class="line"># aaa    41</span><br><span class="line"># bbb    51</span><br><span class="line"># ddd    71</span><br><span class="line"># eee    NaN</span><br><span class="line"># dtype: int64</span><br><span class="line"># 第四个值eee找不到键</span><br><span class="line"></span><br><span class="line"># isnull,notnull检测缺失数据</span><br><span class="line"># print pd.isnull(obj4)</span><br><span class="line"># out:</span><br><span class="line"># aaa    False</span><br><span class="line"># bbb    False</span><br><span class="line"># ddd    False</span><br><span class="line"># eee     True</span><br><span class="line"># dtype: bool</span><br><span class="line"></span><br><span class="line"># 算术运算，自动对齐键</span><br><span class="line"># print obj3+obj4</span><br><span class="line"># our:</span><br><span class="line"># aaa     82.0</span><br><span class="line"># bbb    102.0</span><br><span class="line"># ccc      NaN</span><br><span class="line"># ddd    142.0</span><br><span class="line"># eee      NaN</span><br><span class="line"># dtype: float64</span><br><span class="line"></span><br><span class="line">obj4.name = &#x27;population&#x27;</span><br><span class="line">obj4.index.name = &#x27;state&#x27;</span><br><span class="line"># print obj4</span><br><span class="line"># out:</span><br><span class="line"># state</span><br><span class="line"># aaa    41.0</span><br><span class="line"># bbb    51.0</span><br><span class="line"># ddd    71.0</span><br><span class="line"># eee     NaN</span><br><span class="line"># Name: population, dtype: float64</span><br><span class="line"></span><br><span class="line"># 索引改变：</span><br><span class="line">obj4.index = [&#x27;bob&#x27;, &#x27;fds&#x27;, &#x27;a33&#x27;, &#x27;8uk&#x27;]</span><br><span class="line"># print obj4</span><br></pre></td></tr></table></figure>
-
-<h3 id="DataFrame"><a href="#DataFrame" class="headerlink" title="DataFrame"></a>DataFrame</h3><blockquote>
-<p>DataFrame是一个<strong>表格型</strong>的数据结构，含有一组<strong>有序的列</strong>，每列可以是不同的值类型。既有行索引也有列索引。可看做由Series组成的字典。<br>以<strong>二维</strong>结构保存数据，可视为多维数据（<strong>层次化索引</strong>的表格型结构是pandas中许多高级数据处理功能的关键要素）。</p>
-</blockquote>
-<ol>
-<li>构建DataFrame方式一<blockquote>
-<p>方式一：直接传入一个由等长列表或NumPy数组组成的字典：</p>
-</blockquote>
-</li>
-</ol>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">## 构建</span><br><span class="line">data = &#123;&#x27;state&#x27;: [&#x27;Ohio&#x27;, &#x27;Ohio&#x27;, &#x27;Ohio&#x27;, &#x27;Nevada&#x27;, &#x27;Nevada&#x27;],</span><br><span class="line">        &#x27;year&#x27;: [2000, 2001, 2002, 2003, 2004],</span><br><span class="line">        &#x27;pop&#x27;: [1.5, 1.7, 3.6, 2.4, 2.9]&#125;</span><br><span class="line">frame1 = DataFrame(data)</span><br><span class="line"># print frame1</span><br><span class="line"># out:</span><br><span class="line">#    pop   state  year</span><br><span class="line"># 0  1.5    Ohio  2000</span><br><span class="line"># 1  1.7    Ohio  2001</span><br><span class="line"># 2  3.6    Ohio  2002</span><br><span class="line"># 3  2.4  Nevada  2003</span><br><span class="line"># 4  2.9  Nevada  2004</span><br></pre></td></tr></table></figure>
-
-<p>1.1. 指定列序列</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">frame2 = DataFrame(data, columns=[&#x27;year&#x27;, &#x27;state&#x27;, &#x27;pop&#x27;])</span><br><span class="line"># print frame2</span><br><span class="line"># out:</span><br><span class="line">#    year   state  pop</span><br><span class="line"># 0  2000    Ohio  1.5</span><br><span class="line"># 1  2001    Ohio  1.7</span><br><span class="line"># 2  2002    Ohio  3.6</span><br><span class="line"># 3  2003  Nevada  2.4</span><br><span class="line"># 4  2004  Nevada  2.9</span><br><span class="line"># 若找不到列，就会显示NaN</span><br></pre></td></tr></table></figure>
-
-<p>1.2. 通过字典标记方式或属性方式，获取一个Series</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"># print frame2[&#x27;state&#x27;]</span><br><span class="line"># out:</span><br><span class="line"># 0      Ohio</span><br><span class="line"># 1      Ohio</span><br><span class="line"># 2      Ohio</span><br><span class="line"># 3    Nevada</span><br><span class="line"># 4    Nevada</span><br><span class="line"># Name: state, dtype: object</span><br><span class="line"># print frame2.year</span><br><span class="line"># out:</span><br><span class="line"># 0    2000</span><br><span class="line"># 1    2001</span><br><span class="line"># 2    2002</span><br><span class="line"># 3    2003</span><br><span class="line"># 4    2004</span><br><span class="line"># Name: year, dtype: int64</span><br></pre></td></tr></table></figure>
-
-<p>1.3. 行，通过名称或位置获取，如用索引字段ix</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># print frame2.ix[1]</span><br><span class="line"># out：</span><br><span class="line"># year     2001</span><br><span class="line"># state    Ohio</span><br><span class="line"># pop       1.7</span><br><span class="line"># Name: 1, dtype: object</span><br></pre></td></tr></table></figure>
-
-<p>1.4. 直接给列赋值，新建test列，赋值2.3</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">frame2[&#x27;test&#x27;] = 2.3</span><br><span class="line"># print frame2</span><br><span class="line"># out:</span><br><span class="line">#    year   state  pop  test</span><br><span class="line"># 0  2000    Ohio  1.5   2.3</span><br><span class="line"># 1  2001    Ohio  1.7   2.3</span><br><span class="line"># 2  2002    Ohio  3.6   2.3</span><br><span class="line"># 3  2003  Nevada  2.4   2.3</span><br><span class="line"># 4  2004  Nevada  2.9   2.3</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>将列表或数组赋值给某个列时，长度必须和DataFrame相匹配；空位都将填上缺失值NaN。</p>
-</blockquote>
-<ol start="2">
-<li>构建DataFrame方式二<blockquote>
-<p>方式二：嵌套字典，即字典的字典。</p>
-</blockquote>
-</li>
-</ol>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">pop = &#123;&#x27;Nevada&#x27;: &#123;2001:2.3, 2004:3.4&#125;,</span><br><span class="line">       &#x27;Ohio&#x27;: &#123;2003:3.34, 2005:5.2&#125;&#125;</span><br><span class="line"># 转化为DataFrame，解释原则：外层字典的键作为列，内层键作为行索引。</span><br><span class="line">frame3 = DataFrame(pop)</span><br><span class="line"># print frame3</span><br><span class="line"># out:</span><br><span class="line">#       Nevada  Ohio</span><br><span class="line"># 2001     2.3   NaN</span><br><span class="line"># 2003     NaN  3.34</span><br><span class="line"># 2004     3.4   NaN</span><br><span class="line"># 2005     NaN  5.20</span><br></pre></td></tr></table></figure>
-
-<p>2.1 设置index和columns的name属性</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">frame3.index.name = &#x27;year&#x27;;frame3.columns.name = &#x27;state&#x27;</span><br><span class="line"># print frame3</span><br><span class="line"># out:</span><br><span class="line"># state  Nevada  Ohio</span><br><span class="line"># year</span><br><span class="line"># 2001      2.3   NaN</span><br><span class="line"># 2003      NaN  3.34</span><br><span class="line"># 2004      3.4   NaN</span><br><span class="line"># 2005      NaN  5.20</span><br></pre></td></tr></table></figure>
-
-<p>2.2 value属性会以二维ndarray形式返回DataFrame中的数据</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># print frame3.values</span><br><span class="line"># out:</span><br><span class="line"># [[ 2.3    nan]</span><br><span class="line">#  [  nan  3.34]</span><br><span class="line">#  [ 3.4    nan]</span><br><span class="line">#  [  nan  5.2 ]]</span><br></pre></td></tr></table></figure>
-
-<h3 id="索引对象"><a href="#索引对象" class="headerlink" title="索引对象"></a>索引对象</h3><blockquote>
-<p>pandas索引对象负责管理轴标签和其他元数据（比如轴名称等）。</p>
-</blockquote>
-<p>Index对象不可修改。此特性非常重要，使得Index对象在多个数据结构之间安全共享。</p>
-<h2 id="基本功能"><a href="#基本功能" class="headerlink" title="基本功能"></a>基本功能</h2><h3 id="重新索引reindex"><a href="#重新索引reindex" class="headerlink" title="重新索引reindex"></a>重新索引reindex</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">obj = Series([4.5, 2.3, -2.4, 3.5], index=[&#x27;d&#x27;, &#x27;c&#x27;, &#x27;a&#x27;, &#x27;b&#x27;])</span><br><span class="line"># obj.reindex([&#x27;a&#x27;,&#x27;b&#x27;, &#x27;c&#x27;, &#x27;d&#x27;, &#x27;e&#x27;, &#x27;f&#x27;])</span><br><span class="line"># print obj</span><br><span class="line"># out:</span><br><span class="line"># d    4.5</span><br><span class="line"># c    2.3</span><br><span class="line"># a   -2.4</span><br><span class="line"># b    3.5</span><br><span class="line"># dtype: float64</span><br><span class="line"># 这里没有像书上说的一样，没有索引值用缺失值NaN；待查</span><br><span class="line"># obj.reindex([&#x27;a&#x27;,&#x27;b&#x27;, &#x27;c&#x27;, &#x27;d&#x27;, &#x27;e&#x27;, &#x27;f&#x27;], fill_value=0)</span><br><span class="line"># 这一句会用0来填充缺失值</span><br><span class="line"># print obj</span><br><span class="line"># out:</span><br><span class="line"># d    4.5</span><br><span class="line"># c    2.3</span><br><span class="line"># a   -2.4</span><br><span class="line"># b    3.5</span><br><span class="line"># dtype: float64</span><br><span class="line"># 同样无效</span><br></pre></td></tr></table></figure>
-
-<h3 id="丢弃指定轴上的项"><a href="#丢弃指定轴上的项" class="headerlink" title="丢弃指定轴上的项"></a>丢弃指定轴上的项</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">obj = Series(np.arange(5.), index=[&#x27;a&#x27;, &#x27;b&#x27;, &#x27;c&#x27;, &#x27;d&#x27;, &#x27;e&#x27;])</span><br><span class="line">new_obj = obj.drop(&#x27;c&#x27;)</span><br><span class="line"># print new_obj</span><br><span class="line"># out:</span><br><span class="line"># a    0.0</span><br><span class="line"># b    1.0</span><br><span class="line"># d    3.0</span><br><span class="line"># e    4.0</span><br><span class="line"># dtype: float64</span><br><span class="line"># drop放回一个在指定轴上删除了指定值的新对象</span><br></pre></td></tr></table></figure>
-
-<h3 id="索引、选取和过滤"><a href="#索引、选取和过滤" class="headerlink" title="索引、选取和过滤"></a>索引、选取和过滤</h3><p>利用标签的切片与普通Python切片运算不同，末端是包含的，即封闭区间。如</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">obj = Series(np.arange(4.), index=[&#x27;a&#x27;,&#x27;b&#x27;,&#x27;c&#x27;,&#x27;d&#x27;])</span><br><span class="line"># print obj</span><br><span class="line"># out:</span><br><span class="line"># a    0.0</span><br><span class="line"># b    1.0</span><br><span class="line"># c    2.0</span><br><span class="line"># d    3.0</span><br><span class="line"># dtype: float64</span><br><span class="line"># print obj[&#x27;b&#x27;:&#x27;c&#x27;]</span><br><span class="line"># out:</span><br><span class="line"># b    1.0</span><br><span class="line"># c    2.0</span><br><span class="line"># dtype: float64</span><br><span class="line"># 如果是普通切片方式，b-c就只有1.0</span><br><span class="line"># 赋值方式如下：</span><br><span class="line">obj[&#x27;b&#x27;,&#x27;c&#x27;] = 5</span><br><span class="line"># print obj</span><br><span class="line"># out: </span><br><span class="line"># a    0.0</span><br><span class="line"># b    5.0</span><br><span class="line"># c    5.0</span><br><span class="line"># d    3.0</span><br><span class="line"># dtype: float64</span><br></pre></td></tr></table></figure>
-
-<h3 id="算术运算和数据对齐"><a href="#算术运算和数据对齐" class="headerlink" title="算术运算和数据对齐"></a>算术运算和数据对齐</h3><blockquote>
-<p>对象相加时，如果存在不同的索引对，则结果的索引就是该索引对的并集。</p>
-</blockquote>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">s1 = Series([7.3, 4.5, 67.1, 2.3], index=[&#x27;a&#x27;, &#x27;b&#x27;, &#x27;d&#x27;, &#x27;f&#x27;])</span><br><span class="line">s2 = Series([3, 5, 6, 7, 3], [&#x27;a&#x27;, &#x27;d&#x27;, &#x27;f&#x27;, &#x27;g&#x27;, &#x27;h&#x27;])</span><br><span class="line"># print s1 + s2</span><br><span class="line"># out:</span><br><span class="line"># a    10.3</span><br><span class="line"># b     NaN</span><br><span class="line"># d    72.1</span><br><span class="line"># f     8.3</span><br><span class="line"># g     NaN</span><br><span class="line"># h     NaN</span><br><span class="line"># dtype: float64</span><br><span class="line"># 相加就是并集，若索引不重叠，则NaN；自动数据对齐操作。</span><br><span class="line"># 而DataFrame对齐操作会同时发生在行和列上</span><br></pre></td></tr></table></figure>
-<h3 id="排序和排名"><a href="#排序和排名" class="headerlink" title="排序和排名"></a>排序和排名</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"># obj = Series(range(4), index=[&#x27;d&#x27;,&#x27;c&#x27;,&#x27;b&#x27;,&#x27;a&#x27;])</span><br><span class="line"># print obj</span><br><span class="line"># d    0</span><br><span class="line"># c    1</span><br><span class="line"># b    2</span><br><span class="line"># a    3</span><br><span class="line"># dtype: int64</span><br><span class="line"># print obj.sort_index()</span><br><span class="line"># a    3</span><br><span class="line"># b    2</span><br><span class="line"># c    1</span><br><span class="line"># d    0</span><br><span class="line"># dtype: int64</span><br><span class="line"></span><br><span class="line">frame = DataFrame(np.arange(8).reshape((2,4)), index=[&#x27;three&#x27;, &#x27;one&#x27;], columns=[&#x27;d&#x27;,&#x27;a&#x27;,&#x27;b&#x27;,&#x27;c&#x27;])</span><br><span class="line"># print frame.sort_index()</span><br><span class="line">#        d  a  b  c</span><br><span class="line"># one    4  5  6  7</span><br><span class="line"># three  0  1  2  3</span><br><span class="line"># print frame.sort_index(axis=1)</span><br><span class="line">#        a  b  c  d</span><br><span class="line"># three  1  2  3  0</span><br><span class="line"># one    5  6  7  4</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>按值对Series排序，用其order方法；<br>排序时缺失值会被放到Series末尾。</p>
-</blockquote>
-<p><code>sort_index()方法已过时，用sort_value()方法代替。</code></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"># DataFrame根据列值排序，传列名给by选项</span><br><span class="line">frame = DataFrame(&#123;&#x27;b&#x27;: [4, 8, 5, 3], &#x27;a&#x27;: [-2, 1, 9, 6]&#125;)</span><br><span class="line"># print frame</span><br><span class="line">#    a  b</span><br><span class="line"># 0 -2  4</span><br><span class="line"># 1  1  8</span><br><span class="line"># 2  9  5</span><br><span class="line"># 3  6  3</span><br><span class="line"># print frame.sort_values(by=&#x27;b&#x27;)</span><br><span class="line">#    a  b</span><br><span class="line"># 3  6  3</span><br><span class="line"># 0 -2  4</span><br><span class="line"># 2  9  5</span><br><span class="line"># 1  1  8</span><br></pre></td></tr></table></figure>
-
-<p>排序</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">obj = Series([7, 3, 5, 7, 9, 3, 1])</span><br><span class="line"># print obj.rank()</span><br><span class="line"># 0    5.5</span><br><span class="line"># 1    2.5</span><br><span class="line"># 2    4.0</span><br><span class="line"># 3    5.5</span><br><span class="line"># 4    7.0</span><br><span class="line"># 5    2.5</span><br><span class="line"># 6    1.0</span><br><span class="line"># dtype: float64</span><br><span class="line"># 暂时没看懂什么意思啊</span><br></pre></td></tr></table></figure>
-
-<h3 id="汇总和计算描述统计"><a href="#汇总和计算描述统计" class="headerlink" title="汇总和计算描述统计"></a>汇总和计算描述统计</h3><ul>
-<li>axis（约简的 轴）选项标明是按行还是按列；如axis&#x3D;0按列，axis&#x3D;1按行。</li>
-<li>skipna 排除缺失值，默认值True</li>
-<li>level 轴是层次化索引的，则根据level分组约简</li>
-</ul>
-<blockquote>
-<p>第五章于20170319结束，时间节点设计有问题，现在需要手动敲的越来越多，所以速度跟不上，尤其是精力跟不上了。看书要分主次，重要的知识点要细看，必须手动敲出来；一些同类化的知识可以跳着看，以节省时间。</p>
-</blockquote>
-<blockquote>
-<p>但是有一个原则不能改，一些重要的知识点不能跳过，需要真真的✋敲出来。不然那就是真正的浪费时间。</p>
-</blockquote>
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/cs//" class="article-tag-list-link color3">cs</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2017/03/19/%E3%80%8A%E5%88%A9%E7%94%A8Python%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E3%80%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0-5-%E7%AC%AC%E4%BA%94%E7%AB%A0-pandas%E5%85%A5%E9%97%A8/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/8/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><span class="page-number current">9</span><a class="page-number" href="/page/10/">10</a><a class="page-number" href="/page/11/">11</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><a class="extend next" rel="next" href="/page/10/">Next &raquo;</a>
@@ -2063,6 +1992,10 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">running</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">mongodb</a>
               </li>
             
             <div class="clearfix"></div>
