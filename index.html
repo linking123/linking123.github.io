@@ -1103,6 +1103,126 @@
 
 
   
+    <article id="post-排查并解决vpn访问内网的路由不对称问题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2023/05/20/%E6%8E%92%E6%9F%A5%E5%B9%B6%E8%A7%A3%E5%86%B3vpn%E8%AE%BF%E9%97%AE%E5%86%85%E7%BD%91%E7%9A%84%E8%B7%AF%E7%94%B1%E4%B8%8D%E5%AF%B9%E7%A7%B0%E9%97%AE%E9%A2%98/" target="_blank">排查并解决vpn访问内网的路由不对称问题</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2023/05/20/%E6%8E%92%E6%9F%A5%E5%B9%B6%E8%A7%A3%E5%86%B3vpn%E8%AE%BF%E9%97%AE%E5%86%85%E7%BD%91%E7%9A%84%E8%B7%AF%E7%94%B1%E4%B8%8D%E5%AF%B9%E7%A7%B0%E9%97%AE%E9%A2%98/" class="archive-article-date">
+        <time datetime="2023-05-20T13:31:29.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-05-20</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h1 id="排查并解决VPN访问内网的路由不对称问题"><a href="#排查并解决VPN访问内网的路由不对称问题" class="headerlink" title="排查并解决VPN访问内网的路由不对称问题"></a>排查并解决VPN访问内网的路由不对称问题</h1><h2 id="背景：问题的起源与链路"><a href="#背景：问题的起源与链路" class="headerlink" title="背景：问题的起源与链路"></a>背景：问题的起源与链路</h2><p>最近我在通过VPN访问公司内网时遇到了一个奇怪的问题：配置了两个内网子网，其中192.168.10.55可以正常访问，而192.168.20.166无法访问，但同一子网的192.168.20.254却没问题。这让我困惑不已，于是开始了排查之旅。</p>
+<p>问题链路如下：</p>
+<ul>
+<li><strong>客户端</strong>：我的电脑通过VPN（IP: 10.10.10.2）连接内网。</li>
+<li><strong>目标服务器</strong>：一台Ubuntu 22.04服务器（IP: 192.168.20.163，问题中提到的166类似，后续以163为例）。</li>
+<li><strong>内网设备</strong>：<ul>
+<li>交换机（Waiwang_S5560_HX，IP: 192.168.20.254）。</li>
+<li>中间路由设备（IP: 192.168.100.2）。</li>
+</ul>
+</li>
+<li><strong>现象</strong>：VPN能ping通192.168.20.254和192.168.20.123，但192.168.20.163超时。</li>
+</ul>
+<hr>
+<h2 id="分析过程：从现象到假设"><a href="#分析过程：从现象到假设" class="headerlink" title="分析过程：从现象到假设"></a>分析过程：从现象到假设</h2>
+    
+    <a class="article-more-a" href="/2023/05/20/%E6%8E%92%E6%9F%A5%E5%B9%B6%E8%A7%A3%E5%86%B3vpn%E8%AE%BF%E9%97%AE%E5%86%85%E7%BD%91%E7%9A%84%E8%B7%AF%E7%94%B1%E4%B8%8D%E5%AF%B9%E7%A7%B0%E9%97%AE%E9%A2%98/#more">more >></a>
+    
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">network</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">route</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">vpn</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/cs//" class="article-tag-list-link color3">cs</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2023/05/20/%E6%8E%92%E6%9F%A5%E5%B9%B6%E8%A7%A3%E5%86%B3vpn%E8%AE%BF%E9%97%AE%E5%86%85%E7%BD%91%E7%9A%84%E8%B7%AF%E7%94%B1%E4%B8%8D%E5%AF%B9%E7%A7%B0%E9%97%AE%E9%A2%98/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-server-sent-events" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1176,106 +1296,6 @@
     
     <p class="article-more-link">
       <a class="article-more-a" href="/2022/11/28/server-sent-events/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-something-about-disk" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2022/10/15/something-about-disk/" target="_blank">record something about disk common used</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2022/10/15/something-about-disk/" class="archive-article-date">
-        <time datetime="2022-10-15T12:09:04.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-10-15</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h1 id="Introduce"><a href="#Introduce" class="headerlink" title="Introduce"></a>Introduce</h1><p>最近领了两台服务器，查看后发现几块大瓷盘没有用上，实属浪费，就折腾了下，这篇就记录一下常用命令和问题。</p>
-<h1 id="Common-commands-usage"><a href="#Common-commands-usage" class="headerlink" title="Common commands usage"></a>Common commands usage</h1><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">mount | column -t        # 查看挂在到分区状态</span><br><span class="line">df -h          		     # 看已挂载</span><br><span class="line">sudo fdisk -l  			 # 可看未挂载</span><br><span class="line">sudo lsblk -e7        	 # 依赖关系</span><br><span class="line">sudo lsblk -lf       	 # 列举磁盘格式</span><br><span class="line">sudo blkid     			 # 磁盘uuid</span><br><span class="line">sudo fdisk /dev/sda  	 # 磁盘分区</span><br><span class="line">sudo mkfs.ext4 /dev/sda  # 格式化磁盘为 ext4 格式</span><br><span class="line">sudo mount /dev/sda /media/node/sda  # 挂载磁盘</span><br><span class="line">swapon -s              # 查看所有交换分区</span><br><span class="line">hdparm -i /dev/hda     # 查看磁盘参数(仅适用于IDE设备)</span><br><span class="line">dmesg | grep IDE       # 查看启动时IDE设备检测状况</span><br></pre></td></tr></table></figure>
-    
-    <a class="article-more-a" href="/2022/10/15/something-about-disk/#more">more >></a>
-    
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">disk</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/cs//" class="article-tag-list-link color3">cs</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2022/10/15/something-about-disk/">展开全文 >></a>
     </p>
     
 
@@ -1859,6 +1879,10 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">mongodb</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">vpn</a>
               </li>
             
             <div class="clearfix"></div>

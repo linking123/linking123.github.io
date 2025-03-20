@@ -201,6 +201,145 @@
             
 
   
+    <article id="post-一台机器部署多个Tomcat及如何忽略webapps里的项目" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2016/09/05/%E4%B8%80%E5%8F%B0%E6%9C%BA%E5%99%A8%E9%83%A8%E7%BD%B2%E5%A4%9A%E4%B8%AATomcat%E5%8F%8A%E5%A6%82%E4%BD%95%E5%BF%BD%E7%95%A5webapps%E9%87%8C%E7%9A%84%E9%A1%B9%E7%9B%AE/" target="_blank">一台机器部署多个Tomcat及如何忽略webapps里的项目</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2016/09/05/%E4%B8%80%E5%8F%B0%E6%9C%BA%E5%99%A8%E9%83%A8%E7%BD%B2%E5%A4%9A%E4%B8%AATomcat%E5%8F%8A%E5%A6%82%E4%BD%95%E5%BF%BD%E7%95%A5webapps%E9%87%8C%E7%9A%84%E9%A1%B9%E7%9B%AE/" class="archive-article-date">
+        <time datetime="2016-09-05T14:40:36.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-09-05</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h1 id="一台机器部署多个Tomcat"><a href="#一台机器部署多个Tomcat" class="headerlink" title="一台机器部署多个Tomcat"></a>一台机器部署多个Tomcat</h1><blockquote>
+<p>考虑到线上部署系统<strong>安全</strong>性，需要在同一台机器上部署多个Tomcat。一个系统一个Tomcat,这样更好的容灾机制，避免多米多骨牌效应。<br>重点：<strong>避免端口冲突</strong>    </p>
+</blockquote>
+<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><blockquote>
+<p>修改CATALINA_HOME\conf\server.xml中的启动端口和连接端口。</p>
+</blockquote>
+<p>操作步骤：</p>
+<blockquote>
+<ol>
+<li><a target="_blank" rel="noopener" href="http://tomcat.apache.org/download-70.cgi">下载</a>-解压apache-tomcat-x.x.xx.zip-改名tomcatx-8080</li>
+<li>复制，改名tomcatx-8090</li>
+<li>添加环境变量：CATALINA_HOME:d:\tocatx-8080;CATALINA_HOME2:d:\tomcatx-8090</li>
+<li>修改启动端口和关闭端口<br>进入d:\tomcat5-8090\conf\目录，打开server.xml文件，修改下面两个地方：<br>（1）<code>&lt;Server port=&quot;8006&quot; shutdown=&quot;SHUTDOWN&quot;&gt;</code><br>修改这个port&#x3D;”8006”，原来默认的为：8005，使得它的关闭端口和另一个关闭端口不发生冲突。<br>（2）<code>&lt;Connector port=&quot;8090&quot; maxHttpHeaderSize=&quot;8192&quot;   maxThreads=&quot;150&quot; minSpareThreads=&quot;25&quot; maxSpareThreads=&quot;75&quot; enableLookups=&quot;false&quot; redirectPort=&quot;8443&quot; acceptCount=&quot;100&quot; connectionTimeout=&quot;20000&quot; disableUploadTimeout=&quot;true&quot; /&gt;</code><br>修改port&#x3D;”8090”，原来默认的为“8080”，使得它的连接端口和另一个不冲突。</li>
+<li>修改startup.bat和catalina.bat文件内容：<br>(1) 打开d:\tomcat5-8090\bin\startup.bat文件，把其中所有CATALINA_HOME替换为CATALINA_HOME2。<br>（2）打开d:\tomcat5-8090\bin\catalina.bat文件，把其中所有CATALINA_HOME替换为CATALINA_HOME2。</li>
+<li>启动Tomcat，在命令行下分别进入两个不同的Tomcat安装目录下，执行startup.bat，分别启动两个Tomcat。然后在浏览器中输入：<a target="_blank" rel="noopener" href="http://localhost:8080/">http://localhost:8080</a>  和<a target="_blank" rel="noopener" href="http://localhost:8090/">http://localhost:8090</a></li>
+<li>至此，我们已经在一台服务器上配置了两个Tomcat。</li>
+</ol>
+</blockquote>
+<p>考虑到在本地运行，不需要那么复杂。只需要用Disable-WEB-INF。</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a><strong>参考</strong></h2><blockquote>
+<ol>
+<li><a target="_blank" rel="noopener" href="http://blog.163.com/hegonghe@126/blog/static/50004810200871483335100/">在同一台服务器上配置多个Tomcat（原创）</a></li>
+</ol>
+</blockquote>
+<h1 id="忽略webapps里的项目"><a href="#忽略webapps里的项目" class="headerlink" title="忽略webapps里的项目"></a>忽略webapps里的项目</h1><blockquote>
+<p>有时在同一个webapps中有多个项目，而又不想同时部署或启动，那么就要想办法忽略掉某些项目。</p>
+</blockquote>
+<h2 id="方法-1"><a href="#方法-1" class="headerlink" title="方法"></a>方法</h2><blockquote>
+<ol>
+<li>使用web application manager.密码？未实践<br>The Tomcat Web Application Manager lets you stop selected applications. I think that prevents them from loading when Tomcat is restarted.</li>
+<li>将需要忽略的项目的<code>WEB-INF</code>重命名为<code>Disabled-WEB-INF</code>.实践通过</li>
+<li>添加<code>deployIgnore=&quot;projectName&quot;</code>.不部署，</li>
+</ol>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;Host name=&quot;localhost&quot; appBase=&quot;webapps&quot; unpackWARs=&quot;true&quot; autoDeploy=&quot;false&quot; xmlValidation=&quot;false&quot; xmlNamespaceAware=&quot;false&quot;&gt; </span><br><span class="line">&lt;Context path=&quot;/acbd&quot; docBase=&quot;abcd&quot; debug=&quot;0&quot; reloadable=&quot;true&quot;/&gt; </span><br><span class="line">&lt;Valve className=&quot;org.apache.catalina.valves.AccessLogValve&quot; directory=&quot;logs&quot; prefix=&quot;localhost_access_log.&quot; suffix=&quot;.txt&quot; pattern=&quot;common&quot; resolveHosts=&quot;false&quot;/&gt; </span><br><span class="line">&lt;/Host&gt; </span><br></pre></td></tr></table></figure>
+
+<h2 id="参考-1"><a href="#参考-1" class="headerlink" title="参考"></a><strong>参考</strong></h2><blockquote>
+<ol>
+<li><a target="_blank" rel="noopener" href="http://stackoverflow.com/questions/5067062/how-to-disable-specific-apps-from-starting-during-tomcat-startup">How to disable specific apps from starting during Tomcat startup?</a></li>
+<li><a target="_blank" rel="noopener" href="https://coderanch.com/t/85667/Tomcat/avoid-loading-applications-webapps">avoid loading all applications under webapps</a></li>
+<li><a target="_blank" rel="noopener" href="http://tomcat.apache.org/tomcat-5.5-doc/config/host.html#Automatic_Application_Deployment">Apache.org</a></li>
+</ol>
+</blockquote>
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">tomcat</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/cs//" class="article-tag-list-link color3">cs</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2016/09/05/%E4%B8%80%E5%8F%B0%E6%9C%BA%E5%99%A8%E9%83%A8%E7%BD%B2%E5%A4%9A%E4%B8%AATomcat%E5%8F%8A%E5%A6%82%E4%BD%95%E5%BF%BD%E7%95%A5webapps%E9%87%8C%E7%9A%84%E9%A1%B9%E7%9B%AE/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-git学习一" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1441,185 +1580,6 @@
 
 
   
-    <article id="post-Ajax系列三-探讨XHR及POST数据" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2016/02/28/Ajax%E7%B3%BB%E5%88%97%E4%B8%89-%E6%8E%A2%E8%AE%A8XHR%E5%8F%8APOST%E6%95%B0%E6%8D%AE/" target="_blank">Ajax系列三-探讨XHR及POST数据</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2016/02/28/Ajax%E7%B3%BB%E5%88%97%E4%B8%89-%E6%8E%A2%E8%AE%A8XHR%E5%8F%8APOST%E6%95%B0%E6%8D%AE/" class="archive-article-date">
-        <time datetime="2016-02-28T14:21:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-02-28</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h2 id="Ajax系列三-深度探讨XHR及POST数据Ajax异步原理"><a href="#Ajax系列三-深度探讨XHR及POST数据Ajax异步原理" class="headerlink" title="#Ajax系列三-深度探讨XHR及POST数据Ajax异步原理"></a>#Ajax系列三-深度探讨XHR及POST数据<br>Ajax异步原理</h2><blockquote>
-<p>相当于在用户和服务器之间加了—个中间层(AJAX引擎),使用户操作与服务器响应异步化。并不是所有的用户请求都提交给服务器,像—些数据验证和数据处理等都交给Ajax引擎自己来做, 只有确定需要从服务器读取新数据时再由Ajax引擎代为向服务器提交请求。</p>
-</blockquote>
-<p><code>ajax</code>状态码</p>
-<table>
-<thead>
-<tr>
-<th align="center">排序</th>
-<th align="center">时间</th>
-<th align="center">状态码</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">0</td>
-<td align="center">XHR对象刚创建</td>
-<td align="center">0</td>
-</tr>
-<tr>
-<td align="center">1</td>
-<td align="center">open建立连接成功</td>
-<td align="center">1</td>
-</tr>
-<tr>
-<td align="center">2</td>
-<td align="center">接收头信息完毕</td>
-<td align="center">2</td>
-</tr>
-<tr>
-<td align="center">3</td>
-<td align="center">接收body信息完毕</td>
-<td align="center">3</td>
-</tr>
-<tr>
-<td align="center">4</td>
-<td align="center">成功,结束后</td>
-<td align="center">4</td>
-</tr>
-</tbody></table>
-<p><code>ajax</code>的好处就是不阻塞后面代码的执行。</p>
-<p><code>status</code>状态码为<code>200</code>,<code>statusText</code>状态文字是<code>OK</code>时，正确返回。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">if(this.readyState == 4 &amp;&amp; this.status == 200)&#123;</span><br><span class="line">	var str = &#x27;&#x27;;</span><br><span class="line">	str = &#x27;状态码是 &#x27; + this.status;</span><br><span class="line">	str += &#x27;状态文字是 &#x27; + this.statusText;</span><br><span class="line">	document.getElementById(&#x27;progress&#x27;).innerHTML = str;</span><br><span class="line">&#125;    </span><br></pre></td></tr></table></figure>
-
-<p><code>abort</code>属性 –&gt; 中断<code>xhr</code></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">function stopxhr()&#123;</span><br><span class="line">	xhr.abort();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><code>send</code>参数写法：<code>k1=v1&amp;k2=v2&amp;k3=v3...</code></p>
-<p><code>POST</code>请求必须加上<code>Content-Type: application/x-www-form-urlencoded</code></p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">xhr.<span class="title function_">setRequestHeader</span>(<span class="string">&#x27;Content-Type&#x27;</span>,<span class="string">&#x27;application/x-www-form-urlencoded&#x27;</span>);</span><br><span class="line">xhr.<span class="title function_">send</span>(<span class="string">&#x27;username=&#x27;</span>+un+<span class="string">&#x27;&amp;email=&#x27;</span>+eml);</span><br></pre></td></tr></table></figure>
-
-<h2 id="Ajax返回值之XML类型"><a href="#Ajax返回值之XML类型" class="headerlink" title="Ajax返回值之XML类型"></a>Ajax返回值之XML类型</h2><p>返回值类型：</p>
-<blockquote>
-<p>不考虑HTML5最新标准，返回值有普通文本&#x2F;xml文档两种类型</p>
-</blockquote>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php </span><br><span class="line">header(&#x27;Content-Type: text/xml&#x27;);</span><br><span class="line">?&gt;</span><br><span class="line">//此处空了一行</span><br><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span><br><span class="line">&lt;bookstore&gt;&lt;book bid=&#x27;b0001&#x27;&gt;&lt;title&gt;天龙八部&lt;/title&gt;&lt;intro&gt;人生太苦了&lt;/intro&gt;&lt;/book&gt;&lt;/bookstore&gt;</span><br></pre></td></tr></table></figure>
-<p>打开以上<code>xxx.php</code>，<code>xml</code>格式错误提示:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">This page contains the following errors:</span><br><span class="line">error on line 2 at column 6: XML declaration allowed only at the start of the document.</span><br><span class="line">Below is a rendering of the page up to the first error.</span><br></pre></td></tr></table></figure>
-<p>错误显示：<code>xml</code>必须在文档的首行,如下</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php </span><br><span class="line">header(&#x27;Content-Type: text/xml&#x27;);</span><br><span class="line">?&gt; </span><br><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span><br><span class="line">&lt;bookstore&gt;&lt;book bid=&#x27;b0001&#x27;&gt;&lt;title&gt;天龙八部&lt;/title&gt;&lt;intro&gt;人生太苦了&lt;/intro&gt;&lt;/book&gt;&lt;/bookstore&gt;</span><br></pre></td></tr></table></figure>
-
-<p><strong>API最简单了，基本上照着开发文档写就行了。</strong></p>
-<p><strong><code>Ajax</code>默认无法跨域。最新标准可以，但需要对方允许。</strong></p>
-<p>取后台数据：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">xhr.onreadystatechange = function()&#123;</span><br><span class="line">	if(this.readyState == 4)&#123;         //this即xhr对象</span><br><span class="line">		// alert(this.responseXML);</span><br><span class="line">		var xmldom = this.responseXML; </span><br><span class="line">		var book = xmldom.getElementsByTagName(&#x27;book&#x27;)[&#x27;0&#x27;]; </span><br><span class="line">		var title = book.firstChild.firstChild.wholeText;</span><br><span class="line">		var intro = book.lastChild.firstChild.wholeText;</span><br><span class="line">		document.getElementById(&#x27;btitle&#x27;).value = title;</span><br><span class="line">		document.getElementById(&#x27;bintro&#x27;).value = intro;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>在后端生成格式化文件，拼接成<code>HTML</code>或者<code>json</code>文档，操作DOM，生成新的<code>HTML</code>页面。</p>
-<p><em>返回值类型：大的方向可以分为普通文本和xml文档。</em><br>普通文本返回类型又分为：</p>
-<ul>
-<li>返回简短的标志字符串，如0,1,OK</li>
-<li>后台返回大段的<code>HTML</code>代码，直接<code>innerHTML</code>到前端页面</li>
-<li><code>json</code>格式，再由js解析</li>
-</ul>
-<p>很多类型，除了<code>HTML5</code>新标准返回的是<code>json</code>,本是文本，只不过符合某些规律，例如<code>json</code>格式。</p>
-<p><code>eval</code>将普通文本转化成js对象<code>[object: Object]</code>。<br>自己手写的后台数据：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php  //code  ?&gt;</span><br><span class="line">&#123;name: &#x27;linking&#x27;, sex: &#x27;male&#x27;&#125;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
-<p>前端解析：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var linking = eval(&#x27;(&#x27; + this.responseText + &#x27;)&#x27;);</span><br><span class="line">alert(linking.name);</span><br></pre></td></tr></table></figure>
-<p>如果是<code>PHP</code>后台获取数据:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$book = array(&#x27;title&#x27; =&gt; &#x27;天龙八部&#x27;, &#x27;intro&#x27; =&gt; &#x27;人生九苦&#x27; );</span><br><span class="line">echo json_encode($book) ;</span><br></pre></td></tr></table></figure>
-
-<h2 id="JSONP解决跨域问题"><a href="#JSONP解决跨域问题" class="headerlink" title="JSONP解决跨域问题"></a>JSONP解决跨域问题</h2><p><code>JSONP</code>不是<code>JSON</code>，只是一种协议，还未被标准组织规范，大家约定使用返回字符串；不用造对象。</p>
-<p><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/JSONP">Wikipedia</a>解释: </p>
-<blockquote>
-<p>JSONP(JSON with Padding)是资料格式 JSON 的一种“使用模式”，可以让网页从别的网域要资料。另一个解决这个问题的新方法是<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E8%B7%A8%E4%BE%86%E6%BA%90%E8%B3%87%E6%BA%90%E5%85%B1%E4%BA%AB">跨来源资源共享</a>(CORS)。<br>由于<strong>同源策略</strong>，一般来说位于 server1.example.com 的网页无法与不是 server1.example.com 的服务器沟通，而 HTML 的 script 元素是一个例外。利用 script 元素的这个开放策略，网页可以得到从其他来源动态产生的 JSON 资料，而这种使用模式就是所谓的 JSONP。用 JSONP 抓到的资料并不是 JSON，而是任意的 JavaScript，用 JavaScript 直译器执行而不是用 JSON 解析器解析。<br><strong>padding填充</strong>：典型的 JSONP 就是把既有的 JSON API 用函数呼叫<strong>包起来</strong>以达到跨域存取的解法。<br><strong>script元素注入</strong>：为了要启动一个 JSONP 呼叫（或者说，使用这个模式），你需要一个 script 元素。因此，浏览器必须为每一个 JSONP 要求加（或是重用）一个新的、有所需 src 值的 script 元素到 HTML DOM 里—或者说是“注入”这个元素。浏览器执行该元素，抓取 src 里的 URL，并执行回传的 JavaScript。<br>也因为这样，JSONP 被称作是一种“让使用者利用 script 元素注入的方式绕开同源策略”的方法。</p>
-</blockquote>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">function sear()&#123;</span><br><span class="line">	//获取将要搜索的内容</span><br><span class="line">	var searchtext = document.getElementsByName(&#x27;searchtext&#x27;)[0].value;</span><br><span class="line">	//Google ajax API 搜索参数，返回json格式，利用回调函数aa解析</span><br><span class="line">	var url = &#x27;http://ajax.googleais.com/ajax/services/search/web?v=1.0&amp;q=&#x27;+ searchtext + &#x27;&amp;callback=aa&#x27;;</span><br><span class="line">	//动态创建script标签，加入head，使其以script形式加载进来</span><br><span class="line">	var scr = document.createElement(&#x27;script&#x27;);</span><br><span class="line">	scr.setAttribute(&#x27;type&#x27;, &#x27;text/javascript&#x27;);</span><br><span class="line">	scr.setAttribute(&#x27;src&#x27;, url);</span><br><span class="line">	document.getElementByTagName(&#x27;head&#x27;)[0].appendChild(scr);</span><br><span class="line">&#125;</span><br><span class="line">//回调函数，对返回的数据进行处理</span><br><span class="line">function aa(res)&#123;</span><br><span class="line">	alert(res);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">ajax</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/cs//" class="article-tag-list-link color3">cs</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2016/02/28/Ajax%E7%B3%BB%E5%88%97%E4%B8%89-%E6%8E%A2%E8%AE%A8XHR%E5%8F%8APOST%E6%95%B0%E6%8D%AE/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/10/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="page-number" href="/page/10/">10</a><span class="page-number current">11</span><a class="page-number" href="/page/12/">12</a><a class="page-number" href="/page/13/">13</a><a class="extend next" rel="next" href="/page/12/">Next &raquo;</a>
@@ -2174,6 +2134,10 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">mongodb</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">vpn</a>
               </li>
             
             <div class="clearfix"></div>

@@ -201,6 +201,206 @@
             
 
   
+    <article id="post-《利用Python进行数据分析》读书笔记-6-第六章-数据加载、存储和数据格式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2017/03/25/%E3%80%8A%E5%88%A9%E7%94%A8Python%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E3%80%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0-6-%E7%AC%AC%E5%85%AD%E7%AB%A0-%E6%95%B0%E6%8D%AE%E5%8A%A0%E8%BD%BD%E3%80%81%E5%AD%98%E5%82%A8%E5%92%8C%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8F/" target="_blank">《利用Python进行数据分析》读书笔记-6-第六章-数据加载、存储和数据格式</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2017/03/25/%E3%80%8A%E5%88%A9%E7%94%A8Python%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E3%80%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0-6-%E7%AC%AC%E5%85%AD%E7%AB%A0-%E6%95%B0%E6%8D%AE%E5%8A%A0%E8%BD%BD%E3%80%81%E5%AD%98%E5%82%A8%E5%92%8C%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8F/" class="archive-article-date">
+        <time datetime="2017-03-25T14:49:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-03-25</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <p>输入输出分类：</p>
+<ul>
+<li>读取文本文件</li>
+<li>其他更高效的磁盘存储格式</li>
+<li>加载数据库中数据</li>
+<li>利用Web API操作网络资源</li>
+</ul>
+<h2 id="读取文本格式的数据"><a href="#读取文本格式的数据" class="headerlink" title="读取文本格式的数据"></a>读取文本格式的数据</h2><p>pandas提供了将表格数据读取为DataFrame对象的函数；其中read_csv和read_table是应用最多的两个：</p>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>read_csv</td>
+<td>从文件、URL、文件型对象中加载带分隔符的数据；默认逗号</td>
+</tr>
+<tr>
+<td>read_table</td>
+<td>从文件、URL、文件型对象中加载带分隔符的数据；默认制表符”\t”</td>
+</tr>
+</tbody></table>
+<p>类型推断是这些函数中最重要的功能之一。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">$ cat ex1.csv</span><br><span class="line">&lt;!--out: --&gt;</span><br><span class="line">&lt;!--a,b,c,d,message--&gt;</span><br><span class="line">&lt;!--0,1,2,3,4,hello--&gt;</span><br><span class="line">&lt;!--1,5,6,7,8,world--&gt;</span><br><span class="line">&lt;!--2,9,10,11,12,foo--&gt;</span><br><span class="line">#以上数据用逗号隔开</span><br><span class="line"></span><br><span class="line">import pandas as pd</span><br><span class="line">import numpy as np</span><br><span class="line">from pandas import Series, DataFrame</span><br><span class="line"></span><br><span class="line">df = pd.read_csv(&#x27;../pydata-book-master/ch06/ex1.csv&#x27;)</span><br><span class="line"># print df</span><br><span class="line">#  a   b   c   d message</span><br><span class="line"># 0  1   2   3   4   hello</span><br><span class="line"># 1  5   6   7   8   world</span><br><span class="line"># 2  9  10  11  12     foo</span><br><span class="line">pt = pd.read_table(&#x27;../pydata-book-master/ch06/ex1.csv&#x27;, sep=&#x27;,&#x27;)</span><br><span class="line"># print pt</span><br><span class="line"># out: 同上</span><br></pre></td></tr></table></figure>
+
+<p>对于没有标题行的文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">$ cat ex2.csv</span><br><span class="line">&lt;!--out: --&gt; </span><br><span class="line">&lt;!--0,1,2,3,4,hello--&gt;</span><br><span class="line">&lt;!--1,5,6,7,8,world--&gt;</span><br><span class="line">&lt;!--2,9,10,11,12,foo--&gt;</span><br><span class="line"></span><br><span class="line"># 自动分配默认列名</span><br><span class="line"></span><br><span class="line"># pc = pd.read_csv(&#x27;../pydata-book-master/ch06/ex2.csv&#x27;, header=None)</span><br><span class="line"># print pc</span><br><span class="line">#    0   1   2   3      4</span><br><span class="line"># 0  1   2   3   4  hello</span><br><span class="line"># 1  5   6   7   8  world</span><br><span class="line"># 2  9  10  11  12    foo</span><br><span class="line"># 手动定义列名</span><br><span class="line"># pc2 = pd.read_csv(&#x27;../pydata-book-master/ch06/ex2.csv&#x27;, names=[&#x27;a&#x27;,&#x27;b&#x27;,&#x27;c&#x27;,&#x27;d&#x27;,&#x27;msg&#x27;])</span><br><span class="line"># print pc2</span><br><span class="line">#    a   b   c   d    msg</span><br><span class="line"># 0  1   2   3   4  hello</span><br><span class="line"># 1  5   6   7   8  world</span><br><span class="line"># 2  9  10  11  12    foo</span><br></pre></td></tr></table></figure>
+
+<p>指定索引</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"># 指定索引</span><br><span class="line">names = [&#x27;a&#x27;,&#x27;b&#x27;,&#x27;c&#x27;,&#x27;d&#x27;,&#x27;msg&#x27;]</span><br><span class="line">pc3 = pd.read_csv(&#x27;../pydata-book-master/ch06/ex2.csv&#x27;, names=names, index_col=&#x27;msg&#x27;)</span><br><span class="line"># print pc3</span><br><span class="line">#        a   b   c   d</span><br><span class="line"># msg</span><br><span class="line"># hello  1   2   3   4</span><br><span class="line"># world  5   6   7   8</span><br><span class="line"># foo    9  10  11  12</span><br><span class="line"># 层次化索引</span><br><span class="line">parsed = pd.read_csv(&#x27;../pydata-book-master/ch06/csv_mindex.csv&#x27;, index_col=[&#x27;key1&#x27;, &#x27;key2&#x27;])</span><br><span class="line"># print parsed</span><br><span class="line">#            value1  value2</span><br><span class="line"># key1 key2</span><br><span class="line"># one  a          1       2</span><br><span class="line">#      b          3       4</span><br><span class="line">#      c          5       6</span><br><span class="line">#      d          7       8</span><br><span class="line"># two  a          9      10</span><br><span class="line">#      b         11      12</span><br><span class="line">#      c         13      14</span><br><span class="line">#      d         15      16</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"># 非固定分隔符，需要正则表达式</span><br><span class="line"># print list(open(&#x27;../pydata-book-master/ch06/ex3.csv&#x27;))</span><br><span class="line"># [&#x27;            A         B         C\n&#x27;,</span><br><span class="line">#  &#x27;aaa -0.264438 -1.026059 -0.619500\n&#x27;,</span><br><span class="line">#  &#x27;bbb  0.927272  0.302904 -0.032399\n&#x27;,</span><br><span class="line">#  &#x27;ccc -0.264273 -0.386314 -0.217601\n&#x27;,</span><br><span class="line">#  &#x27;ddd -0.871858 -0.348382  1.100491&#x27;]</span><br><span class="line"># 观察到该文件各个字段由不定数量的空白符分割，用`\s+`这个正则来表示：</span><br><span class="line">result = pd.read_table(&#x27;../pydata-book-master/ch06/ex3.csv&#x27;, sep=&#x27;\s+&#x27;)</span><br><span class="line"># print result</span><br><span class="line">#             A         B         C</span><br><span class="line"># aaa -0.264438 -1.026059 -0.619500</span><br><span class="line"># bbb  0.927272  0.302904 -0.032399</span><br><span class="line"># ccc -0.264273 -0.386314 -0.217601</span><br><span class="line"># ddd -0.871858 -0.348382  1.100491</span><br></pre></td></tr></table></figure>
+
+<p>跳过异常行(使用参数skiprows)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$ cat ch06/ex4.csv </span><br><span class="line"># hey!</span><br><span class="line">a,b,c,d,message</span><br><span class="line"># just wanted to make things more difficult for you</span><br><span class="line"># who reads CSV files with computers, anyway?</span><br><span class="line">1,2,3,4,hello</span><br><span class="line">5,6,7,8,world</span><br><span class="line">9,10,11,12,foo% </span><br></pre></td></tr></table></figure>
+<p>可以认为1，3，4行为异常数据</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">print pd.read_csv(&#x27;../pydata-book-master/ch06/ex4.csv&#x27;, skiprows=[0,2,3])</span><br><span class="line">#    a   b   c   d message</span><br><span class="line"># 0  1   2   3   4   hello</span><br><span class="line"># 1  5   6   7   8   world</span><br><span class="line"># 2  9  10  11  12     foo</span><br></pre></td></tr></table></figure>
+
+<h2 id="逐块读取文本文件"><a href="#逐块读取文本文件" class="headerlink" title="逐块读取文本文件"></a>逐块读取文本文件</h2><p>大文件只想读取一小部分或者逐块对文件进行迭代</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">result = pd.read_csv(&#x27;../pydata-book-master/ch06/ex6.csv&#x27;, nrows=5)</span><br><span class="line"># print result</span><br><span class="line">#         one       two     three      four key</span><br><span class="line"># 0  0.467976 -0.038649 -0.295344 -1.824726   L</span><br><span class="line"># 1 -0.358893  1.404453  0.704965 -0.200638   B</span><br><span class="line"># 2 -0.501840  0.659254 -0.421691 -0.057688   G</span><br><span class="line"># 3  0.204886  1.074134  1.388361 -0.982404   R</span><br><span class="line"># 4  0.354628 -0.133116  0.283763 -0.837063   Q</span><br></pre></td></tr></table></figure>
+
+<p>逐块读取;用到chunksize(行数)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"># chunker = pd.read_csv(&#x27;../pydata-book-master/ch06/ex6.csv&#x27;, chunksize=100)</span><br><span class="line"># print chunker</span><br><span class="line"># &lt;pandas.io.parsers.TextFileReader object at 0x10f6175d0&gt;</span><br><span class="line"># TextFileReader对象可实现盾剑逐块迭代</span><br><span class="line">chunker = pd.read_csv(&#x27;../pydata-book-master/ch06/ex6.csv&#x27;, chunksize=1000)</span><br><span class="line">tot = Series([])</span><br><span class="line">for piece in chunker:</span><br><span class="line">    tot = tot.add(piece[&#x27;key&#x27;].value_counts(), fill_value=0)</span><br><span class="line">tot = tot.sort_values(ascending=False)</span><br><span class="line">print tot[:10]</span><br><span class="line"># E    368.0</span><br><span class="line"># X    364.0</span><br><span class="line"># L    346.0</span><br><span class="line"># O    343.0</span><br><span class="line"># Q    340.0</span><br><span class="line"># M    338.0</span><br><span class="line"># J    337.0</span><br><span class="line"># F    335.0</span><br><span class="line"># K    334.0</span><br><span class="line"># H    330.0</span><br><span class="line"># dtype: float64</span><br></pre></td></tr></table></figure>
+
+<h2 id="将数据写到文本格式"><a href="#将数据写到文本格式" class="headerlink" title="将数据写到文本格式"></a>将数据写到文本格式</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">data = pd.read_csv(&#x27;../pydata-book-master/ch06/ex5.csv&#x27;)</span><br><span class="line"># print data</span><br><span class="line">#   something  a   b     c   d message</span><br><span class="line"># 0       one  1   2   3.0   4     NaN</span><br><span class="line"># 1       two  5   6   NaN   8   world</span><br><span class="line"># 2     three  9  10  11.0  12     foo</span><br></pre></td></tr></table></figure>
+<p>pandas.read_csv生成的是DataFrame对象；</p>
+<p>DataFrame的to_csv方法，可以将数据写到一个用逗号分隔的文件中</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">data.to_csv(&#x27;./ch06_out.csv&#x27;)</span><br><span class="line"># $ cat ./ch06_out.csv</span><br><span class="line"># ,something,a,b,c,d,message</span><br><span class="line"># 0,one,1,2,3.0,4,</span><br><span class="line"># 1,two,5,6,,8,world</span><br><span class="line"># 2,three,9,10,11.0,12,foo</span><br><span class="line"></span><br><span class="line"># 可以指定分隔符,如|；这里只为了展示，所以用sys.stdout直接打印出来了。</span><br><span class="line">data.to_csv(sys.stdout, sep=&#x27;|&#x27;)</span><br><span class="line"># |something|a|b|c|d|message</span><br><span class="line"># 0|one|1|2|3.0|4|</span><br><span class="line"># 1|two|5|6||8|world</span><br><span class="line"># 2|three|9|10|11.0|12|foo</span><br></pre></td></tr></table></figure>
+
+<p>将缺失值替换为其他标记值</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">data.to_csv(sys.stdout, na_rep=&#x27;NULL&#x27;)</span><br><span class="line"># ,something,a,b,c,d,message</span><br><span class="line"># 0,one,1,2,3.0,4,NULL</span><br><span class="line"># 1,two,5,6,NULL,8,world</span><br><span class="line"># 2,three,9,10,11.0,12,foo</span><br></pre></td></tr></table></figure>
+
+<p>只输出特定列，指定顺序</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">data.to_csv(sys.stdout, index=False, columns=[&#x27;a&#x27;, &#x27;b&#x27;, &#x27;c&#x27;])</span><br><span class="line"># a,b,c</span><br><span class="line"># 1,2,3.0</span><br><span class="line"># 5,6,</span><br><span class="line"># 9,10,11.0</span><br></pre></td></tr></table></figure>
+
+<p>Series也有to_csv()方法</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">datas = pd.date_range(&#x27;1/1/2000&#x27;, periods=7)</span><br><span class="line">ts = Series(np.arange(7), index=datas)</span><br><span class="line">ts.to_csv(&#x27;./ch06tsseries.csv&#x27;)</span><br><span class="line"># 2000-01-01,0</span><br><span class="line"># 2000-01-02,1</span><br><span class="line"># 2000-01-03,2</span><br><span class="line"># 2000-01-04,3</span><br><span class="line"># 2000-01-05,4</span><br><span class="line"># 2000-01-06,5</span><br><span class="line"># 2000-01-07,6</span><br></pre></td></tr></table></figure>
+
+<p>更简单的读取方法from_csv</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># print Series.from_csv(&#x27;./ch06tsseries.csv&#x27;, parse_dates=True)</span><br><span class="line"># 2000-01-01    0</span><br><span class="line"># 2000-01-02    1</span><br><span class="line"># 2000-01-03    2</span><br><span class="line"># 2000-01-04    3</span><br><span class="line"># 2000-01-05    4</span><br><span class="line"># 2000-01-06    5</span><br><span class="line"># 2000-01-07    6</span><br><span class="line"># dtype: int64</span><br></pre></td></tr></table></figure>
+
+<h2 id="手工处理分隔符格式"><a href="#手工处理分隔符格式" class="headerlink" title="手工处理分隔符格式"></a>手工处理分隔符格式</h2><p>场景：pandas.read_table加载表格数据时，由于畸形行导致错误</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"># $ cat ch06/ex7.csv</span><br><span class="line"># &quot;a&quot;,&quot;b&quot;,&quot;c&quot;</span><br><span class="line"># &quot;1&quot;,&quot;2&quot;,&quot;3&quot;</span><br><span class="line"># &quot;1&quot;,&quot;2&quot;,&quot;3&quot;,&quot;4&quot;</span><br><span class="line"></span><br><span class="line">import csv</span><br><span class="line"></span><br><span class="line">lines = list(csv.reader(open(&#x27;../pydata-book-master/ch06/ex7.csv&#x27;)))</span><br><span class="line">headers, values = lines[0], lines[1:]</span><br><span class="line">data_dict = &#123;h: v for h, v in zip(headers, zip(*values))&#125;</span><br><span class="line"># print data_dict</span><br><span class="line"># &#123;&#x27;a&#x27;: (&#x27;1&#x27;, &#x27;1&#x27;), &#x27;c&#x27;: (&#x27;3&#x27;, &#x27;3&#x27;), &#x27;b&#x27;: (&#x27;2&#x27;, &#x27;2&#x27;)&#125;</span><br><span class="line"></span><br><span class="line">class my_dialect(csv.Dialect):</span><br><span class="line">    lineterminator = &#x27;\n&#x27;</span><br><span class="line">    delimiter = &#x27;;&#x27;</span><br><span class="line">    quotechar = &#x27;&quot;&#x27;</span><br><span class="line">    quoting = csv.QUOTE_ALL</span><br><span class="line"></span><br><span class="line"># delimiter分隔符指定</span><br><span class="line"></span><br><span class="line">f = open(&#x27;../pydata-book-master/ch06/ex7.csv&#x27;)</span><br><span class="line">reader = csv.reader(f, dialect=my_dialect)</span><br><span class="line"># print reader</span><br><span class="line"># &lt;_csv.reader object at 0x10a5bb440&gt;</span><br><span class="line"># 以上类的参数也可以单个的传入csv.reader方法</span><br></pre></td></tr></table></figure>
+
+<p>手动写入分隔符文件csv.writer</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">with open(&#x27;mydata.csv&#x27;, &#x27;w&#x27;) as fw:</span><br><span class="line">    writer = csv.writer(fw, my_dialect)</span><br><span class="line">    writer.writerow((&quot;one&quot;, &quot;two&quot;, &quot;three&quot;))</span><br><span class="line">    writer.writerow((&#x27;1&#x27;, &#x27;2&#x27;, &#x27;3&#x27;))</span><br><span class="line">    writer.writerow((&#x27;4&#x27;, &#x27;5&#x27;, &#x27;6&#x27;))</span><br><span class="line">    writer.writerow((&#x27;7&#x27;, &#x27;8&#x27;, &#x27;9&#x27;))</span><br><span class="line"># out: mydata.csv</span><br><span class="line"># &quot;one&quot;;&quot;two&quot;;&quot;three&quot;</span><br><span class="line"># &quot;1&quot;;&quot;2&quot;;&quot;3&quot;</span><br><span class="line"># &quot;4&quot;;&quot;5&quot;;&quot;6&quot;</span><br><span class="line"># &quot;7&quot;;&quot;8&quot;;&quot;9&quot;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>tip:一些东西还是要看源码才最直接</p>
+</blockquote>
+<h2 id="JSON数据"><a href="#JSON数据" class="headerlink" title="JSON数据"></a>JSON数据</h2><blockquote>
+<p>JSON已成为HTTP请求在Web浏览器和其他程序之间发送数据的标准格式之一、</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">obj1 = &quot;&quot;&quot;</span><br><span class="line">&#123;&quot;name&quot;: &quot;Wes&quot;,</span><br><span class="line">&quot;places_lived&quot;: [&quot;United States&quot;, &quot;Spain&quot;, &quot;Germany&quot;],</span><br><span class="line">&quot;pet&quot;:null,</span><br><span class="line">&quot;siblings&quot;:[&#123;&quot;name&quot;:&quot;Scott&quot;, &quot;age&quot;:25, &quot;pet&quot;:&quot;Zuko&quot;&#125;, &#123;&quot;name&quot;:&quot;Katie&quot;, &quot;age&quot;:22, &quot;pet&quot;:&quot;Cisco&quot;&#125;]</span><br><span class="line">&#125;</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">import json</span><br><span class="line"># json.loads将JSON字符串转换成Python形式</span><br><span class="line">result = json.loads(obj1)</span><br><span class="line"># print result</span><br><span class="line"># &#123;u&#x27;pet&#x27;: None,</span><br><span class="line"># u&#x27;siblings&#x27;: [&#123;u&#x27;pet&#x27;: u&#x27;Zuko&#x27;, u&#x27;age&#x27;: 25, u&#x27;name&#x27;: u&#x27;Scott&#x27;&#125;,</span><br><span class="line">#               &#123;u&#x27;pet&#x27;: u&#x27;Cisco&#x27;, u&#x27;age&#x27;: 22, u&#x27;name&#x27;: u&#x27;Katie&#x27;&#125;],</span><br><span class="line"># u&#x27;name&#x27;: u&#x27;Wes&#x27;,</span><br><span class="line"># u&#x27;places_lived&#x27;: [u&#x27;United States&#x27;, u&#x27;Spain&#x27;, u&#x27;Germany&#x27;]&#125;</span><br><span class="line"># 对应的，json.dumps将Python转换成JSON形式</span><br><span class="line">asjson = json.dumps(result)</span><br><span class="line"># print asjson</span><br><span class="line"># &#123;&quot;pet&quot;: null, &quot;siblings&quot;: [&#123;&quot;pet&quot;: &quot;Zuko&quot;, &quot;age&quot;: 25, &quot;name&quot;: &quot;Scott&quot;&#125;,</span><br><span class="line">#                            &#123;&quot;pet&quot;: &quot;Cisco&quot;, &quot;age&quot;: 22, &quot;name&quot;: &quot;Katie&quot;&#125;],</span><br><span class="line">#  &quot;name&quot;: &quot;Wes&quot;, &quot;places_lived&quot;: [&quot;United States&quot;, &quot;Spain&quot;, &quot;Germany&quot;]&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="XML和HTML：Web信息收集"><a href="#XML和HTML：Web信息收集" class="headerlink" title="XML和HTML：Web信息收集"></a>XML和HTML：Web信息收集</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line"># http://finance.yahoo.com/quote/AAPL/options?ltr=1</span><br><span class="line">from lxml.html import parse</span><br><span class="line">from urllib2 import urlopen</span><br><span class="line"># 原网址404，在雅虎随便找了一个阿里巴巴的</span><br><span class="line"># parsed = parse(urlopen(&#x27;http://finance.yahoo.com/quote/BABA/options?p=BABA&#x27;))</span><br><span class="line"># doc = parsed.getroot()</span><br><span class="line"># 通过上面的对象，可获取特定的tag</span><br><span class="line"># 如获取所有的链接；&lt;a href=&quot;#&quot;&gt;word&lt;/a&gt;</span><br><span class="line"># links = doc.findall(&#x27;.//a&#x27;)</span><br><span class="line"># print links[:5]</span><br><span class="line"># [&lt;Element a at 0x1109ace10&gt;,</span><br><span class="line"># &lt;Element a at 0x1109ace68&gt;,</span><br><span class="line"># &lt;Element a at 0x1109acec0&gt;,</span><br><span class="line"># &lt;Element a at 0x1109acf18&gt;,</span><br><span class="line"># &lt;Element a at 0x1109acf70&gt;]</span><br><span class="line"># lnk = links[7]</span><br><span class="line"># print lnk</span><br><span class="line"># &lt;Element a at 0x1040d3628&gt;</span><br><span class="line"># 从以上对象中提取出href</span><br><span class="line"># print len(links)</span><br><span class="line"># 50个</span><br><span class="line"># print lnk.get(&#x27;href&#x27;)</span><br><span class="line"># https://www.yahoo.com/celebrity/</span><br><span class="line"># print lnk.text_content()</span><br><span class="line"># Celebrity</span><br><span class="line"></span><br><span class="line"># 构建列表推导式，获取全部URL</span><br><span class="line"># urls = [lnk1.get(&#x27;href&#x27;) for lnk1 in doc.findall(&#x27;.//a&#x27;)]</span><br><span class="line"># print urls[-10:]</span><br><span class="line"># [&#x27;//finance.yahoo.com/broker-comparison?bypass=true&#x27;,</span><br><span class="line"># &#x27;https://help.yahoo.com/kb/index?page=content&amp;y=PROD_MAIL_ML&amp;locale=en_US&amp;id=SLN2310&amp;actp=productlink&#x27;,</span><br><span class="line"># &#x27;http://help.yahoo.com/l/us/yahoo/finance/&#x27;,</span><br><span class="line"># &#x27;https://yahoo.uservoice.com/forums/382977&#x27;,</span><br><span class="line"># &#x27;http://info.yahoo.com/privacy/us/yahoo/&#x27;,</span><br><span class="line"># &#x27;http://info.yahoo.com/relevantads/&#x27;,</span><br><span class="line"># &#x27;http://info.yahoo.com/legal/us/yahoo/utos/utos-173.html&#x27;,</span><br><span class="line"># &#x27;http://twitter.com/YahooFinance&#x27;,</span><br><span class="line"># &#x27;http://facebook.com/yahoofinance&#x27;,</span><br><span class="line"># &#x27;http://yahoofinance.tumblr.com&#x27;]</span><br><span class="line"></span><br><span class="line"># 从文档中找出正确的表格就是反复试验</span><br><span class="line"># parsed1 = parse(urlopen(&#x27;http://finance.yahoo.com/quote/BABA/options?p=BABA&#x27;))</span><br><span class="line"># doc1 = parsed1.getroot()</span><br><span class="line"># tables = doc1.findall(&#x27;.//table&#x27;)</span><br><span class="line"># calls = tables[0]</span><br><span class="line"># puts = tables[0]</span><br><span class="line"># rows = calls.findall(&#x27;.//tr&#x27;)</span><br><span class="line"># print rows[0].text_content()</span><br><span class="line"># Search</span><br><span class="line"># def unpack(row, kind=&#x27;td&#x27;):</span><br><span class="line">#     elts = row.findall(&#x27;.//%s&#x27; % kind)</span><br><span class="line">#     return [val.text_content() for val in elts]</span><br><span class="line"></span><br><span class="line"># print unpack(rows[0], kind=&#x27;th&#x27;)</span><br><span class="line"># 由于对Safari怎么获取XPath不熟悉，后期还要专门了解</span><br><span class="line"># 原网址变动，书本代码无法运行，需要深入理解改写一下</span><br><span class="line"># 完全照着书本敲收效甚微</span><br><span class="line"></span><br><span class="line"># 利用lxml.objectify解析XML</span><br><span class="line">from lxml import objectify</span><br><span class="line">path = &#x27;../pydata-book-master/ch06/mta_perf/Performance_MNR.xml&#x27;</span><br><span class="line">parsed2 = objectify.parse(open(path))</span><br><span class="line">root = parsed2.getroot()</span><br><span class="line">print root</span><br></pre></td></tr></table></figure>
+
+<h2 id="利用lxml-objectify解析XML"><a href="#利用lxml-objectify解析XML" class="headerlink" title="利用lxml.objectify解析XML"></a>利用lxml.objectify解析XML</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">from lxml import objectify</span><br><span class="line"># path = &#x27;../pydata-book-master/ch06/mta_perf/Performance_MNR.xml&#x27;</span><br><span class="line"># parsed2 = objectify.parse(open(path))</span><br><span class="line"># root = parsed2.getroot()</span><br><span class="line"># print root</span><br><span class="line"></span><br><span class="line"># 解析HTML标签</span><br><span class="line">from StringIO import StringIO</span><br><span class="line">tag = &#x27;&lt;a href=&quot;http://www.google.com&quot;&gt;Google&lt;/a&gt;&#x27;</span><br><span class="line">root = objectify.parse(StringIO(tag)).getroot()</span><br><span class="line"># print root.get(&#x27;href&#x27;)</span><br><span class="line"># http://www.google.com</span><br><span class="line"># print root.text</span><br><span class="line"># Google</span><br></pre></td></tr></table></figure>
+
+<h2 id="二进制数据格式"><a href="#二进制数据格式" class="headerlink" title="二进制数据格式"></a>二进制数据格式</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># 保存到磁盘上</span><br><span class="line">frame = pd.read_csv(&#x27;../pydata-book-master/ch06/ex1.csv&#x27;)</span><br><span class="line"># print  frame</span><br><span class="line">#    a   b   c   d message</span><br><span class="line"># 0  1   2   3   4   hello</span><br><span class="line"># 1  5   6   7   8   world</span><br><span class="line"># 2  9  10  11  12     foo</span><br><span class="line"># 从磁盘读取到Python对象中</span><br><span class="line">print pd.load(&#x27;../pydata-book-master/ch06/frame_pickle&#x27;)</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="读取Microsoft-Excel文件-pandas的ExcelFile类）"><a href="#读取Microsoft-Excel文件-pandas的ExcelFile类）" class="headerlink" title="读取Microsoft Excel文件(pandas的ExcelFile类）"></a>读取Microsoft Excel文件(pandas的ExcelFile类）</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">xls_file = pd.ExcelFile(&#x27;../pydata-book-master/ch06/ex1.xlsx&#x27;)</span><br><span class="line"># 将某个工作表中的数据通过parse读取到DataFrame中</span><br><span class="line">table = xls_file.parse(&#x27;Sheet1&#x27;)</span><br><span class="line"># print table</span><br><span class="line">#    a   b   c   d message</span><br><span class="line"># 0  1   2   3   4   hello</span><br><span class="line"># 1  5   6   7   8   world</span><br><span class="line"># 2  9  10  11  12     foo</span><br></pre></td></tr></table></figure>
+
+<h2 id="使用HTML和Web-API"><a href="#使用HTML和Web-API" class="headerlink" title="使用HTML和Web API"></a>使用HTML和Web API</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">import requests</span><br><span class="line">url = &#x27;https://www.google.com.hk/search?safe=strict&amp;site=&amp;source=hp&amp;q=test&amp;btnK=Google+搜索&#x27;</span><br><span class="line">resp = requests.get(url)</span><br><span class="line"># print resp</span><br><span class="line"># &lt;Response [200]&gt;</span><br><span class="line"># Web API一般返回JSON字符串</span><br><span class="line">import json</span><br><span class="line">data = json.loads(resp.text)</span><br><span class="line"># print data.keys()</span><br><span class="line"># ValueError: No JSON object could be decoded</span><br><span class="line"># 书上的Twitter链接打不开</span><br><span class="line"></span><br><span class="line"># 取出感兴趣的tweet字段，然后将results列表传给DataFrame</span><br><span class="line">tweet_field = [&#x27;created_at&#x27;, &#x27;from_user&#x27;, &#x27;id&#x27;, &#x27;text&#x27;]</span><br><span class="line">tweets = DataFrame(data[&#x27;result&#x27;], columns=tweet_field)</span><br><span class="line"># print tweets</span><br><span class="line"># DataFrame中每一行有了来自一条tweet的数据</span><br><span class="line">tweets._ix[7]</span><br></pre></td></tr></table></figure>
+
+<h2 id="使用数据库"><a href="#使用数据库" class="headerlink" title="使用数据库"></a>使用数据库</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"># 数据库选择标准：性能、数据完整性、应用程序的伸缩性需求</span><br><span class="line"># 引入Python内置的sqlite3驱动器</span><br><span class="line">import sqlite3</span><br><span class="line">query = &quot;&quot;&quot;</span><br><span class="line">CREATE TABLE test (a VARCHAR(20), b VARCHAR(20),</span><br><span class="line">c REAL, d INTEGER</span><br><span class="line">);&quot;&quot;&quot;</span><br><span class="line">con = sqlite3.connect(&#x27;:memory:&#x27;)</span><br><span class="line">con.execute(query)</span><br><span class="line">con.commit()</span><br><span class="line"># 插入几条数据</span><br><span class="line">data = [(&#x27;Atlanta&#x27;, &#x27;Georgia&#x27;, 1.25, 6),</span><br><span class="line">        (&#x27;Wangjiang&#x27;, &#x27;Maoan&#x27;, 2.5, 5),</span><br><span class="line">        (&#x27;Hefei&#x27;, &#x27;Gaoxing&#x27;, 5.5, 9)]</span><br><span class="line">stmt = &quot;INSERT INTO test VALUES(?,?,?,?)&quot;</span><br><span class="line">con.executemany(stmt, data)</span><br><span class="line">con.commit()</span><br><span class="line"># 从表中选取数据</span><br><span class="line">cursor = con.execute(&#x27;select * from test&#x27;)</span><br><span class="line">rows = cursor.fetchall()</span><br><span class="line"># print rows</span><br><span class="line"># [(u&#x27;Atlanta&#x27;, u&#x27;Georgia&#x27;, 1.25, 6),</span><br><span class="line">(u&#x27;Wangjiang&#x27;, u&#x27;Maoan&#x27;, 2.5, 5), </span><br><span class="line">(u&#x27;Hefei&#x27;, u&#x27;Gaoxing&#x27;, 5.5, 9)]</span><br><span class="line"># 列名位于游标的description属性中</span><br><span class="line"># print cursor.description</span><br><span class="line"># ((&#x27;a&#x27;, None, None, None, None, None, None),</span><br><span class="line"># (&#x27;b&#x27;, None, None, None, None, None, None),</span><br><span class="line"># (&#x27;c&#x27;, None, None, None, None, None, None),</span><br><span class="line"># (&#x27;d&#x27;, None, None, None, None, None, None))</span><br><span class="line"># 传入DataFrame</span><br><span class="line"># print DataFrame(rows, columns=zip(*cursor.description)[0])</span><br><span class="line">#            a        b     c  d</span><br><span class="line"># 0    Atlanta  Georgia  1.25  6</span><br><span class="line"># 1  Wangjiang    Maoan  2.50  5</span><br><span class="line"># 2      Hefei  Gaoxing  5.50  9</span><br><span class="line"></span><br><span class="line"># pandas有一个简化过程的read_frame函数</span><br><span class="line">import pandas.io.sql as sql</span><br><span class="line"># 书本上read_frame已失效</span><br><span class="line"># print sql.read_sql(&#x27;select * from test&#x27;, con)</span><br><span class="line">#            a        b     c  d</span><br><span class="line"># 0    Atlanta  Georgia  1.25  6</span><br><span class="line"># 1  Wangjiang    Maoan  2.50  5</span><br><span class="line"># 2      Hefei  Gaoxing  5.50  9</span><br></pre></td></tr></table></figure>
+
+<h2 id="存取MongoDB数据"><a href="#存取MongoDB数据" class="headerlink" title="存取MongoDB数据"></a>存取MongoDB数据</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"># 电脑上需要装MongoDB数据库；</span><br><span class="line"># 使用pymongo驱动通过默认端口连接</span><br><span class="line"># 存储在MongoDB中的文档被组织在数据库的集合（想象成表）</span><br><span class="line"># 没有装，姑且记录一下该怎么写,留作参考</span><br><span class="line">import pymongo</span><br><span class="line">con = pymongo.Connection(&#x27;localhost&#x27;, port=27017)</span><br><span class="line"># MongoDB服务运行的每个实例可以有多个数据库，每个数据库又可以有多个集合。</span><br><span class="line"># 访问之前获取的tweets集合</span><br><span class="line">tweets = con.db.tweets</span><br><span class="line"># 加载数据并存入集合</span><br><span class="line">import requests, json</span><br><span class="line"></span><br><span class="line">url = &#x27;https://www.google.com.hk/search?safe=strict&amp;site=&amp;source=hp&amp;q=test&amp;btnK=Google+搜索&#x27;</span><br><span class="line">data = json.loads(requests.get(url).text)</span><br><span class="line">for tweet in data[&#x27;results&#x27;]:</span><br><span class="line">    tweets.save(tweet)</span><br><span class="line"></span><br><span class="line"># 从集合中取出</span><br><span class="line">cursor = tweets.find(&#123;&#x27;from_user&#x27;: &#x27;linking&#x27;&#125;)</span><br><span class="line"># 转换成DataFrame</span><br><span class="line">tweet_fileds = [&#x27;create_at&#x27;, &#x27;from_user&#x27;, &#x27;id&#x27;, &#x27;text&#x27;]</span><br><span class="line">result = DataFrame(list(cursor), columns=tweet_fileds)</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>走过了一遍第六章，给我的感觉是，工具很强大，可以做很多数据分析工作，<strong>数据结构</strong>知识还是匮乏，一些比较复杂的东西还是不能很好的理解，需要加强，多看几遍也是一个方法。</p>
+</blockquote>
+<blockquote>
+<p>时间上，下班时间有点<strong>晚</strong>，可以看书的时间都在9点左右，有点晚，太累了，以后下班是不是可以早一点，做饭时间吃饭时间太晚；另外严重缺乏锻炼了，涨了一些肉的，膝盖还是没有恢复，需要针对性锻炼。</p>
+</blockquote>
+<blockquote>
+<p>记一下，博客的评论插件，<strong>多说</strong>社会化评论系统已经关闭；选择移除多说或者换成其他的。</p>
+</blockquote>
+<blockquote>
+<p>………………………………………………2017-03-25 22:57 Sat&amp;合肥-皖水公寓</p>
+</blockquote>
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/cs//" class="article-tag-list-link color3">cs</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2017/03/25/%E3%80%8A%E5%88%A9%E7%94%A8Python%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E3%80%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0-6-%E7%AC%AC%E5%85%AD%E7%AB%A0-%E6%95%B0%E6%8D%AE%E5%8A%A0%E8%BD%BD%E3%80%81%E5%AD%98%E5%82%A8%E5%92%8C%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8F/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-《利用Python进行数据分析》读书笔记-5-第五章-pandas入门" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1456,145 +1656,6 @@
 
 
   
-    <article id="post-一台机器部署多个Tomcat及如何忽略webapps里的项目" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2016/09/05/%E4%B8%80%E5%8F%B0%E6%9C%BA%E5%99%A8%E9%83%A8%E7%BD%B2%E5%A4%9A%E4%B8%AATomcat%E5%8F%8A%E5%A6%82%E4%BD%95%E5%BF%BD%E7%95%A5webapps%E9%87%8C%E7%9A%84%E9%A1%B9%E7%9B%AE/" target="_blank">一台机器部署多个Tomcat及如何忽略webapps里的项目</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2016/09/05/%E4%B8%80%E5%8F%B0%E6%9C%BA%E5%99%A8%E9%83%A8%E7%BD%B2%E5%A4%9A%E4%B8%AATomcat%E5%8F%8A%E5%A6%82%E4%BD%95%E5%BF%BD%E7%95%A5webapps%E9%87%8C%E7%9A%84%E9%A1%B9%E7%9B%AE/" class="archive-article-date">
-        <time datetime="2016-09-05T14:40:36.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-09-05</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h1 id="一台机器部署多个Tomcat"><a href="#一台机器部署多个Tomcat" class="headerlink" title="一台机器部署多个Tomcat"></a>一台机器部署多个Tomcat</h1><blockquote>
-<p>考虑到线上部署系统<strong>安全</strong>性，需要在同一台机器上部署多个Tomcat。一个系统一个Tomcat,这样更好的容灾机制，避免多米多骨牌效应。<br>重点：<strong>避免端口冲突</strong>    </p>
-</blockquote>
-<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><blockquote>
-<p>修改CATALINA_HOME\conf\server.xml中的启动端口和连接端口。</p>
-</blockquote>
-<p>操作步骤：</p>
-<blockquote>
-<ol>
-<li><a target="_blank" rel="noopener" href="http://tomcat.apache.org/download-70.cgi">下载</a>-解压apache-tomcat-x.x.xx.zip-改名tomcatx-8080</li>
-<li>复制，改名tomcatx-8090</li>
-<li>添加环境变量：CATALINA_HOME:d:\tocatx-8080;CATALINA_HOME2:d:\tomcatx-8090</li>
-<li>修改启动端口和关闭端口<br>进入d:\tomcat5-8090\conf\目录，打开server.xml文件，修改下面两个地方：<br>（1）<code>&lt;Server port=&quot;8006&quot; shutdown=&quot;SHUTDOWN&quot;&gt;</code><br>修改这个port&#x3D;”8006”，原来默认的为：8005，使得它的关闭端口和另一个关闭端口不发生冲突。<br>（2）<code>&lt;Connector port=&quot;8090&quot; maxHttpHeaderSize=&quot;8192&quot;   maxThreads=&quot;150&quot; minSpareThreads=&quot;25&quot; maxSpareThreads=&quot;75&quot; enableLookups=&quot;false&quot; redirectPort=&quot;8443&quot; acceptCount=&quot;100&quot; connectionTimeout=&quot;20000&quot; disableUploadTimeout=&quot;true&quot; /&gt;</code><br>修改port&#x3D;”8090”，原来默认的为“8080”，使得它的连接端口和另一个不冲突。</li>
-<li>修改startup.bat和catalina.bat文件内容：<br>(1) 打开d:\tomcat5-8090\bin\startup.bat文件，把其中所有CATALINA_HOME替换为CATALINA_HOME2。<br>（2）打开d:\tomcat5-8090\bin\catalina.bat文件，把其中所有CATALINA_HOME替换为CATALINA_HOME2。</li>
-<li>启动Tomcat，在命令行下分别进入两个不同的Tomcat安装目录下，执行startup.bat，分别启动两个Tomcat。然后在浏览器中输入：<a target="_blank" rel="noopener" href="http://localhost:8080/">http://localhost:8080</a>  和<a target="_blank" rel="noopener" href="http://localhost:8090/">http://localhost:8090</a></li>
-<li>至此，我们已经在一台服务器上配置了两个Tomcat。</li>
-</ol>
-</blockquote>
-<p>考虑到在本地运行，不需要那么复杂。只需要用Disable-WEB-INF。</p>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a><strong>参考</strong></h2><blockquote>
-<ol>
-<li><a target="_blank" rel="noopener" href="http://blog.163.com/hegonghe@126/blog/static/50004810200871483335100/">在同一台服务器上配置多个Tomcat（原创）</a></li>
-</ol>
-</blockquote>
-<h1 id="忽略webapps里的项目"><a href="#忽略webapps里的项目" class="headerlink" title="忽略webapps里的项目"></a>忽略webapps里的项目</h1><blockquote>
-<p>有时在同一个webapps中有多个项目，而又不想同时部署或启动，那么就要想办法忽略掉某些项目。</p>
-</blockquote>
-<h2 id="方法-1"><a href="#方法-1" class="headerlink" title="方法"></a>方法</h2><blockquote>
-<ol>
-<li>使用web application manager.密码？未实践<br>The Tomcat Web Application Manager lets you stop selected applications. I think that prevents them from loading when Tomcat is restarted.</li>
-<li>将需要忽略的项目的<code>WEB-INF</code>重命名为<code>Disabled-WEB-INF</code>.实践通过</li>
-<li>添加<code>deployIgnore=&quot;projectName&quot;</code>.不部署，</li>
-</ol>
-</blockquote>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;Host name=&quot;localhost&quot; appBase=&quot;webapps&quot; unpackWARs=&quot;true&quot; autoDeploy=&quot;false&quot; xmlValidation=&quot;false&quot; xmlNamespaceAware=&quot;false&quot;&gt; </span><br><span class="line">&lt;Context path=&quot;/acbd&quot; docBase=&quot;abcd&quot; debug=&quot;0&quot; reloadable=&quot;true&quot;/&gt; </span><br><span class="line">&lt;Valve className=&quot;org.apache.catalina.valves.AccessLogValve&quot; directory=&quot;logs&quot; prefix=&quot;localhost_access_log.&quot; suffix=&quot;.txt&quot; pattern=&quot;common&quot; resolveHosts=&quot;false&quot;/&gt; </span><br><span class="line">&lt;/Host&gt; </span><br></pre></td></tr></table></figure>
-
-<h2 id="参考-1"><a href="#参考-1" class="headerlink" title="参考"></a><strong>参考</strong></h2><blockquote>
-<ol>
-<li><a target="_blank" rel="noopener" href="http://stackoverflow.com/questions/5067062/how-to-disable-specific-apps-from-starting-during-tomcat-startup">How to disable specific apps from starting during Tomcat startup?</a></li>
-<li><a target="_blank" rel="noopener" href="https://coderanch.com/t/85667/Tomcat/avoid-loading-applications-webapps">avoid loading all applications under webapps</a></li>
-<li><a target="_blank" rel="noopener" href="http://tomcat.apache.org/tomcat-5.5-doc/config/host.html#Automatic_Application_Deployment">Apache.org</a></li>
-</ol>
-</blockquote>
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">tomcat</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/cs//" class="article-tag-list-link color3">cs</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2016/09/05/%E4%B8%80%E5%8F%B0%E6%9C%BA%E5%99%A8%E9%83%A8%E7%BD%B2%E5%A4%9A%E4%B8%AATomcat%E5%8F%8A%E5%A6%82%E4%BD%95%E5%BF%BD%E7%95%A5webapps%E9%87%8C%E7%9A%84%E9%A1%B9%E7%9B%AE/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/9/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><span class="page-number current">10</span><a class="page-number" href="/page/11/">11</a><a class="page-number" href="/page/12/">12</a><a class="page-number" href="/page/13/">13</a><a class="extend next" rel="next" href="/page/11/">Next &raquo;</a>
@@ -2149,6 +2210,10 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">mongodb</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">vpn</a>
               </li>
             
             <div class="clearfix"></div>
