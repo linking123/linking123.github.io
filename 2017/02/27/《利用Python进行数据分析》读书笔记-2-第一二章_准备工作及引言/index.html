@@ -10,15 +10,15 @@
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="description" content="第一章 准备工作这一章节主要是环境构建工作。 遇到问题，无法安装pandas包，pip也无法安装；命令sudo easy_install xxx，怀疑是网速原因，超时了。所以直接下载了zip包。。补充：之后在公司网速可以的情况下由下载下来了，安装了pip工具。 本书用到的数据地址 第二章 引言来自bit.ly的1.usa.gov数据12345678910111213141516171819#!&#x2F;u">
+  <meta name="description" content="第一章 准备工作这一章节主要是环境构建工作。 遇到问题，无法安装pandas包，pip也无法安装；命令sudo easy_install xxx，怀疑是网速原因，超时了。所以直接下载了zip包。。补充：之后在公司网速可以的情况下由下载下来了，安装了pip工具。 本书用到的数据地址 第二章 引言来自bit.ly的1.usa.gov数据">
 <meta property="og:type" content="article">
 <meta property="og:title" content="《利用Python进行数据分析》读书笔记_2_第一二章_准备工作及引言">
 <meta property="og:url" content="https://linking.fun/2017/02/27/%E3%80%8A%E5%88%A9%E7%94%A8Python%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E3%80%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0-2-%E7%AC%AC%E4%B8%80%E4%BA%8C%E7%AB%A0_%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C%E5%8F%8A%E5%BC%95%E8%A8%80/index.html">
 <meta property="og:site_name" content="Linking&#39;s blog">
-<meta property="og:description" content="第一章 准备工作这一章节主要是环境构建工作。 遇到问题，无法安装pandas包，pip也无法安装；命令sudo easy_install xxx，怀疑是网速原因，超时了。所以直接下载了zip包。。补充：之后在公司网速可以的情况下由下载下来了，安装了pip工具。 本书用到的数据地址 第二章 引言来自bit.ly的1.usa.gov数据12345678910111213141516171819#!&#x2F;u">
+<meta property="og:description" content="第一章 准备工作这一章节主要是环境构建工作。 遇到问题，无法安装pandas包，pip也无法安装；命令sudo easy_install xxx，怀疑是网速原因，超时了。所以直接下载了zip包。。补充：之后在公司网速可以的情况下由下载下来了，安装了pip工具。 本书用到的数据地址 第二章 引言来自bit.ly的1.usa.gov数据">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2017-02-27T15:44:11.000Z">
-<meta property="article:modified_time" content="2025-03-09T13:48:34.291Z">
+<meta property="article:modified_time" content="2025-03-30T10:03:09.623Z">
 <meta property="article:author" content="Linking">
 <meta property="article:tag" content="Python">
 <meta name="twitter:card" content="summary">
@@ -255,7 +255,8 @@
     <h1 id="第一章-准备工作"><a href="#第一章-准备工作" class="headerlink" title="第一章 准备工作"></a>第一章 准备工作</h1><p>这一章节主要是环境构建工作。</p>
 <p>遇到问题，无法安装pandas包，pip也无法安装；<br>命令<code>sudo easy_install xxx</code>，怀疑是网速原因，超时了。<br>所以直接下载了zip包。。补充：之后在公司网速可以的情况下由下载下来了，安装了pip工具。</p>
 <p><a target="_blank" rel="noopener" href="https://github.com/wesm/pydata-book.git">本书用到的数据地址</a></p>
-<h1 id="第二章-引言"><a href="#第二章-引言" class="headerlink" title="第二章 引言"></a>第二章 引言</h1><h2 id="来自bit-ly的1-usa-gov数据"><a href="#来自bit-ly的1-usa-gov数据" class="headerlink" title="来自bit.ly的1.usa.gov数据"></a>来自bit.ly的1.usa.gov数据</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/python</span><br><span class="line">#-*- coding:utf-8 -*-</span><br><span class="line"></span><br><span class="line"># 读取文件中一行</span><br><span class="line">path = &#x27;../pydata-book-master/ch02/usagov_bitly_data2012-03-16-1331923249.txt&#x27;</span><br><span class="line">print open(path).readline()</span><br><span class="line"># out: &#123; &quot;a&quot;: &quot;Mozilla\/5.0 (Windows NT 6.1; WOW64) AppleWebKit\/535.11 (KHTML, like Gecko) Chrome\/17.0.963.78 Safari\/535.11&quot;, &quot;c&quot;: &quot;US&quot;, &quot;nk&quot;: 1, &quot;tz&quot;: &quot;America\/New_York&quot;, &quot;gr&quot;: &quot;MA&quot;, &quot;g&quot;: &quot;A6qOVH&quot;, &quot;h&quot;: &quot;wfLQtf&quot;, &quot;l&quot;: &quot;orofrog&quot;, &quot;al&quot;: &quot;en-US,en;q=0.8&quot;, &quot;hh&quot;: &quot;1.usa.gov&quot;, &quot;r&quot;: &quot;http:\/\/www.facebook.com\/l\/7AQEFzjSi\/1.usa.gov\/wfLQtf&quot;, &quot;u&quot;: &quot;http:\/\/www.ncbi.nlm.nih.gov\/pubmed\/22415991&quot;, &quot;t&quot;: 1331923247, &quot;hc&quot;: 1331822918, &quot;cy&quot;: &quot;Danvers&quot;, &quot;ll&quot;: [ 42.576698, -70.954903 ] &#125;</span><br><span class="line"></span><br><span class="line">import json</span><br><span class="line"># 列表推导式，生成的是一组Python字典</span><br><span class="line">record = [json.loads(line) for line in open(path)]</span><br><span class="line">print record[0]</span><br><span class="line"># out：&#123;u&#x27;a&#x27;: u&#x27;Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/535.11 (KHTML, like Gecko) Chrome/17.0.963.78 Safari/535.11&#x27;, u&#x27;c&#x27;: u&#x27;US&#x27;, u&#x27;nk&#x27;: 1, u&#x27;tz&#x27;: u&#x27;America/New_York&#x27;, u&#x27;gr&#x27;: u&#x27;MA&#x27;, u&#x27;g&#x27;: u&#x27;A6qOVH&#x27;, u&#x27;h&#x27;: u&#x27;wfLQtf&#x27;, u&#x27;cy&#x27;: u&#x27;Danvers&#x27;, u&#x27;l&#x27;: u&#x27;orofrog&#x27;, u&#x27;al&#x27;: u&#x27;en-US,en;q=0.8&#x27;, u&#x27;hh&#x27;: u&#x27;1.usa.gov&#x27;, u&#x27;r&#x27;: u&#x27;http://www.facebook.com/l/7AQEFzjSi/1.usa.gov/wfLQtf&#x27;, u&#x27;u&#x27;: u&#x27;http://www.ncbi.nlm.nih.gov/pubmed/22415991&#x27;, u&#x27;t&#x27;: 1331923247, u&#x27;hc&#x27;: 1331822918, u&#x27;ll&#x27;: [42.576698, -70.954903]&#125;</span><br><span class="line"># 既然已经生成了字典项，就可以通过键访问值</span><br><span class="line">print record[0][&#x27;ll&#x27;]</span><br><span class="line"># out: [42.576698, -70.954903]</span><br><span class="line"># 单引号前面的u标识unicode；</span><br><span class="line">print record[0][&#x27;tz&#x27;]</span><br><span class="line"># out: America/New_York  # 时区是字符串对象形式，而非打印形式</span><br></pre></td></tr></table></figure>
+<h1 id="第二章-引言"><a href="#第二章-引言" class="headerlink" title="第二章 引言"></a>第二章 引言</h1><h2 id="来自bit-ly的1-usa-gov数据"><a href="#来自bit-ly的1-usa-gov数据" class="headerlink" title="来自bit.ly的1.usa.gov数据"></a>来自bit.ly的1.usa.gov数据</h2><span id="more"></span>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/python</span><br><span class="line">#-*- coding:utf-8 -*-</span><br><span class="line"></span><br><span class="line"># 读取文件中一行</span><br><span class="line">path = &#x27;../pydata-book-master/ch02/usagov_bitly_data2012-03-16-1331923249.txt&#x27;</span><br><span class="line">print open(path).readline()</span><br><span class="line"># out: &#123; &quot;a&quot;: &quot;Mozilla\/5.0 (Windows NT 6.1; WOW64) AppleWebKit\/535.11 (KHTML, like Gecko) Chrome\/17.0.963.78 Safari\/535.11&quot;, &quot;c&quot;: &quot;US&quot;, &quot;nk&quot;: 1, &quot;tz&quot;: &quot;America\/New_York&quot;, &quot;gr&quot;: &quot;MA&quot;, &quot;g&quot;: &quot;A6qOVH&quot;, &quot;h&quot;: &quot;wfLQtf&quot;, &quot;l&quot;: &quot;orofrog&quot;, &quot;al&quot;: &quot;en-US,en;q=0.8&quot;, &quot;hh&quot;: &quot;1.usa.gov&quot;, &quot;r&quot;: &quot;http:\/\/www.facebook.com\/l\/7AQEFzjSi\/1.usa.gov\/wfLQtf&quot;, &quot;u&quot;: &quot;http:\/\/www.ncbi.nlm.nih.gov\/pubmed\/22415991&quot;, &quot;t&quot;: 1331923247, &quot;hc&quot;: 1331822918, &quot;cy&quot;: &quot;Danvers&quot;, &quot;ll&quot;: [ 42.576698, -70.954903 ] &#125;</span><br><span class="line"></span><br><span class="line">import json</span><br><span class="line"># 列表推导式，生成的是一组Python字典</span><br><span class="line">record = [json.loads(line) for line in open(path)]</span><br><span class="line">print record[0]</span><br><span class="line"># out：&#123;u&#x27;a&#x27;: u&#x27;Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/535.11 (KHTML, like Gecko) Chrome/17.0.963.78 Safari/535.11&#x27;, u&#x27;c&#x27;: u&#x27;US&#x27;, u&#x27;nk&#x27;: 1, u&#x27;tz&#x27;: u&#x27;America/New_York&#x27;, u&#x27;gr&#x27;: u&#x27;MA&#x27;, u&#x27;g&#x27;: u&#x27;A6qOVH&#x27;, u&#x27;h&#x27;: u&#x27;wfLQtf&#x27;, u&#x27;cy&#x27;: u&#x27;Danvers&#x27;, u&#x27;l&#x27;: u&#x27;orofrog&#x27;, u&#x27;al&#x27;: u&#x27;en-US,en;q=0.8&#x27;, u&#x27;hh&#x27;: u&#x27;1.usa.gov&#x27;, u&#x27;r&#x27;: u&#x27;http://www.facebook.com/l/7AQEFzjSi/1.usa.gov/wfLQtf&#x27;, u&#x27;u&#x27;: u&#x27;http://www.ncbi.nlm.nih.gov/pubmed/22415991&#x27;, u&#x27;t&#x27;: 1331923247, u&#x27;hc&#x27;: 1331822918, u&#x27;ll&#x27;: [42.576698, -70.954903]&#125;</span><br><span class="line"># 既然已经生成了字典项，就可以通过键访问值</span><br><span class="line">print record[0][&#x27;ll&#x27;]</span><br><span class="line"># out: [42.576698, -70.954903]</span><br><span class="line"># 单引号前面的u标识unicode；</span><br><span class="line">print record[0][&#x27;tz&#x27;]</span><br><span class="line"># out: America/New_York  # 时区是字符串对象形式，而非打印形式</span><br></pre></td></tr></table></figure>
 
 <h2 id="纯Python时区计数"><a href="#纯Python时区计数" class="headerlink" title="纯Python时区计数"></a>纯Python时区计数</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">time_zones = [rec[&#x27;tz&#x27;] for rec in record if &#x27;tz&#x27; in rec]</span><br><span class="line">print time_zones[:10]</span><br><span class="line"></span><br><span class="line"># 对时区进行计数</span><br><span class="line">def get_counts(sequence):</span><br><span class="line">    counts = &#123;&#125;</span><br><span class="line">    for x in sequence:</span><br><span class="line">        if x in counts:</span><br><span class="line">            counts[x] += 1</span><br><span class="line">        else:</span><br><span class="line">            counts[x] = 1</span><br><span class="line">    return counts</span><br><span class="line"># 使用标准库简化方法</span><br><span class="line">from collections import defaultdict</span><br><span class="line">def get_counts2(sequence):</span><br><span class="line">    counts = defaultdict(int)</span><br><span class="line">    for x in sequence:</span><br><span class="line">        counts[x]+=1</span><br><span class="line">    return counts</span><br><span class="line">counts = get_counts(time_zones)</span><br><span class="line">print counts[&#x27;America/New_York&#x27;]</span><br><span class="line"># out: 1251</span><br><span class="line">print len(time_zones)</span><br><span class="line"># 3340</span><br><span class="line"># 前10位的时区及计数</span><br><span class="line">def top_counts(count_dict, n = 10):</span><br><span class="line">    value_key_pairs = [(count, tz) for tz, count in count_dict.items()]</span><br><span class="line">    value_key_pairs.sort()</span><br><span class="line">    return value_key_pairs[-n:]</span><br><span class="line">print top_counts(counts)</span><br><span class="line"># out: [(33, u&#x27;America/Sao_Paulo&#x27;), (35, u&#x27;Europe/Madrid&#x27;), (36, u&#x27;Pacific/Honolulu&#x27;), (37, u&#x27;Asia/Tokyo&#x27;), (74, u&#x27;Europe/London&#x27;), (191, u&#x27;America/Denver&#x27;), (382, u&#x27;America/Los_Angeles&#x27;), (400, u&#x27;America/Chicago&#x27;), (521, u&#x27;&#x27;), (1251, u&#x27;America/New_York&#x27;)]</span><br><span class="line"># 更简单的方式是collections.Counter类</span><br><span class="line">from collections import Counter</span><br><span class="line">counts1 = Counter(time_zones)</span><br><span class="line">print counts1.most_common(10)</span><br><span class="line"># out: [(u&#x27;America/New_York&#x27;, 1251), (u&#x27;&#x27;, 521), (u&#x27;America/Chicago&#x27;, 400), (u&#x27;America/Los_Angeles&#x27;, 382), (u&#x27;America/Denver&#x27;, 191), (u&#x27;Europe/London&#x27;, 74), (u&#x27;Asia/Tokyo&#x27;, 37), (u&#x27;Pacific/Honolulu&#x27;, 36), (u&#x27;Europe/Madrid&#x27;, 35), (u&#x27;America/Sao_Paulo&#x27;, 33)]</span><br></pre></td></tr></table></figure>
 
@@ -564,27 +565,7 @@
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">weather</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">需求</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">essay</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">basketball</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">olympic</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">nginx</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -604,6 +585,14 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">weather</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">需求</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">ajax</a>
               </li>
              
@@ -612,11 +601,19 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">HTML5</a>
+                <a href="javascript:void(0)" class="js-tag color1">basketball</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">html5</a>
+                <a href="javascript:void(0)" class="js-tag color3">olympic</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">nginx</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">HTML5</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -625,14 +622,6 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">sse</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">JavaScriptCore</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Oracle</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -648,6 +637,14 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Oracle</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Mac Office</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">ListView</a>
               </li>
              
@@ -656,11 +653,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Mac Office</a>
+                <a href="javascript:void(0)" class="js-tag color4">markdown</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">markdown</a>
+                <a href="javascript:void(0)" class="js-tag color3">mongodb</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -669,6 +666,14 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">慢查询</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">JavaScriptCore</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">html5</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -681,6 +686,10 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">avatar</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">cocoa</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -716,11 +725,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">cocoa</a>
+                <a href="javascript:void(0)" class="js-tag color1">patch</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">patch</a>
+                <a href="javascript:void(0)" class="js-tag color1">gitea</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -728,7 +737,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">gitea</a>
+                <a href="javascript:void(0)" class="js-tag color2">bundle</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -737,10 +746,6 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">https</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">bundle</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -760,11 +765,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">java</a>
+                <a href="javascript:void(0)" class="js-tag color3">cs</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">cs</a>
+                <a href="javascript:void(0)" class="js-tag color5">java</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -773,6 +778,10 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">快捷键</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">pip</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -796,7 +805,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">pip</a>
+                <a href="javascript:void(0)" class="js-tag color5">read</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">bookList</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -804,15 +817,19 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">running</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">showdoc</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">disk</a>
+                <a href="javascript:void(0)" class="js-tag color2">D.Wade</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">D.Wade</a>
+                <a href="javascript:void(0)" class="js-tag color5">disk</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -840,10 +857,6 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">read</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">读书节</a>
               </li>
              
@@ -868,15 +881,15 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">ntp</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">正则</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">手机品牌匹配</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">ntp</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -888,10 +901,6 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">wechat</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">微信公众号</a>
               </li>
              
@@ -900,7 +909,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">张靓颖</a>
+                <a href="javascript:void(0)" class="js-tag color2">wechat</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -908,7 +917,15 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">张靓颖</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">动漫</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">vpn</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -940,19 +957,19 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">ai</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">excel</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">模块化</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">MVC</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">ai</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">excel</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -980,23 +997,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">bookList</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">anti-stealing-link</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">running</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">mongodb</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">vpn</a>
               </li>
             
             <div class="clearfix"></div>

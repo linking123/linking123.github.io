@@ -10,15 +10,15 @@
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="description" content="1:performSelector 多线程12345678910111213141516171819202122232425&#x2F;* *使用performSelector 的多线程 *优点：简单 *缺点：没有串行并线队列，不能实现高级线程调度 *&#x2F; -(void)performSelectorFunction&#123;        NSLog(@&quot;performSelectorFunct">
+  <meta name="description" content="1:performSelector 多线程123456789101112131415161718192021222324&#x2F;* *使用performSelector 的多线程 *优点：简单 *缺点：没有串行并线队列，不能实现高级线程调度 *&#x2F; -(void)performSelectorFunction&#123;        NSLog(@&quot;performSelectorFunctio">
 <meta property="og:type" content="article">
 <meta property="og:title" content="iOS多线程技术">
 <meta property="og:url" content="https://linking.fun/2017/05/23/iOS%E5%A4%9A%E7%BA%BF%E7%A8%8B%E6%8A%80%E6%9C%AF%E7%9A%84%E5%89%AF%E6%9C%AC/index.html">
 <meta property="og:site_name" content="Linking&#39;s blog">
-<meta property="og:description" content="1:performSelector 多线程12345678910111213141516171819202122232425&#x2F;* *使用performSelector 的多线程 *优点：简单 *缺点：没有串行并线队列，不能实现高级线程调度 *&#x2F; -(void)performSelectorFunction&#123;        NSLog(@&quot;performSelectorFunct">
+<meta property="og:description" content="1:performSelector 多线程123456789101112131415161718192021222324&#x2F;* *使用performSelector 的多线程 *优点：简单 *缺点：没有串行并线队列，不能实现高级线程调度 *&#x2F; -(void)performSelectorFunction&#123;        NSLog(@&quot;performSelectorFunctio">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2017-05-23T02:13:15.000Z">
-<meta property="article:modified_time" content="2025-03-09T13:48:34.286Z">
+<meta property="article:modified_time" content="2025-03-30T10:05:03.702Z">
 <meta property="article:author" content="Linking">
 <meta property="article:tag" content="多线程">
 <meta name="twitter:card" content="summary">
@@ -252,7 +252,8 @@
   
   <div class="article-entry" itemprop="articleBody">
     
-    <h2 id="1-performSelector-多线程"><a href="#1-performSelector-多线程" class="headerlink" title="1:performSelector 多线程"></a>1:performSelector 多线程</h2><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> *使用performSelector 的多线程</span></span><br><span class="line"><span class="comment"> *优点：简单</span></span><br><span class="line"><span class="comment"> *缺点：没有串行并线队列，不能实现高级线程调度</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"> </span><br><span class="line">-(<span class="type">void</span>)performSelectorFunction&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@&quot;performSelectorFunction start&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//同步方式执行</span></span><br><span class="line">    <span class="comment">//[self performSelector:@selector(function1)];</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">//延迟两秒执行,主线程阻塞</span></span><br><span class="line">    <span class="comment">//[self performSelector:@selector(function1) withObject:nil afterDelay:2];</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//主线程上执行，主线程阻塞，waitUntilDone:YES：等待执行完成顺序执行，waitUntilDone:NO 先执行后面语句</span></span><br><span class="line">    <span class="comment">//[self performSelectorOnMainThread:@selector(function1) withObject:nil waitUntilDone:NO];</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">//子线程上执行</span></span><br><span class="line">    [<span class="keyword">self</span> performSelectorInBackground:<span class="keyword">@selector</span>(function1) withObject:<span class="literal">nil</span>];</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@&quot;performSelectorFunction end&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+    <h2 id="1-performSelector-多线程"><a href="#1-performSelector-多线程" class="headerlink" title="1:performSelector 多线程"></a>1:performSelector 多线程</h2><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> *使用performSelector 的多线程</span></span><br><span class="line"><span class="comment"> *优点：简单</span></span><br><span class="line"><span class="comment"> *缺点：没有串行并线队列，不能实现高级线程调度</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"> </span><br><span class="line">-(<span class="type">void</span>)performSelectorFunction&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@&quot;performSelectorFunction start&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//同步方式执行</span></span><br><span class="line">    <span class="comment">//[self performSelector:@selector(function1)];</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">//延迟两秒执行,主线程阻塞</span></span><br><span class="line">    <span class="comment">//[self performSelector:@selector(function1) withObject:nil afterDelay:2];</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//主线程上执行，主线程阻塞，waitUntilDone:YES：等待执行完成顺序执行，waitUntilDone:NO 先执行后面语句</span></span><br><span class="line">    <span class="comment">//[self performSelectorOnMainThread:@selector(function1) withObject:nil waitUntilDone:NO];</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">//子线程上执行</span></span><br><span class="line">    [<span class="keyword">self</span> performSelectorInBackground:<span class="keyword">@selector</span>(function1) withObject:<span class="literal">nil</span>];</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@&quot;performSelectorFunction end&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<span id="more"></span>
 
 <h2 id="2-NSThread"><a href="#2-NSThread" class="headerlink" title="2:NSThread"></a>2:NSThread</h2><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> *使用NSThread 的多线程</span></span><br><span class="line"><span class="comment"> *优点：简单</span></span><br><span class="line"><span class="comment"> *缺点：没有串行并线队列，不能实现高级线程调度,和performSelector是一样的。</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line">-(<span class="type">void</span>)<span class="built_in">NSThreadFunction</span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@&quot;NSThreadFunction start&quot;</span>);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//线程暂停 2秒</span></span><br><span class="line">    <span class="comment">//[NSThread sleepForTimeInterval:2];</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">//显示创建的方式执行</span></span><br><span class="line">    <span class="comment">//NSThread *myThread = [[NSThread alloc]initWithTarget:self selector:@selector(function1) object:nil];</span></span><br><span class="line">    <span class="comment">//[myThread start];</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">//静态方法执行线程</span></span><br><span class="line">    <span class="comment">//[NSThread detachNewThreadSelector:@selector(function1) toTarget:self withObject:nil];</span></span><br><span class="line">    </span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@&quot;NSThreadFunction end&quot;</span>);</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
@@ -575,27 +576,7 @@
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">weather</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">需求</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">essay</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">basketball</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">olympic</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">nginx</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -615,6 +596,14 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">weather</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">需求</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">ajax</a>
               </li>
              
@@ -623,11 +612,19 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">HTML5</a>
+                <a href="javascript:void(0)" class="js-tag color1">basketball</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">html5</a>
+                <a href="javascript:void(0)" class="js-tag color3">olympic</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">nginx</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">HTML5</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -636,14 +633,6 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">sse</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">JavaScriptCore</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Oracle</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -659,6 +648,14 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Oracle</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Mac Office</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">ListView</a>
               </li>
              
@@ -667,11 +664,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Mac Office</a>
+                <a href="javascript:void(0)" class="js-tag color4">markdown</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">markdown</a>
+                <a href="javascript:void(0)" class="js-tag color3">mongodb</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -680,6 +677,14 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">慢查询</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">JavaScriptCore</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">html5</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -692,6 +697,10 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">avatar</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">cocoa</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -727,11 +736,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">cocoa</a>
+                <a href="javascript:void(0)" class="js-tag color1">patch</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">patch</a>
+                <a href="javascript:void(0)" class="js-tag color1">gitea</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -739,7 +748,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">gitea</a>
+                <a href="javascript:void(0)" class="js-tag color2">bundle</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -748,10 +757,6 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">https</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">bundle</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -771,11 +776,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">java</a>
+                <a href="javascript:void(0)" class="js-tag color3">cs</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">cs</a>
+                <a href="javascript:void(0)" class="js-tag color5">java</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -784,6 +789,10 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">快捷键</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">pip</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -807,7 +816,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">pip</a>
+                <a href="javascript:void(0)" class="js-tag color5">read</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">bookList</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -815,15 +828,19 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">running</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">showdoc</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">disk</a>
+                <a href="javascript:void(0)" class="js-tag color2">D.Wade</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">D.Wade</a>
+                <a href="javascript:void(0)" class="js-tag color5">disk</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -851,10 +868,6 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">read</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">读书节</a>
               </li>
              
@@ -879,15 +892,15 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">ntp</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">正则</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">手机品牌匹配</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">ntp</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -899,10 +912,6 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">wechat</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">微信公众号</a>
               </li>
              
@@ -911,7 +920,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">张靓颖</a>
+                <a href="javascript:void(0)" class="js-tag color2">wechat</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -919,7 +928,15 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">张靓颖</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">动漫</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">vpn</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -951,19 +968,19 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">ai</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">excel</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">模块化</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">MVC</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">ai</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">excel</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -991,23 +1008,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">bookList</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">anti-stealing-link</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">running</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">mongodb</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">vpn</a>
               </li>
             
             <div class="clearfix"></div>

@@ -199,8 +199,10 @@
           </div>
           <div id="js-content" class="content-ll">
             
+ 
+   
 
-  
+   
     <article id="post-Ajax系列三-探讨XHR及POST数据" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -269,51 +271,9 @@
 </tr>
 </tbody></table>
 <p><code>ajax</code>的好处就是不阻塞后面代码的执行。</p>
-<p><code>status</code>状态码为<code>200</code>,<code>statusText</code>状态文字是<code>OK</code>时，正确返回。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">if(this.readyState == 4 &amp;&amp; this.status == 200)&#123;</span><br><span class="line">	var str = &#x27;&#x27;;</span><br><span class="line">	str = &#x27;状态码是 &#x27; + this.status;</span><br><span class="line">	str += &#x27;状态文字是 &#x27; + this.statusText;</span><br><span class="line">	document.getElementById(&#x27;progress&#x27;).innerHTML = str;</span><br><span class="line">&#125;    </span><br></pre></td></tr></table></figure>
-
-<p><code>abort</code>属性 –&gt; 中断<code>xhr</code></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">function stopxhr()&#123;</span><br><span class="line">	xhr.abort();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><code>send</code>参数写法：<code>k1=v1&amp;k2=v2&amp;k3=v3...</code></p>
-<p><code>POST</code>请求必须加上<code>Content-Type: application/x-www-form-urlencoded</code></p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">xhr.<span class="title function_">setRequestHeader</span>(<span class="string">&#x27;Content-Type&#x27;</span>,<span class="string">&#x27;application/x-www-form-urlencoded&#x27;</span>);</span><br><span class="line">xhr.<span class="title function_">send</span>(<span class="string">&#x27;username=&#x27;</span>+un+<span class="string">&#x27;&amp;email=&#x27;</span>+eml);</span><br></pre></td></tr></table></figure>
-
-<h2 id="Ajax返回值之XML类型"><a href="#Ajax返回值之XML类型" class="headerlink" title="Ajax返回值之XML类型"></a>Ajax返回值之XML类型</h2><p>返回值类型：</p>
-<blockquote>
-<p>不考虑HTML5最新标准，返回值有普通文本&#x2F;xml文档两种类型</p>
-</blockquote>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php </span><br><span class="line">header(&#x27;Content-Type: text/xml&#x27;);</span><br><span class="line">?&gt;</span><br><span class="line">//此处空了一行</span><br><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span><br><span class="line">&lt;bookstore&gt;&lt;book bid=&#x27;b0001&#x27;&gt;&lt;title&gt;天龙八部&lt;/title&gt;&lt;intro&gt;人生太苦了&lt;/intro&gt;&lt;/book&gt;&lt;/bookstore&gt;</span><br></pre></td></tr></table></figure>
-<p>打开以上<code>xxx.php</code>，<code>xml</code>格式错误提示:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">This page contains the following errors:</span><br><span class="line">error on line 2 at column 6: XML declaration allowed only at the start of the document.</span><br><span class="line">Below is a rendering of the page up to the first error.</span><br></pre></td></tr></table></figure>
-<p>错误显示：<code>xml</code>必须在文档的首行,如下</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php </span><br><span class="line">header(&#x27;Content-Type: text/xml&#x27;);</span><br><span class="line">?&gt; </span><br><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span><br><span class="line">&lt;bookstore&gt;&lt;book bid=&#x27;b0001&#x27;&gt;&lt;title&gt;天龙八部&lt;/title&gt;&lt;intro&gt;人生太苦了&lt;/intro&gt;&lt;/book&gt;&lt;/bookstore&gt;</span><br></pre></td></tr></table></figure>
-
-<p><strong>API最简单了，基本上照着开发文档写就行了。</strong></p>
-<p><strong><code>Ajax</code>默认无法跨域。最新标准可以，但需要对方允许。</strong></p>
-<p>取后台数据：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">xhr.onreadystatechange = function()&#123;</span><br><span class="line">	if(this.readyState == 4)&#123;         //this即xhr对象</span><br><span class="line">		// alert(this.responseXML);</span><br><span class="line">		var xmldom = this.responseXML; </span><br><span class="line">		var book = xmldom.getElementsByTagName(&#x27;book&#x27;)[&#x27;0&#x27;]; </span><br><span class="line">		var title = book.firstChild.firstChild.wholeText;</span><br><span class="line">		var intro = book.lastChild.firstChild.wholeText;</span><br><span class="line">		document.getElementById(&#x27;btitle&#x27;).value = title;</span><br><span class="line">		document.getElementById(&#x27;bintro&#x27;).value = intro;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>在后端生成格式化文件，拼接成<code>HTML</code>或者<code>json</code>文档，操作DOM，生成新的<code>HTML</code>页面。</p>
-<p><em>返回值类型：大的方向可以分为普通文本和xml文档。</em><br>普通文本返回类型又分为：</p>
-<ul>
-<li>返回简短的标志字符串，如0,1,OK</li>
-<li>后台返回大段的<code>HTML</code>代码，直接<code>innerHTML</code>到前端页面</li>
-<li><code>json</code>格式，再由js解析</li>
-</ul>
-<p>很多类型，除了<code>HTML5</code>新标准返回的是<code>json</code>,本是文本，只不过符合某些规律，例如<code>json</code>格式。</p>
-<p><code>eval</code>将普通文本转化成js对象<code>[object: Object]</code>。<br>自己手写的后台数据：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php  //code  ?&gt;</span><br><span class="line">&#123;name: &#x27;linking&#x27;, sex: &#x27;male&#x27;&#125;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
-<p>前端解析：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var linking = eval(&#x27;(&#x27; + this.responseText + &#x27;)&#x27;);</span><br><span class="line">alert(linking.name);</span><br></pre></td></tr></table></figure>
-<p>如果是<code>PHP</code>后台获取数据:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$book = array(&#x27;title&#x27; =&gt; &#x27;天龙八部&#x27;, &#x27;intro&#x27; =&gt; &#x27;人生九苦&#x27; );</span><br><span class="line">echo json_encode($book) ;</span><br></pre></td></tr></table></figure>
-
-<h2 id="JSONP解决跨域问题"><a href="#JSONP解决跨域问题" class="headerlink" title="JSONP解决跨域问题"></a>JSONP解决跨域问题</h2><p><code>JSONP</code>不是<code>JSON</code>，只是一种协议，还未被标准组织规范，大家约定使用返回字符串；不用造对象。</p>
-<p><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/JSONP">Wikipedia</a>解释: </p>
-<blockquote>
-<p>JSONP(JSON with Padding)是资料格式 JSON 的一种“使用模式”，可以让网页从别的网域要资料。另一个解决这个问题的新方法是<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E8%B7%A8%E4%BE%86%E6%BA%90%E8%B3%87%E6%BA%90%E5%85%B1%E4%BA%AB">跨来源资源共享</a>(CORS)。<br>由于<strong>同源策略</strong>，一般来说位于 server1.example.com 的网页无法与不是 server1.example.com 的服务器沟通，而 HTML 的 script 元素是一个例外。利用 script 元素的这个开放策略，网页可以得到从其他来源动态产生的 JSON 资料，而这种使用模式就是所谓的 JSONP。用 JSONP 抓到的资料并不是 JSON，而是任意的 JavaScript，用 JavaScript 直译器执行而不是用 JSON 解析器解析。<br><strong>padding填充</strong>：典型的 JSONP 就是把既有的 JSON API 用函数呼叫<strong>包起来</strong>以达到跨域存取的解法。<br><strong>script元素注入</strong>：为了要启动一个 JSONP 呼叫（或者说，使用这个模式），你需要一个 script 元素。因此，浏览器必须为每一个 JSONP 要求加（或是重用）一个新的、有所需 src 值的 script 元素到 HTML DOM 里—或者说是“注入”这个元素。浏览器执行该元素，抓取 src 里的 URL，并执行回传的 JavaScript。<br>也因为这样，JSONP 被称作是一种“让使用者利用 script 元素注入的方式绕开同源策略”的方法。</p>
-</blockquote>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">function sear()&#123;</span><br><span class="line">	//获取将要搜索的内容</span><br><span class="line">	var searchtext = document.getElementsByName(&#x27;searchtext&#x27;)[0].value;</span><br><span class="line">	//Google ajax API 搜索参数，返回json格式，利用回调函数aa解析</span><br><span class="line">	var url = &#x27;http://ajax.googleais.com/ajax/services/search/web?v=1.0&amp;q=&#x27;+ searchtext + &#x27;&amp;callback=aa&#x27;;</span><br><span class="line">	//动态创建script标签，加入head，使其以script形式加载进来</span><br><span class="line">	var scr = document.createElement(&#x27;script&#x27;);</span><br><span class="line">	scr.setAttribute(&#x27;type&#x27;, &#x27;text/javascript&#x27;);</span><br><span class="line">	scr.setAttribute(&#x27;src&#x27;, url);</span><br><span class="line">	document.getElementByTagName(&#x27;head&#x27;)[0].appendChild(scr);</span><br><span class="line">&#125;</span><br><span class="line">//回调函数，对返回的数据进行处理</span><br><span class="line">function aa(res)&#123;</span><br><span class="line">	alert(res);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+    
+    <a class="article-more-a" href="/2016/02/28/Ajax%E7%B3%BB%E5%88%97%E4%B8%89-%E6%8E%A2%E8%AE%A8XHR%E5%8F%8APOST%E6%95%B0%E6%8D%AE/#more">more >></a>
+    
     
 
     
@@ -378,8 +338,8 @@
 
 
 
-
-  
+ 
+   
     <article id="post-Ajax系列二-现代化的Ajax" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -418,15 +378,9 @@
 
 <h2 id="利用XHR发送请求来请求后台服务器资源"><a href="#利用XHR发送请求来请求后台服务器资源" class="headerlink" title="利用XHR发送请求来请求后台服务器资源"></a>利用XHR发送请求来请求后台服务器资源</h2><p>分析HTTP协议，请求需明确几个因素:<br>　　　1)请求方法：GET&#x2F;POST&#x2F;PUT&#x2F;DELETE&#x2F;HEAD<br>　　　2)请求哪个资源(URL)<br>　　　3)同步方式–同步&#x2F;异步</p>
 <h2 id="如何得到请求返回结果"><a href="#如何得到请求返回结果" class="headerlink" title="如何得到请求返回结果"></a>如何得到请求返回结果</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">vote</span>(<span class="params"></span>)&#123;</span><br><span class="line">	<span class="comment">//1. 制造xhr</span></span><br><span class="line">	<span class="keyword">var</span> xhr = <span class="title function_">createXHR</span>();</span><br><span class="line">	<span class="comment">//2. 打开连接</span></span><br><span class="line">	xhr.<span class="title function_">open</span>(<span class="string">&#x27;GET&#x27;</span>, <span class="string">&#x27;./05-ajaxvote.php&#x27;</span>, <span class="literal">true</span>/<span class="literal">false</span>);</span><br><span class="line">	<span class="comment">//3. 发送请求</span></span><br><span class="line">	xhr.<span class="title function_">send</span>(<span class="literal">null</span>);</span><br><span class="line">	<span class="comment">//4. 测试同步异步的差异,改true/false</span></span><br><span class="line">	<span class="comment">//alert(xhr.responseText);</span></span><br><span class="line">	<span class="comment">//为避免误会用</span></span><br><span class="line">	<span class="title function_">alert</span>(<span class="string">&#x27;123&#x27;</span>);</span><br></pre></td></tr></table></figure>
-
-<p>05-ajaxvote.php</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">sleep(3);//等待三秒</span><br><span class="line">if(rand(1,10) &lt; 4)&#123;</span><br><span class="line">	echo &quot;0&quot;;</span><br><span class="line">&#125;else&#123;</span><br><span class="line">	$votenum = file_get_contents(&quot;./vote.txt&quot;);</span><br><span class="line">	if ($votenum == null) &#123;</span><br><span class="line">		$votenum = 0;</span><br><span class="line">	&#125;</span><br><span class="line">	$votenum += 1;</span><br><span class="line">	file_put_contents(&#x27;./vote.txt&#x27;, $votenum);	</span><br><span class="line">	echo &quot;1&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>上面的测试结果显示，<code>true</code>即异步时，立即<code>alert</code>，”你等你的，我先走了”;<code>false</code>即同步时，等三秒才<code>alert</code>，”send返回后，才是下一步”。<br>综上，同步代码按顺序执行，异步代码可跳过等待的代码，先执行下面的代码，再返回执行。</p>
-<p>XHR对象在请求与响应过程中，状态会不断变化，0-4逐步变化；可以绑定一个监听函数来监听状态的变化，只要状态变化就触发某函数。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">xhr.onreadystatechange = function()&#123;</span><br><span class="line">	var pg = document.getElementById(&#x27;progress&#x27;);</span><br><span class="line">	pg.innerHTML += pg.innerHTML + &#x27;现在的状态是 &#x27;+ this.readyState + &#x27;&lt;br /&gt;&#x27;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>只管<code>readyState == 4</code>的状态，其他不管。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">xhr.onreadystatechange = function()&#123;</span><br><span class="line">	if(this.readyState == 4)&#123;</span><br><span class="line">		if(this.responseText == &#x27;1&#x27;)&#123;</span><br><span class="line">			document.getElementById(&#x27;progress&#x27;).innerHTML = &#x27;投票成功&#x27;;</span><br><span class="line">		&#125;else if(this.responseText == &#x27;0&#x27;)&#123;</span><br><span class="line">			document.getElementById(&#x27;progress&#x27;).innerHTML = &#x27;投票失败&#x27;;</span><br><span class="line">		&#125;else&#123;</span><br><span class="line">			document.getElementById(&#x27;progress&#x27;).innerHTML = this.responseText;</span><br><span class="line">		&#125;</span><br><span class="line">    &#125;   </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+    
+    <a class="article-more-a" href="/2016/02/27/Ajax%E7%B3%BB%E5%88%97%E4%BA%8C-%E7%8E%B0%E4%BB%A3%E5%8C%96%E7%9A%84Ajax/#more">more >></a>
+    
     
 
     
@@ -491,8 +445,8 @@
 
 
 
-
-  
+ 
+   
     <article id="post-Ajax系列一-远古时代的Ajax" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -532,38 +486,9 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;div&gt;</span><br><span class="line">        &lt;p&gt;&lt;img width=300 height=400 src=&quot;lin.jpg&quot;&gt;&lt;/p&gt;</span><br><span class="line">        &lt;p&gt;&lt;a href=&quot;vote.php&quot;&gt;vote&lt;/a&gt;&lt;/p&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">&lt;/body&gt;</span><br></pre></td></tr></table></figure>
 <p>后端：</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> </span><br><span class="line"><span class="variable">$votenum</span> = <span class="title function_ invoke__">file_get_contents</span>(<span class="string">&quot;./vote.txt&quot;</span>);</span><br><span class="line"><span class="keyword">if</span> (<span class="variable">$votenum</span> == <span class="literal">null</span>) &#123;</span><br><span class="line">    <span class="variable">$votenum</span> = <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="variable">$votenum</span> += <span class="number">1</span>;</span><br><span class="line"><span class="title function_ invoke__">file_put_contents</span>(<span class="string">&#x27;./vote.txt&#x27;</span>, <span class="variable">$votenum</span>);</span><br><span class="line"><span class="comment">//利用HTTP协议的204特性</span></span><br><span class="line"><span class="title function_ invoke__">header</span>(<span class="string">&#x27;HTTP/1.1 204 No Content&#x27;</span>);</span><br><span class="line"> <span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="方法二：利用图片加载的特性，完成请求"><a href="#方法二：利用图片加载的特性，完成请求" class="headerlink" title="方法二：利用图片加载的特性，完成请求"></a>方法二：利用图片加载的特性，完成请求</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">    <span class="keyword">function</span> <span class="title function_">vote</span>(<span class="params"></span>)&#123;</span><br><span class="line">        <span class="keyword">var</span> lin = <span class="variable language_">document</span>.<span class="title function_">createElement</span>(<span class="string">&#x27;img&#x27;</span>);</span><br><span class="line">        <span class="comment">//设置src属性，浏览器将会请求对应的资源</span></span><br><span class="line">        lin.<span class="title function_">setAttribute</span>(<span class="string">&#x27;src&#x27;</span>, <span class="string">&#x27;./lin.jpg&#x27;</span>);</span><br><span class="line">        <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;progress&quot;</span>).<span class="title function_">appendChild</span>(lin);</span><br><span class="line">    &#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
-
-<h2 id="方法三：-利用css-js加载特性-原理同上。"><a href="#方法三：-利用css-js加载特性-原理同上。" class="headerlink" title="方法三： 利用css,js加载特性,原理同上。"></a>方法三： 利用css,js加载特性,原理同上。</h2><h2 id="方法四：-利用iframe特性"><a href="#方法四：-利用iframe特性" class="headerlink" title="方法四： 利用iframe特性"></a>方法四： 利用iframe特性</h2><p>Ajax注册，提交表单，页面无刷新<br>建议用<code>POST</code>，因为<code>get</code>会暴露用户信息<br>前端：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id=&quot;regres&quot;&gt;&lt;/div&gt;</span><br><span class="line">/*form target--&gt;iframe name*/</span><br><span class="line">&lt;form action=&quot;02-reg.php&quot; method=&quot;post&quot; target=&quot;regzone&quot;&gt;</span><br><span class="line">    &lt;p&gt;用户名：&lt;input type=&quot;text&quot; name=&quot;username&quot;&gt;&lt;/p&gt;</span><br><span class="line">    &lt;p&gt;邮件：&lt;input type=&quot;email&quot; name=&quot;email&quot;&gt;&lt;/p&gt;</span><br><span class="line">    &lt;p&gt;&lt;input type=&quot;submit&quot; name=&quot;submit&quot;&gt;&lt;/p&gt;</span><br><span class="line">&lt;/form&gt;</span><br><span class="line">&lt;iframe width=0 height=0 frameBorder=&quot;0&quot; name=&quot;regzone&quot;&gt;&lt;/iframe&gt;</span><br></pre></td></tr></table></figure>
-<p>后端：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;meta charset=&quot;utf-8&quot;&gt;</span><br><span class="line">&lt;?php </span><br><span class="line">//经过运算，逻辑判断，注册是否成功</span><br><span class="line">$msg = 1/0;</span><br><span class="line">1-&quot;注册成功&quot;  0-&quot;注册失败&quot;</span><br><span class="line">?&gt;</span><br><span class="line">&lt;script type=&quot;text/javascript&quot;&gt;</span><br><span class="line">    //被请求的资源req.php想得到HTML里的元素，用parent</span><br><span class="line">    parent.document.getElementById(&#x27;regres&#x27;).innerHTML = &#x27;注册成功!&#x27;;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
-
-<h2 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h2><blockquote>
-<p>在不适用<code>XMLHttpRequest</code>对象的情况下，依然可以用js来实现对后台服务器请求，同时不刷新页面或跳转。</p>
-</blockquote>
-<p>所谓Ajax：即指<strong>页面不刷新</strong>情况下，利用<code>XMLHttpRequest</code>发送<code>HTTP</code>请求；JS的网络化.</p>
-<p><strong>悄悄的发送请求，不刷新或跳转;后台能传递数据;前台假装没反应</strong></p>
-<p>问题：<code>Ajax</code>能实现文件上传吗？</p>
-<blockquote>
-<p>分析：从<code>HTTP</code>协议角度看，上传文件，则要把文件的内容发送到服务器；<br>如果可以<code>XMLHttpRequest</code>对象在<code>POST</code>数据时，把文件的内容也发送过去。</p>
-</blockquote>
-<ul>
-<li><code>XHR</code>对象获取了你要上传 的内容</li>
-<li><code>JavaScript</code>读取本地的文件内容</li>
-<li>出于安全原因，js不能读取文件内容</li>
-<li><code>Ajax</code>上传文件是无法实现的。</li>
-</ul>
-<p>问题：一些<code>Ajax</code>上传插件是怎样实现的？</p>
-<blockquote>
-<ol>
-<li><code>iframe</code></li>
-<li>用<code>flash</code>实现，如<code>swfuploaded</code></li>
-<li>用<code>HTML5</code>实现，已增加文件读取<code>API</code></li>
-</ol>
-</blockquote>
-
+    
+    <a class="article-more-a" href="/2016/02/26/Ajax%E7%B3%BB%E5%88%97%E4%B8%80-%E8%BF%9C%E5%8F%A4%E6%97%B6%E4%BB%A3%E7%9A%84Ajax/#more">more >></a>
+    
     
 
     
@@ -628,8 +553,8 @@
 
 
 
-
-  
+ 
+   
     <article id="post-最近的想法及计划" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -663,19 +588,9 @@
 <blockquote>
 <p>1.完成毕业论文，顺利毕业<br>2.3月份找到一个合适的工作<br>3.学习新知识，巩固计算机基础知识</p>
 </blockquote>
-<p>2月份还有十天，列的任务表还没有完成。亡羊补牢，希望不晚。希望坚持完成的事情</p>
-<blockquote>
-<p>1.每天花两个小时看论文，整理思路，做记录<br>2.每天坚持锻炼，形式不固定，室内室外随意<br>3.看完燕十八视频，加深对<code>HTTP、AJAX</code>的理解，并写成博客<br>4.每天看一致两篇的<em>池建强</em>的<strong>《MacTalk跨越边界》</strong>的小文章，划线or感想，随后整理出来，发博客上</p>
-</blockquote>
-<p>大概这些就够我折腾了，不折腾不成长。继续努力。</p>
-<blockquote>
-<p>1.知识不去学是不会自己跑到你的脑中的啊。<br>2.学东西不能贪多求快，必须一行一行的文字去咀嚼，才会有深刻的体会。<br>3.遇到难题不要回避，也许下次还会遇到同样的问题，还是不会，因此错过许多机会。<br>4.发现有些东西，只要不是太笨，花时间都是能够解决的，而这个痛苦的过程，是必须经历的，熬过去就好了，哪些知识会倍加深刻的印在脑海中。<br>5.学完一个知识点，可以给自己某种奖励，打一场球，看一个短文章，学一会其他的知识，换换思维。<br>6.任何事都需要保障，身体健康是最强大的后盾，所以每天必须锻炼身体，哪怕只有10分钟，也比不锻炼好。</p>
-</blockquote>
-<p>关于学习渠道</p>
-<blockquote>
-<p>1.利用好公开课：主要是网易云课堂，极客学院，coursera看国外国内名校课程<br>2.看前辈的博客，书籍<br>3.先从前端入手，从视频入手，听别人怎么说，不会在一开始入门时不得要领。之后再去练习，看书。加深理解。</p>
-</blockquote>
-
+    
+    <a class="article-more-a" href="/2016/02/20/%E6%9C%80%E8%BF%91%E7%9A%84%E6%83%B3%E6%B3%95%E5%8F%8A%E8%AE%A1%E5%88%92/#more">more >></a>
+    
     
 
     
@@ -744,8 +659,8 @@
 
 
 
-
-  
+ 
+   
     <article id="post-polygon-polyline-point-addField-caculate" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -845,17 +760,10 @@
 <td>…</td>
 </tr>
 </tbody></table>
-<h2 id="建模必要性"><a href="#建模必要性" class="headerlink" title="建模必要性"></a>建模必要性</h2><blockquote>
-<p>每两个元素之间都有直接的工具，然而多任务情况下无法满足需求，如果单独批量处理每一次的转化，工作量十分巨大；考虑到这些，有必要构建合适的模型，模型的好处是合并多步骤省去了中间步骤，最关键的是可以设置中间参数默认值，这样能大大减少中间的输入，而且避免了每次输入的不必要错误。</p>
-</blockquote>
-<h2 id="模型描述"><a href="#模型描述" class="headerlink" title="模型描述"></a>模型描述</h2><blockquote>
-<p>面-&gt;线-&gt;点-&gt;点抽稀(GA-子集,40%)-&gt;加字段(设好默认属性)-&gt;计算几何(x,y)、字段计算</p>
-</blockquote>
-<p>这里的<strong>关键问题</strong>有两个：<br>1.多个工具的顺序<br>为了是模型更具效率，需要考虑每一步之间的先后，使计算处理量最小。例如此处的子集和加字段步骤，先子集然后加字段，就避免了给多余的点加字段，减少了运算量。<br>2.参数的默认值<br>这一步是简化工作量最关键的步骤。省去很多繁杂的输入操作。<br>模型需要输入输出参数，否则模型无效。<br><img src="http://7xqd63.com1.z0.glb.clouddn.com/polygonToPoint.PNG?imageView/4/w/344/q/88"><br>设置了默认值的参数，显示是蓝色的。<br><img src="http://7xqd63.com1.z0.glb.clouddn.com/polygon_point_childSet_addFiled.PNG?imageView/4/w/544/q/88"><br>待解决问题：<br>1.计算几何没有找到合适的代码，需要手动计算<br>2.字段计算同样人工操作。这两个问题都是对<code>arcgis</code>的<code>Python</code>操作不熟悉，有机会应该了解一点<code>arcpy</code>。</p>
-<h2 id="存在问题"><a href="#存在问题" class="headerlink" title="存在问题"></a>存在问题</h2><blockquote>
-<p>1.异常点。转点的过程中，软件处理算法的原因，造成点不是按顺序排列的，无法自动完成，只能通过人工检视来查找异常点，理清顺序。<br>2.市辖区合并。根据导师的意思，比方说合肥的四个市辖区，合并成一个，命名合肥市。<br>3.每个县市的边界点密度大概多少合适。经过反复试验，大概在100-200左右，统一将原数据降密到原来基础上的40%，能够满足需求。<br>4.邻界点是否必须重合。如果有此要求，就无法做下去。咨询老板，不需要。窃喜。<br>5.淮北市区有一块飞地。保留两个，分开表示即可。</p>
-</blockquote>
-
+<h2 id="建模必要性"><a href="#建模必要性" class="headerlink" title="建模必要性"></a>建模必要性</h2>
+    
+    <a class="article-more-a" href="/2016/01/22/polygon-polyline-point-addField-caculate/#more">more >></a>
+    
     
 
     
@@ -924,8 +832,8 @@
 
 
 
-
-  
+ 
+   
     <article id="post-判断非手机登陆，做一次提醒" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1028,8 +936,8 @@
 
 
 
-
-  
+ 
+   
     <article id="post-nodejs学习记录" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1068,146 +976,9 @@
 <blockquote>
 <p>1.Express框架<br>2.MVC设计模式<br>3.ejs模板引擎<br>4.MongoDB数据库</p>
 </blockquote>
-<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><table>
-<thead>
-<tr>
-<th align="left">简记</th>
-<th align="center">全拼</th>
-<th align="center">中文</th>
-<th align="center">含义</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">M</td>
-<td align="center">Model</td>
-<td align="center">模型</td>
-<td align="center">对象及数据结构的实现,通常包括数据库操作</td>
-</tr>
-<tr>
-<td align="left">V</td>
-<td align="center">View</td>
-<td align="center">视图</td>
-<td align="center">表示用户界面,HTML组织结构</td>
-</tr>
-<tr>
-<td align="left">C</td>
-<td align="center">Controller</td>
-<td align="center">控制器</td>
-<td align="center">用于处理用户请求和数据流、复杂模型,将输出传递给视图</td>
-</tr>
-</tbody></table>
-<p>nodejs两大特性，其一：</p>
-<blockquote>
-<p>可以跳过<code>http</code>服务器,因为它本身就是。提供http模块，由c++实现，性能可靠，可直接应用到生产环境。</p>
-</blockquote>
-<p>其二：</p>
-<blockquote>
-<p>与其他语言的显著区别，原始封装成都较低。nodejs中很多工作需要自己完成(但不是都是自己动手，可借助于<strong>第三方框架</strong>)。</p>
-</blockquote>
-<p>使用http模块</p>
-<blockquote>
-<p>减少一层抽象，性能的提升同时提高了开发难度。就一个简单的post请求来说，PHP只要两行代码，而nodejs需要自己手动写post请求过程。底层接口尽管用起来复杂，但让我们对http协议的理解更加清晰。<br>http模块是http服务器内核的封装，可以做网站，可以做代理服务器。手动实现所有东西，小到POST请求，达到Cookie、会话管理。当你用这种方式建立网站时，几乎已经做好了一个完整的框架了。</p>
-</blockquote>
-<p>Express框架</p>
-<blockquote>
-<p>更高层的http接口，以及许多网站常用功能实现了。<br>但不是一个无所不包的全能框架，没有像Rails或Django实现模板引擎甚至ORM(Object Relation Model,对象关系模型)。只是一个轻量级的web框架，多数功能只是对http协议中的常用操作的封装，更多的功能需要插件或者整合其他模块来完成。</p>
-</blockquote>
-<h2 id="快速开始"><a href="#快速开始" class="headerlink" title="快速开始 "></a>快速开始 </h2><p>安装Express<br>目前express已经更新到4.x版本，安装时可用@加版本</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">npm install -g express-generator@3</span><br><span class="line">or</span><br><span class="line">npm install -g express-generator@4</span><br></pre></td></tr></table></figure>
-<p>书上用的是2.5.8版本，所以</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g express@2.5.8 --save</span><br></pre></td></tr></table></figure>
-<p>不加版本号，默认最新版本.安装完成后，用<code>express -V</code>检查安装结果。<br>这样就可以使用express命令了。<br>最快的安装启动express框架简要步骤：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">express blog &amp;&amp; cd blog &amp;&amp; npm install &amp;&amp; npm start</span><br></pre></td></tr></table></figure>
-<p><code>express 4.x</code>无法用<code>node app.js</code>启动，指令为<code>npm start</code>。<br>然后打开<a href="localhost:3000">localhost:3000</a>即可见到熟悉的<code>Welcome to Express</code>。</p>
-<blockquote>
-<p>对应的版本都需要对应的依赖，有时候安装的时候会自动选择最先版本，也需要最新的依赖；制定的方法是在<code>package.json</code>中制定依赖的版本，再运行<code>npm install</code>来安装依赖。</p>
-</blockquote>
-<p>最重要的事应该是理解框架的设计思想，文件之间的映射关系，各个文件夹的分工。<br>理解MVC。</p>
-<p>老版本用<code>supervisor app.js</code>来启动应用，依然可行。   </p>
-<h2 id="建立微博网站"><a href="#建立微博网站" class="headerlink" title="建立微博网站"></a>建立微博网站</h2><p>1功能分析</p>
-<blockquote>
-<p>开发中的大忌是没想清楚要做什么就开始动手。先应该有一个全局的规划。</p>
-</blockquote>
-<ol>
-<li>以用户为中心，需有注册登录功能</li>
-<li>最核心的是信息的发表，涉及数据库访问，前端显示</li>
-<li>评论，转发，点赞等功能，但由于学习目的，不一一实现</li>
-</ol>
-<p>2路由规划<br>或者控制器规划是网站的骨架部分，优先考虑<br>根据功能设计，路由规划方案如下：</p>
-<ul>
-<li>&#x2F;: 首页</li>
-<li>&#x2F;u[user] 用户主页</li>
-<li>&#x2F;post: 发表信息</li>
-<li>&#x2F;reg: 用户注册</li>
-<li>&#x2F;login: 用户登录</li>
-<li>&#x2F;logout: 登出</li>
-</ul>
-<h2 id="常见错误处理"><a href="#常见错误处理" class="headerlink" title="常见错误处理"></a>常见错误处理</h2><p>在完成用户注册页面书写之后，运行出错。<br>error:connection strategy not found</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">$ node app.js</span><br><span class="line">E:\sync_mypc\sync_mypc\languages\js\nodejs\blog\mblog\node_modules\connect-mongo</span><br><span class="line">\src\index.js:100</span><br><span class="line">                throw new Error(&#x27;Connection strategy not found&#x27;);</span><br><span class="line">                ^</span><br><span class="line"></span><br><span class="line">Error: Connection strategy not found</span><br><span class="line">    at MongoStore (E:\sync_mypc\sync_mypc\languages\js\nodejs\blog\mblog\node_mo</span><br><span class="line">dules\connect-mongo\src\index.js:100:23)</span><br><span class="line">    at HTTPServer.&lt;anonymous&gt; (E:\sync_mypc\sync_mypc\languages\js\nodejs\blog\m</span><br><span class="line">blog\app.js:23:12)</span><br><span class="line">    at HTTPServer.app.configure (E:\sync_mypc\sync_mypc\languages\js\nodejs\blog</span><br><span class="line">\mblog\node_modules\express\lib\http.js:542:61)</span><br><span class="line">    at Object.&lt;anonymous&gt; (E:\sync_mypc\sync_mypc\languages\js\nodejs\blog\mblog</span><br><span class="line">\app.js:15:5)</span><br><span class="line">    at Module._compile (module.js:425:26)</span><br><span class="line">    at Object.Module._extensions..js (module.js:432:10)</span><br><span class="line">    at Module.load (module.js:356:32)</span><br><span class="line">    at Function.Module._load (module.js:311:12)</span><br><span class="line">    at Function.Module.runMain (module.js:457:10)</span><br><span class="line">    at startup (node.js:136:18)</span><br><span class="line">    at node.js:972:3</span><br></pre></td></tr></table></figure>
-<p>问题解决<br>在<a target="_blank" rel="noopener" href="https://cnodejs.org/">cnode</a>(已用github邮箱注册)上看到了一篇同样的<a target="_blank" rel="noopener" href="https://cnodejs.org/topic/567a1120222744630726b244#567bab8c10b0249d07105d9c">问题</a>，答案中解决了。<br>解决方式</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install connect-mongo@0.8.2 --save</span><br></pre></td></tr></table></figure>
-<p>独立的模块更新可能影响整体功能。在同一个时期要用当时的版本。</p>
-<p>定义的<code>db.js</code>中<code>DEFAULT_PORT</code>没有定义</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">TypeError: Cannot read property &#x27;DEFAULT_PORT&#x27; of undefined</span><br><span class="line">    at Object.&lt;anonymous&gt; (E:\sync_mypc\sync_mypc\languages\js\nodejs\blog\mblog\models\db.js:7:74)</span><br><span class="line">    at Module._compile (module.js:425:26)</span><br><span class="line">    at Object.Module._extensions..js (module.js:432:10)</span><br><span class="line">    at Module.load (module.js:356:32)</span><br><span class="line">    at Function.Module._load (module.js:311:12)</span><br><span class="line">    at Module.require (module.js:366:17)</span><br><span class="line">    at require (module.js:385:17)</span><br><span class="line">    at Object.&lt;anonymous&gt; (E:\sync_mypc\sync_mypc\languages\js\nodejs\blog\mblog\models\user.js:1:77)</span><br><span class="line">    at Module._compile (module.js:425:26)</span><br><span class="line">    at Object.Module._extensions..js (module.js:432:10)</span><br><span class="line">Program node app.js exited with code 1</span><br></pre></td></tr></table></figure>
-<p>问题解决</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DEFAULT_PORT   -----    27017</span><br></pre></td></tr></table></figure>
-
-<p>到今天下午，基本完成第五章的学习。程序能够正常运行，但是还有许多细节不是很清楚，例如<code>mongodb</code>的使用，之间的映射关系自己也还要梳理一遍。</p>
-<p>代码稍后会在<a target="_blank" rel="noopener" href="https://github.com/linking123/nodejs_guard"><code>GitHub</code></a>和<a href=""><code>oscGit</code></a>上双备份。</p>
-<h1 id="《Node-js实战》"><a href="#《Node-js实战》" class="headerlink" title="《Node.js实战》  "></a>《Node.js实战》  </h1><h2 id="图书编号：TP312JA425第一部分-基础篇"><a href="#图书编号：TP312JA425第一部分-基础篇" class="headerlink" title="图书编号：TP312JA425第一部分 基础篇"></a>图书编号：TP312JA425<br>第一部分 基础篇</h2><h2 id="nodejs及JavaScript基础了解。第二部分-提高篇"><a href="#nodejs及JavaScript基础了解。第二部分-提高篇" class="headerlink" title="nodejs及JavaScript基础了解。第二部分 提高篇"></a>nodejs及JavaScript基础了解。<br>第二部分 提高篇</h2><p>相册服务器<br>模块<br>模板<br>2015&#x2F;12&#x2F;30 noon 17:09  library<br>稍后补上笔记并上传代码备份</p>
-<h2 id="第三部分-实战篇"><a href="#第三部分-实战篇" class="headerlink" title="第三部分 实战篇"></a>第三部分 实战篇</h2><p>###第七章使用express构建web应用<br>路由</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">app.get(&#x27;/&#x27;, function(req, res)&#123; &#125;);</span><br></pre></td></tr></table></figure>
-
-<p>URL路由函数一般格式</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">app.method(url_pattern, optional_functions, request_handler_function);</span><br></pre></td></tr></table></figure>
-<p>method: get, post, delete, put; all<br>简单的URL</p>
-<blockquote>
-<p>&#x2F;path&#x2F;to&#x2F;resources</p>
-</blockquote>
-<p>也支持正则</p>
-<blockquote>
-<p>&#x2F;user(s)?&#x2F;list<br>&#x2F;user&#x2F;*</p>
-</blockquote>
-<p>占位符(用<code>:</code>标记)从请求路由中提取指定值(除了<code>/</code>)，解析路由时将匹配到的占位符值保存到<code>req.params</code>对象中</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">app.get(&quot;/albums/:album_name.json&quot;, function(req, res)&#123;</span><br><span class="line">　　res.end(&quot;request &quot;+req.params.album_name);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<p>如上面请求&#x2F;albums&#x2F;linking.json,输出结果为:</p>
-<blockquote>
-<p>request linking</p>
-</blockquote>
-<p>模块化，<code>REST</code>风格的接口。</p>
-<blockquote>
-<p>将能够独立出来，以后会复用的模块分离成单独文件。<br>模块化增加了源代码可读性，结构更加清晰明了。</p>
-</blockquote>
-<p>中间件</p>
-<blockquote>
-<p>如<code>express</code>就建立在<code>connect</code>这个中间件。</p>
-</blockquote>
-<p>通过一下格式引用中间件</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var middle_something = require(&#x27;middle_something&#x27;);</span><br><span class="line">app.use(middle_something()); </span><br></pre></td></tr></table></figure>
-<p>配置</p>
-<blockquote>
-<p>使用<code>configure</code>方法指定配置名称，在特定的配置环境下该方法提供的函数会被调用。未指定名称，则函数会被所有的配置环境调用，多个配置名称可以用逗号隔开。 </p>
-</blockquote>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">app.configure(function()&#123;   //全部适用</span><br><span class="line">　app.use(express.bodyParser());</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">app.configure(&#x27;dev&#x27;, function()&#123;  //指定了开发环境适用</span><br><span class="line">　app.use(expresss.logger(&#x27;dev&#x27;));</span><br><span class="line">&#125;);</span><br><span class="line">app.configure(&#x27;production&#x27;, &#x27;staging&#x27;, function()&#123;  //多名称</span><br><span class="line">　app.use(express.logger());</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<p>Mac和UNIX电脑中shell命令</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">NODE_ENV=production node program.js</span><br></pre></td></tr></table></figure>
-<p>Windows命令</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">set NODE_ENV=production</span><br><span class="line">node program.js</span><br></pre></td></tr></table></figure>
-<p>中间件执行过程中有一个顺序问题，注意<code>re</code>s.end&#96;的位置，它会关闭响应。</p>
-<p>静态文件处理</p>
-<blockquote>
-<p><code>express</code>通过<code>connect</code>提供了<code>static</code>中间件，将存放静态文件的根目录路径名赋给中间件创建函数即可</p>
-</blockquote>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">app.use(express.static(&quot;/secure/static_site_files&quot;));</span><br></pre></td></tr></table></figure>
-
-<p><code>bodyParser</code>,<code>cookieParser</code>,<code>session</code></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">var app = express()</span><br><span class="line">    .use(express.logger(&#x27;dev&#x27;))</span><br><span class="line">     // move this to AFTER the next use() and see what happens!</span><br><span class="line">    .use(express.bodyParser())</span><br><span class="line">    .use(function(req, res)&#123;</span><br><span class="line">        console.log(req.body);</span><br><span class="line">        res.end(&#x27;want to update album name to &#x27;</span><br><span class="line">                + req.body.album.new_name + &quot;\n&quot;);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<p><strong>编写应用过程中，检测和捕捉错误的代码量往往要大于正常操作的代码量，这才是良好的代码风格。</strong></p>
-<blockquote>
-<p>也许我单纯的以为代码只要能实现直接的功能就行了，是太浅薄的理解。程序中大部分时间都在跟<code>bug</code>作斗争，良好的代码风格能够节省大量的时间，快速定位错误所在。</p>
-</blockquote>
-<h2 id="第四部分-进阶篇"><a href="#第四部分-进阶篇" class="headerlink" title="第四部分 进阶篇"></a>第四部分 进阶篇</h2>
+    
+    <a class="article-more-a" href="/2016/01/05/nodejs%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/#more">more >></a>
+    
     
 
     
@@ -1272,8 +1043,8 @@
 
 
 
-
-  
+ 
+   
     <article id="post-多pc同步测试" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1371,8 +1142,8 @@
 
 
 
-
-  
+ 
+   
     <article id="post-我喜欢的音乐" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1484,8 +1255,8 @@
 
 
 
-
-  
+ 
+   
     <article id="post-HTML5学习记录" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1553,400 +1324,9 @@
 <td align="center">HTML5之前，谁都可以看见输入的值，存在安全隐患。可以指定”on”,”off”和””三种值，不指定时使用浏览器默认</td>
 </tr>
 </tbody></table>
-<p>以下代码包含上表具体样例。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&lt;form id=&quot;login&quot; action=&quot;test.php&quot; method=&quot;get&quot;&gt;</span><br><span class="line">&lt;/form&gt;</span><br><span class="line"></span><br><span class="line">&lt;input form=&quot;login&quot; autofocus autocomplete=&quot;off&quot; type=&quot;text&quot; name=&quot;username&quot; placeholder=&quot;please write your name here&quot;&gt;</span><br><span class="line">&lt;br&gt;</span><br><span class="line">&lt;input form=&quot;login&quot; type=&quot;submit&quot; name=&quot;dosubmit&quot; value=&quot;登陆&quot;&gt;</span><br><span class="line">&lt;br&gt;</span><br><span class="line">&lt;input form=&quot;login&quot; formaction=&quot;php.php&quot; type=&quot;submit&quot; name=&quot;dosubmit&quot; value=&quot;php&quot;&gt;</span><br><span class="line">&lt;br&gt;</span><br><span class="line">&lt;input form=&quot;login&quot; formaction=&quot;a.html&quot; type=&quot;submit&quot; name=&quot;dosubmit&quot; value=&quot;a&quot;&gt;</span><br><span class="line">&lt;br&gt;</span><br><span class="line">&lt;input form=&quot;login&quot; list=&quot;list&quot; formaction=&quot;b.htm&quot; formmethod=&quot;post&quot; type=&quot;text&quot; name=&quot;eeee&quot;&gt;</span><br><span class="line">&lt;br&gt;</span><br><span class="line">&lt;input form=&quot;login&quot; list=&quot;list&quot; autocomplete formaction=&quot;d.htm&quot; formmethod=&quot;post&quot; type=&quot;text&quot; name=&quot;ddd&quot;&gt;</span><br><span class="line"></span><br><span class="line">&lt;datalist id=&quot;list&quot;&gt;</span><br><span class="line">    &lt;option&gt;asdfasdf&lt;/option&gt;</span><br><span class="line">    &lt;option&gt;b&lt;/option&gt;</span><br><span class="line">    &lt;option&gt;cdddddd&lt;/option&gt;</span><br><span class="line">&lt;/datalist&gt;</span><br></pre></td></tr></table></figure>
-
-<h2 id="改良的input元素的种类"><a href="#改良的input元素的种类" class="headerlink" title="改良的input元素的种类"></a>改良的input元素的种类</h2><p>简单的使用新特性实现js的功能。<br>不同浏览器对新增input特性不一定都支持，不支持就默认为text类型，外观形式也没有规定。</p>
-<p><strong>search</strong><br>搜索关键词的文本框，与text仅在外观上（输入值的时候会出现叉号）有区别，Safari支持较好(默认样式圆角矩形文本框)，chrome等都还不支持，但可以用css样式进行改写。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;style&gt;</span><br><span class="line">    input[type=&quot;search&quot;]&#123;-webkit-appearance: textfield;&#125;</span><br><span class="line">&lt;/style&gt;</span><br><span class="line">&lt;input type=&quot;search&quot; name=&quot;keywords&quot;&gt;</span><br></pre></td></tr></table></figure>
-<p><img src="http://7xosdw.com1.z0.glb.clouddn.com/search_b.png"><br>这个特性用的不多，不太在意。</p>
-<p><strong>tel</strong><br>电话号码专用文本框，没有特殊的校验规则，不强制输入数字，因许多电话号码通常带有其他文字，但开发者可以通过pattern属性来指定电话号码验证(正则)。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tel:&lt;input type=&quot;tel&quot; name=&quot;telephone&quot; title=&quot;请输入10数字&quot; pattern=&quot;^\d&#123;10&#125;$&quot;&gt;</span><br></pre></td></tr></table></figure>
-<p><img src="http://7xosdw.com1.z0.glb.clouddn.com/tel_info.png"></p>
-<p><strong>url</strong><br>提交URL地址专用文本框，非URL不允许提交。<br>若要强制输入，用required。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">url:&lt;input type=&quot;url&quot; required name=&quot;url&quot;&gt;</span><br></pre></td></tr></table></figure>
-<p><img src="http://7xosdw.com1.z0.glb.clouddn.com/input_url_err_info.png"><br><img src="http://7xosdw.com1.z0.glb.clouddn.com/url_empty.png"></p>
-<p><strong>Email</strong><br>并不检查该Email是否存在，文本框可以为空，除非加required属性。还有multiple属性，允许在该文框中输入一个串以逗号分隔的Email地址。并不强制要求用户输入该Email地址列表。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">email:&lt;input type=&quot;email&quot; name=&quot;email&quot; required&gt;</span><br></pre></td></tr></table></figure>
-
-<p>另外常用:Datetime,date,month,week,time,datetime-local。下面除Datetime都添加了默认值。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">Datetime:&lt;input type=&quot;datetime&quot; name=&quot;datetime&quot;&gt;</span><br><span class="line">&lt;br&gt;&lt;br&gt;</span><br><span class="line">date:&lt;input type=&quot;date&quot; value=&quot;2015-12-08&quot; name=&quot;date&quot;&gt;</span><br><span class="line">&lt;br&gt;&lt;br&gt;</span><br><span class="line">month:&lt;input type=&quot;month&quot; value=&quot;2015-12&quot; name=&quot;month&quot;&gt;</span><br><span class="line">&lt;br&gt;&lt;br&gt;</span><br><span class="line">week:&lt;input type=&quot;week&quot; value=&quot;2015-W50&quot; name=&quot;week&quot;&gt;</span><br><span class="line">&lt;br&gt;&lt;br&gt;</span><br><span class="line">time:&lt;input type=&quot;time&quot; value=&quot;22:10&quot; name=&quot;time&quot;&gt;</span><br><span class="line">&lt;br&gt;&lt;br&gt;</span><br><span class="line">datetime-local:&lt;input type=&quot;datetime-local&quot; value=&quot;2015-12-08T23:59&quot; name=&quot;local&quot;&gt;</span><br><span class="line">&lt;br&gt;&lt;br&gt;</span><br><span class="line">&lt;input type=&quot;submit&quot; value=&quot;提交&quot;&gt;</span><br></pre></td></tr></table></figure>
-<p>time: 2015&#x2F;12&#x2F;08 </p>
-<table>
-<thead>
-<tr>
-<th>名称</th>
-<th>特性</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>number</td>
-<td>最小值min，最大值max，step间隔。</td>
-</tr>
-<tr>
-<td>range</td>
-<td>最小值min，最大值max，step间隔。默认0-100</td>
-</tr>
-<tr>
-<td>output</td>
-<td>只是为显示，可用其他标签替代目前只有opera10支持。必须从属于某表单。下面例子与range联动，使用了原生js，并换成了number，因H5新特性浏览器不支持。</td>
-</tr>
-<tr>
-<td>color</td>
-<td>颜色选择器</td>
-</tr>
-<tr>
-<td>file</td>
-<td>文件选择，multiple可选择多个文件，value属性值为用逗分隔的一个或多个文件名。如下accept限制文件只能是图片</td>
-</tr>
-</tbody></table>
-<p><strong>代码段：</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">number:&lt;input type=&quot;number&quot; max=&quot;100000&quot; min=&quot;10&quot; step=&quot;3&quot; name=&quot;num&quot;&gt;</span><br><span class="line">    &lt;br&gt;&lt;br&gt;</span><br><span class="line">range:&lt;input id=&quot;ran&quot; type=&quot;range&quot; min=&quot;0&quot; max=&quot;100&quot; onchange=&quot;document.getElementById(&#x27;num&#x27;).value=this.value&quot; value=&quot;50&quot; name=&quot;range&quot;&gt;</span><br><span class="line">&lt;input id=&quot;num&quot; type=&quot;number&quot; value=&quot;50&quot; min=&quot;0&quot; max=&quot;100&quot; onchange=&quot;document.getElementById(&#x27;ran&#x27;).value = this.value&quot; &gt;</span><br><span class="line">    &lt;br&gt;&lt;br&gt;</span><br><span class="line">color:&lt;input type=&quot;color&quot; name=&quot;color&quot;&gt;</span><br><span class="line">    &lt;br&gt;&lt;br&gt;</span><br><span class="line">file:&lt;input type=&quot;file&quot; multiple accept=&quot;image/*&quot; name=&quot;file&quot;&gt;</span><br></pre></td></tr></table></figure>
-<p><strong>效果：</strong><br><img src="http://7xosdw.com1.z0.glb.clouddn.com/num_ran_col_file.PNG"><br><img src="http://7xosdw.com1.z0.glb.clouddn.com/accept_img.PNG"></p>
-<h2 id="HTML5多媒体播放元素"><a href="#HTML5多媒体播放元素" class="headerlink" title="HTML5多媒体播放元素"></a>HTML5多媒体播放元素</h2><p>H5新增元素将取代Flash，不需要再安装插件，只要浏览器支持HTML5。</p>
-<p><strong>audio</strong><br>主要有.mp3,.wav,.ogg三种格式的音频文件。各浏览器支持情况如表：</p>
-<table>
-<thead>
-<tr>
-<th></th>
-<th align="center">IE9</th>
-<th align="center">Firefox3.5</th>
-<th align="center">Opera10.5</th>
-<th align="center">Chrome3.0</th>
-<th align="center">Safari3.0</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>ogg</td>
-<td align="center"></td>
-<td align="center">√</td>
-<td align="center">√</td>
-<td align="center">√</td>
-<td align="center"></td>
-</tr>
-<tr>
-<td>mp3</td>
-<td align="center">√</td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center">√</td>
-<td align="center">√</td>
-</tr>
-<tr>
-<td>wav</td>
-<td align="center"></td>
-<td align="center">√</td>
-<td align="center">√</td>
-<td align="center"></td>
-<td align="center">√</td>
-</tr>
-</tbody></table>
-<p><code>video</code></p>
-<p>媒体元素audio与video常用属性</p>
-<table>
-<thead>
-<tr>
-<th>属性名</th>
-<th>值</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>src</td>
-<td>url</td>
-<td>媒体数据地址</td>
-</tr>
-<tr>
-<td>autoplay</td>
-<td>autoplay</td>
-<td>是否自动播放</td>
-</tr>
-<tr>
-<td>preload</td>
-<td>none,metadata,auto(默认)</td>
-<td>预加载,metadata只预加载媒体的元数据(媒体字节数,第一帧,播放列表,持续时间等)</td>
-</tr>
-<tr>
-<td>poster</td>
-<td>图片url</td>
-<td>video独有，当视频不可用时替代图片</td>
-</tr>
-<tr>
-<td>controls</td>
-<td>controls</td>
-<td>播放控制条</td>
-</tr>
-<tr>
-<td>width&#x2F;height</td>
-<td>pixels</td>
-<td>video独有,设置宽高,单位像素</td>
-</tr>
-</tbody></table>
-<blockquote>
-<p>另外一些属性方法和事件需结合js才能实现效果。例如，error属性可以处理出现的错误等，使networkState属性读取当前网络状态。使用play播放媒体，使用load方法重载入媒体进行播放，通过timeupdate事件来通知当前播位置的改变，再结合js来现实当前的播放进度等。</p>
-</blockquote>
-<p>代码:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;audio controls autoplay&gt;</span><br><span class="line">    &lt;source src=&quot;Perfect.mp3&quot; type=&quot;audio/mp3&quot; /&gt;</span><br><span class="line">    &lt;source src=&quot;Perfect.ogg&quot; type=&quot;audio/ogg&quot; /&gt;</span><br><span class="line">    &lt;source src=&quot;Perfect.wav&quot; type=&quot;audio/wav&quot; /&gt;</span><br><span class="line">    你的浏览器不支持多媒体格式！</span><br><span class="line">&lt;/audio&gt;</span><br><span class="line">    &lt;br&gt;&lt;br&gt;</span><br><span class="line"></span><br><span class="line">&lt;video controls autoplay loop poster=&quot;img/no_video.png&quot; width=&quot;500&quot; height=&quot;400&quot;&gt;</span><br><span class="line">    &lt;source src=&quot;test.mp4&quot; type=&quot;audio/mp4&quot;&gt;</span><br><span class="line">    &lt;source src=&quot;test.avi&quot; type=&quot;audio/avi&quot;&gt;</span><br><span class="line">    &lt;source src=&quot;test.rm&quot; type=&quot;audio/rm&quot;&gt;</span><br><span class="line">&lt;/video&gt;</span><br></pre></td></tr></table></figure>
-
-<p>效果:<br><img src="http://7xosdw.com1.z0.glb.clouddn.com/audio_video_effection.PNG"></p>
-<h2 id="HTML5新增标签"><a href="#HTML5新增标签" class="headerlink" title="HTML5新增标签"></a>HTML5新增标签</h2><ul>
-<li>语义化标签的增多，有利于搜索引擎的索引整理、小屏幕装置视障人使用。</li>
-<li>HTML4一些标签将取消，包括纯粹用作显示效果的标记，如<code>&lt;font&gt;</code>,<code>&lt;center&gt;</code>,被css取代。</li>
-</ul>
-<p>新增的结构元素发展历程<br>1.舍弃<code>&lt;table&gt;</code>这些没有任何予以的布局，接受相对语义化的<code>&lt;div&gt;</code>布局，并开始调用外部样式表。<br>2.大量使用<code>&lt;div&gt;</code>标记又太单一，复杂的网页设需要大量不同的标签结构代码，称作<code>&quot;&lt;div&gt;-soup&quot;</code>综合征。<br>3.如今，HTML5和CSS3新增了和布局相关多种语义标签。</p>
-<p>常用标签:</p>
-<table>
-<thead>
-<tr>
-<th>元素名</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>section</td>
-<td>内容区块，如章节、页眉、页脚或其他部分</td>
-</tr>
-<tr>
-<td>article</td>
-<td>一块与上下文不相关的独立部分,如博客中一篇文章。</td>
-</tr>
-<tr>
-<td>aside</td>
-<td>article之外内容，与article相关的辅助信息。</td>
-</tr>
-<tr>
-<td>header</td>
-<td>标题</td>
-</tr>
-<tr>
-<td>footer</td>
-<td>脚注</td>
-</tr>
-<tr>
-<td>nav</td>
-<td>导航链接</td>
-</tr>
-<tr>
-<td>figure</td>
-<td>独立流内容，使用figcaption元素为figure元素添加标题.</td>
-</tr>
-</tbody></table>
-<p>html5.js使IE9以下也支持语义化标签。放到head里。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;head&gt;</span><br><span class="line">&lt;!--[if lt IE9]&gt;</span><br><span class="line">    &lt;script src=&#x27;html5.js&#x27;&gt;&lt;/script&gt;</span><br><span class="line">&lt;[endif]--&gt;</span><br><span class="line">&lt;/head&gt;</span><br></pre></td></tr></table></figure>
-
-<p>time: 2015&#x2F;12&#x2F;09 21:46 aielab</p>
-<h2 id="HTML5废除的元素"><a href="#HTML5废除的元素" class="headerlink" title="HTML5废除的元素"></a>HTML5废除的元素</h2><p>1.纯展示服务的标签<br>可以用css代替的，如basefont,big,center,font,s,strike,tt,u。<br>2.frame框架，影响网页可用性，所以frameset、frame、noframes已废弃，只支持iframe。<br>3.一些只有部分浏览器支持的也废除，想bgsound和marquee只有IE支持，applet可用embed和object替代。<br>4.rb可用ruby代替，acronym由abbr代替，以及常用dir、isindex、listing、xmp、nextid、pliantext都有替代。</p>
-<h2 id="前端站点开发-HTML5-CSS3"><a href="#前端站点开发-HTML5-CSS3" class="headerlink" title="前端站点开发(HTML5+CSS3)"></a><a target="_blank" rel="noopener" href="http://study.163.com/course/courseLearn.htm?courseId=1530003">前端站点开发(HTML5+CSS3)</a></h2><p><a target="_blank" rel="noopener" href="http://kejian.jirengu.com/fe">饥人谷课件</a></p>
-<h2 id="第一课-手机站点开发"><a href="#第一课-手机站点开发" class="headerlink" title="第一课 手机站点开发"></a>第一课 手机站点开发</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;meta charset=&quot;utf-8&quot;&gt;</span><br><span class="line">&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no&quot;&gt;</span><br><span class="line">&lt;meta name=&quot;format-detection&quot; content=&quot;telephone=no&quot;&gt;</span><br></pre></td></tr></table></figure>
-<p>上面三个meta大部分手机网站都会有。<br>user-scalable&#x3D;no,用户触摸空白不会放大。</p>
-<p>ios会把数字自定义电话号码</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;link rel=&quot;apple-touch-icon-precomposed&quot; sizes=&quot;57x57&quot; href=&quot;http://www.qiyipic.com/20130423143600/fix/H5-57x57.png&quot;&gt;</span><br><span class="line">		&lt;link rel=&quot;apple-touch-icon-precomposed&quot; sizes=&quot;72x72&quot; href=&quot;http://www.qiyipic.com/20130423143600/fix/H5-72x72.png&quot;&gt;</span><br><span class="line">		&lt;link rel=&quot;apple-touch-icon-precomposed&quot; sizes=&quot;114x114&quot; href=&quot;http://www.qiyipic.com/20130423143600/fix/H5-114x114.png&quot;&gt;</span><br></pre></td></tr></table></figure>
-<p>为了iPhone和iPad，图标大小。</p>
-<p>学到一个本地手机调试的技巧<br>第一步，下载安装anywhere，模拟静态服务器</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install anywhere -g</span><br></pre></td></tr></table></figure>
-<p>第二步，cd到文件所在目录</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd ../path/yourfile.html</span><br></pre></td></tr></table></figure>
-<p>第三步，启动anywhere服务器</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">anywhere</span><br></pre></td></tr></table></figure>
-<p>第四步，就可以在网页总看到,你的ip加默认8000端口打开本路径</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">your_ip:8000/</span><br></pre></td></tr></table></figure>
-<p>第五步，可以在页面中点击你的文件，如test.html<br>第六步，手机(需在同一局域网中，本地WiFi即可)，打开上述网址，即看到效果。</p>
-<table>
-<thead>
-<tr>
-<th>端</th>
-<th>移动</th>
-<th>点击</th>
-<th>离开</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>PC</td>
-<td>mouseover</td>
-<td>mouseenter</td>
-<td>mouseleave</td>
-</tr>
-<tr>
-<td>MOBILE</td>
-<td>touchstart</td>
-<td>touchmove</td>
-<td>touchend</td>
-</tr>
-</tbody></table>
-<p>了解到可以用UC:开发版浏览器进行手机调试</p>
-<blockquote>
-<p>下载UC浏览器，相关配置做好，即可USB或WiFi连接电脑进行调试。</p>
-</blockquote>
-<hr>
-<blockquote>
-<p>IOS： Safari<br>window: fiddler（强大的抓包工具，看有哪些网络请求）<br>Mac: Charles sharks</p>
-</blockquote>
-<p>###真实环境</p>
-<blockquote>
-<p>1.业务逻辑(HTML5&#x2F;CSS3&#x2F;JS)<br>2.统计日志系统(统计用户信息)<br>3.打包部署系统</p>
-</blockquote>
-<p>HTML5新增标签</p>
-<table>
-<thead>
-<tr>
-<th>分类</th>
-<th>标签名</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>语义化</td>
-<td><code>nav,aside,header,footer,progress,time</code></td>
-</tr>
-<tr>
-<td>移动</td>
-<td>tel,sms,调用硬件</td>
-</tr>
-<tr>
-<td>多媒体</td>
-<td>audio,video,canvas,svg</td>
-</tr>
-<tr>
-<td>表单</td>
-<td>type&#x3D;date,email,search</td>
-</tr>
-<tr>
-<td>网络请求</td>
-<td>async&#x2F;defer,prefetch&#x2F;dns-prefetch</td>
-</tr>
-</tbody></table>
-<p>CSS3</p>
-<blockquote>
-<p>1.动画相关</p>
-<blockquote>
-<p>1.旋转，位移，缩放，动画等<br>2.阴影，文字描边，图片滤镜等</p>
-</blockquote>
-</blockquote>
-<blockquote>
-<p>2.弹性布局</p>
-<blockquote>
-<p>1.flexbox等<br>2.字体截断</p>
-</blockquote>
-</blockquote>
-<blockquote>
-<p>3.移动</p>
-<blockquote>
-<p>1.iOS滚动 -webkit-overflow-scrolling:touch;<br>2.禁止选中等 -webkit-user-select:none等</p>
-</blockquote>
-</blockquote>
-<blockquote>
-<p>4.工程化 less&#x2F;sass</p>
-</blockquote>
-<blockquote>
-<p>5.其他</p>
-<blockquote>
-<p>1.iconfont<br>2.webp</p>
-</blockquote>
-</blockquote>
-<p>JS</p>
-<blockquote>
-<p>1.存储相关</p>
-<blockquote>
-<p>1.增加ls,session,websql,app cache</p>
-</blockquote>
-</blockquote>
-<blockquote>
-<p>2.移动设备关联的</p>
-<blockquote>
-<p>1.屏幕旋转<br>2.地理定位<br>3.video&#x2F;audio<br>4.调app</p>
-</blockquote>
-</blockquote>
-<blockquote>
-<p>3.js语法</p>
-<blockquote>
-<p>1.ES6<br>2.开放了性能相关的API</p>
-</blockquote>
-</blockquote>
-<blockquote>
-<p>4.其他<br>1.websocket<br>2.postmessage(消息通信)<br>3.dd,file<br>4.xhr2,history等<br>5.数据可视化(svg,convas.如d3.js,icharts)</p>
-</blockquote>
-<p>###打包部署：</p>
-<blockquote>
-<p>1.将开发的源文件合并为一个文件，并进行代码压缩<br>2.生成版本号，对线上代码进行管理，有效地利用缓存<br>3.文件按需加载，使用bigpipe等，webpack</p>
-</blockquote>
-<p>根据代码不同，常见打包工具：</p>
-<blockquote>
-<p>1.符合AMD规范的，可使用webpack,browserify<br>2.使用seajs做加载器的可以选择spm<br>3.使用FIS<br>4通grunt自己实现(jQuery源码-&gt;打包)<br>5.原始的shell脚本</p>
-</blockquote>
-<p>###统计日志</p>
-<blockquote>
-<p>1.性能相关统计<br>2.逻辑相关统计<br>3.错误日志统计</p>
-</blockquote>
-<p>####系统统计实现<br>日志一般通过img来发送1*1</p>
-<blockquote>
-<p>1.性能相关一般埋点在domready，load，firstScreen<br>2.逻辑相关根据不同的逻辑埋点<br>3.错误日志可以通过try catch或onerror来实现，或重写console的4个函数</p>
-</blockquote>
-<h2 id="第二课-H5进阶-手机开发"><a href="#第二课-H5进阶-手机开发" class="headerlink" title="第二课 H5进阶-手机开发"></a>第二课 H5进阶-手机开发</h2><p>1.手机页面开发知识点</p>
-<blockquote>
-<p>基础篇</p>
-<blockquote>
-<p>1.HTML5<br>2.CSS3<br>3.JS基础，包括HTML5的canvas、video和ls等<br>4.网络请求(ajax以及网络相关</p>
-</blockquote>
-</blockquote>
-<blockquote>
-<p>2.中级篇</p>
-<blockquote>
-<p>1.less&#x2F;sass<br>2.js amd&#x2F;cmd 等模块化工具<br>3.性能优化<br>4.组件开发</p>
-</blockquote>
-</blockquote>
-<blockquote>
-<p>3.高级篇</p>
-<blockquote>
-<p>1.性能优化<br>2.react&#x2F;angular<br>3.gulp&#x2F;grant&#x2F;bower&#x2F;fis等常见的构建工具</p>
-</blockquote>
-</blockquote>
-<p>2.一个活动页面开发</p>
-<blockquote>
-<p>从零写代码<br>css布局，多个class，通过class添加删除，来控制样式。<br>js用jQuery<br>先布局，后控制。层层嵌套，环环相扣。<br><strong>自己写的js，一般不是布局所依赖的类库，写在body最下边，js加载阻塞DOM加载，影响性能。</strong><br>在页面布局有一点不熟悉，位置，自适应需要再熟悉一点。<br>css3的新特性用到了阴影，旋转，动画。。挺强大的</p>
-</blockquote>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">text-shadow: #f6c833 1px 2px 2px;</span><br><span class="line">-webkit-transform: rotateZ(-6deg);</span><br><span class="line">display: -webkit-box;</span><br><span class="line">-webkit-animation:scale 2s 0s infinite;</span><br><span class="line">animation:scale 2s 0s infinite;</span><br><span class="line"></span><br><span class="line">@-webkit-keyframes scale&#123;</span><br><span class="line">	0&#123;</span><br><span class="line">		-webkit-transform:scale3d(1,1,1);</span><br><span class="line">	&#125;</span><br><span class="line">	50%&#123;</span><br><span class="line">		-webkit-transform:scale3d(1.2,1.2,1.2);</span><br><span class="line">	&#125;</span><br><span class="line">	100%&#123;</span><br><span class="line">		-webkit-transform:scale3d(1,1,1);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">@keyframes scale&#123;</span><br><span class="line">	0&#123;</span><br><span class="line">		-webkit-transform:scale3d(1,1,1);</span><br><span class="line">	&#125;</span><br><span class="line">	50%&#123;</span><br><span class="line">		-webkit-transform:scale3d(1.2,1.2,1.2);</span><br><span class="line">	&#125;</span><br><span class="line">	100%&#123;</span><br><span class="line">		-webkit-transform:scale3d(1,1,1);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>less后面学习学习<br>fis，百度的自动化工具，优化工作不用自己手动做。<br>AMD规范，js模块化，之间的通信是怎么建立的，需要弄清楚。</p>
-<p>3.页面打包编译</p>
-<blockquote>
-<p>主要用了百度工程构建工具<a target="_blank" rel="noopener" href="http://fis.baidu.com/fis3/docs/beginning/intro.html">fis</a>。</p>
-</blockquote>
-<p>time:2015&#x2F;12&#x2F;13 19:15 aielab</p>
-<hr>
-<h2 id="第三课-性能优化值内存泄露"><a href="#第三课-性能优化值内存泄露" class="headerlink" title="第三课 性能优化值内存泄露"></a>第三课 性能优化值内存泄露</h2><p>1.什么是内存泄露</p>
-<blockquote>
-<p>并费内存在物理上的小时，而是应用程序分配某段内存后，由于涉及错误，失去了对该段内存的控制，因而造成了内存浪费。<br>js内存由于是虚拟机<strong>自动清理</strong>的，内存泄露很大一部分是由于引用清掉了，内存没清除掉。<br>具体体现在页面停留时间长，会卡或者机器发热厉害。</p>
-</blockquote>
-<blockquote>
-<table>
-<thead>
-<tr>
-<th>堆</th>
-<th>栈</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>内存空间</td>
-<td>指针</td>
-</tr>
-</tbody></table>
-</blockquote>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">function person()&#123;&#125;</span><br><span class="line">var p = new person();</span><br></pre></td></tr></table></figure>
-<p>js垃圾回收机制<br><img src="http://7xosdw.com1.z0.glb.clouddn.com/js_neicun_GC.png"></p>
-<p>内存泄露原因：</p>
-<blockquote>
-<p>1.循环引用(Circular References)，IE的com组件产生的对象实例和网页脚本引擎产生的对象实例相互引用。</p>
-<blockquote>
-<p>破解之道，把其中一个引用置为空，断掉这条链。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">document.getElementById(&#x27;id&#x27;) = null;</span><br></pre></td></tr></table></figure>
-<p>2.内部函数引用(Closures),即闭包-Closures可看成目前引起大量问题的循环引用的一种特殊形式。由于依赖指定的关键字和语法结构，Closures条用是比较容易发现的。<br>3.事件绑定，dom插入顺序，eval等</p>
-</blockquote>
-</blockquote>
-<p>2.如何防止内存泄露</p>
-<blockquote>
-<p>1.避免使用eval(作用域挂在windows下，应禁用)<br>2.谨慎使用全局变量，尤其是全局变量存在DOM引用<br>3.绑定事件注意和un配合使用<br>4.闭包和循环引用容易出问题，注意排查</p>
-</blockquote>
-<p>感觉这一课对我目前来说还是难了点，因为日常学习还涉及不到优化，做的项目都太小了。但是这种思想一定要形成习惯。</p>
-<p>time: 2015&#x2F;12&#x2F;13 20:56 aielab</p>
-
+    
+    <a class="article-more-a" href="/2015/12/09/HTML5%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/#more">more >></a>
+    
     
 
     
@@ -2011,13 +1391,17 @@
 
 
 
+ 
+   
 
-  
-  
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/11/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="page-number" href="/page/11/">11</a><span class="page-number current">12</span><a class="page-number" href="/page/13/">13</a><a class="extend next" rel="next" href="/page/13/">Next &raquo;</a>
-    </nav>
-  
+   
+    <nav id="page-nav"> 
+      <a class="extend prev" rel="prev" href="/page/11/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="page-number" href="/page/11/">11</a><span class="page-number current">12</span><a class="page-number" href="/page/13/">13</a><a class="extend next" rel="next" href="/page/13/">Next &raquo;</a> 
+    </nav> 
+   
+
+ 
+
 
 
           </div>
@@ -2138,27 +1522,7 @@
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">weather</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">需求</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">essay</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">basketball</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">olympic</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">nginx</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2178,6 +1542,14 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">weather</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">需求</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">ajax</a>
               </li>
              
@@ -2186,11 +1558,19 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">HTML5</a>
+                <a href="javascript:void(0)" class="js-tag color1">basketball</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">html5</a>
+                <a href="javascript:void(0)" class="js-tag color3">olympic</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">nginx</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">HTML5</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2199,14 +1579,6 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">sse</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">JavaScriptCore</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Oracle</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2222,6 +1594,14 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Oracle</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Mac Office</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">ListView</a>
               </li>
              
@@ -2230,11 +1610,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Mac Office</a>
+                <a href="javascript:void(0)" class="js-tag color4">markdown</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">markdown</a>
+                <a href="javascript:void(0)" class="js-tag color3">mongodb</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2243,6 +1623,14 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">慢查询</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">JavaScriptCore</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">html5</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2255,6 +1643,10 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">avatar</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">cocoa</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2290,11 +1682,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">cocoa</a>
+                <a href="javascript:void(0)" class="js-tag color1">patch</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">patch</a>
+                <a href="javascript:void(0)" class="js-tag color1">gitea</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2302,7 +1694,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">gitea</a>
+                <a href="javascript:void(0)" class="js-tag color2">bundle</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2311,10 +1703,6 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">https</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">bundle</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2334,11 +1722,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">java</a>
+                <a href="javascript:void(0)" class="js-tag color3">cs</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">cs</a>
+                <a href="javascript:void(0)" class="js-tag color5">java</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2347,6 +1735,10 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">快捷键</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">pip</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2370,7 +1762,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">pip</a>
+                <a href="javascript:void(0)" class="js-tag color5">read</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">bookList</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2378,15 +1774,19 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">running</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">showdoc</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">disk</a>
+                <a href="javascript:void(0)" class="js-tag color2">D.Wade</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">D.Wade</a>
+                <a href="javascript:void(0)" class="js-tag color5">disk</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2414,10 +1814,6 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">read</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">读书节</a>
               </li>
              
@@ -2442,15 +1838,15 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">ntp</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">正则</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">手机品牌匹配</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">ntp</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2462,10 +1858,6 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">wechat</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">微信公众号</a>
               </li>
              
@@ -2474,7 +1866,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">张靓颖</a>
+                <a href="javascript:void(0)" class="js-tag color2">wechat</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2482,7 +1874,15 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">张靓颖</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">动漫</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">vpn</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2514,19 +1914,19 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">ai</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">excel</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">模块化</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">MVC</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">ai</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">excel</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2554,23 +1954,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">bookList</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">anti-stealing-link</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">running</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">mongodb</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">vpn</a>
               </li>
             
             <div class="clearfix"></div>

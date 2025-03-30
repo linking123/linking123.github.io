@@ -18,7 +18,7 @@
 <meta property="og:description" content="核心–XMLHttpRequest对象，一个专门的HTTP请求工具 使用XMLHttpRequest做Ajax请求： 如何创建该对象标准&#96; new XMLHttpRequest()&#96; 低版本&#96;IE(678)&#96;，&#96;new ActiveXObject(&#39;Microsoft.XMLHTTP&#39;)&#96;;新的&#96;jQuery&#96;已经抛弃IE6，**程序员不应该去迁就用户的坏习惯，有时候需要逼用户改变">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2016-02-27T05:29:41.000Z">
-<meta property="article:modified_time" content="2025-03-09T13:48:34.279Z">
+<meta property="article:modified_time" content="2025-03-29T14:42:01.058Z">
 <meta property="article:author" content="Linking">
 <meta property="article:tag" content="ajax">
 <meta name="twitter:card" content="summary">
@@ -262,6 +262,8 @@
 <h2 id="利用XHR发送请求来请求后台服务器资源"><a href="#利用XHR发送请求来请求后台服务器资源" class="headerlink" title="利用XHR发送请求来请求后台服务器资源"></a>利用XHR发送请求来请求后台服务器资源</h2><p>分析HTTP协议，请求需明确几个因素:<br>　　　1)请求方法：GET&#x2F;POST&#x2F;PUT&#x2F;DELETE&#x2F;HEAD<br>　　　2)请求哪个资源(URL)<br>　　　3)同步方式–同步&#x2F;异步</p>
 <h2 id="如何得到请求返回结果"><a href="#如何得到请求返回结果" class="headerlink" title="如何得到请求返回结果"></a>如何得到请求返回结果</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">vote</span>(<span class="params"></span>)&#123;</span><br><span class="line">	<span class="comment">//1. 制造xhr</span></span><br><span class="line">	<span class="keyword">var</span> xhr = <span class="title function_">createXHR</span>();</span><br><span class="line">	<span class="comment">//2. 打开连接</span></span><br><span class="line">	xhr.<span class="title function_">open</span>(<span class="string">&#x27;GET&#x27;</span>, <span class="string">&#x27;./05-ajaxvote.php&#x27;</span>, <span class="literal">true</span>/<span class="literal">false</span>);</span><br><span class="line">	<span class="comment">//3. 发送请求</span></span><br><span class="line">	xhr.<span class="title function_">send</span>(<span class="literal">null</span>);</span><br><span class="line">	<span class="comment">//4. 测试同步异步的差异,改true/false</span></span><br><span class="line">	<span class="comment">//alert(xhr.responseText);</span></span><br><span class="line">	<span class="comment">//为避免误会用</span></span><br><span class="line">	<span class="title function_">alert</span>(<span class="string">&#x27;123&#x27;</span>);</span><br></pre></td></tr></table></figure>
 
+<span id="more"></span>
+
 <p>05-ajaxvote.php</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">sleep(3);//等待三秒</span><br><span class="line">if(rand(1,10) &lt; 4)&#123;</span><br><span class="line">	echo &quot;0&quot;;</span><br><span class="line">&#125;else&#123;</span><br><span class="line">	$votenum = file_get_contents(&quot;./vote.txt&quot;);</span><br><span class="line">	if ($votenum == null) &#123;</span><br><span class="line">		$votenum = 0;</span><br><span class="line">	&#125;</span><br><span class="line">	$votenum += 1;</span><br><span class="line">	file_put_contents(&#x27;./vote.txt&#x27;, $votenum);	</span><br><span class="line">	echo &quot;1&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -270,6 +272,7 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">xhr.onreadystatechange = function()&#123;</span><br><span class="line">	var pg = document.getElementById(&#x27;progress&#x27;);</span><br><span class="line">	pg.innerHTML += pg.innerHTML + &#x27;现在的状态是 &#x27;+ this.readyState + &#x27;&lt;br /&gt;&#x27;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>只管<code>readyState == 4</code>的状态，其他不管。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">xhr.onreadystatechange = function()&#123;</span><br><span class="line">	if(this.readyState == 4)&#123;</span><br><span class="line">		if(this.responseText == &#x27;1&#x27;)&#123;</span><br><span class="line">			document.getElementById(&#x27;progress&#x27;).innerHTML = &#x27;投票成功&#x27;;</span><br><span class="line">		&#125;else if(this.responseText == &#x27;0&#x27;)&#123;</span><br><span class="line">			document.getElementById(&#x27;progress&#x27;).innerHTML = &#x27;投票失败&#x27;;</span><br><span class="line">		&#125;else&#123;</span><br><span class="line">			document.getElementById(&#x27;progress&#x27;).innerHTML = this.responseText;</span><br><span class="line">		&#125;</span><br><span class="line">    &#125;   </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
     
 
     
@@ -565,27 +568,7 @@
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">weather</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">需求</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">essay</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">basketball</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">olympic</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">nginx</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -605,6 +588,14 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">weather</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">需求</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">ajax</a>
               </li>
              
@@ -613,11 +604,19 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">HTML5</a>
+                <a href="javascript:void(0)" class="js-tag color1">basketball</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">html5</a>
+                <a href="javascript:void(0)" class="js-tag color3">olympic</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">nginx</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">HTML5</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -626,14 +625,6 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">sse</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">JavaScriptCore</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Oracle</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -649,6 +640,14 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Oracle</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Mac Office</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">ListView</a>
               </li>
              
@@ -657,11 +656,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Mac Office</a>
+                <a href="javascript:void(0)" class="js-tag color4">markdown</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">markdown</a>
+                <a href="javascript:void(0)" class="js-tag color3">mongodb</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -670,6 +669,14 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">慢查询</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">JavaScriptCore</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">html5</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -682,6 +689,10 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">avatar</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">cocoa</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -717,11 +728,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">cocoa</a>
+                <a href="javascript:void(0)" class="js-tag color1">patch</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">patch</a>
+                <a href="javascript:void(0)" class="js-tag color1">gitea</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -729,7 +740,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">gitea</a>
+                <a href="javascript:void(0)" class="js-tag color2">bundle</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -738,10 +749,6 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">https</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">bundle</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -761,11 +768,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">java</a>
+                <a href="javascript:void(0)" class="js-tag color3">cs</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">cs</a>
+                <a href="javascript:void(0)" class="js-tag color5">java</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -774,6 +781,10 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">快捷键</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">pip</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -797,7 +808,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">pip</a>
+                <a href="javascript:void(0)" class="js-tag color5">read</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">bookList</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -805,15 +820,19 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">running</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">showdoc</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">disk</a>
+                <a href="javascript:void(0)" class="js-tag color2">D.Wade</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">D.Wade</a>
+                <a href="javascript:void(0)" class="js-tag color5">disk</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -841,10 +860,6 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">read</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">读书节</a>
               </li>
              
@@ -869,15 +884,15 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">ntp</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">正则</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">手机品牌匹配</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">ntp</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -889,10 +904,6 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">wechat</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">微信公众号</a>
               </li>
              
@@ -901,7 +912,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">张靓颖</a>
+                <a href="javascript:void(0)" class="js-tag color2">wechat</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -909,7 +920,15 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">张靓颖</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">动漫</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">vpn</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -941,19 +960,19 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">ai</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">excel</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">模块化</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">MVC</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">ai</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">excel</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -981,23 +1000,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">bookList</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">anti-stealing-link</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">running</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">mongodb</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">vpn</a>
               </li>
             
             <div class="clearfix"></div>

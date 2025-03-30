@@ -18,7 +18,7 @@
 <meta property="og:description" content="获取服务端cookie1234567891011&#x2F;&#x2F;获取cookieNSDictionary *headers &#x3D; [((NSHTTPURLResponse *)resp) allHeaderFields];NSLog(@&quot;headers:%@&quot;,headers);NSDictionary *cookies &#x3D; [NSHTTPCookie cookiesWithResponse">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2017-05-12T05:40:27.000Z">
-<meta property="article:modified_time" content="2025-03-09T13:48:34.283Z">
+<meta property="article:modified_time" content="2025-03-29T14:52:10.438Z">
 <meta property="article:author" content="Linking">
 <meta property="article:tag" content="cookie">
 <meta name="twitter:card" content="summary">
@@ -253,6 +253,8 @@
   <div class="article-entry" itemprop="articleBody">
     
     <h2 id="获取服务端cookie"><a href="#获取服务端cookie" class="headerlink" title="获取服务端cookie"></a>获取服务端cookie</h2><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//获取cookie</span></span><br><span class="line"><span class="built_in">NSDictionary</span> *headers = [((<span class="built_in">NSHTTPURLResponse</span> *)resp) allHeaderFields];</span><br><span class="line"><span class="built_in">NSLog</span>(<span class="string">@&quot;headers:%@&quot;</span>,headers);</span><br><span class="line"><span class="built_in">NSDictionary</span> *cookies = [<span class="built_in">NSHTTPCookie</span> cookiesWithResponseHeaderFields:headers forURL:[<span class="built_in">NSURL</span> URLWithString:<span class="string">@&quot;http://localhost/&quot;</span>]];</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="built_in">NSHTTPCookie</span> *cookie <span class="keyword">in</span> cookies) &#123;</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@&quot;cookie:%@&quot;</span>,cookie);</span><br><span class="line">    <span class="keyword">if</span> ([[cookie name] isEqualToString:<span class="string">@&quot;JSESSIONID&quot;</span>]) &#123;</span><br><span class="line">        <span class="built_in">NSLog</span>(<span class="string">@&quot;session id is %@&quot;</span>,[cookie value]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<span id="more"></span>
 <h2 id="获取客户端cookie"><a href="#获取客户端cookie" class="headerlink" title="获取客户端cookie"></a>获取客户端cookie</h2><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//获取本地cookie</span></span><br><span class="line"><span class="built_in">NSHTTPCookieStorage</span> *httpCookiesStorage =  [<span class="built_in">NSHTTPCookieStorage</span> sharedHTTPCookieStorage];</span><br><span class="line"><span class="built_in">NSDictionary</span> *cookies = [httpCookiesStorage cookiesForURL:[<span class="built_in">NSURL</span> URLWithString:<span class="string">@&quot;http://localhost/&quot;</span>]];</span><br><span class="line"><span class="keyword">for</span> (<span class="built_in">NSHTTPCookie</span> *cookie <span class="keyword">in</span> cookies) &#123;</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@&quot;cookie:%@&quot;</span>,cookie);</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 <h2 id="客户端设置cookie"><a href="#客户端设置cookie" class="headerlink" title="客户端设置cookie"></a>客户端设置cookie</h2><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//客户端设置cookie</span></span><br><span class="line">-(<span class="type">void</span>)clientSetCookie&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">NSDictionary</span> *prop1 = [<span class="built_in">NSDictionary</span> dictionaryWithObjectsAndKeys:</span><br><span class="line">                           <span class="string">@&quot;a&quot;</span>,<span class="built_in">NSHTTPCookieName</span>,</span><br><span class="line">                           <span class="string">@&quot;aaa&quot;</span>,<span class="built_in">NSHTTPCookieValue</span>,</span><br><span class="line">                           <span class="string">@&quot;/&quot;</span>,<span class="built_in">NSHTTPCookiePath</span>,</span><br><span class="line">                           [<span class="built_in">NSURL</span> URLWithString:<span class="string">@&quot;http://localhost/&quot;</span>],<span class="built_in">NSHTTPCookieOriginURL</span>,</span><br><span class="line">                           [<span class="built_in">NSDate</span> dateWithTimeIntervalSinceNow:<span class="number">60</span>],<span class="built_in">NSHTTPCookieExpires</span>,</span><br><span class="line">                           <span class="literal">nil</span>];</span><br><span class="line">    <span class="built_in">NSDictionary</span> *prop2 = [<span class="built_in">NSDictionary</span> dictionaryWithObjectsAndKeys:</span><br><span class="line">                           <span class="string">@&quot;b&quot;</span>,<span class="built_in">NSHTTPCookieName</span>,</span><br><span class="line">                           <span class="string">@&quot;bbb&quot;</span>,<span class="built_in">NSHTTPCookieValue</span>,</span><br><span class="line">                           <span class="string">@&quot;/&quot;</span>,<span class="built_in">NSHTTPCookiePath</span>,</span><br><span class="line">                           [<span class="built_in">NSURL</span> URLWithString:<span class="string">@&quot;http://localhost/&quot;</span>],<span class="built_in">NSHTTPCookieOriginURL</span>,</span><br><span class="line">                           [<span class="built_in">NSDate</span> dateWithTimeIntervalSinceNow:<span class="number">60</span>],<span class="built_in">NSHTTPCookieExpires</span>,</span><br><span class="line">                           <span class="literal">nil</span>];</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">NSHTTPCookie</span> *cookie1 = [<span class="built_in">NSHTTPCookie</span> cookieWithProperties:prop1];</span><br><span class="line">    <span class="built_in">NSHTTPCookie</span> *cookie2 = [<span class="built_in">NSHTTPCookie</span> cookieWithProperties:prop2];</span><br><span class="line"></span><br><span class="line">    <span class="comment">//单个设置</span></span><br><span class="line">    [[<span class="built_in">NSHTTPCookieStorage</span> sharedHTTPCookieStorage] setCookie:cookie1];</span><br><span class="line">    [[<span class="built_in">NSHTTPCookieStorage</span> sharedHTTPCookieStorage] setCookie:cookie2];</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//批量设置</span></span><br><span class="line"><span class="comment">//    NSArray *cookies = @[cookie1,cookie2,cookie3];</span></span><br><span class="line"><span class="comment">//    [[NSHTTPCookieStorage sharedHTTPCookieStorage]setCookies:cookies forURL:[NSURL URLWithString:@&quot;http://localhost/&quot;] mainDocumentURL:nil];</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">//设置cookie本地缓存策略</span></span><br><span class="line">    <span class="comment">//NSHTTPCookieAcceptPolicyAlways:保存所有cookie，这个是默认值</span></span><br><span class="line">    <span class="comment">//NSHTTPCookieAcceptPolicyNever:不保存任何响应头中的cookie</span></span><br><span class="line">    <span class="comment">//NSHTTPCookieAcceptPolicyOnlyFromMainDocumentDomain:只保存域请求匹配的cookie</span></span><br><span class="line"></span><br><span class="line">    [[<span class="built_in">NSHTTPCookieStorage</span> sharedHTTPCookieStorage]setCookieAcceptPolicy:<span class="built_in">NSHTTPCookieAcceptPolicyAlways</span>];</span><br><span class="line"></span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@&quot;设置完成&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
@@ -556,27 +558,7 @@
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">weather</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">需求</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">essay</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">basketball</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">olympic</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">nginx</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -596,6 +578,14 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">weather</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">需求</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">ajax</a>
               </li>
              
@@ -604,11 +594,19 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">HTML5</a>
+                <a href="javascript:void(0)" class="js-tag color1">basketball</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">html5</a>
+                <a href="javascript:void(0)" class="js-tag color3">olympic</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">nginx</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">HTML5</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -617,14 +615,6 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">sse</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">JavaScriptCore</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Oracle</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -640,6 +630,14 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Oracle</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Mac Office</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">ListView</a>
               </li>
              
@@ -648,11 +646,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Mac Office</a>
+                <a href="javascript:void(0)" class="js-tag color4">markdown</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">markdown</a>
+                <a href="javascript:void(0)" class="js-tag color3">mongodb</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -661,6 +659,14 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">慢查询</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">JavaScriptCore</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">html5</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -673,6 +679,10 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">avatar</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">cocoa</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -708,11 +718,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">cocoa</a>
+                <a href="javascript:void(0)" class="js-tag color1">patch</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">patch</a>
+                <a href="javascript:void(0)" class="js-tag color1">gitea</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -720,7 +730,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">gitea</a>
+                <a href="javascript:void(0)" class="js-tag color2">bundle</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -729,10 +739,6 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">https</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">bundle</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -752,11 +758,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">java</a>
+                <a href="javascript:void(0)" class="js-tag color3">cs</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">cs</a>
+                <a href="javascript:void(0)" class="js-tag color5">java</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -765,6 +771,10 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">快捷键</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">pip</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -788,7 +798,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">pip</a>
+                <a href="javascript:void(0)" class="js-tag color5">read</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">bookList</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -796,15 +810,19 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">running</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">showdoc</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">disk</a>
+                <a href="javascript:void(0)" class="js-tag color2">D.Wade</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">D.Wade</a>
+                <a href="javascript:void(0)" class="js-tag color5">disk</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -832,10 +850,6 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">read</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">读书节</a>
               </li>
              
@@ -860,15 +874,15 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">ntp</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">正则</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">手机品牌匹配</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">ntp</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -880,10 +894,6 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">wechat</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">微信公众号</a>
               </li>
              
@@ -892,7 +902,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">张靓颖</a>
+                <a href="javascript:void(0)" class="js-tag color2">wechat</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -900,7 +910,15 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">张靓颖</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">动漫</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">vpn</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -932,19 +950,19 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">ai</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">excel</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">模块化</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">MVC</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">ai</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">excel</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -972,23 +990,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">bookList</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">anti-stealing-link</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">running</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">mongodb</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">vpn</a>
               </li>
             
             <div class="clearfix"></div>

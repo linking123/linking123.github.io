@@ -18,7 +18,7 @@
 <meta property="og:description" content="题记：这本书是2016年6月10日购于Aamazon，至今还是新的，有愧初衷。决定于2017年2月25日开始看，本书共12章，400页（不含附录）。计划两个月看完。那么，到3月25日要看200页，大概到第七章结束；四周200页，一周就是50页。  那么就从附录的基础开始看吧。 时间计划表：    周序号 时间 章节 页码 执行情况    1 20170227-20170305 第一、二章 p1-">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2017-02-26T15:10:08.000Z">
-<meta property="article:modified_time" content="2025-03-09T13:48:34.291Z">
+<meta property="article:modified_time" content="2025-03-30T10:13:26.937Z">
 <meta property="article:author" content="Linking">
 <meta property="article:tag" content="Python">
 <meta name="twitter:card" content="summary">
@@ -331,6 +331,8 @@
 <td align="center">-</td>
 </tr>
 </tbody></table>
+<span id="more"></span>
+
 <h1 id="附录A：Python语言精要"><a href="#附录A：Python语言精要" class="headerlink" title="附录A：Python语言精要"></a>附录A：Python语言精要</h1><p>-重拾Python基础</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/python</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="comment"># 在python中输入中文，包括中文注释，都需要加入上面对声明：https://www.python.org/dev/peps/pep-0263/#defining-the-encoding</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># python对变量进行赋值是在创建等号右侧对象对一个引用；即左侧是引用，右侧是对象；</span></span><br><span class="line">a = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>]</span><br><span class="line">b = a</span><br><span class="line">a.append(<span class="number">7</span>)</span><br><span class="line"><span class="built_in">print</span> a</span><br><span class="line"><span class="built_in">print</span> b</span><br><span class="line"><span class="comment"># a，b两个引用指向一个对象，输出都是[1,2,3,4,5,6,7]</span></span><br><span class="line"><span class="comment"># 赋值也叫绑定，将一个名称（引用）和一个对象绑定自在一起；</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># python按引用传递，以参数形式传入函数时，只是传入一个引用，不会复制；</span></span><br><span class="line"><span class="comment"># 其他语言既支持按引用传递，又支持按值传递；</span></span><br><span class="line"><span class="comment"># python可以修改参数的内容；而其他语言貌似不可以</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">append_ele</span>(<span class="params">data_list, ele</span>):</span><br><span class="line">    data_list.append(ele)</span><br><span class="line">data_list = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]</span><br><span class="line">append_ele(data_list, <span class="number">5</span>)</span><br><span class="line"><span class="built_in">print</span> data_list</span><br><span class="line"></span><br><span class="line"><span class="comment"># 强类型语言？</span></span><br><span class="line"><span class="comment"># 由于没有显式的将类型写出，常被误认为是弱类型语言，和js差不多；</span></span><br><span class="line"><span class="comment"># 如计算以下：</span></span><br><span class="line"><span class="string">&#x27;5&#x27;</span> + <span class="number">5</span></span><br><span class="line"><span class="comment"># 报错信息如下：</span></span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">   File <span class="string">&quot;/Users/linking/PycharmProjects/testProject/test1&quot;</span>, line <span class="number">25</span>, <span class="keyword">in</span> &lt;module&gt;</span><br><span class="line">    <span class="string">&#x27;5&#x27;</span> + <span class="number">5</span></span><br><span class="line">TypeError: cannot concatenate <span class="string">&#x27;str&#x27;</span> <span class="keyword">and</span> <span class="string">&#x27;int&#x27;</span> objects</span><br><span class="line"><span class="comment"># 再例：</span></span><br><span class="line">a = <span class="number">5.3</span></span><br><span class="line">b = <span class="number">2</span></span><br><span class="line"><span class="built_in">print</span> <span class="string">&#x27;a is %s, b is %s&#x27;</span> % (<span class="built_in">type</span>(a), <span class="built_in">type</span>(b))</span><br><span class="line">out: a <span class="keyword">is</span> &lt;<span class="built_in">type</span> <span class="string">&#x27;float&#x27;</span>&gt;, b <span class="keyword">is</span> &lt;<span class="built_in">type</span> <span class="string">&#x27;int&#x27;</span>&gt;</span><br><span class="line"><span class="comment"># 占位符 %s</span></span><br><span class="line"><span class="built_in">print</span> a/b</span><br><span class="line"><span class="number">2.65</span></span><br><span class="line"><span class="comment"># isinstance()函数检查类型</span></span><br><span class="line"><span class="built_in">print</span> <span class="built_in">isinstance</span>(a, <span class="built_in">int</span>)</span><br><span class="line">out: <span class="literal">False</span></span><br><span class="line"><span class="built_in">print</span> <span class="built_in">isinstance</span>(b, <span class="built_in">int</span>)</span><br><span class="line">out: <span class="literal">True</span></span><br><span class="line"><span class="built_in">print</span> <span class="built_in">isinstance</span>(a, (<span class="built_in">int</span>, <span class="built_in">float</span>))</span><br><span class="line">out: <span class="literal">True</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 属性和方法</span></span><br><span class="line">a = <span class="string">&#x27;foo&#x27;</span></span><br><span class="line"><span class="comment"># 通过.调用a.</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># python是一种非常严格的语言（急性子）；几乎在任何时候，计算过程和表达式都是立即求值。</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 可变对象：列表，字典，NumPy数组及大部分用户自定义类</span></span><br><span class="line"><span class="comment"># 不可变类：字符串和元组等；</span></span><br><span class="line"><span class="comment"># 不可变指不能修改原内存块的数据。即使修改成功了也只是创建了一个新对象，并将其赋值给原变量而已。</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 数据类型</span></span><br><span class="line"><span class="keyword">from</span> __future__ <span class="keyword">import</span> division</span><br><span class="line"><span class="built_in">print</span> <span class="number">3</span> / <span class="number">2</span></span><br><span class="line"><span class="comment"># 加__future__则结果是1.5,不加就是1</span></span><br><span class="line"><span class="comment"># 也可以显式转换  3／float(2)</span></span><br><span class="line"><span class="comment"># 整数除法如下：</span></span><br><span class="line"><span class="built_in">print</span> <span class="number">3</span>//<span class="number">2</span></span><br><span class="line"><span class="comment"># 结果 1</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 字符串</span></span><br><span class="line"><span class="comment"># 很多人因灵活的字符串处理能力而选择了python</span></span><br><span class="line"><span class="comment"># &#x27;&#x27;  &quot;&quot;  效果相同</span></span><br><span class="line"><span class="comment"># 多行字符串用三重引号（&#x27;&#x27;&#x27;或&quot;&quot;&quot;）如下</span></span><br><span class="line">c = <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    this is a longer string that</span></span><br><span class="line"><span class="string">    spans multiple lines</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line"><span class="comment"># 字符串不可变；要修改也只能创建一个新的。</span></span><br><span class="line"><span class="comment"># str(5.6)这种形式即可完成类型转换</span></span><br><span class="line"><span class="comment"># 反斜杠（\）是转义字符；</span></span><br><span class="line">pring s = <span class="string">&#x27;12\\34&#x27;</span></span><br><span class="line">out : <span class="number">12</span>\<span class="number">34</span></span><br><span class="line"><span class="comment"># 若要按照原样输出，则在左侧加r前缀</span></span><br><span class="line">s = <span class="string">r&#x27;this\has\no\special\characters\&#x27;</span></span><br><span class="line"><span class="string">out: &#x27;</span>this\has\no\special\characters\<span class="string">&#x27;</span></span><br><span class="line"><span class="string"># 字符串格式化</span></span><br><span class="line"><span class="string"># 机制：以一个%开头后面跟着一个或多个格式字符的字符串是需要插入的目标（类似c中的printf函数）</span></span><br><span class="line"><span class="string">temple = &#x27;</span>%<span class="number">2.</span>f %s are worth $%d<span class="string">&#x27;</span></span><br><span class="line"><span class="string">print temple % (3.413444, &#x27;</span>we<span class="string">&#x27;, 222)</span></span><br><span class="line"><span class="string"># 这里的%是二元运算符，后面是元组(,,,)</span></span><br><span class="line"><span class="string">print bool([]),bool([1,2,3])</span></span><br><span class="line"><span class="string">out: False True</span></span><br><span class="line"><span class="string">print bool(&#x27;</span>hollo<span class="string">&#x27;),bool(&#x27;</span><span class="string">&#x27;)</span></span><br><span class="line"><span class="string">out: True False</span></span><br><span class="line"><span class="string">print bool(0), bool(1)</span></span><br><span class="line"><span class="string">out: False,True</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"># None是Python的空值类型。一个函数没有显式地返回值，则隐式返回None</span></span><br><span class="line"><span class="string"># None不是保留关键字，只是NoneType的一个实例。</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"># 异常处理</span></span><br><span class="line"><span class="string">def attempt_float(x):</span></span><br><span class="line"><span class="string">    try:</span></span><br><span class="line"><span class="string">        return float(x)</span></span><br><span class="line"><span class="string">    except (TypeError,ValueError):</span></span><br><span class="line"><span class="string">        return x</span></span><br><span class="line"><span class="string">print attempt_float(&#x27;</span><span class="number">123.44</span>xx<span class="string">&#x27;)</span></span><br><span class="line"><span class="string"># 如上用元组包括多个，同时捕捉多个异常。</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"># 三元表达式</span></span><br><span class="line"><span class="string">x = 5</span></span><br><span class="line"><span class="string">print &#x27;</span>Non-negative<span class="string">&#x27; if x &gt; 0 else &#x27;</span>Negative<span class="string">&#x27;</span></span><br><span class="line"><span class="string"># 优点是缩减代码，缺点是复杂情况下可读性差</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"># 元组</span></span><br><span class="line"><span class="string"># 任何序列或迭代器都可以通过tuple转换为元组</span></span><br><span class="line"><span class="string">print tuple([3,2,1])</span></span><br><span class="line"><span class="string">out: (3,2,1)</span></span><br><span class="line"><span class="string">tup = tuple(&#x27;</span>string<span class="string">&#x27;)</span></span><br><span class="line"><span class="string">print tup</span></span><br><span class="line"><span class="string">out: (&#x27;</span>s<span class="string">&#x27;, &#x27;</span>t<span class="string">&#x27;, &#x27;</span><span class="string">r&#x27;, &#x27;</span>i<span class="string">&#x27;, &#x27;</span>n<span class="string">&#x27;, &#x27;</span>g<span class="string">&#x27;)</span></span><br><span class="line"><span class="string">print tup[0]</span></span><br><span class="line"><span class="string">out: s</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"># 列表切片</span></span><br><span class="line"><span class="string"># 正 从0开始，负 从-1开始；都是在索引的插缝数数。</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"># 有序 sorted ，唯一 set</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"># 字典，是Python中最重要的内置数据结构。是一种大小可变的键值对集。</span></span><br><span class="line"><span class="string">empty_dict=&#123;&#125;</span></span><br><span class="line"><span class="string">dict_a = &#123;&quot;a key&quot;: &quot;a value&quot;, &#x27;</span>b key<span class="string">&#x27;: &#x27;</span>b value<span class="string">&#x27;&#125;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"># 匿名函数</span></span><br><span class="line"><span class="string">def apply_to_list(some_list, f):</span></span><br><span class="line"><span class="string">    return [f(x) for x in some_list]</span></span><br><span class="line"><span class="string">ints = [4, 0, 1, 5, 6]</span></span><br><span class="line"><span class="string">print apply_to_list(ints, lambda x: x * 2)</span></span><br><span class="line"><span class="string">out: [8, 0, 2, 10, 12]</span></span><br><span class="line"><span class="string"># 得以轻松的传入一个自定义运算给apply_to_list函数；</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"># 生成器</span></span><br><span class="line"><span class="string">def squares(n=10):</span></span><br><span class="line"><span class="string">    print &#x27;</span>Generating squares <span class="keyword">from</span> <span class="number">1</span> to %d<span class="string">&#x27; % (n**2)</span></span><br><span class="line"><span class="string">    for i in xrange(1, n+1):</span></span><br><span class="line"><span class="string">        yield i**2</span></span><br><span class="line"><span class="string">gen = squares()</span></span><br><span class="line"><span class="string">print gen</span></span><br><span class="line"><span class="string">out: &lt;generator object squares at 0x106936d20&gt;</span></span><br><span class="line"><span class="string">for x in gen:</span></span><br><span class="line"><span class="string">    print x,</span></span><br><span class="line"><span class="string">out:  Generating squares from 1 to 100</span></span><br><span class="line"><span class="string">      1 4 9 16 25 36 49 64 81 100</span></span><br></pre></td></tr></table></figure>
 <p>20170226 23:06 周日 于皖水公寓1#1317</p>
@@ -631,27 +633,7 @@
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">weather</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">需求</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">essay</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">basketball</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">olympic</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">nginx</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -671,6 +653,14 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">weather</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">需求</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">ajax</a>
               </li>
              
@@ -679,11 +669,19 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">HTML5</a>
+                <a href="javascript:void(0)" class="js-tag color1">basketball</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">html5</a>
+                <a href="javascript:void(0)" class="js-tag color3">olympic</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">nginx</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">HTML5</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -692,14 +690,6 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">sse</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">JavaScriptCore</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Oracle</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -715,6 +705,14 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Oracle</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Mac Office</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">ListView</a>
               </li>
              
@@ -723,11 +721,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Mac Office</a>
+                <a href="javascript:void(0)" class="js-tag color4">markdown</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">markdown</a>
+                <a href="javascript:void(0)" class="js-tag color3">mongodb</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -736,6 +734,14 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">慢查询</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">JavaScriptCore</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">html5</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -748,6 +754,10 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">avatar</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">cocoa</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -783,11 +793,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">cocoa</a>
+                <a href="javascript:void(0)" class="js-tag color1">patch</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">patch</a>
+                <a href="javascript:void(0)" class="js-tag color1">gitea</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -795,7 +805,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">gitea</a>
+                <a href="javascript:void(0)" class="js-tag color2">bundle</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -804,10 +814,6 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">https</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">bundle</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -827,11 +833,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">java</a>
+                <a href="javascript:void(0)" class="js-tag color3">cs</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">cs</a>
+                <a href="javascript:void(0)" class="js-tag color5">java</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -840,6 +846,10 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">快捷键</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">pip</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -863,7 +873,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">pip</a>
+                <a href="javascript:void(0)" class="js-tag color5">read</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">bookList</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -871,15 +885,19 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">running</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">showdoc</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">disk</a>
+                <a href="javascript:void(0)" class="js-tag color2">D.Wade</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">D.Wade</a>
+                <a href="javascript:void(0)" class="js-tag color5">disk</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -907,10 +925,6 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">read</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">读书节</a>
               </li>
              
@@ -935,15 +949,15 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">ntp</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">正则</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">手机品牌匹配</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">ntp</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -955,10 +969,6 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">wechat</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">微信公众号</a>
               </li>
              
@@ -967,7 +977,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">张靓颖</a>
+                <a href="javascript:void(0)" class="js-tag color2">wechat</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -975,7 +985,15 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">张靓颖</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">动漫</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">vpn</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1007,19 +1025,19 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">ai</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">excel</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">模块化</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">MVC</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">ai</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">excel</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1047,23 +1065,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">bookList</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">anti-stealing-link</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">running</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">mongodb</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">vpn</a>
               </li>
             
             <div class="clearfix"></div>

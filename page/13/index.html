@@ -199,8 +199,10 @@
           </div>
           <div id="js-content" class="content-ll">
             
+ 
+   
 
-  
+   
     <article id="post-jQuery学习记录" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -235,251 +237,9 @@
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">(<span class="keyword">function</span>(<span class="params"></span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">var</span> $ = <span class="keyword">function</span>(<span class="params">id</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(id);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="variable language_">window</span>.<span class="property">$</span> = <span class="variable language_">window</span>.<span class="property">jQuery</span> = $;</span><br><span class="line">        &#125;)();</span><br></pre></td></tr></table></figure>
 
 <p>模拟了一个id获取的jQuery方法，$做window的一级方法，即全局方法。</p>
-<h2 id="jQuery对象和DOM对象"><a href="#jQuery对象和DOM对象" class="headerlink" title="jQuery对象和DOM对象"></a>jQuery对象和DOM对象</h2><p>DOM对象和jQuery对象不能互相使用，必须转化后才能使用。就是var $div &#x3D; $(oDiv)或者var div &#x3D; $div[0]之类的伪装成敌方就能使用了。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="keyword">function</span>(<span class="params"></span>)</span><br><span class="line">            &#123;</span><br><span class="line">                $(<span class="string">&quot;#d1&quot;</span>).<span class="title function_">html</span>(<span class="string">&#x27;af&#x27;</span>);</span><br><span class="line">            &#125;);</span><br><span class="line"></span><br><span class="line">            $(<span class="variable language_">document</span>).<span class="title function_">ready</span>(<span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">                $(<span class="string">&quot;.as&quot;</span>).<span class="title function_">html</span>(<span class="string">&quot;1234565&quot;</span>)</span><br><span class="line">            &#125;);</span><br></pre></td></tr></table></figure>
-
-<h2 id="map，each"><a href="#map，each" class="headerlink" title="map，each"></a>map，each</h2><p>map可以遍历数组元素并进行操作，返回数组。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> arr = [<span class="number">1</span>,<span class="number">23</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">76</span>,<span class="number">7</span>,<span class="number">21</span>,<span class="number">45</span>];</span><br><span class="line">        arr = $.<span class="title function_">map</span>(arr,<span class="keyword">function</span>(<span class="params">ite</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> ite*<span class="number">3</span>;</span><br><span class="line">        &#125;);</span><br><span class="line">        <span class="title function_">alert</span>(arr);</span><br></pre></td></tr></table></figure>
-
-<p>each方法遍历数组或字典，然后得到每一个值对。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//定义一个字典  </span></span><br><span class="line"><span class="keyword">var</span> dic =&#123;<span class="string">&quot;name&quot;</span>:<span class="string">&quot;zs&quot;</span>,<span class="string">&quot;age&quot;</span>:<span class="number">18</span>,<span class="string">&quot;sex&quot;</span>:<span class="string">&quot;男&quot;</span>&#125;;  </span><br><span class="line"><span class="comment">//在function中传入两个值的情况  </span></span><br><span class="line">$.<span class="title function_">each</span>(dic,<span class="keyword">function</span>(<span class="params">key,value</span>)  </span><br><span class="line">&#123;  </span><br><span class="line">    <span class="title function_">alert</span>(key+<span class="string">&quot;:&quot;</span>+value);  </span><br><span class="line">&#125;);  </span><br><span class="line"><span class="comment">//在function中传入一个值的情况  </span></span><br><span class="line">$.<span class="title function_">each</span>(dic,<span class="keyword">function</span>(<span class="params">key</span>)  </span><br><span class="line">&#123;  </span><br><span class="line">    <span class="title function_">alert</span>(key+<span class="string">&quot;+&quot;</span>+dic[key]);  </span><br><span class="line">&#125;);  </span><br><span class="line"><span class="comment">//在function中不传值的情况  </span></span><br><span class="line">$.<span class="title function_">each</span>(dic,<span class="keyword">function</span>(<span class="params"></span>)  </span><br><span class="line">&#123;  </span><br><span class="line">    <span class="comment">//this 在这里指的是字典中的值  </span></span><br><span class="line">    <span class="title function_">alert</span>(<span class="variable language_">this</span>);  </span><br><span class="line">&#125;);  </span><br></pre></td></tr></table></figure>
-
-<h2 id="全选反选，label、prop、toggle"><a href="#全选反选，label、prop、toggle" class="headerlink" title="全选反选，label、prop、toggle"></a>全选反选，label、prop、toggle</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;label&gt;</span><br><span class="line">    &lt;input type=&quot;checkbox&quot; /&gt;</span><br><span class="line">    网站制作</span><br><span class="line">&lt;/label&gt;</span><br></pre></td></tr></table></figure>
-<p>label中点击文字也能选中checkbox；或者用for对应到id，也可以。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var box = $(&#x27;input:checkbox&#x27;);</span><br><span class="line">box.prop(&quot;checked&quot;, true);</span><br></pre></td></tr></table></figure>
-<p>属性选择器。checked属性true。prop-property<br><a target="_blank" rel="noopener" href="http://www.w3school.com.cn/jquery/event_toggle.asp">toggle语法</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$(selector).toggle(function1(),function2(),functionN(),...)</span><br></pre></td></tr></table></figure>
-<p>当指定元素被点击时，在两个或多个函数之间轮流切换。</p>
-<h2 id="弹出或关闭"><a href="#弹出或关闭" class="headerlink" title="弹出或关闭"></a>弹出或关闭</h2><p>原生js</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var maincon = document.getElementById(&quot;main&quot;);</span><br><span class="line">maincon.style.display = &quot;none&quot;;</span><br><span class="line">maincon.style.display = &quot;block&quot;;</span><br></pre></td></tr></table></figure>
-<p>jQuery</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$(&quot;#main&quot;).hide(1000);      //数字代1000ms缓慢隐藏</span><br><span class="line">$(&quot;#main&quot;).show(1000);</span><br></pre></td></tr></table></figure>
-
-<h2 id="在线客服的显隐"><a href="#在线客服的显隐" class="headerlink" title="在线客服的显隐"></a>在线客服的显隐</h2><p>html-css-js从骨架到装饰到灵魂。先要建立起骨架，穿起衣裳，才好把玩。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">$(&#x27;.qq_s&#x27;).click(function()&#123;</span><br><span class="line">    $(&#x27;.main_im&#x27;).css(&#x27;height&#x27;, &#x27;0&#x27;);     </span><br><span class="line">    $(&#x27;.qq_s&#x27;).hide();</span><br><span class="line">    $(&#x27;.qq_d&#x27;).show();</span><br><span class="line">&#125;);</span><br><span class="line">$(&#x27;.qq_d&#x27;).mouseleave(function()&#123;</span><br><span class="line">    $(&#x27;.main_im&#x27;).css(&#x27;height&#x27;, &#x27;133&#x27;);</span><br><span class="line">    $(&#x27;.qq_d&#x27;).hide();</span><br><span class="line">    $(&#x27;.qq_s&#x27;).show(500);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<h2 id="搜索菜单"><a href="#搜索菜单" class="headerlink" title="搜索菜单"></a>搜索菜单</h2><p>input点击后出现有颜色的边框<br><img src="http://7xosdw.com1.z0.glb.clouddn.com/input_focus_border.png"><br>去除方法</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">input</span><span class="selector-pseudo">:focus</span>&#123;</span><br><span class="line">    <span class="attribute">outline</span>:none;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>css中关于超链接的四个属性一般正常顺序为：link，visited，hover，active，这个顺序不能乱写的否则就会出现问题。</p>
-<p>动态改变class</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class=&quot;searchbar&quot; onmouseover=&quot;this.className=&#x27;searchover&#x27;&quot;&gt;&lt;/div&gt;</span><br></pre></td></tr></table></figure>
-<p>background背景图的位置控制还是不熟练啊。</p>
-<h2 id="移入图片显示文字可点击"><a href="#移入图片显示文字可点击" class="headerlink" title="移入图片显示文字可点击"></a>移入图片显示文字可点击</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">$(function()&#123;</span><br><span class="line">    $(&#x27;.lili&#x27;).hover(function()&#123;</span><br><span class="line">        $(&#x27;.wenzi&#x27;).fadeIn(2000);</span><br><span class="line">        $(this).find(&quot;a&quot;).stop(true,true).show();</span><br><span class="line">        &#125;,</span><br><span class="line">        function()&#123;</span><br><span class="line">            $(this).find(&#x27;a&#x27;).stop(true,true).hide();           </span><br><span class="line">        &#125;</span><br><span class="line">    );</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<h2 id="点击缩略图显示大图"><a href="#点击缩略图显示大图" class="headerlink" title="点击缩略图显示大图"></a>点击缩略图显示大图</h2><p>思路：</p>
-<blockquote>
-<p>首先大图小图的<strong>src</strong>都是一样的，所以先获取小图的src，在点击缩略图的时候，动态改变大图的src。</p>
-</blockquote>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$(function()&#123;</span><br><span class="line">    $(&#x27;.xt img&#x27;).click(function()&#123;</span><br><span class="line">        var dz = $(this).attr(&#x27;src&#x27;);</span><br><span class="line">        $(&#x27;.bigimg img&#x27;).attr(&#123;src : dz&#125;);</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-
-<h2 id="向上无缝滚动"><a href="#向上无缝滚动" class="headerlink" title="向上无缝滚动"></a>向上无缝滚动</h2><p>思路：</p>
-<blockquote>
-<p>首先定义一个全局布尔值。随后在DOM加载完后即启动滚动函数，鼠标移上停止，移开继续滚；选择到第一个li元素,使向上slideUp，同时将这个元素追加到末尾，但向下slideDown相同的时间内同步。为了实时更新，setTimeout函数绑定滚动函数。</p>
-</blockquote>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">var flag = true;</span><br><span class="line">$(function()&#123;</span><br><span class="line">    goto();</span><br><span class="line">    $(&#x27;.gundong&#x27;).mouseover(function()&#123;</span><br><span class="line">        flag = false;</span><br><span class="line">    &#125;).mouseout(function()&#123;</span><br><span class="line">        flag = true;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br><span class="line">function goto()&#123;</span><br><span class="line">    if(flag)&#123;</span><br><span class="line">        $(&#x27;.gundong dl dd:first&#x27;).slideUp(500,function()&#123;</span><br><span class="line">            $(this).appendTo(&#x27;.gundong dl&#x27;).slideDown(500);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br><span class="line">    setTimeout(goto,600);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>自己学习过程中，多有懈怠。如果能想到做一个什么点子，或许更有动力吧。</p>
-<p>time: 2015&#x2F;12&#x2F;04  aielab</p>
-<p>任何的语言，语法，使用方法，学到的只是形，你只会用，但还不明白其中的设计思想。<br>万法同宗，掌握原理才是最重要的，也是最根本的学习之道。</p>
-<h2 id="阮一峰的博客-jQuery设计思想"><a href="#阮一峰的博客-jQuery设计思想" class="headerlink" title="阮一峰的博客-jQuery设计思想"></a>阮一峰的博客-<a target="_blank" rel="noopener" href="http://www.ruanyifeng.com/blog/2011/07/jquery_fundamentals.html">jQuery设计思想</a></h2><p>一.选择网页元素<br>jQuery的基本设计思想和主要方法，就是<strong>“选择某个网页元素，然后对其进行操作</strong>。此乃区别其他js库的根本特点。<br>选择表达式可以是css选择器:</p>
-<blockquote>
-<p>$(document)</p>
-</blockquote>
-<blockquote>
-<p>$(‘#myId’)</p>
-</blockquote>
-<blockquote>
-<p>$(‘div.myClass’)</p>
-</blockquote>
-<blockquote>
-<p>$(‘input[name&#x3D;first]’)</p>
-</blockquote>
-<p>也可以是jQuery特有表达式:</p>
-<blockquote>
-<p>$(‘a:first’)</p>
-</blockquote>
-<blockquote>
-<p>$(‘tr:odd’)  &#x2F;&#x2F;选择奇数行</p>
-</blockquote>
-<blockquote>
-<p>$(‘#myForm:input’)</p>
-</blockquote>
-<blockquote>
-<p>$(‘div:visiable’)</p>
-</blockquote>
-<blockquote>
-<p>$(‘div:gt(2)’) &#x2F;&#x2F;选择除前三个外所有div元素</p>
-</blockquote>
-<blockquote>
-<p>$(‘div:animated’)</p>
-</blockquote>
-<p>二.改变结果集<br>设计思想之二，提供各种强大的过滤器，对结果集进行筛选，缩小选择结果。</p>
-<blockquote>
-<p>$(‘div’).has(‘p’);</p>
-</blockquote>
-<blockquote>
-<p>$(‘div’).not(‘.myClass’)</p>
-</blockquote>
-<blockquote>
-<p>$(‘div’).filter(‘.myClass’) &#x2F;&#x2F;class等于myClass的div元素</p>
-</blockquote>
-<blockquote>
-<p>$(‘div’).first(); </p>
-</blockquote>
-<blockquote>
-<p>$(‘div’).eq(5); &#x2F;&#x2F;选择第6个div元素</p>
-</blockquote>
-<p>有时从结果集出发，移动到附近元素；DOM树上移动方法:</p>
-<blockquote>
-<p>$(‘div’).next(‘p’);</p>
-</blockquote>
-<blockquote>
-<p>$(‘div’).parent();</p>
-</blockquote>
-<blockquote>
-<p>$(‘div’).closest(‘form’);</p>
-</blockquote>
-<blockquote>
-<p>$(‘div’).children();</p>
-</blockquote>
-<blockquote>
-<p>$(‘div’).siblings(); &#x2F;&#x2F;同级元素</p>
-</blockquote>
-<p>三.链式操作<br>设计思想之三，对元素进行一系列的操作，可以连在一起，以料条的形式写出。</p>
-<blockquote>
-<p>$(‘div’).find(‘h3’).eq(2).html(‘hello’);</p>
-</blockquote>
-<p>分解开来：</p>
-<blockquote>
-<p>$(‘div’)  &#x2F;&#x2F;找到div<br>　　.find(‘h3’)  &#x2F;&#x2F;选择其中h3元素<br>　　.eq(2)  &#x2F;&#x2F;选择第三个h3元素<br>　　.html(‘hello’)  &#x2F;&#x2F;内容改为hello</p>
-</blockquote>
-<p>原理在于每一步jQuery操作都返回一个jQuery对象，所以不同操作可以连在一起。<br>jQuery还提供.end()方法，是结果集可后退一步:</p>
-<blockquote>
-<p>$(‘.div’)<br>　　.find(‘h3’)<br>　　.eq(2)<br>　　.html(‘hello’)<br>　　.end() &#x2F;&#x2F;退回到选中所有元素的h3元素那一步<br>　　.eq(0)<br>　　.html(‘world’)
-　　</p>
-</blockquote>
-<p>四.元素操作:取值和赋值<br>设计思想之四，同一个函数既取值(getter)又赋值(getter)，即“取值器”与“赋值器”合一，由参数决定取值还是赋值。</p>
-<blockquote>
-<p>$(‘h1’).html(); &#x2F;&#x2F;没有参数，代表取值</p>
-</blockquote>
-<blockquote>
-<p>$(‘h1’).html(‘hello’);  &#x2F;&#x2F;赋值</p>
-</blockquote>
-<p>常见取值和赋值函数如下：</p>
-<blockquote>
-<p>.html()<br>.text()<br>.attr()<br>.width()<br>.height()<br>.val()  &#x2F;&#x2F;取出某个表单元素的值</p>
-</blockquote>
-<p>五.元素操作：移动<br>设计思想之五，提供两组方法来来操作元素在网页中的位置移动。一种直接移动，另一组移动其他元素，使得目标元素达到我们想要的位置。<br>.insetAfter(),插入到某元素后，如div移到p元素后:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$(&#x27;div&#x27;).insetAfter($(&#x27;p&#x27;));   </span><br></pre></td></tr></table></figure>
-<p>第二种方法.after(),把p移到div后：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$(&#x27;p&#x27;).after($(&#x27;div&#x27;))</span><br></pre></td></tr></table></figure>
-<p>两种方法的重大差别是，返回元素不一样。第一种返回div元素，第二种返回p元素。<br>此模式操作方法共四对：</p>
-<blockquote>
-<p>.insertAfter()和.after():现存元素外部，从后面插入元素<br>.insertBefore()和.before():现存元素外部，从前面插入元素<br>.appendTo()和.append():现存元素内部，从后面插入<br>.prependTo()和.prepend():现存元素内部，从前面插入元素</p>
-</blockquote>
-<p>六.元素操作：复制、删除和创建<br>复制：.clone()<br>删除：.remove()和detach()。区别是，前者不保留删除元素的事件，后者保留，有利于重新插入文档。<br>清空元素内容，不删除该元素：.empty()<br>创建新元素，新元素传入jQuery构造函数:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$(&#x27;&lt;p&gt;Hello&lt;/p&gt;&#x27;);</span><br><span class="line">$(&#x27;&lt;li class=&quot;new&quot;&gt;new list item&lt;/li&gt;&#x27;);</span><br><span class="line">$(&#x27;ul&#x27;).append(&#x27;&lt;li&gt;list item&lt;/li&gt;&#x27;);</span><br></pre></td></tr></table></figure>
-<p>七.工具方法<br>设计思想之六：提供一些与元素无关的工具方法。不必选中元素就可以直接使用此方法。</p>
-<p>如果你懂JavaScript的继承原理，更好理解工具方法的实质。它是定义在jQuery构造函数上的方法，即jQuery.method()，可直接使用。而操作元素的方法，是定义在构造函数的prototype对象上的方法，即jQuery.prototype.method(),所以必须生成实例（即选中元素）后使用。<br>常用工具方法有：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">$.trim()  //取出字符串两端空格</span><br><span class="line">$.each()  //遍历数组或对象</span><br><span class="line">$.inArray()  //返回一个值在数组中的索引位置。入股没有，返回-1</span><br><span class="line">$.grep()  //返回数组中符合某种标准的元素</span><br><span class="line">$.extend()  //多个对象合并到第一个对象</span><br><span class="line">$.makeArray()  //对象转化为数组</span><br><span class="line">$.type()  //判断对象类别</span><br><span class="line">$.isArray()  </span><br><span class="line">$.isEmptyObject()  </span><br><span class="line">$.isFunction()</span><br><span class="line">$.isPlainObject()  //判断某个参数是否为用&quot;&#123;&#125;&quot;或&quot;new Object&quot;建立的对象。</span><br><span class="line">$.support()  //判断浏览器是否支持某个特性。</span><br></pre></td></tr></table></figure>
-<p>八.事件操作<br>设计思想之七，把事件直接绑定在网页元素上。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$(&#x27;p&#x27;).click(function()&#123;</span><br><span class="line">    alert(&#x27;hello&#x27;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<p>目前jQuery支持事件：</p>
-<blockquote>
-<p>　　.blur() 表单元素失去焦点。<br>　　.change() 表单元素的值发生变化<br>　　.click() 鼠标单击<br>　　.dblclick() 鼠标双击<br>　　.focus() 表单元素获得焦点<br>　　.focusin() 子元素获得焦点<br>　　.focusout() 子元素失去焦点<br>　　.hover() 同时为mouseenter和mouseleave事件指定处理函数<br>　　.keydown() 按下键盘（长时间按键，只返回一个事件）<br>　　.keypress() 按下键盘（长时间按键，将返回多个事件）<br>　　.keyup() 松开键盘<br>　　.load() 元素加载完毕<br>　　.mousedown() 按下鼠标<br>　　.mouseenter() 鼠标进入（进入子元素不触发）<br>　　.mouseleave() 鼠标离开（离开子元素不触发）<br>　　.mousemove() 鼠标在元素内部移动<br>　　.mouseout() 鼠标离开（离开子元素也触发）<br>　　.mouseover() 鼠标进入（进入子元素也触发）<br>　　.mouseup() 松开鼠标<br>　　.ready() DOM加载完成<br>　　.resize() 浏览器窗口的大小发生改变<br>　　.scroll() 滚动条的位置发生变化<br>　　.select() 用户选中文本框中的内容<br>　　.submit() 用户递交表单<br>　　.toggle() 根据鼠标点击的次数，依次运行多个函数<br>　　.unload() 用户离开页面</p>
-</blockquote>
-<p>以上事件均在jQuery内部，都是.bind()的便捷方式。使用.bind()可更灵活的控制事件，比如一个元素的多个事件绑定同一个函数：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$(&#x27;input&#x27;).bind(</span><br><span class="line">    &#x27;click change&#x27;,//同时绑定两个事件</span><br><span class="line">    function()&#123;</span><br><span class="line">        alert(&#x27;Hello&#x27;);</span><br><span class="line">    &#125;</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
-<p>事件只运行一次，用.one()方法：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$(&quot;p&quot;).one(&quot;click&quot;,function()&#123;</span><br><span class="line">    alert(&quot;hello&quot;);  //只运行一次，以后的点击无效</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<p>.unbind()用来解除事件绑定：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$(&#x27;p&#x27;).unbind(&#x27;click&#x27;);</span><br></pre></td></tr></table></figure>
-<p>所有事件处理函数，都可接受一个事件对象(event object)作参数：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$(&#x27;p&#x27;).click(function(e)&#123;</span><br><span class="line">    alert(e.type);   //&quot;click&quot;</span><br><span class="line">&#125;);     </span><br></pre></td></tr></table></figure>
-<p>事件对象常用的属性和方法：</p>
-<blockquote>
-<p>event.pageX 事件发生时，鼠标距离网页左上角的水平距离<br>event.pageY 事件发生时，鼠标距离网页左上角的垂直距离<br>event.type 事件的类型（比如click）<br>event.which 按下了哪一个键<br>event.data 在事件对象上绑定数据，然后传入事件处理函数<br>event.target 事件针对的网页元素<br>event.preventDefault() 阻止事件默认行为（比如点击链接，会自动打开新页面）<br>event.stopPropagation() 停止事件向上层元素冒泡</p>
-</blockquote>
-<p>this关键字返回事件针对的DOM元素：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$(&#x27;a&#x27;).click(function(e)&#123;</span><br><span class="line">    if($(this).attr(&#x27;href&#x27;).match(&#x27;evil&#x27;))&#123;</span><br><span class="line">        //如果确认为有害链接</span><br><span class="line">        e.preventDefault(); //阻止打开</span><br><span class="line">        $(this).addClass(&#x27;.evil&#x27;); //加上表示有害的class</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<p>有两种方法，可以自动触发一个事件。一种是直接使用事件函数，另一种是使用.trigger()或.triggerHandler()。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$(&#x27;a&#x27;).click();</span><br><span class="line">$(&#x27;a&#x27;).trigger(&#x27;click&#x27;);</span><br></pre></td></tr></table></figure>
-<p>九、特殊效果<br>最后，jQuery允许对象呈现某些特殊效果。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$(&#x27;h1&#x27;).show(); //展现一个h1标题</span><br></pre></td></tr></table></figure>
-<p>常用的特殊效果如下：</p>
-<blockquote>
-<p>.fadeIn() 淡入<br>.fadeOut() 淡出<br>.fadeTo() 调整透明度<br>.hide() 隐藏元素<br>.show() 显示元素<br>.slideDown() 向下展开<br>.slideUp() 向上卷起<br>.slideToggle() 依次展开或卷起某个元素<br>.toggle() 依次展示或隐藏某个元素</p>
-</blockquote>
-<p>除了.show()和.hide()，所有其他特效的默认执行时间都是400ms（毫秒），但可以改变这个设置。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$(&#x27;h1&#x27;).fadeIn(300); // 300毫秒内淡入</span><br><span class="line">$(&#x27;h1&#x27;).fadeOut(&#x27;slow&#x27;); // 缓慢地淡出</span><br></pre></td></tr></table></figure>
-<p>在特效结束后，可以指定执行某个函数。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$(&#x27;p&#x27;).fadeOut(300, function() &#123; </span><br><span class="line">    $(this).remove(); </span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<p>更复杂的特效，可以用.animate()自定义。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$(&#x27;div&#x27;).animate(</span><br><span class="line">    &#123;</span><br><span class="line">        left:&quot;+50&quot;， //不断右移</span><br><span class="line">        opacity:0.25 //指定透明度</span><br><span class="line">    &#125;，</span><br><span class="line">    300， //持续事件</span><br><span class="line">    function()&#123;alert(&quot;done!&quot;);&#125;</span><br><span class="line">）；</span><br></pre></td></tr></table></figure>
-
-<p>.stop()和.delay()用来停止或延缓特效执行。<br>$.fx.off如果设置为true，则关闭所有网页特效。</p>
-<p>按照<a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh">创意共享许可3.0</a>,声明:内容转自<a target="_blank" rel="noopener" href="http://www.ruanyifeng.com/blog/">阮一峰的博客</a>    - <a target="_blank" rel="noopener" href="http://www.ruanyifeng.com/blog/2011/07/jquery_fundamentals.html">jQuery设计思想</a><br>time:2015&#x2F;12&#x2F;07 aielab</p>
-<h2 id="jQuery最佳实践"><a href="#jQuery最佳实践" class="headerlink" title="jQuery最佳实践"></a>jQuery最佳实践</h2><p>趁热打铁，再来一篇阮一峰的jQuery博客，更进一步，了解“如何用好jQuery”.<br>1.使用最新版本<br>因为新版本总会改进性能，还有很多新功能。<br>2.用对选择器<br>(1)最快的选择器：id选择器和元素标签选择器<br>如下语句的性能最佳：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$(&#x27;#id&#x27;)</span><br><span class="line">$(&#x27;form&#x27;)</span><br><span class="line">$(&#x27;input&#x27;)</span><br></pre></td></tr></table></figure>
-<p>遇到这些选择器，jQuery内部会自动调用浏览器原生方法（如getElementById）,所以执行速度快。<br>(2)较慢的选择器：class选择器<br>$(‘.className’)性能取决于浏览器。<br>IE5-8没有部署getElementByClassName(),所以这个选择器在IE中会很慢。<br>(3)最慢的选择器：伪类选择器和属性选择器</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$(&#x27;:hidden&#x27;)</span><br><span class="line">$(&#x27;[attribute=value]&#x27;)</span><br></pre></td></tr></table></figure>
-<p>如上，因为浏览器没有针对他们的原生方法，所以最慢。但一些新版浏览器增加了querySelector()和querySelectorAll()方法，对此类选择器的性能有大幅提高。<br>总体而言：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ID&gt;Input/form selector&gt;Class&gt;others</span><br></pre></td></tr></table></figure>
-<p>从另一个侧面看，<span style="color:red">选择器的优先级与性能成正比。</span>浏览器对某种选择器的支持越好，性能越好，优先级自然更高。</p>
-<p>3.理解子元素和父元素的关系<br>下列6个选择器，都是从父元素中选择子元素，知道哪个速度最快吗？</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$(&#x27;.child&#x27;, $parent)</span><br><span class="line">$parent.find(&#x27;.child&#x27;)</span><br><span class="line">$parent.children(&#x27;.child&#x27;)</span><br><span class="line">$(&#x27;#parent &gt; .child&#x27;)</span><br><span class="line">$(&#x27;#parent .child&#x27;)</span><br><span class="line">$(&#x27;.child&#x27;, $(&#x27;#parent&#x27;))</span><br></pre></td></tr></table></figure>
-<p>(1)$(‘.child’,$parent)<br>此句意思是，给定一个DOM对象，从中选择一个子元素。jQuery会自动转换成$.parent.find(‘child’),这会导致一定性能损失。比最快形式慢了5%-10%。</p>
-<p>(2)$parent.find(‘.child’)<br>.find()方法会调用原生方法，所以最快。</p>
-<p>(3)$parent.children(‘.child’)<br>此语句在jQuery内部会使用$.sibling()和js的nextSibling()方法一个个遍历节点。比最快方法慢50%。</p>
-<p>(4)$(‘#parent&gt;.child’)<br>jQuery内部使用sizzle引擎，处理各种选择器。顺序从右到左，这条语句先选.child,然后再一个个过滤出#parent，比最快形式慢70%。</p>
-<p>(5)$(‘#parent.child’)<br>同上。但上一条只选择直接的子元素，这一条可以选择多级子元素，速度更慢，慢了77%。</p>
-<p>(6)$(‘.child’,$(‘#parent’))<br>jQuery内部会转化成$(‘#parent’).find(‘.child’),比最快形式慢23%。</p>
-<p>综上，最佳选择是$parent.find(‘.child’)。而且由于$parent往往在前面操作已经生成，jQuery会进行缓存，所以进一步加快了执行速度。</p>
-<p>4.不要过度使用jQuery<br>jQuery再快也无法与原生js相比。<br>简单的选择器为例，document.getElementById(‘foo’)要比$(‘#foo’)快10多倍。<br>再比较一个：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$(&#x27;a&#x27;).click(function()&#123;</span><br><span class="line">    alert($(this).attr(&#x27;id&#x27;));</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<p>调用了两次jQuery。第一次是$(this),第二次是attr(‘id’).<br>完全不必要，可以采用原生js调用this.id:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$(&#x27;a&#x27;).click(function()&#123;</span><br><span class="line">    alert(this.id);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<p>速度快了20多倍。</p>
-<p>5.做好缓存<br>选择某个网页元素是开销很大的步骤。所以，使用选择器的次数越少越好，并且尽可能的缓存选中的结果，便于以后反复使用。<br>糟糕的写法：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">jQuery(&#x27;#top&#x27;).find(&#x27;p.classA&#x27;);</span><br><span class="line">jQuery(&#x27;#top&#x27;).find(&#x27;p.classB&#x27;);</span><br></pre></td></tr></table></figure>
-<p>更好的写法：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var cached=jQuery(&#x27;#top&#x27;);</span><br><span class="line">cached.find(&#x27;p.classA&#x27;);</span><br><span class="line">cached.find(&#x27;p.classB&#x27;);</span><br></pre></td></tr></table></figure>
-<p>测试显示缓存时快了2-3倍。</p>
-<p>6.使用链式写法<br>采用链式写法，jQuery自动缓存每一步的结果。链式写法比不适用缓存的非链式写法快了25%左右。</p>
-<p>7.事件的委托处理(Event Delegation)<br>js的事件模型，采用”冒泡”模式，即子元素的事件会逐级向上”冒泡”，成为父元素的事件。<br>现有一个ul,里面有一百个li，要在每个li上绑定一个点击事件，是否需要将下面的命令执行100次呢。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$(&#x27;li&#x27;).on(&#x27;click&#x27;,function()&#123;</span><br><span class="line">    $(this).toggleClass(&#x27;click&#x27;);</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
-<p>当然是不要。只要在ul上绑定事件就可以了，当li发生点击事件时，该事件就会’冒泡’到父元素ul上，从而被监听到。<br>这就是”事件委托”，即子元素”委托”父元素处理这个事件。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$(&#x27;ul&#x27;).on(&#x27;click&#x27;,&#x27;li&#x27;,function()&#123;</span><br><span class="line">    $(this).toggleClass(&#x27;click&#x27;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<p>更好的写法则是把事件绑定在document对象上：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$(document).on(&#x27;click&#x27;,&#x27;li&#x27;,function()&#123;</span><br><span class="line">    $(this).toggleClass(&#x27;click&#x27;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<p>取消事件绑定，用off()方法：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$(document).off(&#x27;click&#x27;,&#x27;li&#x27;);</span><br></pre></td></tr></table></figure>
-
-<p>8.少改动DOM结构<br>(1)改动DOM结构开销很大，不要频繁使用.append()&#x2F;.insertBefore()&#x2F;.insetAfter()这些方法。<br>如果插入多个元素，先合并再一次性插入，速度快10倍左右。<br>(2)如果对一个DOM进行大量处理，应先用.detach()方法将次元素从DOM中取出，处理完毕后，再重新插回文档。快60%左右。<br>(3)在DOM元素上存储数据，不要这样：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var elem=$(&#x27;#elem&#x27;);</span><br><span class="line">elem.data(key,value);</span><br></pre></td></tr></table></figure>
-<p>而要：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var elem=$(&#x27;#elem&#x27;);</span><br><span class="line">$.data(elem[0],key,value);</span><br></pre></td></tr></table></figure>
-<p>根据测试，后一种写法要比前一种写法，快了将近10倍。因为elem.data()方法是定义在jQuery函数的<strong>prototype</strong>对象上面的，而$.data()方法是定义<strong>jQuery函数</strong>上面的，调用的时候不从复杂的jQuery对象上调用，所以速度快得多。（此处可以参阅下面第10点。）<br>(4)插入html代码时，浏览器原生innerHTML()方法会比jQuery对象的html()更快。</p>
-<p>9.正确处理循环<br>循环总是一种比较耗时的操作，如果可以使用复杂的选择器直接选中元素，就不要使用循环，去一个个辨认元素。<br>javascript原生循环方法for和while，要比jQuery的.each()方法快，应该优先使用原生方法。</p>
-<p>10.尽量少生成jQuery对象<br>每当你使用一次选择器（比如$(‘#id’)），就会生成一个jQuery对象。jQuery对象是一个很庞大的对象，带有很多属性和方法，会占用不少资源。所以，尽量少生成jQuery对象。<br>举例来说，许多jQuery方法都有两个版本，一个是供jQuery对象使用的版本，另一个是供jQuery函数使用的版本。下面两个例子，都是取出一个元素的文本，使用的都是text()方法。<br>你既可以使用针对jQuery对象的版本：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var $text=$(&#x27;#text&#x27;);</span><br><span class="line">var $ts=$text.text();</span><br></pre></td></tr></table></figure>
-<p>也可以使用针对jQuery函数的版本：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var $text=$(&#x27;#text&#x27;);</span><br><span class="line">var　$ts=$.text($text);</span><br></pre></td></tr></table></figure>
-<p>由于后一种针对jQuery函数的版本不通过jQuery对象操作，所以相对开销较小，速度比较快。</p>
-<p>11.选择作用域链最短的方法<br>严格地说，这一条原则对所有Javascript编程都适用，而不仅仅针对jQuery。<br>我们知道，Javascript的变量采用链式作用域。读取变量的时候，先在当前作用域寻找该变量，如果找不到，就前往上一层的作用域寻找该变量。这样的设计，使得读取局部变量比读取全局变量快得多。<br>请看下面两段代码，第一段代码是读取全局变量：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var a = 0;</span><br><span class="line">function x()&#123;</span><br><span class="line">    a += 1;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>第二段代码是读取局部变量：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">function y()&#123;</span><br><span class="line">    var a = 0;</span><br><span class="line">    a += 1;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>第二段代码读取变量a的时候，不用前往上一层作用域，所以要比第一段代码快五六倍。<br>同理，在调用对象方法的时候，closure模式要比prototype模式更快。<br>prototype模式：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">var X = function(name)&#123; this.name = name; &#125;</span><br><span class="line">X.prototype.get_name = function() &#123; return this.name; &#125;;</span><br><span class="line">//closure模式：</span><br><span class="line">var Y = function(name) &#123;</span><br><span class="line">　　var y = &#123; name: name &#125;;</span><br><span class="line">    return &#123; &#x27;get_name&#x27;: function() &#123; return y.name; &#125; &#125;;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p>同样是get_name()方法，closure模式更快。</p>
-<p>12.使用Pub&#x2F;Sub模式管理事件<br>当发生某个事件后，如果要连续执行多个操作，最好不要写成下面这样：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">function doSomething&#123;</span><br><span class="line">    doSomethingElse();</span><br><span class="line">    doOneMoreThing();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>而要改用事件触发的形式：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">function doSomething&#123;</span><br><span class="line">    $.trigger(&#x27;DO_SOMETHING_DONE&#x27;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">$(document).on(&#x27;DO_SOMETHING_DONE&#x27;,function()&#123;</span><br><span class="line">    doSomethingElse();</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<p>还可以用deferred对象。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">function doSomething()&#123;</span><br><span class="line">　　　　var dfd = new \$.Deferred();</span><br><span class="line">　　　　//Do something async, then... </span><br><span class="line">　　　　//dfd.resolve();</span><br><span class="line">　　　　return dfd.promise();</span><br><span class="line">　　&#125;</span><br><span class="line">　　function doSomethingElse()&#123;</span><br><span class="line">　　　　$.when(doSomething()).then(//The next thing);</span><br><span class="line">　　&#125;</span><br></pre></td></tr></table></figure>
-<p>完<br>按照<a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh">创意共享许可3.0</a>,声明:内容转自<a target="_blank" rel="noopener" href="http://www.ruanyifeng.com/blog/">阮一峰的博客</a> - <a target="_blank" rel="noopener" href="http://www.ruanyifeng.com/blog/2011/08/jquery_best_practices.html">jQuery最佳实践</a><br>time: 2015&#x2F;12&#x2F;07 aielab</p>
-
+    
+    <a class="article-more-a" href="/2015/12/02/jQuery%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/#more">more >></a>
+    
     
 
     
@@ -544,8 +304,8 @@
 
 
 
-
-  
+ 
+   
     <article id="post-MarkDown使用说明书" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -583,204 +343,9 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">这是一个一级标题</span><br><span class="line">============================</span><br><span class="line"></span><br><span class="line">这是一个二级标题</span><br><span class="line">--------------------------------------------------</span><br><span class="line"></span><br><span class="line">### 这是一个三级标题</span><br></pre></td></tr></table></figure>
 
 <p>你也可以选择在行首加井号表示不同级别的标题 (H1-H6)，例如：# H1, ## H2, ### H3，#### H4。</p>
-<h3 id="3-外链接"><a href="#3-外链接" class="headerlink" title="3. 外链接"></a>3. 外链接</h3><p>使用 [描述](链接地址) 为文字增加外链接。</p>
-<p>示例：</p>
-<p>这是去往 <a target="_blank" rel="noopener" href="http://ghosertblog.github.com/">本人博客</a> 的链接。</p>
-<h3 id="4-无序列表"><a href="#4-无序列表" class="headerlink" title="4. 无序列表"></a>4. 无序列表</h3><p>使用 *，+，- 表示无序列表。</p>
-<p>示例：</p>
-<ul>
-<li>无序列表项 一</li>
-<li>无序列表项 二</li>
-<li>无序列表项 三</li>
-</ul>
-<h3 id="5-有序列表"><a href="#5-有序列表" class="headerlink" title="5. 有序列表"></a>5. 有序列表</h3><p>使用数字和点表示有序列表。</p>
-<p>示例：</p>
-<ol>
-<li>有序列表项 一</li>
-<li>有序列表项 二</li>
-<li>有序列表项 三</li>
-</ol>
-<h3 id="6-文字引用"><a href="#6-文字引用" class="headerlink" title="6. 文字引用"></a>6. 文字引用</h3><p>使用 &gt; 表示文字引用。</p>
-<p>示例：</p>
-<blockquote>
-<p>野火烧不尽，春风吹又生。</p>
-</blockquote>
-<h3 id="7-行内代码块"><a href="#7-行内代码块" class="headerlink" title="7. 行内代码块"></a>7. 行内代码块</h3><p>使用 `代码&#96; 表示行内代码块。</p>
-<p>示例：</p>
-<p>让我们聊聊 <code>html</code>。</p>
-<h3 id="8-代码块"><a href="#8-代码块" class="headerlink" title="8.  代码块"></a>8.  代码块</h3><p>使用 四个缩进空格 表示代码块。</p>
-<p>示例：</p>
-<pre><code>这是一个代码块，此行左侧有四个不可见的空格。
-</code></pre>
-<h3 id="9-插入图像"><a href="#9-插入图像" class="headerlink" title="9.  插入图像"></a>9.  插入图像</h3><p>使用 ![描述](图片链接地址) 插入图像。</p>
-<p>示例：</p>
-<p><img src="https://www.zybuluo.com/static/img/my_head.jpg" alt="我的头像"></p>
-<h1 id="Markdown-高阶语法手册"><a href="#Markdown-高阶语法手册" class="headerlink" title="Markdown 高阶语法手册"></a>Markdown 高阶语法手册</h1><h3 id="1-内容目录"><a href="#1-内容目录" class="headerlink" title="1. 内容目录"></a>1. 内容目录</h3><p>在段落中填写 <code>[TOC]</code> 以显示全文内容的目录结构。</p>
-<p>[TOC]</p>
-<h3 id="2-标签分类"><a href="#2-标签分类" class="headerlink" title="2. 标签分类"></a>2. 标签分类</h3><p>在编辑区任意行的列首位置输入以下代码给文稿标签：</p>
-<p>标签： 数学 英语 Markdown</p>
-<p>或者</p>
-<p>Tags： 数学 英语 Markdown</p>
-<h3 id="3-删除线"><a href="#3-删除线" class="headerlink" title="3. 删除线"></a>3. 删除线</h3><p>使用 ~~ 表示删除线。</p>
-<p><del>这是一段错误的文本。</del></p>
-<h3 id="4-注脚"><a href="#4-注脚" class="headerlink" title="4. 注脚"></a>4. 注脚</h3><p>使用 [^keyword] 表示注脚。</p>
-<p>这是一个注脚[^footnote]的样例。</p>
-<p>这是第二个注脚[^footnote2]的样例。</p>
-<h3 id="5-LaTeX-公式"><a href="#5-LaTeX-公式" class="headerlink" title="5. LaTeX 公式"></a>5. LaTeX 公式</h3><p>$ 表示行内公式： </p>
-<p>质能守恒方程可以用一个很简洁的方程式 $E&#x3D;mc^2$ 来表达。</p>
-<p>$$ 表示整行公式：</p>
-<p>$$\sum_{i&#x3D;1}^n a_i&#x3D;0$$</p>
-<p>$$f(x_1,x_x,\ldots,x_n) &#x3D; x_1^2 + x_2^2 + \cdots + x_n^2 $$</p>
-<p>$$\sum^{j-1}<em>{k&#x3D;0}{\widehat{\gamma}</em>{kj} z_k}$$</p>
-<p>访问 <a target="_blank" rel="noopener" href="http://meta.math.stackexchange.com/questions/5020/mathjax-basic-tutorial-and-quick-reference">MathJax</a> 参考更多使用方法。</p>
-<h3 id="6-加强的代码块"><a href="#6-加强的代码块" class="headerlink" title="6. 加强的代码块"></a>6. 加强的代码块</h3><p>支持四十一种编程语言的语法高亮的显示，行号显示。</p>
-<p>非代码示例：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get install vim-gnome</span><br></pre></td></tr></table></figure>
-
-<p>Python 示例：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@requires_authorization</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">somefunc</span>(<span class="params">param1=<span class="string">&#x27;&#x27;</span>, param2=<span class="number">0</span></span>):</span><br><span class="line">    <span class="string">&#x27;&#x27;&#x27;A docstring&#x27;&#x27;&#x27;</span></span><br><span class="line">    <span class="keyword">if</span> param1 &gt; param2: <span class="comment"># interesting</span></span><br><span class="line">        <span class="built_in">print</span> <span class="string">&#x27;Greater&#x27;</span></span><br><span class="line">    <span class="keyword">return</span> (param2 - param1 + <span class="number">1</span>) <span class="keyword">or</span> <span class="literal">None</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">SomeClass</span>:</span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>message = <span class="string">&#x27;&#x27;&#x27;interpreter</span></span><br><span class="line"><span class="string"><span class="meta">... </span>prompt&#x27;&#x27;&#x27;</span></span><br></pre></td></tr></table></figure>
-
-<p>JavaScript 示例：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">* nth element in the fibonacci series.</span></span><br><span class="line"><span class="comment">* <span class="doctag">@param</span> n &gt;= 0</span></span><br><span class="line"><span class="comment">* <span class="doctag">@return</span> the nth element, &gt;= 0.</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">fib</span>(<span class="params">n</span>) &#123;</span><br><span class="line">  <span class="keyword">var</span> a = <span class="number">1</span>, b = <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">var</span> tmp;</span><br><span class="line">  <span class="keyword">while</span> (--n &gt;= <span class="number">0</span>) &#123;</span><br><span class="line">    tmp = a;</span><br><span class="line">    a += b;</span><br><span class="line">    b = tmp;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> a;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable language_">document</span>.<span class="title function_">write</span>(<span class="title function_">fib</span>(<span class="number">10</span>));</span><br></pre></td></tr></table></figure>
-
-<h3 id="7-流程图"><a href="#7-流程图" class="headerlink" title="7. 流程图"></a>7. 流程图</h3><h4 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">st=&gt;start: Start:&gt;https://www.zybuluo.com</span><br><span class="line">io=&gt;inputoutput: verification</span><br><span class="line">op=&gt;operation: Your Operation</span><br><span class="line">cond=&gt;condition: Yes or No?</span><br><span class="line">sub=&gt;subroutine: Your Subroutine</span><br><span class="line">e=&gt;end</span><br><span class="line"></span><br><span class="line">st-&gt;io-&gt;op-&gt;cond</span><br><span class="line">cond(yes)-&gt;e</span><br><span class="line">cond(no)-&gt;sub-&gt;io</span><br></pre></td></tr></table></figure>
-
-<h4 id="更多语法参考：流程图语法参考"><a href="#更多语法参考：流程图语法参考" class="headerlink" title="更多语法参考：流程图语法参考"></a>更多语法参考：<a target="_blank" rel="noopener" href="http://adrai.github.io/flowchart.js/">流程图语法参考</a></h4><h3 id="8-序列图"><a href="#8-序列图" class="headerlink" title="8. 序列图"></a>8. 序列图</h3><h4 id="示例-1"><a href="#示例-1" class="headerlink" title="示例 1"></a>示例 1</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Alice-&gt;Bob: Hello Bob, how are you?</span><br><span class="line">Note right of Bob: Bob thinks</span><br><span class="line">Bob--&gt;Alice: I am good thanks!</span><br></pre></td></tr></table></figure>
-
-<h4 id="示例-2"><a href="#示例-2" class="headerlink" title="示例 2"></a>示例 2</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Title: Here is a title</span><br><span class="line">A-&gt;B: Normal line</span><br><span class="line">B--&gt;C: Dashed line</span><br><span class="line">C-&gt;&gt;D: Open arrow</span><br><span class="line">D--&gt;&gt;A: Dashed open arrow</span><br></pre></td></tr></table></figure>
-
-<h4 id="更多语法参考：序列图语法参考"><a href="#更多语法参考：序列图语法参考" class="headerlink" title="更多语法参考：序列图语法参考"></a>更多语法参考：<a target="_blank" rel="noopener" href="http://bramp.github.io/js-sequence-diagrams/">序列图语法参考</a></h4><h3 id="9-甘特图"><a href="#9-甘特图" class="headerlink" title="9. 甘特图"></a>9. 甘特图</h3><p>甘特图内在思想简单。基本是一条线条图，横轴表示时间，纵轴表示活动（项目），线条表示在整个期间上计划和实际的活动完成情况。它直观地表明任务计划在什么时候进行，及实际进展与计划要求的对比。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">title 项目开发流程</span><br><span class="line">section 项目确定</span><br><span class="line">    需求分析       :a1, 2016-06-22, 3d</span><br><span class="line">    可行性报告     :after a1, 5d</span><br><span class="line">    概念验证       : 5d</span><br><span class="line">section 项目实施</span><br><span class="line">    概要设计      :2016-07-05  , 5d</span><br><span class="line">    详细设计      :2016-07-08, 10d</span><br><span class="line">    编码          :2016-07-15, 10d</span><br><span class="line">    测试          :2016-07-22, 5d</span><br><span class="line">section 发布验收</span><br><span class="line">    发布: 2d</span><br><span class="line">    验收: 3d</span><br></pre></td></tr></table></figure>
-
-<h4 id="更多语法参考：甘特图语法参考"><a href="#更多语法参考：甘特图语法参考" class="headerlink" title="更多语法参考：甘特图语法参考"></a>更多语法参考：<a target="_blank" rel="noopener" href="https://knsv.github.io/mermaid/#gant-diagrams">甘特图语法参考</a></h4><h3 id="10-Mermaid-流程图"><a href="#10-Mermaid-流程图" class="headerlink" title="10. Mermaid 流程图"></a>10. Mermaid 流程图</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">A[Hard edge] --&gt;|Link text| B(Round edge)</span><br><span class="line">B --&gt; C&#123;Decision&#125;</span><br><span class="line">C --&gt;|One| D[Result one]</span><br><span class="line">C --&gt;|Two| E[Result two]</span><br></pre></td></tr></table></figure>
-
-<h4 id="更多语法参考：Mermaid-流程图语法参考"><a href="#更多语法参考：Mermaid-流程图语法参考" class="headerlink" title="更多语法参考：Mermaid 流程图语法参考"></a>更多语法参考：<a target="_blank" rel="noopener" href="https://knsv.github.io/mermaid/#flowcharts-basic-syntax">Mermaid 流程图语法参考</a></h4><h3 id="11-Mermaid-序列图"><a href="#11-Mermaid-序列图" class="headerlink" title="11. Mermaid 序列图"></a>11. Mermaid 序列图</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Alice-&gt;John: Hello John, how are you?</span><br><span class="line">loop every minute</span><br><span class="line">    John--&gt;Alice: Great!</span><br><span class="line">end</span><br></pre></td></tr></table></figure>
-
-<h4 id="更多语法参考：Mermaid-序列图语法参考"><a href="#更多语法参考：Mermaid-序列图语法参考" class="headerlink" title="更多语法参考：Mermaid 序列图语法参考"></a>更多语法参考：<a target="_blank" rel="noopener" href="https://knsv.github.io/mermaid/#sequence-diagrams">Mermaid 序列图语法参考</a></h4><h3 id="12-表格支持"><a href="#12-表格支持" class="headerlink" title="12. 表格支持"></a>12. 表格支持</h3><table>
-<thead>
-<tr>
-<th>项目</th>
-<th align="right">价格</th>
-<th align="center">数量</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>计算机</td>
-<td align="right">$1600</td>
-<td align="center">5</td>
-</tr>
-<tr>
-<td>手机</td>
-<td align="right">$12</td>
-<td align="center">12</td>
-</tr>
-<tr>
-<td>管线</td>
-<td align="right">$1</td>
-<td align="center">234</td>
-</tr>
-</tbody></table>
-<h3 id="13-定义型列表"><a href="#13-定义型列表" class="headerlink" title="13. 定义型列表"></a>13. 定义型列表</h3><dl><dt>名词 1</dt><dd>定义 1（左侧有一个可见的冒号和四个不可见的空格）</dd></dl><dl><dt>代码块 2</dt><dd>这是代码块的定义（左侧有一个可见的冒号和四个不可见的空格）</dd></dl><pre><code>    代码块（左侧有八个不可见的空格）
-</code></pre>
-<h3 id="14-Html-标签"><a href="#14-Html-标签" class="headerlink" title="14. Html 标签"></a>14. Html 标签</h3><p>本站支持在 Markdown 语法中嵌套 Html 标签，譬如，你可以用 Html 写一个纵跨两行的表格：</p>
-<pre><code>&lt;table&gt;
-    &lt;tr&gt;
-        &lt;th rowspan=&quot;2&quot;&gt;值班人员&lt;/th&gt;
-        &lt;th&gt;星期一&lt;/th&gt;
-        &lt;th&gt;星期二&lt;/th&gt;
-        &lt;th&gt;星期三&lt;/th&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-        &lt;td&gt;李强&lt;/td&gt;
-        &lt;td&gt;张明&lt;/td&gt;
-        &lt;td&gt;王平&lt;/td&gt;
-    &lt;/tr&gt;
-&lt;/table&gt;
-</code></pre>
-<table>
-    <tr>
-        <th rowspan="2">值班人员</th>
-        <th>星期一</th>
-        <th>星期二</th>
-        <th>星期三</th>
-    </tr>
-    <tr>
-        <td>李强</td>
-        <td>张明</td>
-        <td>王平</td>
-    </tr>
-</table>
-
-<h3 id="15-内嵌图标"><a href="#15-内嵌图标" class="headerlink" title="15. 内嵌图标"></a>15. 内嵌图标</h3><p>本站的图标系统对外开放，在文档中输入</p>
-<pre><code>&lt;i class=&quot;icon-weibo&quot;&gt;&lt;/i&gt;
-</code></pre>
-<p>即显示微博的图标： <i class="icon-weibo icon-2x"></i></p>
-<p>替换 上述 <code>i 标签</code> 内的 <code>icon-weibo</code> 以显示不同的图标，例如：</p>
-<pre><code>&lt;i class=&quot;icon-renren&quot;&gt;&lt;/i&gt;
-</code></pre>
-<p>即显示人人的图标： <i class="icon-renren icon-2x"></i></p>
-<p>更多的图标和玩法可以参看 <a target="_blank" rel="noopener" href="http://fortawesome.github.io/Font-Awesome/3.2.1/icons/">font-awesome</a> 官方网站。</p>
-<h3 id="16-待办事宜-Todo-列表"><a href="#16-待办事宜-Todo-列表" class="headerlink" title="16. 待办事宜 Todo 列表"></a>16. 待办事宜 Todo 列表</h3><p>使用带有 [ ] 或 [x] （未完成或已完成）项的列表语法撰写一个待办事宜列表，并且支持子列表嵌套以及混用Markdown语法，例如：</p>
-<pre><code>- [ ] **Cmd Markdown 开发**
-    - [ ] 改进 Cmd 渲染算法，使用局部渲染技术提高渲染效率
-    - [ ] 支持以 PDF 格式导出文稿
-    - [x] 新增Todo列表功能 [语法参考](https://github.com/blog/1375-task-lists-in-gfm-issues-pulls-comments)
-    - [x] 改进 LaTex 功能
-        - [x] 修复 LaTex 公式渲染问题
-        - [x] 新增 LaTex 公式编号功能 [语法参考](http://docs.mathjax.org/en/latest/tex.html#tex-eq-numbers)
-- [ ] **七月旅行准备**
-    - [ ] 准备邮轮上需要携带的物品
-    - [ ] 浏览日本免税店的物品
-    - [x] 购买蓝宝石公主号七月一日的船票
     
-</code></pre>
-<p>对应显示如下待办事宜 Todo 列表：</p>
-<ul>
-<li><input disabled="" type="checkbox"> <strong>Cmd Markdown 开发</strong><ul>
-<li><input disabled="" type="checkbox"> 改进 Cmd 渲染算法，使用局部渲染技术提高渲染效率</li>
-<li><input disabled="" type="checkbox"> 支持以 PDF 格式导出文稿</li>
-<li><input checked="" disabled="" type="checkbox"> 新增Todo列表功能 <a target="_blank" rel="noopener" href="https://github.com/blog/1375-task-lists-in-gfm-issues-pulls-comments">语法参考</a></li>
-<li><input checked="" disabled="" type="checkbox"> 改进 LaTex 功能<ul>
-<li><input checked="" disabled="" type="checkbox"> 修复 LaTex 公式渲染问题</li>
-<li><input checked="" disabled="" type="checkbox"> 新增 LaTex 公式编号功能 <a target="_blank" rel="noopener" href="http://docs.mathjax.org/en/latest/tex.html#tex-eq-numbers">语法参考</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><input disabled="" type="checkbox"> <strong>七月旅行准备</strong><ul>
-<li><input disabled="" type="checkbox"> 准备邮轮上需要携带的物品</li>
-<li><input disabled="" type="checkbox"> 浏览日本免税店的物品</li>
-<li><input checked="" disabled="" type="checkbox"> 购买蓝宝石公主号七月一日的船票</li>
-</ul>
-</li>
-</ul>
-<p>[^footnote]: 这是一个 <em>注脚</em> 的 <strong>文本</strong>。</p>
-<p>[^footnote2]: 这是另一个 <em>注脚</em> 的 <strong>文本</strong>。</p>
-<h2 id="我的记录"><a href="#我的记录" class="headerlink" title="我的记录"></a>我的记录</h2><h1 id="用过的MarkDown语法学习记录"><a href="#用过的MarkDown语法学习记录" class="headerlink" title="用过的MarkDown语法学习记录"></a>用过的MarkDown语法学习记录</h1><p>标签（空格分隔）： MarkDown</p>
-<hr>
-<p>在此输入正文</p>
-<pre><code>空四格，是灰色段落。可能是code
-</code></pre>
-<blockquote>
-<p>不要空格也可以</p>
-</blockquote>
-<ul>
-<li>坳发</li>
-</ul>
-<p><img src="/path/to/img.jpg" alt="alt text" title="optional title"><br><img src="/%E7%BB%9D%E5%AF%B9%E8%B7%AF%E5%BE%84%E6%88%96%E8%80%85%E7%9B%B8%E5%AF%B9%E8%B7%AF%E5%BE%84" alt="图片不显示提示文字" title="鼠标放上会提示"></p>
-<p>import date<br>Timestamp ????</p>
-<p>参考式链接：<a href="www.baidu.com" title="百度一下，你就知道">baidu</a></p>
-<blockquote>
-<p>　　shift+空格 全角下才有效<br>    半角呢，果然没效果</p>
-</blockquote>
-<p> <del>这是一条删除线</del></p>
-<p>this is a footertest[^footer1]</p>
-<p>[^footer1]:footer test</p>
-<p><a href="#jump">hello</a><span id="jump">rerere</span></p>
-<blockquote>
-<p>jump to rerere position 锚点</p>
-</blockquote>
-
+    <a class="article-more-a" href="/2015/12/01/MarkDown%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6/#more">more >></a>
+    
     
 
     
@@ -845,8 +410,8 @@
 
 
 
-
-  
+ 
+   
     <article id="post-博客建立过程记录" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -948,8 +513,8 @@
 
 
 
-
-  
+ 
+   
     <article id="post-科比撰文宣布赛季后退役" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1065,13 +630,17 @@
 
 
 
+ 
+   
 
-  
-  
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/12/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="page-number" href="/page/12/">12</a><span class="page-number current">13</span>
-    </nav>
-  
+   
+    <nav id="page-nav"> 
+      <a class="extend prev" rel="prev" href="/page/12/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="page-number" href="/page/12/">12</a><span class="page-number current">13</span> 
+    </nav> 
+   
+
+ 
+
 
 
           </div>
@@ -1192,27 +761,7 @@
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">weather</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">需求</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">essay</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">basketball</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">olympic</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">nginx</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1232,6 +781,14 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">weather</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">需求</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">ajax</a>
               </li>
              
@@ -1240,11 +797,19 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">HTML5</a>
+                <a href="javascript:void(0)" class="js-tag color1">basketball</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">html5</a>
+                <a href="javascript:void(0)" class="js-tag color3">olympic</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">nginx</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">HTML5</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1253,14 +818,6 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">sse</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">JavaScriptCore</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Oracle</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1276,6 +833,14 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Oracle</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Mac Office</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">ListView</a>
               </li>
              
@@ -1284,11 +849,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Mac Office</a>
+                <a href="javascript:void(0)" class="js-tag color4">markdown</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">markdown</a>
+                <a href="javascript:void(0)" class="js-tag color3">mongodb</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1297,6 +862,14 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">慢查询</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">JavaScriptCore</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">html5</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1309,6 +882,10 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">avatar</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">cocoa</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1344,11 +921,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">cocoa</a>
+                <a href="javascript:void(0)" class="js-tag color1">patch</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">patch</a>
+                <a href="javascript:void(0)" class="js-tag color1">gitea</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1356,7 +933,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">gitea</a>
+                <a href="javascript:void(0)" class="js-tag color2">bundle</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1365,10 +942,6 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">https</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">bundle</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1388,11 +961,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">java</a>
+                <a href="javascript:void(0)" class="js-tag color3">cs</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">cs</a>
+                <a href="javascript:void(0)" class="js-tag color5">java</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1401,6 +974,10 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">快捷键</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">pip</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1424,7 +1001,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">pip</a>
+                <a href="javascript:void(0)" class="js-tag color5">read</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">bookList</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1432,15 +1013,19 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">running</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">showdoc</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">disk</a>
+                <a href="javascript:void(0)" class="js-tag color2">D.Wade</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">D.Wade</a>
+                <a href="javascript:void(0)" class="js-tag color5">disk</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1468,10 +1053,6 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">read</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">读书节</a>
               </li>
              
@@ -1496,15 +1077,15 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">ntp</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">正则</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">手机品牌匹配</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">ntp</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1516,10 +1097,6 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">wechat</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">微信公众号</a>
               </li>
              
@@ -1528,7 +1105,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">张靓颖</a>
+                <a href="javascript:void(0)" class="js-tag color2">wechat</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1536,7 +1113,15 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">张靓颖</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">动漫</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">vpn</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1568,19 +1153,19 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">ai</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">excel</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">模块化</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">MVC</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">ai</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">excel</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1608,23 +1193,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">bookList</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">anti-stealing-link</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">running</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">mongodb</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">vpn</a>
               </li>
             
             <div class="clearfix"></div>
