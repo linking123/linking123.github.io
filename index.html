@@ -232,12 +232,17 @@
   
   <div class="article-entry" itemprop="articleBody">
     
-    <h2 id="202503"><a href="#202503" class="headerlink" title="202503"></a>202503</h2><ul>
-<li>2503: 88.78km, 7.39km&#x2F;t, 7’12”&#x2F;km</li>
+    <h2 id="202504"><a href="#202504" class="headerlink" title="202504"></a>202504</h2><ul>
+<li>250412: 27.62km, 4t*6.90km&#x2F;t, 6’44”&#x2F;km</li>
+<li>more easy, feel better</li>
+<li>weight: 58kg</li>
+</ul>
+<h2 id="202503"><a href="#202503" class="headerlink" title="202503"></a>202503</h2><ul>
+<li>2503: 88.78km, 12*7.39km&#x2F;t, 7’12”&#x2F;km</li>
 </ul>
 <h2 id="202501-02"><a href="#202501-02" class="headerlink" title="202501-02"></a>202501-02</h2><ul>
-<li>2502: 80.29km, 6.69km&#x2F;t, 7’12”&#x2F;km</li>
-<li>2501: 116.29km, 7.75km&#x2F;t, 7’03”&#x2F;km </li>
+<li>2502: 80.29km, 12*6.69km&#x2F;t, 7’12”&#x2F;km</li>
+<li>2501: 116.29km, 15*7.75km&#x2F;t, 7’03”&#x2F;km </li>
 <li>weight loss 5kg, from 66-67 to 61-62, 57.08 lightest</li>
 <li>stronger leg</li>
 <li>thinner arm, need to exercise tobe stronger</li>
@@ -246,11 +251,11 @@
 <li>control temper easy, more peaceful</li>
 </ul>
 <h2 id="2024"><a href="#2024" class="headerlink" title="2024"></a>2024</h2><ul>
-<li>2412: 122.07km, 6.10km&#x2F;t, 7’18”&#x2F;km</li>
-<li>2411: 58.42km, 5.84km&#x2F;t, 8’57”&#x2F;km</li>
-<li>2410: 36.60km, 3.66km&#x2F;t, 8’33”&#x2F;km</li>
-<li>2409: 23.51km, 3.91km&#x2F;t, 7’56”&#x2F;km</li>
-<li>2408: 12.79km, 2.55km&#x2F;t, 9’14”&#x2F;km</li>
+<li>2412: 122.07km, 20t*6.10km&#x2F;t, 7’18”&#x2F;km</li>
+<li>2411: 58.42km, 10t*5.84km&#x2F;t, 8’57”&#x2F;km</li>
+<li>2410: 36.60km, 10t*3.66km&#x2F;t, 8’33”&#x2F;km</li>
+<li>2409: 23.51km, 6t*3.91km&#x2F;t, 7’56”&#x2F;km</li>
+<li>2408: 12.79km, 5t*2.55km&#x2F;t, 9’14”&#x2F;km</li>
 </ul>
 
     
@@ -438,6 +443,122 @@
 
  
    
+    <article id="post-Ubuntu-22-04-服务器网络问题定位与解决" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2025/04/12/Ubuntu-22-04-%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BD%91%E7%BB%9C%E9%97%AE%E9%A2%98%E5%AE%9A%E4%BD%8D%E4%B8%8E%E8%A7%A3%E5%86%B3/" target="_blank">Ubuntu 22.04 服务器网络问题定位与解决</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2025/04/12/Ubuntu-22-04-%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BD%91%E7%BB%9C%E9%97%AE%E9%A2%98%E5%AE%9A%E4%BD%8D%E4%B8%8E%E8%A7%A3%E5%86%B3/" class="archive-article-date">
+        <time datetime="2025-04-12T05:12:29.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2025-04-12</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h1 id="Ubuntu-22-04-服务器网络问题定位与解决：从底层到上层的全面排查"><a href="#Ubuntu-22-04-服务器网络问题定位与解决：从底层到上层的全面排查" class="headerlink" title="Ubuntu 22.04 服务器网络问题定位与解决：从底层到上层的全面排查"></a>Ubuntu 22.04 服务器网络问题定位与解决：从底层到上层的全面排查</h1><p>在配置 Ubuntu 22.04 服务器的网络时，我遇到了无线网卡（<code>wlp3s0</code>）和有线网卡（<code>enp4s0</code>）无法自动连接的问题：运行 <code>netplan apply</code> 会导致无线网络被屏蔽，未运行时无线网卡无法分配 IP，有线网卡也无法自动获取 IP。经过一系列排查，我从硬件层到用户空间逐步定位问题，最终解决了网络配置的难题。本文将详细介绍 Ubuntu 22.04 的网络管理逻辑，并提供一个从底层到上层的排查方法与自动化脚本，下次应对类似问题就有了思路和参照。</p>
+<h2 id="Ubuntu-22-04-网络管理逻辑"><a href="#Ubuntu-22-04-网络管理逻辑" class="headerlink" title="Ubuntu 22.04 网络管理逻辑"></a>Ubuntu 22.04 网络管理逻辑</h2><p>Ubuntu 22.04 的网络管理涉及多个层次，以下是从底层到上层的启动流程：</p>
+    
+    <a class="article-more-a" href="/2025/04/12/Ubuntu-22-04-%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BD%91%E7%BB%9C%E9%97%AE%E9%A2%98%E5%AE%9A%E4%BD%8D%E4%B8%8E%E8%A7%A3%E5%86%B3/#more">more >></a>
+    
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">network</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">ubuntu</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">NetworkManager</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">RFKill</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Netplan</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/cs//" class="article-tag-list-link color3">cs</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2025/04/12/Ubuntu-22-04-%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BD%91%E7%BB%9C%E9%97%AE%E9%A2%98%E5%AE%9A%E4%BD%8D%E4%B8%8E%E8%A7%A3%E5%86%B3/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+ 
+   
     <article id="post-docker-container-network-connect-with-host-and-another-local-area-network-host-with-macvlan" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -502,11 +623,11 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">container</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">network</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">network</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">container</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
@@ -1344,108 +1465,6 @@
 
  
    
-    <article id="post-server-sent-events" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2022/11/28/server-sent-events/" target="_blank">server-sent events</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2022/11/28/server-sent-events/" class="archive-article-date">
-        <time datetime="2022-11-28T01:59:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-11-28</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h1 id="Basic-Intro"><a href="#Basic-Intro" class="headerlink" title="Basic, Intro"></a>Basic, Intro</h1><p>Websockets and SSE (Server Sent Events) are both capable of pushing data to browsers.</p>
-<p>Websockets connections can both send data to the browser and receive data from the browser.</p>
-<p>SSE connections can only push data to the browser.</p>
-<p>SSE is Simpler, case by case.</p>
-    
-    <a class="article-more-a" href="/2022/11/28/server-sent-events/#more">more >></a>
-    
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">sse</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/cs//" class="article-tag-list-link color3">cs</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2022/11/28/server-sent-events/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
- 
-   
 
    
     <nav id="page-nav"> 
@@ -1575,26 +1594,6 @@
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">essay</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">APPScan</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">SQl盲注</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">xss</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Ajax</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">weather</a>
               </li>
              
@@ -1603,11 +1602,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">ajax</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Nginx</a>
+                <a href="javascript:void(0)" class="js-tag color1">essay</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1623,7 +1618,35 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">APPScan</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">SQl盲注</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">xss</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">ajax</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Ajax</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Nginx</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">HTML5</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">html5</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1632,6 +1655,14 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">sse</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">JavaScriptCore</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Oracle</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1647,14 +1678,6 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Oracle</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Mac Office</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">ListView</a>
               </li>
              
@@ -1663,11 +1686,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">markdown</a>
+                <a href="javascript:void(0)" class="js-tag color1">Mac Office</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">mongodb</a>
+                <a href="javascript:void(0)" class="js-tag color4">markdown</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1675,15 +1698,11 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">mongodb</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">慢查询</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">JavaScriptCore</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">html5</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1692,6 +1711,26 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">thought</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">network</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">ubuntu</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">NetworkManager</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">RFKill</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Netplan</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1715,23 +1754,19 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">container</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">network</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">macvlan</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">docker</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">oracle</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">container</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">macvlan</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1747,15 +1782,15 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">bundle</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">iOS</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">https</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">bundle</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1791,11 +1826,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">pip</a>
+                <a href="javascript:void(0)" class="js-tag color1">route</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">route</a>
+                <a href="javascript:void(0)" class="js-tag color2">nodejs</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1807,11 +1842,15 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">nodejs</a>
+                <a href="javascript:void(0)" class="js-tag color4">pip</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">标识</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">redis</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1823,10 +1862,6 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">redis</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">running</a>
               </li>
              
@@ -1835,11 +1870,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">D.Wade</a>
+                <a href="javascript:void(0)" class="js-tag color5">disk</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">disk</a>
+                <a href="javascript:void(0)" class="js-tag color2">D.Wade</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1887,15 +1922,15 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Android onclick事件监听</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">正则</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">手机品牌匹配</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Android onclick事件监听</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1911,15 +1946,15 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">wechat</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">微信公众号</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">爬虫</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">wechat</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1947,14 +1982,6 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">plan</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">team</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">朱赟</a>
               </li>
              
@@ -1967,11 +1994,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">模块化</a>
+                <a href="javascript:void(0)" class="js-tag color5">plan</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">MVC</a>
+                <a href="javascript:void(0)" class="js-tag color5">team</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1980,6 +2007,14 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">excel</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">模块化</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">MVC</a>
               </li>
              
               <li class="article-tag-list-item">
