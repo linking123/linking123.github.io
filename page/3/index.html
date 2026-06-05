@@ -203,6 +203,120 @@
    
 
    
+    <article id="post-MySQL转置" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2021/11/14/MySQL%E8%BD%AC%E7%BD%AE/" target="_blank">MySQL转置</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2021/11/14/MySQL%E8%BD%AC%E7%BD%AE/" class="archive-article-date">
+        <time datetime="2021-11-14T14:40:55.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-11-14</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h1 id="Table-of-Contents"><a href="#Table-of-Contents" class="headerlink" title="Table of Contents"></a>Table of Contents</h1><ul>
+<li><a href="#1%E6%A6%82%E8%BF%B0">1.概述</a></li>
+<li><a href="#2%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F">2.实现方式</a><ul>
+<li><a href="#1%E5%B7%AE%E5%BC%82%E5%8C%96%E7%B1%BB%E5%88%AB%E8%BE%83%E5%B0%91%E6%83%85%E5%86%B5">1.差异化类别较少情况</a></li>
+<li><a href="#2%E5%A4%9A%E7%B1%BB%E5%9E%8B%E9%80%9A%E7%94%A8%E8%BD%AC%E7%BD%AEsql">2.多类型，通用转置sql</a></li>
+</ul>
+</li>
+<li><a href="#3%E6%84%9F%E6%85%A8">3.感慨</a></li>
+<li><a href="#4%E8%87%B4%E8%B0%A2">4.致谢</a></li>
+</ul>
+<h1 id="1-概述"><a href="#1-概述" class="headerlink" title="1.概述"></a>1.概述</h1><p>最近工作中，遇到合作方给的数据格式为多行存储的单人单次记录，为方便领导查看，需要将其转换为单行，这时候就需要用到强大的sql转置语句。</p>
+<p>一般分为两种情况，差异化较少以及差异化类型特别多的情况；前一种可手动设置字段名，后一种则需要脚本自动化计算。</p>
+    
+    <a class="article-more-a" href="/2021/11/14/MySQL%E8%BD%AC%E7%BD%AE/#more">more >></a>
+    
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">MySQL</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">转置</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/CS//" class="article-tag-list-link color3">CS</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2021/11/14/MySQL%E8%BD%AC%E7%BD%AE/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+ 
+   
     <article id="post-最近的学习-202110" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1241,112 +1355,6 @@
 
  
    
-    <article id="post-同一台服务器使用不同的jdk版本部署两个tomcat服务" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2021/01/04/%E5%90%8C%E4%B8%80%E5%8F%B0%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%BD%BF%E7%94%A8%E4%B8%8D%E5%90%8C%E7%9A%84jdk%E7%89%88%E6%9C%AC%E9%83%A8%E7%BD%B2%E4%B8%A4%E4%B8%AAtomcat%E6%9C%8D%E5%8A%A1/" target="_blank">同一台服务器使用不同的jdk版本部署两个tomcat服务</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2021/01/04/%E5%90%8C%E4%B8%80%E5%8F%B0%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%BD%BF%E7%94%A8%E4%B8%8D%E5%90%8C%E7%9A%84jdk%E7%89%88%E6%9C%AC%E9%83%A8%E7%BD%B2%E4%B8%A4%E4%B8%AAtomcat%E6%9C%8D%E5%8A%A1/" class="archive-article-date">
-        <time datetime="2021-01-04T14:44:49.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-01-04</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><p>RT</p>
-<p>发现现在的很多人对技术都没有好奇心。这个问题也是一个同事问我的，当时提了这种思路，好像没有动手实践，还是自己测试一把吧。还有前端同事，vue项目打包无法在tomcat运行，文件找不到，我说了思路，也没见他实践，真的很失望，这些人都没有好奇心啊。明天再测试一下前端打包问题。</p>
-<p>最近做安卓真的心烦意乱了。何时能回归我的后端之路呢？还有很多怪没打呢。。</p>
-<p>好吧，言归正传！下面简单记录一下测试过程。</p>
-    
-    <a class="article-more-a" href="/2021/01/04/%E5%90%8C%E4%B8%80%E5%8F%B0%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%BD%BF%E7%94%A8%E4%B8%8D%E5%90%8C%E7%9A%84jdk%E7%89%88%E6%9C%AC%E9%83%A8%E7%BD%B2%E4%B8%A4%E4%B8%AAtomcat%E6%9C%8D%E5%8A%A1/#more">more >></a>
-    
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">jdk</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">war</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Java//" class="article-tag-list-link color5">Java</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2021/01/04/%E5%90%8C%E4%B8%80%E5%8F%B0%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%BD%BF%E7%94%A8%E4%B8%8D%E5%90%8C%E7%9A%84jdk%E7%89%88%E6%9C%AC%E9%83%A8%E7%BD%B2%E4%B8%A4%E4%B8%AAtomcat%E6%9C%8D%E5%8A%A1/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
- 
-   
 
    
     <nav id="page-nav"> 
@@ -1984,6 +1992,10 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Programming</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">complain</a>
               </li>
             
             <div class="clearfix"></div>
