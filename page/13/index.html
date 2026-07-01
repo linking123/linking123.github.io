@@ -203,6 +203,220 @@
    
 
    
+    <article id="post-Ajax系列一-远古时代的Ajax" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2016/02/26/Ajax%E7%B3%BB%E5%88%97%E4%B8%80-%E8%BF%9C%E5%8F%A4%E6%97%B6%E4%BB%A3%E7%9A%84Ajax/" target="_blank">Ajax系列一-远古时代</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2016/02/26/Ajax%E7%B3%BB%E5%88%97%E4%B8%80-%E8%BF%9C%E5%8F%A4%E6%97%B6%E4%BB%A3%E7%9A%84Ajax/" class="archive-article-date">
+        <time datetime="2016-02-26T03:45:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-02-26</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <p>题按–在真正的<code>Ajax</code>出现之前，是怎么实现类似效果的。</p>
+<blockquote>
+<p>这几天断断续续的看完了<code>ajax</code>和<code>http</code>相关的教程，查询了<strong>Wikipedia</strong>相关资料，接下来几天，整理一下。</p>
+</blockquote>
+<p>投票需求：要求无刷新投票，并且不允许使用XMLHttpRequest对象<br>分析：在XHR对象没有流行之前，已经有<strong>无刷新</strong>这种效果的要求</p>
+<h2 id="方法一：-HTTP协议204-No-Content"><a href="#方法一：-HTTP协议204-No-Content" class="headerlink" title="方法一： HTTP协议204 No Content"></a>方法一： HTTP协议204 No Content</h2><p>原理：利用http 204 No Content 状态码,浏览器不会跳转</p>
+<p>前端：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;div&gt;</span><br><span class="line">        &lt;p&gt;&lt;img width=300 height=400 src=&quot;lin.jpg&quot;&gt;&lt;/p&gt;</span><br><span class="line">        &lt;p&gt;&lt;a href=&quot;vote.php&quot;&gt;vote&lt;/a&gt;&lt;/p&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">&lt;/body&gt;</span><br></pre></td></tr></table></figure>
+<p>后端：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> </span><br><span class="line"><span class="variable">$votenum</span> = <span class="title function_ invoke__">file_get_contents</span>(<span class="string">&quot;./vote.txt&quot;</span>);</span><br><span class="line"><span class="keyword">if</span> (<span class="variable">$votenum</span> == <span class="literal">null</span>) &#123;</span><br><span class="line">    <span class="variable">$votenum</span> = <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="variable">$votenum</span> += <span class="number">1</span>;</span><br><span class="line"><span class="title function_ invoke__">file_put_contents</span>(<span class="string">&#x27;./vote.txt&#x27;</span>, <span class="variable">$votenum</span>);</span><br><span class="line"><span class="comment">//利用HTTP协议的204特性</span></span><br><span class="line"><span class="title function_ invoke__">header</span>(<span class="string">&#x27;HTTP/1.1 204 No Content&#x27;</span>);</span><br><span class="line"> <span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+    
+    <a class="article-more-a" href="/2016/02/26/Ajax%E7%B3%BB%E5%88%97%E4%B8%80-%E8%BF%9C%E5%8F%A4%E6%97%B6%E4%BB%A3%E7%9A%84Ajax/#more">more >></a>
+    
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Ajax</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/cs//" class="article-tag-list-link color3">cs</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2016/02/26/Ajax%E7%B3%BB%E5%88%97%E4%B8%80-%E8%BF%9C%E5%8F%A4%E6%97%B6%E4%BB%A3%E7%9A%84Ajax/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+ 
+   
+    <article id="post-最近的想法及计划" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2016/02/20/%E6%9C%80%E8%BF%91%E7%9A%84%E6%83%B3%E6%B3%95%E5%8F%8A%E8%AE%A1%E5%88%92/" target="_blank">最近的想法及计划</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2016/02/20/%E6%9C%80%E8%BF%91%E7%9A%84%E6%83%B3%E6%B3%95%E5%8F%8A%E8%AE%A1%E5%88%92/" class="archive-article-date">
+        <time datetime="2016-02-20T08:05:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-02-20</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <p>年也过完了，该干活了。<br>2016上半年的任务</p>
+<blockquote>
+<p>1.完成毕业论文，顺利毕业<br>2.3月份找到一个合适的工作<br>3.学习新知识，巩固计算机基础知识</p>
+</blockquote>
+    
+    <a class="article-more-a" href="/2016/02/20/%E6%9C%80%E8%BF%91%E7%9A%84%E6%83%B3%E6%B3%95%E5%8F%8A%E8%AE%A1%E5%88%92/#more">more >></a>
+    
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">thought</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">plan</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/plan//" class="article-tag-list-link color5">plan</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2016/02/20/%E6%9C%80%E8%BF%91%E7%9A%84%E6%83%B3%E6%B3%95%E5%8F%8A%E8%AE%A1%E5%88%92/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+ 
+   
     <article id="post-polygon-polyline-point-addField-caculate" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1144,230 +1358,10 @@
 
  
    
-    <article id="post-博客建立过程记录" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2015/11/30/%E5%8D%9A%E5%AE%A2%E5%BB%BA%E7%AB%8B%E8%BF%87%E7%A8%8B%E8%AE%B0%E5%BD%95/" target="_blank">博客建立过程记录</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2015/11/30/%E5%8D%9A%E5%AE%A2%E5%BB%BA%E7%AB%8B%E8%BF%87%E7%A8%8B%E8%AE%B0%E5%BD%95/" class="archive-article-date">
-        <time datetime="2015-11-30T10:18:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2015-11-30</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h2 id="目前为止，博客大部分功能已经实现。可以正常运行。前后大概用了三天时间。头痛熟悉git命令，github，hexo-NexT-theme等。待解决问题："><a href="#目前为止，博客大部分功能已经实现。可以正常运行。前后大概用了三天时间。头痛熟悉git命令，github，hexo-NexT-theme等。待解决问题：" class="headerlink" title="目前为止，博客大部分功能已经实现。可以正常运行。前后大概用了三天时间。头痛熟悉git命令，github，hexo+NexT theme等。待解决问题："></a>目前为止，博客大部分功能已经实现。可以正常运行。<br>前后大概用了三天时间。<br>头痛<br>熟悉git命令，github，hexo+NexT theme等。<br>
-    
-    <a class="article-more-a" href="/2015/11/30/%E5%8D%9A%E5%AE%A2%E5%BB%BA%E7%AB%8B%E8%BF%87%E7%A8%8B%E8%AE%B0%E5%BD%95/#more">more >></a>
-    
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">blog</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">cs</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/cs//" class="article-tag-list-link color3">cs</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2015/11/30/%E5%8D%9A%E5%AE%A2%E5%BB%BA%E7%AB%8B%E8%BF%87%E7%A8%8B%E8%AE%B0%E5%BD%95/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
- 
-   
-    <article id="post-科比撰文宣布赛季后退役" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2015/11/30/%E7%A7%91%E6%AF%94%E6%92%B0%E6%96%87%E5%AE%A3%E5%B8%83%E8%B5%9B%E5%AD%A3%E5%90%8E%E9%80%80%E5%BD%B9/" target="_blank">科比撰文宣布赛季后退役</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2015/11/30/%E7%A7%91%E6%AF%94%E6%92%B0%E6%96%87%E5%AE%A3%E5%B8%83%E8%B5%9B%E5%AD%A3%E5%90%8E%E9%80%80%E5%BD%B9/" class="archive-article-date">
-        <time datetime="2015-11-30T08:32:04.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2015-11-30</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <ul>
-<li>update 20200126<br>– 睡的很晚，八点多起来，打开朋友圈，刷屏了，恍惚了。。<br>– kobe 已经离我们而去，但精神长存。</li>
-</ul>
-<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>科比·布莱恩特（Kobe Bryant），1978年8月23日出生于美国宾夕法尼亚州费城，是一位已故的美国职业篮球运动员，以其卓越的技艺、竞争精神和对篮球的热爱而闻名。科比在NBA的洛杉矶湖人队效力了20个赛季，被认为是篮球历史上最伟大的球员之一。</p>
-<h1 id="生平大事记"><a href="#生平大事记" class="headerlink" title="生平大事记"></a>生平大事记</h1><ul>
-<li>科比在高中时期就展现出了篮球天赋，后直接从高中进入NBA，于1996年被夏洛特黄蜂队选中，随即交易至湖人队。</li>
-<li>职业生涯初期，科比与队友沙奎尔·奥尼尔组成了强大的“OK组合”，共同带领湖人队赢得了2000年至2002年的三连冠。</li>
-<li>2004年奥尼尔离开后，科比成为湖人队的领袖，并在2009年和2010年带领湖人队再次获得两次NBA总冠军。</li>
-<li>科比在2016年宣布退役，并在同年4月14日的告别战中狂砍60分，结束了自己的职业生涯。</li>
-<li>2020年1月26日，科比在一起直升机事故中不幸去世，享年41岁。</li>
-</ul>
-    
-    <a class="article-more-a" href="/2015/11/30/%E7%A7%91%E6%AF%94%E6%92%B0%E6%96%87%E5%AE%A3%E5%B8%83%E8%B5%9B%E5%AD%A3%E5%90%8E%E9%80%80%E5%BD%B9/#more">more >></a>
-    
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">essay</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">NBA</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">kobe</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/NBA//" class="article-tag-list-link color4">NBA</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2015/11/30/%E7%A7%91%E6%AF%94%E6%92%B0%E6%96%87%E5%AE%A3%E5%B8%83%E8%B5%9B%E5%AD%A3%E5%90%8E%E9%80%80%E5%BD%B9/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
- 
-   
 
    
     <nav id="page-nav"> 
-      <a class="extend prev" rel="prev" href="/page/12/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="page-number" href="/page/12/">12</a><span class="page-number current">13</span> 
+      <a class="extend prev" rel="prev" href="/page/12/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="page-number" href="/page/12/">12</a><span class="page-number current">13</span><a class="page-number" href="/page/14/">14</a><a class="extend next" rel="next" href="/page/14/">Next &raquo;</a> 
     </nav> 
    
 
@@ -2005,6 +1999,14 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">complain</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">career</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">commemorate</a>
               </li>
             
             <div class="clearfix"></div>
