@@ -203,6 +203,109 @@
    
 
    
+    <article id="post-https请求处理方式1：信任一切证书的副本" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2017/05/16/https%E8%AF%B7%E6%B1%82%E5%A4%84%E7%90%86%E6%96%B9%E5%BC%8F1%EF%BC%9A%E4%BF%A1%E4%BB%BB%E4%B8%80%E5%88%87%E8%AF%81%E4%B9%A6%E7%9A%84%E5%89%AF%E6%9C%AC/" target="_blank">https请求处理方式1：信任一切证书</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2017/05/16/https%E8%AF%B7%E6%B1%82%E5%A4%84%E7%90%86%E6%96%B9%E5%BC%8F1%EF%BC%9A%E4%BF%A1%E4%BB%BB%E4%B8%80%E5%88%87%E8%AF%81%E4%B9%A6%E7%9A%84%E5%89%AF%E6%9C%AC/" class="archive-article-date">
+        <time datetime="2017-05-16T06:24:49.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-16</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h2 id="处理方法"><a href="#处理方法" class="headerlink" title="处理方法"></a>处理方法</h2><h3 id="1：使用异步请求方式"><a href="#1：使用异步请求方式" class="headerlink" title="1：使用异步请求方式"></a>1：使用异步请求方式</h3><h3 id="2：证书信任的委托这样处理"><a href="#2：证书信任的委托这样处理" class="headerlink" title="2：证书信任的委托这样处理"></a>2：证书信任的委托这样处理</h3><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">-(<span class="type">BOOL</span>)connectionShouldUseCredentialStorage:(<span class="built_in">NSURLConnection</span> *)connection&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line">- (<span class="type">void</span>)connection:(<span class="built_in">NSURLConnection</span> *)connection willSendRequestForAuthenticationChallenge:(<span class="built_in">NSURLAuthenticationChallenge</span> *)challenge&#123;</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@&quot;didReceiveAuthenticationChallenge %@ %zd&quot;</span>, [[challenge protectionSpace] authenticationMethod], (ssize_t) [challenge previousFailureCount]);</span><br><span class="line">    <span class="keyword">if</span> ([challenge.protectionSpace.authenticationMethod isEqualToString:<span class="built_in">NSURLAuthenticationMethodServerTrust</span>])&#123;</span><br><span class="line">        [[challenge sender]  useCredential:[<span class="built_in">NSURLCredential</span> credentialForTrust:challenge.protectionSpace.serverTrust] forAuthenticationChallenge:challenge];</span><br><span class="line">        [[challenge sender]  continueWithoutCredentialForAuthenticationChallenge: challenge];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (<span class="type">BOOL</span>)connection:(<span class="built_in">NSURLConnection</span> *)connection canAuthenticateAgainstProtectionSpace:(<span class="built_in">NSURLProtectionSpace</span> *)protectionSpace&#123;</span><br><span class="line">       <span class="keyword">return</span> [protectionSpace.authenticationMethod isEqualToString:<span class="built_in">NSURLAuthenticationMethodServerTrust</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+    
+    <a class="article-more-a" href="/2017/05/16/https%E8%AF%B7%E6%B1%82%E5%A4%84%E7%90%86%E6%96%B9%E5%BC%8F1%EF%BC%9A%E4%BF%A1%E4%BB%BB%E4%B8%80%E5%88%87%E8%AF%81%E4%B9%A6%E7%9A%84%E5%89%AF%E6%9C%AC/#more">more >></a>
+    
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">iOS</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">https</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/cs//" class="article-tag-list-link color3">cs</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2017/05/16/https%E8%AF%B7%E6%B1%82%E5%A4%84%E7%90%86%E6%96%B9%E5%BC%8F1%EF%BC%9A%E4%BF%A1%E4%BB%BB%E4%B8%80%E5%88%87%E8%AF%81%E4%B9%A6%E7%9A%84%E5%89%AF%E6%9C%AC/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+ 
+   
     <article id="post-我换主题了" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1199,110 +1302,6 @@
     
     <p class="article-more-link">
       <a class="article-more-a" href="/2017/03/25/%E3%80%8A%E5%88%A9%E7%94%A8Python%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E3%80%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0-6-%E7%AC%AC%E5%85%AD%E7%AB%A0-%E6%95%B0%E6%8D%AE%E5%8A%A0%E8%BD%BD%E3%80%81%E5%AD%98%E5%82%A8%E5%92%8C%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8F/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
- 
-   
-    <article id="post-《利用Python进行数据分析》读书笔记-5-第五章-pandas入门" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2017/03/19/%E3%80%8A%E5%88%A9%E7%94%A8Python%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E3%80%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0-5-%E7%AC%AC%E4%BA%94%E7%AB%A0-pandas%E5%85%A5%E9%97%A8/" target="_blank">《利用Python进行数据分析》读书笔记-第五章-pandas入门</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2017/03/19/%E3%80%8A%E5%88%A9%E7%94%A8Python%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E3%80%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0-5-%E7%AC%AC%E4%BA%94%E7%AB%A0-pandas%E5%85%A5%E9%97%A8/" class="archive-article-date">
-        <time datetime="2017-03-19T14:40:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-03-19</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h2 id="pandas数据结构介绍"><a href="#pandas数据结构介绍" class="headerlink" title="pandas数据结构介绍"></a>pandas数据结构介绍</h2><h3 id="Series"><a href="#Series" class="headerlink" title="Series"></a>Series</h3><blockquote>
-<ul>
-<li>Series最重要的一个功能：在算术运算中会自动对齐不同索引的数据（键相同）。</li>
-<li>Series对象本身及其索引都有一个name属性。</li>
-</ul>
-</blockquote>
-    
-    <a class="article-more-a" href="/2017/03/19/%E3%80%8A%E5%88%A9%E7%94%A8Python%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E3%80%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0-5-%E7%AC%AC%E4%BA%94%E7%AB%A0-pandas%E5%85%A5%E9%97%A8/#more">more >></a>
-    
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/cs//" class="article-tag-list-link color3">cs</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2017/03/19/%E3%80%8A%E5%88%A9%E7%94%A8Python%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E3%80%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0-5-%E7%AC%AC%E4%BA%94%E7%AB%A0-pandas%E5%85%A5%E9%97%A8/">展开全文 >></a>
     </p>
     
 

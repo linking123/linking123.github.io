@@ -203,6 +203,113 @@
    
 
    
+    <article id="post-Ajax系列二-现代化的Ajax" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2016/02/27/Ajax%E7%B3%BB%E5%88%97%E4%BA%8C-%E7%8E%B0%E4%BB%A3%E5%8C%96%E7%9A%84Ajax/" target="_blank">Ajax系列二-现代化的Ajax</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2016/02/27/Ajax%E7%B3%BB%E5%88%97%E4%BA%8C-%E7%8E%B0%E4%BB%A3%E5%8C%96%E7%9A%84Ajax/" class="archive-article-date">
+        <time datetime="2016-02-27T05:29:41.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-02-27</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <p><strong>核心</strong>–<code>XMLHttpRequest</code>对象，一个专门的<code>HTTP</code>请求工具</p>
+<p>使用<code>XMLHttpRequest</code>做<code>Ajax</code>请求：</p>
+<h2 id="如何创建该对象"><a href="#如何创建该对象" class="headerlink" title="如何创建该对象"></a>如何创建该对象</h2><pre><code>标准` new XMLHttpRequest()`
+低版本`IE(678)`，`new ActiveXObject(&#39;Microsoft.XMLHTTP&#39;)`;新的`jQuery`已经抛弃IE6，**程序员不应该去迁就用户的坏习惯，有时候需要逼用户改变习惯。**
+</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">function createXHR()&#123;</span><br><span class="line">	var xhr = null;</span><br><span class="line">	if(window.XMLHttpRequest)&#123;</span><br><span class="line">		xhr = new XMLHttpRequest();</span><br><span class="line">	&#125; else if(window.ActiveXObject)&#123;</span><br><span class="line">		xhr = new ActiveXObject(&#x27;Microsoft.XMLHTTP&#x27;);</span><br><span class="line">	&#125; else&#123;</span><br><span class="line">		console.log(&#x27;你的浏览器很奇怪。&#x27;);</span><br><span class="line">	&#125;</span><br><span class="line">	return xhr;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="利用XHR发送请求来请求后台服务器资源"><a href="#利用XHR发送请求来请求后台服务器资源" class="headerlink" title="利用XHR发送请求来请求后台服务器资源"></a>利用XHR发送请求来请求后台服务器资源</h2><p>分析HTTP协议，请求需明确几个因素:<br>　　　1)请求方法：GET&#x2F;POST&#x2F;PUT&#x2F;DELETE&#x2F;HEAD<br>　　　2)请求哪个资源(URL)<br>　　　3)同步方式–同步&#x2F;异步</p>
+<h2 id="如何得到请求返回结果"><a href="#如何得到请求返回结果" class="headerlink" title="如何得到请求返回结果"></a>如何得到请求返回结果</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">vote</span>(<span class="params"></span>)&#123;</span><br><span class="line">	<span class="comment">//1. 制造xhr</span></span><br><span class="line">	<span class="keyword">var</span> xhr = <span class="title function_">createXHR</span>();</span><br><span class="line">	<span class="comment">//2. 打开连接</span></span><br><span class="line">	xhr.<span class="title function_">open</span>(<span class="string">&#x27;GET&#x27;</span>, <span class="string">&#x27;./05-ajaxvote.php&#x27;</span>, <span class="literal">true</span>/<span class="literal">false</span>);</span><br><span class="line">	<span class="comment">//3. 发送请求</span></span><br><span class="line">	xhr.<span class="title function_">send</span>(<span class="literal">null</span>);</span><br><span class="line">	<span class="comment">//4. 测试同步异步的差异,改true/false</span></span><br><span class="line">	<span class="comment">//alert(xhr.responseText);</span></span><br><span class="line">	<span class="comment">//为避免误会用</span></span><br><span class="line">	<span class="title function_">alert</span>(<span class="string">&#x27;123&#x27;</span>);</span><br></pre></td></tr></table></figure>
+    
+    <a class="article-more-a" href="/2016/02/27/Ajax%E7%B3%BB%E5%88%97%E4%BA%8C-%E7%8E%B0%E4%BB%A3%E5%8C%96%E7%9A%84Ajax/#more">more >></a>
+    
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">ajax</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/cs//" class="article-tag-list-link color3">cs</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2016/02/27/Ajax%E7%B3%BB%E5%88%97%E4%BA%8C-%E7%8E%B0%E4%BB%A3%E5%8C%96%E7%9A%84Ajax/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+ 
+   
     <article id="post-Ajax系列一-远古时代的Ajax" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1223,112 +1330,6 @@
     
     <p class="article-more-link">
       <a class="article-more-a" href="/2015/12/02/jQuery%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
- 
-   
-    <article id="post-MarkDown使用说明书" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2015/12/01/MarkDown%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6/" target="_blank">MarkDown使用说明书</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2015/12/01/MarkDown%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6/" class="archive-article-date">
-        <time datetime="2015-12-01T12:32:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2015-12-01</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h3 id="1-斜体和粗体"><a href="#1-斜体和粗体" class="headerlink" title="1. 斜体和粗体"></a>1. 斜体和粗体</h3><p>使用 * 和 ** 表示斜体和粗体。</p>
-<p>示例：</p>
-<p>这是 <em>斜体</em>，这是 <strong>粗体</strong>。</p>
-<h3 id="2-分级标题"><a href="#2-分级标题" class="headerlink" title="2. 分级标题"></a>2. 分级标题</h3><p>使用 &#x3D;&#x3D;&#x3D; 表示一级标题，使用 — 表示二级标题。</p>
-<p>示例：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">这是一个一级标题</span><br><span class="line">============================</span><br><span class="line"></span><br><span class="line">这是一个二级标题</span><br><span class="line">--------------------------------------------------</span><br><span class="line"></span><br><span class="line">### 这是一个三级标题</span><br></pre></td></tr></table></figure>
-
-<p>你也可以选择在行首加井号表示不同级别的标题 (H1-H6)，例如：# H1, ## H2, ### H3，#### H4。</p>
-    
-    <a class="article-more-a" href="/2015/12/01/MarkDown%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6/#more">more >></a>
-    
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">markdown</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/cs//" class="article-tag-list-link color3">cs</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2015/12/01/MarkDown%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6/">展开全文 >></a>
     </p>
     
 
